@@ -1,0 +1,212 @@
+{
+  "sections": {
+    "announcement": {
+      "type": "announcement-bar",
+      "settings": {
+        "show_bar": true,
+        "show_close": true,
+        "bg_color": "#8B5E3C",
+        "text_color": "#FAF8F5"
+      },
+      "blocks": {
+        "announcement_1": {
+          "type": "announcement",
+          "settings": {
+            "text": "Free Delivery on Orders Over PKR 3,000",
+            "link": "/collections/all"
+          }
+        },
+        "announcement_2": {
+          "type": "announcement",
+          "settings": {
+            "text": "Cash on Delivery Available Nationwide",
+            "link": ""
+          }
+        },
+        "announcement_3": {
+          "type": "announcement",
+          "settings": {
+            "text": "100% Genuine Leather · Handcrafted in Pakistan",
+            "link": "/pages/about"
+          }
+        }
+      },
+      "block_order": ["announcement_1", "announcement_2", "announcement_3"]
+    },
+    "hero": {
+      "type": "hero-banner",
+      "settings": {
+        "eyebrow": "Pakistan's Original Leather Craft House",
+        "heading": "Built to Last.<br><em>Made to Age.</em>",
+        "subheading": "Handcrafted leather goods for those who value quality over quantity. Every stitch, every grain — made to outlast a lifetime.",
+        "cta_primary_text": "Shop Collection",
+        "cta_primary_url": "/collections/all",
+        "cta_secondary_text": "Our Story",
+        "cta_secondary_url": "/pages/about",
+        "overlay_opacity": 50,
+        "height": "full",
+        "show_scroll_hint": true
+      }
+    },
+    "trust": {
+      "type": "trust-bar",
+      "settings": {},
+      "blocks": {
+        "trust_1": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "truck",
+            "text": "Free Delivery Over PKR 3,000"
+          }
+        },
+        "trust_2": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "shield",
+            "text": "100% Genuine Leather"
+          }
+        },
+        "trust_3": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "award",
+            "text": "Handcrafted in Pakistan"
+          }
+        },
+        "trust_4": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "refresh",
+            "text": "7-Day Returns"
+          }
+        },
+        "trust_5": {
+          "type": "trust_item",
+          "settings": {
+            "icon": "check",
+            "text": "COD Available Nationwide"
+          }
+        }
+      },
+      "block_order": ["trust_1", "trust_2", "trust_3", "trust_4", "trust_5"]
+    },
+    "featured_collections": {
+      "type": "featured-collections",
+      "settings": {
+        "title": "Shop by Category",
+        "eyebrow": "Collections"
+      },
+      "blocks": {
+        "col_1": {
+          "type": "collection",
+          "settings": {
+            "size": "large",
+            "label": "Bestseller",
+            "cta_text": "Shop Wallets"
+          }
+        },
+        "col_2": {
+          "type": "collection",
+          "settings": {
+            "size": "medium",
+            "cta_text": "Shop Bags"
+          }
+        },
+        "col_3": {
+          "type": "collection",
+          "settings": {
+            "size": "medium",
+            "cta_text": "Shop Belts"
+          }
+        }
+      },
+      "block_order": ["col_1", "col_2", "col_3"]
+    },
+    "bestsellers": {
+      "type": "bestsellers",
+      "settings": {
+        "title": "Customer Favourites",
+        "eyebrow": "Bestsellers",
+        "cta_text": "View All Products",
+        "cta_url": "/collections/all"
+      }
+    },
+    "brand_story": {
+      "type": "brand-story",
+      "settings": {
+        "eyebrow": "Our Story",
+        "title": "Craft That Speaks for Itself",
+        "body": "Since 2020, Kordovan has been on a mission to bring genuine leather craftsmanship back to Pakistan. We work with the finest full-grain and veg-tan leathers, cut and stitched by hand in our Karachi workshop.\n\nEvery wallet, bag, and belt we make is meant to be used daily, carried with purpose, and passed down when the time comes. No fast fashion. No compromises.",
+        "cta_text": "Read Our Story",
+        "cta_url": "/pages/about",
+        "stat_1_number": "10,000+",
+        "stat_1_label": "Happy Customers",
+        "stat_2_number": "5+",
+        "stat_2_label": "Years of Craft",
+        "stat_3_number": "100%",
+        "stat_3_label": "Genuine Leather"
+      }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "settings": {
+        "title": "What Our Customers Say",
+        "eyebrow": "Reviews"
+      },
+      "blocks": {
+        "review_1": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "text": "Been using my Kordovan bifold for 2 years now and it just keeps getting better. The leather has developed this incredible patina that you simply cannot fake. Best wallet I've ever owned.",
+            "author": "Ahmed Raza",
+            "location": "Lahore",
+            "product": "Full-Grain Bifold Wallet"
+          }
+        },
+        "review_2": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "text": "Ordered the messenger bag and was blown away by the quality. Stitching is immaculate and the leather smell alone is worth it. Fast delivery to Islamabad too. Will definitely order again.",
+            "author": "Sara Malik",
+            "location": "Islamabad",
+            "product": "Leather Messenger Bag"
+          }
+        },
+        "review_3": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "text": "Finally, a Pakistani brand doing leather goods the right way. No synthetic shortcuts. The belt I bought has held up perfectly and looks better now than the day it arrived.",
+            "author": "Usman Khan",
+            "location": "Karachi",
+            "product": "Handcrafted Leather Belt"
+          }
+        }
+      },
+      "block_order": ["review_1", "review_2", "review_3"]
+    },
+    "email_signup": {
+      "type": "email-signup",
+      "settings": {
+        "eyebrow": "Join the Kordovan Family",
+        "title": "Get 10% Off Your First Order",
+        "subtitle": "Join 10,000+ leather lovers who get early access to new drops, exclusive offers, and care tips straight to their inbox.",
+        "placeholder": "Your email address",
+        "button_text": "Claim My Discount",
+        "disclaimer": "No spam. Unsubscribe anytime. We respect your inbox."
+      }
+    }
+  },
+  "order": [
+    "announcement",
+    "hero",
+    "trust",
+    "featured_collections",
+    "bestsellers",
+    "brand_story",
+    "testimonials",
+    "email_signup"
+  ]
+}

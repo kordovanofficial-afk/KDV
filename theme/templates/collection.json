@@ -1,0 +1,20 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-collection",
+      "settings": {
+        "products_per_page": 24
+      }
+    },
+    "email_signup": {
+      "type": "email-signup",
+      "settings": {
+        "eyebrow": "Never Miss a Drop",
+        "title": "Join the Kordovan Family",
+        "subtitle": "Be first to know about new arrivals, restocks, and exclusive offers.",
+        "button_text": "Subscribe"
+      }
+    }
+  },
+  "order": ["main", "email_signup"]
+}
