@@ -2,8 +2,8 @@
   "type": "header",
   "name": "Header",
   "sections": {
-    "header": {
-      "type": "header",
+    "site-header": {
+      "type": "site-header",
       "settings": {
         "menu": "new-theme-main-nav",
         "transparent_on_home": true,
@@ -13,5 +13,5 @@
       }
     }
   },
-  "order": ["header"]
+  "order": ["site-header"]
 }

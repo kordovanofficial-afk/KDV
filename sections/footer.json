@@ -2,8 +2,8 @@
   "type": "footer",
   "name": "Footer",
   "sections": {
-    "footer": {
-      "type": "footer",
+    "site-footer": {
+      "type": "site-footer",
       "blocks": {
         "shop_col": {
           "type": "link_list",
@@ -32,5 +32,5 @@
       "settings": {}
     }
   },
-  "order": ["footer"]
+  "order": ["site-footer"]
 }
