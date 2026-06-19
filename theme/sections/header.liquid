@@ -1,0 +1,153 @@
+<header class="site-header{% if section.settings.transparent_on_home and template.name == 'index' %} header--transparent{% endif %}" role="banner">
+  <div class="container">
+    <div class="header__inner">
+
+      <!-- Nav (Left) -->
+      <nav class="header__nav" role="navigation" aria-label="Main navigation">
+        <ul class="header__nav-list">
+          {%- for link in linklists[section.settings.menu].links -%}
+            <li class="header__nav-item">
+              <a
+                href="{{ link.url }}"
+                class="header__nav-link{% if link.active %} active{% endif %}"
+                {% if link.links != blank %}aria-haspopup="true" aria-expanded="false"{% endif %}
+              >
+                {{ link.title }}
+                {%- if link.links != blank -%}
+                  <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M1 1l4 4 4-4"/>
+                  </svg>
+                {%- endif -%}
+              </a>
+              {%- if link.links != blank -%}
+                <div class="header__dropdown" role="menu">
+                  {%- for child in link.links -%}
+                    <a href="{{ child.url }}" class="header__dropdown-link" role="menuitem">
+                      {{ child.title }}
+                    </a>
+                  {%- endfor -%}
+                </div>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+      </nav>
+
+      <!-- Logo (Centre) -->
+      <div class="header__logo">
+        <a href="{{ routes.root_url }}" aria-label="{{ shop.name }}">
+          {%- if section.settings.logo -%}
+            <img
+              src="{{ section.settings.logo | img_url: '300x' }}"
+              alt="{{ shop.name }}"
+              width="{{ section.settings.logo.width | at_most: 200 }}"
+              height="{{ section.settings.logo.height | at_most: 60 }}"
+              loading="eager"
+            >
+          {%- else -%}
+            <span class="header__logo-text">{{ shop.name }}</span>
+          {%- endif -%}
+        </a>
+      </div>
+
+      <!-- Actions (Right) -->
+      <div class="header__actions">
+        {%- if section.settings.show_search -%}
+          <button class="header__action-btn" aria-label="Search" onclick="document.querySelector('.search-modal')?.classList.add('is-open')">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+            </svg>
+          </button>
+        {%- endif -%}
+
+        {%- if section.settings.show_account -%}
+          <a
+            href="{{ routes.account_url }}"
+            class="header__action-btn"
+            aria-label="{% if customer %}Account{% else %}Log in{% endif %}"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+            </svg>
+          </a>
+        {%- endif -%}
+
+        <button class="header__action-btn header__cart-btn" aria-label="Cart ({{ cart.item_count }} items)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+          <span class="header__cart-count" style="display:{% if cart.item_count > 0 %}flex{% else %}none{% endif %}">
+            {{ cart.item_count }}
+          </span>
+        </button>
+
+        <button class="header__hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation menu">
+  <div class="mobile-menu__header">
+    <a href="{{ routes.root_url }}" class="header__logo-text">{{ shop.name }}</a>
+    <button class="mobile-menu__close" aria-label="Close menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M18 6 6 18M6 6l12 12"/>
+      </svg>
+    </button>
+  </div>
+
+  <nav class="mobile-menu__nav" aria-label="Mobile navigation">
+    {%- for link in linklists[section.settings.menu].links -%}
+      <a href="{{ link.url }}" class="mobile-menu__link">
+        {{ link.title }}
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="m9 18 6-6-6-6"/>
+        </svg>
+      </a>
+    {%- endfor -%}
+  </nav>
+
+  <div class="mobile-menu__footer">
+    {%- if section.settings.whatsapp_cta != blank -%}
+      <a href="https://wa.me/{{ settings.whatsapp_number | replace: '+', '' | replace: ' ', '' }}"
+         class="btn btn--primary btn--full" target="_blank" rel="noopener">
+        💬 {{ section.settings.whatsapp_cta }}
+      </a>
+    {%- endif -%}
+  </div>
+</div>
+
+<script>
+  // Mobile menu overlay interaction
+  document.querySelector('.mobile-menu-overlay')?.addEventListener('click', () => {
+    document.querySelector('.mobile-menu')?.classList.remove('is-open');
+    document.body.style.overflow = '';
+  });
+  document.querySelector('.header__hamburger')?.addEventListener('click', () => {
+    document.querySelector('.mobile-menu-overlay').style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:199;opacity:1;visibility:visible;transition:all 300ms ease;';
+  });
+  document.querySelector('.mobile-menu__close')?.addEventListener('click', () => {
+    document.querySelector('.mobile-menu-overlay').style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:199;opacity:0;visibility:hidden;transition:all 300ms ease;';
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Logo" },
+    { "type": "link_list", "id": "menu", "label": "Navigation menu" },
+    { "type": "checkbox", "id": "transparent_on_home", "label": "Transparent header on homepage", "default": true },
+    { "type": "checkbox", "id": "show_search", "label": "Show search icon", "default": true },
+    { "type": "checkbox", "id": "show_account", "label": "Show account icon", "default": true },
+    { "type": "text", "id": "whatsapp_cta", "label": "WhatsApp CTA text (mobile menu)", "default": "Chat with us on WhatsApp" }
+  ]
+}
+{% endschema %}

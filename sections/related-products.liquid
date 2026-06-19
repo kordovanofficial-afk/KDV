@@ -1,0 +1,35 @@
+{%- if section.settings.title != blank -%}
+<section class="section section--sm" style="border-top: 1px solid var(--color-border);">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:var(--space-10);">
+      <p class="eyebrow">More to Explore</p>
+      <h2>{{ section.settings.title }}</h2>
+    </div>
+    <div class="product-grid" id="related-products-container">
+      {%- assign related_collection = product.collections.first -%}
+      {%- if related_collection -%}
+        {%- assign shown = 0 -%}
+        {%- for p in related_collection.products -%}
+          {%- unless p.id == product.id or shown >= section.settings.products_to_show -%}
+            <div class="fade-in">
+              {% render 'product-card', product: p %}
+            </div>
+            {%- assign shown = shown | plus: 1 -%}
+          {%- endunless -%}
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Related Products",
+  "settings": [
+    { "type": "text", "id": "title", "label": "Section title", "default": "You May Also Like" },
+    { "type": "range", "id": "products_to_show", "label": "Products to show", "min": 2, "max": 8, "step": 2, "default": 4 }
+  ],
+  "presets": [{ "name": "Related Products" }]
+}
+{% endschema %}

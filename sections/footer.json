@@ -1,0 +1,36 @@
+{
+  "type": "footer",
+  "name": "Footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "blocks": {
+        "shop_col": {
+          "type": "link_list",
+          "settings": {
+            "title": "Shop",
+            "menu": "new-theme-footer-shop"
+          }
+        },
+        "info_col": {
+          "type": "link_list",
+          "settings": {
+            "title": "Information",
+            "menu": "new-theme-footer-info"
+          }
+        },
+        "contact_col": {
+          "type": "contact",
+          "settings": {
+            "title": "Contact Us",
+            "phone": "+92 333 260 1161",
+            "email": "admin@kordovanleather.com"
+          }
+        }
+      },
+      "block_order": ["shop_col", "info_col", "contact_col"],
+      "settings": {}
+    }
+  },
+  "order": ["footer"]
+}
