@@ -1,0 +1,27 @@
+{% layout 'theme' %}
+
+<section class="section">
+  <div class="container" style="max-width:480px;">
+    <h1 style="margin-bottom:var(--space-8);">Log In</h1>
+
+    {% form 'customer_login' %}
+      {{ form.errors | default_errors }}
+      <div style="margin-bottom:var(--space-4);">
+        <label for="customer-email" class="form-label">Email</label>
+        <input type="email" name="customer[email]" id="customer-email" class="form-input" autocomplete="email" required>
+      </div>
+      <div style="margin-bottom:var(--space-6);">
+        <label for="customer-password" class="form-label">Password</label>
+        <input type="password" name="customer[password]" id="customer-password" class="form-input" autocomplete="current-password" required>
+      </div>
+      <button type="submit" class="btn btn--primary btn--full btn--lg">Log In</button>
+    {% endform %}
+
+    <p style="text-align:center; margin-top:var(--space-6); font-size:var(--text-sm); color:var(--color-text-muted);">
+      Don't have an account? <a href="{{ routes.account_register_url }}" class="footer__link" style="color:var(--color-primary);">Create one</a>
+    </p>
+    <p style="text-align:center; margin-top:var(--space-2); font-size:var(--text-sm);">
+      <a href="{{ routes.account_recover_url }}" style="color:var(--color-text-muted);">Forgot your password?</a>
+    </p>
+  </div>
+</section>

@@ -1,0 +1,101 @@
+{%- comment -%}
+  Product Card Snippet
+  Usage: {% render 'product-card', product: product %}
+{%- endcomment -%}
+
+{%- assign first_variant = product.first_available_variant | default: product.variants.first -%}
+{%- assign second_image = product.images[1] -%}
+{%- assign on_sale = false -%}
+{%- if first_variant.compare_at_price > first_variant.price -%}
+  {%- assign on_sale = true -%}
+{%- endif -%}
+
+<article class="product-card" aria-label="{{ product.title | escape }}">
+  <div class="product-card__media">
+    <a href="{{ product.url }}" tabindex="-1" aria-hidden="true">
+      {%- if product.featured_image -%}
+        <img
+          class="product-card__img"
+          src="{{ product.featured_image | img_url: '600x800' }}"
+          srcset="{{ product.featured_image | img_url: '400x533' }} 400w, {{ product.featured_image | img_url: '600x800' }} 600w"
+          sizes="(max-width: 600px) 50vw, (max-width: 1200px) 33vw, 25vw"
+          alt="{{ product.featured_image.alt | escape | default: product.title | escape }}"
+          loading="lazy"
+          width="600"
+          height="800"
+        >
+        {%- if second_image -%}
+          <img
+            class="product-card__img--hover"
+            src="{{ second_image | img_url: '600x800' }}"
+            alt="{{ second_image.alt | escape | default: product.title | escape }}"
+            loading="lazy"
+            width="600"
+            height="800"
+          >
+        {%- endif -%}
+      {%- endif -%}
+    </a>
+
+    <!-- Badges -->
+    {%- if product.available == false -%}
+      <span class="product-card__badge product-card__badge--new">Sold Out</span>
+    {%- elsif on_sale -%}
+      {%- assign saving = first_variant.compare_at_price | minus: first_variant.price | times: 100 | divided_by: first_variant.compare_at_price -%}
+      <span class="product-card__badge product-card__badge--sale">{{ saving }}% Off</span>
+    {%- elsif product.created_at > 'now' | date: '%s' | minus: 2592000 | date: '%Y-%m-%dT%H:%M:%SZ' -%}
+      <span class="product-card__badge product-card__badge--new">New</span>
+    {%- endif -%}
+
+    <!-- Quick Add -->
+    {%- if product.variants.size == 1 and product.available -%}
+      <button
+        class="product-card__quick-add"
+        data-variant-id="{{ first_variant.id }}"
+        aria-label="Quick add {{ product.title | escape }} to cart"
+      >Quick Add</button>
+    {%- else -%}
+      <a href="{{ product.url }}" class="product-card__quick-add">Choose Options</a>
+    {%- endif -%}
+
+    <!-- Wishlist -->
+    <button class="product-card__wishlist" aria-label="Save {{ product.title | escape }}">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Info -->
+  <div class="product-card__info">
+    {%- if product.vendor != blank -%}
+      <p class="product-card__vendor">{{ product.vendor }}</p>
+    {%- endif -%}
+    <h3 class="product-card__title">
+      <a href="{{ product.url }}">{{ product.title }}</a>
+    </h3>
+
+    <!-- Stars (static for now — replace with review app data) -->
+    {%- if product.metafields.reviews.rating != blank -%}
+      <div class="product-card__stars" aria-label="{{ product.metafields.reviews.rating.value }} stars">
+        {%- for i in (1..5) -%}
+          <svg class="star" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+          </svg>
+        {%- endfor -%}
+        {%- if product.metafields.reviews.rating_count != blank -%}
+          <span class="product-card__rating-count">({{ product.metafields.reviews.rating_count }})</span>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="product-card__price">
+      {%- if on_sale -%}
+        <span class="product-card__price-current is-sale">{{ first_variant.price | money_without_trailing_zeros }}</span>
+        <span class="product-card__price-compare">{{ first_variant.compare_at_price | money_without_trailing_zeros }}</span>
+      {%- else -%}
+        <span class="product-card__price-current">{{ first_variant.price | money_without_trailing_zeros }}</span>
+      {%- endif -%}
+    </div>
+  </div>
+</article>

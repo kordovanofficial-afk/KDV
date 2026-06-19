@@ -1,0 +1,78 @@
+<section class="section section--muted">
+  <div class="container">
+    <div class="section-header fade-in">
+      <p class="eyebrow">{{ section.settings.eyebrow | default: 'Customer Favourites' }}</p>
+      <h2>{{ section.settings.title | default: 'Our Bestsellers' }}</h2>
+      {%- if section.settings.subtitle != blank -%}
+        <p class="lead">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- assign collection = collections[section.settings.collection] -%}
+
+    {%- if collection != blank -%}
+      <div class="product-grid">
+        {%- for product in collection.products limit: section.settings.products_count -%}
+          <div class="fade-in" style="animation-delay: {{ forloop.index | times: 0.1 }}s;">
+            {% render 'product-card', product: product %}
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- else -%}
+      {%- assign featured_products = section.blocks | map: 'settings' | map: 'product' -%}
+      <div class="product-grid">
+        {%- for block in section.blocks -%}
+          {%- assign product = all_products[block.settings.product] -%}
+          {%- if product != blank -%}
+            <div class="fade-in" style="animation-delay: {{ forloop.index | times: 0.1 }}s;" {{ block.shopify_attributes }}>
+              {% render 'product-card', product: product %}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.cta_text != blank -%}
+      <div class="text-center" style="margin-top: var(--space-10);">
+        <a href="{{ section.settings.cta_url | default: '/collections/all' }}" class="btn btn--primary btn--lg fade-in">
+          {{ section.settings.cta_text }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Bestsellers",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Customer Favourites" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Our Bestsellers" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle" },
+    { "type": "collection", "id": "collection", "label": "Collection (auto-populates products)" },
+    { "type": "range", "id": "products_count", "label": "Number of products", "min": 2, "max": 8, "step": 1, "default": 4 },
+    { "type": "text", "id": "cta_text", "label": "CTA text", "default": "View All Products" },
+    { "type": "url", "id": "cta_url", "label": "CTA link" }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        { "type": "product", "id": "product", "label": "Product" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bestsellers",
+      "settings": {
+        "eyebrow": "Customer Favourites",
+        "title": "Our Bestsellers",
+        "cta_text": "View All Products",
+        "products_count": 4
+      }
+    }
+  ]
+}
+{% endschema %}
