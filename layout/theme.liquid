@@ -44,11 +44,10 @@
 
   <a href="#MainContent" class="visually-hidden skip-link">Skip to content</a>
 
-  {%- sections 'announcement-bar' -%}
-  {%- sections 'header' -%}
+  {%- section 'site-header' -%}
 
   <!-- Cart Drawer -->
-  {%- sections 'cart-drawer' -%}
+  {%- section 'cart-drawer' -%}
   <div class="cart-drawer-overlay"></div>
 
   <!-- Mobile Menu Overlay -->
@@ -58,7 +57,7 @@
     {{ content_for_layout }}
   </main>
 
-  {%- sections 'footer' -%}
+  {%- section 'site-footer' -%}
 
   <!-- WhatsApp Sticky Button -->
   {%- if settings.whatsapp_number != blank -%}
