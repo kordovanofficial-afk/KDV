@@ -100,6 +100,7 @@
         "col_1": {
           "type": "collection",
           "settings": {
+            "collection": "gid://shopify/Collection/483424043248",
             "size": "large",
             "label": "Bestseller",
             "cta_text": "Shop Wallets"
@@ -108,6 +109,7 @@
         "col_2": {
           "type": "collection",
           "settings": {
+            "collection": "gid://shopify/Collection/483424207088",
             "size": "medium",
             "cta_text": "Shop Bags"
           }
@@ -115,6 +117,7 @@
         "col_3": {
           "type": "collection",
           "settings": {
+            "collection": "gid://shopify/Collection/483424305392",
             "size": "medium",
             "cta_text": "Shop Belts"
           }
@@ -125,6 +128,7 @@
     "bestsellers": {
       "type": "bestsellers",
       "settings": {
+        "collection": "gid://shopify/Collection/483424436464",
         "title": "Customer Favourites",
         "eyebrow": "Bestsellers",
         "cta_text": "View All Products",
