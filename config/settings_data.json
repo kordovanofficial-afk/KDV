@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "current": {
     "whatsapp_number": "923332601161",
@@ -7,6 +16,54 @@
     "social_youtube": "https://www.youtube.com/@kordovanleather",
     "cart_drawer_enabled": true,
     "free_shipping_bar": true,
-    "free_shipping_threshold": "3000"
+    "free_shipping_threshold": "3000",
+    "sections": {
+      "site-header": {
+        "type": "site-header",
+        "settings": {
+          "menu": "new-theme-main-nav",
+          "transparent_on_home": true,
+          "show_search": true,
+          "show_account": true,
+          "whatsapp_cta": "Chat with us on WhatsApp"
+        }
+      },
+      "cart-drawer": {
+        "type": "cart-drawer",
+        "settings": {}
+      },
+      "site-footer": {
+        "type": "site-footer",
+        "blocks": {
+          "link_list_7VfeD4": {
+            "type": "link_list",
+            "settings": {
+              "title": "Information",
+              "menu": "new-theme-footer-info"
+            }
+          },
+          "link_list_RQPRUw": {
+            "type": "link_list",
+            "settings": {
+              "title": "Shop",
+              "menu": "new-theme-footer-shop"
+            }
+          }
+        },
+        "block_order": [
+          "link_list_7VfeD4",
+          "link_list_RQPRUw"
+        ],
+        "settings": {
+          "tagline": "",
+          "instagram_url": "",
+          "facebook_url": "",
+          "youtube_url": "",
+          "whatsapp_url": "",
+          "policy_text": ""
+        }
+      }
+    },
+    "content_for_index": []
   }
 }
