@@ -58,6 +58,18 @@ Shopify, GitHub, Canva, Figma, Facebook Ads, Higgsfield.
 (Playwright is NOT available in this remote env — design is done in code, then
 pushed to the draft theme to preview in a browser.)
 
+## 📍 Session state (resume here)
+- **Workflow = mockup-first:** build static HTML mockup in `docs/mockups/` →
+  user approves → THEN implement in Liquid → deploy once. (User's idea — avoids
+  repeated Shopify pushes/sync lag while iterating on design.)
+- **Done & deployed** to `shopify-theme-deploy`: Step 1 (Quiet Heritage palette +
+  Fraunces + logo support), Step 2 (homepage scroll order, brand story copy,
+  testimonial names, eyebrow fix).
+- **Homepage mockup** `docs/mockups/homepage.html` — APPROVED by user ("love it").
+- **OPEN / next up:** user wants the **menu/nav to look better** (hero header nav)
+  — refine that first. Then build the **product page mockup (Step 3)** for review.
+- Logo file still pending upload in theme editor (Header → "Logo (dark mark)").
+
 ## ✅ Working loop
 Edit theme → push to draft theme `164277190896` (via Shopify) → review in browser
 → iterate. Keep to the BRAND_MOODBOARD spec at every step.
