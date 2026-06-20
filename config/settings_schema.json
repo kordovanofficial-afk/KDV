@@ -14,25 +14,25 @@
         "type": "color",
         "id": "color_primary",
         "label": "Primary (Cognac)",
-        "default": "#8B5E3C"
+        "default": "#A0623A"
       },
       {
         "type": "color",
         "id": "color_accent",
         "label": "Accent (Gold)",
-        "default": "#C9A96E"
+        "default": "#B0894F"
       },
       {
         "type": "color",
         "id": "color_bg",
         "label": "Background",
-        "default": "#FAF8F5"
+        "default": "#F7F2EA"
       },
       {
         "type": "color",
         "id": "color_text",
         "label": "Body text",
-        "default": "#1C1917"
+        "default": "#241C16"
       }
     ]
   },

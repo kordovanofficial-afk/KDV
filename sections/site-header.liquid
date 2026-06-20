@@ -38,12 +38,23 @@
         <a href="{{ routes.root_url }}" aria-label="{{ shop.name }}">
           {%- if section.settings.logo -%}
             <img
-              src="{{ section.settings.logo | img_url: '300x' }}"
-              alt="{{ shop.name }}"
-              width="{{ section.settings.logo.width | at_most: 200 }}"
-              height="{{ section.settings.logo.height | at_most: 60 }}"
+              class="header__logo-img header__logo-img--primary{% unless section.settings.logo_light %} header__logo-img--auto-invert{% endunless %}"
+              src="{{ section.settings.logo | img_url: '320x' }}"
+              alt="{{ shop.name }} logo"
+              width="{{ section.settings.logo.width }}"
+              height="{{ section.settings.logo.height }}"
               loading="eager"
             >
+            {%- if section.settings.logo_light -%}
+              <img
+                class="header__logo-img header__logo-img--light"
+                src="{{ section.settings.logo_light | img_url: '320x' }}"
+                alt="{{ shop.name }} logo"
+                width="{{ section.settings.logo_light.width }}"
+                height="{{ section.settings.logo_light.height }}"
+                loading="eager"
+              >
+            {%- endif -%}
           {%- else -%}
             <span class="header__logo-text">{{ shop.name }}</span>
           {%- endif -%}
@@ -142,7 +153,8 @@
 {
   "name": "Header",
   "settings": [
-    { "type": "image_picker", "id": "logo", "label": "Logo" },
+    { "type": "image_picker", "id": "logo", "label": "Logo (dark mark)", "info": "Your black horse mark. Auto-inverts to cream on the transparent/dark header — one upload is enough." },
+    { "type": "image_picker", "id": "logo_light", "label": "Logo (light variant — optional)", "info": "Optional custom cream/white version for the dark header. Leave empty to auto-invert the dark logo." },
     { "type": "link_list", "id": "menu", "label": "Navigation menu" },
     { "type": "checkbox", "id": "transparent_on_home", "label": "Transparent header on homepage", "default": true },
     { "type": "checkbox", "id": "show_search", "label": "Show search icon", "default": true },

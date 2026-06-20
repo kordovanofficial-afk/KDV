@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kordovan — Brand Mood Board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --canvas:#F7F2EA; --parchment:#ECE3D4; --ink:#241C16; --walnut:#4A3528;
+    --cognac:#A0623A; --tan:#C08B5C; --brass:#B0894F; --stone:#8B8174;
+    --border:#DDD2C0; --olive:#5A5A3C; --success:#2D6A4F; --error:#8B2D2D;
+    --heading:'Fraunces',Georgia,serif; --body:'Inter',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--canvas);color:var(--ink);font-family:var(--body);
+    font-weight:300;line-height:1.6;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1100px;margin:0 auto;padding:64px 32px;}
+  .eyebrow{font-family:var(--body);font-weight:500;text-transform:uppercase;
+    letter-spacing:.14em;font-size:12px;color:var(--stone);margin-bottom:12px;}
+  h1{font-family:var(--heading);font-weight:500;font-size:72px;line-height:1.02;
+    letter-spacing:-.01em;margin-bottom:16px;}
+  h2{font-family:var(--heading);font-weight:500;font-size:34px;margin:0 0 8px;}
+  h3{font-family:var(--heading);font-weight:500;font-size:22px;margin:0 0 4px;}
+  .lede{font-size:20px;color:var(--walnut);max-width:620px;margin-bottom:8px;}
+  section{padding:56px 0;border-top:1px solid var(--border);}
+  section:first-of-type{border-top:none;}
+  .grid{display:grid;gap:20px;}
+  .sw{grid-template-columns:repeat(4,1fr);}
+  @media(max-width:760px){.sw{grid-template-columns:repeat(2,1fr);}h1{font-size:48px;}}
+  .swatch{border-radius:10px;overflow:hidden;border:1px solid var(--border);background:#fff;}
+  .chip{height:120px;display:flex;align-items:flex-end;padding:12px;}
+  .chip span{font-size:11px;font-weight:500;background:rgba(255,255,255,.85);
+    padding:3px 7px;border-radius:99px;color:var(--ink);}
+  .meta{padding:12px 14px;}
+  .meta b{display:block;font-weight:500;font-size:14px;}
+  .meta small{color:var(--stone);font-size:12px;}
+  /* type specimens */
+  .spec{padding:20px 0;border-bottom:1px dashed var(--border);}
+  .spec:last-child{border-bottom:none;}
+  .fr{font-family:var(--heading);}
+  .pf{font-family:'Playfair Display',serif;}
+  .label{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--stone);}
+  /* buttons */
+  .btn{display:inline-block;font-family:var(--body);font-weight:500;font-size:15px;
+    padding:14px 30px;border-radius:6px;text-decoration:none;border:1px solid transparent;cursor:pointer;}
+  .btn-primary{background:var(--cognac);color:#fff;}
+  .btn-soft{background:transparent;color:var(--ink);border-color:var(--ink);}
+  .btn-tan{background:var(--tan);color:var(--ink);}
+  .row{display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
+  /* mock product card */
+  .cards{grid-template-columns:repeat(3,1fr);}
+  @media(max-width:760px){.cards{grid-template-columns:repeat(2,1fr);}}
+  .card{background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+  .card .ph{height:170px;background:linear-gradient(135deg,var(--tan),var(--walnut));}
+  .card .cb{padding:14px;}
+  .card .nm{font-family:var(--heading);font-size:16px;}
+  .card .pr{color:var(--cognac);font-weight:500;font-size:14px;margin-top:4px;}
+  /* dark band */
+  .dark{background:var(--ink);color:var(--canvas);border-radius:14px;padding:48px;margin-top:24px;}
+  .dark h2{color:var(--canvas);}
+  .dark .lede{color:var(--parchment);}
+  table{width:100%;border-collapse:collapse;font-size:14px;}
+  td,th{text-align:left;padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top;}
+  th{font-weight:500;color:var(--stone);font-size:12px;text-transform:uppercase;letter-spacing:.08em;}
+  .steal td:first-child{font-family:var(--heading);font-size:15px;width:200px;}
+  .ratio{font-size:12px;color:var(--stone);margin-top:6px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <section>
+    <div class="eyebrow">Kordovan · Brand Mood Board · 2026</div>
+    <h1 class="fr">Heirloom leather,<br>handmade in Pakistan.</h1>
+    <p class="lede">Quiet Heritage — a warm, considered, permanent design language
+      distilled from the world's best leather houses (Bellroy, Saddleback, Carl Friedrik,
+      Cuyana, Nappa Dori) and tuned for 2026 quiet-luxury.</p>
+    <div class="row" style="margin-top:24px;">
+      <a class="btn btn-primary">Shop Wallets</a>
+      <a class="btn btn-soft">See the Craft</a>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="fr">Palette — Quiet Heritage</h2>
+    <p class="lede">70% canvas · 20% espresso · 8% cognac · 2% brass/olive.</p>
+    <br>
+    <div class="eyebrow">Core</div>
+    <div class="grid sw">
+      <div class="swatch"><div class="chip" style="background:#F7F2EA"><span>#F7F2EA</span></div><div class="meta"><b>Alabaster</b><small>Primary background</small></div></div>
+      <div class="swatch"><div class="chip" style="background:#ECE3D4"><span>#ECE3D4</span></div><div class="meta"><b>Parchment</b><small>Secondary surfaces</small></div></div>
+      <div class="swatch"><div class="chip" style="background:#241C16"><span style="background:rgba(255,255,255,.9)">#241C16</span></div><div class="meta"><b>Espresso</b><small>Text · dark sections</small></div></div>
+      <div class="swatch"><div class="chip" style="background:#4A3528"><span style="background:rgba(255,255,255,.9)">#4A3528</span></div><div class="meta"><b>Walnut</b><small>Deep brown panels</small></div></div>
+    </div>
+    <br>
+    <div class="eyebrow">Signature</div>
+    <div class="grid sw">
+      <div class="swatch"><div class="chip" style="background:#A0623A"><span style="background:rgba(255,255,255,.9)">#A0623A</span></div><div class="meta"><b>Cognac</b><small>Primary CTA · links</small></div></div>
+      <div class="swatch"><div class="chip" style="background:#C08B5C"><span>#C08B5C</span></div><div class="meta"><b>Saddle Tan</b><small>Hover · highlights</small></div></div>
+      <div class="swatch"><div class="chip" style="background:#B0894F"><span>#B0894F</span></div><div class="meta"><b>Antique Brass</b><small>Dividers · fine detail</small></div></div>
+      <div class="swatch"><div class="chip" style="background:#5A5A3C"><span style="background:rgba(255,255,255,.9)">#5A5A3C</span></div><div class="meta"><b>Heritage Olive</b><small>Sparing accent (≤5%)</small></div></div>
+    </div>
+    <br>
+    <div class="eyebrow">Supporting</div>
+    <div class="grid sw">
+      <div class="swatch"><div class="chip" style="background:#8B8174"><span style="background:rgba(255,255,255,.9)">#8B8174</span></div><div class="meta"><b>Stone</b><small>Muted text</small></div></div>
+      <div class="swatch"><div class="chip" style="background:#DDD2C0"><span>#DDD2C0</span></div><div class="meta"><b>Border</b><small>Hairlines</small></div></div>
+      <div class="swatch"><div class="chip" style="background:#2D6A4F"><span style="background:rgba(255,255,255,.9)">#2D6A4F</span></div><div class="meta"><b>Deep Pine</b><small>Success</small></div></div>
+      <div class="swatch"><div class="chip" style="background:#8B2D2D"><span style="background:rgba(255,255,255,.9)">#8B2D2D</span></div><div class="meta"><b>Oxblood</b><small>Error</small></div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="fr">Typography</h2>
+    <p class="lede">Fraunces (display) + Inter (body). Fraunces replaces the
+      overused Playfair for a softer, editorial, heritage-luxury voice.</p>
+    <div class="spec">
+      <div class="label">Fraunces · Display 72/500 — RECOMMENDED</div>
+      <div class="fr" style="font-size:64px;font-weight:500;line-height:1.05;">Built to be handed down</div>
+    </div>
+    <div class="spec">
+      <div class="label">Fraunces · Heading 34/500</div>
+      <div class="fr" style="font-size:34px;font-weight:500;">The grain tells the story</div>
+    </div>
+    <div class="spec">
+      <div class="label">Fraunces · Italic accent</div>
+      <div class="fr" style="font-size:28px;font-style:italic;">Worth holding onto.</div>
+    </div>
+    <div class="spec">
+      <div class="label">Playfair Display · current fallback (for comparison)</div>
+      <div class="pf" style="font-size:34px;font-weight:500;">The grain tells the story</div>
+    </div>
+    <div class="spec">
+      <div class="label">Inter · Body 16/300</div>
+      <div style="font-size:16px;font-weight:300;max-width:620px;">Each Kordovan piece is cut from full-grain leather and hand-finished in our workshop. It starts beautiful and only deepens with the years — a patina that becomes uniquely yours.</div>
+    </div>
+    <div class="spec">
+      <div class="label">Inter · Eyebrow 12/500 · tracked</div>
+      <div style="font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.14em;color:var(--stone);">Bestsellers</div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="fr">Buttons &amp; components</h2>
+    <div class="row" style="margin:20px 0 8px;">
+      <a class="btn btn-primary">Add to Cart</a>
+      <a class="btn btn-tan">Shop the Collection</a>
+      <a class="btn btn-soft">See the Craft</a>
+    </div>
+    <p class="ratio">Cognac button + white text ≈ 5:1 contrast (passes WCAG AA). ATC is never grey.</p>
+    <br>
+    <div class="eyebrow">Product cards — 3 up, hover reveals second angle</div>
+    <div class="grid cards">
+      <div class="card"><div class="ph"></div><div class="cb"><div class="nm">Kodo Bifold Wallet</div><div class="pr">PKR 6,900</div></div></div>
+      <div class="card"><div class="ph"></div><div class="cb"><div class="nm">Cardholder — RFID</div><div class="pr">PKR 4,500</div></div></div>
+      <div class="card"><div class="ph"></div><div class="cb"><div class="nm">Saddle Messenger</div><div class="pr">PKR 18,900</div></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="dark">
+      <div class="eyebrow" style="color:var(--brass)">Dark band — brand story / footer</div>
+      <h2 class="fr">They'll fight over it when you're gone.</h2>
+      <p class="lede">Espresso, not cold charcoal — warm enough to feel like leather.
+        Used for the brand-story band, footer, and full-bleed editorial moments.</p>
+      <div class="row" style="margin-top:20px;">
+        <a class="btn btn-tan">Our Leather</a>
+        <a class="btn" style="background:transparent;color:var(--canvas);border-color:var(--canvas);">The Workshop</a>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="fr">Steal map</h2>
+    <p class="lede">What we take from each global leader.</p>
+    <br>
+    <table class="steal">
+      <tr><th>Brand</th><th>The lesson we steal</th></tr>
+      <tr><td>Bellroy</td><td>Benefit-first copy + warranty badge above the fold; show capacity/function, not specs.</td></tr>
+      <tr><td>Saddleback</td><td>Heirloom story + lifetime warranty as a hero pillar. "Built to outlive you."</td></tr>
+      <tr><td>Carl Friedrik</td><td>Editorial whitespace + press/trust logo strip. Premium = restraint.</td></tr>
+      <tr><td>Cuyana</td><td>Warm cream canvas + oversized imagery + a clear ethos line.</td></tr>
+      <tr><td>Nappa Dori</td><td>Heritage-as-premium — we're the Pakistani answer, not a discount brand.</td></tr>
+      <tr><td>Shinola</td><td>Name the silhouettes + "Made in Pakistan" as a badge.</td></tr>
+      <tr><td>Tanner Goods</td><td>Maker/workshop imagery — show the hands, not just the product.</td></tr>
+      <tr><td>Popov Leather</td><td>An "Our Leather" education page + monogramming upsell.</td></tr>
+      <tr><td>WP Standard</td><td>Feel-the-grain photography; colour-match the site to the product.</td></tr>
+      <tr><td>Hidesign</td><td>Keep the catalogue navigable and category-led as range grows.</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <p class="ratio">Full rationale, UX rulebook and SEO spec live in <b>docs/BRAND_MOODBOARD.md</b>.
+    Live theme 162105917680 is off-limits; draft theme 164277190896 is the working preview.</p>
+  </section>
+
+</div>
+</body>
+</html>
