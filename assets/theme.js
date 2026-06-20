@@ -715,9 +715,72 @@ class TrustMarquee {
   }
 
   init() {
-    const clone = this.track.cloneNode(true);
-    clone.setAttribute('aria-hidden', 'true');
-    this.track.parentElement.appendChild(clone);
+    const items = [...this.track.children];
+    items.forEach(item => {
+      const clone = item.cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      this.track.appendChild(clone);
+    });
+  }
+}
+
+// ─── Testimonials Carousel ───────────────────────────────────────────────────
+class TestimonialsCarousel {
+  constructor(el) {
+    this.el = el;
+    this.slides = [...el.querySelectorAll('.testimonial-card')];
+    this.current = 0;
+    this.timer = null;
+    if (this.slides.length < 2) return;
+    this.init();
+  }
+
+  init() {
+    this.slides.forEach((s, i) => {
+      s.setAttribute('data-index', i);
+      s.style.display = i === 0 ? 'flex' : 'none';
+      s.classList.add('testimonial-card--active');
+    });
+    this.slides[0].classList.add('is-visible');
+
+    const dots = document.createElement('div');
+    dots.className = 'testimonials-dots';
+    this.slides.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = 'testimonials-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', `Review ${i + 1}`);
+      dot.addEventListener('click', () => this.goto(i));
+      dots.appendChild(dot);
+    });
+    this.el.parentElement.appendChild(dots);
+    this.dotEls = [...dots.children];
+
+    this.startAuto();
+  }
+
+  goto(index) {
+    const prev = this.slides[this.current];
+    prev.classList.remove('is-visible');
+    setTimeout(() => { prev.style.display = 'none'; }, 500);
+
+    this.current = index;
+    const next = this.slides[this.current];
+    next.style.display = 'flex';
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => next.classList.add('is-visible'));
+    });
+
+    this.dotEls.forEach((d, i) => d.classList.toggle('active', i === index));
+    this.restartAuto();
+  }
+
+  next() { this.goto((this.current + 1) % this.slides.length); }
+
+  startAuto() { this.timer = setInterval(() => this.next(), 5000); }
+
+  restartAuto() {
+    clearInterval(this.timer);
+    this.startAuto();
   }
 }
 
@@ -765,6 +828,10 @@ document.addEventListener('DOMContentLoaded', () => {
   // Trust bar marquee
   const trustList = document.querySelector('.trust-bar__track');
   if (trustList) new TrustMarquee(trustList);
+
+  // Testimonials carousel
+  const testimonialsSlider = document.querySelector('.testimonials-slider');
+  if (testimonialsSlider) new TestimonialsCarousel(testimonialsSlider);
 
   // Cart page
   if (document.querySelector('.cart-page')) new CartPage();

@@ -1,28 +1,29 @@
 <section class="section testimonials">
   <div class="container">
     <div class="section-header fade-in">
-      <p class="eyebrow" style="color: var(--color-gold);">{{ section.settings.eyebrow | default: 'Customer Love' }}</p>
+      <p class="eyebrow" style="color: var(--color-gold);">{{ section.settings.eyebrow | default: 'Reviews' }}</p>
       <h2 style="color: var(--color-text-light);">{{ section.settings.title | default: 'What Our Customers Say' }}</h2>
     </div>
 
     <div class="testimonials-slider">
       {%- for block in section.blocks -%}
-        <div class="testimonial-card fade-in" {{ block.shopify_attributes }}>
+        <div class="testimonial-card" {{ block.shopify_attributes }}>
+          <div class="testimonial-card__quote">&ldquo;</div>
           <div class="testimonial-card__stars" aria-label="{{ block.settings.rating }} out of 5 stars">
             {%- for i in (1..5) -%}
-              <svg class="star" viewBox="0 0 24 24" aria-hidden="true" style="color: {% if i <= block.settings.rating %}var(--color-gold){% else %}rgba(250,248,245,0.2){% endif %};">
+              <svg class="star" viewBox="0 0 24 24" aria-hidden="true" style="color: {% if i <= block.settings.rating %}var(--color-gold){% else %}rgba(250,248,245,0.15){% endif %};">
                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="currentColor"/>
               </svg>
             {%- endfor -%}
           </div>
-          <p class="testimonial-card__text">"{{ block.settings.text }}"</p>
+          <p class="testimonial-card__text">{{ block.settings.text }}</p>
           <div class="testimonial-card__author">
             <div class="testimonial-card__avatar" aria-hidden="true">
               {{ block.settings.name | slice: 0 }}
             </div>
             <div>
               <p class="testimonial-card__name">{{ block.settings.name }}</p>
-              <p class="testimonial-card__meta">{{ block.settings.location }}{%- if block.settings.product != blank %} · {{ block.settings.product }}{%- endif %}</p>
+              <p class="testimonial-card__meta">{{ block.settings.location }}{%- if block.settings.product != blank %} &middot; {{ block.settings.product }}{%- endif %}</p>
             </div>
           </div>
         </div>
@@ -35,7 +36,7 @@
 {
   "name": "Testimonials",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Customer Love" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Reviews" },
     { "type": "text", "id": "title", "label": "Title", "default": "What Our Customers Say" }
   ],
   "blocks": [
@@ -44,9 +45,9 @@
       "name": "Review",
       "settings": [
         { "type": "range", "id": "rating", "label": "Star rating", "min": 1, "max": 5, "default": 5 },
-        { "type": "textarea", "id": "text", "label": "Review text", "default": "Best leather wallet I have ever owned. The quality is exceptional and it only gets better with age." },
-        { "type": "text", "id": "name", "label": "Customer name", "default": "Ahmed K." },
-        { "type": "text", "id": "location", "label": "City", "default": "Karachi" },
+        { "type": "textarea", "id": "text", "label": "Review text", "default": "Best leather wallet I have ever owned." },
+        { "type": "text", "id": "name", "label": "Customer name", "default": "Usman R." },
+        { "type": "text", "id": "location", "label": "City", "default": "Lahore" },
         { "type": "text", "id": "product", "label": "Product bought", "default": "KODO Smart Wallet" }
       ]
     }
