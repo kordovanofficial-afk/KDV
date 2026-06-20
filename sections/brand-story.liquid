@@ -18,9 +18,9 @@
     </div>
 
     <!-- Content -->
-    <div class="brand-story__content fade-in">
+    <div class="brand-story__content">
       <p class="eyebrow">{{ section.settings.eyebrow | default: 'Our Story' }}</p>
-      <h2>{{ section.settings.title | default: 'We Started With One Wallet.' }}</h2>
+      <h2 class="fade-in">{{ section.settings.title | default: 'We Started With One Wallet.' }}</h2>
 
       {%- if section.settings.text != blank -%}
         <div class="brand-story__text">{{ section.settings.text }}</div>
