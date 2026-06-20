@@ -660,6 +660,67 @@ class CartPage {
 // ============================================================
 // INIT ON DOM READY
 // ============================================================
+// ─── Parallax Hero ──────────────────────────────────────────────────────────
+class ParallaxHero {
+  constructor() {
+    this.hero = document.querySelector('.hero--parallax');
+    this.media = this.hero && this.hero.querySelector('.hero__media');
+    if (!this.media) return;
+    this.ticking = false;
+    this.lastY = 0;
+    window.addEventListener('scroll', () => this.onScroll(), { passive: true });
+    this.update();
+  }
+
+  onScroll() {
+    this.lastY = window.scrollY;
+    if (!this.ticking) {
+      requestAnimationFrame(() => { this.update(); this.ticking = false; });
+      this.ticking = true;
+    }
+  }
+
+  update() {
+    const offset = this.lastY * 0.38;
+    this.media.style.transform = `translate3d(0, ${offset}px, 0)`;
+  }
+}
+
+// ─── Scroll Reveal ───────────────────────────────────────────────────────────
+class ScrollReveal {
+  constructor() {
+    this.els = document.querySelectorAll('[data-reveal]');
+    if (!this.els.length) return;
+    const opts = { threshold: 0.12, rootMargin: '0px 0px -60px 0px' };
+    this.io = new IntersectionObserver(entries => this.handle(entries), opts);
+    this.els.forEach(el => this.io.observe(el));
+  }
+
+  handle(entries) {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const delay = el.dataset.revealDelay || 0;
+      setTimeout(() => el.classList.add('revealed'), Number(delay));
+      this.io.unobserve(el);
+    });
+  }
+}
+
+// ─── Trust Marquee ───────────────────────────────────────────────────────────
+class TrustMarquee {
+  constructor(track) {
+    this.track = track;
+    this.init();
+  }
+
+  init() {
+    const clone = this.track.cloneNode(true);
+    clone.setAttribute('aria-hidden', 'true');
+    this.track.parentElement.appendChild(clone);
+  }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   // Announcement bar
   const announcementEl = document.querySelector('.announcement-bar');
@@ -694,6 +755,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Scroll animations
   if ('IntersectionObserver' in window) new ScrollAnimator();
+
+  // Parallax hero
+  if (document.querySelector('.hero--parallax')) new ParallaxHero();
+
+  // Scroll reveal
+  if ('IntersectionObserver' in window) new ScrollReveal();
+
+  // Trust bar marquee
+  const trustList = document.querySelector('.trust-bar__track');
+  if (trustList) new TrustMarquee(trustList);
 
   // Cart page
   if (document.querySelector('.cart-page')) new CartPage();

@@ -1,6 +1,6 @@
 {%- assign hero_height = section.settings.height -%}
 
-<section class="hero hero--{{ hero_height }}" aria-label="Hero banner">
+<section class="hero hero--{{ hero_height }} hero--parallax" aria-label="Hero banner">
   <!-- Media -->
   <div class="hero__media">
     {%- if section.settings.video_url != blank -%}
@@ -42,19 +42,19 @@
     <div class="hero__content" style="text-align: {{ section.settings.content_alignment | default: 'left' }};">
 
       {%- if section.settings.eyebrow != blank -%}
-        <p class="eyebrow fade-in" style="color: var(--color-gold);">{{ section.settings.eyebrow }}</p>
+        <p class="eyebrow hero__eyebrow" data-reveal data-reveal-delay="100" style="color: var(--color-gold);">{{ section.settings.eyebrow }}</p>
       {%- endif -%}
 
       {%- if section.settings.heading != blank -%}
-        <h1 class="hero__title fade-in">{{ section.settings.heading }}</h1>
+        <h1 class="hero__title" data-reveal data-reveal-delay="300">{{ section.settings.heading }}</h1>
       {%- endif -%}
 
       {%- if section.settings.subheading != blank -%}
-        <p class="hero__subtitle fade-in">{{ section.settings.subheading }}</p>
+        <p class="hero__subtitle" data-reveal data-reveal-delay="550">{{ section.settings.subheading }}</p>
       {%- endif -%}
 
       {%- if section.settings.cta_text != blank or section.settings.cta_secondary_text != blank -%}
-        <div class="hero__actions fade-in">
+        <div class="hero__actions" data-reveal data-reveal-delay="800">
           {%- if section.settings.cta_text != blank -%}
             <a href="{{ section.settings.cta_url | default: '/collections/all' }}" class="btn btn--cognac btn--lg">
               {{ section.settings.cta_text }}
