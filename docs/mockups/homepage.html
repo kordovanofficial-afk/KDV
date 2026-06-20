@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kordovan — Homepage Mockup (Step 2)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --canvas:#F7F2EA; --parchment:#ECE3D4; --ink:#241C16; --walnut:#4A3528;
+    --cognac:#A0623A; --cognac-dark:#7E4B2C; --tan:#C08B5C; --brass:#B0894F;
+    --brass-light:#D8C39A; --stone:#8B8174; --border:#DDD2C0; --olive:#5A5A3C;
+    --heading:'Fraunces',Georgia,serif; --body:'Inter',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--canvas);color:var(--ink);font-family:var(--body);font-weight:300;line-height:1.7;-webkit-font-smoothing:antialiased;}
+  h1,h2,h3,h4{font-family:var(--heading);font-weight:500;line-height:1.12;letter-spacing:-.01em;}
+  a{color:inherit;text-decoration:none;}
+  img{display:block;max-width:100%;}
+  .wrap{max-width:1340px;margin:0 auto;padding:0 40px;}
+  .eyebrow{font-family:var(--body);font-weight:500;text-transform:uppercase;letter-spacing:.18em;font-size:11px;color:var(--brass);}
+  .btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--body);font-weight:500;font-size:13px;letter-spacing:.08em;text-transform:uppercase;padding:16px 32px;border-radius:4px;border:1px solid transparent;cursor:pointer;transition:.25s;}
+  .btn--cognac{background:var(--cognac);color:#fff;}
+  .btn--cognac:hover{background:var(--cognac-dark);}
+  .btn--ghost{background:transparent;border-color:currentColor;}
+  .btn--ghost:hover{background:rgba(255,255,255,.1);}
+  .section{padding:110px 0;}
+  .section__head{text-align:center;max-width:640px;margin:0 auto 56px;}
+  .section__head .eyebrow{display:block;margin-bottom:14px;}
+  .section__head h2{font-size:clamp(28px,3.5vw,44px);}
+
+  /* ===== Announcement ===== */
+  .announce{background:var(--ink);color:var(--canvas);text-align:center;font-size:12px;letter-spacing:.08em;padding:10px;text-transform:uppercase;font-weight:400;}
+  .announce b{color:var(--brass-light);font-weight:500;}
+
+  /* ===== Header ===== */
+  .header{position:absolute;top:38px;left:0;right:0;z-index:20;}
+  .header__inner{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:30px;}
+  .nav{display:flex;gap:26px;list-style:none;}
+  .nav a{font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;color:var(--canvas);opacity:.92;display:flex;align-items:center;gap:5px;}
+  .nav a:hover{color:var(--brass-light);}
+  .logo{font-family:var(--heading);font-weight:600;font-size:26px;letter-spacing:.14em;text-transform:uppercase;color:var(--canvas);text-align:center;}
+  .actions{display:flex;gap:20px;justify-content:flex-end;color:var(--canvas);}
+  .actions svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.4;}
+  .cart{position:relative;}
+  .cart-count{position:absolute;top:-7px;right:-9px;background:var(--cognac);color:#fff;font-size:9px;font-weight:600;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+
+  /* ===== Hero ===== */
+  .hero{min-height:92vh;display:flex;align-items:center;position:relative;color:var(--canvas);overflow:hidden;}
+  .hero__bg{position:absolute;inset:0;background:linear-gradient(115deg,#1d150f 0%,#2e1f14 38%,#5c3a24 72%,#8a5230 100%);}
+  .hero__bg::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 80% at 80% 50%,rgba(160,98,58,.35),transparent 60%);}
+  .hero__content{position:relative;z-index:2;max-width:680px;}
+  .hero .eyebrow{color:var(--brass-light);}
+  .hero h1{font-size:clamp(48px,7vw,104px);font-weight:500;margin:18px 0 24px;line-height:1.02;letter-spacing:-.02em;}
+  .hero h1 em{font-style:italic;font-weight:400;}
+  .hero p{font-size:19px;font-weight:300;max-width:520px;color:rgba(247,242,234,.82);margin-bottom:36px;}
+  .hero__cta{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:40px;}
+  .hero__trust{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:rgba(247,242,234,.6);}
+  .scroll-hint{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);z-index:2;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:rgba(247,242,234,.5);display:flex;flex-direction:column;align-items:center;gap:10px;}
+  .scroll-hint span{width:1px;height:40px;background:linear-gradient(rgba(247,242,234,.5),transparent);}
+
+  /* ===== Trust bar ===== */
+  .trustbar{background:var(--parchment);border-block:1px solid var(--border);}
+  .trustbar__row{display:flex;justify-content:space-between;gap:20px;padding:22px 0;}
+  .trust-item{display:flex;align-items:center;gap:10px;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--walnut);font-weight:500;}
+  .trust-item svg{width:20px;height:20px;stroke:var(--cognac);fill:none;stroke-width:1.4;flex:none;}
+
+  /* ===== Product grid ===== */
+  .pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;}
+  .card{cursor:pointer;}
+  .card__media{position:relative;aspect-ratio:4/5;border-radius:6px;overflow:hidden;background:linear-gradient(150deg,var(--tan),var(--walnut));}
+  .card__media .tag{position:absolute;top:12px;left:12px;background:var(--ink);color:var(--canvas);font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:5px 9px;border-radius:3px;font-weight:500;}
+  .card__atc{position:absolute;left:12px;right:12px;bottom:12px;background:var(--cognac);color:#fff;text-align:center;font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;padding:12px;border-radius:4px;opacity:0;transform:translateY(8px);transition:.25s;}
+  .card:hover .card__atc{opacity:1;transform:none;}
+  .card__name{font-family:var(--heading);font-size:18px;margin-top:16px;}
+  .card__price{color:var(--cognac);font-weight:500;font-size:14px;margin-top:4px;}
+  .center-cta{text-align:center;margin-top:54px;}
+  .btn-text{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:var(--cognac);border-bottom:1px solid var(--cognac);padding-bottom:3px;}
+
+  /* ===== Brand story ===== */
+  .story{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+  .story__img{aspect-ratio:3/4;border-radius:8px;background:linear-gradient(160deg,#2e1f14,#5c3a24 70%,#8a5230);}
+  .story h2{font-size:clamp(30px,3.5vw,46px);margin:14px 0 22px;}
+  .story p{color:var(--stone);margin-bottom:18px;max-width:480px;}
+  .story__stats{display:flex;gap:44px;margin:32px 0;}
+  .story__stats .n{font-family:var(--heading);font-size:34px;color:var(--cognac);font-weight:500;}
+  .story__stats .l{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);}
+
+  /* ===== Collections ===== */
+  .colls{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+  .coll{position:relative;border-radius:8px;overflow:hidden;min-height:300px;display:flex;align-items:flex-end;padding:32px;color:var(--canvas);}
+  .coll--lg{grid-row:span 2;min-height:auto;}
+  .coll__bg{position:absolute;inset:0;background:linear-gradient(160deg,var(--walnut),var(--cognac));z-index:0;}
+  .coll__bg::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 40%,rgba(36,28,22,.7));}
+  .coll__c{position:relative;z-index:1;}
+  .coll h3{font-size:26px;}
+  .coll .lk{font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:var(--brass-light);margin-top:6px;display:inline-block;}
+
+  /* ===== Testimonials ===== */
+  .testi{background:var(--ink);color:var(--canvas);}
+  .testi .section__head h2{color:var(--canvas);}
+  .tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+  .tcard{background:rgba(247,242,234,.04);border:1px solid rgba(247,242,234,.1);border-radius:8px;padding:32px;}
+  .tcard .stars{color:var(--brass);letter-spacing:3px;margin-bottom:16px;font-size:14px;}
+  .tcard p{font-size:15px;font-weight:300;color:rgba(247,242,234,.85);margin-bottom:22px;}
+  .tcard__who{display:flex;align-items:center;gap:12px;}
+  .tcard__ini{width:40px;height:40px;border-radius:50%;background:var(--cognac);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--heading);font-size:16px;}
+  .tcard__n{font-weight:500;font-size:14px;}
+  .tcard__m{font-size:12px;color:var(--stone);}
+
+  /* ===== Email ===== */
+  .email{background:var(--walnut);color:var(--canvas);text-align:center;}
+  .email h2{font-size:clamp(28px,3.5vw,42px);color:var(--canvas);margin:12px 0 14px;}
+  .email p{color:rgba(247,242,234,.75);max-width:480px;margin:0 auto 30px;font-weight:300;}
+  .email__form{display:flex;gap:12px;max-width:480px;margin:0 auto;}
+  .email__form input{flex:1;padding:15px 18px;border:1px solid rgba(247,242,234,.25);background:rgba(247,242,234,.06);color:var(--canvas);border-radius:4px;font-family:var(--body);font-size:14px;}
+  .email__form input::placeholder{color:rgba(247,242,234,.5);}
+  .email small{display:block;margin-top:16px;font-size:11px;color:rgba(247,242,234,.5);letter-spacing:.04em;}
+
+  /* ===== Footer ===== */
+  .footer{background:var(--ink);color:rgba(247,242,234,.7);padding:72px 0 32px;border-top:1px solid rgba(247,242,234,.08);}
+  .footer__top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;padding-bottom:48px;border-bottom:1px solid rgba(247,242,234,.1);}
+  .footer__brand .logo{color:var(--canvas);text-align:left;margin-bottom:16px;}
+  .footer__brand p{font-size:13px;max-width:280px;}
+  .footer h4{font-family:var(--body);font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--canvas);margin-bottom:18px;font-weight:600;}
+  .footer ul{list-style:none;}
+  .footer li{margin-bottom:11px;font-size:13px;}
+  .footer li a:hover{color:var(--brass-light);}
+  .footer__bottom{display:flex;justify-content:space-between;padding-top:24px;font-size:12px;color:var(--stone);}
+
+  .note{background:var(--cognac);color:#fff;text-align:center;font-size:12px;padding:8px;letter-spacing:.05em;}
+
+  @media(max-width:900px){
+    .nav,.actions{display:none;}
+    .header__inner{grid-template-columns:1fr;}
+    .logo{text-align:left;}
+    .pgrid{grid-template-columns:repeat(2,1fr);}
+    .story,.colls,.tgrid,.footer__top{grid-template-columns:1fr;gap:32px;}
+    .coll--lg{grid-row:auto;}
+    .trustbar__row{flex-wrap:wrap;justify-content:center;gap:16px 28px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="note">MOCKUP — Kordovan homepage, Step 2. Quiet Heritage palette + Fraunces. Image areas are placeholders for real leather photography.</div>
+
+<!-- Announcement -->
+<div class="announce">Free delivery on orders over <b>PKR 3,000</b> &nbsp;·&nbsp; Cash on delivery nationwide &nbsp;·&nbsp; 100% genuine leather</div>
+
+<!-- Hero (with header overlaid) -->
+<section class="hero">
+  <div class="hero__bg"></div>
+
+  <header class="header">
+    <div class="wrap header__inner">
+      <ul class="nav">
+        <li><a href="#">New Arrivals</a></li>
+        <li><a href="#">Men ▾</a></li>
+        <li><a href="#">Women ▾</a></li>
+        <li><a href="#">Bags ▾</a></li>
+        <li><a href="#">Accessories ▾</a></li>
+      </ul>
+      <div class="logo">Kordovan</div>
+      <div class="actions">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span class="cart"><svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><i class="cart-count">2</i></span>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap hero__content">
+    <span class="eyebrow">Pakistan's Original Leather Craft House</span>
+    <h1>Built to Last.<br><em>Made to Age.</em></h1>
+    <p>Handcrafted leather goods for those who value quality over quantity. Every stitch, every grain — made to outlast a lifetime.</p>
+    <div class="hero__cta">
+      <a class="btn btn--cognac">Shop Bestsellers →</a>
+      <a class="btn btn--ghost">Our Story</a>
+    </div>
+    <div class="hero__trust">Free delivery · 7-day returns · Genuine leather guaranteed</div>
+  </div>
+  <div class="scroll-hint">Scroll<span></span></div>
+</section>
+
+<!-- Trust bar -->
+<div class="trustbar">
+  <div class="wrap trustbar__row">
+    <div class="trust-item"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 3v5h-7z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>Free Delivery Over PKR 3,000</div>
+    <div class="trust-item"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>100% Genuine Leather</div>
+    <div class="trust-item"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"/><path d="M8.5 13 7 22l5-3 5 3-1.5-9"/></svg>Handcrafted in Pakistan</div>
+    <div class="trust-item"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 9-9 9 9 0 0 1 6 2.3L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9 9 0 0 1-6-2.3L3 16"/></svg>7-Day Returns</div>
+    <div class="trust-item"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>COD Available Nationwide</div>
+  </div>
+</div>
+
+<!-- Bestsellers -->
+<section class="section">
+  <div class="wrap">
+    <div class="section__head"><span class="eyebrow">Bestsellers</span><h2>Customer Favourites</h2></div>
+    <div class="pgrid">
+      <div class="card"><div class="card__media"><span class="tag">Bestseller</span><div class="card__atc">Add to Cart</div></div><div class="card__name">Kodo Bifold Wallet</div><div class="card__price">PKR 6,900</div></div>
+      <div class="card"><div class="card__media"><div class="card__atc">Add to Cart</div></div><div class="card__name">Slim Cardholder — RFID</div><div class="card__price">PKR 4,500</div></div>
+      <div class="card"><div class="card__media"><div class="card__atc">Add to Cart</div></div><div class="card__name">Saddle Messenger Bag</div><div class="card__price">PKR 18,900</div></div>
+      <div class="card"><div class="card__media"><div class="card__atc">Add to Cart</div></div><div class="card__name">Heritage Leather Belt</div><div class="card__price">PKR 5,200</div></div>
+    </div>
+    <div class="center-cta"><a class="btn-text">View All Products</a></div>
+  </div>
+</section>
+
+<!-- Brand story -->
+<section class="section" style="background:var(--parchment);">
+  <div class="wrap story">
+    <div class="story__img"></div>
+    <div>
+      <span class="eyebrow">Our Story</span>
+      <h2>Craft That Speaks for Itself</h2>
+      <p>Kordovan began with a simple belief: a wallet should outlive its trends. We work full-grain leather by hand in Pakistan — cut, stitched, and finished to age into something better with every year you carry it.</p>
+      <p>No fast fashion. No corners cut. Just leather built to be handed down.</p>
+      <div class="story__stats">
+        <div><div class="n">10K+</div><div class="l">Happy Customers</div></div>
+        <div><div class="n">5+</div><div class="l">Years of Craft</div></div>
+        <div><div class="n">100%</div><div class="l">Genuine Leather</div></div>
+      </div>
+      <a class="btn-text">Read Our Story →</a>
+    </div>
+  </div>
+</section>
+
+<!-- Collections -->
+<section class="section">
+  <div class="wrap">
+    <div class="section__head"><span class="eyebrow">Collections</span><h2>Shop by Category</h2></div>
+    <div class="colls">
+      <div class="coll coll--lg"><div class="coll__bg"></div><div class="coll__c"><h3>Wallets</h3><span class="lk">Shop Wallets →</span></div></div>
+      <div class="coll"><div class="coll__bg"></div><div class="coll__c"><h3>Bags</h3><span class="lk">Shop Bags →</span></div></div>
+      <div class="coll"><div class="coll__bg"></div><div class="coll__c"><h3>Belts</h3><span class="lk">Shop Belts →</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="section testi">
+  <div class="wrap">
+    <div class="section__head"><span class="eyebrow">Reviews</span><h2>What Our Customers Say</h2></div>
+    <div class="tgrid">
+      <div class="tcard"><div class="stars">★★★★★</div><p>Been using my Kordovan bifold for 2 years now and it just keeps getting better. The leather has developed this incredible patina you simply cannot fake. Best wallet I have ever owned.</p><div class="tcard__who"><div class="tcard__ini">A</div><div><div class="tcard__n">Ahmed Raza</div><div class="tcard__m">Lahore · Full-Grain Bifold Wallet</div></div></div></div>
+      <div class="tcard"><div class="stars">★★★★★</div><p>Ordered the messenger bag and was blown away by the quality. Stitching is immaculate and the leather smell alone is worth it. Fast delivery to Islamabad too. Will definitely order again.</p><div class="tcard__who"><div class="tcard__ini">S</div><div><div class="tcard__n">Sara Malik</div><div class="tcard__m">Islamabad · Leather Messenger Bag</div></div></div></div>
+      <div class="tcard"><div class="stars">★★★★★</div><p>Finally, a Pakistani brand doing leather goods the right way. No synthetic shortcuts. The belt I bought has held up perfectly and looks better now than the day it arrived.</p><div class="tcard__who"><div class="tcard__ini">U</div><div><div class="tcard__n">Usman Khan</div><div class="tcard__m">Karachi · Handcrafted Leather Belt</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Email -->
+<section class="section email">
+  <div class="wrap">
+    <span class="eyebrow" style="color:var(--brass-light);">Join the Kordovan Family</span>
+    <h2>Get 10% Off Your First Order</h2>
+    <p>Join 10,000+ leather lovers who get early access to new drops, exclusive offers, and care tips straight to their inbox.</p>
+    <form class="email__form" onsubmit="return false;">
+      <input type="email" placeholder="Your email address">
+      <button class="btn btn--cognac">Claim My Discount</button>
+    </form>
+    <small>No spam. Unsubscribe anytime. We respect your inbox.</small>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <div class="logo">Kordovan</div>
+        <p>Handcrafted full-grain leather goods, made in Pakistan to be carried daily and handed down.</p>
+      </div>
+      <div><h4>Shop</h4><ul><li><a>Wallets</a></li><li><a>Bags</a></li><li><a>Belts</a></li><li><a>Accessories</a></li></ul></div>
+      <div><h4>Help</h4><ul><li><a>Shipping & Delivery</a></li><li><a>Returns</a></li><li><a>Leather Care</a></li><li><a>Contact</a></li></ul></div>
+      <div><h4>Company</h4><ul><li><a>Our Story</a></li><li><a>Our Leather</a></li><li><a>Reviews</a></li><li><a>WhatsApp Us</a></li></ul></div>
+    </div>
+    <div class="footer__bottom"><span>© 2026 Kordovan. All rights reserved.</span><span>Genuine Leather · Made in Pakistan</span></div>
+  </div>
+</footer>
+
+</body>
+</html>
