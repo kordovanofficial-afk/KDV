@@ -417,6 +417,23 @@ p { line-height: 1.75; color: var(--color-text-muted); }
   background-color: var(--color-bg);
 }
 
+/* Transparent header (homepage hero) — light text/icons for contrast */
+.site-header.header--transparent:not(.scrolled) .header__logo-text,
+.site-header.header--transparent:not(.scrolled) .header__nav-link,
+.site-header.header--transparent:not(.scrolled) .header__action-btn,
+.site-header.header--transparent:not(.scrolled) .header__hamburger {
+  color: var(--color-text-light);
+}
+
+.site-header.header--transparent:not(.scrolled) .header__nav-link:hover,
+.site-header.header--transparent:not(.scrolled) .header__action-btn:hover {
+  color: var(--color-gold);
+}
+
+.site-header.header--transparent:not(.scrolled) .header__nav-link::after {
+  background-color: var(--color-gold);
+}
+
 .header__inner {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
