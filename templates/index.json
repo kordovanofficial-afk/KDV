@@ -47,7 +47,7 @@
     "hero": {
       "type": "hero-banner",
       "settings": {
-        "eyebrow": "Pakistans Original Leather Craft House",
+        "eyebrow": "Pakistan's Original Leather Craft House",
         "heading": "Built to Last. Made to Age.",
         "subheading": "Handcrafted leather goods for those who value quality over quantity. Every stitch, every grain — made to outlast a lifetime.",
         "cta_secondary_text": "Our Story",
@@ -155,6 +155,7 @@
       "settings": {
         "eyebrow": "Our Story",
         "title": "Craft That Speaks for Itself",
+        "text": "<p>Kordovan began with a simple belief: a wallet should outlive its trends. We work full-grain leather by hand in Pakistan — cut, stitched, and finished to age into something better with every year you carry it.</p><p>No fast fashion. No corners cut. Just leather built to be handed down.</p>",
         "cta_text": "Read Our Story",
         "cta_url": "/pages/about"
       }
@@ -167,6 +168,7 @@
           "settings": {
             "rating": 5,
             "text": "Been using my Kordovan bifold for 2 years now and it just keeps getting better. The leather has developed this incredible patina that you simply cannot fake. Best wallet I have ever owned.",
+            "name": "Ahmed Raza",
             "location": "Lahore",
             "product": "Full-Grain Bifold Wallet"
           }
@@ -176,6 +178,7 @@
           "settings": {
             "rating": 5,
             "text": "Ordered the messenger bag and was blown away by the quality. Stitching is immaculate and the leather smell alone is worth it. Fast delivery to Islamabad too. Will definitely order again.",
+            "name": "Sara Malik",
             "location": "Islamabad",
             "product": "Leather Messenger Bag"
           }
@@ -185,6 +188,7 @@
           "settings": {
             "rating": 5,
             "text": "Finally, a Pakistani brand doing leather goods the right way. No synthetic shortcuts. The belt I bought has held up perfectly and looks better now than the day it arrived.",
+            "name": "Usman Khan",
             "location": "Karachi",
             "product": "Handcrafted Leather Belt"
           }
@@ -216,9 +220,9 @@
     "announcement",
     "hero",
     "trust",
-    "featured_collections",
     "bestsellers",
     "brand_story",
+    "featured_collections",
     "testimonials",
     "email_signup"
   ]
