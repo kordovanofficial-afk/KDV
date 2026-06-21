@@ -1,146 +1,41 @@
-{%- assign hero_height = section.settings.height -%}
+{%- liquid
+  if section.settings.image
+    assign hero_image = section.settings.image | image_url: width: 2400
+  else
+    assign hero_image = 'https://cdn.shopify.com/s/files/1/0267/9164/1277/files/hero.png?v=1782022757&width=2400'
+  endif
+-%}
 
-<section class="hero hero--{{ hero_height }} hero--parallax" aria-label="Hero banner">
-  <!-- Media -->
-  <div class="hero__media">
-    {%- if section.settings.video_url != blank -%}
-      <video
-        src="{{ section.settings.video_url }}"
-        autoplay
-        muted
-        loop
-        playsinline
-        preload="metadata"
-        aria-hidden="true"
-      ></video>
-    {%- elsif section.settings.image != blank -%}
-      <img
-        src="{{ section.settings.image | img_url: '2000x' }}"
-        srcset="
-          {{ section.settings.image | img_url: '800x' }} 800w,
-          {{ section.settings.image | img_url: '1200x' }} 1200w,
-          {{ section.settings.image | img_url: '1600x' }} 1600w,
-          {{ section.settings.image | img_url: '2000x' }} 2000w
-        "
-        sizes="100vw"
-        alt="{{ section.settings.image.alt | escape | default: shop.name }}"
-        loading="eager"
-        fetchpriority="high"
-        width="{{ section.settings.image.width }}"
-        height="{{ section.settings.image.height }}"
-      >
-    {%- else -%}
-      <div style="background: linear-gradient(135deg, #241C16 0%, #4A3528 50%, #A0623A 100%); width:100%; height:100%;"></div>
-    {%- endif -%}
-  </div>
-
-  <!-- Overlay -->
-  <div class="hero__overlay" style="background: {{ section.settings.overlay_color | default: 'linear-gradient(105deg, rgba(36,28,22,0.75) 0%, rgba(36,28,22,0.3) 60%, transparent 100%)' }};"></div>
-
-  <!-- Content -->
-  <div class="container">
-    <div class="hero__content" style="text-align: {{ section.settings.content_alignment | default: 'left' }};">
-
-      {%- if section.settings.eyebrow != blank -%}
-        <p class="eyebrow hero__eyebrow" data-reveal data-reveal-delay="100" style="color: var(--color-gold);">{{ section.settings.eyebrow }}</p>
+<section class="kv-home kv-hero">
+  <div class="kv-hero__photo" style="background-image:url('{{ hero_image }}');"></div>
+  <div class="kv-hero__scrim"></div>
+  <div class="kv-wrap kv-hero__inner"><div class="kv-hero__c">
+    {%- if section.settings.eyebrow != blank -%}<span class="kv-eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}
+    <h1>Built to Last.<br><em>Made to Age.</em></h1>
+    {%- if section.settings.subheading != blank -%}<p class="kv-hero__sub">{{ section.settings.subheading }}</p>{%- endif -%}
+    <div class="kv-hero__cta">
+      {%- if section.settings.cta_text != blank -%}
+        <a class="kv-btn kv-btn--cognac" href="{{ section.settings.cta_url | default: routes.all_products_collection_url }}">{{ section.settings.cta_text }} →</a>
       {%- endif -%}
-
-      {%- if section.settings.heading != blank -%}
-        <h1 class="hero__title" data-reveal data-reveal-delay="300">{{ section.settings.heading }}</h1>
+      {%- if section.settings.cta_secondary_text != blank -%}
+        <a class="kv-btn kv-btn--ghost" href="{{ section.settings.cta_secondary_url | default: '/pages/about' }}">{{ section.settings.cta_secondary_text }}</a>
       {%- endif -%}
-
-      {%- if section.settings.subheading != blank -%}
-        <p class="hero__subtitle" data-reveal data-reveal-delay="550">{{ section.settings.subheading }}</p>
-      {%- endif -%}
-
-      {%- if section.settings.cta_text != blank or section.settings.cta_secondary_text != blank -%}
-        <div class="hero__actions" data-reveal data-reveal-delay="800">
-          {%- if section.settings.cta_text != blank -%}
-            <a href="{{ section.settings.cta_url | default: '/collections/all' }}" class="btn btn--cognac btn--lg">
-              {{ section.settings.cta_text }}
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
-            </a>
-          {%- endif -%}
-          {%- if section.settings.cta_secondary_text != blank -%}
-            <a href="{{ section.settings.cta_secondary_url | default: '/pages/about' }}" class="btn btn--ghost btn--lg">
-              {{ section.settings.cta_secondary_text }}
-            </a>
-          {%- endif -%}
-        </div>
-      {%- endif -%}
-
     </div>
-  </div>
-
-  {%- if section.settings.show_scroll_hint -%}
-    <div class="hero__scroll-hint" aria-hidden="true">
-      <span>Scroll</span>
-      <div class="scroll-arrow"></div>
-    </div>
-  {%- endif -%}
+    <div class="kv-hero__trust">Free delivery · 7-day returns · <b>Genuine leather guaranteed</b></div>
+  </div></div>
 </section>
 
 {% schema %}
 {
-  "name": "Hero Banner",
-  "tag": "section",
+  "name": "Hero",
   "settings": [
-    {
-      "type": "header",
-      "content": "Media"
-    },
-    { "type": "image_picker", "id": "image", "label": "Background image" },
-    { "type": "text", "id": "video_url", "label": "Background video URL (MP4, overrides image)" },
-    {
-      "type": "header",
-      "content": "Content"
-    },
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow text", "default": "Pakistans Original Leather Craft House" },
-    { "type": "textarea", "id": "heading", "label": "Heading", "default": "Leather That Gets Better With Age" },
-    { "type": "textarea", "id": "subheading", "label": "Subheading", "default": "Handcrafted wallets, bags & accessories built to last a lifetime. Made by master craftsmen. Shipped across Pakistan." },
+    { "type": "image_picker", "id": "image", "label": "Hero image", "info": "Wide leather/craft shot. Keep the left third dark for the text. Defaults to the brand hero." },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Pakistan's Original Leather Craft House" },
+    { "type": "textarea", "id": "subheading", "label": "Sub-headline", "default": "Handcrafted leather goods for those who value quality over quantity. Every stitch, every grain — made to outlast a lifetime." },
     { "type": "text", "id": "cta_text", "label": "Primary CTA text", "default": "Shop Bestsellers" },
     { "type": "url", "id": "cta_url", "label": "Primary CTA link" },
-    { "type": "text", "id": "cta_secondary_text", "label": "Secondary CTA text", "default": "Our Story" },
-    { "type": "url", "id": "cta_secondary_url", "label": "Secondary CTA link" },
-    {
-      "type": "header",
-      "content": "Style"
-    },
-    {
-      "type": "select",
-      "id": "height",
-      "label": "Hero height",
-      "options": [
-        { "value": "full", "label": "Full screen (100vh)" },
-        { "value": "medium", "label": "Medium (70vh)" }
-      ],
-      "default": "full"
-    },
-    {
-      "type": "select",
-      "id": "content_alignment",
-      "label": "Content alignment",
-      "options": [
-        { "value": "left", "label": "Left" },
-        { "value": "center", "label": "Centre" }
-      ],
-      "default": "left"
-    },
-    { "type": "checkbox", "id": "show_scroll_hint", "label": "Show scroll hint", "default": true }
-  ],
-  "presets": [
-    {
-      "name": "Hero Banner",
-      "settings": {
-        "eyebrow": "Pakistans Original Leather Craft House",
-        "heading": "Leather That Gets Better With Age",
-        "subheading": "Handcrafted wallets, bags & accessories built to last a lifetime.",
-        "cta_text": "Shop Bestsellers",
-        "height": "full"
-      }
-    }
+    { "type": "text", "id": "cta_secondary_text", "label": "Secondary CTA text", "default": "See the Craft" },
+    { "type": "url", "id": "cta_secondary_url", "label": "Secondary CTA link" }
   ]
 }
 {% endschema %}

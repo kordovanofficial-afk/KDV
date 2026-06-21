@@ -3,7 +3,7 @@
    All classes are kv- prefixed to avoid collisions with theme.css.
    Milestone 1: tokens + header (announcement, nav, mega, mobile).
    ============================================================ */
-.kv-announce,.kv-hdr,.kv-mmenu{
+.kv-announce,.kv-hdr,.kv-mmenu,.kv-home,.kv-ftr{
   --canvas:#F7F2EA; --parchment:#ECE3D4; --ink:#241C16; --walnut:#4A3528;
   --cognac:#A0623A; --cognac-dark:#7E4B2C; --tan:#C08B5C; --brass:#B0894F;
   --brass-light:#D8C39A; --stone:#8B8174; --border:#DDD2C0;
@@ -82,4 +82,38 @@
   .kv-wrap{padding:0 20px;}
   .kv-logo{font-size:20px;letter-spacing:.1em;}
   .kv-announce{font-size:10px;letter-spacing:.05em;padding:7px 12px;}
+}
+
+/* ============================================================
+   Milestone 2: shared utilities + HERO
+   ============================================================ */
+.kv-home{font-family:var(--kv-body);}
+.kv-section{padding:104px 0;}
+.kv-shead{text-align:center;max-width:660px;margin:0 auto 52px;}
+.kv-shead .kv-eyebrow{display:block;margin-bottom:13px;}
+.kv-shead h2{font-family:var(--kv-heading);font-weight:500;font-size:clamp(28px,3.6vw,46px);letter-spacing:-.01em;color:var(--ink);}
+.kv-eyebrow{font-family:var(--kv-body);font-weight:500;text-transform:uppercase;letter-spacing:.18em;font-size:11px;color:var(--brass);}
+.kv-btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--kv-body);font-weight:500;font-size:13px;letter-spacing:.08em;text-transform:uppercase;padding:16px 30px;border-radius:5px;border:1px solid transparent;cursor:pointer;transition:.25s;text-decoration:none;}
+.kv-btn--cognac{background:var(--cognac);color:#fff;}
+.kv-btn--cognac:hover{background:var(--cognac-dark);}
+.kv-btn--ghost{background:transparent;border-color:rgba(247,242,234,.55);color:var(--canvas);}
+.kv-btn--ghost:hover{background:rgba(255,255,255,.08);border-color:#fff;}
+.kv-btn-text{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--cognac);border-bottom:1px solid var(--cognac);padding-bottom:4px;text-decoration:none;display:inline-block;}
+
+.kv-hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;color:var(--canvas);}
+.kv-hero__photo{position:absolute;inset:0;background-size:cover;background-position:center right;background-color:#1d150f;}
+.kv-hero__scrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(28,20,14,.82) 0%,rgba(28,20,14,.55) 38%,rgba(28,20,14,.12) 70%,transparent 100%);}
+.kv-hero__inner{position:relative;z-index:2;width:100%;}
+.kv-hero__c{max-width:620px;text-align:left;}
+.kv-hero .kv-eyebrow{color:var(--brass-light);}
+.kv-hero h1{font-family:var(--kv-heading);font-size:clamp(46px,7vw,104px);font-weight:500;line-height:1.0;letter-spacing:-.02em;margin:18px 0 24px;}
+.kv-hero h1 em{font-style:italic;font-weight:400;}
+.kv-hero__sub{font-size:18px;max-width:480px;color:rgba(247,242,234,.84);line-height:1.65;margin-bottom:34px;font-weight:300;}
+.kv-hero__cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:38px;}
+.kv-hero__trust{font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:rgba(247,242,234,.62);}
+.kv-hero__trust b{color:var(--brass-light);font-weight:500;}
+
+@media(max-width:640px){
+  .kv-section{padding:68px 0;}
+  .kv-hero__scrim{background:linear-gradient(180deg,rgba(28,20,14,.45),rgba(28,20,14,.85));}
 }
