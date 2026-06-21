@@ -44,13 +44,17 @@ Aspect **3:4** portrait, size **1000 × 1300 px**.
 | `story-craft` ✅ | Artisan burnishing leather | DONE — `files/story-craft.png`. | 1000×1300 |
 
 ## 4. Homepage — collections grid
-Large tile = **4:5** portrait **1200 × 1500**; medium tiles = **4:3** **1200 × 900**.
+Goal: reflect **Kordovan's actual products** (not generic AI goods). Large flagship
+tile = **portrait ~6:7, 1200 × 1400**; the four small tiles = **~square, 1000 × 900**.
+Images are cover-cropped, so keep the subject centred with a little breathing room.
 
 | ID | Subject | GPT prompt (after preamble) | Size |
 |----|---------|------------------------------|------|
-| `coll-wallets` (large) | Wallets category | "An arrangement of premium leather wallets in cognac and espresso tones standing and stacked on a warm stone surface; soft overhead warm light; full-grain texture; empty space at the bottom for a label." | 1200×1500 |
-| `coll-bags` (med) | Bags category | "A full-grain leather messenger bag on a wooden bench in warm directional light, espresso background, editorial." | 1200×900 |
-| `coll-belts` (med) | Belts category | "Several coiled full-grain leather belts in brown and tan tones arranged on warm linen, top-down, soft warm light." | 1200×900 |
+| `coll-wallets` (large) | Wallets (flagship) | "An elegant angled-overhead arrangement of several Kordovan full-grain leather wallets — a slim bifold, a minimalist cardholder, and an RFID elastic-band smart wallet — in cognac, dark brown and black Crazy-Horse leather, fanned on a warm walnut-wood surface with a couple of cards peeking out; soft directional window light raking the grain, deep espresso shadows; vertical composition with calm space at the bottom for a label." | 1200×1400 |
+| `coll-bags` | Bags | "A styled still life of Kordovan full-grain leather bags — a structured women's tote beside a men's leather messenger/laptop bag — in tan and chocolate brown on a warm linen-and-wood surface; soft warm light, visible grain and hand-stitching; premium editorial." | 1000×900 |
+| `coll-jackets` | Jackets | "A men's leather cafe-racer / biker jacket in rich brown sheepskin on a wooden hanger against a warm, moody workshop wall; soft side light catching the grain, zips and stitching; masculine, heritage, premium." | 1000×900 |
+| `coll-shoes` | Shoes | "A pair of Kordovan brown full-grain leather oxford/brogue dress shoes, angled on a warm stone surface, a loafer hinted softly behind; polished grain, soft overhead warm light, deep shadows; refined menswear editorial." | 1000×900 |
+| `coll-belts` | Belts | "Two or three Kordovan full-grain leather belts — one coiled, one laid straight — in tan, brown and black with brushed-metal buckles, on warm linen; top-down, soft warm light, crisp grain and double-stitching." | 1000×900 |
 
 ---
 
