@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kordovan — Header / Nav Mockups</title>
+<title>Kordovan — Header / Nav Mockup v2 (Variant B)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -20,140 +20,85 @@
   img{display:block;max-width:100%;}
   .wrap{max-width:1340px;margin:0 auto;padding:0 40px;}
   .pagelabel{background:var(--ink);color:var(--canvas);text-align:center;font-size:12px;letter-spacing:.05em;padding:9px;}
-  .demo-label{max-width:1340px;margin:54px auto 14px;padding:0 40px;font-family:var(--heading);font-size:22px;font-weight:500;color:var(--walnut);display:flex;align-items:baseline;gap:12px;}
+  .demo-label{max-width:1340px;margin:54px auto 14px;padding:0 40px;font-family:var(--heading);font-size:22px;font-weight:500;color:var(--walnut);display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;}
   .demo-label small{font-family:var(--body);font-size:12px;font-weight:400;letter-spacing:.04em;text-transform:uppercase;color:var(--stone);}
 
-  /* ===== Shared header bits ===== */
   .announce{background:var(--ink);color:var(--canvas);text-align:center;font-size:11.5px;letter-spacing:.09em;padding:9px;text-transform:uppercase;}
   .announce b{color:var(--brass-light);font-weight:500;}
-  .stage{position:relative;min-height:430px;background:linear-gradient(120deg,#1d150f 0%,#2e1f14 42%,#5c3a24 78%,#8a5230 100%);overflow:hidden;}
+  .stage{position:relative;min-height:470px;background:linear-gradient(120deg,#1d150f 0%,#2e1f14 42%,#5c3a24 78%,#8a5230 100%);overflow:hidden;}
   .stage::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 82% 30%,rgba(160,98,58,.32),transparent 60%);pointer-events:none;}
-  .stage__cap{position:absolute;bottom:34px;left:40px;color:rgba(247,242,234,.5);font-size:11px;letter-spacing:.06em;text-transform:uppercase;z-index:1;}
 
   .hdr{position:relative;z-index:5;color:var(--canvas);}
-  .hdr__row{display:grid;align-items:center;gap:30px;padding:24px 0;}
-  .row--center{grid-template-columns:1fr auto 1fr;}
-  .row--left{grid-template-columns:auto 1fr auto;}
+  .hdr__row{display:grid;align-items:center;gap:30px;padding:24px 0;grid-template-columns:auto 1fr auto;}
   .logo{font-family:var(--heading);font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--canvas);font-size:25px;white-space:nowrap;}
-
-  .nav{display:flex;gap:30px;list-style:none;align-items:center;}
-  .row--center .nav{justify-self:start;}
-  .row--left .nav{justify-self:center;}
+  .nav{display:flex;gap:30px;list-style:none;align-items:center;justify-self:center;}
   .nav > li > a{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;color:rgba(247,242,234,.9);display:inline-flex;align-items:center;gap:6px;padding:6px 0;position:relative;}
   .nav > li > a .car{width:9px;height:9px;stroke:currentColor;fill:none;stroke-width:1.6;transition:transform .25s;}
   .nav > li > a::after{content:"";position:absolute;left:0;right:100%;bottom:-2px;height:1px;background:var(--brass-light);transition:right .28s ease;}
-  .nav > li > a:hover{color:#fff;}
-  .nav > li > a:hover::after{right:0;}
-  .nav > li.open > a{color:#fff;}
-  .nav > li.open > a::after{right:0;}
-  .nav > li.open > a .car{transform:rotate(180deg);}
+  .nav > li > a:hover{color:#fff;} .nav > li > a:hover::after{right:0;}
+  .nav > li.open > a{color:#fff;} .nav > li.open > a::after{right:0;} .nav > li.open > a .car{transform:rotate(180deg);}
+  .nav .sale > a{color:var(--brass-light);}
 
   .actions{justify-self:end;display:flex;gap:20px;align-items:center;}
   .actions svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.4;}
   .cart{position:relative;}
   .cart i{position:absolute;top:-7px;right:-9px;background:var(--cognac);color:#fff;font-size:9px;font-weight:600;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-style:normal;}
 
-  /* ===== Mega menu ===== */
   .mega{position:absolute;left:0;right:0;top:100%;background:var(--canvas);color:var(--ink);box-shadow:0 24px 48px rgba(36,28,22,.18);border-top:1px solid var(--border);z-index:6;}
-  .mega__in{display:grid;grid-template-columns:1fr 1fr 1fr 1.3fr;gap:48px;padding:40px 0;}
+  .mega__in{display:grid;grid-template-columns:1fr 1fr 1fr 1.35fr;gap:48px;padding:40px 0;}
   .mega__col h5{font-family:var(--body);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--cognac);margin-bottom:16px;font-weight:600;}
   .mega__col ul{list-style:none;}
   .mega__col li{margin-bottom:11px;}
   .mega__col li a{font-size:14px;color:var(--walnut);font-weight:400;transition:.2s;}
   .mega__col li a:hover{color:var(--cognac);padding-left:4px;}
-  .mega__feat{background:var(--parchment);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;}
-  .mega__feat img{aspect-ratio:16/11;object-fit:cover;width:100%;}
-  .mega__feat .c{padding:16px 18px;}
-  .mega__feat .tag{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--brass);font-weight:600;}
-  .mega__feat h4{font-family:var(--heading);font-size:18px;font-weight:500;margin:5px 0 4px;}
-  .mega__feat .pr{color:var(--cognac);font-weight:500;font-size:13px;}
-  .mega__feat .lk{display:inline-block;margin-top:10px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--cognac);border-bottom:1px solid var(--cognac);padding-bottom:2px;}
+  .mega__feat{position:relative;border-radius:8px;overflow:hidden;display:block;min-height:230px;}
+  .mega__feat img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  .mega__feat .grad{position:absolute;inset:0;background:linear-gradient(180deg,rgba(36,28,22,0) 35%,rgba(36,28,22,.82));}
+  .mega__feat .c{position:absolute;left:18px;right:18px;bottom:16px;color:var(--canvas);}
+  .mega__feat .tag{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--brass-light);font-weight:600;}
+  .mega__feat h4{font-family:var(--heading);font-size:19px;font-weight:500;margin:4px 0 3px;color:#fff;}
+  .mega__feat .pr{font-size:12.5px;color:rgba(247,242,234,.85);}
+  .mega__feat .lk{display:inline-block;margin-top:10px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:#fff;border-bottom:1px solid var(--brass-light);padding-bottom:2px;}
 
-  /* hero text under header */
-  .stage__h{position:absolute;left:40px;bottom:64px;z-index:1;max-width:520px;}
+  .stage__h{position:absolute;left:40px;bottom:60px;z-index:1;max-width:520px;}
   .stage__h .eb{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--brass-light);font-weight:500;}
   .stage__h h1{font-family:var(--heading);font-weight:500;color:var(--canvas);font-size:52px;line-height:1.05;margin-top:10px;letter-spacing:-.02em;}
   .stage__h h1 em{font-style:italic;font-weight:400;}
 
-  /* ===== Scrolled (solid, shrunk) state ===== */
   .solid{background:var(--canvas);border-bottom:1px solid var(--border);box-shadow:0 1px 12px rgba(36,28,22,.06);}
   .solid .hdr__row{padding:11px 0;}
   .solid .logo{color:var(--ink);font-size:19px;}
   .solid .nav > li > a{color:var(--walnut);}
   .solid .nav > li > a:hover{color:var(--cognac);}
   .solid .nav > li > a::after{background:var(--cognac);}
+  .solid .nav .sale > a{color:var(--cognac);}
   .solid .actions{color:var(--ink);}
 
-  @media(max-width:980px){
-    .nav,.mega{display:none;}
-    .row--center,.row--left{grid-template-columns:auto 1fr auto;}
-  }
+  .notes{max-width:1340px;margin:36px auto 70px;padding:0 40px;color:var(--stone);font-size:13px;line-height:1.85;}
+  .notes strong.h{color:var(--walnut);font-family:var(--heading);font-size:16px;font-weight:500;}
+
+  @media(max-width:980px){ .nav,.mega{display:none;} }
 </style>
 </head>
 <body>
 
-<div class="pagelabel">MOCKUP — Header / Navigation · real Kordovan catalogue + imagery · Quiet Heritage palette + Fraunces</div>
+<div class="pagelabel">MOCKUP v2 — Header / Navigation · Variant B (logo left) · category-first nav · real catalogue + composed imagery</div>
 
-<!-- ============ VARIANT A: LOGO CENTERED ============ -->
-<div class="demo-label">Variant A — Logo centered <small>nav left · logo middle · icons right · Wallets mega menu open</small></div>
+<!-- ===== WALLETS MEGA (flagship) ===== -->
+<div class="demo-label">Header — Wallets mega open <small>flagship category · Men's / Women's / Smart-KODO + composed featured tile</small></div>
 <div class="announce">Free delivery over <b>PKR 3,000</b> &nbsp;·&nbsp; Cash on delivery nationwide &nbsp;·&nbsp; 100% genuine leather</div>
 <div class="stage">
   <header class="hdr">
-    <div class="wrap hdr__row row--center">
-      <ul class="nav">
-        <li><a>New Arrivals</a></li>
-        <li class="open"><a>Wallets <svg class="car" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg></a></li>
-        <li><a>Bags <svg class="car" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg></a></li>
-        <li><a>Shoes <svg class="car" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg></a></li>
-        <li><a>Belts</a></li>
-      </ul>
-      <div class="logo">Kordovan</div>
-      <div class="actions">
-        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        <span class="cart"><svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><i>2</i></span>
-      </div>
-    </div>
-    <!-- Mega -->
-    <div class="mega">
-      <div class="wrap mega__in">
-        <div class="mega__col">
-          <h5>Men's Wallets</h5>
-          <ul><li><a>Bifold Wallets</a></li><li><a>Cardholders</a></li><li><a>Money Clips</a></li><li><a>Long Wallets</a></li><li><a>View all men's →</a></li></ul>
-        </div>
-        <div class="mega__col">
-          <h5>Women's Wallets</h5>
-          <ul><li><a>Zip Wallets</a></li><li><a>Clutches</a></li><li><a>Cardholders</a></li><li><a>View all women's →</a></li></ul>
-        </div>
-        <div class="mega__col">
-          <h5>Smart — KODO</h5>
-          <ul><li><a>RFID Smart Wallets</a></li><li><a>KODO Black</a></li><li><a>KODO Brown</a></li><li><a>The KODO Story</a></li></ul>
-        </div>
-        <a class="mega__feat">
-          <img src="https://cdn.shopify.com/s/files/1/0267/9164/1277/files/Kodo-New-Front-Black-_2.jpg?v=1761204721&width=560" alt="KODO RFID Smart Wallet">
-          <div class="c"><div class="tag">Pakistan's First RFID Wallet</div><h4>The KODO Smart Wallet</h4><div class="pr">From PKR 2,300</div><span class="lk">Shop the KODO →</span></div>
-        </a>
-      </div>
-    </div>
-  </header>
-  <div class="stage__cap">Transparent over hero · light/inverted logo</div>
-</div>
-
-<!-- ============ VARIANT B: LOGO LEFT ============ -->
-<div class="demo-label">Variant B — Logo left <small>logo left · nav centered · icons right · Wallets mega menu open (recommended for mega menus)</small></div>
-<div class="announce">Free delivery over <b>PKR 3,000</b> &nbsp;·&nbsp; Cash on delivery nationwide &nbsp;·&nbsp; 100% genuine leather</div>
-<div class="stage">
-  <header class="hdr">
-    <div class="wrap hdr__row row--left">
+    <div class="wrap hdr__row">
       <div class="logo">Kordovan</div>
       <ul class="nav">
         <li><a>New Arrivals</a></li>
         <li class="open"><a>Wallets <svg class="car" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg></a></li>
         <li><a>Bags <svg class="car" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg></a></li>
+        <li><a>Jackets <svg class="car" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg></a></li>
         <li><a>Shoes <svg class="car" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg></a></li>
-        <li><a>Belts</a></li>
         <li><a>Accessories <svg class="car" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg></a></li>
-        <li><a style="color:var(--brass-light)">Sale</a></li>
+        <li class="sale"><a>Sale</a></li>
       </ul>
       <div class="actions">
         <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
@@ -163,20 +108,12 @@
     </div>
     <div class="mega">
       <div class="wrap mega__in">
-        <div class="mega__col">
-          <h5>Men's Wallets</h5>
-          <ul><li><a>Bifold Wallets</a></li><li><a>Cardholders</a></li><li><a>Money Clips</a></li><li><a>Long Wallets</a></li><li><a>View all men's →</a></li></ul>
-        </div>
-        <div class="mega__col">
-          <h5>Women's Wallets</h5>
-          <ul><li><a>Zip Wallets</a></li><li><a>Clutches</a></li><li><a>Cardholders</a></li><li><a>View all women's →</a></li></ul>
-        </div>
-        <div class="mega__col">
-          <h5>Smart — KODO</h5>
-          <ul><li><a>RFID Smart Wallets</a></li><li><a>KODO Black</a></li><li><a>KODO Brown</a></li><li><a>The KODO Story</a></li></ul>
-        </div>
+        <div class="mega__col"><h5>Men's Wallets</h5><ul><li><a>Bifold Wallets</a></li><li><a>Cardholders</a></li><li><a>Money Clips</a></li><li><a>Long Wallets</a></li><li><a>View all men's →</a></li></ul></div>
+        <div class="mega__col"><h5>Women's Wallets</h5><ul><li><a>Zip Wallets</a></li><li><a>Clutches</a></li><li><a>Cardholders</a></li><li><a>View all women's →</a></li></ul></div>
+        <div class="mega__col"><h5>Smart — KODO</h5><ul><li><a>RFID Smart Wallets</a></li><li><a>KODO Black</a></li><li><a>KODO Brown</a></li><li><a>The KODO Story</a></li></ul></div>
         <a class="mega__feat">
-          <img src="https://cdn.shopify.com/s/files/1/0267/9164/1277/files/Kodo-New-Front-Black-_2.jpg?v=1761204721&width=560" alt="KODO RFID Smart Wallet">
+          <img src="https://cdn.shopify.com/s/files/1/0267/9164/1277/collections/20251023_1840_Luxury_Leather_Wallets_simple_compose_01k88mqw5ze6may4gzrms43df1.png?width=640" alt="Kordovan leather wallets">
+          <div class="grad"></div>
           <div class="c"><div class="tag">Pakistan's First RFID Wallet</div><h4>The KODO Smart Wallet</h4><div class="pr">From PKR 2,300</div><span class="lk">Shop the KODO →</span></div>
         </a>
       </div>
@@ -185,19 +122,57 @@
   <div class="stage__h"><span class="eb">Pakistan's Original Leather Craft House</span><h1>Built to Last.<br><em>Made to Age.</em></h1></div>
 </div>
 
-<!-- ============ SCROLLED STATE ============ -->
-<div class="demo-label">Sticky scrolled state <small>shrinks 80→56px · background fades to cream · dark logo · same nav (Variant B layout)</small></div>
+<!-- ===== JACKETS MEGA ===== -->
+<div class="demo-label">Header — Jackets mega open <small>same system, different category + image (this is the jackets you didn't see)</small></div>
+<div class="announce">Free delivery over <b>PKR 3,000</b> &nbsp;·&nbsp; Cash on delivery nationwide &nbsp;·&nbsp; 100% genuine leather</div>
+<div class="stage">
+  <header class="hdr">
+    <div class="wrap hdr__row">
+      <div class="logo">Kordovan</div>
+      <ul class="nav">
+        <li><a>New Arrivals</a></li>
+        <li><a>Wallets <svg class="car" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg></a></li>
+        <li><a>Bags <svg class="car" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg></a></li>
+        <li class="open"><a>Jackets <svg class="car" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg></a></li>
+        <li><a>Shoes <svg class="car" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg></a></li>
+        <li><a>Accessories <svg class="car" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg></a></li>
+        <li class="sale"><a>Sale</a></li>
+      </ul>
+      <div class="actions">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span class="cart"><svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><i>2</i></span>
+      </div>
+    </div>
+    <div class="mega">
+      <div class="wrap mega__in">
+        <div class="mega__col"><h5>Men's Jackets</h5><ul><li><a>Biker Jackets</a></li><li><a>Bomber Jackets</a></li><li><a>Racer Jackets</a></li><li><a>Shearling & Coats</a></li><li><a>View all men's →</a></li></ul></div>
+        <div class="mega__col"><h5>Women's Jackets</h5><ul><li><a>Biker Jackets</a></li><li><a>Blazers</a></li><li><a>View all women's →</a></li></ul></div>
+        <div class="mega__col"><h5>By Leather</h5><ul><li><a>Cowhide</a></li><li><a>Sheep / Nappa</a></li><li><a>Suede</a></li><li><a>Care Guide</a></li></ul></div>
+        <a class="mega__feat">
+          <img src="https://cdn.shopify.com/s/files/1/0267/9164/1277/collections/Men_s_Leather_jacket.webp?width=640" alt="Kordovan men's leather jackets">
+          <div class="grad"></div>
+          <div class="c"><div class="tag">Heirloom Outerwear</div><h4>Men's Leather Jackets</h4><div class="pr">31 styles · full-grain</div><span class="lk">Shop jackets →</span></div>
+        </a>
+      </div>
+    </div>
+  </header>
+  <div class="stage__h"><span class="eb">Cowhide · Nappa · Shearling</span><h1>Jackets, <em>made to outlast.</em></h1></div>
+</div>
+
+<!-- ===== SCROLLED ===== -->
+<div class="demo-label">Sticky scrolled state <small>shrinks · cream background · dark logo</small></div>
 <header class="hdr solid">
-  <div class="wrap hdr__row row--left">
+  <div class="wrap hdr__row">
     <div class="logo">Kordovan</div>
     <ul class="nav">
       <li><a>New Arrivals</a></li>
       <li><a>Wallets <svg class="car" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg></a></li>
       <li><a>Bags <svg class="car" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg></a></li>
+      <li><a>Jackets <svg class="car" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg></a></li>
       <li><a>Shoes <svg class="car" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg></a></li>
-      <li><a>Belts</a></li>
       <li><a>Accessories <svg class="car" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg></a></li>
-      <li><a style="color:var(--cognac)">Sale</a></li>
+      <li class="sale"><a>Sale</a></li>
     </ul>
     <div class="actions">
       <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
@@ -207,13 +182,14 @@
   </div>
 </header>
 
-<div style="max-width:1340px;margin:40px auto 70px;padding:0 40px;color:var(--stone);font-size:13px;line-height:1.8;">
-  <strong style="color:var(--walnut);font-family:var(--heading);font-size:16px;">Notes</strong><br>
-  · Top-level items use your real categories (max 7): New Arrivals · Wallets · Bags · Shoes · Belts · Accessories · Sale.<br>
-  · Mega menu shown on <strong>Wallets</strong> (flagship — KODO RFID). Same pattern fits Bags, Shoes, Accessories.<br>
-  · Hover any item → animated brass underline; caret flips when its menu is open.<br>
-  · Search icon opens a full-screen overlay (next mock); cart shows live count.<br>
-  · The featured tile pulls a live product image straight from your Shopify CDN.
+<div class="notes">
+  <strong class="h">Why category-first (not Men/Women)</strong><br>
+  · Shoppers search by product type ("a wallet", "a jacket") — matches the best leather brands (Bellroy, Cuyana, Carl Friedrik).<br>
+  · Your catalogue is accessories-led and skews men's — a Men/Women split would leave a thin, empty-looking Women's section.<br>
+  · Gender still lives inside each mega menu as columns (Men's / Women's) — the hybrid that converts best.<br><br>
+  <strong class="h">Top 7 categories</strong> &nbsp; New Arrivals · Wallets · Bags · Jackets · Shoes · Accessories · Sale<br>
+  · Belts, Gloves, Caps, Cigarette/Lipstick Cases, Folios live inside the <em>Accessories</em> mega (Belts can be promoted to top-level if you prefer).<br>
+  · Featured tiles use your <em>composed</em> collection imagery (not raw cutouts) — and these can be upgraded to bespoke Canva-designed tiles.
 </div>
 
 </body>
