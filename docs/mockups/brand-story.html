@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kordovan — Brand Story Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --canvas:#F7F2EA; --parchment:#ECE3D4; --ink:#241C16; --walnut:#4A3528;
+    --cognac:#A0623A; --cognac-dark:#7E4B2C; --tan:#C08B5C; --brass:#B0894F;
+    --brass-light:#D8C39A; --stone:#8B8174; --border:#DDD2C0;
+    --heading:'Fraunces',Georgia,serif; --body:'Inter',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--canvas);color:var(--ink);font-family:var(--body);font-weight:300;-webkit-font-smoothing:antialiased;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1340px;margin:0 auto;padding:0 40px;}
+  .pagelabel{background:var(--ink);color:var(--canvas);text-align:center;font-size:12px;letter-spacing:.05em;padding:9px;}
+
+  .story{background:var(--parchment);padding:108px 0;}
+  .story__grid{display:grid;grid-template-columns:1fr 1fr;gap:84px;align-items:center;}
+
+  .story__img{position:relative;aspect-ratio:3/4;border-radius:10px;overflow:hidden;
+    background:linear-gradient(160deg,#2e1f14,#5c3a24 65%,#8a5230);box-shadow:var(--shadow,0 24px 60px rgba(36,28,22,.22));}
+  .story__img::after{content:"story-craft image · 1000×1300 (3:4)";position:absolute;left:50%;bottom:18px;transform:translateX(-50%);
+    font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:rgba(247,242,234,.45);}
+  .story__badge{position:absolute;left:22px;top:22px;background:rgba(36,28,22,.55);backdrop-filter:blur(4px);
+    color:var(--canvas);border:1px solid rgba(247,242,234,.25);border-radius:99px;padding:8px 16px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;}
+
+  .story__c .eyebrow{display:block;font-family:var(--body);font-weight:500;text-transform:uppercase;letter-spacing:.18em;font-size:11px;color:var(--brass);margin-bottom:16px;}
+  .story__c h2{font-family:var(--heading);font-weight:500;font-size:clamp(30px,3.6vw,48px);line-height:1.1;letter-spacing:-.01em;margin-bottom:24px;}
+  .story__c p{color:var(--walnut);font-size:16px;line-height:1.8;margin-bottom:18px;max-width:480px;}
+  .story__stats{display:flex;gap:48px;margin:38px 0 34px;}
+  .story__stats .n{font-family:var(--heading);font-size:38px;font-weight:500;color:var(--cognac);line-height:1;}
+  .story__stats .l{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);margin-top:8px;}
+  .btn-text{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--cognac);border-bottom:1px solid var(--cognac);padding-bottom:4px;}
+
+  .notes{max-width:1340px;margin:30px auto 70px;padding:0 40px;color:var(--stone);font-size:13px;line-height:1.85;}
+  .notes strong{color:var(--walnut);font-family:var(--heading);font-size:15px;font-weight:500;}
+  .notes em{color:var(--cognac);font-style:normal;font-weight:500;}
+
+  @media(max-width:860px){
+    .story__grid{grid-template-columns:1fr;gap:40px;}
+    .story{padding:72px 0;}
+    .story__stats{gap:32px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="pagelabel">MOCKUP — Homepage · BRAND STORY ("why us") · image placeholder for story-craft</div>
+
+<section class="story">
+  <div class="wrap story__grid">
+    <div class="story__img">
+      <span class="story__badge">Handmade in Pakistan</span>
+    </div>
+    <div class="story__c">
+      <span class="eyebrow">Our Story</span>
+      <h2>Craft That Speaks for Itself</h2>
+      <p>Kordovan began with a simple belief: a wallet should outlive its trends. We work full-grain leather by hand in Pakistan — cut, stitched, and finished to age into something better with every year you carry it.</p>
+      <p>No fast fashion. No corners cut. Just leather built to be handed down.</p>
+      <div class="story__stats">
+        <div><div class="n">10K+</div><div class="l">Happy Customers</div></div>
+        <div><div class="n">5+</div><div class="l">Years of Craft</div></div>
+        <div><div class="n">100%</div><div class="l">Genuine Leather</div></div>
+      </div>
+      <a class="btn-text">Read Our Story →</a>
+    </div>
+  </div>
+</section>
+
+<div class="notes">
+  <strong>Brand story — your call</strong><br>
+  · <em>Layout:</em> image left, story + stats right. I can flip it (image right) or go full-bleed image — say the word.<br>
+  · <em>Copy:</em> heading "Craft That Speaks for Itself" + the two short lines. Keep, or rewrite the story?<br>
+  · <em>Stats:</em> 10K+ Customers · 5+ Years · 100% Genuine Leather — are these numbers accurate to use? (Swap any.)<br>
+  · <em>Image:</em> the <em>story-craft</em> brief is ready to generate (artisan burnishing leather, 3:4, 1000×1300). The "Handmade in Pakistan" pill sits over it — keep or drop?
+</div>
+
+</body>
+</html>
