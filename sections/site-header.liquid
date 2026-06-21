@@ -5,10 +5,11 @@
   endif
 -%}
 
+<div class="kv-announce" id="kv-announce">
+  Free delivery over <b>PKR 2,500</b> &nbsp;·&nbsp; Cash on delivery nationwide &nbsp;·&nbsp; 100% genuine leather
+</div>
+
 <header class="kv-hdr{% unless is_home %} kv-hdr--page{% endunless %}" id="kv-hdr">
-  <div class="kv-announce">
-    Free delivery over <b>PKR 2,500</b> &nbsp;·&nbsp; Cash on delivery nationwide &nbsp;·&nbsp; 100% genuine leather
-  </div>
   <div class="kv-hdr__bar">
   <div class="kv-wrap kv-hdr__row">
 
@@ -92,8 +93,21 @@
 
 <script>
   (function(){
-    var h=document.getElementById('kv-hdr');
-    if(h){window.addEventListener('scroll',function(){h.classList.toggle('kv-scrolled',window.scrollY>40);},{passive:true});}
+    var h=document.getElementById('kv-hdr'), a=document.getElementById('kv-announce');
+    if(!h) return;
+    var home = !h.classList.contains('kv-hdr--page');
+    function pos(){
+      var ah = a ? a.offsetHeight : 0;
+      if(home){
+        if(window.scrollY > ah){ h.classList.add('kv-scrolled'); h.style.top='0px'; }
+        else { h.classList.remove('kv-scrolled'); h.style.top = ah + 'px'; }
+      } else {
+        h.classList.toggle('kv-scrolled', window.scrollY > 10);
+      }
+    }
+    window.addEventListener('scroll', pos, {passive:true});
+    window.addEventListener('resize', pos);
+    pos();
   })();
 </script>
 

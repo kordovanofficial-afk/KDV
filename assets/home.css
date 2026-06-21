@@ -15,10 +15,11 @@
 .kv-announce{position:relative;z-index:55;background:var(--ink);color:var(--canvas);text-align:center;font-family:var(--kv-body);font-weight:300;font-size:11.5px;letter-spacing:.09em;padding:9px;text-transform:uppercase;}
 .kv-announce b{color:var(--brass-light);font-weight:500;}
 
-/* header — announcement + bar are ONE sticky/fixed unit (robust to announcement wrapping) */
-.kv-hdr{position:fixed;top:0;left:0;right:0;z-index:50;color:var(--canvas);font-family:var(--kv-body);}
-.kv-hdr--page{position:sticky;color:var(--ink);}
-.kv-hdr.kv-scrolled .kv-announce{display:none;}
+/* header — announcement sits in normal flow ABOVE the header (pushes the hero down,
+   exactly like the mockup); header is fixed on home (JS sets top = announcement height,
+   so it never overlaps the wrapped announcement on mobile) and sticky elsewhere. */
+.kv-hdr{position:fixed;left:0;right:0;z-index:50;color:var(--canvas);font-family:var(--kv-body);transition:top .3s,background .3s,color .3s,box-shadow .3s;}
+.kv-hdr--page{position:sticky;top:0;color:var(--ink);}
 .kv-hdr__bar{transition:background .3s,box-shadow .3s;}
 .kv-hdr--page .kv-hdr__bar,.kv-hdr.kv-scrolled .kv-hdr__bar{background:var(--canvas);box-shadow:0 1px 14px rgba(36,28,22,.08);}
 .kv-hdr--page,.kv-hdr.kv-scrolled{color:var(--ink);}
