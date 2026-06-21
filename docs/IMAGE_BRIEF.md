@@ -47,6 +47,7 @@ Aspect **3:4** portrait, size **1000 × 1300 px**.
 Goal: reflect **Kordovan's actual products** (not generic AI goods). Large flagship
 tile = **portrait ~6:7, 1200 × 1400**; the four small tiles = **~square, 1000 × 900**.
 Images are cover-cropped, so keep the subject centred with a little breathing room.
+**Status: all 5 placed ✅** — `files/coll-wallets|bags|jackets|shoes|belts.png`.
 
 | ID | Subject | GPT prompt (after preamble) | Size |
 |----|---------|------------------------------|------|
