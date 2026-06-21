@@ -20,8 +20,10 @@
   .pagelabel{background:var(--ink);color:var(--canvas);text-align:center;font-size:12px;letter-spacing:.05em;padding:9px;}
 
   .email{position:relative;color:var(--canvas);padding:104px 0;overflow:hidden;
-    background:linear-gradient(125deg,#1d150f 0%,#3a2517 50%,#693f25 100%);}
-  .email::before{content:"";position:absolute;inset:0;background:radial-gradient(70% 110% at 82% 30%,rgba(192,139,92,.35),transparent 60%);}
+    background:#1d150f url('https://cdn.shopify.com/s/files/1/0267/9164/1277/files/email-leather-bg.png?v=1782035962&width=2000') center/cover;}
+  .email::before{content:"";position:absolute;inset:0;background:
+    radial-gradient(70% 110% at 82% 25%, rgba(192,139,92,.22), transparent 60%),
+    linear-gradient(120deg, rgba(18,11,6,.84), rgba(34,22,13,.74));}
   .email__in{position:relative;z-index:2;max-width:1040px;margin:0 auto;display:grid;grid-template-columns:auto 1fr;gap:64px;align-items:center;}
 
   /* coupon ticket */

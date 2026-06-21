@@ -55,7 +55,7 @@ subtle dark leather texture behind it. Wide full-bleed band.
 
 | ID | Subject | GPT prompt (after preamble) | Size |
 |----|---------|------------------------------|------|
-| `email-leather-bg` *(optional)* | Dark full-grain leather texture | "An extreme close-up of dark cognac-to-espresso full-grain leather filling the frame, soft warm light raking low across the surface to reveal natural grain, pores and subtle creasing; very dark, even and moody so light text stays perfectly legible on top; abstract texture, no objects, no stitching seams across the centre." | 2400×1000 |
+| `email-leather-bg` *(optional)* ✅ | Dark full-grain leather texture | PLACED in mockup — `files/email-leather-bg.png` (dark overlay on top for legibility). Final decision on shipping it to the theme: TBD. | 2400×1000 |
 
 | ID | Subject | GPT prompt (after preamble) | Size |
 |----|---------|------------------------------|------|
