@@ -49,6 +49,14 @@ tile = **portrait ~6:7, 1200 × 1400**; the four small tiles = **~square, 1000 �
 Images are cover-cropped, so keep the subject centred with a little breathing room.
 **Status: all 5 placed ✅** — `files/coll-wallets|bags|jackets|shoes|belts.png`.
 
+## 5. Optional — email-capture background
+The email band currently uses a CSS gradient (looks good as-is). Optionally add a
+subtle dark leather texture behind it. Wide full-bleed band.
+
+| ID | Subject | GPT prompt (after preamble) | Size |
+|----|---------|------------------------------|------|
+| `email-leather-bg` *(optional)* | Dark full-grain leather texture | "An extreme close-up of dark cognac-to-espresso full-grain leather filling the frame, soft warm light raking low across the surface to reveal natural grain, pores and subtle creasing; very dark, even and moody so light text stays perfectly legible on top; abstract texture, no objects, no stitching seams across the centre." | 2400×1000 |
+
 | ID | Subject | GPT prompt (after preamble) | Size |
 |----|---------|------------------------------|------|
 | `coll-wallets` (large) | Wallets (flagship) | "An elegant angled-overhead arrangement of several Kordovan full-grain leather wallets — a slim bifold, a minimalist cardholder, and an RFID elastic-band smart wallet — in cognac, dark brown and black Crazy-Horse leather, fanned on a warm walnut-wood surface with a couple of cards peeking out; soft directional window light raking the grain, deep espresso shadows; vertical composition with calm space at the bottom for a label." | 1200×1400 |
