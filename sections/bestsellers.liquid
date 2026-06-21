@@ -7,7 +7,7 @@
 
     <div class="kv-pgrid">
       {%- for block in section.blocks -%}
-        {%- assign coll = block.settings.collection -%}
+        {%- assign coll = collections[block.settings.collection] -%}
         {%- assign product = coll.products.first -%}
         {%- if product != blank -%}
           <a class="kv-card" href="{{ product.url }}" {{ block.shopify_attributes }}>
