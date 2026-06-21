@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kordovan — Bestsellers Mockup</title>
+<title>Kordovan — Bestsellers Mockup (per-category)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -22,7 +22,7 @@
   .pagelabel{background:var(--ink);color:var(--canvas);text-align:center;font-size:12px;letter-spacing:.05em;padding:9px;}
 
   .section{padding:104px 0;}
-  .section__head{text-align:center;max-width:640px;margin:0 auto 56px;}
+  .section__head{text-align:center;max-width:660px;margin:0 auto 56px;}
   .eyebrow{display:block;font-family:var(--body);font-weight:500;text-transform:uppercase;letter-spacing:.18em;font-size:11px;color:var(--brass);margin-bottom:13px;}
   .section__head h2{font-family:var(--heading);font-weight:500;font-size:clamp(28px,3.5vw,44px);letter-spacing:-.01em;}
   .section__head p{color:var(--stone);margin-top:12px;font-size:15px;}
@@ -32,8 +32,9 @@
   .card__media{position:relative;aspect-ratio:4/5;border-radius:8px;overflow:hidden;background:var(--parchment);border:1px solid var(--border);}
   .card__media img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);}
   .card:hover .card__media img{transform:scale(1.05);}
-  .card__tag{position:absolute;top:12px;left:12px;background:var(--ink);color:var(--canvas);font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:6px 10px;border-radius:3px;font-weight:500;z-index:2;}
-  .card__fav{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:50%;background:rgba(247,242,234,.9);display:flex;align-items:center;justify-content:center;z-index:2;opacity:0;transform:translateY(-4px);transition:.25s;}
+  .card__tag{position:absolute;top:12px;left:12px;background:var(--ink);color:var(--brass-light);font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:6px 10px;border-radius:3px;font-weight:600;z-index:2;display:flex;align-items:center;gap:5px;}
+  .card__tag svg{width:10px;height:10px;fill:var(--brass-light);}
+  .card__fav{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:50%;background:rgba(247,242,234,.92);display:flex;align-items:center;justify-content:center;z-index:2;opacity:0;transform:translateY(-4px);transition:.25s;}
   .card:hover .card__fav{opacity:1;transform:none;}
   .card__fav svg{width:16px;height:16px;stroke:var(--ink);fill:none;stroke-width:1.5;}
   .card__atc{position:absolute;left:12px;right:12px;bottom:12px;background:var(--cognac);color:#fff;text-align:center;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;padding:13px;border-radius:5px;opacity:0;transform:translateY(10px);transition:.28s;z-index:2;}
@@ -56,31 +57,21 @@
 </head>
 <body>
 
-<div class="pagelabel">MOCKUP — Homepage · BESTSELLERS ("Customer Favourites") · real top-selling products + live catalogue photos</div>
+<div class="pagelabel">MOCKUP — Homepage · BESTSELLERS · one auto-updating #1 per category (Wallet · Bag · Jacket · Shoe)</div>
 
 <section class="section">
   <div class="wrap">
     <div class="section__head">
       <span class="eyebrow">Bestsellers</span>
       <h2>Customer Favourites</h2>
-      <p>The pieces our customers reach for most.</p>
+      <p>The single best-loved piece in every category — updated automatically as our customers vote with their wallets.</p>
     </div>
 
     <div class="pgrid">
-      <!-- 1 -->
+      <!-- Wallet -->
       <div class="card">
         <div class="card__media">
-          <span class="card__tag">#1 Bestseller</span>
-          <span class="card__fav"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></span>
-          <img src="https://cdn.shopify.com/s/files/1/0267/9164/1277/files/Kodo-New-Front-Black-_2.jpg?v=1761204721&width=640" alt="KODO RFID Smart Wallet">
-          <div class="card__atc">Add to Cart</div>
-        </div>
-        <div class="card__name">KODO Smart Wallet — RFID</div>
-        <div class="card__meta"><span class="card__price">PKR 2,300</span><span class="card__stars">★★★★★</span></div>
-      </div>
-      <!-- 2 -->
-      <div class="card">
-        <div class="card__media">
+          <span class="card__tag"><svg viewBox="0 0 24 24"><path d="M12 2 15 9l7 .5-5.5 4.5L18 21l-6-3.8L6 21l1.5-7L2 9.5 9 9z"/></svg>#1 in Wallets</span>
           <span class="card__fav"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></span>
           <img src="https://cdn.shopify.com/s/files/1/0267/9164/1277/files/Mocha_Mate_Leather_Wallet_by_Kordovan_Front.png?v=1761205257&width=640" alt="The Mocha Mate Wallet">
           <div class="card__atc">Add to Cart</div>
@@ -88,25 +79,41 @@
         <div class="card__name">The Mocha Mate Wallet</div>
         <div class="card__meta"><span class="card__price">PKR 3,200</span><span class="card__stars">★★★★★</span></div>
       </div>
-      <!-- 3 -->
+
+      <!-- Bag -->
       <div class="card">
         <div class="card__media">
+          <span class="card__tag"><svg viewBox="0 0 24 24"><path d="M12 2 15 9l7 .5-5.5 4.5L18 21l-6-3.8L6 21l1.5-7L2 9.5 9 9z"/></svg>#1 in Bags</span>
           <span class="card__fav"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></span>
-          <img src="https://cdn.shopify.com/s/files/1/0267/9164/1277/files/20251228_1826_ElegantWalletDisplay_remix_01kdjj5rx6endv54mccjbv340y.png?v=1766929036&width=640" alt="The Bastion Bifold Wallet">
+          <img src="https://cdn.shopify.com/s/files/1/0267/9164/1277/files/DSC05039_00dc622c-db22-47f0-893b-8591fa877c93.jpg?v=1761567776&width=640" alt="The Diva Tote">
           <div class="card__atc">Add to Cart</div>
         </div>
-        <div class="card__name">The Bastion Bifold</div>
-        <div class="card__meta"><span class="card__price">PKR 2,500</span><span class="card__stars">★★★★★</span></div>
+        <div class="card__name">The Diva Tote</div>
+        <div class="card__meta"><span class="card__price">PKR 5,500</span><span class="card__stars">★★★★★</span></div>
       </div>
-      <!-- 4 -->
+
+      <!-- Jacket -->
       <div class="card">
         <div class="card__media">
+          <span class="card__tag"><svg viewBox="0 0 24 24"><path d="M12 2 15 9l7 .5-5.5 4.5L18 21l-6-3.8L6 21l1.5-7L2 9.5 9 9z"/></svg>#1 in Jackets</span>
           <span class="card__fav"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></span>
-          <img src="https://cdn.shopify.com/s/files/1/0267/9164/1277/files/DSC00313.jpg?v=1761463179&width=640" alt="The Imperial Reversible Belt">
+          <img src="https://cdn.shopify.com/s/files/1/0267/9164/1277/files/Shadow-Rider-Black-Leather-Jacket-1.webp?v=1726483541&width=640" alt="Shadow Rider Cafe Racer Jacket">
           <div class="card__atc">Add to Cart</div>
         </div>
-        <div class="card__name">The Imperial Reversible Belt</div>
-        <div class="card__meta"><span class="card__price">PKR 3,900</span><span class="card__stars">★★★★★</span></div>
+        <div class="card__name">Shadow Rider Jacket</div>
+        <div class="card__meta"><span class="card__price">PKR 25,600</span><span class="card__stars">★★★★★</span></div>
+      </div>
+
+      <!-- Shoe -->
+      <div class="card">
+        <div class="card__media">
+          <span class="card__tag"><svg viewBox="0 0 24 24"><path d="M12 2 15 9l7 .5-5.5 4.5L18 21l-6-3.8L6 21l1.5-7L2 9.5 9 9z"/></svg>#1 in Shoes</span>
+          <span class="card__fav"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></span>
+          <img src="https://cdn.shopify.com/s/files/1/0267/9164/1277/products/Stallion-Front.jpg?v=1761387891&width=640" alt="The Stallion Leather Boot">
+          <div class="card__atc">Add to Cart</div>
+        </div>
+        <div class="card__name">The Stallion Boot</div>
+        <div class="card__meta"><span class="card__price">PKR 24,000</span><span class="card__stars">★★★★★</span></div>
       </div>
     </div>
 
@@ -115,11 +122,11 @@
 </section>
 
 <div class="notes">
-  <strong>Bestsellers — your call</strong><br>
-  · <em>Cards (hover me):</em> image zoom + "Add to Cart" slide-up + a wishlist heart. In the live theme, hover also swaps to the product's 2nd photo.<br>
-  · <em>The 4 products</em> shown are real top-sellers (KODO, Mocha Mate, Bastion, Imperial Belt). Live section auto-pulls from a bestsellers collection you choose — so it always reflects current sales.<br>
-  · <em>Star ratings</em> are placeholders — they'll show real review counts once a reviews app (e.g. Judge.me / Loox) is connected. Want me to keep stars, or hide them until reviews are live?<br>
-  · Keep 4 across, or want a different mix (e.g. swap the belt for a bag to vary categories)?
+  <strong>Bestsellers — your idea, built</strong><br>
+  · Each card = the current <em>#1 best-seller in that category</em>, with a badge so the "why" is clear. Range now spans Wallet · Bag · Jacket · Shoe instead of four wallets.<br>
+  · <em>Auto-updates:</em> each card pulls the top product from its category collection, sorted Best Selling. When a product overtakes the leader in its category, it appears here on its own — no manual work.<br>
+  · <em>Setup:</em> Shoes is already sorted Best Selling ✓. Jackets is sorted by newest — we'll switch it to Best Selling. We'll point the section at one "parent" collection per category (All Wallets / Bags / Jackets / Shoes).<br>
+  · <em>Categories shown:</em> Wallet, Bag, Jacket, Shoe. Want Belts in instead of one of these, or a 5th card? Easy.
 </div>
 
 </body>
