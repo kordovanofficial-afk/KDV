@@ -41,7 +41,7 @@ Aspect **3:4** portrait, size **1000 × 1300 px**.
 
 | ID | Subject | GPT prompt (after preamble) | Size |
 |----|---------|------------------------------|------|
-| `story-craft` | Artisan burnishing leather | "Vertical intimate photo of a leather artisan's hands burnishing the edge of a leather wallet at a workbench, hand tools and leather offcuts around; warm espresso and cognac tones, soft side light; craft-heritage mood; no faces." | 1000×1300 |
+| `story-craft` ✅ | Artisan burnishing leather | DONE — `files/story-craft.png`. | 1000×1300 |
 
 ## 4. Homepage — collections grid
 Large tile = **4:5** portrait **1200 × 1500**; medium tiles = **4:3** **1200 × 900**.
