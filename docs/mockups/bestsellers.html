@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kordovan — Bestsellers Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --canvas:#F7F2EA; --parchment:#ECE3D4; --ink:#241C16; --walnut:#4A3528;
+    --cognac:#A0623A; --cognac-dark:#7E4B2C; --tan:#C08B5C; --brass:#B0894F;
+    --brass-light:#D8C39A; --stone:#8B8174; --border:#DDD2C0;
+    --heading:'Fraunces',Georgia,serif; --body:'Inter',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--canvas);color:var(--ink);font-family:var(--body);font-weight:300;-webkit-font-smoothing:antialiased;}
+  a{color:inherit;text-decoration:none;}
+  img{display:block;max-width:100%;}
+  .wrap{max-width:1340px;margin:0 auto;padding:0 40px;}
+  .pagelabel{background:var(--ink);color:var(--canvas);text-align:center;font-size:12px;letter-spacing:.05em;padding:9px;}
+
+  .section{padding:104px 0;}
+  .section__head{text-align:center;max-width:640px;margin:0 auto 56px;}
+  .eyebrow{display:block;font-family:var(--body);font-weight:500;text-transform:uppercase;letter-spacing:.18em;font-size:11px;color:var(--brass);margin-bottom:13px;}
+  .section__head h2{font-family:var(--heading);font-weight:500;font-size:clamp(28px,3.5vw,44px);letter-spacing:-.01em;}
+  .section__head p{color:var(--stone);margin-top:12px;font-size:15px;}
+
+  .pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;}
+  .card{cursor:pointer;}
+  .card__media{position:relative;aspect-ratio:4/5;border-radius:8px;overflow:hidden;background:var(--parchment);border:1px solid var(--border);}
+  .card__media img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);}
+  .card:hover .card__media img{transform:scale(1.05);}
+  .card__tag{position:absolute;top:12px;left:12px;background:var(--ink);color:var(--canvas);font-size:9px;letter-spacing:.14em;text-transform:uppercase;padding:6px 10px;border-radius:3px;font-weight:500;z-index:2;}
+  .card__fav{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:50%;background:rgba(247,242,234,.9);display:flex;align-items:center;justify-content:center;z-index:2;opacity:0;transform:translateY(-4px);transition:.25s;}
+  .card:hover .card__fav{opacity:1;transform:none;}
+  .card__fav svg{width:16px;height:16px;stroke:var(--ink);fill:none;stroke-width:1.5;}
+  .card__atc{position:absolute;left:12px;right:12px;bottom:12px;background:var(--cognac);color:#fff;text-align:center;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;padding:13px;border-radius:5px;opacity:0;transform:translateY(10px);transition:.28s;z-index:2;}
+  .card:hover .card__atc{opacity:1;transform:none;}
+  .card__atc:hover{background:var(--cognac-dark);}
+  .card__name{font-family:var(--heading);font-size:18px;font-weight:500;margin-top:16px;}
+  .card__meta{display:flex;align-items:center;justify-content:space-between;margin-top:5px;}
+  .card__price{color:var(--cognac);font-weight:500;font-size:14px;}
+  .card__stars{color:var(--brass);font-size:11px;letter-spacing:1px;}
+
+  .center-cta{text-align:center;margin-top:56px;}
+  .btn-text{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--cognac);border-bottom:1px solid var(--cognac);padding-bottom:4px;}
+
+  .notes{max-width:1340px;margin:6px auto 70px;padding:0 40px;color:var(--stone);font-size:13px;line-height:1.85;}
+  .notes strong{color:var(--walnut);font-family:var(--heading);font-size:15px;font-weight:500;}
+  .notes em{color:var(--cognac);font-style:normal;font-weight:500;}
+
+  @media(max-width:860px){ .pgrid{grid-template-columns:repeat(2,1fr);gap:20px;} .section{padding:72px 0;} }
+</style>
+</head>
+<body>
+
+<div class="pagelabel">MOCKUP — Homepage · BESTSELLERS ("Customer Favourites") · real top-selling products + live catalogue photos</div>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section__head">
+      <span class="eyebrow">Bestsellers</span>
+      <h2>Customer Favourites</h2>
+      <p>The pieces our customers reach for most.</p>
+    </div>
+
+    <div class="pgrid">
+      <!-- 1 -->
+      <div class="card">
+        <div class="card__media">
+          <span class="card__tag">#1 Bestseller</span>
+          <span class="card__fav"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></span>
+          <img src="https://cdn.shopify.com/s/files/1/0267/9164/1277/files/Kodo-New-Front-Black-_2.jpg?v=1761204721&width=640" alt="KODO RFID Smart Wallet">
+          <div class="card__atc">Add to Cart</div>
+        </div>
+        <div class="card__name">KODO Smart Wallet — RFID</div>
+        <div class="card__meta"><span class="card__price">PKR 2,300</span><span class="card__stars">★★★★★</span></div>
+      </div>
+      <!-- 2 -->
+      <div class="card">
+        <div class="card__media">
+          <span class="card__fav"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></span>
+          <img src="https://cdn.shopify.com/s/files/1/0267/9164/1277/files/Mocha_Mate_Leather_Wallet_by_Kordovan_Front.png?v=1761205257&width=640" alt="The Mocha Mate Wallet">
+          <div class="card__atc">Add to Cart</div>
+        </div>
+        <div class="card__name">The Mocha Mate Wallet</div>
+        <div class="card__meta"><span class="card__price">PKR 3,200</span><span class="card__stars">★★★★★</span></div>
+      </div>
+      <!-- 3 -->
+      <div class="card">
+        <div class="card__media">
+          <span class="card__fav"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></span>
+          <img src="https://cdn.shopify.com/s/files/1/0267/9164/1277/files/20251228_1826_ElegantWalletDisplay_remix_01kdjj5rx6endv54mccjbv340y.png?v=1766929036&width=640" alt="The Bastion Bifold Wallet">
+          <div class="card__atc">Add to Cart</div>
+        </div>
+        <div class="card__name">The Bastion Bifold</div>
+        <div class="card__meta"><span class="card__price">PKR 2,500</span><span class="card__stars">★★★★★</span></div>
+      </div>
+      <!-- 4 -->
+      <div class="card">
+        <div class="card__media">
+          <span class="card__fav"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></span>
+          <img src="https://cdn.shopify.com/s/files/1/0267/9164/1277/files/DSC00313.jpg?v=1761463179&width=640" alt="The Imperial Reversible Belt">
+          <div class="card__atc">Add to Cart</div>
+        </div>
+        <div class="card__name">The Imperial Reversible Belt</div>
+        <div class="card__meta"><span class="card__price">PKR 3,900</span><span class="card__stars">★★★★★</span></div>
+      </div>
+    </div>
+
+    <div class="center-cta"><a class="btn-text">View All Products →</a></div>
+  </div>
+</section>
+
+<div class="notes">
+  <strong>Bestsellers — your call</strong><br>
+  · <em>Cards (hover me):</em> image zoom + "Add to Cart" slide-up + a wishlist heart. In the live theme, hover also swaps to the product's 2nd photo.<br>
+  · <em>The 4 products</em> shown are real top-sellers (KODO, Mocha Mate, Bastion, Imperial Belt). Live section auto-pulls from a bestsellers collection you choose — so it always reflects current sales.<br>
+  · <em>Star ratings</em> are placeholders — they'll show real review counts once a reviews app (e.g. Judge.me / Loox) is connected. Want me to keep stars, or hide them until reviews are live?<br>
+  · Keep 4 across, or want a different mix (e.g. swap the belt for a bag to vary categories)?
+</div>
+
+</body>
+</html>
