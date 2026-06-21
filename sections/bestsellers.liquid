@@ -7,7 +7,7 @@
 
     <div class="kv-pgrid">
       {%- for block in section.blocks -%}
-        {%- assign coll = collections[block.settings.collection] -%}
+        {%- assign coll = collections[block.settings.handle] -%}
         {%- assign product = coll.products.first -%}
         {%- if product != blank -%}
           <a class="kv-card" href="{{ product.url }}" {{ block.shopify_attributes }}>
@@ -51,7 +51,7 @@
       "type": "category",
       "name": "Category #1",
       "settings": [
-        { "type": "collection", "id": "collection", "label": "Category collection", "info": "Set this collection's sort order to 'Best selling' so its top product auto-updates here." },
+        { "type": "text", "id": "handle", "label": "Collection handle", "info": "e.g. kv2-mens-wallets — set that collection's sort order to 'Best selling' so its top product auto-updates here." },
         { "type": "text", "id": "label", "label": "Badge label", "info": "e.g. Wallets — shows as '#1 in Wallets'" }
       ]
     }
