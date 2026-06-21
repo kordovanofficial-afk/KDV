@@ -46,7 +46,8 @@
     background-size:cover;background-position:center right;background-color:#1d150f;}
   /* legibility overlay: dark on the left where text sits, clearing to the right */
   .hero__scrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(28,20,14,.82) 0%,rgba(28,20,14,.55) 38%,rgba(28,20,14,.12) 70%,transparent 100%);}
-  .hero__content{position:relative;z-index:2;max-width:660px;}
+  .hero__inner{position:relative;z-index:2;width:100%;}
+  .hero__content{max-width:620px;text-align:left;}
   .hero .eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--brass-light);font-weight:500;}
   .hero h1{font-family:var(--heading);font-weight:500;font-size:clamp(50px,7.2vw,110px);line-height:1.0;letter-spacing:-.02em;margin:20px 0 26px;}
   .hero h1 em{font-style:italic;font-weight:400;}
@@ -100,15 +101,17 @@
     </div>
   </header>
 
-  <div class="wrap hero__content">
-    <span class="eyebrow">Pakistan's Original Leather Craft House</span>
-    <h1>Built to Last.<br><em>Made to Age.</em></h1>
-    <p class="hero__sub">Handcrafted leather goods for those who value quality over quantity. Every stitch, every grain — made to outlast a lifetime.</p>
-    <div class="hero__cta">
-      <a class="btn btn--cognac">Shop Bestsellers →</a>
-      <a class="btn btn--ghost">See the Craft</a>
+  <div class="wrap hero__inner">
+    <div class="hero__content">
+      <span class="eyebrow">Pakistan's Original Leather Craft House</span>
+      <h1>Built to Last.<br><em>Made to Age.</em></h1>
+      <p class="hero__sub">Handcrafted leather goods for those who value quality over quantity. Every stitch, every grain — made to outlast a lifetime.</p>
+      <div class="hero__cta">
+        <a class="btn btn--cognac">Shop Bestsellers →</a>
+        <a class="btn btn--ghost">See the Craft</a>
+      </div>
+      <div class="hero__trust">Free delivery · 7-day returns · <b>Genuine leather guaranteed</b></div>
     </div>
-    <div class="hero__trust">Free delivery · 7-day returns · <b>Genuine leather guaranteed</b></div>
   </div>
 
   <div class="scroll">Scroll<span></span></div>
