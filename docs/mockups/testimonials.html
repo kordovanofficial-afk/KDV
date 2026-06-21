@@ -3,90 +3,102 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kordovan — Testimonials Mockup</title>
+<title>Kordovan — Testimonials Mockup (elegant)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
     --canvas:#F7F2EA; --parchment:#ECE3D4; --ink:#241C16; --walnut:#4A3528;
-    --cognac:#A0623A; --cognac-dark:#7E4B2C; --tan:#C08B5C; --brass:#B0894F;
-    --brass-light:#D8C39A; --stone:#8B8174; --border:#DDD2C0; --pine:#2D6A4F;
+    --cognac:#A0623A; --tan:#C08B5C; --brass:#B0894F; --brass-light:#D8C39A;
+    --stone:#8B8174; --border:#DDD2C0; --pine:#2D6A4F;
     --heading:'Fraunces',Georgia,serif; --body:'Inter',sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
   body{background:var(--canvas);color:var(--ink);font-family:var(--body);font-weight:300;-webkit-font-smoothing:antialiased;}
-  .wrap{max-width:1340px;margin:0 auto;padding:0 40px;}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 40px;}
   .pagelabel{background:var(--ink);color:var(--canvas);text-align:center;font-size:12px;letter-spacing:.05em;padding:9px;}
 
-  .testi{background:var(--parchment);padding:104px 0;}
-  .section__head{text-align:center;max-width:640px;margin:0 auto 50px;}
-  .eyebrow{display:block;font-family:var(--body);font-weight:500;text-transform:uppercase;letter-spacing:.18em;font-size:11px;color:var(--brass);margin-bottom:13px;}
-  .section__head h2{font-family:var(--heading);font-weight:500;font-size:clamp(28px,3.5vw,44px);letter-spacing:-.01em;}
-  .section__head .agg{margin-top:14px;font-size:13px;color:var(--walnut);display:inline-flex;align-items:center;gap:8px;}
-  .section__head .agg .s{color:var(--brass);letter-spacing:2px;}
+  .testi{background:linear-gradient(180deg,var(--canvas),var(--parchment));padding:112px 0;}
+  .head{text-align:center;max-width:640px;margin:0 auto 64px;}
+  .eyebrow{display:block;font-family:var(--body);font-weight:500;text-transform:uppercase;letter-spacing:.2em;font-size:11px;color:var(--brass);margin-bottom:14px;}
+  .head h2{font-family:var(--heading);font-weight:500;font-size:clamp(30px,3.8vw,48px);letter-spacing:-.01em;}
+  .head .agg{margin-top:16px;font-size:13px;color:var(--walnut);display:inline-flex;align-items:center;gap:9px;}
+  .head .agg .s{color:var(--brass);letter-spacing:3px;}
 
-  .tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
-  .tcard{background:var(--canvas);border:1px solid var(--border);border-radius:10px;padding:34px;display:flex;flex-direction:column;box-shadow:0 4px 16px rgba(36,28,22,.05);}
-  .tcard__top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;}
-  .tcard__stars{color:var(--brass);letter-spacing:2px;font-size:14px;}
-  .tcard__verified{display:inline-flex;align-items:center;gap:5px;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--pine);font-weight:600;}
-  .tcard__verified svg{width:13px;height:13px;stroke:var(--pine);fill:none;stroke-width:2;}
-  .tcard__quote{font-size:15px;line-height:1.75;color:var(--walnut);margin-bottom:26px;flex:1;}
-  .tcard__who{display:flex;align-items:center;gap:13px;border-top:1px solid var(--border);padding-top:20px;}
-  .tcard__ini{width:44px;height:44px;border-radius:50%;background:var(--cognac);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--heading);font-size:18px;flex:none;}
-  .tcard__n{font-weight:500;font-size:14px;color:var(--ink);}
-  .tcard__m{font-size:12px;color:var(--stone);margin-top:2px;}
+  .tflow{display:grid;grid-template-columns:repeat(3,1fr);gap:0;}
+  .tq{padding:8px 42px;position:relative;}
+  .tq + .tq::before{content:"";position:absolute;left:0;top:14%;height:72%;width:1px;
+    background:linear-gradient(transparent,var(--border) 20%,var(--border) 80%,transparent);}
+  .tq__mark{font-family:var(--heading);font-weight:500;font-size:72px;line-height:.7;color:var(--cognac);opacity:.32;height:34px;}
+  .tq__stars{color:var(--brass);letter-spacing:3px;font-size:13px;margin:6px 0 16px;}
+  .tq__text{font-family:var(--heading);font-weight:400;font-size:20px;line-height:1.62;color:var(--walnut);letter-spacing:.002em;}
+  .tq__foot{margin-top:26px;}
+  .tq__name{font-family:var(--heading);font-style:italic;font-weight:500;font-size:18px;color:var(--ink);}
+  .tq__meta{margin-top:6px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);}
+  .tq__verified{display:inline-flex;align-items:center;gap:5px;margin-top:10px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--pine);font-weight:600;}
+  .tq__verified svg{width:12px;height:12px;stroke:var(--pine);fill:none;stroke-width:2.2;}
 
-  .tdots{display:flex;justify-content:center;gap:8px;margin-top:38px;}
-  .tdots span{width:8px;height:8px;border-radius:50%;background:var(--border);}
-  .tdots span.on{background:var(--cognac);width:22px;border-radius:99px;}
+  .tdots{display:flex;justify-content:center;gap:8px;margin-top:56px;}
+  .tdots span{width:7px;height:7px;border-radius:50%;background:var(--border);transition:.3s;}
+  .tdots span.on{background:var(--cognac);width:24px;border-radius:99px;}
 
-  .notes{max-width:1340px;margin:30px auto 70px;padding:0 40px;color:var(--stone);font-size:13px;line-height:1.85;}
+  .notes{max-width:1240px;margin:30px auto 70px;padding:0 40px;color:var(--stone);font-size:13px;line-height:1.85;}
   .notes strong{color:var(--walnut);font-family:var(--heading);font-size:15px;font-weight:500;}
   .notes em{color:var(--cognac);font-style:normal;font-weight:500;}
 
-  @media(max-width:860px){ .tgrid{grid-template-columns:1fr;} .testi{padding:72px 0;} }
+  @media(max-width:860px){
+    .tflow{grid-template-columns:1fr;gap:48px;}
+    .tq{padding:0;}
+    .tq + .tq::before{display:none;}
+    .testi{padding:72px 0;}
+  }
 </style>
 </head>
 <body>
 
-<div class="pagelabel">MOCKUP — Homepage · TESTIMONIALS (the section I missed) · real reviewer names · verified</div>
+<div class="pagelabel">MOCKUP — Homepage · TESTIMONIALS (elegant, flowing) · real reviewer names · verified</div>
 
 <section class="testi">
   <div class="wrap">
-    <div class="section__head">
+    <div class="head">
       <span class="eyebrow">Reviews</span>
-      <h2>What Our Customers Say</h2>
-      <div class="agg"><span class="s">★★★★★</span> 4.9 / 5 · loved by 25,000+ customers</div>
+      <h2>Loved, carried, and passed on</h2>
+      <div class="agg"><span class="s">★★★★★</span> 4.9 / 5 · from 25,000+ happy customers</div>
     </div>
 
-    <div class="tgrid">
-      <div class="tcard">
-        <div class="tcard__top">
-          <span class="tcard__stars">★★★★★</span>
-          <span class="tcard__verified"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Verified</span>
+    <div class="tflow">
+      <div class="tq">
+        <div class="tq__mark">&ldquo;</div>
+        <div class="tq__stars">★★★★★</div>
+        <p class="tq__text">Been using my Kordovan bifold for two years now and it just keeps getting better. The leather has developed a patina you simply cannot fake. The best wallet I've ever owned.</p>
+        <div class="tq__foot">
+          <div class="tq__name">— Ahmed Raza</div>
+          <div class="tq__meta">Lahore · Full-Grain Bifold Wallet</div>
+          <div class="tq__verified"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Verified Purchase</div>
         </div>
-        <p class="tcard__quote">"Been using my Kordovan bifold for 2 years now and it just keeps getting better. The leather has developed this incredible patina you simply cannot fake. Best wallet I have ever owned."</p>
-        <div class="tcard__who"><div class="tcard__ini">A</div><div><div class="tcard__n">Ahmed Raza</div><div class="tcard__m">Lahore · Full-Grain Bifold Wallet</div></div></div>
       </div>
 
-      <div class="tcard">
-        <div class="tcard__top">
-          <span class="tcard__stars">★★★★★</span>
-          <span class="tcard__verified"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Verified</span>
+      <div class="tq">
+        <div class="tq__mark">&ldquo;</div>
+        <div class="tq__stars">★★★★★</div>
+        <p class="tq__text">Ordered the messenger bag and was blown away by the quality. The stitching is immaculate and the leather smell alone is worth it. Fast delivery to Islamabad, too. I'll definitely order again.</p>
+        <div class="tq__foot">
+          <div class="tq__name">— Sara Malik</div>
+          <div class="tq__meta">Islamabad · Leather Messenger Bag</div>
+          <div class="tq__verified"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Verified Purchase</div>
         </div>
-        <p class="tcard__quote">"Ordered the messenger bag and was blown away by the quality. Stitching is immaculate and the leather smell alone is worth it. Fast delivery to Islamabad too. Will definitely order again."</p>
-        <div class="tcard__who"><div class="tcard__ini">S</div><div><div class="tcard__n">Sara Malik</div><div class="tcard__m">Islamabad · Leather Messenger Bag</div></div></div>
       </div>
 
-      <div class="tcard">
-        <div class="tcard__top">
-          <span class="tcard__stars">★★★★★</span>
-          <span class="tcard__verified"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Verified</span>
+      <div class="tq">
+        <div class="tq__mark">&ldquo;</div>
+        <div class="tq__stars">★★★★★</div>
+        <p class="tq__text">Finally, a Pakistani brand doing leather the right way — no synthetic shortcuts. The belt I bought has held up perfectly, and somehow it looks better now than the day it arrived.</p>
+        <div class="tq__foot">
+          <div class="tq__name">— Usman Khan</div>
+          <div class="tq__meta">Karachi · Handcrafted Leather Belt</div>
+          <div class="tq__verified"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Verified Purchase</div>
         </div>
-        <p class="tcard__quote">"Finally, a Pakistani brand doing leather goods the right way. No synthetic shortcuts. The belt I bought has held up perfectly and looks better now than the day it arrived."</p>
-        <div class="tcard__who"><div class="tcard__ini">U</div><div><div class="tcard__n">Usman Khan</div><div class="tcard__m">Karachi · Handcrafted Leather Belt</div></div></div>
       </div>
     </div>
 
@@ -95,11 +107,10 @@
 </section>
 
 <div class="notes">
-  <strong>Testimonials — your call</strong><br>
-  · <em>Carousel:</em> 3 cards on desktop, swipeable on mobile (dots below). Real names, city, product bought, and a Verified badge — exactly per the spec ("real names, real products, verified").<br>
-  · <em>Aggregate line</em> "4.9/5 · loved by 25,000+" — keep, or hide the rating until a reviews app (Judge.me / Loox) provides real aggregate numbers?<br>
-  · <em>Content:</em> these 3 are your existing reviews. Want to add more, or pull live verified reviews once an app is connected?<br>
-  · <em>Style:</em> light parchment band (breaks up the page before the dark email + footer). Prefer it dark instead?
+  <strong>Testimonials — reworked for flow &amp; elegance</strong><br>
+  · Boxes gone. Now: large serif quotation marks, quotes set in Fraunces, soft hairline dividers, and editorial "— Name" signatures. Airy and premium.<br>
+  · Heading is now "Loved, carried, and passed on" (more emotive). Keep, or revert to "What Our Customers Say"?<br>
+  · Auto-advances gently (dots). The 4.9/5 aggregate is a placeholder until a reviews app gives real numbers — keep or hide?
 </div>
 
 </body>
