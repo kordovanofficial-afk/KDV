@@ -34,7 +34,7 @@ Full-bleed. Aspect **16:9**, size **2560 × 1440 px**. Keep the **left third cle
 
 | ID | Subject | GPT prompt (after preamble) | Size |
 |----|---------|------------------------------|------|
-| `hero-home` | Hands working leather | "Cinematic wide shot: close-up of an artisan's hands hand-stitching a piece of rich cognac full-grain leather on a worn wooden workbench; warm low directional light, deep espresso shadows, brass highlights; leather sharp, background softly blurred; generous empty negative space on the left half for text." | 2560×1440 |
+| `hero-home` | Pakistani artisan hand-stitching leather | "Cinematic wide editorial shot inside a warm, dimly-lit Pakistani leather workshop: the weathered hands of a South-Asian master artisan saddle-stitching a piece of rich cognac Crazy-Horse full-grain leather on a worn wooden workbench; traditional hand tools — a stitching awl, waxed thread, a wooden mallet and a round knife — resting nearby; a single shaft of warm window light rakes across the leather grain, deep espresso shadows, antique-brass highlights; shallow depth of field with the leather and hands tack-sharp and the background softly blurred; heritage craft, quiet-luxury mood; the LEFT third of the frame is intentionally dark and empty (negative space) for headline text. Photorealistic, 16:9." | 2560×1440 |
 
 ## 3. Homepage — brand story
 Aspect **3:4** portrait, size **1000 × 1300 px**.
