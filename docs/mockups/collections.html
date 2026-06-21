@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kordovan — Collections Grid Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --canvas:#F7F2EA; --parchment:#ECE3D4; --ink:#241C16; --walnut:#4A3528;
+    --cognac:#A0623A; --cognac-dark:#7E4B2C; --tan:#C08B5C; --brass:#B0894F;
+    --brass-light:#D8C39A; --stone:#8B8174; --border:#DDD2C0;
+    --heading:'Fraunces',Georgia,serif; --body:'Inter',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--canvas);color:var(--ink);font-family:var(--body);font-weight:300;-webkit-font-smoothing:antialiased;}
+  a{color:inherit;text-decoration:none;}
+  img{display:block;max-width:100%;}
+  .wrap{max-width:1340px;margin:0 auto;padding:0 40px;}
+  .pagelabel{background:var(--ink);color:var(--canvas);text-align:center;font-size:12px;letter-spacing:.05em;padding:9px;}
+
+  .section{padding:104px 0;}
+  .section__head{text-align:center;max-width:640px;margin:0 auto 52px;}
+  .eyebrow{display:block;font-family:var(--body);font-weight:500;text-transform:uppercase;letter-spacing:.18em;font-size:11px;color:var(--brass);margin-bottom:13px;}
+  .section__head h2{font-family:var(--heading);font-weight:500;font-size:clamp(28px,3.5vw,44px);letter-spacing:-.01em;}
+
+  .colls{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:repeat(2,318px);gap:20px;}
+  .coll{position:relative;border-radius:10px;overflow:hidden;display:flex;align-items:flex-end;padding:26px;color:var(--canvas);}
+  .coll--lg{grid-column:1;grid-row:1 / span 2;}
+  .coll__img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.25,.46,.45,.94);}
+  .coll:hover .coll__img{transform:scale(1.06);}
+  .coll__grad{position:absolute;inset:0;background:linear-gradient(transparent 30%,rgba(36,28,22,.78));z-index:1;}
+  .coll__c{position:relative;z-index:2;}
+  .coll h3{font-family:var(--heading);font-weight:500;font-size:24px;}
+  .coll--lg h3{font-size:38px;}
+  .coll .ct{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:rgba(247,242,234,.7);margin-top:4px;}
+  .coll .lk{display:inline-flex;align-items:center;gap:7px;margin-top:14px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;color:var(--brass-light);}
+  .coll .lk svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.8;transition:transform .25s;}
+  .coll:hover .lk svg{transform:translateX(4px);}
+
+  .notes{max-width:1340px;margin:30px auto 70px;padding:0 40px;color:var(--stone);font-size:13px;line-height:1.85;}
+  .notes strong{color:var(--walnut);font-family:var(--heading);font-size:15px;font-weight:500;}
+  .notes em{color:var(--cognac);font-style:normal;font-weight:500;}
+
+  @media(max-width:860px){
+    .colls{grid-template-columns:1fr 1fr;grid-template-rows:auto;gap:14px;}
+    .coll{min-height:240px;}
+    .coll--lg{grid-column:1 / span 2;grid-row:auto;min-height:300px;}
+    .coll--lg h3{font-size:30px;}
+    .section{padding:72px 0;}
+  }
+</style>
+</head>
+<body>
+
+<div class="pagelabel">MOCKUP — Homepage · COLLECTIONS GRID ("Shop by Category") · real Shopify collection images</div>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section__head">
+      <span class="eyebrow">Collections</span>
+      <h2>Shop by Category</h2>
+    </div>
+
+    <div class="colls">
+      <!-- Large: Wallets -->
+      <a class="coll coll--lg">
+        <img class="coll__img" src="https://cdn.shopify.com/s/files/1/0267/9164/1277/collections/20251023_1840_Luxury_Leather_Wallets_simple_compose_01k88mqw5ze6may4gzrms43df1.png?width=1100" alt="Leather wallets">
+        <div class="coll__grad"></div>
+        <div class="coll__c"><h3>Wallets</h3><div class="ct">36 styles · incl. KODO smart wallets</div><span class="lk">Shop Wallets <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      </a>
+      <!-- Bags -->
+      <a class="coll">
+        <img class="coll__img" src="https://cdn.shopify.com/s/files/1/0267/9164/1277/collections/20251023_1832_Elegance_in_Leather_simple_compose_01k88m94f9fmxa4fa342n92yjh.png?width=760" alt="Leather bags and handbags">
+        <div class="coll__grad"></div>
+        <div class="coll__c"><h3>Bags</h3><div class="ct">20 styles</div><span class="lk">Shop Bags <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      </a>
+      <!-- Jackets -->
+      <a class="coll">
+        <img class="coll__img" src="https://cdn.shopify.com/s/files/1/0267/9164/1277/collections/Men_s_Leather_jacket.webp?width=760" alt="Leather jackets">
+        <div class="coll__grad"></div>
+        <div class="coll__c"><h3>Jackets</h3><div class="ct">31 styles</div><span class="lk">Shop Jackets <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      </a>
+      <!-- Shoes -->
+      <a class="coll">
+        <img class="coll__img" src="https://cdn.shopify.com/s/files/1/0267/9164/1277/collections/20251023_1824_Luxury_Leather_Shoes_Display_simple_compose_01k88krk77ebsrnfsp1d2qy9gb.png?width=760" alt="Leather shoes">
+        <div class="coll__grad"></div>
+        <div class="coll__c"><h3>Shoes</h3><div class="ct">24 styles</div><span class="lk">Shop Shoes <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      </a>
+      <!-- Belts -->
+      <a class="coll">
+        <img class="coll__img" src="https://cdn.shopify.com/s/files/1/0267/9164/1277/collections/Mens_Leather_Belt.webp?width=760" alt="Leather belts">
+        <div class="coll__grad"></div>
+        <div class="coll__c"><h3>Belts</h3><div class="ct">10 styles</div><span class="lk">Shop Belts <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="notes">
+  <strong>Collections grid — your call</strong><br>
+  · <em>Layout:</em> one large flagship tile (Wallets) + a 2×2 (Bags, Jackets, Shoes, Belts). All use your real Shopify collection images — no new generation needed.<br>
+  · <em>Which 5 categories &amp; order?</em> Currently Wallets (large) · Bags · Jackets · Shoes · Belts. Want Accessories in, or a different category as the large hero tile?<br>
+  · <em>Counts</em> ("36 styles", etc.) pull live from each collection in the real theme — mockup numbers are approximate.<br>
+  · Hover a tile → image zoom + arrow nudge.
+</div>
+
+</body>
+</html>
