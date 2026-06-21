@@ -88,6 +88,9 @@
    Milestone 2: shared utilities + HERO
    ============================================================ */
 .kv-home{font-family:var(--kv-body);}
+/* Guard: stop theme.css base `h1..h6{color:espresso}` from bleeding into kv sections.
+   Headings inherit their section's colour unless a kv rule sets it explicitly. */
+.kv-home h1,.kv-home h2,.kv-home h3,.kv-home h4,.kv-home h5,.kv-home h6{color:inherit;}
 .kv-section{padding:104px 0;}
 .kv-shead{text-align:center;max-width:660px;margin:0 auto 52px;}
 .kv-shead .kv-eyebrow{display:block;margin-bottom:13px;}
@@ -106,7 +109,7 @@
 .kv-hero__inner{position:relative;z-index:2;width:100%;}
 .kv-hero__c{max-width:620px;text-align:left;}
 .kv-hero .kv-eyebrow{color:var(--brass-light);}
-.kv-hero h1{font-family:var(--kv-heading);font-size:clamp(46px,7vw,104px);font-weight:500;line-height:1.0;letter-spacing:-.02em;margin:18px 0 24px;}
+.kv-hero h1{font-family:var(--kv-heading);font-size:clamp(46px,7vw,104px);font-weight:500;line-height:1.0;letter-spacing:-.02em;margin:18px 0 24px;color:var(--canvas);}
 .kv-hero h1 em{font-style:italic;font-weight:400;}
 .kv-hero__sub{font-size:18px;max-width:480px;color:rgba(247,242,234,.84);line-height:1.65;margin-bottom:34px;font-weight:300;}
 .kv-hero__cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:38px;}
