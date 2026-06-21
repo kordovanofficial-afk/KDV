@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kordovan — Email Capture Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --canvas:#F7F2EA; --parchment:#ECE3D4; --ink:#241C16; --walnut:#4A3528;
+    --cognac:#A0623A; --cognac-dark:#7E4B2C; --tan:#C08B5C; --brass:#B0894F;
+    --brass-light:#D8C39A; --stone:#8B8174; --border:#DDD2C0;
+    --heading:'Fraunces',Georgia,serif; --body:'Inter',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--canvas);color:var(--ink);font-family:var(--body);font-weight:300;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1340px;margin:0 auto;padding:0 40px;}
+  .pagelabel{background:var(--ink);color:var(--canvas);text-align:center;font-size:12px;letter-spacing:.05em;padding:9px;}
+
+  .email{position:relative;background:var(--ink);color:var(--canvas);padding:110px 0;text-align:center;overflow:hidden;}
+  .email::before{content:"";position:absolute;inset:0;background:radial-gradient(80% 120% at 50% 0%,rgba(160,98,58,.30),transparent 60%);}
+  .email::after{content:"";position:absolute;inset:0;background:radial-gradient(60% 90% at 50% 120%,rgba(90,58,36,.5),transparent 60%);}
+  .email__in{position:relative;z-index:2;max-width:600px;margin:0 auto;}
+  .email .eyebrow{display:block;font-family:var(--body);font-weight:500;text-transform:uppercase;letter-spacing:.2em;font-size:11px;color:var(--brass-light);margin-bottom:18px;}
+  .email h2{font-family:var(--heading);font-weight:500;font-size:clamp(30px,4vw,52px);line-height:1.06;letter-spacing:-.01em;margin-bottom:16px;}
+  .email h2 em{font-style:italic;color:var(--brass-light);font-weight:400;}
+  .email p{color:rgba(247,242,234,.78);font-size:16px;line-height:1.7;max-width:500px;margin:0 auto 34px;}
+  .email__form{display:flex;gap:12px;max-width:500px;margin:0 auto;}
+  .email__form input{flex:1;padding:16px 20px;border:1px solid rgba(247,242,234,.28);background:rgba(247,242,234,.06);color:var(--canvas);border-radius:5px;font-family:var(--body);font-size:15px;outline:none;transition:.2s;}
+  .email__form input::placeholder{color:rgba(247,242,234,.5);}
+  .email__form input:focus{border-color:var(--brass-light);background:rgba(247,242,234,.1);}
+  .btn{font-family:var(--body);font-weight:500;font-size:13px;letter-spacing:.08em;text-transform:uppercase;padding:16px 30px;border-radius:5px;border:none;cursor:pointer;white-space:nowrap;background:var(--cognac);color:#fff;transition:.25s;}
+  .btn:hover{background:var(--cognac-dark);}
+  .email small{display:block;margin-top:18px;font-size:11px;color:rgba(247,242,234,.5);letter-spacing:.04em;}
+  .email__perks{display:flex;justify-content:center;gap:26px;margin-top:30px;flex-wrap:wrap;}
+  .perk{display:flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:rgba(247,242,234,.6);}
+  .perk svg{width:14px;height:14px;stroke:var(--brass-light);fill:none;stroke-width:1.6;}
+
+  .notes{max-width:1340px;margin:30px auto 70px;padding:0 40px;color:var(--stone);font-size:13px;line-height:1.85;}
+  .notes strong{color:var(--walnut);font-family:var(--heading);font-size:15px;font-weight:500;}
+  .notes em{color:var(--cognac);font-style:normal;font-weight:500;}
+
+  @media(max-width:640px){ .email__form{flex-direction:column;} .email{padding:80px 0;} }
+</style>
+</head>
+<body>
+
+<div class="pagelabel">MOCKUP — Homepage · EMAIL CAPTURE (10% off offer, not just "subscribe")</div>
+
+<section class="email">
+  <div class="wrap email__in">
+    <span class="eyebrow">Join the Kordovan Family</span>
+    <h2>Get <em>10% off</em> your first order</h2>
+    <p>Join 25,000+ leather lovers who get early access to new drops, exclusive offers, and leather-care tips — straight to their inbox.</p>
+    <form class="email__form" onsubmit="return false;">
+      <input type="email" placeholder="Your email address">
+      <button class="btn">Claim My Discount</button>
+    </form>
+    <div class="email__perks">
+      <span class="perk"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Instant 10% code</span>
+      <span class="perk"><svg viewBox="0 0 24 24"><path d="M3 8l9 6 9-6"/><rect x="3" y="5" width="18" height="14" rx="2"/></svg>Early access to drops</span>
+      <span class="perk"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>No spam, ever</span>
+    </div>
+    <small>By signing up you agree to receive emails. Unsubscribe anytime.</small>
+  </div>
+</section>
+
+<div class="notes">
+  <strong>Email capture — your call</strong><br>
+  · <em>Offer:</em> 10% off first order (a real incentive, not just "subscribe"). Keep 10%, or different (e.g. free shipping on first order)?<br>
+  · <em>Social proof:</em> "Join 25,000+ leather lovers" (updated to your real number).<br>
+  · <em>Button:</em> "Claim My Discount" — keep or change ("Get My 10% Off")?<br>
+  · <em>Style:</em> dark espresso band with warm cognac glow. Want a real leather-texture photo behind it instead? (That'd be one more image brief.)<br>
+  · <em>Behaviour note:</em> per the spec, any pop-up version of this only fires after 45s or on exit-intent — never on page load.
+</div>
+
+</body>
+</html>
