@@ -9,41 +9,6 @@
  */
 {
   "sections": {
-    "announcement": {
-      "type": "announcement-bar",
-      "blocks": {
-        "announcement_1": {
-          "type": "announcement",
-          "settings": {
-            "text": "Free Delivery on Orders Over PKR 3,000",
-            "link": "/collections/all"
-          }
-        },
-        "announcement_2": {
-          "type": "announcement",
-          "settings": {
-            "text": "Cash on Delivery Available Nationwide",
-            "link": ""
-          }
-        },
-        "announcement_3": {
-          "type": "announcement",
-          "settings": {
-            "text": "100% Genuine Leather · Handcrafted in Pakistan",
-            "link": "/pages/about"
-          }
-        }
-      },
-      "block_order": [
-        "announcement_1",
-        "announcement_2",
-        "announcement_3"
-      ],
-      "settings": {
-        "show_bar": true,
-        "show_close": true
-      }
-    },
     "hero": {
       "type": "hero-banner",
       "settings": {
@@ -217,7 +182,6 @@
     }
   },
   "order": [
-    "announcement",
     "hero",
     "trust",
     "bestsellers",
