@@ -22,8 +22,8 @@ Display ~360×270; generated at 2×. Aspect **5:4**, size **1000 × 800 px**.
 
 | ID | Product / subject | GPT prompt (after preamble) | Size |
 |----|-------------------|------------------------------|------|
-| `mega-wallets` | KODO RFID Smart Wallet (flagship) | "A single dark-brown full-grain leather bifold smart wallet standing upright, slightly angled, on a warm walnut wood surface; espresso-to-cognac gradient background; warm key light from the right giving a soft rim-light along the leather edge; rich shadows; flagship hero feel." | 1000×800 |
-| `mega-jackets` | Men's leather jacket | "A men's dark-brown full-grain leather biker jacket draped over a wooden stool in a warm-lit artisan workshop; cognac and espresso tones; soft window light catching the grain and stitching; moody, premium." | 1000×800 |
+| `mega-wallets` ✅ | KODO RFID Smart Wallet (flagship) | DONE — `files/KODO.png` (embossed horse mark + local bank cards). | 1000×800 |
+| `mega-jackets` ✅ | Men's leather jacket | DONE — `files/Jacket.png` (workshop, warm window light). | 1000×800 |
 | `mega-bags` | Men's leather laptop/messenger bag | "A tan-brown full-grain leather messenger/laptop bag resting on a worn wooden bench beside a coiled strap; warm side light, espresso background, editorial still life." | 1000×800 |
 | `mega-shoes` | Men's leather dress shoe | "A pair of dark-brown full-grain leather oxford dress shoes on a warm stone surface, one slightly forward, soft overhead warm light, polished grain, luxury editorial." | 1000×800 |
 | `mega-accessories` | Small leather goods grouping | "An overhead arrangement of small leather goods — a belt coil, a cardholder, leather gloves and a cigarette case — in cognac and espresso tones on warm linen; tidy editorial flat-lay." | 1000×800 |
