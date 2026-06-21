@@ -80,7 +80,8 @@
   .hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;color:var(--canvas);}
   .hero__photo{position:absolute;inset:0;background:#1d150f url('https://cdn.shopify.com/s/files/1/0267/9164/1277/files/hero.png?v=1782022757&width=2400') center right/cover;}
   .hero__scrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(28,20,14,.82) 0%,rgba(28,20,14,.55) 38%,rgba(28,20,14,.12) 70%,transparent 100%);}
-  .hero__c{position:relative;z-index:2;max-width:620px;}
+  .hero__inner{position:relative;z-index:2;width:100%;}
+  .hero__c{max-width:620px;text-align:left;}
   .hero .eyebrow{color:var(--brass-light);}
   .hero h1{font-size:clamp(46px,7vw,104px);font-weight:500;line-height:1.0;letter-spacing:-.02em;margin:18px 0 24px;}
   .hero h1 em{font-style:italic;font-weight:400;}
@@ -282,13 +283,13 @@
 <!-- hero -->
 <section class="hero">
   <div class="hero__photo"></div><div class="hero__scrim"></div>
-  <div class="wrap hero__c">
+  <div class="wrap hero__inner"><div class="hero__c">
     <span class="eyebrow">Pakistan's Original Leather Craft House</span>
     <h1>Built to Last.<br><em>Made to Age.</em></h1>
     <p class="hero__sub">Handcrafted leather goods for those who value quality over quantity. Every stitch, every grain — made to outlast a lifetime.</p>
     <div class="hero__cta"><a class="btn btn--cognac">Shop Bestsellers →</a><a class="btn btn--ghost">See the Craft</a></div>
     <div class="hero__trust">Free delivery · 7-day returns · <b>Genuine leather guaranteed</b></div>
-  </div>
+  </div></div>
 </section>
 
 <!-- trust marquee -->
