@@ -70,6 +70,14 @@ pushed to the draft theme to preview in a browser.)
   — refine that first. Then build the **product page mockup (Step 3)** for review.
 - Logo file still pending upload in theme editor (Header → "Logo (dark mark)").
 
+## 🖼 Image workflow (protocol)
+- **Every designed image slot = an image brief:** product/subject + ready-to-paste
+  GPT-image prompt + exact px size & aspect. Tracked in **`docs/IMAGE_BRIEF.md`**.
+- Give new briefs inline whenever a new image slot is introduced.
+- **Label/copy on a tile must match the image in it** (no mismatched product names).
+- Product cards use real Shopify catalogue photos; hero/mega/collection/brand-story
+  use the generated "art-directed" images.
+
 ## ✅ Working loop
 Edit theme → push to draft theme `164277190896` (via Shopify) → review in browser
 → iterate. Keep to the BRAND_MOODBOARD spec at every step.
