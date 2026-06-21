@@ -42,10 +42,8 @@
   .hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;}
   /* --- BACKGROUND: replace .hero__photo background-image with the real hero-home image --- */
   .hero__photo{position:absolute;inset:0;
-    background:linear-gradient(115deg,#1d150f 0%,#2e1f14 38%,#5c3a24 70%,#8a5230 100%);
-    background-size:cover;background-position:center;}
-  .hero__photo::after{content:"PLACEHOLDER — hero-home image (hands working leather) drops in here · 2560×1440";
-    position:absolute;right:22px;bottom:18px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(247,242,234,.4);}
+    background-image:url('https://cdn.shopify.com/s/files/1/0267/9164/1277/files/hero.png?v=1782022757&width=2400');
+    background-size:cover;background-position:center right;background-color:#1d150f;}
   /* legibility overlay: dark on the left where text sits, clearing to the right */
   .hero__scrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(28,20,14,.82) 0%,rgba(28,20,14,.55) 38%,rgba(28,20,14,.12) 70%,transparent 100%);}
   .hero__content{position:relative;z-index:2;max-width:660px;}
@@ -73,7 +71,7 @@
 </head>
 <body>
 
-<div class="pagelabel">MOCKUP — Homepage · HERO section (with approved Variant B header) · background is a placeholder for the hero-home photo</div>
+<div class="pagelabel">MOCKUP — Homepage · HERO section · real hero image placed · approved Variant B header</div>
 
 <div class="announce">Free delivery over <b>PKR 2,500</b> &nbsp;·&nbsp; Cash on delivery nationwide &nbsp;·&nbsp; 100% genuine leather</div>
 
@@ -119,7 +117,8 @@
 <div class="notes">
   <div class="wrap">
     <strong>Hero — what's set, and what's open for your call</strong><br><br>
-    ✓ Headline <em>"Built to Last. Made to Age."</em> (approved) &nbsp;·&nbsp; ✓ Full-viewport real photo background (approved — image being generated) &nbsp;·&nbsp; ✓ Left-aligned, dark-on-left scrim so text stays legible on the photo<br><br>
+    ✓ Headline <em>"Built to Last. Made to Age."</em> (approved) &nbsp;·&nbsp; ✓ Real hero photo placed (hero.png) &nbsp;·&nbsp; ✓ Left-aligned, dark-on-left scrim so text stays legible on the photo<br><br>
+    <em>Scrim tuning:</em> if your photo is already dark enough on the left, I can lighten the overlay so more of the leather shows; if text ever looks faint, I can deepen it. Tell me which way.<br><br>
     <strong>Tweak anything below:</strong><br>
     · <em>Eyebrow:</em> "Pakistan's Original Leather Craft House" — keep / shorten?<br>
     · <em>Sub-headline:</em> current copy above — keep / rewrite?<br>
