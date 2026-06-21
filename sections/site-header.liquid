@@ -5,11 +5,11 @@
   endif
 -%}
 
-<div class="kv-announce">
-  Free delivery over <b>PKR 2,500</b> &nbsp;·&nbsp; Cash on delivery nationwide &nbsp;·&nbsp; 100% genuine leather
-</div>
-
 <header class="kv-hdr{% unless is_home %} kv-hdr--page{% endunless %}" id="kv-hdr">
+  <div class="kv-announce">
+    Free delivery over <b>PKR 2,500</b> &nbsp;·&nbsp; Cash on delivery nationwide &nbsp;·&nbsp; 100% genuine leather
+  </div>
+  <div class="kv-hdr__bar">
   <div class="kv-wrap kv-hdr__row">
 
     <a href="{{ routes.root_url }}" class="kv-logo" aria-label="{{ shop.name }}">
@@ -73,8 +73,8 @@
       <button class="kv-burger" aria-label="Open menu" onclick="document.getElementById('kv-mm').classList.add('kv-open')"><span></span><span></span><span></span></button>
     </div>
   </div>
+  </div>
 </header>
-{%- unless is_home -%}<div style="height:72px"></div>{%- endunless -%}
 
 <div class="kv-mmenu" id="kv-mm">
   <div class="kv-mmenu__top">
