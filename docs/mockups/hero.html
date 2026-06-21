@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kordovan — Hero Mockup (Step: Hero)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --canvas:#F7F2EA; --parchment:#ECE3D4; --ink:#241C16; --walnut:#4A3528;
+    --cognac:#A0623A; --cognac-dark:#7E4B2C; --tan:#C08B5C; --brass:#B0894F;
+    --brass-light:#D8C39A; --stone:#8B8174; --border:#DDD2C0;
+    --heading:'Fraunces',Georgia,serif; --body:'Inter',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--ink);color:var(--canvas);font-family:var(--body);font-weight:300;-webkit-font-smoothing:antialiased;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1340px;margin:0 auto;padding:0 40px;}
+  .pagelabel{background:#000;color:var(--canvas);text-align:center;font-size:12px;letter-spacing:.05em;padding:9px;}
+
+  /* announce */
+  .announce{background:var(--ink);color:var(--canvas);text-align:center;font-size:11.5px;letter-spacing:.09em;padding:9px;text-transform:uppercase;}
+  .announce b{color:var(--brass-light);font-weight:500;}
+
+  /* header (Variant B) */
+  .hdr{position:absolute;top:0;left:0;right:0;z-index:20;color:var(--canvas);}
+  .hdr__row{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:30px;padding:24px 0;}
+  .logo{font-family:var(--heading);font-weight:600;letter-spacing:.16em;text-transform:uppercase;font-size:24px;white-space:nowrap;}
+  .nav{display:flex;gap:28px;list-style:none;justify-self:center;align-items:center;}
+  .nav>li>a{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;color:rgba(247,242,234,.9);display:inline-flex;gap:6px;align-items:center;}
+  .nav>li>a:hover{color:#fff;}
+  .nav .sale>a{color:var(--brass-light);}
+  .car{width:9px;height:9px;stroke:currentColor;fill:none;stroke-width:1.6;}
+  .actions{justify-self:end;display:flex;gap:20px;align-items:center;}
+  .actions svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.4;}
+  .cart{position:relative;}
+  .cart i{position:absolute;top:-7px;right:-9px;background:var(--cognac);color:#fff;font-size:9px;font-weight:600;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-style:normal;}
+
+  /* hero */
+  .hero{position:relative;min-height:100vh;display:flex;align-items:center;overflow:hidden;}
+  /* --- BACKGROUND: replace .hero__photo background-image with the real hero-home image --- */
+  .hero__photo{position:absolute;inset:0;
+    background:linear-gradient(115deg,#1d150f 0%,#2e1f14 38%,#5c3a24 70%,#8a5230 100%);
+    background-size:cover;background-position:center;}
+  .hero__photo::after{content:"PLACEHOLDER — hero-home image (hands working leather) drops in here · 2560×1440";
+    position:absolute;right:22px;bottom:18px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(247,242,234,.4);}
+  /* legibility overlay: dark on the left where text sits, clearing to the right */
+  .hero__scrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(28,20,14,.82) 0%,rgba(28,20,14,.55) 38%,rgba(28,20,14,.12) 70%,transparent 100%);}
+  .hero__content{position:relative;z-index:2;max-width:660px;}
+  .hero .eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--brass-light);font-weight:500;}
+  .hero h1{font-family:var(--heading);font-weight:500;font-size:clamp(50px,7.2vw,110px);line-height:1.0;letter-spacing:-.02em;margin:20px 0 26px;}
+  .hero h1 em{font-style:italic;font-weight:400;}
+  .hero__sub{font-size:19px;font-weight:300;max-width:500px;color:rgba(247,242,234,.84);line-height:1.65;margin-bottom:38px;}
+  .hero__cta{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:42px;}
+  .btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--body);font-weight:500;font-size:13px;letter-spacing:.09em;text-transform:uppercase;padding:17px 34px;border-radius:4px;border:1px solid transparent;cursor:pointer;transition:.25s;}
+  .btn--cognac{background:var(--cognac);color:#fff;}
+  .btn--cognac:hover{background:var(--cognac-dark);}
+  .btn--ghost{background:transparent;border-color:rgba(247,242,234,.55);color:var(--canvas);}
+  .btn--ghost:hover{border-color:#fff;background:rgba(255,255,255,.08);}
+  .hero__trust{font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:rgba(247,242,234,.62);}
+  .hero__trust b{color:var(--brass-light);font-weight:500;}
+  .scroll{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:2;font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:rgba(247,242,234,.5);display:flex;flex-direction:column;align-items:center;gap:10px;}
+  .scroll span{width:1px;height:42px;background:linear-gradient(rgba(247,242,234,.55),transparent);}
+
+  .notes{background:var(--canvas);color:var(--stone);font-size:13px;line-height:1.85;padding:34px 0 60px;}
+  .notes .wrap strong{color:var(--walnut);font-family:var(--heading);font-size:16px;font-weight:500;}
+  .notes em{color:var(--cognac);font-style:normal;font-weight:500;}
+
+  @media(max-width:980px){ .nav{display:none;} .hero__scrim{background:linear-gradient(180deg,rgba(28,20,14,.4),rgba(28,20,14,.85));} }
+</style>
+</head>
+<body>
+
+<div class="pagelabel">MOCKUP — Homepage · HERO section (with approved Variant B header) · background is a placeholder for the hero-home photo</div>
+
+<div class="announce">Free delivery over <b>PKR 3,000</b> &nbsp;·&nbsp; Cash on delivery nationwide &nbsp;·&nbsp; 100% genuine leather</div>
+
+<section class="hero">
+  <div class="hero__photo"></div>
+  <div class="hero__scrim"></div>
+
+  <!-- header sits over hero -->
+  <header class="hdr">
+    <div class="wrap hdr__row">
+      <div class="logo">Kordovan</div>
+      <ul class="nav">
+        <li><a>New Arrivals</a></li>
+        <li><a>Wallets <svg class="car" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg></a></li>
+        <li><a>Bags <svg class="car" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg></a></li>
+        <li><a>Jackets <svg class="car" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg></a></li>
+        <li><a>Shoes <svg class="car" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg></a></li>
+        <li><a>Accessories <svg class="car" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg></a></li>
+        <li class="sale"><a>Sale</a></li>
+      </ul>
+      <div class="actions">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span class="cart"><svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg><i>2</i></span>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap hero__content">
+    <span class="eyebrow">Pakistan's Original Leather Craft House</span>
+    <h1>Built to Last.<br><em>Made to Age.</em></h1>
+    <p class="hero__sub">Handcrafted leather goods for those who value quality over quantity. Every stitch, every grain — made to outlast a lifetime.</p>
+    <div class="hero__cta">
+      <a class="btn btn--cognac">Shop Bestsellers →</a>
+      <a class="btn btn--ghost">See the Craft</a>
+    </div>
+    <div class="hero__trust">Free delivery · 7-day returns · <b>Genuine leather guaranteed</b></div>
+  </div>
+
+  <div class="scroll">Scroll<span></span></div>
+</section>
+
+<div class="notes">
+  <div class="wrap">
+    <strong>Hero — what's set, and what's open for your call</strong><br><br>
+    ✓ Headline <em>"Built to Last. Made to Age."</em> (approved) &nbsp;·&nbsp; ✓ Full-viewport real photo background (approved — image being generated) &nbsp;·&nbsp; ✓ Left-aligned, dark-on-left scrim so text stays legible on the photo<br><br>
+    <strong>Tweak anything below:</strong><br>
+    · <em>Eyebrow:</em> "Pakistan's Original Leather Craft House" — keep / shorten?<br>
+    · <em>Sub-headline:</em> current copy above — keep / rewrite?<br>
+    · <em>Primary CTA:</em> "Shop Bestsellers" — or "Shop Wallets" / "Shop the Collection"?<br>
+    · <em>Soft CTA:</em> "See the Craft" — or "Our Story"?<br>
+    · <em>Trust line:</em> "Free delivery · 7-day returns · Genuine leather guaranteed" — wording ok?<br>
+    · Headline size / how much the photo shows vs how dark the left scrim is.
+  </div>
+</div>
+
+</body>
+</html>
