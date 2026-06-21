@@ -1,42 +1,36 @@
-<section class="section section--muted">
-  <div class="container">
-    <div class="section-header fade-in">
-      <p class="eyebrow">{{ section.settings.eyebrow | default: 'Customer Favourites' }}</p>
-      <h2>{{ section.settings.title | default: 'Our Bestsellers' }}</h2>
-      {%- if section.settings.subtitle != blank -%}
-        <p class="lead">{{ section.settings.subtitle }}</p>
-      {%- endif -%}
+<section class="kv-home kv-section">
+  <div class="kv-wrap">
+    <div class="kv-shead">
+      <span class="kv-eyebrow">{{ section.settings.eyebrow | default: 'Bestsellers' }}</span>
+      <h2>{{ section.settings.title | default: 'Customer Favourites' }}</h2>
     </div>
 
-    {%- assign collection = collections[section.settings.collection] -%}
-
-    {%- if collection != blank -%}
-      <div class="product-grid">
-        {%- for product in collection.products limit: section.settings.products_count -%}
-          <div class="fade-in" style="animation-delay: {{ forloop.index | times: 0.1 }}s;">
-            {% render 'product-card', product: product %}
-          </div>
-        {%- endfor -%}
-      </div>
-    {%- else -%}
-      {%- assign featured_products = section.blocks | map: 'settings' | map: 'product' -%}
-      <div class="product-grid">
-        {%- for block in section.blocks -%}
-          {%- assign product = all_products[block.settings.product] -%}
-          {%- if product != blank -%}
-            <div class="fade-in" style="animation-delay: {{ forloop.index | times: 0.1 }}s;" {{ block.shopify_attributes }}>
-              {% render 'product-card', product: product %}
+    <div class="kv-pgrid">
+      {%- for block in section.blocks -%}
+        {%- assign coll = block.settings.collection -%}
+        {%- assign product = coll.products.first -%}
+        {%- if product != blank -%}
+          <a class="kv-card" href="{{ product.url }}" {{ block.shopify_attributes }}>
+            <div class="kv-card__m">
+              {%- if block.settings.label != blank -%}<span class="kv-card__tag">#1 in {{ block.settings.label }}</span>{%- endif -%}
+              {%- if product.featured_image -%}
+                <img src="{{ product.featured_image | image_url: width: 640 }}" alt="{{ product.title | escape }}" width="640" height="800" loading="lazy">
+              {%- endif -%}
+              <div class="kv-card__atc">Add to Cart</div>
             </div>
-          {%- endif -%}
-        {%- endfor -%}
-      </div>
-    {%- endif -%}
+            <div class="kv-card__n">{{ product.title | truncate: 46 }}</div>
+            <div class="kv-card__meta">
+              <span class="kv-card__p">{{ product.price | money }}</span>
+              <span class="kv-card__s">★★★★★</span>
+            </div>
+          </a>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
 
     {%- if section.settings.cta_text != blank -%}
-      <div class="text-center" style="margin-top: var(--space-10);">
-        <a href="{{ section.settings.cta_url | default: '/collections/all' }}" class="btn btn--primary btn--lg fade-in">
-          {{ section.settings.cta_text }}
-        </a>
+      <div style="text-align:center;margin-top:54px">
+        <a class="kv-btn-text" href="{{ section.settings.cta_url | default: routes.all_products_collection_url }}">{{ section.settings.cta_text }} →</a>
       </div>
     {%- endif -%}
   </div>
@@ -46,32 +40,20 @@
 {
   "name": "Bestsellers",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Customer Favourites" },
-    { "type": "text", "id": "title", "label": "Title", "default": "Our Bestsellers" },
-    { "type": "text", "id": "subtitle", "label": "Subtitle" },
-    { "type": "collection", "id": "collection", "label": "Collection (auto-populates products)" },
-    { "type": "range", "id": "products_count", "label": "Number of products", "min": 2, "max": 8, "step": 1, "default": 4 },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Bestsellers" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Customer Favourites" },
     { "type": "text", "id": "cta_text", "label": "CTA text", "default": "View All Products" },
     { "type": "url", "id": "cta_url", "label": "CTA link" }
   ],
+  "max_blocks": 5,
   "blocks": [
     {
-      "type": "product",
-      "name": "Product",
+      "type": "category",
+      "name": "Category #1",
       "settings": [
-        { "type": "product", "id": "product", "label": "Product" }
+        { "type": "collection", "id": "collection", "label": "Category collection", "info": "Set this collection's sort order to 'Best selling' so its top product auto-updates here." },
+        { "type": "text", "id": "label", "label": "Badge label", "info": "e.g. Wallets — shows as '#1 in Wallets'" }
       ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "Bestsellers",
-      "settings": {
-        "eyebrow": "Customer Favourites",
-        "title": "Our Bestsellers",
-        "cta_text": "View All Products",
-        "products_count": 4
-      }
     }
   ]
 }

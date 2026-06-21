@@ -121,3 +121,32 @@
   .kv-section{padding:68px 0;}
   .kv-hero__scrim{background:linear-gradient(180deg,rgba(28,20,14,.45),rgba(28,20,14,.85));}
 }
+
+/* ============================================================
+   Milestone 3: trust marquee + bestsellers (cross-ref homepage-final.html)
+   ============================================================ */
+.kv-marq{background:var(--parchment);border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden;}
+.kv-marq__t{display:flex;width:max-content;animation:kv-scroll 34s linear infinite;}
+.kv-marq:hover .kv-marq__t{animation-play-state:paused;}
+.kv-mi{display:flex;align-items:center;gap:11px;padding:20px 42px;}
+.kv-mi svg{width:20px;height:20px;stroke:var(--cognac);fill:none;stroke-width:1.4;}
+.kv-mi span{font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--walnut);font-weight:500;white-space:nowrap;}
+.kv-mi .kv-dot{width:4px;height:4px;border-radius:50%;background:var(--brass);}
+@keyframes kv-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+.kv-pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;}
+.kv-card{cursor:pointer;display:block;color:inherit;text-decoration:none;}
+.kv-card__m{position:relative;aspect-ratio:4/5;border-radius:8px;overflow:hidden;background:var(--parchment);border:1px solid var(--border);}
+.kv-card__m img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);}
+.kv-card:hover .kv-card__m img{transform:scale(1.05);}
+.kv-card__tag{position:absolute;top:12px;left:12px;background:var(--ink);color:var(--brass-light);font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:6px 10px;border-radius:3px;font-weight:600;z-index:2;}
+.kv-card__atc{position:absolute;left:12px;right:12px;bottom:12px;background:var(--cognac);color:#fff;text-align:center;font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;padding:13px;border-radius:5px;opacity:0;transform:translateY(10px);transition:.28s;z-index:2;}
+.kv-card:hover .kv-card__atc{opacity:1;transform:none;}
+.kv-card__n{font-family:var(--kv-heading);font-size:18px;margin-top:15px;color:var(--ink);font-weight:500;line-height:1.25;}
+.kv-card__meta{display:flex;justify-content:space-between;align-items:center;margin-top:5px;}
+.kv-card__p{color:var(--cognac);font-weight:500;font-size:14px;}
+.kv-card__s{color:var(--brass);font-size:11px;letter-spacing:1px;}
+
+@media(max-width:860px){
+  .kv-pgrid{grid-template-columns:repeat(2,1fr);gap:16px;}
+}

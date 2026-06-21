@@ -23,50 +23,6 @@
     },
     "trust": {
       "type": "trust-bar",
-      "blocks": {
-        "trust_1": {
-          "type": "trust_item",
-          "settings": {
-            "icon": "truck",
-            "text": "Free Delivery Over PKR 3,000"
-          }
-        },
-        "trust_2": {
-          "type": "trust_item",
-          "settings": {
-            "icon": "shield",
-            "text": "100% Genuine Leather"
-          }
-        },
-        "trust_3": {
-          "type": "trust_item",
-          "settings": {
-            "icon": "award",
-            "text": "Handcrafted in Pakistan"
-          }
-        },
-        "trust_4": {
-          "type": "trust_item",
-          "settings": {
-            "icon": "refresh",
-            "text": "7-Day Returns"
-          }
-        },
-        "trust_5": {
-          "type": "trust_item",
-          "settings": {
-            "icon": "check",
-            "text": "COD Available Nationwide"
-          }
-        }
-      },
-      "block_order": [
-        "trust_1",
-        "trust_2",
-        "trust_3",
-        "trust_4",
-        "trust_5"
-      ],
       "settings": {}
     },
     "featured_collections": {
@@ -110,10 +66,16 @@
       "settings": {
         "eyebrow": "Bestsellers",
         "title": "Customer Favourites",
-        "collection": "gid://shopify/collection/483424436464",
         "cta_text": "View All Products",
         "cta_url": "/collections/all"
-      }
+      },
+      "blocks": {
+        "b_wallets": { "type": "category", "settings": { "collection": "gid://shopify/Collection/483424043248", "label": "Wallets" } },
+        "b_bags": { "type": "category", "settings": { "collection": "gid://shopify/Collection/439905452272", "label": "Bags" } },
+        "b_jackets": { "type": "category", "settings": { "collection": "gid://shopify/Collection/483424108784", "label": "Jackets" } },
+        "b_shoes": { "type": "category", "settings": { "collection": "gid://shopify/Collection/483424174320", "label": "Shoes" } }
+      },
+      "block_order": ["b_wallets", "b_bags", "b_jackets", "b_shoes"]
     },
     "brand_story": {
       "type": "brand-story",
