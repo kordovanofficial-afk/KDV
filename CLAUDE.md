@@ -82,8 +82,34 @@ pushed to the draft theme to preview in a browser.)
   newly-added section settings (`aggregate`, `percent`, `count`, hero `heading`)
   from `index.json` on sync — harmless ONLY because every kv- section supplies
   `| default:` fallbacks in liquid. Keep hardcoded defaults on all section settings.
-- **OPEN / next up (user picks):** product page mockup (Step 3, recommended) ·
-  collection/category page · cart drawer · search · more content pages.
+- **Content-page designs DONE & deployed:** Our Story (`about-kordovan`), Our Craft
+  (`our-craft`), Shipping (`shipping`), Leather Care (`leather-care-guide`), Returns
+  (`returns`) — bespoke layouts rendered via `snippets/*` dispatched by handle in
+  `sections/main-page.liquid` (theme-local; NO template-suffix change → live theme
+  untouched). Shared `.kv-cp` component CSS in home.css. Images uploaded to Files
+  (`about-*`, `craft-*`, `care-patina`, `returns-pillar-bg`).
+- **PRODUCT PAGE (PDP) DONE & deployed:** `sections/main-product.liquid` +
+  `related-products.liquid` restyled to the approved `docs/mockups/product.html`
+  (`.kv-pdp` CSS). Reuses ALL `theme.js` hooks (`.product-gallery`, `.product-form`,
+  `.variant-btn`, `.product-atc__*`, `.product-info__price-*`, `[data-product-variants]`)
+  so gallery/variants/AJAX add-to-cart/cart-drawer work untouched. Structure:
+  gallery + sticky benefit buy-box (price+shipping transparency, full-width cognac
+  ATC, 3 trust icons) → 4 brand features → capacity "fits" (metafield) → description
+  + Care/Shipping/Warranty accordion → reviews (metafield) → guarantee → related →
+  sticky mobile ATC.
+- ⚠️ **SEO-PHASE TODOs (user-confirmed, remember):** (1) NO review app — author
+  reviews ourselves per product via metafields: `reviews.rating` (number),
+  `reviews.rating_count`, `custom.reviews` (one per line `name|city|text`). PDP shows
+  the reviews block + star rating ONLY when `reviews.rating` is set (hidden until then).
+  (2) Go product-by-product so EVERY active product matches this PDP's depth — fill
+  `custom.subtitle`, `custom.benefits` (one per line), `custom.material`, capacity
+  `custom.fits` (`value|label` per line) + `custom.fits_title`/`fits_text`, full image
+  gallery. Until filled, brand-universal fallbacks render.
+- **Known follow-up:** site header cart link (`.kv-cart`) navigates to /cart; it does
+  NOT open the cart drawer (theme.js binds drawer-open to legacy `.header__cart-btn`).
+  Wire `.kv-cart` to open the drawer when we polish cart.
+- **OPEN / next up (user picks):** collection/category page (recommended) ·
+  cart drawer polish · search results · SEO pass.
 - Logo: user is uploading manually (Header → "Logo (dark mark)"); needs a
   TRANSPARENT-bg black PNG (their source had a white bg). Favicon/social TODO.
 
