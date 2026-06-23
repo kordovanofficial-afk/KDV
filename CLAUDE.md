@@ -119,10 +119,19 @@ pushed to the draft theme to preview in a browser.)
   ⚠️ **Filter pills/drawer populate only when storefront filters are enabled** in
   admin → Search & Discovery → Filters. Until then: just "All" + sort (graceful).
   Optional `collection.metafields.custom.editorial` overrides the SEO block.
-- **OPEN / next up (user picks):** cart drawer polish — restyle to Quiet Heritage
-  + wire `.kv-cart` header icon to open the drawer (recommended next) · search
-  results (reuse `.kv-coll`/`card-product`) · SEO pass (per-product enrichment,
-  self-authored reviews, titles/meta/alt, enable storefront filters).
+- **CART DRAWER DONE & deployed:** `sections/cart-drawer.liquid` restyled to
+  `docs/mockups/cart-drawer.html` (`.cart-drawer` in home.css). `theme.js
+  CartDrawer.render` now outputs the **free-shipping progress bar** (threshold
+  PKR 2,500 = `250000` minor units in `renderShip()` — change there if free-ship
+  amount changes), kv line items with inline qty + **Remove**, subtotal; shows/
+  hides ship+cross-sell on empty. **Header cart `.kv-cart` now opens the drawer**
+  (fixed the earlier gap). `KDV.updateCartCount()` updates both legacy + `.kv-cart i`
+  badges. Cross-sell = server-rendered from `cart-drawer` section setting
+  `upsell_collection` (default `kdv-accessories`), one-click via the quick-add hook.
+- **OPEN / next up (user picks):** search results (reuse `.kv-coll` grid +
+  `card-product`; full-screen search overlay per moodboard) · **SEO pass** (the big
+  finisher: per-product enrichment + self-authored reviews via metafields,
+  titles/meta/alt text, enable storefront filters in Search & Discovery, sitemap).
 - Logo: user is uploading manually (Header → "Logo (dark mark)"); needs a
   TRANSPARENT-bg black PNG (their source had a white bg). Favicon/social TODO.
 
