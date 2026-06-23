@@ -78,6 +78,17 @@ pushed to the draft theme to preview in a browser.)
 - Product cards use real Shopify catalogue photos; hero/mega/collection/brand-story
   use the generated "art-directed" images.
 
+## 🗃 Site collections (kdv- set — controlled, for this theme)
+Created as **smart collections** (auto-populate by tag), published to Online Store,
+sorted **Best Selling**. Referenced by hardcoded handle in Liquid (NOT via JSON
+template settings — Shopify's editor strips collection/handle settings from
+`templates/index.json` on sync, which is why block-based references render empty).
+- `kdv-wallets` (≈55) · `kdv-bags` (≈68) · `kdv-jackets` (≈36) · `kdv-shoes` (≈24)
+  · `kdv-belts` (≈13) · `kdv-accessories` (≈28)
+- Header nav + Bestsellers (#1 per category) reference these. New Arrivals →
+  `/collections/all?sort_by=created-descending`; Sale → `/collections/all` (no
+  kdv-sale yet). Women's sub-links still use existing womens-* collections.
+
 ## ✅ Working loop
 Edit theme → push to draft theme `164277190896` (via Shopify) → review in browser
 → iterate. Keep to the BRAND_MOODBOARD spec at every step.
