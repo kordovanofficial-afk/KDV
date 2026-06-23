@@ -1,7 +1,12 @@
 {%- comment -%}
   Shared content-page template (About, Shipping, Leather Care, Returns, Our Craft,
   FAQs, etc.). On-brand editorial layout; styling lives in assets/home.css (.kv-page).
+  Specific handles get a bespoke designed layout (rendered via snippet) so we stay
+  theme-local and never alter the page's template suffix (which is store-wide).
 {%- endcomment -%}
+{%- if page.handle == 'about-kordovan' -%}
+  {%- render 'our-story' -%}
+{%- else -%}
 <div class="kv-page">
   <div class="kv-page__hero">
     <div class="kv-wrap">
@@ -18,6 +23,7 @@
     </div>
   </div>
 </div>
+{%- endif -%}
 
 {% schema %}
 {

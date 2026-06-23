@@ -1,0 +1,97 @@
+{%- comment -%}
+  Designed "Our Story" page body (handle: about-kordovan). Rendered by
+  sections/main-page.liquid only for that handle, so it stays theme-local
+  (draft theme) and never alters how any other theme renders the page.
+  Markup ported 1:1 from docs/mockups/page-about.html; styling = .kv-cp in home.css.
+  Images uploaded to Shopify Files: about-hero / about-origin / about-craft-teaser / about-promise-bg.
+{%- endcomment -%}
+{%- liquid
+  assign img_hero = 'https://cdn.shopify.com/s/files/1/0267/9164/1277/files/about-hero.png?v=1782208300&width=1800'
+  assign img_origin = 'https://cdn.shopify.com/s/files/1/0267/9164/1277/files/about-origin.png?v=1782208300&width=900'
+  assign img_craft = 'https://cdn.shopify.com/s/files/1/0267/9164/1277/files/about-craft-teaser.png?v=1782208300&width=900'
+  assign img_promise = 'https://cdn.shopify.com/s/files/1/0267/9164/1277/files/about-promise-bg.png?v=1782208301&width=2000'
+-%}
+
+<div class="kv-cp">
+
+  <section class="phero">
+    <img src="{{ img_hero }}" alt="Artisan hand-stitching full-grain leather in the Kordovan workshop" loading="eager" width="1800" height="1013">
+    <div class="phero__scrim"></div>
+    <div class="wrap phero__c">
+      <span class="eyebrow">Our Story</span>
+      <h1>Built to be <em>handed down.</em></h1>
+      <p>Kordovan was born from a simple belief: Pakistan deserves world-class leather — crafted right here at home, by Pakistani hands, for the people who carry it.</p>
+    </div>
+  </section>
+
+  <section class="sec"><div class="wrap split">
+    <div class="split__img"><img src="{{ img_origin }}" alt="Full-grain leather wallets aged to a rich patina" loading="lazy" width="900" height="1125"></div>
+    <div>
+      <span class="eyebrow">Where it began</span>
+      <h2>It started with a belief.</h2>
+      <p>Founded in Karachi, we set out to prove that genuine leather — the kind that gets better with age, that develops a rich patina, that outlasts trends — did not have to come from Europe or cost a fortune.</p>
+      <p>It could be made by Pakistani hands, for Pakistani people, and appreciated the world over. One wallet at a time, that belief became Kordovan.</p>
+      <p style="margin-top:8px"><a class="btn-text" href="/pages/our-craft">See how it's made →</a></p>
+    </div>
+  </div></section>
+
+  <section class="stats"><div class="wrap"><div class="stats__g">
+    <div class="stats__i"><div class="stats__n">22,000+</div><div class="stats__l">Orders Delivered</div></div>
+    <div class="stats__i"><div class="stats__n">5+</div><div class="stats__l">Years of Craft</div></div>
+    <div class="stats__i"><div class="stats__n">100%</div><div class="stats__l">Genuine Leather</div></div>
+    <div class="stats__i"><div class="stats__n">Lifetime</div><div class="stats__l">Craftsmanship Warranty</div></div>
+  </div></div></section>
+
+  <section class="sec sec--parch"><div class="wrap">
+    <div class="shead"><span class="eyebrow">What we stand for</span><h2>Fewer, better things.</h2></div>
+    <div class="cards">
+      <div class="card">
+        <svg class="ic" viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 8 8 8 8s8-3 8-8V6z"/><path d="m9 12 2 2 4-4"/></svg>
+        <h3>Heirloom Quality</h3>
+        <p>We work full-grain and vegetable-tanned hides — the highest grade available — so every piece is built to be carried for decades, not seasons.</p>
+      </div>
+      <div class="card">
+        <svg class="ic" viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V8l7-5 7 5v13"/><path d="M9 21v-6h6v6"/></svg>
+        <h3>Honest Craft</h3>
+        <p>Cut, skived, and saddle-stitched by skilled artisans who treat leather as a living material — one that breathes, ages, and tells your story.</p>
+      </div>
+      <div class="card">
+        <svg class="ic" viewBox="0 0 24 24"><path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+        <h3>Made in Pakistan</h3>
+        <p>Proudly designed and handcrafted in Karachi. We're the Pakistani leather house built to read world-class — heritage as a mark of pride, never a discount.</p>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="sec"><div class="wrap split split--rev">
+    <div class="split__img"><img src="{{ img_craft }}" alt="Skilled hands finishing a leather jacket" loading="lazy" width="900" height="1125"></div>
+    <div>
+      <span class="eyebrow">Our Craft</span>
+      <h2>From hide to stitch, by hand.</h2>
+      <p>Every Kordovan piece starts with the finest cut of the hide and passes through trained hands at every step — cutting, skiving, saddle-stitching, burnishing, and finishing.</p>
+      <p>Where mass producers rely on machines and shortcuts, we rely on people and an unwillingness to compromise.</p>
+      <p style="margin-top:8px"><a class="btn btn--cognac" href="/pages/our-craft">Explore the Craft →</a></p>
+    </div>
+  </div></section>
+
+  <section class="sec sec--tight"><div class="wrap"><div class="pillar" style="background-image:url('{{ img_promise }}')"><div class="pillar__c">
+    <span class="eyebrow">Our Promise</span>
+    <h2>If it fails, <em>we make it right.</em></h2>
+    <p>We stand behind everything we make with a Lifetime Craftsmanship Warranty. If a Kordovan piece fails because of how it was made, we'll repair or replace it — no questions asked. That's the promise behind a brand built to be handed down.</p>
+  </div></div></div></section>
+
+  <section class="sec sec--tight"><div class="wrap"><div class="contact">
+    <div>
+      <h3>Come say hello.</h3>
+      <p>We're based in Karachi. Visit us at G4, Falcon Street Mall, Malir Cantt — or reach us any time.<br>+92 333 2601161 · kordovan.official@gmail.com</p>
+    </div>
+    <a class="fwa" href="https://wa.me/923332601161" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2z" fill="#fff"/></svg>Chat on WhatsApp</a>
+  </div></div></section>
+
+  <section class="cta"><div class="wrap">
+    <h2>Carry something built to last.</h2>
+    <p>Explore wallets, bags, jackets and small leather goods — each one made to age beautifully with you.</p>
+    <a class="btn btn--dark" href="{{ routes.all_products_collection_url }}">Shop the Collection →</a>
+  </div></section>
+
+</div>
