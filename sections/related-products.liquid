@@ -1,34 +1,31 @@
-{%- if section.settings.title != blank -%}
-<section class="section section--sm" style="border-top: 1px solid var(--color-border);">
-  <div class="container">
-    <div style="text-align:center; margin-bottom:var(--space-10);">
-      <p class="eyebrow">More to Explore</p>
-      <h2>{{ section.settings.title }}</h2>
-    </div>
-    <div class="product-grid" id="related-products-container">
-      {%- assign related_collection = product.collections.first -%}
-      {%- if related_collection -%}
-        {%- assign shown = 0 -%}
-        {%- for p in related_collection.products -%}
-          {%- unless p.id == product.id or shown >= section.settings.products_to_show -%}
-            <div class="fade-in">
-              {% render 'product-card', product: p %}
-            </div>
-            {%- assign shown = shown | plus: 1 -%}
-          {%- endunless -%}
-        {%- endfor -%}
-      {%- endif -%}
-    </div>
+{%- comment -%} "You may also like" — Quiet Heritage cards (.kv-pdp). Pulls from the product's first collection. {%- endcomment -%}
+{%- assign coll = product.collections.first -%}
+{%- if coll -%}
+<section class="kv-pdp"><div class="kv-pdp__sec"><div class="kv-wrap">
+  <div class="kv-pdp__shead"><span class="eyebrow">Complete the Carry</span><h2>{{ section.settings.title | default: 'You may also like.' }}</h2></div>
+  <div class="kv-pdp__rel">
+    {%- assign shown = 0 -%}
+    {%- assign limit = section.settings.products_to_show | default: 3 -%}
+    {%- for p in coll.products -%}
+      {%- unless p.id == product.id or shown >= limit -%}
+        <a class="kv-pdp__pcard" href="{{ p.url }}">
+          <div class="m"><img src="{{ p.featured_image | image_url: width: 600 }}" alt="{{ p.title | escape }}" loading="lazy" width="600" height="750"></div>
+          <div class="n">{{ p.title | truncate: 44 }}</div>
+          <div class="meta"><span class="p">{{ p.price | money }}</span>{%- if p.metafields.reviews.rating != blank -%}<span class="s">★★★★★</span>{%- endif -%}</div>
+        </a>
+        {%- assign shown = shown | plus: 1 -%}
+      {%- endunless -%}
+    {%- endfor -%}
   </div>
-</section>
+</div></div></section>
 {%- endif -%}
 
 {% schema %}
 {
   "name": "Related Products",
   "settings": [
-    { "type": "text", "id": "title", "label": "Section title", "default": "You May Also Like" },
-    { "type": "range", "id": "products_to_show", "label": "Products to show", "min": 2, "max": 8, "step": 2, "default": 4 }
+    { "type": "text", "id": "title", "label": "Section title", "default": "You may also like." },
+    { "type": "range", "id": "products_to_show", "label": "Products to show", "min": 2, "max": 6, "step": 1, "default": 3 }
   ],
   "presets": [{ "name": "Related Products" }]
 }

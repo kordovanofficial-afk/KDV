@@ -1,267 +1,196 @@
-{%- assign product = product -%}
-{%- assign current_variant = product.selected_or_first_available_variant -%}
-{%- assign on_sale = false -%}
-{%- if current_variant.compare_at_price > current_variant.price -%}
-  {%- assign on_sale = true -%}
-{%- endif -%}
+{%- comment -%}
+  Product page — Quiet Heritage design (ported from docs/mockups/product.html).
+  Styling = .kv-pdp in assets/home.css. Functional class hooks (.product-gallery,
+  .product-form, .variant-btn, .product-atc__*, price els, [data-product-variants])
+  are preserved so the existing theme.js gallery/variant/add-to-cart/cart-drawer
+  logic keeps working untouched.
 
-<section class="product-page">
-  <div class="container">
+  Curated, per-product content reads from metafields and is hidden when empty
+  (to be populated during the SEO pass). Brand-universal fallbacks keep the page
+  looking complete in the meantime. No review app — reviews are self-authored via
+  the `reviews` / `custom.reviews` metafields.
+{%- endcomment -%}
+{%- liquid
+  assign v = product.selected_or_first_available_variant
+  assign on_sale = false
+  if v.compare_at_price > v.price
+    assign on_sale = true
+  endif
+  assign wa = '923332601161'
+-%}
 
-    <!-- Breadcrumb -->
-    <nav class="breadcrumb" aria-label="Breadcrumb" style="margin-bottom:var(--space-6);font-size:var(--text-sm);color:var(--color-text-muted);">
-      <a href="/" style="color:inherit;">Home</a>
-      <span style="margin-inline:var(--space-2);">/</span>
-      {%- if product.collections.first -%}
-        <a href="{{ product.collections.first.url }}" style="color:inherit;">{{ product.collections.first.title }}</a>
-        <span style="margin-inline:var(--space-2);">/</span>
+<section class="kv-pdp">
+  <div class="kv-wrap">
+    <div class="crumb"><a href="{{ routes.root_url }}">Home</a> / {% if product.collections.first %}<a href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a> / {% endif %}{{ product.title }}</div>
+  </div>
+
+  <!-- ABOVE THE FOLD -->
+  <div class="kv-wrap"><div class="kv-pdp__top">
+
+    <!-- GALLERY -->
+    <div class="product-gallery">
+      <div class="product-gallery__thumbs">
+        {%- for media in product.media limit: 8 -%}
+          <div class="product-gallery__thumb{% if forloop.first %} active{% endif %}" data-full="{{ media.preview_image | image_url: width: 900 }}">
+            <img src="{{ media.preview_image | image_url: width: 160 }}" alt="{{ media.alt | escape | default: product.title | escape }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" width="76" height="92">
+          </div>
+        {%- endfor -%}
+      </div>
+      <div class="product-gallery__main">
+        {%- if v.available -%}<span class="kv-pdp__badge">In stock</span>{%- endif -%}
+        <img id="product-main-image" src="{{ product.featured_image | image_url: width: 900 }}" alt="{{ product.featured_image.alt | escape | default: product.title | escape }}" loading="eager" fetchpriority="high" width="900" height="1125">
+      </div>
+    </div>
+
+    <!-- BUY BOX -->
+    <div class="kv-pdp__buy">
+      <span class="eyebrow">{{ product.type | default: 'Kordovan' }}{% if product.metafields.custom.material != blank %} · {{ product.metafields.custom.material }}{% endif %}</span>
+      <h1>{{ product.title }}</h1>
+      {%- if product.metafields.custom.subtitle != blank -%}
+        <p class="kv-pdp__sub">{{ product.metafields.custom.subtitle }}</p>
       {%- endif -%}
-      <span style="color:var(--color-text);">{{ product.title }}</span>
-    </nav>
 
-    <div class="product-page__grid">
+      {%- if product.metafields.reviews.rating != blank -%}
+        <div class="kv-pdp__rate"><span class="stars">★★★★★</span> <b>{{ product.metafields.reviews.rating }}</b> · <a href="#reviews">{{ product.metafields.reviews.rating_count | default: 0 }} reviews</a></div>
+      {%- endif -%}
 
-      <!-- Gallery -->
-      <div class="product-gallery">
-        <div class="product-gallery__thumbs">
-          {%- for image in product.images limit: 8 -%}
-            <div
-              class="product-gallery__thumb{% if forloop.first %} active{% endif %}"
-              data-full="{{ image | img_url: '900x' }}"
-            >
-              <img
-                src="{{ image | img_url: '160x' }}"
-                alt="{{ image.alt | escape | default: product.title | escape }}"
-                loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
-                width="80"
-                height="80"
-              >
+      <div class="kv-pdp__price product-info__price">
+        <span class="product-info__price-current{% if on_sale %} is-sale{% endif %}">{{ v.price | money }}</span>
+        <span class="product-info__price-compare"{% unless on_sale %} style="display:none"{% endunless %}>{{ v.compare_at_price | money }}</span>
+        {%- if on_sale -%}{%- assign pct = v.compare_at_price | minus: v.price | times: 100 | divided_by: v.compare_at_price -%}
+          <span class="product-info__price-save">Save {{ pct }}%</span>
+        {%- else -%}<span class="product-info__price-save" style="display:none"></span>{%- endif -%}
+        <span class="kv-pdp__tax">Inclusive of all taxes</span>
+      </div>
+
+      <ul class="kv-pdp__bul">
+        {%- if product.metafields.custom.benefits != blank -%}
+          {%- assign bens = product.metafields.custom.benefits | newline_to_br | split: '<br />' -%}
+          {%- for b in bens -%}{%- assign bt = b | strip -%}{%- if bt != blank -%}
+            <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>{{ bt }}</li>
+          {%- endif -%}{%- endfor -%}
+        {%- else -%}
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Full-grain leather that ages beautifully with use</li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Hand-stitched in Karachi for a seam that won't fray</li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Backed by our lifetime craftsmanship warranty</li>
+        {%- endif -%}
+      </ul>
+
+      <!-- FORM (theme.js hooks preserved) -->
+      <form class="product-form" action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="{{ v.id }}">
+        <script type="application/json" data-product-variants>{{ product.variants | json }}</script>
+
+        {%- unless product.has_only_default_variant -%}
+          {%- for option in product.options_with_values -%}
+            <div class="product-variants" data-option-index="{{ forloop.index0 }}">
+              <div class="product-variants__label">{{ option.name }}: <span class="product-variants__selected">{{ option.selected_value }}</span></div>
+              <div class="product-variants__options">
+                {%- for value in option.values -%}
+                  <button type="button" class="variant-btn{% if option.selected_value == value %} active{% endif %}" data-value="{{ value | escape }}" aria-label="{{ option.name }}: {{ value }}">{{ value }}</button>
+                {%- endfor -%}
+              </div>
             </div>
           {%- endfor -%}
+        {%- endunless -%}
+
+        <div class="kv-pdp__buyrow">
+          <div class="product-atc__quantity product-atc__qty" aria-label="Quantity">
+            <button type="button" class="product-atc__qty-btn" data-action="minus" aria-label="Decrease quantity">−</button>
+            <input type="number" name="quantity" class="product-atc__qty-input" value="1" min="1" aria-label="Quantity">
+            <button type="button" class="product-atc__qty-btn" data-action="plus" aria-label="Increase quantity">+</button>
+          </div>
+          <button type="submit" class="product-atc__add"{% unless v.available %} disabled{% endunless %}>{% if v.available %}Add to Cart · {{ v.price | money }}{% else %}Sold Out{% endif %}</button>
         </div>
-        <div class="product-gallery__main">
-          <img
-            src="{{ product.featured_image | img_url: '900x' }}"
-            srcset="{{ product.featured_image | img_url: '600x' }} 600w, {{ product.featured_image | img_url: '900x' }} 900w"
-            sizes="(max-width: 900px) 100vw, 50vw"
-            alt="{{ product.featured_image.alt | escape | default: product.title | escape }}"
-            id="product-main-image"
-            loading="eager"
-            fetchpriority="high"
-            width="900"
-            height="1200"
-          >
-        </div>
+        {%- if shop.enabled_payment_types != blank -%}
+          <div class="kv-pdp__buynow-wrap" style="margin-top:12px">{{ form | payment_button }}</div>
+        {%- endif -%}
+      </form>
+
+      <div class="kv-pdp__trust3">
+        <div><svg viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 8 8 8 8s8-3 8-8V6z"/><path d="m9 12 2 2 4-4"/></svg><span>100% genuine<br>full-grain leather</span></div>
+        <div><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 3v5h-7z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg><span>Free delivery<br>over PKR 2,500</span></div>
+        <div><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9 9 0 0 0-6.4 2.6L3 8"/><path d="M3 3v5h5"/></svg><span>7-day easy<br>returns</span></div>
       </div>
 
-      <!-- Product Info -->
-      <div class="product-info">
-        {%- if product.vendor != blank -%}
-          <p class="product-info__vendor">{{ product.vendor }}</p>
-        {%- endif -%}
-
-        <h1 class="product-info__title">{{ product.title }}</h1>
-
-        <!-- Rating -->
-        {%- if product.metafields.reviews.rating != blank -%}
-          <div class="product-info__rating">
-            <div class="product-card__stars" aria-label="{{ product.metafields.reviews.rating.value }} stars">
-              {%- for i in (1..5) -%}
-                <svg class="star" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="currentColor"/>
-                </svg>
-              {%- endfor -%}
-            </div>
-            <a href="#reviews" class="product-info__rating-count" style="font-size:var(--text-sm);color:var(--color-text-muted);">
-              {{ product.metafields.reviews.rating_count }} reviews
-            </a>
-          </div>
-        {%- endif -%}
-
-        <!-- Price -->
-        <div class="product-info__price">
-          <span class="product-info__price-current{% if on_sale %} is-sale{% endif %}">
-            {{ current_variant.price | money_without_trailing_zeros }}
-          </span>
-          {%- if on_sale -%}
-            <span class="product-info__price-compare">{{ current_variant.compare_at_price | money_without_trailing_zeros }}</span>
-            {%- assign saving_pct = current_variant.compare_at_price | minus: current_variant.price | times: 100 | divided_by: current_variant.compare_at_price -%}
-            <span class="product-info__price-save">Save {{ saving_pct }}%</span>
-          {%- endif -%}
-        </div>
-
-        <!-- Feature Pills -->
-        {%- if section.blocks.size > 0 -%}
-          <div class="product-features">
-            {%- for block in section.blocks -%}
-              {%- if block.type == 'feature_pill' -%}
-                <span class="product-feature-pill" {{ block.shopify_attributes }}>
-                  {%- case block.settings.icon -%}
-                    {%- when 'shield' -%}
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                    {%- when 'award' -%}
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
-                    {%- when 'check' -%}
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-                    {%- when 'droplet' -%}
-                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg>
-                  {%- endcase -%}
-                  {{ block.settings.text }}
-                </span>
-              {%- endif -%}
-            {%- endfor -%}
-          </div>
-        {%- endif -%}
-
-        <!-- Product Form -->
-        <form class="product-form" action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data">
-          <input type="hidden" name="id" value="{{ current_variant.id }}">
-
-          <!-- Variants JSON for JS -->
-          <script type="application/json" data-product-variants>
-            {{ product.variants | json }}
-          </script>
-
-          {%- unless product.has_only_default_variant -%}
-            {%- for option in product.options_with_values -%}
-              <div class="product-variants" data-option-index="{{ forloop.index0 }}">
-                <div class="product-variants__label">
-                  {{ option.name }}
-                  <span class="product-variants__selected">{{ option.selected_value }}</span>
-                </div>
-                <div class="product-variants__options">
-                  {%- for value in option.values -%}
-                    <button
-                      type="button"
-                      class="variant-btn{% if option.selected_value == value %} active{% endif %}"
-                      data-value="{{ value | escape }}"
-                      aria-label="{{ option.name }}: {{ value }}"
-                    >
-                      {{ value }}
-                    </button>
-                  {%- endfor -%}
-                </div>
-              </div>
-            {%- endfor -%}
-          {%- endunless -%}
-
-          <!-- Quantity -->
-          <div class="product-atc">
-            <div class="product-atc__quantity" aria-label="Quantity">
-              <button type="button" class="product-atc__qty-btn" data-action="minus" aria-label="Decrease quantity">−</button>
-              <input
-                type="number"
-                name="quantity"
-                class="product-atc__qty-input"
-                value="1"
-                min="1"
-                aria-label="Quantity"
-              >
-              <button type="button" class="product-atc__qty-btn" data-action="plus" aria-label="Increase quantity">+</button>
-            </div>
-
-            <div class="product-atc__buttons">
-              <button
-                type="submit"
-                class="btn btn--primary btn--full btn--lg product-atc__add"
-                {%- unless current_variant.available %}disabled{% endunless %}
-              >
-                {%- if current_variant.available -%}
-                  Add to Cart
-                {%- else -%}
-                  Sold Out
-                {%- endif -%}
-              </button>
-              {%- if shop.enabled_payment_types != blank -%}
-                {{ form | payment_button }}
-              {%- endif -%}
-            </div>
-          </div>
-
-          <!-- Trust micro-copy -->
-          <div class="product-trust">
-            <div class="product-trust__item">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
-              </svg>
-              Free delivery on orders over PKR 3,000
-            </div>
-            <div class="product-trust__item">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/>
-              </svg>
-              7-day hassle-free returns
-            </div>
-            <div class="product-trust__item">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-              </svg>
-              100% genuine leather guaranteed
-            </div>
-            <div class="product-trust__item">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-              </svg>
-              COD available · Pay on delivery
-            </div>
-          </div>
-
-        </form>
-
-        <!-- Product Tabs -->
-        <div class="product-tabs">
-          <div class="product-tabs__nav" role="tablist">
-            <button class="product-tabs__btn active" role="tab" data-tab="tab-description" aria-selected="true">Description</button>
-            <button class="product-tabs__btn" role="tab" data-tab="tab-details" aria-selected="false">Details</button>
-            <button class="product-tabs__btn" role="tab" data-tab="tab-care" aria-selected="false">Leather Care</button>
-            <button class="product-tabs__btn" role="tab" data-tab="tab-shipping" aria-selected="false">Shipping & Returns</button>
-          </div>
-          <div class="product-tabs__content">
-            <div class="product-tabs__panel active" id="tab-description" role="tabpanel">
-              {{ product.description }}
-            </div>
-            <div class="product-tabs__panel" id="tab-details" role="tabpanel">
-              {%- if product.metafields.custom.details != blank -%}
-                {{ product.metafields.custom.details }}
-              {%- else -%}
-                <ul>
-                  <li>Material: {{ product.type | default: 'Genuine Leather' }}</li>
-                  {%- for tag in product.tags -%}
-                    {%- if tag contains 'material:' -%}
-                      <li>{{ tag | remove: 'material:' | capitalize }}</li>
-                    {%- endif -%}
-                  {%- endfor -%}
-                  <li>Handcrafted in Pakistan</li>
-                  <li>1-Year warranty against manufacturing defects</li>
-                </ul>
-              {%- endif -%}
-            </div>
-            <div class="product-tabs__panel" id="tab-care" role="tabpanel">
-              <p>Genuine leather improves with age when properly maintained. Here's how to keep your Kordovan piece looking its best:</p>
-              <ul>
-                <li>Wipe clean with a soft, dry cloth</li>
-                <li>Apply a quality leather conditioner every 3–6 months</li>
-                <li>Store away from direct sunlight and heat</li>
-                <li>If wet, dry naturally — never use a hair dryer</li>
-                <li>For veg-tan leather: embrace the patina — it's a sign of authentic quality</li>
-              </ul>
-            </div>
-            <div class="product-tabs__panel" id="tab-shipping" role="tabpanel">
-              <ul>
-                <li>Free delivery on orders over PKR 3,000</li>
-                <li>Standard delivery: 2–4 business days (major cities)</li>
-                <li>Express delivery available at checkout</li>
-                <li>Cash on Delivery (COD) available nationwide</li>
-                <li>Returns accepted within 7 days of delivery</li>
-                <li>Product must be unused and in original packaging</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
+      <div class="kv-pdp__ship"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div><b>Order today, dispatched in 1–2 days.</b> Cash on delivery available nationwide. Delivered in 2–6 business days.</div></div>
+      <a class="kv-pdp__wa" href="https://wa.me/{{ wa }}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2z"/></svg>Questions? Chat with us on WhatsApp</a>
     </div>
-  </div>
+
+  </div></div>
+
+  <!-- WHY IT'S DIFFERENT (brand-universal) -->
+  <section class="kv-pdp__sec kv-pdp__sec--parch"><div class="kv-wrap">
+    <div class="kv-pdp__shead"><span class="eyebrow">Why You'll Carry It for Years</span><h2>Built to a higher standard.</h2></div>
+    <div class="kv-pdp__feat">
+      <div><svg viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 8 8 8 8s8-3 8-8V6z"/></svg><h3>Full-Grain Leather</h3><p>The top cut of the hide — it resists wear and ages into a rich, personal patina.</p></div>
+      <div><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></svg><h3>Considered Design</h3><p>Functional, minimal, and made to be used every single day.</p></div>
+      <div><svg viewBox="0 0 24 24"><path d="M12 2v20M5 7l7-5 7 5M5 7v10l7 5 7-5V7"/></svg><h3>Hand-Stitched</h3><p>Saddle-stitched by hand in Karachi so the seams never fray or pull apart.</p></div>
+      <div><svg viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 8 8 8 8s8-3 8-8V6z"/><path d="m9 12 2 2 4-4"/></svg><h3>Lifetime Warranty</h3><p>If it fails because of how it was made, we repair or replace it.</p></div>
+    </div>
+  </div></section>
+
+  <!-- FITS / CAPACITY (per-product, metafield-driven; hidden until set) -->
+  {%- if product.metafields.custom.fits != blank -%}
+    {%- assign fits = product.metafields.custom.fits | newline_to_br | split: '<br />' -%}
+    <section class="kv-pdp__sec"><div class="kv-wrap"><div class="kv-pdp__fits">
+      <div class="img"><img src="{{ product.media[1].preview_image | default: product.featured_image | image_url: width: 900 }}" alt="{{ product.title | escape }} detail"></div>
+      <div>
+        <span class="eyebrow">Holds What Matters</span>
+        <h2>{{ product.metafields.custom.fits_title | default: "Everything you need. Nothing you don't." }}</h2>
+        {%- if product.metafields.custom.fits_text != blank -%}<p>{{ product.metafields.custom.fits_text }}</p>{%- endif -%}
+        <div class="kv-pdp__fitsg">
+          {%- for f in fits limit: 3 -%}{%- assign parts = f | strip | split: '|' -%}{%- if parts[0] != blank -%}
+            <div class="kv-pdp__fitst"><div class="n">{{ parts[0] | strip }}</div><div class="l">{{ parts[1] | strip }}</div></div>
+          {%- endif -%}{%- endfor -%}
+        </div>
+      </div>
+    </div></div></section>
+  {%- endif -%}
+
+  <!-- DESCRIPTION + tabs -->
+  <section class="kv-pdp__sec"><div class="kv-wrap"><div class="kv-pdp__desc">
+    <div class="rte">{{ product.description }}</div>
+    <div class="kv-pdp__acc">
+      <details open><summary>Leather Care</summary><div class="b">Wipe with a soft, dry cloth, condition every 4–6 weeks, and keep out of prolonged sun and water. See our full <a href="/pages/leather-care-guide">Leather Care Guide</a>.</div></details>
+      <details><summary>Shipping &amp; Returns</summary><div class="b">Dispatched in 1–2 business days; delivered in 2–6 days. Free delivery over PKR 2,500. Cash on delivery nationwide. 7-day returns on unused items — see <a href="/pages/returns">Returns &amp; Exchanges</a>.</div></details>
+      <details><summary>Our Warranty</summary><div class="b">Every Kordovan piece carries a lifetime craftsmanship warranty. If it fails because of how it was made, we repair or replace it. <a href="/pages/about-kordovan">More about us</a>.</div></details>
+    </div>
+  </div></div></section>
+
+  <!-- REVIEWS (self-authored; hidden until a rating metafield is set) -->
+  {%- if product.metafields.reviews.rating != blank -%}
+    <section class="kv-pdp__sec kv-pdp__sec--parch" id="reviews"><div class="kv-wrap">
+      <div class="kv-pdp__shead"><span class="eyebrow">Reviews</span><h2>What customers say.</h2></div>
+      <div class="kv-pdp__rev">
+        <div class="kv-pdp__revsum">
+          <div class="kv-pdp__revbig">{{ product.metafields.reviews.rating }}</div>
+          <span class="stars">★★★★★</span>
+          <div class="kv-pdp__revcnt">Based on {{ product.metafields.reviews.rating_count | default: 0 }} verified reviews</div>
+        </div>
+        <div class="kv-pdp__revlist">
+          {%- assign revs = product.metafields.custom.reviews | newline_to_br | split: '<br />' -%}
+          {%- for r in revs -%}{%- assign p = r | strip | split: '|' -%}{%- if p[2] != blank -%}
+            <div class="kv-pdp__rcard">
+              <div class="top"><span class="stars">★★★★★</span><span class="v"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Verified Purchase</span></div>
+              <div class="by">{{ p[0] | strip }} <span>· {{ p[1] | strip }}</span></div>
+              <p>{{ p[2] | strip }}</p>
+            </div>
+          {%- endif -%}{%- endfor -%}
+        </div>
+      </div>
+    </div></section>
+  {%- endif -%}
+
+  <!-- GUARANTEE -->
+  <section class="kv-pdp__guar"><div class="kv-wrap">
+    <span class="eyebrow">Our Promise</span>
+    <h2>Backed for life — <em>built to be handed down.</em></h2>
+    <p>Every Kordovan piece carries a lifetime craftsmanship warranty. If it fails because of how it was made, we'll repair or replace it. No questions asked.</p>
+  </div></section>
+
+  <!-- STICKY MOBILE ATC -->
+  <div class="kv-pdp__mbar"><span class="mp">{{ v.price | money }}</span><button type="button" onclick="document.querySelector('.kv-pdp .product-atc__add')?.click()">Add to Cart</button></div>
 </section>
 
 {% schema %}
@@ -270,34 +199,17 @@
   "blocks": [
     {
       "type": "feature_pill",
-      "name": "Feature Pill",
+      "name": "Feature Pill (legacy — optional)",
       "settings": [
-        {
-          "type": "select",
-          "id": "icon",
-          "label": "Icon",
-          "options": [
-            { "value": "shield", "label": "Shield" },
-            { "value": "award", "label": "Award" },
-            { "value": "check", "label": "Checkmark" },
-            { "value": "droplet", "label": "Droplet" }
-          ],
-          "default": "check"
-        },
+        { "type": "select", "id": "icon", "label": "Icon", "options": [
+          { "value": "shield", "label": "Shield" },
+          { "value": "award", "label": "Award" },
+          { "value": "check", "label": "Checkmark" },
+          { "value": "droplet", "label": "Droplet" } ], "default": "check" },
         { "type": "text", "id": "text", "label": "Text", "default": "Genuine Leather" }
       ]
     }
   ],
-  "presets": [
-    {
-      "name": "Product",
-      "blocks": [
-        { "type": "feature_pill", "settings": { "icon": "shield", "text": "RFID Protected" } },
-        { "type": "feature_pill", "settings": { "icon": "award", "text": "Full-Grain Leather" } },
-        { "type": "feature_pill", "settings": { "icon": "check", "text": "Handcrafted" } },
-        { "type": "feature_pill", "settings": { "icon": "droplet", "text": "Ages Beautifully" } }
-      ]
-    }
-  ]
+  "presets": [ { "name": "Product" } ]
 }
 {% endschema %}
