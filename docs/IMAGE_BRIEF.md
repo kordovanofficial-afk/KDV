@@ -67,6 +67,22 @@ subtle dark leather texture behind it. Wide full-bleed band.
 
 ---
 
+## 6. Content page — Our Story (About) — `page-about.html`
+Top-to-bottom image slots. Header = logo only (no image). Stats band, value
+cards (line icons) and the cognac CTA band are intentionally image-free.
+
+| ID | Where on page | Prompt (after preamble) | Aspect / Size |
+|----|---------------|--------------------------|---------------|
+| `about-hero` | Full-bleed hero behind "Built to be handed down." Keep **lower-left third calm/shadowed** for the headline. | "A wide, cinematic view inside a warm Pakistani leather workshop — a craftsman at a worn wooden bench saddle-stitching a cognac full-grain wallet, coils of leather, brass tools and thread spools around him, dust catching low golden window light from the left, deep espresso shadows filling the right and lower-left; documentary heritage mood, photoreal, shallow depth of field." | 16:9 · 2560×1440 |
+| `about-origin` | Left image — "It started with a belief." | "A close still life of three well-used full-grain leather wallets in cognac, chocolate and black, fanned on a warm walnut surface, edges softened and surfaces glowing with years of patina, a couple of worn bank cards peeking out; raking warm window light revealing grain and hand-stitching, calm negative space top-left; intimate, nostalgic, premium editorial." | 4:5 · 1200×1500 |
+| `about-craft-teaser` | Right image — "From hide to stitch, by hand." | "Over-the-shoulder shot of an artisan's hands finishing a rich brown leather jacket on a workbench — pressing a seam, waxed thread and a stitching pony in frame, soft warm side light, blurred warm workshop behind; tactile, human, heritage-luxury, photoreal, shallow depth of field." | 4:5 · 1200×1500 |
+| `about-promise-bg` | Dark background behind the warranty pillar (dark overlay sits on top). May reuse `email-leather-bg` instead. | "A full-frame macro of dark espresso full-grain leather — deep natural grain, subtle scarring, a single line of hand-stitching crossing one corner, dramatic low side light, rich shadows; luxurious, masculine, near-monochrome brown texture suitable as a darkened background." | wide · 2400×1100 |
+
+> Briefs for Our Craft / Shipping / Leather Care / Returns pages: TBD (doing them
+> one page at a time per the user's request — About first).
+
+---
+
 ## Notes
 - **Product cards** (bestsellers, collection/product pages) use **real catalogue
   photos** already on Shopify — no generation needed there.
