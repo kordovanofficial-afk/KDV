@@ -21,11 +21,7 @@
       "site-header": {
         "type": "site-header",
         "settings": {
-          "menu": "new-theme-main-nav",
-          "transparent_on_home": true,
-          "show_search": true,
-          "show_account": true,
-          "whatsapp_cta": "Chat with us on WhatsApp"
+          "logo": "shopify://shop_images/Kordovan_Logo.png"
         }
       },
       "cart-drawer": {
@@ -34,33 +30,17 @@
       },
       "site-footer": {
         "type": "site-footer",
-        "blocks": {
-          "link_list_7VfeD4": {
-            "type": "link_list",
-            "settings": {
-              "title": "Information",
-              "menu": "new-theme-footer-info"
-            }
-          },
-          "link_list_RQPRUw": {
-            "type": "link_list",
-            "settings": {
-              "title": "Shop",
-              "menu": "new-theme-footer-shop"
-            }
-          }
-        },
-        "block_order": [
-          "link_list_7VfeD4",
-          "link_list_RQPRUw"
-        ],
         "settings": {
-          "tagline": "",
+          "credo": "Leather, <em>built to be handed down.</em>",
           "instagram_url": "",
           "facebook_url": "",
           "youtube_url": "",
-          "whatsapp_url": "",
-          "policy_text": ""
+          "tiktok_url": "",
+          "whatsapp_number": "923332601161",
+          "phone": "+92 333 2601161",
+          "email": "kordovan.official@gmail.com",
+          "address": "G4, Falcon Street Mall,<br>Malir Cantt, Karachi",
+          "hours": "Support · 11am – 8pm PKT"
         }
       }
     },

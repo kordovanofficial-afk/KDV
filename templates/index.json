@@ -13,12 +13,9 @@
       "type": "hero-banner",
       "settings": {
         "eyebrow": "Pakistan's Original Leather Craft House",
-        "heading": "Built to Last. Made to Age.",
         "subheading": "Handcrafted leather goods for those who value quality over quantity. Every stitch, every grain — made to outlast a lifetime.",
         "cta_secondary_text": "See the Craft",
-        "cta_secondary_url": "/pages/about",
-        "height": "full",
-        "show_scroll_hint": true
+        "cta_secondary_url": "/pages/about"
       }
     },
     "trust": {
@@ -55,20 +52,17 @@
       "type": "testimonials",
       "settings": {
         "eyebrow": "Reviews",
-        "title": "Loved, carried, and passed on",
-        "aggregate": "4.9 / 5 · from 25,000+ happy customers"
+        "title": "Loved, carried, and passed on"
       }
     },
     "email_signup": {
       "type": "email-signup",
       "settings": {
-        "percent": "10%",
         "eyebrow": "Join the Kordovan family",
         "title": "Here's <em>10% off</em> — just for saying hello.",
         "subtitle": "Drop your email and we'll send your code right away — plus first dibs on new drops, members-only offers, and the care tips that keep your leather ageing beautifully.",
         "placeholder": "Your email address",
         "button_text": "Send My Code",
-        "count": "25,000+",
         "disclaimer": "leather lovers already inside. No spam — just good leather."
       }
     }
