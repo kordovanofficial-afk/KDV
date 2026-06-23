@@ -27,35 +27,6 @@
     },
     "featured_collections": {
       "type": "featured-collections",
-      "blocks": {
-        "col_1": {
-          "type": "collection",
-          "settings": {
-            "collection": "gid://shopify/collection/483424043248",
-            "label": "Bestseller",
-            "size": "large"
-          }
-        },
-        "col_2": {
-          "type": "collection",
-          "settings": {
-            "collection": "gid://shopify/collection/483424207088",
-            "size": "medium"
-          }
-        },
-        "col_3": {
-          "type": "collection",
-          "settings": {
-            "collection": "gid://shopify/collection/483424305392",
-            "size": "medium"
-          }
-        }
-      },
-      "block_order": [
-        "col_1",
-        "col_2",
-        "col_3"
-      ],
       "settings": {
         "eyebrow": "Collections",
         "title": "Shop by Category"
@@ -68,14 +39,7 @@
         "title": "Customer Favourites",
         "cta_text": "View All Products",
         "cta_url": "/collections/all"
-      },
-      "blocks": {
-        "b_wallets": { "type": "category", "settings": { "handle": "kv2-mens-wallets", "label": "Wallets" } },
-        "b_bags": { "type": "category", "settings": { "handle": "leather-bags", "label": "Bags" } },
-        "b_jackets": { "type": "category", "settings": { "handle": "kv2-mens-leather-jackets", "label": "Jackets" } },
-        "b_shoes": { "type": "category", "settings": { "handle": "kv2-mens-leather-shoes", "label": "Shoes" } }
-      },
-      "block_order": ["b_wallets", "b_bags", "b_jackets", "b_shoes"]
+      }
     },
     "brand_story": {
       "type": "brand-story",

@@ -1,53 +1,48 @@
-<section class="section section--collections">
-  <div class="container">
-    {%- if section.settings.title != blank -%}
-      <div class="section-header fade-in">
-        <p class="eyebrow">{{ section.settings.eyebrow | default: 'Shop By Category' }}</p>
-        <h2>{{ section.settings.title }}</h2>
-        {%- if section.settings.subtitle != blank -%}
-          <p class="lead">{{ section.settings.subtitle }}</p>
-        {%- endif -%}
-      </div>
-    {%- endif -%}
-  </div>
+{%- comment -%}
+  Editorial 5-tile category grid. Handles/images are hardcoded here (NOT in the JSON
+  template) because Shopify's theme editor strips block settings on sync. Counts are
+  live via collection.all_products_count. Cross-referenced to homepage-final.html.
+{%- endcomment -%}
+{%- liquid
+  assign cdn = 'https://cdn.shopify.com/s/files/1/0267/9164/1277/files/'
+  assign sm_handles = 'kdv-bags,kdv-jackets,kdv-shoes,kdv-belts' | split: ','
+  assign sm_labels  = 'Bags,Jackets,Shoes,Belts' | split: ','
+  assign sm_imgs    = 'coll-bags.png,coll-jackets.png,coll-shoes.png,coll-belts.png' | split: ','
+  assign wallets    = collections['kdv-wallets']
+-%}
 
-  <div class="collections-grid collections-grid--featured">
-    {%- for block in section.blocks -%}
-      {%- assign coll = collections[block.settings.collection] -%}
-      {%- assign block_image = block.settings.image | default: coll.image -%}
-      {%- assign block_size = block.settings.size | default: 'medium' -%}
+<section class="kv-home kv-section">
+  <div class="kv-wrap">
+    <div class="kv-shead">
+      <span class="kv-eyebrow">{{ section.settings.eyebrow | default: 'Collections' }}</span>
+      <h2>{{ section.settings.title | default: 'Shop by Category' }}</h2>
+    </div>
 
-      <a
-        href="{{ coll.url | default: block.settings.url | default: '/collections/all' }}"
-        class="collection-card collection-card--{{ block_size }} fade-in"
-        {{ block.shopify_attributes }}
-      >
-        <div class="collection-card__media">
-          {%- if block_image -%}
-            <img
-              src="{{ block_image | img_url: '1200x' }}"
-              srcset="{{ block_image | img_url: '600x' }} 600w, {{ block_image | img_url: '1200x' }} 1200w"
-              sizes="{% if block_size == 'large' %}(max-width: 900px) 100vw, 58vw{% else %}(max-width: 900px) 100vw, 42vw{% endif %}"
-              alt="{{ block.settings.title | default: coll.title | escape }}"
-              loading="lazy"
-              width="1200"
-              height="{% if block_size == 'large' %}900{% else %}600{% endif %}"
-            >
-          {%- else -%}
-            <div class="collection-card__placeholder"></div>
-          {%- endif -%}
-        </div>
-        <div class="collection-card__overlay"></div>
-        <span class="collection-card__number">0{{ forloop.index }}</span>
-        <div class="collection-card__content">
-          {%- if block.settings.label != blank -%}
-            <p class="collection-card__label">{{ block.settings.label }}</p>
-          {%- endif -%}
-          <h3 class="collection-card__title">{{ block.settings.title | default: coll.title }}</h3>
-          <span class="collection-card__cta">{{ block.settings.cta | default: 'Explore' }}</span>
+    <div class="kv-colls">
+      <a class="kv-coll kv-coll--lg" href="{{ wallets.url | default: '/collections/kdv-wallets' }}">
+        <img class="kv-coll__img" src="{{ cdn }}coll-wallets.png?v=1782029619&width=1100" alt="Wallets" loading="lazy">
+        <div class="kv-coll__g"></div>
+        <div class="kv-coll__c">
+          <h3>Wallets</h3>
+          <div class="kv-coll__ct">{{ wallets.all_products_count }} styles · incl. KODO smart wallets</div>
+          <span class="kv-coll__lk">Shop Wallets <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
         </div>
       </a>
-    {%- endfor -%}
+
+      {%- for handle in sm_handles -%}
+        {%- assign coll = collections[handle] -%}
+        {%- assign label = sm_labels[forloop.index0] -%}
+        <a class="kv-coll" href="{{ coll.url | default: '/collections/' | append: handle }}">
+          <img class="kv-coll__img" src="{{ cdn }}{{ sm_imgs[forloop.index0] }}?v=1782029619&width=760" alt="{{ label }}" loading="lazy">
+          <div class="kv-coll__g"></div>
+          <div class="kv-coll__c">
+            <h3>{{ label }}</h3>
+            <div class="kv-coll__ct">{{ coll.all_products_count }} styles</div>
+            <span class="kv-coll__lk">Shop {{ label }} <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+          </div>
+        </a>
+      {%- endfor -%}
+    </div>
   </div>
 </section>
 
@@ -55,43 +50,8 @@
 {
   "name": "Featured Collections",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow text", "default": "Shop By Category" },
-    { "type": "text", "id": "title", "label": "Section title", "default": "Shop by Category" },
-    { "type": "text", "id": "subtitle", "label": "Subtitle" }
-  ],
-  "blocks": [
-    {
-      "type": "collection",
-      "name": "Collection",
-      "settings": [
-        { "type": "collection", "id": "collection", "label": "Collection" },
-        { "type": "image_picker", "id": "image", "label": "Image (overrides collection image)" },
-        { "type": "text", "id": "title", "label": "Title (overrides collection title)" },
-        { "type": "text", "id": "label", "label": "Label tag", "default": "New Arrivals" },
-        { "type": "text", "id": "cta", "label": "CTA text", "default": "Explore" },
-        { "type": "url", "id": "url", "label": "Link (if no collection selected)" },
-        {
-          "type": "select",
-          "id": "size",
-          "label": "Card size",
-          "options": [
-            { "value": "large", "label": "Large (spans 7 columns)" },
-            { "value": "medium", "label": "Medium (spans 5 columns)" }
-          ],
-          "default": "medium"
-        }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "Featured Collections",
-      "blocks": [
-        { "type": "collection", "settings": { "title": "Wallets", "label": "Bestseller", "size": "large", "cta": "Shop Wallets" } },
-        { "type": "collection", "settings": { "title": "Bags & Briefcases", "label": "Premium", "size": "medium", "cta": "Shop Bags" } },
-        { "type": "collection", "settings": { "title": "Leather Belts", "label": "Handcrafted", "size": "medium", "cta": "Shop Belts" } }
-      ]
-    }
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow text", "default": "Collections" },
+    { "type": "text", "id": "title", "label": "Section title", "default": "Shop by Category" }
   ]
 }
 {% endschema %}

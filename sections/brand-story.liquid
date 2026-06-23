@@ -1,54 +1,37 @@
-<section class="brand-story section--sm">
-  <div class="brand-story__grid">
-    <!-- Media -->
-    <div class="brand-story__media fade-in">
-      {%- if section.settings.image != blank -%}
-        <img
-          src="{{ section.settings.image | img_url: '900x' }}"
-          srcset="{{ section.settings.image | img_url: '600x' }} 600w, {{ section.settings.image | img_url: '900x' }} 900w"
-          sizes="(max-width: 900px) 100vw, 50vw"
-          alt="{{ section.settings.image.alt | escape | default: 'Kordovan Leather craftsmanship' }}"
-          loading="lazy"
-          width="900"
-          height="1200"
-        >
-      {%- else -%}
-        <div style="background: linear-gradient(160deg, #241C16 0%, #4A3528 100%); width:100%; height:100%; min-height:600px;"></div>
-      {%- endif -%}
-    </div>
+{%- comment -%}
+  Stats are hardcoded (not blocks) because Shopify's theme editor strips block
+  settings from templates/index.json on sync. Cross-referenced to homepage-final.html.
+{%- endcomment -%}
+{%- liquid
+  assign story_img = 'https://cdn.shopify.com/s/files/1/0267/9164/1277/files/story-craft.png?v=1782025665&width=1100'
+  if section.settings.image != blank
+    assign story_img = section.settings.image | image_url: width: 1100
+  endif
+-%}
 
-    <!-- Content -->
-    <div class="brand-story__content">
-      <p class="eyebrow">{{ section.settings.eyebrow | default: 'Our Story' }}</p>
-      <h2 class="fade-in">{{ section.settings.title | default: 'We Started With One Wallet.' }}</h2>
+<section class="kv-home kv-section kv-story">
+  <div class="kv-wrap kv-story__g">
+    <div class="kv-story__img" style="background-image:url('{{ story_img }}')">
+      <span class="kv-story__badge">{{ section.settings.badge | default: 'Handmade in Pakistan' }}</span>
+    </div>
+    <div>
+      <span class="kv-eyebrow">{{ section.settings.eyebrow | default: 'Our Story' }}</span>
+      <h2>{{ section.settings.title | default: 'Craft That Speaks for Itself' }}</h2>
 
       {%- if section.settings.text != blank -%}
-        <div class="brand-story__text">{{ section.settings.text }}</div>
+        {{ section.settings.text }}
       {%- else -%}
-        <p>In 2020, we set out to prove that Pakistan could make leather goods that rival anything in the world. Five years and 10,000+ customers later, our leather still speaks for itself.</p>
-        <p>Every Kordovan piece is crafted from genuine full-grain, veg-tan, or crazy horse leather — materials that don't just last, they improve. The scratches, the patina, the wear marks? That's not damage. That's character.</p>
+        <p>Kordovan began with a simple belief: a wallet should outlive its trends. We work full-grain leather by hand in Pakistan — cut, stitched, and finished to age into something better with every year you carry it.</p>
+        <p>No fast fashion. No corners cut. Just leather built to be handed down.</p>
       {%- endif -%}
 
-      <!-- Stats -->
-      {%- if section.blocks.size > 0 -%}
-        <div class="brand-story__stats">
-          {%- for block in section.blocks -%}
-            <div {{ block.shopify_attributes }}>
-              <div class="brand-story__stat-number">{{ block.settings.number }}</div>
-              <div class="brand-story__stat-label">{{ block.settings.label }}</div>
-            </div>
-          {%- endfor -%}
-        </div>
-      {%- endif -%}
+      <div class="kv-story__stats">
+        <div><div class="n">25K+</div><div class="l">Happy Customers</div></div>
+        <div><div class="n">5+</div><div class="l">Years of Craft</div></div>
+        <div><div class="n">100%</div><div class="l">Genuine Leather</div></div>
+      </div>
 
-      {%- if section.settings.cta_text != blank -%}
-        <a href="{{ section.settings.cta_url | default: '/pages/about' }}" class="btn-text">
-          {{ section.settings.cta_text }}
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
-        </a>
-      {%- endif -%}
+      <a class="kv-btn-text" href="{{ section.settings.cta_url | default: '/pages/about' }}">{{ section.settings.cta_text | default: 'Read Our Story' }} →</a>
     </div>
   </div>
 </section>
@@ -57,32 +40,13 @@
 {
   "name": "Brand Story",
   "settings": [
-    { "type": "image_picker", "id": "image", "label": "Story image" },
+    { "type": "image_picker", "id": "image", "label": "Story image", "info": "Defaults to story-craft.png if empty." },
+    { "type": "text", "id": "badge", "label": "Image badge", "default": "Handmade in Pakistan" },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Our Story" },
-    { "type": "text", "id": "title", "label": "Heading", "default": "We Started With One Wallet." },
+    { "type": "text", "id": "title", "label": "Heading", "default": "Craft That Speaks for Itself" },
     { "type": "richtext", "id": "text", "label": "Story text" },
-    { "type": "text", "id": "cta_text", "label": "CTA text", "default": "Read Our Full Story" },
+    { "type": "text", "id": "cta_text", "label": "CTA text", "default": "Read Our Story" },
     { "type": "url", "id": "cta_url", "label": "CTA link" }
-  ],
-  "blocks": [
-    {
-      "type": "stat",
-      "name": "Stat",
-      "settings": [
-        { "type": "text", "id": "number", "label": "Number", "default": "10K+" },
-        { "type": "text", "id": "label", "label": "Label", "default": "Happy Customers" }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "Brand Story",
-      "blocks": [
-        { "type": "stat", "settings": { "number": "10K+", "label": "Happy Customers" } },
-        { "type": "stat", "settings": { "number": "5+", "label": "Years of Craft" } },
-        { "type": "stat", "settings": { "number": "100%", "label": "Genuine Leather" } }
-      ]
-    }
   ]
 }
 {% endschema %}
