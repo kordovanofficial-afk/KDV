@@ -1,28 +1,31 @@
-<section class="email-capture">
-  <div class="container">
-    <div class="email-capture__inner">
-      <p class="eyebrow">{{ section.settings.eyebrow | default: 'Join the Kordovan Family' }}</p>
-      <h2 class="email-capture__title">{{ section.settings.title | default: 'Get 10% Off Your First Order' }}</h2>
-      <p class="email-capture__subtitle">{{ section.settings.subtitle | default: 'Join 15,000+ leather lovers who get early access to new drops, exclusive offers, and care tips straight to their inbox.' }}</p>
+{%- comment -%} Email capture — 1:1 with homepage-final.html, wired to Shopify customer form. {%- endcomment -%}
+<section class="kv-home kv-email">
+  <div class="kv-wrap kv-email__in">
+    <div class="kv-ticket">
+      <div class="kv-ticket__l">
+        <div class="kv-ticket__pct">{{ section.settings.percent | default: '10%' }}</div>
+        <div class="kv-ticket__off">Off</div>
+      </div>
+      <div class="kv-ticket__r">
+        <div class="t1">Welcome gift</div>
+        <div class="t2">Your first order</div>
+        <div class="code"><b>Emailed instantly</b> when you join</div>
+      </div>
+    </div>
 
-      {%- form 'customer', id: 'email-signup-form', class: 'email-capture__form' -%}
+    <div class="kv-email__c">
+      <span class="kv-eyebrow">{{ section.settings.eyebrow | default: 'Join the Kordovan family' }}</span>
+      <h2>{{ section.settings.title | default: "Here's <em>10% off</em> — just for saying hello." }}</h2>
+      <p>{{ section.settings.subtitle | default: "Drop your email and we'll send your code right away — plus first dibs on new drops, members-only offers, and the care tips that keep your leather ageing beautifully." }}</p>
+
+      {%- form 'customer', id: 'kv-email-form', class: 'kv-email__form' -%}
         <input type="hidden" name="contact[tags]" value="newsletter">
-        <label for="email-signup-input" class="visually-hidden">Email address</label>
-        <input
-          type="email"
-          name="contact[email]"
-          id="email-signup-input"
-          class="email-capture__input"
-          placeholder="{{ section.settings.placeholder | default: 'Your email address' }}"
-          required
-          autocomplete="email"
-        >
-        <button type="submit" class="email-capture__submit">
-          {{ section.settings.button_text | default: 'Claim Discount' }}
-        </button>
+        <label for="kv-email-input" class="visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);">Email address</label>
+        <input type="email" name="contact[email]" id="kv-email-input" placeholder="{{ section.settings.placeholder | default: 'Your email address' }}" required autocomplete="email">
+        <button type="submit" class="kv-btn kv-btn--cognac">{{ section.settings.button_text | default: 'Send My Code' }} →</button>
       {%- endform -%}
 
-      <p class="email-capture__disclaimer">{{ section.settings.disclaimer | default: 'No spam. Unsubscribe anytime. We hate junk mail too.' }}</p>
+      <small><b>{{ section.settings.count | default: '25,000+' }}</b> {{ section.settings.disclaimer | default: 'leather lovers already inside. No spam — just good leather.' }}</small>
     </div>
   </div>
 </section>
@@ -31,17 +34,15 @@
 {
   "name": "Email Signup",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Join the Kordovan Family" },
-    { "type": "text", "id": "title", "label": "Title", "default": "Get 10% Off Your First Order" },
-    { "type": "text", "id": "subtitle", "label": "Subtitle" },
+    { "type": "text", "id": "percent", "label": "Discount badge", "default": "10%" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Join the Kordovan family" },
+    { "type": "text", "id": "title", "label": "Title (supports <em>)", "default": "Here's <em>10% off</em> — just for saying hello." },
+    { "type": "textarea", "id": "subtitle", "label": "Subtitle" },
     { "type": "text", "id": "placeholder", "label": "Input placeholder", "default": "Your email address" },
-    { "type": "text", "id": "button_text", "label": "Button text", "default": "Claim Discount" },
-    { "type": "text", "id": "disclaimer", "label": "Disclaimer text" }
+    { "type": "text", "id": "button_text", "label": "Button text", "default": "Send My Code" },
+    { "type": "text", "id": "count", "label": "Subscriber count (bold)", "default": "25,000+" },
+    { "type": "text", "id": "disclaimer", "label": "Disclaimer text", "default": "leather lovers already inside. No spam — just good leather." }
   ],
-  "presets": [
-    {
-      "name": "Email Signup"
-    }
-  ]
+  "presets": [ { "name": "Email Signup" } ]
 }
 {% endschema %}

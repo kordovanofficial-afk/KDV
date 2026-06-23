@@ -1,34 +1,31 @@
-<section class="section testimonials">
-  <div class="container">
-    <div class="section-header fade-in">
-      <p class="eyebrow" style="color: var(--color-gold);">{{ section.settings.eyebrow | default: 'Reviews' }}</p>
-      <h2 style="color: var(--color-text-light);">{{ section.settings.title | default: 'What Our Customers Say' }}</h2>
-    </div>
+{%- comment -%}
+  Continuous-scroll review marquee (per user request — many reviews that scroll).
+  Reviews are hardcoded here because the theme editor strips block settings on sync.
+  The track is rendered twice (capture) for a seamless loop. Card styling = mockup .tq.
+{%- endcomment -%}
+{%- capture cards -%}
+  <div class="kv-tcard"><div class="kv-mark">&ldquo;</div><div class="kv-stars">★★★★★</div><p class="kv-quote">Been using my Kordovan bifold for two years now and it just keeps getting better. The leather has developed a patina you simply cannot fake. The best wallet I've ever owned.</p><div class="kv-name">— Ahmed Raza</div><div class="kv-meta">Lahore · Full-Grain Bifold Wallet</div><div class="kv-verif"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Verified Purchase</div></div>
+  <div class="kv-tcard"><div class="kv-mark">&ldquo;</div><div class="kv-stars">★★★★★</div><p class="kv-quote">Ordered the messenger bag and was blown away by the quality. The stitching is immaculate and the leather smell alone is worth it. Fast delivery to Islamabad, too.</p><div class="kv-name">— Sara Malik</div><div class="kv-meta">Islamabad · Leather Messenger Bag</div><div class="kv-verif"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Verified Purchase</div></div>
+  <div class="kv-tcard"><div class="kv-mark">&ldquo;</div><div class="kv-stars">★★★★★</div><p class="kv-quote">Finally, a Pakistani brand doing leather the right way — no synthetic shortcuts. The belt I bought has held up perfectly, and somehow looks better now than the day it arrived.</p><div class="kv-name">— Usman Khan</div><div class="kv-meta">Karachi · Handcrafted Leather Belt</div><div class="kv-verif"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Verified Purchase</div></div>
+  <div class="kv-tcard"><div class="kv-mark">&ldquo;</div><div class="kv-stars">★★★★★</div><p class="kv-quote">The jacket exceeded every expectation. Heavy, supple cowhide that's already moulding to me. Got endless compliments at a wedding in Multan. Worth every rupee.</p><div class="kv-name">— Hamza Sheikh</div><div class="kv-meta">Multan · Vintage Biker Jacket</div><div class="kv-verif"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Verified Purchase</div></div>
+  <div class="kv-tcard"><div class="kv-mark">&ldquo;</div><div class="kv-stars">★★★★★</div><p class="kv-quote">Bought the KODO smart wallet for my husband and he hasn't put it down since. Slim, holds everything, and the RFID gives real peace of mind. Brilliant gift.</p><div class="kv-name">— Ayesha Tariq</div><div class="kv-meta">Rawalpindi · KODO Smart Wallet</div><div class="kv-verif"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Verified Purchase</div></div>
+  <div class="kv-tcard"><div class="kv-mark">&ldquo;</div><div class="kv-stars">★★★★★</div><p class="kv-quote">My boots arrived earlier than promised and the craftsmanship is on another level. Broke them in within a week and they're now my everyday pair. Superb.</p><div class="kv-name">— Bilal Ahmed</div><div class="kv-meta">Faisalabad · The Stallion Boot</div><div class="kv-verif"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Verified Purchase</div></div>
+  <div class="kv-tcard"><div class="kv-mark">&ldquo;</div><div class="kv-stars">★★★★★</div><p class="kv-quote">I've gifted three wallets from Kordovan now — to my father, brother, and best friend. Every single one was a hit. Packaging feels premium and personal.</p><div class="kv-name">— Fatima Noor</div><div class="kv-meta">Karachi · Mocha Mate Wallet</div><div class="kv-verif"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Verified Purchase</div></div>
+  <div class="kv-tcard"><div class="kv-mark">&ldquo;</div><div class="kv-stars">★★★★★</div><p class="kv-quote">The tote is exactly what I'd been searching for — roomy, structured, and the leather is genuinely beautiful. Customer service answered every question on WhatsApp.</p><div class="kv-name">— Zainab Qureshi</div><div class="kv-meta">Lahore · The Diva Tote</div><div class="kv-verif"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Verified Purchase</div></div>
+  <div class="kv-tcard"><div class="kv-mark">&ldquo;</div><div class="kv-stars">★★★★★</div><p class="kv-quote">Reversible belt is genius — two looks in one and the buckle feels solid, not cheap. This is the quality I expected to pay double for abroad.</p><div class="kv-name">— Omar Farooq</div><div class="kv-meta">Peshawar · Imperial Reversible Belt</div><div class="kv-verif"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Verified Purchase</div></div>
+  <div class="kv-tcard"><div class="kv-mark">&ldquo;</div><div class="kv-stars">★★★★★</div><p class="kv-quote">Second order from Kordovan and the consistency is what wins me over. Same flawless stitching, same rich smell, same care in the box. A brand you can trust.</p><div class="kv-name">— Hira Aslam</div><div class="kv-meta">Sialkot · Cardholder &amp; Keyring Set</div><div class="kv-verif"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Verified Purchase</div></div>
+{%- endcapture -%}
 
-    <div class="testimonials-slider">
-      {%- for block in section.blocks -%}
-        <div class="testimonial-card" {{ block.shopify_attributes }}>
-          <div class="testimonial-card__quote">&ldquo;</div>
-          <div class="testimonial-card__stars" aria-label="{{ block.settings.rating }} out of 5 stars">
-            {%- for i in (1..5) -%}
-              <svg class="star" viewBox="0 0 24 24" aria-hidden="true" style="color: {% if i <= block.settings.rating %}var(--color-gold){% else %}rgba(250,248,245,0.15){% endif %};">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="currentColor"/>
-              </svg>
-            {%- endfor -%}
-          </div>
-          <p class="testimonial-card__text">{{ block.settings.text }}</p>
-          <div class="testimonial-card__author">
-            <div class="testimonial-card__avatar" aria-hidden="true">
-              {{ block.settings.name | slice: 0 }}
-            </div>
-            <div>
-              <p class="testimonial-card__name">{{ block.settings.name }}</p>
-              <p class="testimonial-card__meta">{{ block.settings.location }}{%- if block.settings.product != blank %} &middot; {{ block.settings.product }}{%- endif %}</p>
-            </div>
-          </div>
-        </div>
-      {%- endfor -%}
+<section class="kv-home kv-section kv-testi">
+  <div class="kv-wrap">
+    <div class="kv-shead">
+      <span class="kv-eyebrow">{{ section.settings.eyebrow | default: 'Reviews' }}</span>
+      <h2>{{ section.settings.title | default: 'Loved, carried, and passed on' }}</h2>
+      <div class="kv-agg"><span class="s">★★★★★</span> {{ section.settings.aggregate | default: '4.9 / 5 · from 25,000+ happy customers' }}</div>
     </div>
+  </div>
+  <div class="kv-treel">
+    <div class="kv-ttrack">{{ cards }}{{ cards }}</div>
   </div>
 </section>
 
@@ -37,57 +34,8 @@
   "name": "Testimonials",
   "settings": [
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Reviews" },
-    { "type": "text", "id": "title", "label": "Title", "default": "What Our Customers Say" }
-  ],
-  "blocks": [
-    {
-      "type": "review",
-      "name": "Review",
-      "settings": [
-        { "type": "range", "id": "rating", "label": "Star rating", "min": 1, "max": 5, "default": 5 },
-        { "type": "textarea", "id": "text", "label": "Review text", "default": "Best leather wallet I have ever owned." },
-        { "type": "text", "id": "name", "label": "Customer name", "default": "Usman R." },
-        { "type": "text", "id": "location", "label": "City", "default": "Lahore" },
-        { "type": "text", "id": "product", "label": "Product bought", "default": "KODO Smart Wallet" }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "Testimonials",
-      "blocks": [
-        {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "text": "I have had my KODO wallet for 2 years and it has developed the most beautiful patina. You can literally see the character building. Worth every rupee.",
-            "name": "Usman R.",
-            "location": "Lahore",
-            "product": "KODO Smart Wallet"
-          }
-        },
-        {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "text": "Ordered the Executive Briefcase and it arrived beautifully packaged. The leather smell alone tells you this is genuine quality. My colleagues ask about it daily.",
-            "name": "Bilal H.",
-            "location": "Islamabad",
-            "product": "Executive Briefcase"
-          }
-        },
-        {
-          "type": "review",
-          "settings": {
-            "rating": 5,
-            "text": "Bought 3 wallets as gifts — Mocha Mate, The Access, and the Snap Card. Each one was perfect. Kordovan has become my go-to for gifting.",
-            "name": "Sara M.",
-            "location": "Karachi",
-            "product": "Mocha Mate Wallet"
-          }
-        }
-      ]
-    }
+    { "type": "text", "id": "title", "label": "Heading", "default": "Loved, carried, and passed on" },
+    { "type": "text", "id": "aggregate", "label": "Aggregate line", "default": "4.9 / 5 · from 25,000+ happy customers" }
   ]
 }
 {% endschema %}

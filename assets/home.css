@@ -6,7 +6,7 @@
 .kv-announce,.kv-hdr,.kv-mmenu,.kv-home,.kv-ftr{
   --canvas:#F7F2EA; --parchment:#ECE3D4; --ink:#241C16; --walnut:#4A3528;
   --cognac:#A0623A; --cognac-dark:#7E4B2C; --tan:#C08B5C; --brass:#B0894F;
-  --brass-light:#D8C39A; --stone:#8B8174; --border:#DDD2C0;
+  --brass-light:#D8C39A; --stone:#8B8174; --border:#DDD2C0; --pine:#2D6A4F;
   --kv-heading:'Fraunces',Georgia,serif; --kv-body:'Inter',-apple-system,sans-serif;
 }
 .kv-wrap{max-width:1340px;margin:0 auto;padding:0 40px;}
@@ -189,4 +189,97 @@
 @media(max-width:640px){
   .kv-colls{grid-template-columns:1fr;}
   .kv-coll--lg{grid-column:auto;}
+}
+
+/* ============================================================
+   Milestone 5: testimonials (continuous scroll) + email capture
+   Testimonials diverge from the static 3-up mockup per user request:
+   a continuous horizontal marquee of review cards. Card internals keep
+   the mockup .tq styling. Email capture is 1:1 with homepage-final.html.
+   ============================================================ */
+.kv-testi{background:linear-gradient(180deg,var(--canvas),var(--parchment));overflow:hidden;}
+.kv-testi .kv-agg{margin-top:16px;font-size:13px;color:var(--walnut);display:inline-flex;align-items:center;gap:9px;justify-content:center;}
+.kv-testi .kv-agg .s{color:var(--brass);letter-spacing:3px;}
+.kv-treel{position:relative;width:100%;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);}
+.kv-ttrack{display:flex;width:max-content;gap:24px;padding:8px 12px;animation:kv-tscroll 70s linear infinite;}
+.kv-treel:hover .kv-ttrack{animation-play-state:paused;}
+@keyframes kv-tscroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.kv-tcard{flex:0 0 384px;width:384px;background:var(--canvas);border:1px solid var(--border);border-radius:14px;padding:32px 30px;box-shadow:0 14px 36px rgba(36,28,22,.06);}
+.kv-tcard .kv-mark{font-family:var(--kv-heading);font-weight:500;font-size:64px;line-height:.6;color:var(--cognac);opacity:.32;height:30px;}
+.kv-tcard .kv-stars{color:var(--brass);letter-spacing:3px;font-size:13px;margin:8px 0 16px;}
+.kv-tcard .kv-quote{font-family:var(--kv-heading);font-weight:400;font-size:18px;line-height:1.6;color:var(--walnut);}
+.kv-tcard .kv-name{font-family:var(--kv-heading);font-style:italic;font-weight:500;font-size:18px;color:var(--ink);margin-top:22px;}
+.kv-tcard .kv-meta{margin-top:6px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);}
+.kv-tcard .kv-verif{display:inline-flex;align-items:center;gap:5px;margin-top:12px;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--pine);font-weight:600;}
+.kv-tcard .kv-verif svg{width:12px;height:12px;stroke:var(--pine);fill:none;stroke-width:2.2;}
+
+.kv-email{position:relative;color:var(--canvas);padding:100px 0;overflow:hidden;background:#1d150f url('https://cdn.shopify.com/s/files/1/0267/9164/1277/files/email-leather-bg.png?v=1782035962&width=2000') center/cover;}
+.kv-email::before{content:"";position:absolute;inset:0;background:radial-gradient(70% 110% at 82% 25%,rgba(192,139,92,.22),transparent 60%),linear-gradient(120deg,rgba(18,11,6,.84),rgba(34,22,13,.74));}
+.kv-email__in{position:relative;z-index:2;max-width:1040px;margin:0 auto;display:grid;grid-template-columns:auto 1fr;gap:60px;align-items:center;}
+.kv-ticket{display:flex;background:rgba(247,242,234,.06);border:1px solid rgba(216,195,154,.45);border-radius:14px;overflow:hidden;min-width:230px;box-shadow:0 20px 50px rgba(20,12,6,.4);}
+.kv-ticket__l{padding:30px 26px;text-align:center;display:flex;flex-direction:column;justify-content:center;border-right:2px dashed rgba(216,195,154,.45);}
+.kv-ticket__pct{font-family:var(--kv-heading);font-weight:600;font-size:54px;line-height:.9;color:var(--brass-light);}
+.kv-ticket__off{font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--brass-light);margin-top:4px;}
+.kv-ticket__r{padding:24px 22px;display:flex;flex-direction:column;justify-content:center;gap:6px;}
+.kv-ticket__r .t1{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(247,242,234,.6);}
+.kv-ticket__r .t2{font-family:var(--kv-heading);font-size:18px;color:var(--canvas);}
+.kv-ticket__r .code{margin-top:4px;font-size:11px;letter-spacing:.06em;color:var(--brass-light);}
+.kv-email__c .kv-eyebrow{display:block;color:var(--brass-light);margin-bottom:16px;}
+.kv-email__c h2{font-family:var(--kv-heading);font-weight:500;font-size:clamp(28px,3.4vw,44px);line-height:1.08;margin-bottom:16px;color:var(--canvas);}
+.kv-email__c h2 em{font-style:italic;color:var(--brass-light);font-weight:400;}
+.kv-email__c p{color:rgba(247,242,234,.8);font-size:16px;line-height:1.7;max-width:460px;margin-bottom:26px;}
+.kv-email__form{display:flex;gap:12px;max-width:460px;}
+.kv-email__form input{flex:1;padding:16px 20px;border:1px solid rgba(247,242,234,.3);background:rgba(247,242,234,.08);color:var(--canvas);border-radius:6px;font-family:var(--kv-body);font-size:15px;outline:none;}
+.kv-email__form input::placeholder{color:rgba(247,242,234,.55);}
+.kv-email__c small{display:block;margin-top:16px;font-size:12px;color:rgba(247,242,234,.6);}
+.kv-email__c small b{color:var(--brass-light);font-weight:500;}
+
+/* ============================================================
+   Milestone 6: footer (1:1 with homepage-final.html)
+   ============================================================ */
+.kv-ftr{position:relative;color:rgba(247,242,234,.7);overflow:hidden;background:#160f08 url('https://cdn.shopify.com/s/files/1/0267/9164/1277/files/email-leather-bg.png?v=1782035962&width=2000') center/cover;font-family:var(--kv-body);}
+.kv-ftr::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,9,5,.93),rgba(20,12,7,.86) 55%,rgba(26,16,9,.9));}
+.kv-ftr__inner{position:relative;z-index:2;padding:64px 0 26px;}
+.kv-stitch{height:2px;background:repeating-linear-gradient(90deg,var(--brass) 0 12px,transparent 12px 24px);opacity:.55;border-radius:2px;}
+.kv-ftr__head{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.3fr;gap:48px;padding:52px 0 56px;}
+.kv-fbrand .kv-eyebrow{color:var(--brass);font-weight:600;letter-spacing:.24em;font-size:10px;}
+.kv-fbrand .kv-credo{font-family:var(--kv-heading);font-weight:500;font-size:30px;line-height:1.18;color:var(--canvas);margin:16px 0 24px;max-width:360px;}
+.kv-fbrand .kv-credo em{font-style:italic;color:var(--brass-light);font-weight:400;}
+.kv-fsocial{display:flex;gap:11px;}
+.kv-fsocial a{width:40px;height:40px;border:1px solid rgba(247,242,234,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:.25s;}
+.kv-fsocial a:hover{background:var(--cognac);border-color:var(--cognac);transform:translateY(-2px);}
+.kv-fsocial svg{width:17px;height:17px;stroke:var(--brass-light);fill:none;stroke-width:1.6;}
+.kv-fsocial a:hover svg{stroke:#fff;}
+.kv-fcol h4,.kv-fconnect h4{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--canvas);margin-bottom:20px;font-weight:600;font-family:var(--kv-body);}
+.kv-fcol ul{list-style:none;margin:0;padding:0;}
+.kv-fcol li{margin-bottom:13px;}
+.kv-fcol li a{font-size:14px;color:rgba(247,242,234,.7);text-decoration:none;}
+.kv-fcol li a:hover{color:var(--brass-light);}
+.kv-fwa{display:inline-flex;align-items:center;gap:9px;background:linear-gradient(135deg,#1f6e4d,#13593c);color:#fff;font-size:13px;font-weight:500;padding:13px 20px;border-radius:7px;margin-bottom:18px;text-decoration:none;}
+.kv-fwa svg{width:17px;height:17px;fill:#fff;}
+.kv-fconnect p{font-size:13.5px;line-height:1.75;}
+.kv-fconnect p a{color:var(--brass-light);text-decoration:none;}
+.kv-fconnect .addr{display:flex;gap:7px;margin-top:14px;font-size:13px;line-height:1.5;color:rgba(247,242,234,.72);}
+.kv-fconnect .addr svg{width:15px;height:15px;stroke:var(--brass-light);fill:none;stroke-width:1.6;flex:none;margin-top:2px;}
+.kv-fconnect .hours{margin-top:12px;font-size:12px;color:var(--stone);}
+.kv-ftr__bottom{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:30px 0 0;border-top:1px solid rgba(247,242,234,.1);flex-wrap:wrap;}
+.kv-fcopy{font-size:12px;color:var(--stone);}
+.kv-fpay{display:flex;gap:7px;flex-wrap:wrap;}
+.kv-fpay span{font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(247,242,234,.6);border:1px solid rgba(247,242,234,.16);border-radius:4px;padding:5px 9px;}
+.kv-ftop{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--brass-light);font-weight:500;text-decoration:none;}
+.kv-ftop svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;}
+
+@media(max-width:1000px){
+  .kv-email__in{grid-template-columns:1fr;gap:34px;text-align:center;}
+  .kv-ticket{margin:0 auto;}
+  .kv-email__c p{margin:0 auto 26px;}
+  .kv-email__form{margin:0 auto;}
+  .kv-ftr__head{grid-template-columns:1fr 1fr;gap:34px;}
+  .kv-fbrand{grid-column:1 / -1;}
+}
+@media(max-width:640px){
+  .kv-tcard{flex:0 0 300px;width:300px;padding:26px 24px;}
+  .kv-email__form{flex-direction:column;}
+  .kv-ftr__head{grid-template-columns:1fr;}
+  .kv-ftr__bottom{flex-direction:column;align-items:flex-start;gap:14px;}
 }
