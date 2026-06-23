@@ -1,81 +1,82 @@
-<div class="collection-header">
-  <div class="container">
+{%- comment -%}
+  Search results page — Quiet Heritage, reuses .kv-coll grid + card-product.
+  The live overlay (snippets/search-overlay) handles predictive search; this is
+  the full results page (form fallback + "View all results" target).
+{%- endcomment -%}
+<div class="kv-coll">
+
+  <div class="kv-wrap kv-coll__hero">
+    <div class="kv-coll__crumb"><a href="{{ routes.root_url }}">Home</a> / Search</div>
+    <span class="eyebrow">Search</span>
     {%- if search.performed -%}
-      <p class="eyebrow">Search Results</p>
-      <h1>
-        {%- if search.results_count == 0 -%}
-          No results for "{{ search.terms }}"
-        {%- else -%}
-          {{ search.results_count }} result{{ search.results_count | pluralize: '', 's' }} for "{{ search.terms }}"
-        {%- endif -%}
-      </h1>
+      <h1>{% if search.results_count == 0 %}No results for &ldquo;{{ search.terms }}&rdquo;{% else %}Results for &ldquo;{{ search.terms }}&rdquo;{% endif %}</h1>
     {%- else -%}
       <h1>Search</h1>
     {%- endif -%}
-
-    <form action="{{ routes.search_url }}" method="get" class="search-form" style="margin-top:var(--space-6); max-width:560px; display:flex; gap:var(--space-3);">
-      <input
-        type="search"
-        name="q"
-        value="{{ search.terms | escape }}"
-        placeholder="Search products..."
-        class="form-input"
-        style="flex:1;"
-        aria-label="Search"
-      >
+    <form class="kv-coll__searchform" action="{{ routes.search_url }}" method="get" role="search">
+      <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search for wallets, bags, jackets…" aria-label="Search">
       <input type="hidden" name="type" value="product">
-      <button type="submit" class="btn btn--primary">Search</button>
+      <button type="submit">Search</button>
     </form>
   </div>
+
+  {%- if search.performed and search.results_count > 0 -%}
+    {%- paginate search.results by 24 -%}
+      <div class="kv-wrap" style="padding-top:30px"><div class="kv-grid" id="kv-grid">
+        {%- for item in search.results -%}
+          {%- if item.object_type == 'product' -%}
+            {% render 'card-product', product: item %}
+          {%- endif -%}
+        {%- endfor -%}
+      </div></div>
+
+      <div class="kv-wrap kv-coll__more">
+        {%- assign shown = paginate.current_offset | plus: paginate.page_size -%}
+        {%- if shown > paginate.items -%}{%- assign shown = paginate.items -%}{%- endif -%}
+        <div class="pct">Showing <b id="kv-shown">{{ shown }}</b> of <b>{{ paginate.items }}</b> results</div>
+        {%- if paginate.next -%}
+          <a class="btn" id="kv-more" href="{{ paginate.next.url }}" data-total="{{ paginate.items }}">Load More</a>
+        {%- endif -%}
+      </div>
+    {%- endpaginate -%}
+  {%- elsif search.performed -%}
+    <div class="kv-wrap kv-coll__empty">
+      <p>We couldn't find anything for that search. Try another keyword, or browse a category.</p>
+      <p style="margin-top:18px">
+        <a href="{{ routes.collections_url }}/kdv-wallets" style="color:var(--cognac);text-decoration:underline">Wallets</a> ·
+        <a href="{{ routes.collections_url }}/kdv-bags" style="color:var(--cognac);text-decoration:underline">Bags</a> ·
+        <a href="{{ routes.collections_url }}/kdv-jackets" style="color:var(--cognac);text-decoration:underline">Jackets</a> ·
+        <a href="{{ routes.all_products_collection_url }}" style="color:var(--cognac);text-decoration:underline">Everything</a>
+      </p>
+    </div>
+  {%- else -%}
+    <div class="kv-wrap kv-coll__empty"><p>Type a keyword above to search the collection.</p></div>
+  {%- endif -%}
+
+  <section class="kv-coll__edit"><div class="kv-coll__editin">
+    <h2>Looking for something specific?</h2>
+    <p>Search by product name, type or material — "smart wallet", "messenger bag", "biker jacket", "crazy horse". Every result is genuine full-grain leather, hand-stitched in Karachi, with free delivery over PKR 2,500 and cash on delivery nationwide.</p>
+  </div></section>
 </div>
 
-{%- if search.performed and search.results_count > 0 -%}
-  <section class="section section--sm">
-    <div class="container">
-      <div class="product-grid">
-        {%- paginate search.results by 24 -%}
-          {%- for result in search.results -%}
-            {%- if result.object_type == 'product' -%}
-              <div class="fade-in">
-                {% render 'product-card', product: result %}
-              </div>
-            {%- endif -%}
-          {%- endfor -%}
-
-          {%- if paginate.pages > 1 -%}
-            <div class="pagination" style="grid-column:1/-1; display:flex; justify-content:center; gap:var(--space-2); margin-top:var(--space-12);">
-              {%- if paginate.previous -%}
-                <a href="{{ paginate.previous.url }}" class="btn btn--secondary btn--sm">← Previous</a>
-              {%- endif -%}
-              {%- for part in paginate.parts -%}
-                {%- if part.is_link -%}
-                  <a href="{{ part.url }}" class="btn btn--secondary btn--sm">{{ part.title }}</a>
-                {%- else -%}
-                  <span class="btn btn--primary btn--sm" aria-current="page">{{ part.title }}</span>
-                {%- endif -%}
-              {%- endfor -%}
-              {%- if paginate.next -%}
-                <a href="{{ paginate.next.url }}" class="btn btn--secondary btn--sm">Next →</a>
-              {%- endif -%}
-            </div>
-          {%- endif -%}
-        {%- endpaginate -%}
-      </div>
-    </div>
-  </section>
-{%- elsif search.performed -%}
-  <section class="section section--sm">
-    <div class="container" style="text-align:center; padding-block:var(--space-16);">
-      <p style="color:var(--color-text-muted); margin-bottom:var(--space-6);">Try a different keyword, or browse our collections.</p>
-      <a href="/collections/all" class="btn btn--primary">Shop All Products</a>
-    </div>
-  </section>
-{%- endif -%}
+<script>
+(function(){
+  var btn=document.getElementById('kv-more'); if(!btn) return;
+  btn.addEventListener('click',function(e){
+    e.preventDefault();
+    var url=btn.getAttribute('href'); btn.textContent='Loading…';
+    fetch(url).then(function(r){return r.text();}).then(function(html){
+      var doc=new DOMParser().parseFromString(html,'text/html');
+      var ng=doc.getElementById('kv-grid'), g=document.getElementById('kv-grid');
+      if(ng&&g){ Array.prototype.forEach.call(ng.children,function(c){g.appendChild(c);}); }
+      var nb=doc.getElementById('kv-more'), s=document.getElementById('kv-shown');
+      if(g&&s){ s.textContent=g.children.length; }
+      if(nb){ btn.setAttribute('href',nb.getAttribute('href')); btn.textContent='Load More'; } else { btn.remove(); }
+    }).catch(function(){ window.location.href=url; });
+  });
+})();
+</script>
 
 {% schema %}
-{
-  "name": "Search",
-  "settings": [],
-  "presets": [{ "name": "Search" }]
-}
+{ "name": "Search", "settings": [], "presets": [{ "name": "Search" }] }
 {% endschema %}

@@ -1,0 +1,52 @@
+{%- comment -%}
+  Predictive search results — fetched by the search overlay via
+  /search/suggest?section_id=predictive-search&q=... Rendered server-side so
+  prices use | money. Output is injected into #kv-srch-results.
+{%- endcomment -%}
+<div class="kv-srch__grid">
+  <div class="kv-srch__side">
+    {%- if predictive_search.resources.queries.size > 0 -%}
+      <div class="kv-srch__sect">
+        <h4>Suggestions</h4>
+        <ul class="kv-srch__sug">
+          {%- for q in predictive_search.resources.queries -%}
+            <li><a href="{{ q.url }}">{{ q.styled_text }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </div>
+    {%- endif -%}
+    {%- if predictive_search.resources.collections.size > 0 -%}
+      <div class="kv-srch__sect">
+        <h4>Collections</h4>
+        <div class="kv-srch__cats">
+          {%- for c in predictive_search.resources.collections -%}
+            <a class="kv-srch__cat" href="{{ c.url }}">{{ c.title }} <span>{{ c.products_count }}</span></a>
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+  </div>
+
+  <div class="kv-srch__main">
+    {%- assign prods = predictive_search.resources.products -%}
+    {%- if prods.size > 0 -%}
+      <div class="kv-srch__rhead"><h3>Products for &ldquo;<em>{{ predictive_search.terms }}</em>&rdquo;</h3></div>
+      <div class="kv-srch__res">
+        {%- for p in prods -%}
+          <a class="rc" href="{{ p.url }}">
+            <div class="rc__m"><img src="{{ p.featured_image | image_url: width: 500 }}" alt="{{ p.featured_image.alt | escape | default: p.title | escape }}"></div>
+            <div class="rc__n">{{ p.title | truncate: 42 }}</div>
+            <div class="rc__meta"><span class="rc__p">{{ p.price | money }}</span>{% if p.metafields.reviews.rating != blank %}<span class="stars">★★★★★</span>{% endif %}</div>
+          </a>
+        {%- endfor -%}
+      </div>
+      <div class="kv-srch__all"><a href="{{ routes.search_url }}?q={{ predictive_search.terms | url_encode }}&type=product">View all results →</a></div>
+    {%- else -%}
+      <div class="kv-srch__none"><p>No products match &ldquo;{{ predictive_search.terms }}&rdquo;.</p><p style="margin-top:8px"><a href="{{ routes.all_products_collection_url }}">Browse everything →</a></p></div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{ "name": "Predictive Search" }
+{% endschema %}

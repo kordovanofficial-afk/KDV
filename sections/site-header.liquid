@@ -82,6 +82,7 @@
     <span class="kv-logo" style="color:var(--canvas)">{{ shop.name }}</span>
     <button class="kv-mclose" aria-label="Close menu" onclick="document.getElementById('kv-mm').classList.remove('kv-open')">&times;</button>
   </div>
+  <a href="{{ routes.search_url }}" class="kv-search">Search</a>
   <a href="{{ routes.collections_url }}/all?sort_by=created-descending">New Arrivals</a>
   <a href="{{ routes.collections_url }}/kdv-wallets">Wallets</a>
   <a href="{{ routes.collections_url }}/kdv-bags">Bags</a>
@@ -90,6 +91,8 @@
   <a href="{{ routes.collections_url }}/kdv-accessories">Accessories</a>
   <a href="{{ routes.collections_url }}/all" style="color:var(--brass-light)">Sale</a>
 </div>
+
+{% render 'search-overlay' %}
 
 <script>
   (function(){

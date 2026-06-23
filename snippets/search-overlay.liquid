@@ -1,0 +1,67 @@
+{%- comment -%}
+  Full-screen search overlay (docs/mockups/search.html). Opens from any .kv-search
+  trigger. Live results fetched from the predictive-search section; submitting the
+  form falls back to the full /search results page. Styling = .kv-srch in home.css.
+{%- endcomment -%}
+<div class="kv-srch" id="kv-srch" role="dialog" aria-modal="true" aria-label="Search">
+  <div class="kv-srch__top">
+    <div class="kv-srch__topin">
+      <form class="kv-srch__field" action="{{ routes.search_url }}" method="get" role="search">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="search" name="q" id="kv-srch-input" placeholder="Search for wallets, bags, jackets…" autocomplete="off" aria-label="Search">
+        <input type="hidden" name="type" value="product">
+      </form>
+      <button class="kv-srch__close" id="kv-srch-close" type="button">Close <b>&times;</b></button>
+    </div>
+    <div class="kv-srch__pop">
+      <span>Popular:</span>
+      <a data-term="smart wallet">Smart wallet</a>
+      <a data-term="card holder">Card holder</a>
+      <a data-term="messenger bag">Messenger bag</a>
+      <a data-term="jacket">Biker jacket</a>
+      <a data-term="belt">Belt</a>
+    </div>
+  </div>
+
+  <div class="kv-srch__body">
+    <div id="kv-srch-results">
+      <!-- empty state -->
+      <div class="kv-srch__grid" style="grid-template-columns:1fr">
+        <div>
+          <h4>Shop by category</h4>
+          <div class="kv-srch__res">
+            <a class="rc" href="{{ routes.collections_url }}/kdv-wallets"><div class="rc__m"><img src="https://cdn.shopify.com/s/files/1/0267/9164/1277/files/coll-wallets.png?v=1782029619&width=500" alt="Wallets"></div><div class="rc__n">Wallets</div></a>
+            <a class="rc" href="{{ routes.collections_url }}/kdv-bags"><div class="rc__m"><img src="https://cdn.shopify.com/s/files/1/0267/9164/1277/files/coll-bags.png?v=1782029619&width=500" alt="Bags"></div><div class="rc__n">Bags</div></a>
+            <a class="rc" href="{{ routes.collections_url }}/kdv-jackets"><div class="rc__m"><img src="https://cdn.shopify.com/s/files/1/0267/9164/1277/files/coll-jackets.png?v=1782029618&width=500" alt="Jackets"></div><div class="rc__n">Jackets</div></a>
+            <a class="rc" href="{{ routes.collections_url }}/kdv-shoes"><div class="rc__m"><img src="https://cdn.shopify.com/s/files/1/0267/9164/1277/files/coll-shoes.png?v=1782029618&width=500" alt="Shoes"></div><div class="rc__n">Shoes</div></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var ov=document.getElementById('kv-srch'); if(!ov) return;
+  var input=document.getElementById('kv-srch-input');
+  var results=document.getElementById('kv-srch-results');
+  var emptyHTML=results.innerHTML, t;
+  function open(){ ov.classList.add('open'); document.body.style.overflow='hidden'; setTimeout(function(){input.focus();},60); }
+  function close(){ ov.classList.remove('open'); document.body.style.overflow=''; }
+  document.querySelectorAll('.kv-search').forEach(function(b){ b.addEventListener('click', function(e){ e.preventDefault(); open(); }); });
+  document.getElementById('kv-srch-close').addEventListener('click', close);
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape' && ov.classList.contains('open')) close(); });
+  function run(){
+    var q=input.value.trim();
+    if(q.length<2){ results.innerHTML=emptyHTML; bindPop(); return; }
+    fetch('/search/suggest?q='+encodeURIComponent(q)+'&section_id=predictive-search&resources[type]=product,collection,query&resources[limit]=6')
+      .then(function(r){return r.text();})
+      .then(function(html){ results.innerHTML=html; })
+      .catch(function(){});
+  }
+  function bindPop(){ ov.querySelectorAll('[data-term]').forEach(function(a){ a.onclick=function(){ input.value=a.getAttribute('data-term'); run(); }; }); }
+  bindPop();
+  input.addEventListener('input', function(){ clearTimeout(t); t=setTimeout(run, 220); });
+})();
+</script>

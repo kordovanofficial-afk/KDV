@@ -3,7 +3,7 @@
    All classes are kv- prefixed to avoid collisions with theme.css.
    Milestone 1: tokens + header (announcement, nav, mega, mobile).
    ============================================================ */
-.kv-announce,.kv-hdr,.kv-mmenu,.kv-home,.kv-ftr,.kv-cp,.kv-pdp,.kv-coll,.cart-drawer,.cart-drawer-overlay{
+.kv-announce,.kv-hdr,.kv-mmenu,.kv-home,.kv-ftr,.kv-cp,.kv-pdp,.kv-coll,.cart-drawer,.cart-drawer-overlay,.kv-srch{
   --canvas:#F7F2EA; --parchment:#ECE3D4; --ink:#241C16; --walnut:#4A3528;
   --cognac:#A0623A; --cognac-dark:#7E4B2C; --tan:#C08B5C; --brass:#B0894F;
   --brass-light:#D8C39A; --stone:#8B8174; --border:#DDD2C0; --pine:#2D6A4F; --oxblood:#8B2D2D;
@@ -805,3 +805,67 @@
 @media(max-width:480px){
   .cart-drawer{width:100vw;}
 }
+
+/* ============================================================
+   Search overlay (.kv-srch) — full-screen, ported from
+   docs/mockups/search.html. Live results injected from the
+   predictive-search section. Results page reuses .kv-coll/.kv-grid.
+   ============================================================ */
+.kv-srch{position:fixed;inset:0;z-index:100;background:rgba(247,242,234,.99);display:flex;flex-direction:column;font-family:var(--kv-body);opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s;}
+.kv-srch.open{opacity:1;visibility:visible;}
+.kv-srch h3,.kv-srch h4{font-family:var(--kv-heading);}
+.kv-srch .stars{color:var(--brass);letter-spacing:1.5px;font-size:11px;}
+.kv-srch__top{border-bottom:1px solid var(--border);background:var(--canvas);}
+.kv-srch__topin{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:18px;padding:22px 40px 18px;}
+.kv-srch__field{flex:1;display:flex;align-items:center;gap:14px;border-bottom:2px solid var(--ink);padding-bottom:12px;margin:0;}
+.kv-srch__field svg{width:24px;height:24px;stroke:var(--ink);fill:none;stroke-width:1.6;flex:none;}
+.kv-srch__field input{flex:1;border:none;background:none;font-family:var(--kv-heading);font-weight:500;font-size:clamp(22px,3vw,34px);color:var(--ink);outline:none;}
+.kv-srch__field input::placeholder{color:var(--stone);opacity:.6;}
+.kv-srch__close{display:inline-flex;align-items:center;gap:8px;background:none;border:none;cursor:pointer;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);font-weight:500;}
+.kv-srch__close b{font-size:24px;line-height:1;color:var(--ink);font-weight:400;}
+.kv-srch__pop{max-width:1100px;margin:0 auto;padding:0 40px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.kv-srch__pop span{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);}
+.kv-srch__pop a{font-size:13px;border:1px solid var(--border);border-radius:99px;padding:7px 15px;color:var(--walnut);cursor:pointer;}
+.kv-srch__pop a:hover{border-color:var(--cognac);color:var(--cognac);}
+.kv-srch__body{flex:1;overflow-y:auto;}
+.kv-srch__grid{max-width:1100px;margin:0 auto;padding:34px 40px 60px;display:grid;grid-template-columns:250px 1fr;gap:48px;}
+.kv-srch__sect+.kv-srch__sect{margin-top:34px;}
+.kv-srch h4{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cognac);font-weight:600;margin:0 0 16px;}
+.kv-srch__sug{list-style:none;}
+.kv-srch__sug li{margin-bottom:12px;}
+.kv-srch__sug a{font-family:var(--kv-heading);font-size:18px;color:var(--ink);}
+.kv-srch__sug a:hover{color:var(--cognac);}
+.kv-srch__sug b{color:var(--cognac);font-weight:500;}
+.kv-srch__cats{display:flex;flex-direction:column;gap:10px;}
+.kv-srch__cat{display:flex;align-items:center;justify-content:space-between;font-size:14px;color:var(--walnut);padding:10px 0;border-bottom:1px solid var(--border);}
+.kv-srch__cat:hover{color:var(--cognac);}
+.kv-srch__cat span{font-size:12px;color:var(--stone);}
+.kv-srch__rhead{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:22px;}
+.kv-srch__rhead h3{font-weight:500;font-size:18px;color:var(--ink);}
+.kv-srch__rhead h3 em{font-style:normal;color:var(--cognac);}
+.kv-srch__rhead .n{font-size:13px;color:var(--stone);}
+.kv-srch__res{display:grid;grid-template-columns:repeat(3,1fr);gap:26px 22px;}
+.kv-srch .rc__m{aspect-ratio:4/5;border-radius:10px;overflow:hidden;border:1px solid var(--border);background:#fff;}
+.kv-srch .rc__m img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
+.kv-srch .rc:hover .rc__m img{transform:scale(1.05);}
+.kv-srch .rc__n{font-family:var(--kv-heading);font-size:15px;margin-top:12px;color:var(--ink);font-weight:500;line-height:1.3;}
+.kv-srch .rc__meta{display:flex;justify-content:space-between;align-items:center;margin-top:5px;}
+.kv-srch .rc__p{color:var(--cognac);font-weight:500;font-size:14px;}
+.kv-srch__all{text-align:center;margin-top:40px;}
+.kv-srch__all a{display:inline-flex;align-items:center;gap:10px;font-family:var(--kv-body);font-weight:600;font-size:13px;letter-spacing:.06em;text-transform:uppercase;padding:15px 40px;border-radius:7px;background:var(--cognac);color:#fff;}
+.kv-srch__all a:hover{background:var(--cognac-dark);}
+.kv-srch__none{padding:20px 0;color:var(--walnut);}
+.kv-srch__none a{color:var(--cognac);text-decoration:underline;}
+.kv-srch__hint{max-width:1100px;margin:0 auto;padding:50px 40px;color:var(--stone);text-align:center;}
+@media(max-width:860px){
+  .kv-srch__grid{grid-template-columns:1fr;gap:30px;}
+  .kv-srch__res{grid-template-columns:1fr 1fr;}
+  .kv-srch__topin,.kv-srch__pop{padding-left:20px;padding-right:20px;}
+}
+
+/* search results page reuses .kv-coll; compact search form */
+.kv-coll__searchform{display:flex;gap:12px;max-width:560px;margin-top:18px;}
+.kv-coll__searchform input{flex:1;padding:14px 18px;border:1px solid var(--border);border-radius:8px;font-family:var(--kv-body);font-size:15px;background:#fff;color:var(--ink);outline:none;}
+.kv-coll__searchform input:focus{border-color:var(--cognac);}
+.kv-coll__searchform button{background:var(--cognac);color:#fff;border:none;border-radius:8px;padding:0 26px;font-family:var(--kv-body);font-weight:600;font-size:14px;cursor:pointer;}
+.kv-coll__searchform button:hover{background:var(--cognac-dark);}
