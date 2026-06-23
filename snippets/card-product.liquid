@@ -1,0 +1,69 @@
+{%- comment -%}
+  Quiet Heritage product card for collection/search grids.
+  Usage: {% render 'card-product', product: product %}
+  Quick-add reuses theme.js hook .product-card__quick-add[data-variant-id]
+  (single-variant only); multi-variant routes to the PDP ("Choose Options").
+{%- endcomment -%}
+{%- assign v = product.first_available_variant | default: product.variants.first -%}
+{%- assign img2 = product.images[1] -%}
+{%- assign on_sale = false -%}
+{%- if v.compare_at_price > v.price -%}{%- assign on_sale = true -%}{%- endif -%}
+
+<div class="kv-pc{% unless product.available %} kv-pc--out{% endunless %}">
+  <div class="kv-pc__m">
+    {%- unless product.available -%}<span class="kv-pc__badge soldout">Sold Out</span>
+    {%- elsif on_sale -%}{%- assign pct = v.compare_at_price | minus: v.price | times: 100 | divided_by: v.compare_at_price -%}<span class="kv-pc__badge sale">{{ pct }}% Off</span>
+    {%- elsif product.tags contains 'new' or product.tags contains 'New' -%}<span class="kv-pc__badge">New</span>
+    {%- elsif product.tags contains 'bestseller' or product.tags contains 'Bestseller' -%}<span class="kv-pc__badge">Bestseller</span>
+    {%- endunless -%}
+
+    <button class="kv-pc__wish product-card__wishlist" aria-label="Save {{ product.title | escape }}"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></button>
+
+    <a href="{{ product.url }}" aria-label="{{ product.title | escape }}">
+      {%- if product.featured_image -%}
+        <img class="kv-pc__img1" src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.featured_image.alt | escape | default: product.title | escape }}" loading="lazy" width="600" height="750">
+        {%- if img2 -%}<img class="kv-pc__img2" src="{{ img2 | image_url: width: 600 }}" alt="" loading="lazy" width="600" height="750">{%- endif -%}
+      {%- endif -%}
+    </a>
+
+    {%- if product.available -%}
+      {%- if product.variants.size == 1 -%}
+        <button class="kv-pc__quick product-card__quick-add" data-variant-id="{{ v.id }}" aria-label="Quick add {{ product.title | escape }}">+ Quick Add</button>
+      {%- else -%}
+        <a class="kv-pc__choose" href="{{ product.url }}">Choose Options</a>
+      {%- endif -%}
+    {%- else -%}
+      <a class="kv-pc__choose" href="{{ product.url }}" style="background:var(--stone)">View</a>
+    {%- endif -%}
+  </div>
+
+  <a href="{{ product.url }}" class="kv-pc__n">{{ product.title | truncate: 46 }}</a>
+  <div class="kv-pc__meta">
+    <span class="kv-pc__p">{{ v.price | money }}{% if on_sale %}<span class="was">{{ v.compare_at_price | money }}</span>{% endif %}</span>
+    {%- if product.metafields.reviews.rating != blank -%}<span class="stars">★★★★★</span>{%- endif -%}
+  </div>
+
+  {%- for option in product.options_with_values -%}
+    {%- assign on = option.name | downcase -%}
+    {%- if on == 'color' or on == 'colour' -%}
+      <div class="kv-pc__sw">
+        {%- for val in option.values limit: 4 -%}
+          {%- assign c = val | downcase -%}
+          {%- assign hex = '#8B8174' -%}
+          {%- if c contains 'black' or c contains 'midnight' or c contains 'espresso' -%}{%- assign hex = '#241C16' -%}
+          {%- elsif c contains 'brown' or c contains 'pullup' or c contains 'walnut' or c contains 'mocha' -%}{%- assign hex = '#5C3A22' -%}
+          {%- elsif c contains 'tan' or c contains 'natural' or c contains 'camel' -%}{%- assign hex = '#C08B5C' -%}
+          {%- elsif c contains 'cognac' or c contains 'saddle' -%}{%- assign hex = '#A0623A' -%}
+          {%- elsif c contains 'green' or c contains 'emerald' or c contains 'olive' -%}{%- assign hex = '#3f5d3a' -%}
+          {%- elsif c contains 'red' or c contains 'maroon' or c contains 'oxblood' -%}{%- assign hex = '#8B2D2D' -%}
+          {%- elsif c contains 'white' or c contains 'cream' or c contains 'beige' -%}{%- assign hex = '#E7DCC8' -%}
+          {%- elsif c contains 'blue' or c contains 'navy' -%}{%- assign hex = '#2c3a52' -%}
+          {%- endif -%}
+          <i style="background:{{ hex }}" title="{{ val | escape }}"></i>
+        {%- endfor -%}
+        {%- if option.values.size > 1 -%}<span>{{ option.values.size }} colours</span>{%- endif -%}
+      </div>
+      {%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
+</div>

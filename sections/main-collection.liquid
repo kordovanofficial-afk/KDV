@@ -1,83 +1,194 @@
-<div class="collection-header">
-  <div class="container">
-    <p class="eyebrow">{{ collection.title }}</p>
-    <h1>{{ collection.title }}</h1>
-    {%- if collection.description != blank -%}
-      <p>{{ collection.description }}</p>
-    {%- endif -%}
-  </div>
-</div>
+{%- comment -%}
+  Collection / category page — Quiet Heritage design (docs/mockups/collection.html).
+  Cards via snippets/card-product.liquid (reuses theme.js quick-add hook).
+  Native Shopify sort + storefront filters (drawer + active chips). Load More
+  appends the next paginated page. CollectionPage + ItemList JSON-LD for SEO.
+{%- endcomment -%}
+{%- assign ppp = section.settings.products_per_page | default: 24 -%}
+{%- assign sb = collection.sort_by | default: collection.default_sort_by -%}
 
-<section class="section section--sm">
-  <div class="container">
-    <!-- Toolbar -->
-    <div class="collection-toolbar">
-      <p class="collection-toolbar__count">
-        {{ collection.products_count }}
-        {{ collection.products_count | pluralize: 'product', 'products' }}
-      </p>
-      <div class="collection-toolbar__controls">
-        <label for="sort-by" class="visually-hidden">Sort by</label>
-        <select
-          id="sort-by"
-          name="sort_by"
-          class="sort-select"
-          onchange="window.location.href = '{{ collection.url }}?sort_by=' + this.value"
-        >
-          <option value="manual"{% if collection.sort_by == 'manual' %} selected{% endif %}>Featured</option>
-          <option value="best-selling"{% if collection.sort_by == 'best-selling' %} selected{% endif %}>Best Selling</option>
-          <option value="price-ascending"{% if collection.sort_by == 'price-ascending' %} selected{% endif %}>Price: Low to High</option>
-          <option value="price-descending"{% if collection.sort_by == 'price-descending' %} selected{% endif %}>Price: High to Low</option>
-          <option value="created-descending"{% if collection.sort_by == 'created-descending' %} selected{% endif %}>Newest</option>
-          <option value="title-ascending"{% if collection.sort_by == 'title-ascending' %} selected{% endif %}>A–Z</option>
+<div class="kv-coll">
+
+  <!-- HERO (compact, no big banner) -->
+  <div class="kv-wrap kv-coll__hero">
+    <div class="kv-coll__crumb"><a href="{{ routes.root_url }}">Home</a> / {{ collection.title }}</div>
+    <div class="kv-coll__hrow">
+      <div>
+        <span class="eyebrow">The Collection</span>
+        <h1>{{ collection.title }}</h1>
+        {%- if collection.description != blank -%}
+          <p>{{ collection.description | strip_html | truncatewords: 40 }}</p>
+        {%- else -%}
+          <p>Hand-stitched full-grain leather, made in Karachi to age beautifully and last a lifetime.</p>
+        {%- endif -%}
+      </div>
+      <div class="kv-coll__count">{{ collection.products_count }} {{ collection.products_count | pluralize: 'product', 'products' }}</div>
+    </div>
+  </div>
+
+  <!-- TOOLBAR -->
+  <div class="kv-coll__bar"><div class="kv-wrap kv-coll__barin">
+    <div class="kv-coll__pills">
+      <a class="kv-coll__pill" href="{{ collection.url }}">All</a>
+      {%- if collection.filters.size > 0 -%}
+        {%- assign pill_filter = collection.filters.first -%}
+        {%- if pill_filter.type == 'list' -%}
+          {%- for val in pill_filter.values limit: 6 -%}
+            <a class="kv-coll__pill{% if val.active %} active{% endif %}" href="{% if val.active %}{{ val.url_to_remove }}{% else %}{{ val.url_to_add }}{% endif %}">{{ val.label }}</a>
+          {%- endfor -%}
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+    <div class="kv-coll__tools">
+      {%- if collection.filters.size > 0 -%}
+        <button class="kv-coll__fbtn" type="button" onclick="document.getElementById('kv-filters').classList.add('open');document.getElementById('kv-filters-ov').classList.add('open');"><svg viewBox="0 0 24 24"><path d="M3 5h18M6 12h12M10 19h4"/></svg>Filters</button>
+      {%- endif -%}
+      <div class="kv-coll__sort">
+        <select aria-label="Sort by" onchange="(function(v){var u=new URL(window.location.href);u.searchParams.set('sort_by',v);u.searchParams.delete('page');window.location.href=u.toString();})(this.value)">
+          <option value="best-selling"{% if sb == 'best-selling' %} selected{% endif %}>Best Selling</option>
+          <option value="created-descending"{% if sb == 'created-descending' %} selected{% endif %}>Newest</option>
+          <option value="price-ascending"{% if sb == 'price-ascending' %} selected{% endif %}>Price: Low to High</option>
+          <option value="price-descending"{% if sb == 'price-descending' %} selected{% endif %}>Price: High to Low</option>
+          <option value="title-ascending"{% if sb == 'title-ascending' %} selected{% endif %}>A–Z</option>
         </select>
+        <svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
       </div>
     </div>
+  </div></div>
 
-    <!-- Product Grid -->
+  <!-- ACTIVE FILTER CHIPS -->
+  {%- assign active_count = 0 -%}
+  {%- for f in collection.filters -%}{%- assign active_count = active_count | plus: f.active_values.size -%}{%- endfor -%}
+  {%- if active_count > 0 -%}
+    <div class="kv-wrap"><div class="kv-coll__chips">
+      {%- for f in collection.filters -%}
+        {%- for val in f.active_values -%}
+          <span class="kv-coll__chip">{{ val.label }} <a href="{{ val.url_to_remove }}" aria-label="Remove">×</a></span>
+        {%- endfor -%}
+      {%- endfor -%}
+      <span class="kv-coll__chip" style="background:none;border:none"><a href="{{ collection.url }}?sort_by={{ sb }}">Clear all</a></span>
+    </div></div>
+  {%- endif -%}
+
+  <!-- GRID -->
+  {%- paginate collection.products by ppp -%}
     {%- if collection.products.size > 0 -%}
-      <div class="product-grid">
-        {%- paginate collection.products by section.settings.products_per_page -%}
-          {%- for product in collection.products -%}
-            <div class="fade-in">
-              {% render 'product-card', product: product %}
-            </div>
-          {%- endfor -%}
+      <div class="kv-wrap"><div class="kv-grid" id="kv-grid">
+        {%- for product in collection.products -%}
+          {% render 'card-product', product: product %}
+        {%- endfor -%}
+      </div></div>
 
-          <!-- Pagination -->
-          {%- if paginate.pages > 1 -%}
-            <div class="pagination" style="grid-column: 1/-1; display:flex; justify-content:center; gap:var(--space-2); margin-top:var(--space-12);">
-              {%- if paginate.previous -%}
-                <a href="{{ paginate.previous.url }}" class="btn btn--secondary btn--sm">← Previous</a>
-              {%- endif -%}
-              {%- for part in paginate.parts -%}
-                {%- if part.is_link -%}
-                  <a href="{{ part.url }}" class="btn btn--secondary btn--sm">{{ part.title }}</a>
-                {%- else -%}
-                  <span class="btn btn--primary btn--sm" aria-current="page">{{ part.title }}</span>
-                {%- endif -%}
-              {%- endfor -%}
-              {%- if paginate.next -%}
-                <a href="{{ paginate.next.url }}" class="btn btn--secondary btn--sm">Next →</a>
-              {%- endif -%}
-            </div>
-          {%- endif -%}
-        {%- endpaginate -%}
+      <div class="kv-wrap kv-coll__more">
+        {%- assign shown = paginate.current_offset | plus: paginate.page_size -%}
+        {%- if shown > paginate.items -%}{%- assign shown = paginate.items -%}{%- endif -%}
+        <div class="pct">Showing <b id="kv-shown">{{ shown }}</b> of <b>{{ paginate.items }}</b> products</div>
+        <div class="track"><div class="fill" id="kv-fill" style="width:{{ shown | times: 100 | divided_by: paginate.items }}%"></div></div>
+        {%- if paginate.next -%}
+          <a class="btn" id="kv-more" href="{{ paginate.next.url }}" data-total="{{ paginate.items }}">Load More</a>
+        {%- endif -%}
       </div>
     {%- else -%}
-      <div class="text-center" style="padding-block:var(--space-20);">
-        <p>No products found in this collection yet.</p>
-        <a href="/collections/all" class="btn btn--primary" style="margin-top:var(--space-6);">Shop All</a>
-      </div>
+      <div class="kv-wrap kv-coll__empty"><p>No products here yet — check back soon, or <a href="{{ routes.all_products_collection_url }}" style="color:var(--cognac);text-decoration:underline">browse everything</a>.</p></div>
     {%- endif -%}
-  </div>
-</section>
+
+    <!-- FILTER DRAWER -->
+    {%- if collection.filters.size > 0 -%}
+      <div class="kv-fd-ov" id="kv-filters-ov" onclick="this.classList.remove('open');document.getElementById('kv-filters').classList.remove('open');"></div>
+      <form class="kv-fd" id="kv-filters" method="get">
+        <div class="kv-fd__top"><h3>Filters</h3><button class="kv-fd__close" type="button" onclick="document.getElementById('kv-filters').classList.remove('open');document.getElementById('kv-filters-ov').classList.remove('open');">&times;</button></div>
+        <div class="kv-fd__body">
+          {%- if sb != blank -%}<input type="hidden" name="sort_by" value="{{ sb }}">{%- endif -%}
+          {%- for f in collection.filters -%}
+            <div class="kv-fd__g">
+              <h4>{{ f.label }}</h4>
+              {%- case f.type -%}
+                {%- when 'list', 'boolean' -%}
+                  {%- for val in f.values -%}
+                    <label><input type="checkbox" name="{{ val.param_name }}" value="{{ val.value }}"{% if val.active %} checked{% endif %}> {{ val.label }} ({{ val.count }})</label>
+                  {%- endfor -%}
+                {%- when 'price_range' -%}
+                  <div style="display:flex;gap:10px;align-items:center">
+                    <input type="number" name="{{ f.min_value.param_name }}" value="{{ f.min_value.value }}" placeholder="Min" style="width:50%;padding:10px;border:1px solid var(--border);border-radius:6px">
+                    <input type="number" name="{{ f.max_value.param_name }}" value="{{ f.max_value.value }}" placeholder="Max" style="width:50%;padding:10px;border:1px solid var(--border);border-radius:6px">
+                  </div>
+              {%- endcase -%}
+            </div>
+          {%- endfor -%}
+        </div>
+        <div class="kv-fd__foot">
+          <a class="kv-fd__clear" href="{{ collection.url }}?sort_by={{ sb }}">Clear</a>
+          <button class="kv-fd__apply" type="submit">Apply</button>
+        </div>
+      </form>
+    {%- endif -%}
+  {%- endpaginate -%}
+
+  <!-- EDITORIAL / SEO (below grid) -->
+  <section class="kv-coll__edit"><div class="kv-coll__editin">
+    {%- if collection.metafields.custom.editorial != blank -%}
+      {{ collection.metafields.custom.editorial }}
+    {%- else -%}
+      <h2>Genuine Leather {{ collection.title }}, Made in Pakistan</h2>
+      <p>Every Kordovan piece is cut and hand-stitched from full-grain and Crazy Horse cow leather — the highest grade of hide available. Unlike bonded or corrected leather, full-grain keeps the natural surface of the skin intact, so it resists wear, breathes, and develops a rich personal patina the longer you carry it.</p>
+      <p>Saddle-stitched seams, burnished edges, and reinforced stress points are standard on every piece — not premium add-ons. Free delivery over PKR 2,500, cash on delivery nationwide, and a lifetime craftsmanship warranty on everything we make.</p>
+    {%- endif -%}
+  </div></section>
+</div>
+
+{%- comment -%} Structured data for SEO {%- endcomment -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": {{ collection.title | json }},
+  "description": {{ collection.description | default: collection.title | strip_html | truncatewords: 40 | json }},
+  "url": {{ request.origin | append: collection.url | json }},
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": {{ collection.products_count }},
+    "itemListElement": [
+      {%- for product in collection.products limit: 24 -%}
+      {
+        "@type": "ListItem",
+        "position": {{ forloop.index }},
+        "url": {{ request.origin | append: product.url | json }},
+        "name": {{ product.title | json }}
+      }{%- unless forloop.last -%},{%- endunless -%}
+      {%- endfor -%}
+    ]
+  }
+}
+</script>
+
+<script>
+(function(){
+  var btn=document.getElementById('kv-more');
+  if(!btn) return;
+  btn.addEventListener('click',function(e){
+    e.preventDefault();
+    var url=btn.getAttribute('href');
+    btn.textContent='Loading…';
+    fetch(url).then(function(r){return r.text();}).then(function(html){
+      var doc=new DOMParser().parseFromString(html,'text/html');
+      var newGrid=doc.getElementById('kv-grid'), grid=document.getElementById('kv-grid');
+      if(newGrid&&grid){ Array.prototype.forEach.call(newGrid.children,function(c){grid.appendChild(c);}); }
+      var newBtn=doc.getElementById('kv-more');
+      var shownEl=document.getElementById('kv-shown'), fill=document.getElementById('kv-fill');
+      var total=parseInt(btn.getAttribute('data-total'))||0;
+      if(grid&&shownEl){ shownEl.textContent=grid.children.length; if(fill&&total){fill.style.width=Math.min(100,Math.round(grid.children.length*100/total))+'%';} }
+      if(newBtn){ btn.setAttribute('href',newBtn.getAttribute('href')); btn.textContent='Load More'; }
+      else{ btn.remove(); }
+    }).catch(function(){ window.location.href=url; });
+  });
+})();
+</script>
 
 {% schema %}
 {
   "name": "Collection",
   "settings": [
-    { "type": "range", "id": "products_per_page", "label": "Products per page", "min": 8, "max": 48, "step": 4, "default": 24 }
+    { "type": "range", "id": "products_per_page", "label": "Products per page", "min": 12, "max": 48, "step": 4, "default": 24 }
   ],
   "presets": [{ "name": "Collection" }]
 }
