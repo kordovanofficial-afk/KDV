@@ -4,9 +4,13 @@
   Specific handles get a bespoke designed layout (rendered via snippet) so we stay
   theme-local and never alter the page's template suffix (which is store-wide).
 {%- endcomment -%}
-{%- if page.handle == 'about-kordovan' -%}
-  {%- render 'our-story' -%}
-{%- else -%}
+{%- case page.handle -%}
+  {%- when 'about-kordovan' -%}{%- render 'our-story' -%}
+  {%- when 'our-craft' -%}{%- render 'our-craft' -%}
+  {%- when 'shipping' -%}{%- render 'shipping' -%}
+  {%- when 'leather-care-guide' -%}{%- render 'leather-care' -%}
+  {%- when 'returns' -%}{%- render 'returns' -%}
+  {%- else -%}
 <div class="kv-page">
   <div class="kv-page__hero">
     <div class="kv-wrap">
@@ -23,7 +27,7 @@
     </div>
   </div>
 </div>
-{%- endif -%}
+{%- endcase -%}
 
 {% schema %}
 {

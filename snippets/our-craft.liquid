@@ -1,0 +1,81 @@
+{%- comment -%}
+  Designed "Our Craft" page body (handle: our-craft). Rendered by main-page.liquid
+  for that handle only. Ported 1:1 from docs/mockups/page-craft.html; styling = .kv-cp.
+  Images on Shopify Files: craft-hero, craft-leather, craft-hands, craft-pillar-bg.
+{%- endcomment -%}
+{%- liquid
+  assign img_hero = 'https://cdn.shopify.com/s/files/1/0267/9164/1277/files/craft-hero.png?v=1782214497&width=1800'
+  assign img_leather = 'https://cdn.shopify.com/s/files/1/0267/9164/1277/files/craft-leather.png?v=1782214499&width=900'
+  assign img_hands = 'https://cdn.shopify.com/s/files/1/0267/9164/1277/files/craft-hands.png?v=1782214497&width=900'
+  assign img_pillar = 'https://cdn.shopify.com/s/files/1/0267/9164/1277/files/craft-pillar-bg_optional_can_reuse_about-promise-bg.png?v=1782214498&width=2000'
+-%}
+
+<div class="kv-cp">
+
+  <section class="phero">
+    <img src="{{ img_hero }}" alt="Close-up of hands cutting full-grain leather at the Kordovan workbench" loading="eager" width="1800" height="1013">
+    <div class="phero__scrim"></div>
+    <div class="wrap phero__c">
+      <span class="eyebrow">The Craft</span>
+      <h1>Made by hand. <em>Made to last.</em></h1>
+      <p>Every Kordovan piece begins with a single question: will this last a lifetime? If the answer is anything less than yes, it doesn't leave our workshop.</p>
+    </div>
+  </section>
+
+  <section class="sec sec--tight"><div class="wrap wrap--narrow" style="text-align:center">
+    <p class="lead">We don't make leather goods to be replaced. We make them to be <em>carried, worn, and eventually passed on</em> — and every decision in our workshop serves that one promise.</p>
+  </div></section>
+
+  <section class="sec"><div class="wrap split">
+    <div class="split__img"><img src="{{ img_leather }}" alt="Texture macro of full-grain leather showing the natural grain" loading="lazy" width="900" height="1125"></div>
+    <div>
+      <span class="eyebrow">01 — The Leather</span>
+      <h2>Only the top of the hide.</h2>
+      <p>We work exclusively with full-grain and vegetable-tanned leathers — the finest, most durable cuts available. Unlike corrected or bonded leather, full-grain keeps the natural surface of the hide intact.</p>
+      <p>That means it breathes, resists moisture, and ages into a rich patina that records exactly how you carry it. No two pieces will ever wear quite the same.</p>
+    </div>
+  </div></section>
+
+  <section class="sec sec--parch"><div class="wrap wrap--narrow">
+    <div class="shead"><span class="eyebrow">02 — The Process</span><h2>Five steps, no shortcuts.</h2></div>
+    <div class="steps">
+      <div class="step"><div class="step__n">01</div><div><h3>Cut</h3><p>Each panel is cut by hand from the strongest part of the hide, working around natural marks so only the best leather makes it into your piece.</p></div></div>
+      <div class="step"><div class="step__n">02</div><div><h3>Skive</h3><p>Edges are skived — thinned by hand — so seams fold clean and sit flat, with no bulk where panels meet.</p></div></div>
+      <div class="step"><div class="step__n">03</div><div><h3>Saddle-stitch</h3><p>Seams are saddle-stitched with two needles and waxed thread. If one stitch ever breaks, the rest hold — far stronger than any machine lockstitch.</p></div></div>
+      <div class="step"><div class="step__n">04</div><div><h3>Burnish</h3><p>Raw edges are sealed and burnished by friction until they're smooth and glossy — the detail that separates heirloom leather from the rest.</p></div></div>
+      <div class="step"><div class="step__n">05</div><div><h3>Finish</h3><p>Every piece is conditioned, inspected, and reinforced at its stress points before it's boxed — and only then does it earn the Kordovan name.</p></div></div>
+    </div>
+  </div></section>
+
+  <section class="sec"><div class="wrap split split--rev">
+    <div class="split__img"><img src="{{ img_hands }}" alt="A Kordovan artisan saddle-stitching by hand in Karachi" loading="lazy" width="900" height="1125"></div>
+    <div>
+      <span class="eyebrow">03 — The Hands</span>
+      <h2>Decades of skill, in Karachi.</h2>
+      <p>Our artisans bring decades of combined experience to every cut, skive, and stitch. This is not an assembly line — it's a workshop, where trained hands and patience do what machines can't.</p>
+      <p>Saddle-stitched seams, burnished edges, and reinforced stress points are standard here, not premium add-ons.</p>
+    </div>
+  </div></section>
+
+  <section class="sec sec--parch"><div class="wrap">
+    <div class="shead"><span class="eyebrow">04 — The Detail</span><h2>Where quality lives.</h2></div>
+    <div class="cards">
+      <div class="card"><h4>Saddle-Stitched</h4><p>Hand-sewn with two needles and waxed thread so seams never unravel — the most durable stitch in leatherwork.</p></div>
+      <div class="card"><h4>Burnished Edges</h4><p>Every edge is sealed and polished by hand, so it won't fray or roughen with years of daily use.</p></div>
+      <div class="card"><h4>Reinforced Stress Points</h4><p>Corners, straps, and snap points are double-layered and reinforced where wear happens most.</p></div>
+    </div>
+  </div></section>
+
+  <section class="sec sec--tight"><div class="wrap"><div class="pillar" style="background-image:url('{{ img_pillar }}')"><div class="pillar__c">
+    <span class="eyebrow">Built to Age</span>
+    <h2>The marks aren't flaws. <em>They're memory.</em></h2>
+    <p>A Kordovan product isn't meant to be replaced. The scratches, the deepening colour, the soft patina — that's not damage, it's the leather recording your life. That is the promise behind everything we make.</p>
+  </div></div></div></section>
+
+  <section class="cta"><div class="wrap">
+    <h2>Own a piece of the craft.</h2>
+    <p>Every wallet, bag, and belt carries the same hands-on standard. Find the one you'll carry for years.</p>
+    <a class="btn btn--dark" href="{{ routes.all_products_collection_url }}">Shop the Collection →</a>
+  </div></section>
+
+</div>
