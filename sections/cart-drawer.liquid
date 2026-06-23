@@ -1,83 +1,73 @@
-<div class="cart-drawer" id="cart-drawer" role="dialog" aria-modal="true" aria-label="Shopping cart" style="
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 420px;
-  max-width: 100vw;
-  height: 100vh;
-  background: var(--color-bg);
-  z-index: 300;
-  transform: translateX(100%);
-  transition: transform var(--transition-slower);
-  display: flex;
-  flex-direction: column;
-  box-shadow: var(--shadow-xl);
-">
-  <div style="
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: var(--space-6);
-    border-bottom: 1px solid var(--color-border);
-    flex-shrink: 0;
-  ">
-    <h2 style="font-size: var(--text-xl); font-family: var(--font-heading);">Your Bag</h2>
-    <button class="cart-drawer__close" aria-label="Close cart" style="
-      background: none; border: none; cursor: pointer;
-      color: var(--color-text); padding: var(--space-2);
-      display: flex; align-items: center;
-    ">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-        <path d="M18 6 6 18M6 6l12 12"/>
-      </svg>
-    </button>
+{%- comment -%}
+  Cart drawer — Quiet Heritage (docs/mockups/cart-drawer.html). Styling in
+  assets/home.css (.cart-drawer). Items, free-shipping progress and subtotal are
+  rendered live by theme.js CartDrawer; cross-sell is server-rendered below.
+  Free-shipping threshold (PKR 2,500) also set in theme.js renderShip().
+{%- endcomment -%}
+{%- assign xcoll = collections[section.settings.upsell_collection] | default: collections['kdv-accessories'] -%}
+
+<div class="cart-drawer-overlay"></div>
+<aside class="cart-drawer" id="cart-drawer" role="dialog" aria-modal="true" aria-label="Shopping cart">
+
+  <div class="cart-drawer__head">
+    <h2>Your Cart</h2>
+    <button class="cart-drawer__close" aria-label="Close cart">&times;</button>
   </div>
 
-  <div class="cart-drawer__items" style="flex: 1; overflow-y: auto; padding: var(--space-5) var(--space-6);">
-    <!-- Dynamically populated by JS -->
-    <div class="cart-drawer__empty" style="text-align:center; padding-top: var(--space-16);">
-      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--color-border)" stroke-width="1" style="margin-inline:auto; margin-bottom:var(--space-4);">
-        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/>
-      </svg>
-      <p style="margin-bottom: var(--space-5);">Your bag is empty.</p>
-      <a href="/collections/all" class="btn btn--primary btn--sm">Start Shopping</a>
+  <!-- free-shipping progress (filled by JS) -->
+  <div class="cart-drawer__ship" style="display:none"></div>
+
+  <!-- line items (filled by JS) -->
+  <div class="cart-drawer__items">
+    <div class="cart-drawer__empty"><p>Your cart is empty.</p>
+      <a href="{{ routes.all_products_collection_url }}" class="cd__co" style="display:inline-block;width:auto;padding:13px 26px;margin-top:8px;">Start Shopping</a>
     </div>
   </div>
 
-  <div style="
-    border-top: 1px solid var(--color-border);
-    padding: var(--space-5) var(--space-6);
-    flex-shrink: 0;
-    background: var(--color-bg);
-  ">
-    <div class="cart-drawer__total" style="
-      display: flex;
-      justify-content: space-between;
-      font-weight: 700;
-      font-size: var(--text-lg);
-      margin-bottom: var(--space-4);
-    "></div>
-    <p style="font-size: var(--text-xs); color: var(--color-text-muted); margin-bottom: var(--space-4); text-align: center;">
-      Taxes and delivery calculated at checkout.
-    </p>
-    <a href="{{ routes.cart_url }}" class="btn btn--primary btn--full btn--lg" style="margin-bottom: var(--space-3);">
-      View Cart
-    </a>
-    <a href="/checkout" class="btn btn--cognac btn--full btn--lg">
-      Checkout →
-    </a>
-  </div>
-</div>
+  <!-- cross-sell (one-click; quick-add reuses theme.js .product-card__quick-add) -->
+  {%- if xcoll.products.size > 0 -%}
+    <div class="cart-drawer__cross" style="display:none">
+      <h3>Complete your carry</h3>
+      {%- assign n = 0 -%}
+      {%- for p in xcoll.products -%}
+        {%- if p.available and n < 3 -%}
+          <div class="xs">
+            <a class="xs__img" href="{{ p.url }}"><img src="{{ p.featured_image | image_url: width: 120 }}" alt="{{ p.title | escape }}"></a>
+            <div class="xs__i"><a href="{{ p.url }}" class="xs__n">{{ p.title }}</a><div class="xs__p">{{ p.price | money }}</div></div>
+            {%- if p.variants.size == 1 -%}
+              <button class="xs__add product-card__quick-add" data-variant-id="{{ p.selected_or_first_available_variant.id }}">+ Add</button>
+            {%- else -%}
+              <a class="xs__add" href="{{ p.url }}">+ Add</a>
+            {%- endif -%}
+          </div>
+          {%- assign n = n | plus: 1 -%}
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
 
-<style>
-  .cart-drawer.is-open { transform: translateX(0); }
-  .cart-drawer-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 299; opacity: 0; visibility: hidden; transition: all 300ms ease; }
-  .cart-drawer-overlay.is-visible { opacity: 1; visibility: visible; }
-  .cart-drawer__item { display: grid; grid-template-columns: 80px 1fr; gap: var(--space-4); padding-block: var(--space-5); border-bottom: 1px solid var(--color-border); }
-  .cart-drawer__item img { width: 80px; height: 96px; object-fit: cover; background: var(--color-bg-muted); }
-  .cart-drawer__item-title { font-family: var(--font-heading); font-size: var(--text-base); color: var(--color-text); margin-bottom: var(--space-1); display: block; }
-  .cart-drawer__item-variant { font-size: var(--text-xs); color: var(--color-text-muted); margin-bottom: var(--space-3); }
-  .cart-drawer__item-footer { display: flex; align-items: center; justify-content: space-between; }
-  .cart-drawer__qty { padding-inline: var(--space-3); font-weight: 600; min-width: 24px; text-align: center; }
-  .cart-drawer__item-price { font-weight: 600; font-size: var(--text-base); }
-</style>
+  <!-- sticky footer -->
+  <div class="cart-drawer__foot">
+    <span class="cart-drawer__note">+ Add order note / gift message</span>
+    <div class="cd__sub"><span class="l">Subtotal</span><span class="v cart-drawer__total"></span></div>
+    <div class="cd__fine">Shipping &amp; taxes calculated at checkout · Cash on delivery available</div>
+    <a class="cd__co" href="/checkout">Checkout →</a>
+    <a class="cd__view" href="{{ routes.cart_url }}">View full cart</a>
+    <div class="cd__trust">
+      <span><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Secure checkout</span>
+      <span><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>7-day returns</span>
+      <span><svg viewBox="0 0 24 24"><rect x="1" y="4" width="15" height="12"/><path d="M16 8h4l3 3v5h-7z"/></svg>COD available</span>
+    </div>
+    <div class="cd__pay"><span>COD</span><span>Visa</span><span>Mastercard</span><span>Easypaisa</span><span>JazzCash</span></div>
+  </div>
+
+</aside>
+
+{% schema %}
+{
+  "name": "Cart Drawer",
+  "settings": [
+    { "type": "collection", "id": "upsell_collection", "label": "Cross-sell collection", "info": "Products suggested in the cart drawer. Defaults to kdv-accessories." }
+  ]
+}
+{% endschema %}

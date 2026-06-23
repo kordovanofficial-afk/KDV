@@ -29,6 +29,14 @@ const KDV = {
   }
 };
 
+// Update every cart-count badge in the theme (legacy + kv header)
+KDV.updateCartCount = function (n) {
+  document.querySelectorAll('.header__cart-count, .kv-cart i').forEach(el => {
+    el.textContent = n;
+    el.style.display = n > 0 ? 'flex' : 'none';
+  });
+};
+
 // ============================================================
 // ANNOUNCEMENT BAR
 // ============================================================
@@ -347,10 +355,7 @@ class AddToCart {
   async updateCartCount() {
     try {
       const cart = await KDV.utils.fetchJSON('/cart.js');
-      if (this.cartCount) {
-        this.cartCount.textContent = cart.item_count;
-        this.cartCount.style.display = cart.item_count > 0 ? 'flex' : 'none';
-      }
+      KDV.updateCartCount(cart.item_count);
     } catch {}
   }
 }
@@ -367,6 +372,8 @@ class CartDrawer {
     this.closeBtn = el.querySelector('.cart-drawer__close');
     this.itemsContainer = el.querySelector('.cart-drawer__items');
     this.totalEl = el.querySelector('.cart-drawer__total');
+    this.shipEl = el.querySelector('.cart-drawer__ship');
+    this.crossEl = el.querySelector('.cart-drawer__cross');
     CartDrawer.instance = this;
     this.init();
   }
@@ -374,9 +381,9 @@ class CartDrawer {
   init() {
     this.closeBtn?.addEventListener('click', () => this.close());
     this.overlay?.addEventListener('click', () => this.close());
-    document.querySelector('.header__cart-btn')?.addEventListener('click', () => {
-      this.open();
-    });
+    document.querySelectorAll('.header__cart-btn, .kv-cart').forEach(b =>
+      b.addEventListener('click', e => { e.preventDefault(); this.open(); })
+    );
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') this.close();
     });
@@ -404,49 +411,61 @@ class CartDrawer {
 
   render(cart) {
     if (!this.itemsContainer) return;
+    const empty = cart.item_count === 0;
+    if (this.shipEl) this.shipEl.style.display = empty ? 'none' : '';
+    if (this.crossEl) this.crossEl.style.display = empty ? 'none' : '';
 
-    if (cart.item_count === 0) {
+    if (empty) {
       this.itemsContainer.innerHTML = `
         <div class="cart-drawer__empty">
           <p>Your cart is empty.</p>
-          <a href="/collections/all" class="btn btn--primary btn--sm">Shop Now</a>
-        </div>
-      `;
+          <a href="/collections/all" class="cd__co" style="display:inline-block;width:auto;padding:13px 26px;margin-top:8px;">Start Shopping</a>
+        </div>`;
       if (this.totalEl) this.totalEl.textContent = '';
       return;
     }
 
+    this.renderShip(cart);
+
     this.itemsContainer.innerHTML = cart.items.map(item => `
-      <div class="cart-drawer__item" data-key="${item.key}">
-        <a href="${item.url}">
-          <img src="${item.image}" alt="${item.product_title}" width="80" height="96">
-        </a>
-        <div class="cart-drawer__item-info">
-          <a href="${item.url}" class="cart-drawer__item-title">${item.product_title}</a>
-          <p class="cart-drawer__item-variant">${item.variant_title !== 'Default Title' ? item.variant_title : ''}</p>
-          <div class="cart-drawer__item-footer">
-            <div class="cart-item__qty">
+      <div class="cd-item" data-key="${item.key}">
+        <a class="cd-item__img" href="${item.url}"><img src="${item.image}" alt="${item.product_title}"></a>
+        <div>
+          <div class="cd-item__t">
+            <div><div class="cd-item__n">${item.product_title}</div>${item.variant_title && item.variant_title !== 'Default Title' ? '<div class="cd-item__v">' + item.variant_title + '</div>' : ''}</div>
+            <button class="cd-item__rm cart-item__qty-btn" data-action="remove" data-key="${item.key}">Remove</button>
+          </div>
+          <div class="cd-item__b">
+            <div class="qty">
               <button class="cart-item__qty-btn" data-action="minus" data-key="${item.key}">−</button>
               <span class="cart-drawer__qty">${item.quantity}</span>
               <button class="cart-item__qty-btn" data-action="plus" data-key="${item.key}">+</button>
             </div>
-            <span class="cart-drawer__item-price">${KDV.utils.formatMoney(item.line_price)}</span>
+            <span class="cd-item__p">${KDV.utils.formatMoney(item.line_price)}</span>
           </div>
         </div>
       </div>
     `).join('');
 
-    if (this.totalEl) {
-      this.totalEl.innerHTML = `
-        <span>Subtotal</span>
-        <span>${KDV.utils.formatMoney(cart.total_price)}</span>
-      `;
-    }
+    if (this.totalEl) this.totalEl.textContent = KDV.utils.formatMoney(cart.total_price);
 
-    // Attach qty change handlers
     this.itemsContainer.querySelectorAll('.cart-item__qty-btn').forEach(btn => {
       btn.addEventListener('click', () => this.updateQty(btn.dataset.key, btn.dataset.action));
     });
+  }
+
+  renderShip(cart) {
+    if (!this.shipEl) return;
+    const threshold = 250000; // PKR 2,500 in minor units (paisa)
+    const t = cart.total_price;
+    if (t >= threshold) {
+      this.shipEl.classList.add('unlocked');
+      this.shipEl.innerHTML = `<p>🎉 You've unlocked <b>FREE delivery!</b></p><div class="track"><div class="fill" style="width:100%"></div></div>`;
+    } else {
+      this.shipEl.classList.remove('unlocked');
+      const pct = Math.round(t * 100 / threshold);
+      this.shipEl.innerHTML = `<p>You're just <b>${KDV.utils.formatMoney(threshold - t)}</b> away from <b>FREE delivery</b> 🚚</p><div class="track"><div class="fill" style="width:${pct}%"></div></div>`;
+    }
   }
 
   async updateQty(key, action) {
@@ -454,18 +473,15 @@ class CartDrawer {
       const cart = await KDV.utils.fetchJSON('/cart.js');
       const item = cart.items.find(i => i.key === key);
       if (!item) return;
-      const newQty = action === 'plus' ? item.quantity + 1 : Math.max(0, item.quantity - 1);
+      let newQty;
+      if (action === 'remove') newQty = 0;
+      else newQty = action === 'plus' ? item.quantity + 1 : Math.max(0, item.quantity - 1);
       const updated = await KDV.utils.fetchJSON('/cart/change.js', {
         method: 'POST',
         body: JSON.stringify({ id: key, quantity: newQty })
       });
       this.render(updated);
-      // Update header count
-      const countEl = document.querySelector('.header__cart-count');
-      if (countEl) {
-        countEl.textContent = updated.item_count;
-        countEl.style.display = updated.item_count > 0 ? 'flex' : 'none';
-      }
+      KDV.updateCartCount(updated.item_count);
     } catch {}
   }
 }
@@ -525,12 +541,8 @@ class QuickAdd {
         body: JSON.stringify({ id: variantId, quantity: qty })
       });
       CartDrawer.instance?.open();
-      const countEl = document.querySelector('.header__cart-count');
-      if (countEl) {
-        const cart = await KDV.utils.fetchJSON('/cart.js');
-        countEl.textContent = cart.item_count;
-        countEl.style.display = 'flex';
-      }
+      const cart = await KDV.utils.fetchJSON('/cart.js');
+      KDV.updateCartCount(cart.item_count);
     } catch {}
   }
 }
