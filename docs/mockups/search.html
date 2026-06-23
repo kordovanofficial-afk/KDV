@@ -1,0 +1,137 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Search | Kordovan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --canvas:#F7F2EA; --parchment:#ECE3D4; --ink:#241C16; --walnut:#4A3528;
+  --cognac:#A0623A; --cognac-dark:#7E4B2C; --tan:#C08B5C; --brass:#B0894F;
+  --brass-light:#D8C39A; --stone:#8B8174; --border:#DDD2C0; --pine:#2D6A4F;
+  --heading:'Fraunces',Georgia,serif; --body:'Inter',-apple-system,sans-serif;
+}
+body{background:var(--canvas);color:var(--ink);font-family:var(--body);font-weight:300;-webkit-font-smoothing:antialiased;min-height:100vh;}
+img{max-width:100%;display:block;} a{color:inherit;text-decoration:none;}
+.stars{color:var(--brass);letter-spacing:1.5px;font-size:11px;}
+/* faux page behind */
+.bg{padding:60px 40px;opacity:.25;}
+.bg h1{font-family:var(--heading);font-size:42px;}
+.bg .row{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:30px;}
+.bg .row div{aspect-ratio:4/5;background:#fff;border:1px solid var(--border);border-radius:10px;}
+
+/* ===== SEARCH OVERLAY (full-screen) ===== */
+.srch{position:fixed;inset:0;z-index:100;background:rgba(247,242,234,.99);display:flex;flex-direction:column;}
+.srch__top{border-bottom:1px solid var(--border);background:var(--canvas);}
+.srch__topin{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:18px;padding:22px 40px;}
+.srch__field{flex:1;display:flex;align-items:center;gap:14px;border-bottom:2px solid var(--ink);padding-bottom:12px;}
+.srch__field svg{width:24px;height:24px;stroke:var(--ink);fill:none;stroke-width:1.6;flex:none;}
+.srch__field input{flex:1;border:none;background:none;font-family:var(--heading);font-weight:500;font-size:clamp(22px,3vw,34px);color:var(--ink);outline:none;}
+.srch__field input::placeholder{color:var(--stone);opacity:.6;}
+.srch__close{display:inline-flex;align-items:center;gap:8px;background:none;border:none;cursor:pointer;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);font-weight:500;}
+.srch__close b{font-size:24px;line-height:1;color:var(--ink);font-weight:400;}
+
+.srch__body{flex:1;overflow-y:auto;}
+.srch__grid{max-width:1100px;margin:0 auto;padding:34px 40px 60px;display:grid;grid-template-columns:250px 1fr;gap:48px;}
+
+/* left rail */
+.srch__rail h4{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cognac);font-weight:600;margin:0 0 16px;}
+.srch__rail+.srch__rail,.srch__sect+.srch__sect{margin-top:34px;}
+.srch__sug{list-style:none;}
+.srch__sug li{margin-bottom:12px;}
+.srch__sug a{font-family:var(--heading);font-size:18px;color:var(--ink);}
+.srch__sug a:hover{color:var(--cognac);}
+.srch__sug b{color:var(--cognac);font-weight:500;}
+.srch__cats{display:flex;flex-direction:column;gap:10px;}
+.srch__cat{display:flex;align-items:center;justify-content:space-between;font-size:14px;color:var(--walnut);padding:10px 0;border-bottom:1px solid var(--border);}
+.srch__cat:hover{color:var(--cognac);}
+.srch__cat span{font-size:12px;color:var(--stone);}
+
+/* results */
+.srch__rhead{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:22px;}
+.srch__rhead h3{font-family:var(--heading);font-weight:500;font-size:18px;color:var(--ink);}
+.srch__rhead h3 em{font-style:normal;color:var(--cognac);}
+.srch__rhead .n{font-size:13px;color:var(--stone);}
+.srch__res{display:grid;grid-template-columns:repeat(3,1fr);gap:26px 22px;}
+.rc__m{aspect-ratio:4/5;border-radius:10px;overflow:hidden;border:1px solid var(--border);background:#fff;}
+.rc__m img{width:100%;height:100%;object-fit:cover;transition:transform .5s;}
+.rc:hover .rc__m img{transform:scale(1.05);}
+.rc__n{font-family:var(--heading);font-size:15px;margin-top:12px;color:var(--ink);font-weight:500;line-height:1.3;}
+.rc__meta{display:flex;justify-content:space-between;align-items:center;margin-top:5px;}
+.rc__p{color:var(--cognac);font-weight:500;font-size:14px;}
+.srch__all{text-align:center;margin-top:40px;}
+.srch__all a{display:inline-flex;align-items:center;gap:10px;font-family:var(--body);font-weight:600;font-size:13px;letter-spacing:.06em;text-transform:uppercase;padding:15px 40px;border-radius:7px;background:var(--cognac);color:#fff;}
+.srch__all a:hover{background:var(--cognac-dark);}
+
+/* popular (empty state row, shown under field for reference) */
+.srch__pop{max-width:1100px;margin:0 auto;padding:0 40px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:-8px;margin-bottom:6px;}
+.srch__pop span{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);}
+.srch__pop a{font-size:13px;border:1px solid var(--border);border-radius:99px;padding:7px 15px;color:var(--walnut);}
+.srch__pop a:hover{border-color:var(--cognac);color:var(--cognac);}
+
+@media(max-width:860px){
+  .srch__grid{grid-template-columns:1fr;gap:30px;}
+  .srch__res{grid-template-columns:1fr 1fr;}
+  .srch__topin,.srch__pop{padding-left:20px;padding-right:20px;}
+}
+</style>
+</head><body>
+
+<div class="bg"><h1>Wallets</h1><div class="row"><div></div><div></div><div></div><div></div></div></div>
+
+<!-- ===== SEARCH OVERLAY ===== -->
+<div class="srch">
+  <div class="srch__top">
+    <div class="srch__topin">
+      <div class="srch__field">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input value="wallet" autofocus placeholder="Search for wallets, bags, jackets…">
+      </div>
+      <button class="srch__close">Close <b>&times;</b></button>
+    </div>
+    <div class="srch__pop"><span>Popular:</span><a>Smart wallet</a><a>Card holder</a><a>Messenger bag</a><a>Biker jacket</a><a>Belt</a></div>
+    <div style="height:18px"></div>
+  </div>
+
+  <div class="srch__body"><div class="srch__grid">
+
+    <!-- LEFT RAIL: suggestions + categories -->
+    <div>
+      <div class="srch__sect srch__rail">
+        <h4>Suggestions</h4>
+        <ul class="srch__sug">
+          <li><a><b>wallet</b></a></li>
+          <li><a><b>wallet</b> for men</a></li>
+          <li><a>smart <b>wallet</b></a></li>
+          <li><a>bifold <b>wallet</b></a></li>
+          <li><a>minimalist <b>wallet</b></a></li>
+        </ul>
+      </div>
+      <div class="srch__sect srch__rail">
+        <h4>Collections</h4>
+        <div class="srch__cats">
+          <a class="srch__cat">Wallets <span>55</span></a>
+          <a class="srch__cat">Card Holders <span>18</span></a>
+          <a class="srch__cat">Smart / RFID <span>9</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULTS -->
+    <div>
+      <div class="srch__rhead"><h3>Products for &ldquo;<em>wallet</em>&rdquo;</h3><span class="n">23 results</span></div>
+      <div class="srch__res">
+        <a class="rc"><div class="rc__m"><img src="https://cdn.shopify.com/s/files/1/0267/9164/1277/files/The-Luke-Minimalist-Wallet1.jpg?v=1761294035&width=500" alt="The Luke Minimalist Wallet"></div><div class="rc__n">The Luke Minimalist Wallet</div><div class="rc__meta"><span class="rc__p">PKR 2,400</span><span class="stars">★★★★★</span></div></a>
+        <a class="rc"><div class="rc__m"><img src="https://cdn.shopify.com/s/files/1/0267/9164/1277/files/hunter_handcrafted_wallet_and_card_holder_by_kordovan_front.png?v=1761285544&width=500" alt="The Hunter HM Wallet"></div><div class="rc__n">The Hunter HM Wallet</div><div class="rc__meta"><span class="rc__p">PKR 3,200</span><span class="stars">★★★★★</span></div></a>
+        <a class="rc"><div class="rc__m"><img src="https://cdn.shopify.com/s/files/1/0267/9164/1277/files/Broncobrownwallet4.jpg?v=1716387316&width=500" alt="Bronco Handcrafted Wallet"></div><div class="rc__n">Bronco Handcrafted Wallet</div><div class="rc__meta"><span class="rc__p">PKR 6,200</span><span class="stars">★★★★★</span></div></a>
+        <a class="rc"><div class="rc__m"><img src="https://cdn.shopify.com/s/files/1/0267/9164/1277/products/Saffiano-Wallet-Green1.jpg?v=1669292631&width=500" alt="Premium Saffiano Leather Wallet"></div><div class="rc__n">Premium Saffiano Leather Wallet</div><div class="rc__meta"><span class="rc__p">PKR 4,300</span><span class="stars">★★★★★</span></div></a>
+        <a class="rc"><div class="rc__m"><img src="https://cdn.shopify.com/s/files/1/0267/9164/1277/files/Snap_card_holder_tan_by_kordovan.jpg?v=1761285003&width=500" alt="Snap Card Holder"></div><div class="rc__n">Snap Card Holder</div><div class="rc__meta"><span class="rc__p">PKR 1,500</span><span class="stars">★★★★★</span></div></a>
+        <a class="rc"><div class="rc__m"><img src="https://cdn.shopify.com/s/files/1/0267/9164/1277/files/NappaWallet-BF-_1.jpg?v=1715855981&width=500" alt="Plain Bifold Nappa Wallet"></div><div class="rc__n">Plain Bifold Nappa Leather Wallet</div><div class="rc__meta"><span class="rc__p">PKR 2,400</span><span class="stars">★★★★★</span></div></a>
+      </div>
+      <div class="srch__all"><a>View all 23 results →</a></div>
+    </div>
+
+  </div></div>
+</div>
+
+</body></html>
