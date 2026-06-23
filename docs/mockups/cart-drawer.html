@@ -1,0 +1,166 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cart Drawer | Kordovan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --canvas:#F7F2EA; --parchment:#ECE3D4; --ink:#241C16; --walnut:#4A3528;
+  --cognac:#A0623A; --cognac-dark:#7E4B2C; --tan:#C08B5C; --brass:#B0894F;
+  --brass-light:#D8C39A; --stone:#8B8174; --border:#DDD2C0; --pine:#2D6A4F; --oxblood:#8B2D2D;
+  --heading:'Fraunces',Georgia,serif; --body:'Inter',-apple-system,sans-serif;
+}
+body{background:var(--canvas);color:var(--ink);font-family:var(--body);font-weight:300;-webkit-font-smoothing:antialiased;min-height:100vh;}
+img{max-width:100%;display:block;}
+/* faux page behind */
+.bg{padding:60px 40px;filter:saturate(.9);}
+.bg h1{font-family:var(--heading);font-weight:500;font-size:42px;color:var(--ink);opacity:.5;}
+.bg p{color:var(--stone);max-width:480px;margin-top:12px;opacity:.5;}
+.bg .row{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:40px;opacity:.35;}
+.bg .row div{aspect-ratio:4/5;background:#fff;border:1px solid var(--border);border-radius:10px;}
+
+.cd-ov{position:fixed;inset:0;background:rgba(20,13,7,.5);z-index:90;}
+
+/* ===== DRAWER ===== */
+.cd{position:fixed;top:0;right:0;bottom:0;width:430px;max-width:100vw;background:var(--canvas);z-index:91;display:flex;flex-direction:column;box-shadow:-10px 0 40px rgba(20,13,7,.25);}
+.cd__head{display:flex;align-items:center;justify-content:space-between;padding:20px 22px;border-bottom:1px solid var(--border);}
+.cd__head h2{font-family:var(--heading);font-weight:500;font-size:21px;color:var(--ink);}
+.cd__head h2 span{color:var(--stone);font-size:15px;font-family:var(--body);font-weight:400;}
+.cd__close{background:none;border:none;font-size:26px;line-height:1;cursor:pointer;color:var(--ink);}
+
+/* free-shipping progress */
+.cd__ship{padding:16px 22px;background:var(--parchment);border-bottom:1px solid var(--border);}
+.cd__ship p{font-size:13px;color:var(--walnut);text-align:center;margin-bottom:10px;}
+.cd__ship p b{color:var(--cognac);font-weight:600;}
+.cd__ship .track{height:7px;background:#fff;border:1px solid var(--border);border-radius:6px;overflow:hidden;}
+.cd__ship .fill{height:100%;background:linear-gradient(90deg,var(--brass),var(--cognac));border-radius:6px;transition:width .4s;}
+.cd__ship.unlocked p b{color:var(--pine);}
+.cd__ship.unlocked .fill{background:var(--pine);width:100%!important;}
+
+/* items */
+.cd__items{flex:1;overflow-y:auto;padding:6px 22px;}
+.cd-item{display:grid;grid-template-columns:74px 1fr;gap:14px;padding:18px 0;border-bottom:1px solid var(--border);}
+.cd-item__img{width:74px;height:90px;border-radius:8px;overflow:hidden;border:1px solid var(--border);background:#fff;}
+.cd-item__img img{width:100%;height:100%;object-fit:cover;}
+.cd-item__t{display:flex;justify-content:space-between;gap:10px;}
+.cd-item__n{font-family:var(--heading);font-weight:500;font-size:15.5px;color:var(--ink);line-height:1.25;}
+.cd-item__v{font-size:12px;color:var(--stone);margin-top:3px;}
+.cd-item__rm{background:none;border:none;color:var(--stone);font-size:12px;cursor:pointer;text-decoration:underline;align-self:flex-start;white-space:nowrap;}
+.cd-item__rm:hover{color:var(--oxblood);}
+.cd-item__b{display:flex;justify-content:space-between;align-items:center;margin-top:14px;}
+.qty{display:inline-flex;align-items:center;border:1px solid var(--border);border-radius:7px;overflow:hidden;}
+.qty button{width:32px;height:32px;background:none;border:none;font-size:16px;cursor:pointer;color:var(--ink);}
+.qty span{width:30px;text-align:center;font-size:14px;}
+.cd-item__p{font-weight:600;font-size:15px;color:var(--ink);}
+
+/* cross-sell */
+.cd__cross{padding:18px 22px;border-top:1px solid var(--border);background:#fbf8f2;}
+.cd__cross h3{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--cognac);font-weight:600;margin-bottom:14px;}
+.xs{display:flex;align-items:center;gap:12px;padding:10px 0;}
+.xs+.xs{border-top:1px solid var(--border);}
+.xs__img{width:50px;height:60px;border-radius:6px;overflow:hidden;border:1px solid var(--border);background:#fff;flex:none;}
+.xs__img img{width:100%;height:100%;object-fit:cover;}
+.xs__i{flex:1;min-width:0;}
+.xs__n{font-size:13.5px;color:var(--ink);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.xs__p{font-size:13px;color:var(--cognac);font-weight:600;margin-top:2px;}
+.xs__add{flex:none;background:var(--ink);color:var(--canvas);border:none;border-radius:6px;font-size:12px;font-weight:600;padding:9px 14px;cursor:pointer;transition:.2s;}
+.xs__add:hover{background:var(--cognac);}
+
+/* footer (sticky) */
+.cd__foot{border-top:1px solid var(--border);padding:16px 22px 18px;background:var(--canvas);}
+.cd__note{font-size:12px;color:var(--stone);text-decoration:underline;cursor:pointer;display:inline-block;margin-bottom:14px;}
+.cd__sub{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px;}
+.cd__sub .l{font-size:14px;color:var(--walnut);font-weight:500;}
+.cd__sub .v{font-family:var(--heading);font-weight:500;font-size:22px;color:var(--ink);}
+.cd__fine{font-size:11.5px;color:var(--stone);margin-bottom:14px;}
+.cd__co{display:block;width:100%;background:var(--cognac);color:#fff;border:none;border-radius:8px;font-family:var(--body);font-weight:600;font-size:15px;letter-spacing:.03em;padding:17px;cursor:pointer;transition:.2s;text-align:center;}
+.cd__co:hover{background:var(--cognac-dark);}
+.cd__co .arw{opacity:.7;}
+.cd__view{display:block;text-align:center;margin-top:10px;font-size:13px;color:var(--ink);text-decoration:underline;}
+.cd__trust{display:flex;align-items:center;justify-content:center;gap:14px;margin:14px 0 12px;flex-wrap:wrap;}
+.cd__trust span{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--stone);}
+.cd__trust svg{width:14px;height:14px;stroke:var(--pine);fill:none;stroke-width:1.8;}
+.cd__pay{display:flex;align-items:center;justify-content:center;gap:7px;flex-wrap:wrap;}
+.cd__pay span{font-size:8.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--stone);border:1px solid var(--border);border-radius:4px;padding:4px 7px;font-weight:600;}
+
+@media(max-width:480px){
+  .cd{width:100vw;}
+  .bg{padding:30px 20px;}
+}
+</style>
+</head><body>
+
+<!-- faux storefront behind the drawer -->
+<div class="bg">
+  <h1>Wallets</h1>
+  <p>Full-grain bifolds, slim cardholders and RFID smart wallets — hand-stitched in Karachi.</p>
+  <div class="row"><div></div><div></div><div></div><div></div></div>
+</div>
+
+<div class="cd-ov"></div>
+
+<!-- ===== CART DRAWER ===== -->
+<aside class="cd" role="dialog" aria-label="Shopping cart">
+
+  <div class="cd__head">
+    <h2>Your Cart <span>(1)</span></h2>
+    <button class="cd__close" aria-label="Close">&times;</button>
+  </div>
+
+  <!-- FREE SHIPPING PROGRESS (the #1 AOV lever) -->
+  <div class="cd__ship">
+    <p>You're just <b>PKR 100</b> away from <b>FREE delivery</b> 🚚</p>
+    <div class="track"><div class="fill" style="width:96%"></div></div>
+  </div>
+
+  <!-- LINE ITEMS -->
+  <div class="cd__items">
+    <div class="cd-item">
+      <div class="cd-item__img"><img src="https://cdn.shopify.com/s/files/1/0267/9164/1277/files/The-Luke-Minimalist-Wallet1.jpg?v=1761294035&width=200" alt="The Luke Minimalist Wallet"></div>
+      <div>
+        <div class="cd-item__t">
+          <div><div class="cd-item__n">The Luke Minimalist Wallet</div><div class="cd-item__v">Cognac Brown</div></div>
+          <button class="cd-item__rm">Remove</button>
+        </div>
+        <div class="cd-item__b">
+          <div class="qty"><button>−</button><span>1</span><button>+</button></div>
+          <div class="cd-item__p">PKR 2,400</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CROSS-SELL (one-click, no popup) -->
+  <div class="cd__cross">
+    <h3>Complete your carry</h3>
+    <div class="xs">
+      <div class="xs__img"><img src="https://cdn.shopify.com/s/files/1/0267/9164/1277/files/Snap_card_holder_tan_by_kordovan.jpg?v=1761285003&width=120" alt="Snap Card Holder"></div>
+      <div class="xs__i"><div class="xs__n">Snap Card Holder</div><div class="xs__p">PKR 1,500</div></div>
+      <button class="xs__add">+ Add</button>
+    </div>
+    <div class="xs">
+      <div class="xs__img"><img src="https://cdn.shopify.com/s/files/1/0267/9164/1277/files/NappaWallet-BF-_1.jpg?v=1715855981&width=120" alt="Plain Bifold Nappa Wallet"></div>
+      <div class="xs__i"><div class="xs__n">Plain Bifold Nappa Wallet</div><div class="xs__p">PKR 2,400</div></div>
+      <button class="xs__add">+ Add</button>
+    </div>
+  </div>
+
+  <!-- STICKY FOOTER -->
+  <div class="cd__foot">
+    <span class="cd__note">+ Add order note / gift message</span>
+    <div class="cd__sub"><span class="l">Subtotal</span><span class="v">PKR 2,400</span></div>
+    <div class="cd__fine">Shipping &amp; taxes calculated at checkout · Cash on delivery available</div>
+    <button class="cd__co">Checkout <span class="arw">→</span></button>
+    <a class="cd__view" href="#">View full cart</a>
+    <div class="cd__trust">
+      <span><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Secure checkout</span>
+      <span><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>7-day returns</span>
+      <span><svg viewBox="0 0 24 24"><rect x="1" y="4" width="15" height="12"/><path d="M16 8h4l3 3v5h-7z"/></svg>COD available</span>
+    </div>
+    <div class="cd__pay"><span>COD</span><span>Visa</span><span>Mastercard</span><span>Easypaisa</span><span>JazzCash</span></div>
+  </div>
+
+</aside>
+
+</body></html>
