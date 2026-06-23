@@ -283,3 +283,40 @@
   .kv-ftr__head{grid-template-columns:1fr;}
   .kv-ftr__bottom{flex-direction:column;align-items:flex-start;gap:14px;}
 }
+
+/* ============================================================
+   Content / editorial pages (About, Shipping, Leather Care, Returns,
+   Our Craft, etc.) — on-brand styling for the shared main-page template.
+   ============================================================ */
+.kv-page{background:var(--canvas);font-family:var(--kv-body);}
+.kv-page__hero{background:var(--parchment);border-bottom:1px solid var(--border);text-align:center;padding:90px 0 72px;}
+.kv-page__hero .kv-eyebrow{display:block;margin-bottom:14px;}
+.kv-page__hero h1{font-family:var(--kv-heading);font-weight:500;font-size:clamp(34px,5vw,58px);letter-spacing:-.02em;line-height:1.05;color:var(--ink);margin:0;}
+.kv-page__body{max-width:760px;margin:0 auto;padding:74px 40px 104px;}
+.kv-rte{font-family:var(--kv-body);font-weight:300;color:var(--walnut);font-size:17px;line-height:1.85;}
+.kv-rte > h1:first-child,.kv-rte > h2:first-child{display:none;} /* bodies repeat the title — hero shows it */
+.kv-rte > :first-child{margin-top:0;}
+.kv-rte > h1:first-child + *,.kv-rte > h2:first-child + *{margin-top:0;}
+.kv-rte h2{font-family:var(--kv-heading);font-weight:500;font-size:clamp(24px,2.6vw,32px);letter-spacing:-.01em;color:var(--ink);line-height:1.2;margin:48px 0 16px;}
+.kv-rte h3{font-family:var(--kv-heading);font-weight:500;font-size:21px;color:var(--ink);margin:34px 0 12px;}
+.kv-rte h4{font-family:var(--kv-body);font-weight:600;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--cognac);margin:30px 0 12px;}
+.kv-rte p{margin:0 0 20px;}
+.kv-rte a{color:var(--cognac);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;}
+.kv-rte a:hover{color:var(--cognac-dark);}
+.kv-rte strong,.kv-rte b{color:var(--ink);font-weight:600;}
+.kv-rte ul,.kv-rte ol{margin:0 0 22px;padding-left:24px;}
+.kv-rte li{margin-bottom:10px;padding-left:6px;}
+.kv-rte ul li::marker{color:var(--brass);}
+.kv-rte ol li::marker{color:var(--cognac);font-family:var(--kv-heading);font-weight:500;}
+.kv-rte blockquote{margin:32px 0;padding:8px 0 8px 26px;border-left:2px solid var(--cognac);font-family:var(--kv-heading);font-style:italic;font-size:21px;line-height:1.55;color:var(--ink);}
+.kv-rte img{max-width:100%;height:auto;border-radius:10px;margin:28px 0;}
+.kv-rte hr{border:none;border-top:1px solid var(--border);margin:44px 0;}
+.kv-rte table{width:100%;border-collapse:collapse;margin:26px 0;font-size:15px;}
+.kv-rte th,.kv-rte td{text-align:left;padding:13px 16px;border-bottom:1px solid var(--border);}
+.kv-rte th{font-family:var(--kv-body);font-weight:600;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--cognac);background:var(--parchment);}
+
+@media(max-width:640px){
+  .kv-page__hero{padding:60px 0 48px;}
+  .kv-page__body{padding:52px 24px 72px;}
+  .kv-rte{font-size:16px;}
+}
