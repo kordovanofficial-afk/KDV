@@ -128,10 +128,18 @@ pushed to the draft theme to preview in a browser.)
   (fixed the earlier gap). `KDV.updateCartCount()` updates both legacy + `.kv-cart i`
   badges. Cross-sell = server-rendered from `cart-drawer` section setting
   `upsell_collection` (default `kdv-accessories`), one-click via the quick-add hook.
-- **OPEN / next up (user picks):** search results (reuse `.kv-coll` grid +
-  `card-product`; full-screen search overlay per moodboard) · **SEO pass** (the big
-  finisher: per-product enrichment + self-authored reviews via metafields,
-  titles/meta/alt text, enable storefront filters in Search & Discovery, sitemap).
+- **SEARCH DONE & deployed:** full-screen overlay `snippets/search-overlay.liquid`
+  (opens from `.kv-search` desktop + mobile-menu link; popular searches + category
+  empty state; debounced live results) backed by `sections/predictive-search.liquid`
+  (server-rendered suggestions/collections/products via `/search/suggest?section_id=
+  predictive-search`). `sections/main-search.liquid` restyled to `.kv-coll` grid +
+  `card-product` + Load More + friendly no-results. `.kv-srch` CSS in home.css.
+- **STOREFRONT BUILD COMPLETE** (homepage, content pages, PDP, collection, cart
+  drawer, search). **OPEN = SEO PASS + polish:** (1) per-product enrichment +
+  self-authored reviews via metafields; (2) titles/meta/alt text + PDP Product
+  JSON-LD; (3) enable storefront filters (Search & Discovery); (4) logo upload +
+  favicon + social share image; (5) optional polish: /cart PAGE, 404 & account
+  pages still on legacy theme styling; wishlist heart is decorative (no backend).
 - Logo: user is uploading manually (Header → "Logo (dark mark)"); needs a
   TRANSPARENT-bg black PNG (their source had a white bg). Favicon/social TODO.
 
