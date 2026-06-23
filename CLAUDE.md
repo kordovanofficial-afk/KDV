@@ -65,10 +65,27 @@ pushed to the draft theme to preview in a browser.)
 - **Done & deployed** to `shopify-theme-deploy`: Step 1 (Quiet Heritage palette +
   Fraunces + logo support), Step 2 (homepage scroll order, brand story copy,
   testimonial names, eyebrow fix).
-- **Homepage mockup** `docs/mockups/homepage.html` — APPROVED by user ("love it").
-- **OPEN / next up:** user wants the **menu/nav to look better** (hero header nav)
-  — refine that first. Then build the **product page mockup (Step 3)** for review.
-- Logo file still pending upload in theme editor (Header → "Logo (dark mark)").
+- **Homepage mockup** `docs/mockups/homepage-final.html` — APPROVED. **Homepage is
+  now FULLY BUILT & deployed** (all kv- sections in `assets/home.css`, loaded
+  globally via `layout/theme.liquid`): header → hero → trust marquee → bestsellers
+  (Customer Favourites) → brand story → collections grid → testimonials (continuous
+  horizontal review marquee, 10 verified reviews, pause-on-hover — user asked for
+  "lots of reviews that scroll") → email capture (real Shopify customer form) →
+  footer (`site-footer.liquid`, hardcoded content).
+- **Content pages DONE:** `sections/main-page.liquid` rebuilt into on-brand editorial
+  layout (`.kv-page` / `.kv-rte` in home.css); leading h1/h2 in page bodies is
+  CSS-suppressed (hero band shows the title). Pages already exist in the store w/
+  real content — footer/CTA links repointed to the REAL handles:
+  `about-kordovan` (Our Story), `our-craft` (hero "See the Craft"), `shipping`,
+  `leather-care-guide`, `returns`. (Don't use `/pages/about` or `/pages/leather-care`.)
+- ⚠️ **Editor strips SETTINGS too (not just blocks):** the theme editor removed
+  newly-added section settings (`aggregate`, `percent`, `count`, hero `heading`)
+  from `index.json` on sync — harmless ONLY because every kv- section supplies
+  `| default:` fallbacks in liquid. Keep hardcoded defaults on all section settings.
+- **OPEN / next up (user picks):** product page mockup (Step 3, recommended) ·
+  collection/category page · cart drawer · search · more content pages.
+- Logo: user is uploading manually (Header → "Logo (dark mark)"); needs a
+  TRANSPARENT-bg black PNG (their source had a white bg). Favicon/social TODO.
 
 ## 🖼 Image workflow (protocol)
 - **Every designed image slot = an image brief:** product/subject + ready-to-paste
