@@ -1,0 +1,404 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Luke Minimalist Wallet | Kordovan — Full-Grain Leather Wallet</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --canvas:#F7F2EA; --parchment:#ECE3D4; --ink:#241C16; --walnut:#4A3528;
+  --cognac:#A0623A; --cognac-dark:#7E4B2C; --tan:#C08B5C; --brass:#B0894F;
+  --brass-light:#D8C39A; --stone:#8B8174; --border:#DDD2C0; --pine:#2D6A4F; --oxblood:#8B2D2D;
+  --heading:'Fraunces',Georgia,serif; --body:'Inter',-apple-system,sans-serif;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--canvas);color:var(--ink);font-family:var(--body);font-weight:300;-webkit-font-smoothing:antialiased;line-height:1.6;}
+img{max-width:100%;display:block;}
+a{color:inherit;text-decoration:none;}
+h1,h2,h3,h4{font-family:var(--heading);font-weight:500;letter-spacing:-.01em;line-height:1.15;}
+.wrap{max-width:1240px;margin:0 auto;padding:0 40px;}
+.eyebrow{font-family:var(--body);font-weight:600;text-transform:uppercase;letter-spacing:.16em;font-size:11px;color:var(--cognac);}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:var(--body);font-weight:600;font-size:14px;letter-spacing:.04em;padding:17px 30px;border-radius:7px;border:1px solid transparent;cursor:pointer;transition:.2s;width:100%;}
+.btn--cognac{background:var(--cognac);color:#fff;} .btn--cognac:hover{background:var(--cognac-dark);}
+.btn--out{background:transparent;border-color:var(--ink);color:var(--ink);} .btn--out:hover{background:var(--ink);color:var(--canvas);}
+.stars{color:var(--brass);letter-spacing:2px;}
+
+/* header */
+.announce{background:var(--ink);color:var(--canvas);text-align:center;font-weight:300;font-size:11.5px;letter-spacing:.09em;padding:9px;text-transform:uppercase;}
+.announce b{color:var(--brass-light);font-weight:500;}
+.hdr{position:sticky;top:0;z-index:50;background:var(--canvas);box-shadow:0 1px 14px rgba(36,28,22,.08);}
+.hdr__row{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:24px;padding:14px 0;}
+.logo{font-family:var(--heading);font-weight:600;letter-spacing:.16em;text-transform:uppercase;font-size:22px;}
+.nav{display:flex;gap:28px;list-style:none;justify-self:center;}
+.nav a{font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;opacity:.9;}
+.nav a:hover{opacity:1;color:var(--cognac);}
+.actions{justify-self:end;display:flex;gap:18px;}
+.actions svg{width:20px;height:20px;stroke:var(--ink);fill:none;stroke-width:1.4;}
+
+/* ===== PDP top ===== */
+.crumb{font-size:12px;color:var(--stone);padding:22px 0 0;}
+.crumb a:hover{color:var(--cognac);}
+.pdp{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:start;padding:22px 0 84px;}
+
+/* gallery */
+.gallery{display:grid;grid-template-columns:76px 1fr;gap:16px;position:sticky;top:92px;}
+.gthumbs{display:flex;flex-direction:column;gap:12px;}
+.gthumbs img{width:76px;height:92px;object-fit:cover;border-radius:8px;border:1px solid var(--border);cursor:pointer;opacity:.65;transition:.2s;background:#fff;}
+.gthumbs img:hover{opacity:.9;}
+.gthumbs img.active{opacity:1;border-color:var(--cognac);}
+.gmain{position:relative;border:1px solid var(--border);border-radius:14px;overflow:hidden;background:#fff;aspect-ratio:4/5;}
+.gmain img{width:100%;height:100%;object-fit:cover;}
+.gbadge{position:absolute;top:16px;left:16px;background:var(--ink);color:var(--brass-light);font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:7px 12px;border-radius:4px;}
+
+/* buy box */
+.buybox{position:sticky;top:92px;}
+.buybox h1{font-size:clamp(27px,2.6vw,36px);color:var(--ink);}
+.buybox .sub{color:var(--walnut);font-size:16px;margin-top:8px;}
+.rate{display:flex;align-items:center;gap:10px;margin:16px 0 18px;font-size:13px;color:var(--walnut);}
+.rate a{color:var(--cognac);border-bottom:1px solid var(--cognac);}
+.price{display:flex;align-items:baseline;gap:12px;}
+.price .now{font-family:var(--heading);font-weight:500;font-size:30px;color:var(--ink);}
+.price .tax{font-size:12px;color:var(--stone);}
+.benbul{list-style:none;margin:22px 0;display:grid;gap:11px;}
+.benbul li{position:relative;padding-left:26px;font-size:14.5px;color:var(--walnut);}
+.benbul li svg{position:absolute;left:0;top:2px;width:17px;height:17px;stroke:var(--cognac);fill:none;stroke-width:2;}
+.opt{margin:22px 0;}
+.opt__l{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);font-weight:600;margin-bottom:12px;}
+.opt__l b{color:var(--ink);font-weight:600;}
+.sw{display:flex;gap:12px;}
+.sw button{width:38px;height:38px;border-radius:50%;border:2px solid var(--border);cursor:pointer;position:relative;}
+.sw button.active{border-color:var(--cognac);box-shadow:0 0 0 2px var(--canvas) inset;}
+.buyrow{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:stretch;margin-top:8px;}
+.qty{display:flex;align-items:center;border:1px solid var(--ink);border-radius:7px;overflow:hidden;}
+.qty button{width:42px;height:100%;background:none;border:none;font-size:18px;cursor:pointer;color:var(--ink);}
+.qty input{width:42px;text-align:center;border:none;font-family:var(--body);font-size:15px;background:none;-moz-appearance:textfield;}
+.buynow{margin-top:12px;}
+.trust3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:24px 0 0;padding:22px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.trust3 div{text-align:center;}
+.trust3 svg{width:24px;height:24px;stroke:var(--cognac);fill:none;stroke-width:1.5;margin:0 auto 8px;}
+.trust3 span{display:block;font-size:11.5px;color:var(--walnut);line-height:1.4;}
+.ship{display:flex;gap:10px;align-items:flex-start;margin-top:20px;font-size:13.5px;color:var(--walnut);}
+.ship svg{width:18px;height:18px;stroke:var(--pine);fill:none;stroke-width:1.8;flex:none;margin-top:2px;}
+.ship b{color:var(--ink);font-weight:600;}
+.wa{display:inline-flex;align-items:center;gap:8px;margin-top:16px;font-size:13px;color:var(--pine);font-weight:500;}
+.wa svg{width:16px;height:16px;fill:var(--pine);}
+
+/* sections */
+.sec{padding:78px 0;}
+.sec--parch{background:var(--parchment);}
+.shead{text-align:center;max-width:600px;margin:0 auto 48px;}
+.shead .eyebrow{display:block;margin-bottom:12px;}
+.shead h2{font-size:clamp(26px,3vw,38px);color:var(--ink);}
+
+/* benefits */
+.feat{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+.feat__i{text-align:center;padding:0 10px;}
+.feat__i svg{width:38px;height:38px;stroke:var(--cognac);fill:none;stroke-width:1.4;margin:0 auto 16px;}
+.feat__i h3{font-size:18px;margin-bottom:8px;color:var(--ink);}
+.feat__i p{font-size:14px;color:var(--walnut);line-height:1.7;}
+
+/* fits / capacity (Bellroy steal) */
+.fits{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+.fits__img{aspect-ratio:4/3;border-radius:12px;overflow:hidden;background:#fff;border:1px solid var(--border);}
+.fits__img img{width:100%;height:100%;object-fit:cover;}
+.fits h2{font-size:clamp(26px,3vw,36px);margin-bottom:10px;}
+.fits p{color:var(--walnut);font-size:16px;margin-bottom:26px;max-width:440px;}
+.fits__g{display:flex;gap:14px;}
+.fits__t{flex:1;background:var(--canvas);border:1px solid var(--border);border-radius:10px;padding:22px 16px;text-align:center;}
+.fits__t .n{font-family:var(--heading);font-weight:500;font-size:32px;color:var(--cognac);line-height:1;}
+.fits__t .l{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--stone);margin-top:8px;}
+
+/* lifestyle band */
+.life{height:60vh;min-height:420px;background:#1d150f center/cover;position:relative;display:flex;align-items:center;}
+.life::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,13,7,.7),transparent 70%);}
+.life__c{position:relative;z-index:2;color:var(--canvas);max-width:480px;}
+.life__c h2{color:var(--canvas);font-size:clamp(28px,3.4vw,42px);margin-bottom:14px;}
+.life__c p{color:rgba(247,242,234,.85);font-size:17px;}
+
+/* description + specs accordion */
+.desc{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;}
+.desc__lead{font-family:var(--heading);font-weight:400;font-size:22px;line-height:1.55;color:var(--ink);margin-bottom:18px;}
+.desc p{color:var(--walnut);font-size:15.5px;line-height:1.85;margin-bottom:16px;}
+.acc{border-top:1px solid var(--border);}
+.acc details{border-bottom:1px solid var(--border);}
+.acc summary{cursor:pointer;list-style:none;padding:20px 4px;display:flex;justify-content:space-between;align-items:center;font-family:var(--heading);font-weight:500;font-size:17px;color:var(--ink);}
+.acc summary::-webkit-details-marker{display:none;}
+.acc summary::after{content:"+";font-size:22px;color:var(--cognac);}
+.acc details[open] summary::after{content:"–";}
+.acc__b{padding:0 4px 22px;color:var(--walnut);font-size:14.5px;line-height:1.8;}
+.acc__b ul{margin:0;padding-left:20px;} .acc__b li{margin-bottom:7px;}
+
+/* reviews */
+.rev{display:grid;grid-template-columns:300px 1fr;gap:54px;align-items:start;}
+.rev__sum{text-align:center;border:1px solid var(--border);border-radius:14px;padding:34px 26px;background:var(--canvas);position:sticky;top:92px;}
+.rev__big{font-family:var(--heading);font-weight:500;font-size:60px;color:var(--ink);line-height:1;}
+.rev__sum .stars{font-size:18px;display:block;margin:8px 0;}
+.rev__cnt{font-size:13px;color:var(--stone);}
+.bars{margin:22px 0;display:grid;gap:7px;}
+.bar{display:flex;align-items:center;gap:9px;font-size:12px;color:var(--stone);}
+.bar .t{width:30px;text-align:right;}
+.bar .track{flex:1;height:7px;background:var(--parchment);border-radius:4px;overflow:hidden;}
+.bar .fill{height:100%;background:var(--brass);}
+.rev__list{display:grid;gap:22px;}
+.rcard{border:1px solid var(--border);border-radius:12px;padding:26px 28px;background:var(--canvas);}
+.rcard__top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+.rcard__top .stars{font-size:13px;}
+.rcard__v{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--pine);font-weight:600;display:inline-flex;gap:5px;align-items:center;}
+.rcard__v svg{width:12px;height:12px;stroke:var(--pine);fill:none;stroke-width:2.2;}
+.rcard p{color:var(--walnut);font-size:14.5px;line-height:1.7;margin:10px 0;}
+.rcard__by{font-size:13px;color:var(--ink);font-weight:600;} .rcard__by span{color:var(--stone);font-weight:400;}
+
+/* related */
+.rel{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+.pcard{display:block;}
+.pcard__m{aspect-ratio:4/5;border-radius:10px;overflow:hidden;border:1px solid var(--border);background:#fff;}
+.pcard__m img{width:100%;height:100%;object-fit:cover;transition:transform .6s;}
+.pcard:hover .pcard__m img{transform:scale(1.05);}
+.pcard__n{font-family:var(--heading);font-size:17px;margin-top:14px;color:var(--ink);}
+.pcard__meta{display:flex;justify-content:space-between;margin-top:5px;}
+.pcard__p{color:var(--cognac);font-weight:500;font-size:14px;} .pcard__s{color:var(--brass);font-size:11px;}
+
+/* guarantee band */
+.guar{background:var(--ink);color:var(--canvas);text-align:center;padding:74px 0;}
+.guar .eyebrow{color:var(--brass-light);}
+.guar h2{color:var(--canvas);font-size:clamp(26px,3vw,38px);margin:14px 0 14px;}
+.guar h2 em{font-style:italic;color:var(--brass-light);font-weight:400;}
+.guar p{color:rgba(247,242,234,.82);max-width:520px;margin:0 auto;font-size:16px;}
+
+/* sticky mobile bar */
+.mbar{display:none;position:fixed;left:0;right:0;bottom:0;z-index:60;background:var(--canvas);border-top:1px solid var(--border);box-shadow:0 -4px 18px rgba(36,28,22,.1);padding:11px 16px;align-items:center;gap:12px;}
+.mbar .mp{font-family:var(--heading);font-size:18px;color:var(--ink);white-space:nowrap;}
+.mbar .btn{width:auto;flex:1;padding:14px;}
+
+/* footer */
+.footer{background:#160f08;color:rgba(247,242,234,.7);}
+.footer__in{padding:48px 0 26px;}
+.footer__head{display:grid;grid-template-columns:1.6fr 1fr 1fr 1.3fr;gap:40px;padding-bottom:34px;border-bottom:1px solid rgba(247,242,234,.1);}
+.footer .credo{font-family:var(--heading);font-weight:500;font-size:24px;color:var(--canvas);margin-bottom:12px;max-width:300px;} .footer .credo em{font-style:italic;color:var(--brass-light);font-weight:400;}
+.footer h4{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--canvas);margin-bottom:16px;}
+.footer ul{list-style:none;} .footer li{margin-bottom:10px;} .footer li a{font-size:14px;} .footer li a:hover{color:var(--brass-light);}
+.footer__bot{display:flex;justify-content:space-between;padding-top:22px;font-size:12px;color:var(--stone);flex-wrap:wrap;gap:10px;}
+
+@media(max-width:980px){
+  .nav,.actions svg:not(:last-child){display:none;}
+  .pdp{grid-template-columns:1fr;gap:30px;}
+  .gallery{position:static;}
+  .buybox{position:static;}
+  .feat{grid-template-columns:1fr 1fr;gap:30px 18px;}
+  .fits,.desc,.rev{grid-template-columns:1fr;gap:32px;}
+  .rev__sum{position:static;}
+  .rel{grid-template-columns:1fr 1fr;}
+  .footer__head{grid-template-columns:1fr 1fr;gap:28px;}
+  .mbar{display:flex;}
+}
+@media(max-width:560px){
+  .wrap{padding:0 20px;}
+  .gallery{grid-template-columns:1fr;}
+  .gthumbs{flex-direction:row;order:2;overflow-x:auto;}
+  .feat{grid-template-columns:1fr 1fr;}
+  .rel{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head><body>
+
+<div class="announce">Free delivery over <b>PKR 2,500</b> &nbsp;·&nbsp; Cash on delivery nationwide &nbsp;·&nbsp; 100% genuine leather</div>
+<header class="hdr"><div class="wrap hdr__row">
+  <a class="logo" href="#">Kordovan</a>
+  <ul class="nav"><li><a href="#">New Arrivals</a></li><li><a href="#">Wallets</a></li><li><a href="#">Bags</a></li><li><a href="#">Jackets</a></li><li><a href="#">Shoes</a></li><li><a href="#">Accessories</a></li></ul>
+  <div class="actions">
+    <a aria-label="Search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></a>
+    <a aria-label="Account"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></a>
+    <a aria-label="Cart"><svg viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></a>
+  </div>
+</div></header>
+
+<div class="wrap"><div class="crumb"><a href="#">Home</a> / <a href="#">Wallets</a> / The Luke Minimalist Wallet</div></div>
+
+<!-- ABOVE THE FOLD -->
+<div class="wrap"><div class="pdp">
+
+  <!-- GALLERY -->
+  <div class="gallery">
+    <div class="gthumbs">
+      <img class="active" onclick="swap(this,'1761294035','The-Luke-Minimalist-Wallet1')" src="https://cdn.shopify.com/s/files/1/0267/9164/1277/files/The-Luke-Minimalist-Wallet1.jpg?v=1761294035&width=160" alt="The Luke wallet front">
+      <img onclick="swap(this,'1761294058','The-Luke-Minimalist-Wallet2')" src="https://cdn.shopify.com/s/files/1/0267/9164/1277/files/The-Luke-Minimalist-Wallet2.jpg?v=1761294058&width=160" alt="The Luke wallet angle">
+      <img onclick="swap(this,'1761294080','The-Luke-Minimalist-Wallet4')" src="https://cdn.shopify.com/s/files/1/0267/9164/1277/files/The-Luke-Minimalist-Wallet4.jpg?v=1761294080&width=160" alt="The Luke wallet open">
+      <img onclick="swap(this,'1761294099','The-Luke-Minimalist-Wallet3')" src="https://cdn.shopify.com/s/files/1/0267/9164/1277/files/The-Luke-Minimalist-Wallet3.jpg?v=1761294099&width=160" alt="The Luke wallet cards">
+      <img onclick="swap(this,'1761294122','The-Luke-Minimalist-Wallet5')" src="https://cdn.shopify.com/s/files/1/0267/9164/1277/files/The-Luke-Minimalist-Wallet5.jpg?v=1761294122&width=160" alt="The Luke wallet detail">
+    </div>
+    <div class="gmain">
+      <span class="gbadge">Bestseller · 40 in stock</span>
+      <img id="mainimg" src="https://cdn.shopify.com/s/files/1/0267/9164/1277/files/The-Luke-Minimalist-Wallet1.jpg?v=1761294035&width=900" alt="The Luke Minimalist Wallet">
+    </div>
+  </div>
+
+  <!-- BUY BOX -->
+  <div class="buybox">
+    <span class="eyebrow">Smart Wallets · Full-Grain</span>
+    <h1>The Luke Minimalist Wallet</h1>
+    <p class="sub">Vertical full-grain bifold — holds 8 cards + 20 bills, slim enough for your front pocket.</p>
+    <div class="rate"><span class="stars">★★★★★</span> <b>4.9</b> · <a href="#reviews">214 reviews</a></div>
+    <div class="price"><span class="now">PKR 2,400</span><span class="tax">Inclusive of all taxes</span></div>
+
+    <ul class="benbul">
+      <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Full-grain cow leather that ages like good whiskey</li>
+      <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Carries 6–8 cards + up to 20 bills, with a center slot</li>
+      <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Hand-stitched seams — backed by a lifetime warranty</li>
+    </ul>
+
+    <div class="opt">
+      <div class="opt__l">Colour: <b>Cognac Brown</b></div>
+      <div class="sw">
+        <button class="active" style="background:#7E4B2C" aria-label="Cognac Brown"></button>
+        <button style="background:#241C16" aria-label="Espresso Black"></button>
+        <button style="background:#C08B5C" aria-label="Saddle Tan"></button>
+      </div>
+    </div>
+
+    <div class="buyrow">
+      <div class="qty"><button onclick="q(-1)">−</button><input id="qty" value="1" inputmode="numeric"><button onclick="q(1)">+</button></div>
+      <button class="btn btn--cognac">Add to Cart · PKR 2,400</button>
+    </div>
+    <button class="btn btn--out buynow">Buy it now</button>
+
+    <div class="trust3">
+      <div><svg viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 8 8 8 8s8-3 8-8V6z"/><path d="m9 12 2 2 4-4"/></svg><span>100% genuine<br>full-grain leather</span></div>
+      <div><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 3v5h-7z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg><span>Free delivery<br>over PKR 2,500</span></div>
+      <div><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9 9 0 0 0-6.4 2.6L3 8"/><path d="M3 3v5h5"/></svg><span>7-day easy<br>returns</span></div>
+    </div>
+
+    <div class="ship"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div><b>Order today, dispatched in 1–2 days.</b> Cash on delivery available nationwide. Delivered in 2–6 business days.</div></div>
+    <a class="wa" href="#"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2z"/></svg>Questions? Chat with us on WhatsApp</a>
+  </div>
+
+</div></div>
+
+<!-- WHY IT'S DIFFERENT -->
+<section class="sec sec--parch"><div class="wrap">
+  <div class="shead"><span class="eyebrow">Why You'll Carry It for Years</span><h2>Built to a higher standard.</h2></div>
+  <div class="feat">
+    <div class="feat__i"><svg viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 8 8 8 8s8-3 8-8V6z"/></svg><h3>Full-Grain Leather</h3><p>The top cut of the hide — it resists wear and ages into a rich, personal patina.</p></div>
+    <div class="feat__i"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></svg><h3>Smart Capacity</h3><p>A vertical billfold that holds 8 cards and 20 bills without the bulk.</p></div>
+    <div class="feat__i"><svg viewBox="0 0 24 24"><path d="M12 2v20M5 7l7-5 7 5M5 7v10l7 5 7-5V7"/></svg><h3>Hand-Stitched</h3><p>Saddle-stitched by hand so the seams never fray or pull apart.</p></div>
+    <div class="feat__i"><svg viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 8 8 8 8s8-3 8-8V6z"/><path d="m9 12 2 2 4-4"/></svg><h3>Lifetime Warranty</h3><p>If it fails because of how it was made, we repair or replace it.</p></div>
+  </div>
+</div></section>
+
+<!-- FITS / CAPACITY (Bellroy steal) -->
+<section class="sec"><div class="wrap"><div class="fits">
+  <div class="fits__img"><img src="https://cdn.shopify.com/s/files/1/0267/9164/1277/files/The-Luke-Minimalist-Wallet4.jpg?v=1761294080&width=900" alt="The Luke wallet open showing card slots"></div>
+  <div>
+    <span class="eyebrow">Holds What Matters</span>
+    <h2>Everything you need. Nothing you don't.</h2>
+    <p>Designed around a vertical billfold first introduced in 2014 — quick-access card slots and a center slot for bills or receipts, in a profile slim enough for your front pocket.</p>
+    <div class="fits__g">
+      <div class="fits__t"><div class="n">8</div><div class="l">Cards</div></div>
+      <div class="fits__t"><div class="n">20</div><div class="l">Bills</div></div>
+      <div class="fits__t"><div class="n">3.2×4.3"</div><div class="l">Slim Profile</div></div>
+    </div>
+  </div>
+</div></div></section>
+
+<!-- LIFESTYLE BAND -->
+<section class="life" style="background-image:url('https://cdn.shopify.com/s/files/1/0267/9164/1277/files/The-Luke-Minimalist-Wallet5.jpg?v=1761294122&width=1800')"><div class="wrap"><div class="life__c">
+  <h2>The last wallet you'll need to buy.</h2>
+  <p>One investment, a lifetime of carry. The Luke only looks better the more you use it.</p>
+</div></div></section>
+
+<!-- DESCRIPTION + SPECS -->
+<section class="sec"><div class="wrap"><div class="desc">
+  <div>
+    <p class="desc__lead">A true game-changer for your everyday carry — a sleek vertical billfold that sets itself apart in both form and function.</p>
+    <p>Gone are the days of bulky, generic wallets. The Luke is your statement piece: a declaration of style and a tangible upgrade to your daily life. With a modest investment you gain enhanced functionality, lasting quality, and a piece that earns a second look.</p>
+    <p>And the icing on the cake — it's backed by a lifetime warranty, so it stands the test of time.</p>
+  </div>
+  <div class="acc">
+    <details open><summary>Features</summary><div class="acc__b"><ul>
+      <li>Full-grain cow leather that ages like a good whiskey</li>
+      <li>Carries 6–8 cards and up to 20 bills</li>
+      <li>Center vertical slot for bills or receipts</li>
+      <li>Hand-stitched so the seams never fray</li>
+      <li>Suitable for both formal and casual occasions</li>
+    </ul></div></details>
+    <details><summary>Dimensions</summary><div class="acc__b"><ul><li>Width: 3.2 inches</li><li>Height: 4.3 inches</li></ul></div></details>
+    <details><summary>Leather Care</summary><div class="acc__b">Wipe with a soft dry cloth, condition every 4–6 weeks, and keep out of prolonged sun and water. See our full <a href="#" style="color:var(--cognac);text-decoration:underline">Leather Care Guide</a>.</div></details>
+    <details><summary>Shipping &amp; Returns</summary><div class="acc__b">Dispatched in 1–2 business days; delivered in 2–6 days. Free delivery over PKR 2,500. Cash on delivery nationwide. 7-day returns on unused items.</div></details>
+  </div>
+</div></div></section>
+
+<!-- REVIEWS -->
+<section class="sec sec--parch" id="reviews"><div class="wrap">
+  <div class="shead"><span class="eyebrow">Reviews</span><h2>What customers say.</h2></div>
+  <div class="rev">
+    <div class="rev__sum">
+      <div class="rev__big">4.9</div>
+      <span class="stars">★★★★★</span>
+      <div class="rev__cnt">Based on 214 verified reviews</div>
+      <div class="bars">
+        <div class="bar"><span class="t">5★</span><div class="track"><div class="fill" style="width:92%"></div></div></div>
+        <div class="bar"><span class="t">4★</span><div class="track"><div class="fill" style="width:6%"></div></div></div>
+        <div class="bar"><span class="t">3★</span><div class="track"><div class="fill" style="width:1%"></div></div></div>
+        <div class="bar"><span class="t">2★</span><div class="track"><div class="fill" style="width:1%"></div></div></div>
+        <div class="bar"><span class="t">1★</span><div class="track"><div class="fill" style="width:0%"></div></div></div>
+      </div>
+      <button class="btn btn--out">Write a Review</button>
+    </div>
+    <div class="rev__list">
+      <div class="rcard">
+        <div class="rcard__top"><span class="stars">★★★★★</span><span class="rcard__v"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Verified Purchase</span></div>
+        <div class="rcard__by">Ahmed R. <span>· Lahore</span></div>
+        <p>Slimmest wallet I've owned and the leather already looks better after a month. The vertical layout is genuinely faster at the counter. Worth every rupee.</p>
+      </div>
+      <div class="rcard">
+        <div class="rcard__top"><span class="stars">★★★★★</span><span class="rcard__v"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Verified Purchase</span></div>
+        <div class="rcard__by">Sara M. <span>· Islamabad</span></div>
+        <p>Bought it for my husband and he hasn't switched back. Stitching is immaculate and it arrived in two days with COD. Will buy again as gifts.</p>
+      </div>
+      <div class="rcard">
+        <div class="rcard__top"><span class="stars">★★★★★</span><span class="rcard__v"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Verified Purchase</span></div>
+        <div class="rcard__by">Usman K. <span>· Karachi</span></div>
+        <p>Holds way more than it looks. Eight cards, some cash, still slim in my front pocket. The full-grain smell alone tells you it's the real thing.</p>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- YOU MAY ALSO LIKE -->
+<section class="sec"><div class="wrap">
+  <div class="shead"><span class="eyebrow">Complete the Carry</span><h2>You may also like.</h2></div>
+  <div class="rel">
+    <a class="pcard" href="#"><div class="pcard__m"><img src="https://cdn.shopify.com/s/files/1/0267/9164/1277/files/hunter_handcrafted_wallet_and_card_holder_by_kordovan_front.png?v=1761285544&width=600" alt="The Hunter HM Wallet"></div><div class="pcard__n">The Hunter HM Wallet</div><div class="pcard__meta"><span class="pcard__p">PKR 3,200</span><span class="pcard__s">★★★★★</span></div></a>
+    <a class="pcard" href="#"><div class="pcard__m"><img src="https://cdn.shopify.com/s/files/1/0267/9164/1277/files/Snap_card_holder_tan_by_kordovan.jpg?v=1761285003&width=600" alt="Snap Card Holder"></div><div class="pcard__n">Snap Card Holder</div><div class="pcard__meta"><span class="pcard__p">PKR 1,500</span><span class="pcard__s">★★★★★</span></div></a>
+    <a class="pcard" href="#"><div class="pcard__m"><img src="https://cdn.shopify.com/s/files/1/0267/9164/1277/files/KODO.png?v=1782021735&width=600" alt="KODO Smart Wallet"></div><div class="pcard__n">The KODO Smart Wallet</div><div class="pcard__meta"><span class="pcard__p">PKR 4,500</span><span class="pcard__s">★★★★★</span></div></a>
+  </div>
+</div></section>
+
+<!-- GUARANTEE -->
+<section class="guar"><div class="wrap">
+  <span class="eyebrow">Our Promise</span>
+  <h2>Backed for life — <em>built to be handed down.</em></h2>
+  <p>Every Kordovan piece carries a lifetime craftsmanship warranty. If it fails because of how it was made, we'll repair or replace it. No questions asked.</p>
+</div></section>
+
+<footer class="footer"><div class="footer__in wrap">
+  <div class="footer__head">
+    <div><div class="credo">Leather, <em>built to be handed down.</em></div><span class="eyebrow" style="color:var(--brass)">Est. 2020 · Made in Pakistan</span></div>
+    <div><h4>Shop</h4><ul><li><a>Wallets</a></li><li><a>Bags</a></li><li><a>Jackets</a></li><li><a>Shoes</a></li><li><a>Belts</a></li></ul></div>
+    <div><h4>Help</h4><ul><li><a>Shipping &amp; Delivery</a></li><li><a>Returns &amp; Exchanges</a></li><li><a>Leather Care</a></li><li><a>Our Story</a></li></ul></div>
+    <div><h4>Get in Touch</h4><p style="font-size:13.5px;line-height:1.8;color:rgba(247,242,234,.7)">+92 333 2601161<br>kordovan.official@gmail.com<br>Malir Cantt, Karachi</p></div>
+  </div>
+  <div class="footer__bot"><span>© 2026 Kordovan · Handcrafted in Pakistan 🇵🇰</span><span>Cash on Delivery · Visa · Mastercard · Easypaisa · JazzCash</span></div>
+</div></footer>
+
+<!-- STICKY MOBILE ATC -->
+<div class="mbar"><span class="mp">PKR 2,400</span><button class="btn btn--cognac">Add to Cart</button></div>
+
+<script>
+function swap(el,v,name){
+  document.getElementById('mainimg').src='https://cdn.shopify.com/s/files/1/0267/9164/1277/files/'+name+'.jpg?v='+v+'&width=900';
+  document.querySelectorAll('.gthumbs img').forEach(i=>i.classList.remove('active'));
+  el.classList.add('active');
+}
+function q(n){var i=document.getElementById('qty');i.value=Math.max(1,(parseInt(i.value)||1)+n);}
+</script>
+</body></html>
