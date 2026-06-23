@@ -1,3 +1,13 @@
+{%- comment -%}
+  Category handles + labels are hardcoded here (not in the JSON template) because
+  Shopify's theme editor strips block settings from templates/index.json on sync.
+  Each handle's collection must be sorted "Best selling" so the #1 product auto-updates.
+{%- endcomment -%}
+{%- liquid
+  assign cat_handles = 'kv2-mens-wallets,leather-bags,kv2-mens-leather-jackets,kv2-mens-leather-shoes' | split: ','
+  assign cat_labels  = 'Wallets,Bags,Jackets,Shoes' | split: ','
+-%}
+
 <section class="kv-home kv-section">
   <div class="kv-wrap">
     <div class="kv-shead">
@@ -6,13 +16,14 @@
     </div>
 
     <div class="kv-pgrid">
-      {%- for block in section.blocks -%}
-        {%- assign coll = collections[block.settings.handle] -%}
+      {%- for handle in cat_handles -%}
+        {%- assign coll = collections[handle] -%}
         {%- assign product = coll.products.first -%}
+        {%- assign label = cat_labels[forloop.index0] -%}
         {%- if product != blank -%}
-          <a class="kv-card" href="{{ product.url }}" {{ block.shopify_attributes }}>
+          <a class="kv-card" href="{{ product.url }}">
             <div class="kv-card__m">
-              {%- if block.settings.label != blank -%}<span class="kv-card__tag">#1 in {{ block.settings.label }}</span>{%- endif -%}
+              <span class="kv-card__tag">#1 in {{ label }}</span>
               {%- if product.featured_image -%}
                 <img src="{{ product.featured_image | image_url: width: 640 }}" alt="{{ product.title | escape }}" width="640" height="800" loading="lazy">
               {%- endif -%}
@@ -44,17 +55,6 @@
     { "type": "text", "id": "title", "label": "Heading", "default": "Customer Favourites" },
     { "type": "text", "id": "cta_text", "label": "CTA text", "default": "View All Products" },
     { "type": "url", "id": "cta_url", "label": "CTA link" }
-  ],
-  "max_blocks": 5,
-  "blocks": [
-    {
-      "type": "category",
-      "name": "Category #1",
-      "settings": [
-        { "type": "text", "id": "handle", "label": "Collection handle", "info": "e.g. kv2-mens-wallets — set that collection's sort order to 'Best selling' so its top product auto-updates here." },
-        { "type": "text", "id": "label", "label": "Badge label", "info": "e.g. Wallets — shows as '#1 in Wallets'" }
-      ]
-    }
   ]
 }
 {% endschema %}
