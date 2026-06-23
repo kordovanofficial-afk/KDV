@@ -108,8 +108,21 @@ pushed to the draft theme to preview in a browser.)
 - **Known follow-up:** site header cart link (`.kv-cart`) navigates to /cart; it does
   NOT open the cart drawer (theme.js binds drawer-open to legacy `.header__cart-btn`).
   Wire `.kv-cart` to open the drawer when we polish cart.
-- **OPEN / next up (user picks):** collection/category page (recommended) ·
-  cart drawer polish · search results · SEO pass.
+- **COLLECTION / CATEGORY PAGE DONE & deployed:** `sections/main-collection.liquid`
+  + new `snippets/card-product.liquid` restyled to `docs/mockups/collection.html`
+  (`.kv-coll` / `.kv-pc` CSS). Compact hero, sticky toolbar (native sort +
+  storefront filter pills/drawer + active chips), 3/2-col grid, hover 2nd-image +
+  Quick Add (reuses theme.js `.product-card__quick-add[data-variant-id]`) + colour
+  swatches + Sold-Out/Sale/New badges + wishlist, JS **Load More** (appends next
+  paginated page), editorial SEO block + `CollectionPage`/`ItemList` JSON-LD.
+  Serves EVERY category. `collection.json` keeps email_signup below.
+  ⚠️ **Filter pills/drawer populate only when storefront filters are enabled** in
+  admin → Search & Discovery → Filters. Until then: just "All" + sort (graceful).
+  Optional `collection.metafields.custom.editorial` overrides the SEO block.
+- **OPEN / next up (user picks):** cart drawer polish — restyle to Quiet Heritage
+  + wire `.kv-cart` header icon to open the drawer (recommended next) · search
+  results (reuse `.kv-coll`/`card-product`) · SEO pass (per-product enrichment,
+  self-authored reviews, titles/meta/alt, enable storefront filters).
 - Logo: user is uploading manually (Header → "Logo (dark mark)"); needs a
   TRANSPARENT-bg black PNG (their source had a white bg). Favicon/social TODO.
 
