@@ -1,7 +1,7 @@
 {
   "sections": {
     "main": {
-      "type": "main-product",
+      "type": "pdp-main",
       "blocks": {
         "pill_1": {
           "type": "feature_pill",
