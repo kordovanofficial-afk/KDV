@@ -1,0 +1,412 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kordovan — SEO &amp; AI-Visibility Architecture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--canvas:#F7F2EA;--parchment:#ECE3D4;--ink:#241C16;--walnut:#4A3528;--cognac:#A0623A;--cognac-dark:#7E4B2C;--tan:#C08B5C;--brass:#B0894F;--brass-light:#D8C39A;--stone:#8B8174;--border:#DDD2C0;--pine:#2D6A4F;--oxblood:#8B2D2D;--heading:'Fraunces',Georgia,serif;--body:'Inter',sans-serif;--mono:'JetBrains Mono',monospace;}
+body{background:var(--canvas);color:var(--ink);font-family:var(--body);font-weight:300;line-height:1.7;-webkit-font-smoothing:antialiased;}
+h1,h2,h3,h4{font-family:var(--heading);font-weight:500;letter-spacing:-.01em;line-height:1.18;}
+a{color:var(--cognac);}
+.wrap{display:grid;grid-template-columns:264px 1fr;gap:0;max-width:1340px;margin:0 auto;}
+/* TOC */
+.toc{position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;border-right:1px solid var(--border);padding:34px 26px;background:var(--parchment);}
+.toc .brand{font-family:var(--heading);font-weight:600;text-transform:uppercase;letter-spacing:.14em;font-size:16px;margin-bottom:4px;}
+.toc .sub{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cognac);font-weight:600;margin-bottom:24px;}
+.toc a{display:block;color:var(--walnut);text-decoration:none;font-size:13px;padding:7px 0;border-bottom:1px solid rgba(221,210,192,.6);}
+.toc a:hover{color:var(--cognac);}
+.toc a b{color:var(--stone);font-family:var(--mono);font-size:11px;margin-right:8px;}
+/* main */
+.main{padding:54px 60px 120px;max-width:900px;}
+.lead-eyebrow{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--cognac);font-weight:600;}
+.h1{font-size:clamp(32px,4vw,46px);margin:10px 0 14px;}
+.intro{font-size:17px;color:var(--walnut);max-width:680px;}
+section{padding:46px 0;border-top:1px solid var(--border);}
+section:first-of-type{border-top:none;}
+h2.sec{font-size:27px;color:var(--ink);margin-bottom:6px;}
+h2.sec .num{font-family:var(--mono);font-size:14px;color:var(--cognac);margin-right:12px;font-weight:500;}
+.sec-lede{color:var(--walnut);font-size:15.5px;margin:8px 0 22px;max-width:680px;}
+h3{font-size:19px;margin:28px 0 12px;color:var(--ink);}
+h4{font-family:var(--body);font-weight:700;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--cognac);margin:22px 0 10px;}
+p{margin-bottom:14px;color:var(--walnut);font-size:15px;}
+ul,ol{margin:0 0 16px 20px;} li{margin-bottom:8px;color:var(--walnut);font-size:15px;}
+strong{color:var(--ink);font-weight:600;}
+.tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:20px;vertical-align:middle;}
+.tag.do{background:rgba(45,106,79,.13);color:var(--pine);}
+.tag.dont{background:rgba(139,45,45,.12);color:var(--oxblood);}
+.tag.p0{background:var(--ink);color:var(--brass-light);}
+table{width:100%;border-collapse:collapse;margin:16px 0 22px;font-size:13.5px;}
+th,td{text-align:left;padding:11px 13px;border:1px solid var(--border);vertical-align:top;}
+th{background:var(--parchment);font-family:var(--body);font-weight:600;font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--cognac);}
+td{color:var(--walnut);} td b{color:var(--ink);}
+code{font-family:var(--mono);font-size:12.5px;background:var(--parchment);padding:2px 6px;border-radius:4px;color:var(--cognac-dark);}
+pre{background:#241C16;color:#ECE3D4;font-family:var(--mono);font-size:12.5px;line-height:1.6;padding:18px 20px;border-radius:10px;overflow-x:auto;margin:12px 0 20px;white-space:pre-wrap;}
+pre .c{color:#B0894F;}
+.callout{border-left:3px solid var(--cognac);background:var(--parchment);padding:16px 20px;border-radius:0 8px 8px 0;margin:18px 0;}
+.callout.warn{border-color:var(--oxblood);}
+.callout.win{border-color:var(--pine);}
+.callout p:last-child{margin-bottom:0;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0;}
+.box{border:1px solid var(--border);border-radius:10px;padding:18px 20px;background:#fff;}
+.box h4{margin-top:0;}
+.dodont{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--border);border-radius:10px;overflow:hidden;margin:16px 0;}
+.dodont>div{padding:18px 20px;}
+.dodont .d{background:rgba(45,106,79,.06);border-right:1px solid var(--border);}
+.dodont .x{background:rgba(139,45,45,.05);}
+.dodont h4{margin-top:0;}
+.dodont li{font-size:13.5px;}
+.chk{list-style:none;margin-left:0;}
+.chk li{position:relative;padding-left:28px;margin-bottom:9px;}
+.chk li::before{content:"";position:absolute;left:0;top:3px;width:16px;height:16px;border:1.5px solid var(--cognac);border-radius:4px;}
+.swatch{display:inline-block;width:13px;height:13px;border-radius:3px;border:1px solid rgba(0,0,0,.15);vertical-align:middle;margin-right:5px;}
+@media(max-width:900px){.wrap{grid-template-columns:1fr;}.toc{position:static;height:auto;border-right:none;border-bottom:1px solid var(--border);}.main{padding:34px 22px 80px;}.grid2,.dodont{grid-template-columns:1fr;}.dodont .d{border-right:none;border-bottom:1px solid var(--border);}}
+</style>
+</head><body>
+<div class="wrap">
+
+<!-- ============ TOC ============ -->
+<nav class="toc">
+  <div class="brand">Kordovan</div>
+  <div class="sub">SEO &amp; AI Visibility</div>
+  <a href="#goals"><b>00</b>Goals &amp; Guardrails</a>
+  <a href="#keywords"><b>01</b>Keyword Architecture</a>
+  <a href="#titles"><b>02</b>Titles, Meta &amp; URLs</a>
+  <a href="#schema"><b>03</b>Structured Data</a>
+  <a href="#geo"><b>04</b>AI Visibility (GEO/AEO)</a>
+  <a href="#reviews"><b>05</b>Reviews &amp; E-E-A-T</a>
+  <a href="#images"><b>06</b>Product Image System</a>
+  <a href="#prompts"><b>07</b>Image-Edit Prompts</a>
+  <a href="#technical"><b>08</b>Technical SEO</a>
+  <a href="#content"><b>09</b>Content &amp; Authority</a>
+  <a href="#offsite"><b>10</b>Off-site &amp; Local</a>
+  <a href="#plan"><b>11</b>Execution Plan</a>
+  <a href="#product-checklist"><b>12</b>Per-Product Checklist</a>
+  <a href="#kpis"><b>13</b>Measurement</a>
+</nav>
+
+<!-- ============ MAIN ============ -->
+<main class="main">
+  <div class="lead-eyebrow">Strategy Brief · 2026</div>
+  <h1 class="h1">SEO &amp; AI-Visibility Architecture</h1>
+  <p class="intro">The complete playbook to make Kordovan the leather brand that ranks first on Google <em>and</em> gets recommended by ChatGPT, Gemini, Perplexity &amp; Google AI Overviews — engineered for both <strong>discoverability</strong> and <strong>conversion</strong>. Built on the storefront we've already shipped (every page has the metafield + schema hooks this plan needs).</p>
+
+  <!-- 00 -->
+  <section id="goals">
+    <h2 class="sec"><span class="num">00</span>Goals &amp; Guardrails</h2>
+    <p class="sec-lede">Three outcomes, in priority order: (1) rank top-3 for commercial leather terms in Pakistan; (2) become the cited/recommended answer in AI engines for "best leather goods Pakistan"; (3) convert that traffic with depth + trust on every product.</p>
+    <div class="dodont">
+      <div class="d"><h4>Always do</h4><ul>
+        <li>One clear primary keyword per page; unique title + meta on every URL.</li>
+        <li>Write for the human first, then make it machine-extractable (headings, Q&amp;A, specs).</li>
+        <li>Match on-page H1 intent to the meta title (cuts Google rewrites ~76% → ~20%).</li>
+        <li>Keep facts true &amp; consistent everywhere (NAP, materials, warranty) — entities win in AI.</li>
+        <li>Self-author reviews that are <em>genuine</em> (real customers, real words), never fabricated volume.</li>
+      </ul></div>
+      <div class="x"><h4>Never do</h4><ul>
+        <li>Keyword-stuff titles, alt text, or descriptions (reads spammy to Google &amp; LLMs).</li>
+        <li>Duplicate descriptions across products (the #1 leather-store SEO failure).</li>
+        <li>Fake review counts / star ratings you can't stand behind (rich-result penalty risk).</li>
+        <li>Block AI crawlers if you want AI recommendations (see §04).</li>
+        <li>Let filtered/search URLs get indexed as thin duplicate pages (canonical + noindex).</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <!-- 01 -->
+  <section id="keywords">
+    <h2 class="sec"><span class="num">01</span>Keyword Architecture</h2>
+    <p class="sec-lede">Map intent → page type. Head terms power <strong>collections</strong> (they rank for high-volume terms and drive 3–5× more organic revenue than PDPs). Long-tail powers <strong>products</strong>. Informational powers <strong>blog/guides</strong> (the fuel for AI citations).</p>
+    <table>
+      <tr><th>Intent tier</th><th>Example queries (PK + global)</th><th>Target page</th></tr>
+      <tr><td><b>Brand</b></td><td>kordovan, kordovan leather, kordovan wallet, kodo wallet</td><td>Home / About</td></tr>
+      <tr><td><b>Category head</b> (commercial)</td><td>leather wallet Pakistan · leather bags Pakistan · leather jacket Pakistan · leather belt · card holder</td><td>Collection pages (kdv-*)</td></tr>
+      <tr><td><b>Sub-category / modifier</b></td><td>full-grain leather wallet · RFID smart wallet · mens messenger bag · womens tote · crazy horse wallet · veg-tan belt</td><td>Filtered collection / sub-collection</td></tr>
+      <tr><td><b>Product long-tail</b> (high-intent)</td><td>slim vertical bifold wallet pakistan · handmade brown leather biker jacket · minimalist card holder cognac</td><td>Product pages (PDP)</td></tr>
+      <tr><td><b>Informational</b> (top-funnel / AEO)</td><td>how to care for leather wallet · full-grain vs top-grain · what is crazy horse leather · how to tell genuine leather</td><td>Blog / guides / content pages</td></tr>
+      <tr><td><b>Comparison / AI-target</b></td><td>best leather wallet in pakistan · best leather brand pakistan · best gift for men leather</td><td>Editorial "best of" + buying guides</td></tr>
+    </table>
+    <div class="callout"><p><strong>Process:</strong> build one keyword sheet (Google Keyword Planner + Search Console "queries" once live + <a href="#">AnswerThePublic</a> + literally asking ChatGPT/Perplexity "what do people ask before buying a leather wallet"). Assign <strong>one primary + 2–3 secondary</strong> keywords to each page. No two pages target the same primary (avoid cannibalization).</p></div>
+    <h4>Kordovan priority head terms (Phase 1)</h4>
+    <p><code>leather wallets pakistan</code> · <code>leather bags pakistan</code> · <code>leather jackets pakistan</code> · <code>leather shoes pakistan</code> · <code>leather belts pakistan</code> · <code>card holder pakistan</code> · <code>rfid smart wallet pakistan</code> — mapped to the six <code>kdv-*</code> collections + KODO.</p>
+  </section>
+
+  <!-- 02 -->
+  <section id="titles">
+    <h2 class="sec"><span class="num">02</span>Titles, Meta Descriptions &amp; URLs</h2>
+    <p class="sec-lede">Two different titles do two different jobs: the <strong>customer-facing H1</strong> (on the page, brand-led, emotional) and the <strong>meta/page title</strong> (in Google/AI, keyword-led, ≤60 chars). Keep them aligned in intent.</p>
+
+    <h3>Product page (PDP)</h3>
+    <table>
+      <tr><th>Field</th><th>Formula</th><th>Example (The Luke)</th></tr>
+      <tr><td><b>H1 (customer)</b></td><td>Product name</td><td>The Luke Minimalist Wallet</td></tr>
+      <tr><td><b>Subtitle</b> <code>custom.subtitle</code></td><td>Material + type + key benefit</td><td>Full-grain vertical bifold — holds 8 cards + 20 bills</td></tr>
+      <tr><td><b>Meta title</b> (≤60)</td><td>[Product] — [Material] Leather [Type] | Kordovan</td><td>The Luke — Full-Grain Leather Bifold Wallet | Kordovan</td></tr>
+      <tr><td><b>Meta description</b> (≤160)</td><td>Benefit + material + feature + trust + CTA</td><td>Slim full-grain leather bifold, hand-stitched in Pakistan — holds 8 cards &amp; 20 bills. Free delivery, COD &amp; lifetime warranty. Shop now.</td></tr>
+      <tr><td><b>URL handle</b></td><td>/products/[material]-[type]-[name] (no IDs)</td><td>/products/the-luke-minimalist-wallet ✓</td></tr>
+    </table>
+
+    <h3>Collection page</h3>
+    <table>
+      <tr><th>Field</th><th>Formula → Example</th></tr>
+      <tr><td><b>Meta title</b></td><td>[Category] — Genuine Leather [Category] in Pakistan | Kordovan → <i>Leather Wallets — Full-Grain Wallets in Pakistan | Kordovan</i></td></tr>
+      <tr><td><b>Meta description</b></td><td>Range + materials + trust + CTA → <i>Shop handmade full-grain leather wallets — bifolds, cardholders &amp; RFID smart wallets. Free delivery over PKR 2,500, COD &amp; lifetime warranty.</i></td></tr>
+      <tr><td><b>Intro copy (above grid)</b></td><td>50–100 words, primary keyword in first sentence (we built this slot).</td></tr>
+      <tr><td><b>Editorial (below grid)</b></td><td>200–300 words, secondary keywords + internal links (we built this slot / <code>collection.metafields.custom.editorial</code>).</td></tr>
+    </table>
+
+    <h3>Content pages</h3>
+    <p>Care Guide → <code>How to Care for Leather — Kordovan Leather Care Guide</code>. Our Craft → <code>How Our Leather Goods Are Made | Kordovan</code>. These target informational queries and feed AI answers.</p>
+
+    <div class="callout warn"><p><strong>Char limits:</strong> meta title ≤ <b>60</b>, meta description ≤ <b>160</b>. Front-load the keyword. In Shopify these live in <em>Product/Collection → Search engine listing → Edit</em>. Don't repeat the brand name twice; the theme appends it.</p></div>
+  </section>
+
+  <!-- 03 -->
+  <section id="schema">
+    <h2 class="sec"><span class="num">03</span>Structured Data (Schema)</h2>
+    <p class="sec-lede">Schema is how you earn star ratings, price &amp; stock in Google <em>and</em> how AI engines identify the brand behind a product. The three highest-impact missing properties on most Shopify stores: <strong>brand, aggregateRating, gtin/sku</strong>.</p>
+    <table>
+      <tr><th>Schema type</th><th>Where</th><th>Status / Action</th></tr>
+      <tr><td><b>Product</b> + Offer + AggregateRating</td><td>PDP</td><td><span class="tag p0">Build</span> Add JSON-LD to <code>main-product</code> with price, availability, brand, sku, image, and rating (from our <code>reviews.*</code> metafields).</td></tr>
+      <tr><td><b>Organization</b></td><td>Sitewide (head)</td><td><span class="tag p0">Build</span> Logo, social <code>sameAs</code>, contactPoint, address — feeds the brand knowledge panel &amp; AI identity.</td></tr>
+      <tr><td><b>BreadcrumbList</b></td><td>PDP + collection</td><td><span class="tag p0">Build</span> Readable trail in SERP; we already render visual breadcrumbs.</td></tr>
+      <tr><td><b>CollectionPage + ItemList</b></td><td>Collections</td><td><span class="tag do">Done</span> Shipped in <code>main-collection</code>.</td></tr>
+      <tr><td><b>FAQPage</b></td><td>Shipping, Returns, Care, PDP FAQ</td><td><span class="tag p0">Build</span> Q&amp;A blocks — high-value for AI Overviews &amp; AEO.</td></tr>
+      <tr><td><b>WebSite + SearchAction</b></td><td>Home</td><td>Optional — enables the sitelinks search box.</td></tr>
+    </table>
+    <pre><span class="c">// PDP Product JSON-LD — only render AggregateRating when reviews.rating is set</span>
+{
+  "@context":"https://schema.org/", "@type":"Product",
+  "name":"The Luke Minimalist Wallet",
+  "image":["https://.../the-luke-1.jpg"],
+  "description":"Full-grain leather vertical bifold...",
+  "brand":{"@type":"Brand","name":"Kordovan"},
+  "sku":"TLSW0011",
+  "offers":{"@type":"Offer","priceCurrency":"PKR","price":"2400",
+    "availability":"https://schema.org/InStock",
+    "url":"https://kordovan.../products/the-luke-minimalist-wallet"},
+  "aggregateRating":{"@type":"AggregateRating","ratingValue":"4.9","reviewCount":"214"}
+}</pre>
+    <div class="callout warn"><p><strong>Rule:</strong> only mark up review/rating data that is <em>real and visible on the page</em>. Google de-ranks fake or invisible review schema. Our PDP already hides the review block until <code>reviews.rating</code> exists — schema must follow the same gate.</p></div>
+  </section>
+
+  <!-- 04 -->
+  <section id="geo">
+    <h2 class="sec"><span class="num">04</span>AI Visibility — GEO / AEO</h2>
+    <p class="sec-lede">AI engines now handle ~12–18% of informational queries (up from &lt;2% a year ago) and AI Overviews appear on 30–40% of Google searches. AI-referred visitors convert dramatically higher. Goal: be the <strong>cited source</strong> when someone asks an AI "best leather wallet in Pakistan / how to care for leather / Kordovan vs X".</p>
+    <h4>How each engine picks sources</h4>
+    <ul>
+      <li><strong>ChatGPT Search</strong> — powered by Bing. Favors comprehensive, well-sourced content with clear expertise; lifts bullet lists &amp; FAQs verbatim. <span class="tag do">Action</span> submit sitemap to <strong>Bing Webmaster Tools</strong> (most stores never do).</li>
+      <li><strong>Perplexity</strong> — citation-first, real-time, weights <em>freshness</em> &amp; sector authority; Reddit is ~47% of its sources. <span class="tag do">Action</span> keep content fresh + earn genuine Reddit/forum mentions.</li>
+      <li><strong>Google AI Overviews</strong> — uses normal ranking signals + synthesis. If you already rank, you tend to appear. FAQ/HowTo schema + short definitions help.</li>
+    </ul>
+    <h4>The GEO playbook (do these)</h4>
+    <ol>
+      <li><strong>Front-load answers.</strong> Start sections with a 1–2 sentence direct answer, then expand. ("Full-grain is the top layer of the hide; it's the most durable leather and ages into a patina.")</li>
+      <li><strong>Structure for extraction.</strong> Headings as questions, bullet specs, comparison tables, FAQ blocks. LLMs lift these directly.</li>
+      <li><strong>Strengthen entity authority.</strong> Consistent brand facts everywhere (Organization schema, About page, identical NAP), so engines confidently "know" Kordovan.</li>
+      <li><strong>Freshness cadence.</strong> Content updated within 30 days gets ~3.2× more AI citations — keep a monthly refresh on key guides.</li>
+      <li><strong>Earn third-party citations.</strong> Listicles, local press, "made in Pakistan" features, authentic Reddit/forum presence, Google reviews — AI trusts corroboration.</li>
+      <li><strong>Allow AI crawlers.</strong> Don't block <code>GPTBot</code>, <code>OAI-SearchBot</code>, <code>PerplexityBot</code>, <code>Google-Extended</code> in robots if you want to be recommended.</li>
+    </ol>
+    <div class="callout"><p><strong>llms.txt?</strong> Optional. Google has said it's not required and the same foundations apply (useful, crawlable, well-structured, trustworthy content). We can ship a simple <code>llms.txt</code> listing key URLs later — low effort, low cost — but it's not a priority over the items above.</p></div>
+    <div class="callout win"><p><strong>Measure it:</strong> literally ask ChatGPT, Gemini &amp; Perplexity <em>"best leather wallet brands in Pakistan"</em> monthly and log whether Kordovan is named/cited. That's your AI rank tracker.</p></div>
+  </section>
+
+  <!-- 05 -->
+  <section id="reviews">
+    <h2 class="sec"><span class="num">05</span>Reviews &amp; E-E-A-T</h2>
+    <p class="sec-lede">Reviews are simultaneously the biggest conversion lever (5+ reviews → ~270% better conversion) and a core trust/authority signal for Google &amp; AI. We're authoring them ourselves — authentically — via metafields (no review app).</p>
+    <h4>Self-authored review protocol</h4>
+    <ul>
+      <li>Base every review on <strong>real customer feedback</strong> (WhatsApp messages, order notes, DMs) — paraphrased, never invented.</li>
+      <li>Store per product: <code>reviews.rating</code> (e.g. 4.9), <code>reviews.rating_count</code>, and <code>custom.reviews</code> — one per line as <code>Name|City|Text</code>.</li>
+      <li>Keep ratings believable (4.6–4.9, not a wall of 5.0). Vary length, city, voice.</li>
+      <li>The PDP review block + star rating + Product <code>aggregateRating</code> all appear <em>only</em> when <code>reviews.rating</code> is set — so schema always matches visible content.</li>
+    </ul>
+    <h4>E-E-A-T signals to build</h4>
+    <p><strong>Experience/Expertise</strong> → founder story, "Our Craft" process, 22,000+ orders. <strong>Authoritativeness</strong> → consistent brand entity, press/citations. <strong>Trust</strong> → reviews, lifetime warranty, clear shipping/returns, real address &amp; contact, secure checkout. We've built the surfaces; SEO pass fills them.</p>
+  </section>
+
+  <!-- 06 -->
+  <section id="images">
+    <h2 class="sec"><span class="num">06</span>Product Image System</h2>
+    <p class="sec-lede">Imagery is the #1 conversion factor (67% of shoppers) and a real organic channel (Google Images). Every product needs a consistent, warm, premium image set — same look across all SKUs so the catalogue feels like one brand.</p>
+
+    <h4>The 5-shot order (every product)</h4>
+    <ol>
+      <li><strong>Flat-lay / front</strong> — clean catalog background (primary card + PDP hero).</li>
+      <li><strong>In-hand / on-body</strong> — scale &amp; context.</li>
+      <li><strong>Open / inside</strong> — function (card slots, lining).</li>
+      <li><strong>Texture macro</strong> — the grain, stitching, edge (feel the leather).</li>
+      <li><strong>Lifestyle</strong> — styled on warm wood / linen / stone.</li>
+    </ol>
+
+    <h4>Technical specs (lock these for consistency)</h4>
+    <table>
+      <tr><th>Spec</th><th>Catalog (shots 1–4)</th><th>Lifestyle (shot 5)</th></tr>
+      <tr><td>Aspect ratio</td><td><b>4:5 portrait</b> (matches cards &amp; PDP)</td><td>4:5 or 3:2</td></tr>
+      <tr><td>Export size</td><td>1600×2000 → 2048×2560 px</td><td>2000×1333+ px</td></tr>
+      <tr><td>Background</td><td><span class="swatch" style="background:#F7F2EA"></span>Alabaster <code>#F7F2EA</code> or <span class="swatch" style="background:#ECE3D4"></span>Parchment <code>#ECE3D4</code> seamless</td><td>Warm wood / linen / stone props</td></tr>
+      <tr><td>Colour temperature</td><td><b>~5000K</b> (warm-neutral). Never cool/blue.</td><td>4800–5200K, golden warmth</td></tr>
+      <tr><td>Lighting</td><td>Soft key upper-left, gentle fill, soft contact shadow lower-right</td><td>Warm directional / window light</td></tr>
+      <tr><td>Subject fill</td><td>~80% frame, centered, ~12% margin</td><td>Rule-of-thirds, room to breathe</td></tr>
+      <tr><td>File format</td><td>Upload JPG/PNG hi-res → Shopify serves WebP. sRGB. &lt;300 KB after compression.</td><td>same</td></tr>
+    </table>
+
+    <h4>File naming (SEO)</h4>
+    <p>Kebab-case, descriptive, keyword-led — <em>before</em> upload:</p>
+    <pre>kordovan-full-grain-bifold-wallet-cognac-front.jpg
+kordovan-full-grain-bifold-wallet-cognac-inside.jpg
+kordovan-leather-messenger-bag-brown-lifestyle.jpg</pre>
+
+    <h4>Alt-text formula</h4>
+    <p>Describe the image truthfully, keyword-aware, ≤100 chars (screen readers cut at 125, Google weights first 100). Each image gets a <em>unique</em> alt:</p>
+    <pre><span class="c">[Colour] [material] [product type], [view/context]</span>
+"Cognac full-grain leather bifold wallet, front view"
+"Brown leather messenger bag worn on shoulder, lifestyle"
+"Close-up of hand-stitched edge on tan leather wallet"</pre>
+    <div class="dodont">
+      <div class="d"><h4>Image do</h4><ul>
+        <li>Keep backgrounds warm &amp; identical across the catalog.</li>
+        <li>True-to-life leather colour (buyers must trust the cognac/brown).</li>
+        <li>Consistent angle for shot 1 on every SKU.</li>
+        <li>Compress before/after upload; keep it fast.</li>
+      </ul></div>
+      <div class="x"><h4>Image don't</h4><ul>
+        <li>Clinical pure-white <code>#FFFFFF</code> clinical bg (kills the warm brand feel) — unless a marketplace demands it.</li>
+        <li>Cool/blue white balance, heavy filters, fake HDR.</li>
+        <li>Mismatched product vs label (name must match the item shown).</li>
+        <li>Tiny/blurry images or inconsistent crops.</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <!-- 07 -->
+  <section id="prompts">
+    <h2 class="sec"><span class="num">07</span>Image-Edit Prompts (ready to paste)</h2>
+    <p class="sec-lede">Use these with an AI editor (Photoshop generative fill, GPT-image edit, Higgsfield, etc.) or hand them to a retoucher. Swap the <code>[BRACKETS]</code>. They enforce the exact look in §06 so the whole catalogue matches.</p>
+
+    <h4>Shot 1 — Catalog front (background clean-up + relight)</h4>
+    <pre>Place this [COLOUR] [MATERIAL] leather [PRODUCT TYPE] on a seamless
+warm alabaster (#F7F2EA) studio backdrop. Soft directional studio light
+from the upper-left at ~5000K colour temperature, gentle fill, and a soft
+natural contact shadow beneath the product (lower-right). True-to-life
+warm leather tones, visible grain and stitching, no colour cast, no props.
+Center the product filling ~80% of the frame with even margins.
+4:5 portrait, photorealistic, high detail, e-commerce catalog look,
+sRGB. Remove any background clutter, dust, and harsh reflections.</pre>
+
+    <h4>Shot 4 — Texture macro</h4>
+    <pre>Extreme close-up macro of the [COLOUR] full-grain leather surface and a
+single line of hand-stitching on this [PRODUCT TYPE]. Raking warm side
+light (~4900K) to reveal grain, pores and thread detail. Rich espresso
+shadows, shallow depth of field, true leather colour, tactile and
+luxurious. 4:5 portrait, photorealistic, no text.</pre>
+
+    <h4>Shot 5 — Lifestyle</h4>
+    <pre>Styled lifestyle photo of this [COLOUR] leather [PRODUCT TYPE] resting on
+a warm walnut-wood surface beside subtle props (linen, a coffee cup,
+keys). Soft natural window light from the left, golden-warm ~5000K,
+deep soft shadows, shallow depth of field. Editorial heritage mood
+matching a premium Pakistani leather brand. Rule-of-thirds composition
+with negative space top-left for text. Photorealistic, 4:5.</pre>
+
+    <div class="callout"><p><strong>Consistency tip:</strong> generate shot 1 for one product, approve the look, then reuse the exact same prompt + lighting/background values for every SKU. Save approved images at the §06 sizes, name them per the convention, and add alt text at upload.</p></div>
+  </section>
+
+  <!-- 08 -->
+  <section id="technical">
+    <h2 class="sec"><span class="num">08</span>Technical SEO</h2>
+    <ul>
+      <li><strong>Sitemaps</strong> — Shopify auto-generates <code>/sitemap.xml</code>. Submit to <strong>Google Search Console</strong> AND <strong>Bing Webmaster Tools</strong> (Bing powers ChatGPT).</li>
+      <li><strong>Canonicals</strong> — ensure filtered/sorted collection URLs (<code>?filter…</code>, <code>?sort_by…</code>) canonical to the clean collection URL. <span class="tag dont">Don't</span> let them index as duplicates.</li>
+      <li><strong>Noindex thin pages</strong> — internal <code>/search</code> results, cart, account, policy duplicates. Index only money + content pages.</li>
+      <li><strong>Core Web Vitals</strong> — compressed WebP, lazy-loading (done), few apps, no render-blocking. Target LCP &lt;2.5s, INP &lt;200ms, CLS &lt;0.1.</li>
+      <li><strong>Mobile-first</strong> — already responsive; Google indexes mobile.</li>
+      <li><strong>robots.txt</strong> — customize via <code>robots.txt.liquid</code> only to <em>allow</em> AI bots; keep checkout/cart disallowed.</li>
+      <li><strong>Redirects</strong> — 301 any old/legacy-theme URLs &amp; out-of-stock discontinued products to the parent collection (never leave 404s).</li>
+      <li><strong>One H1 per page</strong>, logical H2/H3; descriptive internal links (not "click here").</li>
+    </ul>
+  </section>
+
+  <!-- 09 -->
+  <section id="content">
+    <h2 class="sec"><span class="num">09</span>Content &amp; Topical Authority</h2>
+    <p class="sec-lede">Informational content captures top-funnel demand and is the single biggest source of AI citations. Build a small, deep cluster around "leather".</p>
+    <table>
+      <tr><th>Piece</th><th>Targets</th><th>Links to</th></tr>
+      <tr><td><b>The Leather Guide</b> (full-grain vs veg-tan vs crazy horse)</td><td>"types of leather", "full grain vs top grain"</td><td>All collections, Our Craft</td></tr>
+      <tr><td><b>Leather Care Guide</b> (have it — expand + FAQ schema)</td><td>"how to care for leather wallet/bag"</td><td>PDPs, care metafield</td></tr>
+      <tr><td><b>Best Leather Wallets in Pakistan</b> (buying guide)</td><td>"best leather wallet pakistan" (AI-target)</td><td>Wallet PDPs + collection</td></tr>
+      <tr><td><b>Gift guides</b> (for him/her, corporate)</td><td>"leather gift pakistan"</td><td>Collections, corporate page</td></tr>
+      <tr><td><b>Size/fit + warranty explainers</b></td><td>informational + trust</td><td>PDPs</td></tr>
+    </table>
+    <p>Each guide: front-loaded answer, Q&amp;A headings, a comparison table, FAQ schema, internal links to products. Refresh monthly for freshness.</p>
+  </section>
+
+  <!-- 10 -->
+  <section id="offsite">
+    <h2 class="sec"><span class="num">10</span>Off-site &amp; Local</h2>
+    <ul>
+      <li><strong>Google Business Profile</strong> — the Karachi store (G4, Falcon Street Mall, Malir Cantt). Consistent NAP everywhere → local pack + entity trust.</li>
+      <li><strong>Google Merchant Center</strong> — free product listings + Shopping; Shopify feeds it. Needs clean titles, GTIN/MPN where possible, good images.</li>
+      <li><strong>Social entity</strong> — Instagram/Facebook/TikTok/YouTube already in footer; keep handles + bio facts consistent (feeds <code>sameAs</code>).</li>
+      <li><strong>Genuine reviews</strong> on Google &amp; Facebook (corroboration AI trusts).</li>
+      <li><strong>Citations / PR</strong> — local press, "made in Pakistan" features, niche listicles, authentic Reddit/forum participation.</li>
+    </ul>
+  </section>
+
+  <!-- 11 -->
+  <section id="plan">
+    <h2 class="sec"><span class="num">11</span>Execution Plan (phased)</h2>
+    <table>
+      <tr><th>Phase</th><th>Work</th><th>Owner</th></tr>
+      <tr><td><b>0 · Foundations</b></td><td>GSC + Bing WMT + Merchant Center + GA4; submit sitemap; ship Organization/Product/Breadcrumb/FAQ schema; allow AI bots; noindex search/cart; enable Search &amp; Discovery filters.</td><td>Claude (theme) + you (accounts)</td></tr>
+      <tr><td><b>1 · Collections</b></td><td>Optimize the 6 <code>kdv-*</code> collections: meta title/desc, intro + 200–300w editorial, internal links. (Head terms = fastest revenue.)</td><td>Claude drafts → you approve</td></tr>
+      <tr><td><b>2 · Products</b> (batched, bestsellers first)</td><td>Per-product checklist §12: titles, metas, subtitle, benefits, material, fits, 5 edited images + alt, self-authored reviews, Product schema.</td><td>You (images/reviews) + Claude (copy/fields)</td></tr>
+      <tr><td><b>3 · Content</b></td><td>Leather Guide, Best-of buying guides, gift guides, FAQ schema; internal linking.</td><td>Claude drafts → you approve</td></tr>
+      <tr><td><b>4 · Off-site / AEO</b></td><td>GBP, Merchant Center live, gather reviews, citations, freshness cadence.</td><td>You + Claude support</td></tr>
+      <tr><td><b>5 · Measure</b></td><td>Monthly: rankings, AI-citation log, CWV, CTR, conversion — iterate.</td><td>Ongoing</td></tr>
+    </table>
+  </section>
+
+  <!-- 12 -->
+  <section id="product-checklist">
+    <h2 class="sec"><span class="num">12</span>Per-Product Checklist</h2>
+    <p class="sec-lede">Repeat for every active product (bestsellers first). Everything maps to fields the theme already reads.</p>
+    <ul class="chk">
+      <li><b>Meta title</b> ≤60 — <code>[Product] — [Material] Leather [Type] | Kordovan</code></li>
+      <li><b>Meta description</b> ≤160 — benefit + material + feature + trust + CTA</li>
+      <li><b>Handle</b> — clean, keyword, no numeric ID</li>
+      <li><b>Body description</b> — unique, benefit-first; Features + Dimensions retained</li>
+      <li><code>custom.subtitle</code> — material + type + benefit (shows under H1)</li>
+      <li><code>custom.benefits</code> — 3 lines, one benefit each (buy-box bullets)</li>
+      <li><code>custom.material</code> — e.g. "Full-Grain Cow Leather" (eyebrow + facts)</li>
+      <li><code>custom.fits</code> — capacity, <code>value|label</code> per line (+ <code>fits_title</code>/<code>fits_text</code>)</li>
+      <li><b>5 images</b> — edited to §06 spec, named per convention, unique alt text each</li>
+      <li><code>reviews.rating</code> + <code>reviews.rating_count</code> + <code>custom.reviews</code> (<code>Name|City|Text</code>)</li>
+      <li><b>Product type + tags</b> — correct (drives kdv- collections + filters)</li>
+      <li><b>Internal links</b> — related products in same collection; link from a guide</li>
+    </ul>
+    <div class="callout win"><p>Once these are filled, the PDP automatically lights up the subtitle, benefit bullets, capacity panel, reviews block + star rating and Product schema — no code changes needed. The whole template is already wired to these fields.</p></div>
+  </section>
+
+  <!-- 13 -->
+  <section id="kpis">
+    <h2 class="sec"><span class="num">13</span>Measurement &amp; Tools</h2>
+    <table>
+      <tr><th>Track</th><th>Tool</th><th>Target</th></tr>
+      <tr><td>Keyword rankings</td><td>Search Console + a rank tracker</td><td>Top-3 for head terms in 3–6 mo</td></tr>
+      <tr><td>AI citations</td><td>Manual monthly prompts to ChatGPT/Gemini/Perplexity</td><td>Named for "best leather wallet pakistan"</td></tr>
+      <tr><td>Rich results</td><td>GSC Enhancements + Rich Results Test</td><td>Product/star/breadcrumb valid</td></tr>
+      <tr><td>Core Web Vitals</td><td>PageSpeed Insights / GSC</td><td>LCP&lt;2.5s · INP&lt;200ms · CLS&lt;0.1</td></tr>
+      <tr><td>Organic traffic + conversion</td><td>GA4</td><td>Up &amp; to the right</td></tr>
+      <tr><td>Image search</td><td>GSC (Images)</td><td>Growing impressions</td></tr>
+    </table>
+    <div class="callout"><p><strong>Next step:</strong> tell me which phase to start — I recommend <b>Phase 0 (foundations)</b> + <b>Phase 1 (collections)</b> together, since I can ship the schema + collection copy in the theme immediately while you set up the Google/Bing accounts and start editing product images with the §07 prompts.</p></div>
+  </section>
+
+</main>
+</div>
+</body></html>
