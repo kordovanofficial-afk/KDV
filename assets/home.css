@@ -869,3 +869,7 @@
 .kv-coll__searchform input:focus{border-color:var(--cognac);}
 .kv-coll__searchform button{background:var(--cognac);color:#fff;border:none;border-radius:8px;padding:0 26px;font-family:var(--kv-body);font-weight:600;font-size:14px;cursor:pointer;}
 .kv-coll__searchform button:hover{background:var(--cognac-dark);}
+
+/* product card image placeholder (products without a photo) */
+.kv-pc__ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--parchment);}
+.kv-pc__ph span{font-family:var(--kv-heading);font-weight:600;letter-spacing:.18em;text-transform:uppercase;font-size:13px;color:var(--stone);}
