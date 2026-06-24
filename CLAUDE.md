@@ -62,6 +62,17 @@ pushed to the draft theme to preview in a browser.)
 - **Workflow = mockup-first:** build static HTML mockup in `docs/mockups/` →
   user approves → THEN implement in Liquid → deploy once. (User's idea — avoids
   repeated Shopify pushes/sync lag while iterating on design.)
+- ⚠️ **GOTCHA — class-name collisions:** homepage collection-grid TILE class
+  `.kv-coll` (display:flex) collided with the collection-PAGE wrapper `.kv-coll`,
+  forcing the page into 3 columns. FIXED by scoping all homepage tile rules under
+  `.kv-colls .kv-coll`. Lesson: namespace page wrappers distinctly.
+- ⚠️ **GOTCHA — GitHub sync got stuck on `sections/main-product.liquid`** (draft
+  kept serving the legacy `.product-page` template; new file `pdp-main` section
+  also wouldn't sync, and `templates/*.json` are theme-editor-owned so git won't
+  overwrite them). FIX: PDP body lives in `snippets/pdp-main.liquid` (snippets DO
+  sync); `sections/main-product.liquid` is a thin `{% render 'pdp-main' %}` wrapper
+  pushed directly to the DRAFT theme via `themeFilesUpsert` (allowed on unpublished;
+  blocked on live). If main-product ever reverts, re-upsert the wrapper.
 - **Done & deployed** to `shopify-theme-deploy`: Step 1 (Quiet Heritage palette +
   Fraunces + logo support), Step 2 (homepage scroll order, brand story copy,
   testimonial names, eyebrow fix).
