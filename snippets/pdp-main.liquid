@@ -192,24 +192,3 @@
   <!-- STICKY MOBILE ATC -->
   <div class="kv-pdp__mbar"><span class="mp">{{ v.price | money }}</span><button type="button" onclick="document.querySelector('.kv-pdp .product-atc__add')?.click()">Add to Cart</button></div>
 </section>
-
-{% schema %}
-{
-  "name": "Product",
-  "blocks": [
-    {
-      "type": "feature_pill",
-      "name": "Feature Pill (legacy — optional)",
-      "settings": [
-        { "type": "select", "id": "icon", "label": "Icon", "options": [
-          { "value": "shield", "label": "Shield" },
-          { "value": "award", "label": "Award" },
-          { "value": "check", "label": "Checkmark" },
-          { "value": "droplet", "label": "Droplet" } ], "default": "check" },
-        { "type": "text", "id": "text", "label": "Text", "default": "Genuine Leather" }
-      ]
-    }
-  ],
-  "presets": [ { "name": "Product" } ]
-}
-{% endschema %}
