@@ -284,36 +284,65 @@ kordovan-leather-messenger-bag-brown-lifestyle.jpg</pre>
 
   <!-- 07 -->
   <section id="prompts">
-    <h2 class="sec"><span class="num">07</span>Image-Edit Prompts (ready to paste)</h2>
-    <p class="sec-lede">Use these with an AI editor (Photoshop generative fill, GPT-image edit, Higgsfield, etc.) or hand them to a retoucher. Swap the <code>[BRACKETS]</code>. They enforce the exact look in §06 so the whole catalogue matches.</p>
+    <h2 class="sec"><span class="num">07</span>Image-Edit Prompts — all 5 shots (ready to paste)</h2>
+    <p class="sec-lede">One self-contained prompt per shot — every value (background hex, colour temperature, lighting, contrast, depth of field, composition, aspect ratio, export size, sRGB, negatives) is baked in, so it's pure copy-paste. Swap only the <code>[BRACKETS]</code>. Works with Photoshop generative fill, GPT-image edit, Higgsfield, Midjourney, or a retoucher.</p>
 
-    <h4>Shot 1 — Catalog front (background clean-up + relight)</h4>
-    <pre>Place this [COLOUR] [MATERIAL] leather [PRODUCT TYPE] on a seamless
-warm alabaster (#F7F2EA) studio backdrop. Soft directional studio light
-from the upper-left at ~5000K colour temperature, gentle fill, and a soft
-natural contact shadow beneath the product (lower-right). True-to-life
-warm leather tones, visible grain and stitching, no colour cast, no props.
-Center the product filling ~80% of the frame with even margins.
-4:5 portrait, photorealistic, high detail, e-commerce catalog look,
-sRGB. Remove any background clutter, dust, and harsh reflections.</pre>
+    <div class="callout"><p><strong>Fill the brackets once:</strong> <code>[PRODUCT TYPE]</code> = e.g. bifold wallet · <code>[COLOUR]</code> = e.g. cognac brown · <code>[MATERIAL]</code> = e.g. full-grain cow / Crazy Horse / vegetable-tanned. Generate Shot 1 first, approve the look, then run the rest with the same product so the set matches.</p></div>
 
-    <h4>Shot 4 — Texture macro</h4>
-    <pre>Extreme close-up macro of the [COLOUR] full-grain leather surface and a
-single line of hand-stitching on this [PRODUCT TYPE]. Raking warm side
-light (~4900K) to reveal grain, pores and thread detail. Rich espresso
-shadows, shallow depth of field, true leather colour, tactile and
-luxurious. 4:5 portrait, photorealistic, no text.</pre>
+    <h4>Shot 1 — Flat-lay / front (catalog hero · card + PDP main)</h4>
+    <pre>Premium e-commerce catalog photo of a [COLOUR] [MATERIAL] leather [PRODUCT TYPE],
+shot straight-on / slight top-down, centered, filling ~80% of frame with ~12% even margin.
+Background: seamless warm Alabaster #F7F2EA studio sweep (NOT pure white).
+Lighting: large soft key from upper-left + gentle fill, soft diffused contact shadow
+lower-right. Colour temperature 5000K (warm-neutral white balance). Low-to-medium contrast,
+true-to-life cognac/brown leather tones, no colour cast. Visible natural grain and
+hand-stitching. 50mm lens look, deep focus (sharp throughout).
+Aspect ratio 4:5 portrait, export 2048x2560 px, sRGB, photorealistic, high detail.
+No text, no logos, no watermark, no props, no harsh reflections, no blue/cool tones.</pre>
 
-    <h4>Shot 5 — Lifestyle</h4>
-    <pre>Styled lifestyle photo of this [COLOUR] leather [PRODUCT TYPE] resting on
-a warm walnut-wood surface beside subtle props (linen, a coffee cup,
-keys). Soft natural window light from the left, golden-warm ~5000K,
-deep soft shadows, shallow depth of field. Editorial heritage mood
-matching a premium Pakistani leather brand. Rule-of-thirds composition
-with negative space top-left for text. Photorealistic, 4:5.</pre>
+    <h4>Shot 2 — In-hand / on-body (scale &amp; context)</h4>
+    <pre>A [COLOUR] [MATERIAL] leather [PRODUCT TYPE] held naturally in an adult hand
+(relaxed grip, neutral warm skin tone) to show real-world scale.
+Background: soft, heavily blurred warm interior in Parchment #ECE3D4 / muted brown tones.
+Lighting: soft window light from the left at 5000K, gentle fill, no harsh shadows.
+Shallow depth of field (f/2.8) — product crisp, background creamy.
+Medium contrast, true leather colour, natural skin. 50mm look.
+Aspect ratio 4:5 portrait, export 1600x2000 px, sRGB, photorealistic.
+No text, no logos, no watermark, no cool/blue cast, no busy background.</pre>
 
-    <div class="callout"><p><strong>Consistency tip:</strong> generate shot 1 for one product, approve the look, then reuse the exact same prompt + lighting/background values for every SKU. Save approved images at the §06 sizes, name them per the convention, and add alt text at upload.</p></div>
+    <h4>Shot 3 — Open / inside (function: slots, lining, compartments)</h4>
+    <pre>A [COLOUR] [MATERIAL] leather [PRODUCT TYPE] shown OPEN at a slight 3/4 top-down angle
+to reveal the interior — card slots, lining and compartments (a few cards/notes inserted
+for context, optional). Background: seamless Alabaster #F7F2EA sweep.
+Lighting: soft, even, diffused studio light at 5000K so interior detail is fully legible;
+low contrast, soft shadows. True warm leather tones, visible stitching and edges.
+Deep focus (everything sharp). Centered, product fills ~80% of frame.
+Aspect ratio 4:5 portrait, export 2048x2560 px, sRGB, photorealistic, high detail.
+No text, no logos, no watermark, no clutter, no blue/cool tones.</pre>
+
+    <h4>Shot 4 — Texture macro (the grain, stitching, edge)</h4>
+    <pre>Extreme close-up macro of the [COLOUR] [MATERIAL] leather surface with a single line of
+hand-stitching and a burnished edge on this [PRODUCT TYPE].
+Background: the leather itself fills the frame. Lighting: raking warm side light at 4900K
+to rake across the grain and reveal pores, texture and thread; deep rich espresso shadows,
+higher local contrast for tactility. 100mm macro lens look, very shallow depth of field.
+True warm leather colour, luxurious and tactile.
+Aspect ratio 4:5 portrait, export 2048x2560 px, sRGB, photorealistic.
+No text, no logos, no watermark, no flat/even lighting, no cool tones.</pre>
+
+    <h4>Shot 5 — Lifestyle (styled, editorial)</h4>
+    <pre>Editorial lifestyle photo of a [COLOUR] [MATERIAL] leather [PRODUCT TYPE] resting on a warm
+walnut-wood surface with subtle heritage props (natural linen, a coffee cup, brass keys).
+Lighting: soft natural window light from the left, golden-warm 4800-5200K; medium contrast,
+deep soft shadows. Shallow depth of field (f/2.8). Rule-of-thirds composition with calm
+negative space at the top-left for headline text. Premium Pakistani leather-house mood,
+true warm tones. 35-50mm look.
+Aspect ratio 3:2 landscape, export 2400x1600 px, sRGB, photorealistic, high detail.
+No text, no logos, no watermark, no cluttered styling, no cool/blue cast.</pre>
+
+    <div class="callout win"><p><strong>Consistency lock:</strong> keep the <em>background hex, Kelvin and lighting direction identical</em> across Shots 1, 3 &amp; 4 for every product so the catalog grid reads as one set. Save at the sizes above, name files per §06 (<code>kordovan-[material]-[type]-[colour]-[view].jpg</code>), and add the §06 alt-text at upload.</p></div>
   </section>
+
 
   <!-- 08 -->
   <section id="technical">
