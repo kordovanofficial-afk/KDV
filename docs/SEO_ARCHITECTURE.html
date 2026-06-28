@@ -285,62 +285,84 @@ kordovan-leather-messenger-bag-brown-lifestyle.jpg</pre>
   <!-- 07 -->
   <section id="prompts">
     <h2 class="sec"><span class="num">07</span>Image-Edit Prompts — all 5 shots (ready to paste)</h2>
-    <p class="sec-lede">One self-contained prompt per shot — every value (background hex, colour temperature, lighting, contrast, depth of field, composition, aspect ratio, export size, sRGB, negatives) is baked in, so it's pure copy-paste. Swap only the <code>[BRACKETS]</code>. Works with Photoshop generative fill, GPT-image edit, Higgsfield, Midjourney, or a retoucher.</p>
+    <p class="sec-lede">These are <strong>photo-EDIT prompts, not generators.</strong> You <strong>upload your own product photo first</strong>, then paste the prompt — the model re-lights and re-backgrounds <em>your exact product</em>. Every value (background hex, colour temperature, lighting, contrast, depth of field, composition, aspect ratio, export size, sRGB, negatives) is baked in, so it's pure copy-paste. Works with GPT-image edit, Nano Banana / Gemini, Photoshop generative fill, or a retoucher.</p>
 
-    <div class="callout"><p><strong>Fill the brackets once:</strong> <code>[PRODUCT TYPE]</code> = e.g. bifold wallet · <code>[COLOUR]</code> = e.g. cognac brown · <code>[MATERIAL]</code> = e.g. full-grain cow / Crazy Horse / vegetable-tanned. Generate Shot 1 first, approve the look, then run the rest with the same product so the set matches.</p></div>
+    <div class="callout"><p><strong>How to use (read once):</strong> ① <strong>Attach / upload the real product photo</strong> to the chat or tool. ② Paste the matching prompt below. ③ There are <em>no brackets to fill</em> — the prompt deliberately refers to "the uploaded product" so the model keeps <em>your</em> wallet/bag, not a new one. ④ Do Shot 1 first; once the background/light is right, reuse the <em>same source photo</em> (or the Shot-1 result) for Shots 3 &amp; 4 so the set matches.</p></div>
+
+    <div class="callout dont"><p><strong>Why your first tries failed:</strong> the old prompts began "Premium e-commerce catalog photo of a&nbsp;…" — that's an instruction to <em>invent a new product</em>, so it changed the wallet. And "no logos" told the model to <em>erase your brand mark</em>. Both are now fixed: every prompt locks the uploaded product and explicitly <strong>preserves the embossed Kordovan logo</strong>.</p></div>
+
+    <p style="margin:18px 0 6px"><strong>Preservation clause</strong> — the same lock is built into all 5 prompts. This is what keeps the product and logo identical:</p>
+    <pre>Keep the product EXACTLY as in the uploaded photo: same model, shape, proportions,
+colour, leather grain, stitching, edges, hardware and the embossed Kordovan horse-head
+logo — do NOT redraw, move, resize, restyle, replace or remove the product or its logo.
+Change ONLY the background and the lighting. Do not add or alter any logo or branding.</pre>
 
     <h4>Shot 1 — Flat-lay / front (catalog hero · card + PDP main)</h4>
-    <pre>Premium e-commerce catalog photo of a [COLOUR] [MATERIAL] leather [PRODUCT TYPE],
-shot straight-on / slight top-down, centered, filling ~80% of frame with ~12% even margin.
+    <pre>Using the UPLOADED photo of this exact leather product, change ONLY the background and
+lighting — keep the product, its model, shape, proportions, colour, grain, stitching,
+hardware and the embossed Kordovan horse-head logo 100% identical and unaltered.
+Place it straight-on / slightly top-down, centered, filling ~80% of frame with ~12% margin.
 Background: seamless warm Alabaster #F7F2EA studio sweep (NOT pure white).
 Lighting: large soft key from upper-left + gentle fill, soft diffused contact shadow
 lower-right. Colour temperature 5000K (warm-neutral white balance). Low-to-medium contrast,
-true-to-life cognac/brown leather tones, no colour cast. Visible natural grain and
-hand-stitching. 50mm lens look, deep focus (sharp throughout).
+true-to-life leather tones, no colour cast. 50mm lens look, deep focus (sharp throughout).
 Aspect ratio 4:5 portrait, export 2048x2560 px, sRGB, photorealistic, high detail.
-No text, no logos, no watermark, no props, no harsh reflections, no blue/cool tones.</pre>
+Do NOT add, remove, redraw or alter any logo or branding. Do not change the product.
+No added text or watermark, no extra props, no harsh reflections, no blue/cool tones.</pre>
 
     <h4>Shot 2 — In-hand / on-body (scale &amp; context)</h4>
-    <pre>A [COLOUR] [MATERIAL] leather [PRODUCT TYPE] held naturally in an adult hand
-(relaxed grip, neutral warm skin tone) to show real-world scale.
+    <pre>Using the UPLOADED photo of this exact leather product, place THE SAME unchanged product
+held naturally in an adult hand (relaxed grip, neutral warm skin tone) to show real-world
+scale. Keep the product, its shape, colour, stitching, hardware and the embossed Kordovan
+logo 100% identical — do not redraw or restyle the product.
 Background: soft, heavily blurred warm interior in Parchment #ECE3D4 / muted brown tones.
 Lighting: soft window light from the left at 5000K, gentle fill, no harsh shadows.
-Shallow depth of field (f/2.8) — product crisp, background creamy.
-Medium contrast, true leather colour, natural skin. 50mm look.
+Shallow depth of field (f/2.8) — product crisp, background creamy. Medium contrast,
+true leather colour, natural skin. 50mm look.
 Aspect ratio 4:5 portrait, export 1600x2000 px, sRGB, photorealistic.
-No text, no logos, no watermark, no cool/blue cast, no busy background.</pre>
+Do NOT add, remove or alter any logo or branding. No added text/watermark,
+no cool/blue cast, no busy background.</pre>
 
     <h4>Shot 3 — Open / inside (function: slots, lining, compartments)</h4>
-    <pre>A [COLOUR] [MATERIAL] leather [PRODUCT TYPE] shown OPEN at a slight 3/4 top-down angle
-to reveal the interior — card slots, lining and compartments (a few cards/notes inserted
-for context, optional). Background: seamless Alabaster #F7F2EA sweep.
-Lighting: soft, even, diffused studio light at 5000K so interior detail is fully legible;
-low contrast, soft shadows. True warm leather tones, visible stitching and edges.
-Deep focus (everything sharp). Centered, product fills ~80% of frame.
+    <pre>Using the UPLOADED photo of this exact leather product, show THE SAME unchanged product
+OPEN at a slight 3/4 top-down angle to reveal its interior — card slots, lining and
+compartments (a few cards/notes inserted for context, optional). Keep the product, its
+construction, colour, stitching, edges, hardware and the embossed Kordovan logo 100%
+identical — do not invent a different interior; match the real product.
+Background: seamless Alabaster #F7F2EA sweep. Lighting: soft, even, diffused studio light
+at 5000K so interior detail is fully legible; low contrast, soft shadows. Deep focus
+(everything sharp). Centered, product fills ~80% of frame.
 Aspect ratio 4:5 portrait, export 2048x2560 px, sRGB, photorealistic, high detail.
-No text, no logos, no watermark, no clutter, no blue/cool tones.</pre>
+Do NOT add, remove or alter any logo or branding. No added text/watermark,
+no clutter, no blue/cool tones.</pre>
 
     <h4>Shot 4 — Texture macro (the grain, stitching, edge)</h4>
-    <pre>Extreme close-up macro of the [COLOUR] [MATERIAL] leather surface with a single line of
-hand-stitching and a burnished edge on this [PRODUCT TYPE].
-Background: the leather itself fills the frame. Lighting: raking warm side light at 4900K
-to rake across the grain and reveal pores, texture and thread; deep rich espresso shadows,
-higher local contrast for tactility. 100mm macro lens look, very shallow depth of field.
-True warm leather colour, luxurious and tactile.
+    <pre>Using the UPLOADED photo of this exact leather product, create an extreme close-up macro
+of ITS OWN leather surface — the real grain, a line of its hand-stitching and a burnished
+edge. Keep the actual colour, grain pattern, thread and (if in frame) the embossed Kordovan
+logo identical to the uploaded product — do not invent a different texture or colour.
+Background: the product's own leather fills the frame. Lighting: raking warm side light at
+4900K to rake across the grain and reveal pores, texture and thread; deep rich espresso
+shadows, higher local contrast for tactility. 100mm macro lens look, very shallow DoF.
 Aspect ratio 4:5 portrait, export 2048x2560 px, sRGB, photorealistic.
-No text, no logos, no watermark, no flat/even lighting, no cool tones.</pre>
+Do NOT add, remove or alter any logo or branding. No added text/watermark,
+no flat/even lighting, no cool tones.</pre>
 
     <h4>Shot 5 — Lifestyle (styled, editorial)</h4>
-    <pre>Editorial lifestyle photo of a [COLOUR] [MATERIAL] leather [PRODUCT TYPE] resting on a warm
-walnut-wood surface with subtle heritage props (natural linen, a coffee cup, brass keys).
+    <pre>Using the UPLOADED photo of this exact leather product, place THE SAME unchanged product
+resting on a warm walnut-wood surface with subtle heritage props (natural linen, a coffee
+cup, brass keys). Keep the product, its shape, colour, stitching, hardware and the embossed
+Kordovan logo 100% identical — do not redraw or replace the product.
 Lighting: soft natural window light from the left, golden-warm 4800-5200K; medium contrast,
 deep soft shadows. Shallow depth of field (f/2.8). Rule-of-thirds composition with calm
 negative space at the top-left for headline text. Premium Pakistani leather-house mood,
 true warm tones. 35-50mm look.
 Aspect ratio 3:2 landscape, export 2400x1600 px, sRGB, photorealistic, high detail.
-No text, no logos, no watermark, no cluttered styling, no cool/blue cast.</pre>
+Do NOT add, remove or alter any logo or branding. No added text/watermark on the product,
+no cluttered styling, no cool/blue cast.</pre>
 
-    <div class="callout win"><p><strong>Consistency lock:</strong> keep the <em>background hex, Kelvin and lighting direction identical</em> across Shots 1, 3 &amp; 4 for every product so the catalog grid reads as one set. Save at the sizes above, name files per §06 (<code>kordovan-[material]-[type]-[colour]-[view].jpg</code>), and add the §06 alt-text at upload.</p></div>
+    <div class="callout win"><p><strong>If a tool still alters the product or logo:</strong> prepend <em>"This is a product photo edit. Preserve the subject pixel-for-pixel; you may only relight and replace the background."</em> and lower the tool's "edit strength" / "denoise" / "creativity" setting (aim ~0.3–0.5, not max). On GPT-image / Nano Banana, attach the photo and keep the product words minimal so it doesn't re-imagine the item.</p>
+    <p style="margin-top:10px"><strong>Consistency lock:</strong> keep the <em>background hex, Kelvin and lighting direction identical</em> across Shots 1, 3 &amp; 4 for every product so the catalog grid reads as one set. Save at the sizes above, name files per §06 (<code>kordovan-[material]-[type]-[colour]-[view].jpg</code>), and add the §06 alt-text at upload.</p></div>
   </section>
 
 
