@@ -73,10 +73,19 @@ Goal: kill TMDHosting "Starter" Linux hosting ($180/yr, renews in ~9 mo from Jul
 - **Guide = `docs/EMAIL_MIGRATION.html`** (baby-steps, 8 phases + troubleshooting,
   delivered). User executing solo; reports back after the Phase 6 test checklist.
   Catch-all mailbox already emptied (was pure spam).
-- **Order:** renew domain → Zoho setup+verify → IMAP-migrate mail → move DNS to
-  Cloudflare Free (recreate Shopify A/CNAMEs verbatim — ads running, zero downtime)
-  → switch MX/SPF/DKIM → test 1–2 wks → disable hosting auto-renew. NEVER cancel
-  hosting before mail + DNS are moved.
+- **STATUS Jul 4 2026 — MIGRATION EXECUTED ✅:** Zoho org live (5 users + sales@/
+  daraz@ aliases on admin, all green: MX/SPF/DKIM verified). DNS moved to
+  Cloudflare Free (nameservers brady/lucy.ns.cloudflare.com set at TMD). Final
+  CF zone = 15 records, ALL grey-cloud/DNS-only: A@→23.227.38.65, CNAME www/
+  account→shops.myshopify.com, 4× Shopify email CNAMEs (s9k/s9k2/s9k3._domainkey
+  →dkim1-3.e2b7bcdd21fe.p531.email.myshopify.com + mailers9k), 3× Zoho MX,
+  TXT: zoho SPF, zmail._domainkey DKIM, _dmarc (p=none+rua), zoho-verification,
+  facebook-domain-verification (Meta ads — NEVER delete). Klaviyo NS+TXT deleted
+  (user confirmed unused). Old mail archived in Thunderbird Local Folders.
+  User tested all 7 addresses — working. **PENDING:** (1) observation window →
+  ~Jul 18: disable TMD Starter auto-renew (hosting only, NOT domain!);
+  (2) domain renewal ~Aug 2026 $19.99 — PAY IT; (3) optional: SPF/DKIM/DMARC
+  "show original" check + COD test-order email check.
 - **Site emails:** gmail address PURGED from theme (commit ff8aeb3) — public
   contact = `contact@kordovanleather.com` (footer + story/care/shipping/returns
   snippets); `admin@` remains in Shopify PAGE content (FAQs/Contact/Corporate/
