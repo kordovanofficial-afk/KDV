@@ -63,12 +63,13 @@ Goal: kill TMDHosting "Starter" Linux hosting ($180/yr, renews in ~9 mo from Jul
 → total ~$20/yr. Site is 100% on Shopify; hosting only serves DNS + cPanel email.
 - Domain .com at TMD $19.99/yr — **renews ~Aug 2026, RENEW IT** (transfer to
   Cloudflare Registrar ~$10/yr only NEXT year, never near expiry).
-- **Plan:** Zoho Mail Free (5 seats) → real mailboxes `admin@` (475MB), `asadj@`
-  (1.3GB), `umair@` (327MB); role addresses become free aliases: `contact@`,
-  `corporate@`, `sales@`, `marketing@`, `social@`, `daraz@`. User DELETED
-  `customercare.usa@` + `shahid.butt@us.` (no longer needed). `kordovan` system
-  catch-all (552MB) — check for strays, then retire. Alias→owner mapping: **user
-  will supply**. Outlook/IMAP need unknown (Zoho Free = webmail+app only; Lite $12/user/yr).
+- **DECIDED (user-confirmed): Zoho Mail Forever Free, webmail + Zoho app only**
+  (user accepts no IMAP → Thunderbird demoted to local ARCHIVE of old mail).
+  5 seats: `admin@`, `asadj@`, `umair@`, `contact@`, `corporate@`.
+  Aliases: `sales@` + `daraz@` → admin · `marketing@` + `social@` → asadj.
+  User DELETED `customercare.usa@` + `shahid.butt@us.`. `kordovan` system
+  catch-all (552MB) — check for strays, then retire.
+- **Guide = `docs/EMAIL_MIGRATION.md`** (click-by-click, delivered to user).
 - **Order:** renew domain → Zoho setup+verify → IMAP-migrate mail → move DNS to
   Cloudflare Free (recreate Shopify A/CNAMEs verbatim — ads running, zero downtime)
   → switch MX/SPF/DKIM → test 1–2 wks → disable hosting auto-renew. NEVER cancel
