@@ -58,6 +58,27 @@ Shopify, GitHub, Canva, Figma, Facebook Ads, Higgsfield.
 (Playwright is NOT available in this remote env — design is done in code, then
 pushed to the draft theme to preview in a browser.)
 
+## 📧 ACTIVE — Hosting/email cost migration (backend cleanup before SEO)
+Goal: kill TMDHosting "Starter" Linux hosting ($180/yr, renews in ~9 mo from Jul 2026)
+→ total ~$20/yr. Site is 100% on Shopify; hosting only serves DNS + cPanel email.
+- Domain .com at TMD $19.99/yr — **renews ~Aug 2026, RENEW IT** (transfer to
+  Cloudflare Registrar ~$10/yr only NEXT year, never near expiry).
+- **Plan:** Zoho Mail Free (5 seats) → real mailboxes `admin@` (475MB), `asadj@`
+  (1.3GB), `umair@` (327MB); role addresses become free aliases: `contact@`,
+  `corporate@`, `sales@`, `marketing@`, `social@`, `daraz@`. User DELETED
+  `customercare.usa@` + `shahid.butt@us.` (no longer needed). `kordovan` system
+  catch-all (552MB) — check for strays, then retire. Alias→owner mapping: **user
+  will supply**. Outlook/IMAP need unknown (Zoho Free = webmail+app only; Lite $12/user/yr).
+- **Order:** renew domain → Zoho setup+verify → IMAP-migrate mail → move DNS to
+  Cloudflare Free (recreate Shopify A/CNAMEs verbatim — ads running, zero downtime)
+  → switch MX/SPF/DKIM → test 1–2 wks → disable hosting auto-renew. NEVER cancel
+  hosting before mail + DNS are moved.
+- **Site emails:** gmail address PURGED from theme (commit ff8aeb3) — public
+  contact = `contact@kordovanleather.com` (footer + story/care/shipping/returns
+  snippets); `admin@` remains in Shopify PAGE content (FAQs/Contact/Corporate/
+  policies) + store sender. Optional pending: Corporate page quote email →
+  `corporate@` (live page content — needs explicit OK).
+
 ## 📍 Session state (resume here)
 - **Workflow = mockup-first:** build static HTML mockup in `docs/mockups/` →
   user approves → THEN implement in Liquid → deploy once. (User's idea — avoids
