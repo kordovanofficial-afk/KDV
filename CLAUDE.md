@@ -66,9 +66,10 @@ Goal: kill TMDHosting "Starter" Linux hosting ($180/yr, renews in ~9 mo from Jul
 - **DECIDED (user-confirmed): Zoho Mail Forever Free, webmail + Zoho app only**
   (user accepts no IMAP → Thunderbird demoted to local ARCHIVE of old mail).
   5 seats: `admin@`, `asadj@`, `umair@`, `contact@`, `corporate@`.
-  Aliases: `sales@` + `daraz@` → admin · `marketing@` + `social@` → asadj.
-  User DELETED `customercare.usa@` + `shahid.butt@us.`. `kordovan` system
-  catch-all (552MB) — check for strays, then retire.
+  Aliases: `sales@` + `daraz@` → admin ONLY. User DELETED `customercare.usa@`,
+  `shahid.butt@us.`, `marketing@`, `social@` (verified unused: not on site/
+  Shopify/customers; socials are under user's personal Meta email). `kordovan`
+  system catch-all — emptied (pure spam); NO catch-all in Zoho.
 - **Guide = `docs/EMAIL_MIGRATION.html`** (baby-steps, 8 phases + troubleshooting,
   delivered). User executing solo; reports back after the Phase 6 test checklist.
   Catch-all mailbox already emptied (was pure spam).

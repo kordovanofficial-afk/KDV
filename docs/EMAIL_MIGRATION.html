@@ -73,7 +73,7 @@
       <tr><td><b>Yearly cost</b></td><td><b>~$200</b></td><td><b>~$20</b></td></tr>
     </table></div>
     <p><b>Mailboxes (5 free Zoho seats):</b> <code>admin@</code>, <code>asadj@</code>, <code>umair@</code>, <code>contact@</code>, <code>corporate@</code><br>
-    <b>Aliases:</b> <code>sales@</code> + <code>daraz@</code> → admin &nbsp;·&nbsp; <code>marketing@</code> + <code>social@</code> → asadj</p>
+    <b>Aliases:</b> <code>sales@</code> + <code>daraz@</code> → admin. &nbsp;(<code>marketing@</code>, <code>social@</code>, <code>customercare.usa@</code>, <code>shahid.butt@us.</code> — deleted, unused anywhere.)</p>
   </div>
 
   <div class="callout stop"><b>The one golden rule</b>
@@ -106,7 +106,7 @@
   <p>You already read these mailboxes in Thunderbird, so it holds a synced copy of everything. We turn that into a permanent offline archive — then nothing on the old server matters anymore.</p>
   <ol class="steps">
     <li>Open Thunderbird. In the left sidebar, scroll to the bottom to find <b class="ui">Local Folders</b>.</li>
-    <li>Right-click <b class="ui">Local Folders → New Folder…</b> → name it <code>Archive-admin</code>. Repeat to create one per account: <code>Archive-asadj</code>, <code>Archive-umair</code>, <code>Archive-contact</code>, <code>Archive-corporate</code>, <code>Archive-sales</code>, <code>Archive-marketing</code>, <code>Archive-social</code>, <code>Archive-daraz</code>.</li>
+    <li>Right-click <b class="ui">Local Folders → New Folder…</b> → name it <code>Archive-admin</code>. Repeat to create one per account you still have: <code>Archive-asadj</code>, <code>Archive-umair</code>, <code>Archive-contact</code>, <code>Archive-corporate</code>, <code>Archive-sales</code>, <code>Archive-daraz</code>.</li>
     <li>For each account in the sidebar: click its <b class="ui">Inbox</b>, click any message, press <kbd>Ctrl+A</kbd> (select all), then right-click → <b class="ui">Copy To → Local Folders → Archive-[name]</b>. Wait for the status bar at the bottom to finish before moving on.</li>
     <li>Repeat step 3 for that account's <b class="ui">Sent</b> folder (and any custom folders you've made). Junk/Trash can be skipped.</li>
     <li>Spot-check: open each <code>Archive-*</code> folder and confirm the message counts look right (oldest mail visible at the bottom).</li>
@@ -152,11 +152,10 @@
     <li>Recommended: turn on 2-factor authentication at least for <code>admin@</code> (Admin Console → Security, or accounts.zoho.com → MFA).</li>
   </ol>
 
-  <h3>1.4 — Create the 4 aliases</h3>
+  <h3>1.4 — Create the 2 aliases</h3>
   <ol class="steps">
     <li>Admin Console → <b class="ui">Users</b> → click <b class="ui">admin</b> → open its <b class="ui">Mail settings / Email aliases</b> panel → <b class="ui">Add alias</b> → <code>sales@kordovanleather.com</code> → save. Add <code>daraz@kordovanleather.com</code> the same way.</li>
-    <li>Click <b class="ui">asadj</b> → add aliases <code>marketing@kordovanleather.com</code> and <code>social@kordovanleather.com</code>.</li>
-    <li>That's all 9 addresses: 5 mailboxes + 4 aliases. Do <b>not</b> add a catch-all anywhere — unknown addresses should bounce (kills the spam).</li>
+    <li>That's all 7 addresses: 5 mailboxes + 2 aliases on admin. Do <b>not</b> add a catch-all anywhere — unknown addresses should bounce (kills the spam). (If <code>marketing@</code>/<code>social@</code> are ever needed again, they're a two-click alias here.)</li>
   </ol>
 
   <div class="callout stop"><b>Stop sign inside the Zoho wizard</b>
@@ -244,20 +243,19 @@
     <li>Everyone installs the <b class="ui">Zoho Mail</b> app (Play Store / App Store) and logs in with their own address: admin@, asadj@, umair@ (+ whoever owns contact@ / corporate@ adds those accounts in the same app — the app supports multiple accounts).</li>
     <li>On desktop, daily mail is now <code>mail.zoho.com</code> in the browser. Bookmark it.</li>
     <li>Thunderbird stays installed purely as the ARCHIVE of pre-migration mail (the <code>Archive-*</code> local folders). The old TMD accounts in it will error once the hosting dies — that's expected; the Local Folders keep working forever.</li>
-    <li>Replying as an alias: in Zoho compose, click the <b class="ui">From</b> dropdown — admin can send as <code>sales@</code> / <code>daraz@</code>, asadj as <code>marketing@</code> / <code>social@</code>.</li>
+    <li>Replying as an alias: in Zoho compose, click the <b class="ui">From</b> dropdown — admin can send as <code>sales@</code> or <code>daraz@</code>.</li>
   </ol>
 
   <!-- ============ PHASE 6 ============ -->
   <h2 class="phase" id="p6"><span class="num">Phase 6</span>Test everything — the green checklist</h2>
   <div class="when">~20 min, ideally the morning after the switch</div>
-  <p>From an OUTSIDE mailbox (any personal account NOT on the domain), send one test email to each of the 9 addresses, then tick:</p>
+  <p>From an OUTSIDE mailbox (any personal account NOT on the domain), send one test email to each of the 7 addresses, then tick:</p>
   <label class="chk"><input type="checkbox"> <span>To <code>admin@</code> → arrives in admin's Zoho inbox</span></label>
   <label class="chk"><input type="checkbox"> <span>To <code>asadj@</code> → arrives in asadj's inbox</span></label>
   <label class="chk"><input type="checkbox"> <span>To <code>umair@</code> → arrives in umair's inbox</span></label>
   <label class="chk"><input type="checkbox"> <span>To <code>contact@</code> → arrives in contact's inbox &nbsp;<i>(the public one — most important)</i></span></label>
   <label class="chk"><input type="checkbox"> <span>To <code>corporate@</code> → arrives in corporate's inbox</span></label>
   <label class="chk"><input type="checkbox"> <span>To <code>sales@</code> AND <code>daraz@</code> → both arrive in <b>admin's</b> inbox</span></label>
-  <label class="chk"><input type="checkbox"> <span>To <code>marketing@</code> AND <code>social@</code> → both arrive in <b>asadj's</b> inbox</span></label>
   <p>Outbound + authentication:</p>
   <label class="chk"><input type="checkbox"> <span>Reply from Zoho webmail as <code>contact@</code> to your personal Gmail → it arrives in the INBOX (not spam)</span></label>
   <label class="chk"><input type="checkbox"> <span>In Gmail open that reply → ⋮ menu → <b class="ui">Show original</b> → says <code>SPF: PASS</code>, <code>DKIM: PASS</code>, <code>DMARC: PASS</code></span></label>
