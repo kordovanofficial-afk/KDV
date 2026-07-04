@@ -69,7 +69,9 @@ Goal: kill TMDHosting "Starter" Linux hosting ($180/yr, renews in ~9 mo from Jul
   Aliases: `sales@` + `daraz@` → admin · `marketing@` + `social@` → asadj.
   User DELETED `customercare.usa@` + `shahid.butt@us.`. `kordovan` system
   catch-all (552MB) — check for strays, then retire.
-- **Guide = `docs/EMAIL_MIGRATION.md`** (click-by-click, delivered to user).
+- **Guide = `docs/EMAIL_MIGRATION.html`** (baby-steps, 8 phases + troubleshooting,
+  delivered). User executing solo; reports back after the Phase 6 test checklist.
+  Catch-all mailbox already emptied (was pure spam).
 - **Order:** renew domain → Zoho setup+verify → IMAP-migrate mail → move DNS to
   Cloudflare Free (recreate Shopify A/CNAMEs verbatim — ads running, zero downtime)
   → switch MX/SPF/DKIM → test 1–2 wks → disable hosting auto-renew. NEVER cancel

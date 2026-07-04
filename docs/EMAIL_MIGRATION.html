@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kordovan — Email &amp; Hosting Migration (Baby-Steps Guide)</title>
+<style>
+  :root{
+    --canvas:#F7F2EA; --parchment:#ECE3D4; --ink:#241C16; --walnut:#4A3528;
+    --cognac:#A0623A; --cognac-dark:#7E4B2C; --tan:#C08B5C; --brass:#B0894F;
+    --stone:#8B8174; --border:#DDD2C0; --pine:#2D6A4F; --oxblood:#8B2D2D;
+    --heading:Georgia,'Times New Roman',serif; --body:-apple-system,'Segoe UI',Inter,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--canvas);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.75}
+  .wrap{max-width:880px;margin:0 auto;padding:48px 24px 90px}
+  header.hero{background:var(--ink);color:var(--canvas);padding:56px 24px;text-align:center}
+  header.hero .eyebrow{color:var(--brass);text-transform:uppercase;letter-spacing:.18em;font-size:11px;font-weight:600}
+  header.hero h1{font-family:var(--heading);font-weight:500;font-size:clamp(30px,5vw,44px);margin:10px 0 8px}
+  header.hero p{color:#D8C39A;max-width:620px;margin:0 auto;font-size:15px}
+  h2.phase{font-family:var(--heading);font-weight:500;font-size:clamp(24px,3.4vw,32px);margin:64px 0 6px;padding-top:24px;border-top:1px solid var(--border)}
+  h2.phase .num{display:inline-block;background:var(--cognac);color:#fff;border-radius:6px;font-size:15px;font-family:var(--body);font-weight:600;padding:3px 12px;margin-right:12px;vertical-align:middle}
+  .when{color:var(--stone);font-size:13px;text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:18px}
+  h3{font-family:var(--heading);font-weight:500;font-size:20px;margin:34px 0 10px;color:var(--walnut)}
+  p{margin:10px 0}
+  .goal{background:var(--parchment);border:1px solid var(--border);border-radius:12px;padding:26px 30px;margin:30px 0}
+  table{border-collapse:collapse;width:100%;margin:16px 0;background:#fff;border:1px solid var(--border);border-radius:8px;overflow:hidden;font-size:14.5px}
+  th{background:var(--parchment);text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--cognac);padding:10px 14px}
+  td{padding:10px 14px;border-top:1px solid var(--border);vertical-align:top}
+  .overflow{overflow-x:auto}
+  ol.steps{counter-reset:s;list-style:none;margin:14px 0}
+  ol.steps>li{position:relative;padding:14px 18px 14px 60px;background:#fff;border:1px solid var(--border);border-radius:10px;margin:10px 0;counter-increment:s}
+  ol.steps>li::before{content:counter(s);position:absolute;left:16px;top:14px;width:28px;height:28px;border-radius:50%;background:var(--cognac);color:#fff;font-weight:600;font-size:14px;display:flex;align-items:center;justify-content:center}
+  label.chk{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px 16px;margin:8px 0;cursor:pointer}
+  label.chk input{margin-top:5px;accent-color:var(--cognac);width:16px;height:16px;flex:none}
+  label.chk:has(input:checked){background:#F0EDE2;color:var(--stone);text-decoration:line-through}
+  code,kbd{background:var(--parchment);border:1px solid var(--border);border-radius:4px;padding:1px 7px;font-size:.88em;font-family:Consolas,Menlo,monospace;color:var(--cognac-dark);word-break:break-all}
+  b.ui{color:var(--cognac-dark)}
+  .callout{border-left:4px solid var(--brass);background:#fff;border-radius:0 10px 10px 0;padding:14px 20px;margin:18px 0;font-size:15px}
+  .callout.stop{border-left-color:var(--oxblood);background:#FBF1EF}
+  .callout.win{border-left-color:var(--pine);background:#F0F5F1}
+  .callout b:first-child{text-transform:uppercase;letter-spacing:.06em;font-size:12px;display:block;margin-bottom:4px}
+  .callout.stop b:first-child{color:var(--oxblood)}
+  .callout.win b:first-child{color:var(--pine)}
+  .callout:not(.stop):not(.win) b:first-child{color:var(--brass)}
+  .toc{background:#fff;border:1px solid var(--border);border-radius:12px;padding:22px 28px;margin:30px 0}
+  .toc a{color:var(--cognac);text-decoration:none;display:block;padding:5px 0;border-bottom:1px dashed var(--border);font-size:15px}
+  .toc a:last-child{border-bottom:0}
+  .toc b{display:inline-block;width:74px;color:var(--stone);font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+  ul.plain{margin:8px 0 8px 22px}
+  ul.plain li{margin:5px 0}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="eyebrow">Kordovan · Backend Cleanup</div>
+  <h1>Email &amp; Hosting Migration — the complete walkthrough</h1>
+  <p>Every click, from TMD to Zoho to Cloudflare to Shopify. Do the phases in order, tick the boxes, and report back when everything in Phase 6 is green. $200/yr → ~$20/yr, with zero downtime for the store.</p>
+</header>
+
+<div class="wrap">
+
+  <div class="goal">
+    <h3 style="margin-top:0">What you're building</h3>
+    <div class="overflow"><table>
+      <tr><th>Piece</th><th>Before</th><th>After</th></tr>
+      <tr><td>Website</td><td>Shopify (already)</td><td>Shopify — <b>unchanged, zero downtime</b></td></tr>
+      <tr><td>Domain (.com)</td><td>TMD — $19.99/yr</td><td>TMD — $19.99/yr (keep &amp; renew)</td></tr>
+      <tr><td>DNS</td><td>TMD nameservers (die with hosting)</td><td>Cloudflare Free — $0</td></tr>
+      <tr><td>Email</td><td>TMD cPanel — inside $180/yr hosting</td><td>Zoho Mail Free — $0 (webmail + mobile app)</td></tr>
+      <tr><td>Old mail history</td><td>On TMD server</td><td>Archived locally in Thunderbird</td></tr>
+      <tr><td><b>Yearly cost</b></td><td><b>~$200</b></td><td><b>~$20</b></td></tr>
+    </table></div>
+    <p><b>Mailboxes (5 free Zoho seats):</b> <code>admin@</code>, <code>asadj@</code>, <code>umair@</code>, <code>contact@</code>, <code>corporate@</code><br>
+    <b>Aliases:</b> <code>sales@</code> + <code>daraz@</code> → admin &nbsp;·&nbsp; <code>marketing@</code> + <code>social@</code> → asadj</p>
+  </div>
+
+  <div class="callout stop"><b>The one golden rule</b>
+  Do NOT cancel or disable anything at TMD until Phase 6 is fully tested and green. The hosting is paid for ~9 more months — there is zero rush, and it's your safety net.</div>
+
+  <div class="toc">
+    <a href="#p0"><b>Phase 0</b> Prep — archive old mail, renew domain (do today)</a>
+    <a href="#p1"><b>Phase 1</b> Zoho — account, domain, 5 users, 4 aliases</a>
+    <a href="#p2"><b>Phase 2</b> Cloudflare — copy DNS, add mail records (prepare only)</a>
+    <a href="#p3"><b>Phase 3</b> The switch — change nameservers at TMD</a>
+    <a href="#p4"><b>Phase 4</b> Shopify — verify nothing changed</a>
+    <a href="#p5"><b>Phase 5</b> Phones — Zoho app for all three of you</a>
+    <a href="#p6"><b>Phase 6</b> Test everything — the green checklist</a>
+    <a href="#p7"><b>Phase 7</b> Kill the $180 — after 1–2 clean weeks</a>
+    <a href="#help"><b>Fix-it</b> Troubleshooting — if something looks wrong</a>
+  </div>
+
+  <!-- ============ PHASE 0 ============ -->
+  <h2 class="phase" id="p0"><span class="num">Phase 0</span>Prep</h2>
+  <div class="when">Do today · ~30–60 min · zero risk</div>
+
+  <h3>0.1 — Keep the domain alive</h3>
+  <ol class="steps">
+    <li>Log in to the TMD client area (the panel from your screenshots).</li>
+    <li>Go to <b class="ui">All products &amp; services → Domain Names → .com (kordovanleather.com) → Manage domain name</b>.</li>
+    <li>It renews in ~1 month: either renew it now or make sure <b class="ui">auto-renew is ON for the DOMAIN</b>. (We are only killing the <i>hosting</i>, never the domain.)</li>
+  </ol>
+
+  <h3>0.2 — Archive all old mail in Thunderbird (this IS the mail migration)</h3>
+  <p>You already read these mailboxes in Thunderbird, so it holds a synced copy of everything. We turn that into a permanent offline archive — then nothing on the old server matters anymore.</p>
+  <ol class="steps">
+    <li>Open Thunderbird. In the left sidebar, scroll to the bottom to find <b class="ui">Local Folders</b>.</li>
+    <li>Right-click <b class="ui">Local Folders → New Folder…</b> → name it <code>Archive-admin</code>. Repeat to create one per account: <code>Archive-asadj</code>, <code>Archive-umair</code>, <code>Archive-contact</code>, <code>Archive-corporate</code>, <code>Archive-sales</code>, <code>Archive-marketing</code>, <code>Archive-social</code>, <code>Archive-daraz</code>.</li>
+    <li>For each account in the sidebar: click its <b class="ui">Inbox</b>, click any message, press <kbd>Ctrl+A</kbd> (select all), then right-click → <b class="ui">Copy To → Local Folders → Archive-[name]</b>. Wait for the status bar at the bottom to finish before moving on.</li>
+    <li>Repeat step 3 for that account's <b class="ui">Sent</b> folder (and any custom folders you've made). Junk/Trash can be skipped.</li>
+    <li>Spot-check: open each <code>Archive-*</code> folder and confirm the message counts look right (oldest mail visible at the bottom).</li>
+    <li>Back up the whole Thunderbird profile: menu <b class="ui">☰ → Help → Troubleshooting Information</b> → under "Profile Folder" click <b class="ui">Open Folder</b> → close Thunderbird completely → copy that entire folder to a USB drive or external disk.</li>
+  </ol>
+  <div class="callout"><b>Why this matters</b> Zoho's free plan can't import from the old server, and the old server eventually dies with the hosting. After this step, your complete mail history lives on your own PC (plus the USB backup) forever — searchable in Thunderbird any time.</div>
+
+  <h3>0.3 — Catch-all mailbox</h3>
+  <label class="chk"><input type="checkbox" checked> <span><code>kordovan</code> system catch-all reviewed &amp; emptied — DONE (it was all supplier spam). We will NOT create a catch-all in Zoho, so this spam stream ends permanently.</span></label>
+
+  <!-- ============ PHASE 1 ============ -->
+  <h2 class="phase" id="p1"><span class="num">Phase 1</span>Zoho Mail — account, domain &amp; users</h2>
+  <div class="when">~45 min + waiting for verification · zero risk · mail keeps flowing to TMD throughout</div>
+
+  <h3>1.1 — Create the free account</h3>
+  <ol class="steps">
+    <li>Go to <code>zoho.com/mail</code> → click <b class="ui">Pricing</b>.</li>
+    <li>Scroll to the very bottom of the pricing page — below all the paid plans there is a small <b class="ui">"Forever Free Plan"</b> section (they hide it on purpose). Click <b class="ui">Sign up now / Get started</b> under it. It must say: <b>5 users, 5GB per user, one domain, webmail only.</b></li>
+    <li>Register using <code>admin@kordovanleather.com</code> as the contact email (it still works on TMD right now) + your phone number. Verify the OTP they send.</li>
+    <li>When asked, choose <b class="ui">"Sign up with a domain I already own"</b> → enter <code>kordovanleather.com</code> → organisation name: <b>Kordovan</b>.</li>
+  </ol>
+  <div class="callout"><b>Careful</b> If at any point Zoho pushes you into a "trial of Zoho Workplace / Mail Premium", look for the skip link or "continue with free plan". You never need to enter a card.</div>
+
+  <h3>1.2 — Prove you own the domain (TXT record at TMD)</h3>
+  <ol class="steps">
+    <li>Zoho's setup wizard now shows a verification screen. Choose the <b class="ui">TXT method</b>. It shows a value like <code>zoho-verification=zb12345678.zmverify.zoho.com</code>. Keep this tab open.</li>
+    <li>New tab → TMD client area → <b class="ui">Manage web hosting → Login to cPanel</b>.</li>
+    <li>In cPanel find the <b class="ui">Domains</b> section → <b class="ui">Zone Editor</b> → next to <code>kordovanleather.com</code> click <b class="ui">Manage</b>.</li>
+    <li>Click <b class="ui">+ Add Record</b> → type <b class="ui">TXT</b>. Fields: <b>Name</b> = <code>kordovanleather.com.</code> (or just <code>@</code> if it offers that), <b>TTL</b> = leave default, <b>Record</b> = paste the full <code>zoho-verification=…</code> value → <b class="ui">Save</b>.</li>
+    <li>Back in the Zoho tab, click <b class="ui">Verify</b>. If it fails, wait 15–60 minutes and try again (DNS needs time to propagate). Retry until green.</li>
+  </ol>
+
+  <h3>1.3 — Create the 5 mailboxes</h3>
+  <ol class="steps">
+    <li>Your signup account automatically becomes <code>admin@kordovanleather.com</code> — the Super Admin. That's seat 1. ✓</li>
+    <li>Open the Admin Console: <code>mailadmin.zoho.com</code> → <b class="ui">Users → Add User</b> (or the wizard's "Add Users" step).</li>
+    <li>Create each user — name, email prefix, and a strong unique password:<br>
+      · <code>asadj@kordovanleather.com</code><br>
+      · <code>umair@kordovanleather.com</code><br>
+      · <code>contact@kordovanleather.com</code><br>
+      · <code>corporate@kordovanleather.com</code></li>
+    <li>Write the 5 passwords down somewhere safe (or a password manager). Each person changes theirs on first login.</li>
+    <li>Recommended: turn on 2-factor authentication at least for <code>admin@</code> (Admin Console → Security, or accounts.zoho.com → MFA).</li>
+  </ol>
+
+  <h3>1.4 — Create the 4 aliases</h3>
+  <ol class="steps">
+    <li>Admin Console → <b class="ui">Users</b> → click <b class="ui">admin</b> → open its <b class="ui">Mail settings / Email aliases</b> panel → <b class="ui">Add alias</b> → <code>sales@kordovanleather.com</code> → save. Add <code>daraz@kordovanleather.com</code> the same way.</li>
+    <li>Click <b class="ui">asadj</b> → add aliases <code>marketing@kordovanleather.com</code> and <code>social@kordovanleather.com</code>.</li>
+    <li>That's all 9 addresses: 5 mailboxes + 4 aliases. Do <b>not</b> add a catch-all anywhere — unknown addresses should bounce (kills the spam).</li>
+  </ol>
+
+  <div class="callout stop"><b>Stop sign inside the Zoho wizard</b>
+  The wizard's next steps are "MX records / SPF / DKIM". <b>Do NOT add MX records at TMD, and do not expect verification to pass yet.</b> We add those records in Cloudflare in Phase 2, and they go live in Phase 3. It is completely fine to leave the Zoho wizard "incomplete" at this stage — mail keeps arriving at TMD/Thunderbird as usual. One thing you SHOULD do now: in the Zoho Admin Console go to <b class="ui">Domains → kordovanleather.com → DKIM / Email configuration</b> → generate the DKIM key (selector <code>zmail</code> is the default) and <b>copy the TXT name and value into a notes file</b> — you'll paste it in Phase 2.5.</div>
+
+  <!-- ============ PHASE 2 ============ -->
+  <h2 class="phase" id="p2"><span class="num">Phase 2</span>Cloudflare — build the new DNS (prepare only, switch later)</h2>
+  <div class="when">~40 min · zero risk — nothing changes until Phase 3</div>
+
+  <h3>2.1 — Add the site</h3>
+  <ol class="steps">
+    <li>Create a free account at <code>dash.cloudflare.com/sign-up</code> (use <code>admin@kordovanleather.com</code>).</li>
+    <li>Click <b class="ui">Add a domain</b> → enter <code>kordovanleather.com</code> → Continue.</li>
+    <li>Plan selection: scroll to the bottom → choose <b class="ui">Free — $0</b> → Continue.</li>
+    <li>Cloudflare auto-scans and imports your existing DNS records, then shows the record list. Don't trust the scan blindly — next step.</li>
+  </ol>
+
+  <h3>2.2 — Cross-check every record against cPanel (the important 10 minutes)</h3>
+  <ol class="steps">
+    <li>Second tab: TMD cPanel → <b class="ui">Zone Editor → Manage</b> (same place as Phase 1.2). This shows the REAL current records.</li>
+    <li>Compare line by line with Cloudflare's imported list. Anything cPanel has that Cloudflare missed → add it in Cloudflare (<b class="ui">Add record</b>), copying the values <i>exactly</i>.</li>
+    <li>The records that keep the STORE alive — these must exist and match cPanel exactly:<br>
+      · <b>A</b> record, name <code>@</code> (or kordovanleather.com) → the Shopify IP cPanel shows (typically <code>23.227.38.x</code>)<br>
+      · <b>CNAME</b> <code>www</code> → <code>shops.myshopify.com</code> (or exactly what cPanel shows)<br>
+      · <b>CNAME</b> <code>account</code> → exactly what cPanel shows</li>
+    <li>You can IGNORE / skip copying: records pointing at the TMD box itself — <code>mail.kordovanleather.com</code>, <code>ftp</code>, <code>cpanel</code>, <code>webmail</code>, <code>webdisk</code>, <code>autodiscover</code>, <code>autoconfig</code>, <code>_domainkey</code> entries from TMD, and the old MX records. They all die with the hosting.</li>
+  </ol>
+
+  <h3>2.3 — Grey-cloud the Shopify records</h3>
+  <ol class="steps">
+    <li>In Cloudflare's DNS list, each A/CNAME record has a <b class="ui">Proxy status</b> cloud icon. Orange = proxied, grey = DNS only.</li>
+    <li>Click <b class="ui">Edit</b> on the apex <b>A</b> record, the <b>www</b> CNAME and the <b>account</b> CNAME → set each to <b class="ui">DNS only (grey cloud)</b> → Save. Shopify manages its own SSL; proxying can break the padlock/checkout.</li>
+  </ol>
+
+  <h3>2.4 — Remove old mail records from the Cloudflare list</h3>
+  <ol class="steps">
+    <li>Delete any imported <b>MX</b> records (they point to the TMD server).</li>
+    <li>Delete any imported <b>TXT</b> record that starts with <code>v=spf1</code> and mentions the TMD server (e.g. contains <code>a mx</code> or an IP). A domain may only have ONE SPF record and we're adding Zoho's next. Keep unrelated TXT records (e.g. <code>google-site-verification</code>, the <code>zoho-verification</code> one from Phase 1).</li>
+  </ol>
+
+  <h3>2.5 — Add the Zoho mail records</h3>
+  <p>All via <b class="ui">Add record</b>. Use exactly the hostnames Zoho's setup page shows you (these are the standard ones):</p>
+  <div class="overflow"><table>
+    <tr><th>Type</th><th>Name</th><th>Content / target</th><th>Priority</th><th>Proxy</th></tr>
+    <tr><td>MX</td><td>@</td><td><code>mx.zoho.com</code></td><td>10</td><td>DNS only</td></tr>
+    <tr><td>MX</td><td>@</td><td><code>mx2.zoho.com</code></td><td>20</td><td>DNS only</td></tr>
+    <tr><td>MX</td><td>@</td><td><code>mx3.zoho.com</code></td><td>50</td><td>DNS only</td></tr>
+    <tr><td>TXT</td><td>@</td><td><code>v=spf1 include:zohomail.com ~all</code></td><td>—</td><td>—</td></tr>
+    <tr><td>TXT</td><td><code>zmail._domainkey</code></td><td>the long DKIM value you copied in Phase 1 (starts <code>v=DKIM1; k=rsa; p=…</code>)</td><td>—</td><td>—</td></tr>
+    <tr><td>TXT</td><td><code>_dmarc</code></td><td><code>v=DMARC1; p=none; rua=mailto:admin@kordovanleather.com</code></td><td>—</td><td>—</td></tr>
+  </table></div>
+
+  <h3>2.6 — Get the nameserver pair (but don't switch yet)</h3>
+  <ol class="steps">
+    <li>Click <b class="ui">Continue / Done</b> in Cloudflare. It shows the two nameservers assigned to you, like <code>ana.ns.cloudflare.com</code> and <code>rick.ns.cloudflare.com</code> (yours will differ).</li>
+    <li>Write both down exactly. Cloudflare will now show the site as <b class="ui">"Pending nameserver update"</b> — correct, that's Phase 3.</li>
+  </ol>
+  <div class="callout win"><b>Optional but smart</b> Before Phase 3, screenshot your full Cloudflare DNS record list and send it to me — I'll cross-check it in one minute. If you'd rather run solo, the checklist above is complete.</div>
+
+  <!-- ============ PHASE 3 ============ -->
+  <h2 class="phase" id="p3"><span class="num">Phase 3</span>The switch — nameservers at TMD</h2>
+  <div class="when">5 min of clicking + a few hours of propagation · do it late night PKT</div>
+  <ol class="steps">
+    <li>Pick a quiet time (e.g. after 11 PM PKT). The site will NOT go down — this is just cautious scheduling.</li>
+    <li>TMD client area → <b class="ui">All products &amp; services → Domain Names → Manage domain name</b> → find <b class="ui">Nameservers</b> (sometimes under "Settings" or "DNS management").</li>
+    <li>It currently lists TMD's nameservers. Choose <b class="ui">"Use custom nameservers"</b>, delete the TMD entries, and enter the two Cloudflare nameservers from Phase 2.6. Save.</li>
+    <li>Wait. Cloudflare emails you (and its dashboard banner turns to <b class="ui">"Active"</b>) when it takes over — usually 15 min to a few hours, worst case 24h.</li>
+    <li>What happens in the meantime: the website keeps serving from the identical Shopify records (visitors notice nothing). New email starts arriving in <b>Zoho</b> instead of TMD as resolvers pick up the new MX. During the overlap a stray message may still land at TMD — you'll sweep those in Phase 7.</li>
+    <li>Once Cloudflare says Active: go back to the <b class="ui">Zoho Admin Console → Domains → kordovanleather.com</b> and let it verify MX / SPF / DKIM — each should turn green now.</li>
+  </ol>
+
+  <!-- ============ PHASE 4 ============ -->
+  <h2 class="phase" id="p4"><span class="num">Phase 4</span>Shopify — verify nothing changed</h2>
+  <div class="when">5 min · read-only checks, change nothing</div>
+  <ol class="steps">
+    <li>Shopify admin → <b class="ui">Settings → Domains</b>: <code>kordovanleather.com</code> and <code>www</code> should both show <b class="ui">Connected</b> with no red warnings. (If a warning appears, see Fix-it below — it means a DNS record didn't match cPanel's values.)</li>
+    <li>Shopify admin → <b class="ui">Settings → Notifications</b>: the <b>sender email</b> is <code>admin@kordovanleather.com</code> — leave it. If Shopify shows a banner offering to "authenticate your sender domain" by adding DNS records (CNAMEs), you may add exactly what it lists in Cloudflare — it improves deliverability of order-confirmation emails. Optional, any time.</li>
+    <li>Open the live store in a private/incognito window: homepage, a product page, add to cart, proceed to checkout page (no need to order). Padlock everywhere.</li>
+  </ol>
+
+  <!-- ============ PHASE 5 ============ -->
+  <h2 class="phase" id="p5"><span class="num">Phase 5</span>Phones &amp; daily use</h2>
+  <div class="when">10 min per person</div>
+  <ol class="steps">
+    <li>Everyone installs the <b class="ui">Zoho Mail</b> app (Play Store / App Store) and logs in with their own address: admin@, asadj@, umair@ (+ whoever owns contact@ / corporate@ adds those accounts in the same app — the app supports multiple accounts).</li>
+    <li>On desktop, daily mail is now <code>mail.zoho.com</code> in the browser. Bookmark it.</li>
+    <li>Thunderbird stays installed purely as the ARCHIVE of pre-migration mail (the <code>Archive-*</code> local folders). The old TMD accounts in it will error once the hosting dies — that's expected; the Local Folders keep working forever.</li>
+    <li>Replying as an alias: in Zoho compose, click the <b class="ui">From</b> dropdown — admin can send as <code>sales@</code> / <code>daraz@</code>, asadj as <code>marketing@</code> / <code>social@</code>.</li>
+  </ol>
+
+  <!-- ============ PHASE 6 ============ -->
+  <h2 class="phase" id="p6"><span class="num">Phase 6</span>Test everything — the green checklist</h2>
+  <div class="when">~20 min, ideally the morning after the switch</div>
+  <p>From an OUTSIDE mailbox (any personal account NOT on the domain), send one test email to each of the 9 addresses, then tick:</p>
+  <label class="chk"><input type="checkbox"> <span>To <code>admin@</code> → arrives in admin's Zoho inbox</span></label>
+  <label class="chk"><input type="checkbox"> <span>To <code>asadj@</code> → arrives in asadj's inbox</span></label>
+  <label class="chk"><input type="checkbox"> <span>To <code>umair@</code> → arrives in umair's inbox</span></label>
+  <label class="chk"><input type="checkbox"> <span>To <code>contact@</code> → arrives in contact's inbox &nbsp;<i>(the public one — most important)</i></span></label>
+  <label class="chk"><input type="checkbox"> <span>To <code>corporate@</code> → arrives in corporate's inbox</span></label>
+  <label class="chk"><input type="checkbox"> <span>To <code>sales@</code> AND <code>daraz@</code> → both arrive in <b>admin's</b> inbox</span></label>
+  <label class="chk"><input type="checkbox"> <span>To <code>marketing@</code> AND <code>social@</code> → both arrive in <b>asadj's</b> inbox</span></label>
+  <p>Outbound + authentication:</p>
+  <label class="chk"><input type="checkbox"> <span>Reply from Zoho webmail as <code>contact@</code> to your personal Gmail → it arrives in the INBOX (not spam)</span></label>
+  <label class="chk"><input type="checkbox"> <span>In Gmail open that reply → ⋮ menu → <b class="ui">Show original</b> → says <code>SPF: PASS</code>, <code>DKIM: PASS</code>, <code>DMARC: PASS</code></span></label>
+  <label class="chk"><input type="checkbox"> <span>Send once as an alias (From: <code>sales@</code>) → arrives fine</span></label>
+  <p>Store:</p>
+  <label class="chk"><input type="checkbox"> <span><code>kordovanleather.com</code>, <code>www.</code>, and a customer-account login all load with the padlock</span></label>
+  <label class="chk"><input type="checkbox"> <span>Place a real small test order (COD) → Shopify order-confirmation email arrives → then cancel the order in admin</span></label>
+  <label class="chk"><input type="checkbox"> <span>Shopify Settings → Domains still shows Connected, no warnings</span></label>
+  <label class="chk"><input type="checkbox"> <span>Zoho Admin Console → Domains: MX, SPF, DKIM all green</span></label>
+  <div class="callout win"><b>All green?</b> Report back to me here with the results — then we start the 1–2 week observation window, and after that Phase 7 kills the $180.</div>
+
+  <!-- ============ PHASE 7 ============ -->
+  <h2 class="phase" id="p7"><span class="num">Phase 7</span>Kill the cost (after 1–2 clean weeks)</h2>
+  <ol class="steps">
+    <li>Log into the old TMD webmail one last time and check for any stragglers delivered during the propagation window — forward anything real to the new Zoho address, ignore spam.</li>
+    <li>TMD client area → <b class="ui">Manage web hosting</b> → find <b class="ui">Auto-renew / Billing</b> → turn auto-renew <b>OFF</b> for the <b>Linux Shared Hosting "Starter"</b> package only. If there's no self-serve toggle, open a TMD support ticket: <i>"Please set my Starter hosting (kordovanleather.com) to not renew at the end of the current term. Keep my domain registration active and auto-renewing."</i></li>
+    <li>Double-check the DOMAIN still shows active + renewing. (Hosting dies ~Apr 2027; domain lives on.)</li>
+    <li>Optional, next year: transfer the domain to Cloudflare Registrar (~$10/yr, at-cost). Only 60+ days after any renewal, never near expiry.</li>
+  </ol>
+
+  <!-- ============ TROUBLESHOOT ============ -->
+  <h2 class="phase" id="help"><span class="num">Fix-it</span>Troubleshooting</h2>
+  <div class="overflow"><table>
+    <tr><th>Symptom</th><th>Cause &amp; fix</th></tr>
+    <tr><td>Zoho TXT verification keeps failing (Phase 1.2)</td><td>Propagation lag — wait up to an hour and retry. Check the record has no typo and sits on the root domain (<code>@</code>), not <code>www</code>.</td></tr>
+    <tr><td>Site shows security warning / won't load after the switch</td><td>A Shopify record is wrong or proxied. In Cloudflare: apex A + www/account CNAMEs must exactly match what cPanel had, and be <b>grey cloud (DNS only)</b>. Fixing the record fixes the site within minutes.</td></tr>
+    <tr><td>Shopify Domains page shows "needs attention"</td><td>Same as above — compare the record values Shopify asks for with what's in Cloudflare.</td></tr>
+    <tr><td>Mail still arriving at old TMD webmail a day later</td><td>Old MX still present in Cloudflare, or NS switch didn't save at TMD. Check Cloudflare shows ONLY the three Zoho MX records, and TMD shows the Cloudflare nameservers.</td></tr>
+    <tr><td>Sent mail lands in recipients' spam</td><td>SPF/DKIM issue. Zoho Admin → Domains must show SPF + DKIM green; Cloudflare must contain exactly ONE <code>v=spf1</code> TXT (Zoho's) and the <code>zmail._domainkey</code> TXT.</td></tr>
+    <tr><td>An alias doesn't deliver</td><td>Admin Console → Users → the owner → Email aliases: confirm the alias is listed and spelled right.</td></tr>
+    <tr><td>Zoho nags to upgrade / "trial expiring"</td><td>Cosmetic — the Forever Free plan doesn't expire. Ignore, or check Admin Console → Subscription shows "Free Plan".</td></tr>
+    <tr><td>Anything else weird</td><td>Screenshot it and send it to me — do NOT delete/cancel anything at TMD while debugging.</td></tr>
+  </table></div>
+
+  <p style="margin-top:50px;color:var(--stone);font-size:13px;text-align:center">Kordovan · backend cleanup · guide v2 — once Phase 6 is green, report back and we resume the SEO pass.</p>
+</div>
+</body>
+</html>
