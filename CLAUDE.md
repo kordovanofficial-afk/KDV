@@ -92,6 +92,24 @@ Goal: kill TMDHosting "Starter" Linux hosting ($180/yr, renews in ~9 mo from Jul
   policies) + store sender. Optional pending: Corporate page quote email →
   `corporate@` (live page content — needs explicit OK).
 
+## 🧹 DONE — Customer-base cleanup (Jul 5 2026, pre-SEO backend hygiene)
+From 27,193 → ~26,000 profiles. Executed via Shopify MCP GraphQL (user granted
+approval; `customerDelete` works, `customerMerge` BLOCKED — connector token
+lacks `write_customer_merge` scope, no workaround; direct API egress blocked).
+- Alias/duplicate analysis from customer CSV export (scratchpad, session-local):
+  892 clusters → 185 zero-order duplicates API-deleted · 23 priority merges
+  (dup ≥2 orders) done MANUALLY by user in admin (Spring '26 has native
+  "Mergeable" column + Merge button) · 446 one-order-dup merges + 86
+  consent-hold merges SKIPPED as cosmetic (list = manual_merge_list.csv,
+  delivered) · 6 junk test profiles deleted (placeholder phones 0300-0000000/
+  1234567, "Test/Abc Def" names); 9 junk-with-orders remain (undeletable).
+- BIG PURGE: 985 deleted (zero orders + no email/SMS/WhatsApp consent + no
+  tags/notes + created ≤Dec 26 2025 via ID↔date probing; 520 recent spared;
+  2 refused by API order-guard). Audit logs delivered to user.
+- **OPEN:** 56 REVIEW clusters (different names sharing phone/address — family
+  vs COD-refuser) await user's CANCELLED-ORDERS export → then tag `cod-risk`
+  via API (tags work). User's own profiles: business phone 3332601161 cluster.
+
 ## 📍 Session state (resume here)
 - **Workflow = mockup-first:** build static HTML mockup in `docs/mockups/` →
   user approves → THEN implement in Liquid → deploy once. (User's idea — avoids
