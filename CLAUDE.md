@@ -124,6 +124,26 @@ lacks `write_customer_merge` scope, no workaround; direct API egress blocked).
   vs COD-refuser) await user's CANCELLED-ORDERS export → then tag via API (tags
   work). User's own profiles: business phone 3332601161 cluster.
 
+## 📣 Meta Ads (SCOPED — Kordovan 2025 ONLY)
+- **ONLY account to ever touch/reference: `995683712074843` ("Kordovan 2025", PKR,
+  ACTIVE).** User locked scope Jul 7 2026. IGNORE all others (Kordovan Leather
+  337…255 = DISABLED/flagged; Kordovan 2.0 492…061 = closed; Corporate 136…323;
+  UAE 589…560; + unrelated DEW/Vertix/Ivy Laine/Oakn'Moss).
+- **KEY INSIGHT (parallels COD finding):** lookalike seeds = Pixel "Purchase"
+  (order PLACED) → ~40% are COD refusers, so LLAs teach Meta to find refusers.
+  FIX PLAN: (1) reseed value-based LLA from DELIVERED/PREPAID buyers (clean seed
+  buildable from bulk order export); (2) build REFUSER EXCLUSION audience (323
+  FRAUD RISK + all cancelled-order customers) → exclude from prospecting;
+  (3) feed delivered/paid back as conversion signal (offline conv/CAPI); (4) prune
+  ~25 audience sprawl. Old inactive "Lifetime Fulfilled Customers" LLA had the
+  right idea (fulfilled=delivered) but is off.
+- Uploading customer PII (hashed) to Meta needs explicit user OK each time.
+- Pixel EMQ check pending (tool needed approval). Data export files in scratchpad:
+  cancelled_orders.jsonl (5203), orders_12mo.jsonl (3468), serial_cod_refusers.csv.
+- **Prepaid discount LIVE on store:** code `PAYONLINE10` (10% off, active, unlimited).
+  Deploy via WhatsApp order-confirmation reward (leak-proof, no app). Full enforce
+  + COD fee + OTP later via PostEx XPay integration (user exploring) — PARKED.
+
 ## 📍 Session state (resume here)
 - **Workflow = mockup-first:** build static HTML mockup in `docs/mockups/` →
   user approves → THEN implement in Liquid → deploy once. (User's idea — avoids
