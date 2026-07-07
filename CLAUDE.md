@@ -106,9 +106,23 @@ lacks `write_customer_merge` scope, no workaround; direct API egress blocked).
 - BIG PURGE: 985 deleted (zero orders + no email/SMS/WhatsApp consent + no
   tags/notes + created ≤Dec 26 2025 via ID↔date probing; 520 recent spared;
   2 refused by API order-guard). Audit logs delivered to user.
+- **SERIAL COD REFUSERS tagged (Jul 7 2026):** bulk-exported ALL 5,203 cancelled
+  orders (bulkOperationRunQuery → storage.googleapis.com URL IS fetchable through
+  proxy; cdn.shopify.com is NOT). Refuser = 2+ cancels with reason CUSTOMER/FRAUD/
+  OTHER (excluded INVENTORY/STAFF/DECLINED = our-side). 425 serial refusers found;
+  **API-tagged `FRAUD RISK` on 323** (the "never completed a single order" set),
+  9 batches of tagsAdd, zero errors. Skipped 4 internal/team (Asad Janjua/Umair
+  Khan/biz phone 3332601161·3009120000) + 71 MEDIUM (2 cancels but did complete) +
+  27 other HIGH (3+ cancels but completed ≥1 — OFFERED to tag, user hasn't said yes).
+  `customerDelete` CANNOT remove them (Shopify blocks delete of any customer with
+  orders, incl. cancelled). List = serial_cod_refusers.csv (delivered).
+- **Shopify Flow LIVE (user built, on):** Order created → IF customer tags Includes
+  "FRAUD RISK" → Add order tag `⛔ FRAUD RISK`. Auto-flags every new order from a
+  refuser at top of order. (Order tags are grey chips, not red text — Shopify has no
+  native tag colouring w/o a paid app; ⛔ emoji is the visibility hack.)
 - **OPEN:** 56 REVIEW clusters (different names sharing phone/address — family
-  vs COD-refuser) await user's CANCELLED-ORDERS export → then tag `cod-risk`
-  via API (tags work). User's own profiles: business phone 3332601161 cluster.
+  vs COD-refuser) await user's CANCELLED-ORDERS export → then tag via API (tags
+  work). User's own profiles: business phone 3332601161 cluster.
 
 ## 📍 Session state (resume here)
 - **Workflow = mockup-first:** build static HTML mockup in `docs/mockups/` →
