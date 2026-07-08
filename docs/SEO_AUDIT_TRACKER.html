@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kordovan — SEO Audit &amp; Master Tracker</title>
+<style>
+  :root{
+    --canvas:#F7F2EA;--parchment:#ECE3D4;--ink:#241C16;--walnut:#4A3528;
+    --cognac:#A0623A;--cognac-dark:#7E4B2C;--tan:#C08B5C;--brass:#B0894F;
+    --stone:#8B8174;--border:#DDD2C0;--pine:#2D6A4F;--oxblood:#8B2D2D;--gold:#B0894F;
+    --heading:Georgia,'Times New Roman',serif;--body:-apple-system,'Segoe UI',Inter,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--canvas);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.7}
+  .wrap{max-width:960px;margin:0 auto;padding:44px 24px 100px}
+  header.hero{background:var(--ink);color:var(--canvas);padding:52px 24px;text-align:center}
+  header.hero .eyebrow{color:var(--brass);text-transform:uppercase;letter-spacing:.18em;font-size:11px;font-weight:600}
+  header.hero h1{font-family:var(--heading);font-weight:500;font-size:clamp(28px,5vw,42px);margin:10px 0 6px}
+  header.hero p{color:#D8C39A;max-width:640px;margin:0 auto;font-size:15px}
+  h2.sec{font-family:var(--heading);font-weight:500;font-size:clamp(22px,3.2vw,30px);margin:56px 0 14px;padding-top:22px;border-top:2px solid var(--border)}
+  h3{font-family:var(--heading);font-weight:500;font-size:20px;margin:28px 0 8px;color:var(--walnut)}
+  h4{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--cognac);margin:20px 0 8px}
+  p{margin:9px 0}
+  code{background:var(--parchment);border:1px solid var(--border);border-radius:4px;padding:1px 6px;font-size:.87em;font-family:Consolas,monospace;color:var(--cognac-dark)}
+  .overflow{overflow-x:auto}
+  table{border-collapse:collapse;width:100%;margin:14px 0;background:#fff;border:1px solid var(--border);border-radius:8px;overflow:hidden;font-size:14.5px}
+  th{background:var(--parchment);text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--cognac);padding:9px 13px}
+  td{padding:9px 13px;border-top:1px solid var(--border);vertical-align:top}
+  /* scorecard */
+  .score-hero{display:flex;gap:26px;align-items:center;flex-wrap:wrap;background:#fff;border:1px solid var(--border);border-radius:16px;padding:28px 32px;margin:26px 0}
+  .score-badge{width:132px;height:132px;border-radius:50%;flex:none;display:flex;flex-direction:column;align-items:center;justify-content:center;background:conic-gradient(var(--cognac) 0 58%,var(--border) 58% 100%);position:relative}
+  .score-badge::before{content:"";position:absolute;inset:11px;background:#fff;border-radius:50%}
+  .score-badge span{position:relative;font-family:var(--heading);font-size:40px;color:var(--ink);line-height:1}
+  .score-badge small{position:relative;font-size:11px;color:var(--stone);text-transform:uppercase;letter-spacing:.1em;margin-top:3px}
+  .bars{flex:1;min-width:280px}
+  .bar{display:flex;align-items:center;gap:10px;margin:7px 0;font-size:14px}
+  .bar .lbl{width:150px;flex:none;color:var(--walnut)}
+  .bar .track{flex:1;height:9px;background:var(--parchment);border-radius:99px;overflow:hidden}
+  .bar .fill{height:100%;border-radius:99px}
+  .bar .n{width:42px;flex:none;text-align:right;font-weight:600;font-size:13px}
+  .g{background:var(--pine)}.y{background:var(--gold)}.r{background:var(--oxblood)}
+  /* checklist */
+  .phase{background:#fff;border:1px solid var(--border);border-radius:12px;padding:6px 22px 18px;margin:14px 0}
+  .phase>summary{cursor:pointer;font-family:var(--heading);font-size:19px;color:var(--ink);padding:14px 0 10px;list-style:none;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .phase>summary::-webkit-details-marker{display:none}
+  .phase>summary::before{content:"▸";color:var(--cognac);font-size:14px;transition:transform .2s}
+  .phase[open]>summary::before{transform:rotate(90deg)}
+  .who{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:2px 8px;border-radius:99px;margin-left:auto}
+  .who.you{background:#EAF1EC;color:var(--pine)}
+  .who.me{background:#F3E7DE;color:var(--cognac-dark)}
+  .who.both{background:#EFEAF0;color:#6b4a6b}
+  label.chk{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-top:1px solid var(--border);cursor:pointer;font-size:15px}
+  label.chk:first-of-type{border-top:0}
+  label.chk input{margin-top:4px;accent-color:var(--cognac);width:16px;height:16px;flex:none}
+  label.chk:has(input:checked) span{color:var(--stone);text-decoration:line-through}
+  .tag{font-size:10px;font-weight:700;border-radius:4px;padding:1px 6px;margin-left:6px;vertical-align:middle}
+  .p1{background:#FBEDEA;color:var(--oxblood)}.p2{background:#FaF3E4;color:#8a6d1e}.p3{background:#EEF1EE;color:var(--stone)}
+  .callout{border-left:4px solid var(--brass);background:#fff;border-radius:0 10px 10px 0;padding:13px 18px;margin:16px 0;font-size:15px}
+  .callout.win{border-left-color:var(--pine);background:#F0F5F1}
+  .callout.stop{border-left-color:var(--oxblood);background:#FBF1EF}
+  .callout b:first-child{display:block;text-transform:uppercase;letter-spacing:.06em;font-size:11px;margin-bottom:3px;color:var(--brass)}
+  .callout.win b:first-child{color:var(--pine)}.callout.stop b:first-child{color:var(--oxblood)}
+  ul.plain{margin:6px 0 6px 20px}ul.plain li{margin:4px 0}
+  .legend{font-size:12px;color:var(--stone);margin:6px 0 0}
+  .legend b{display:inline-block;margin:0 3px}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="eyebrow">Kordovan · Quiet Heritage</div>
+  <h1>SEO Audit &amp; Master Tracker</h1>
+  <p>Current-state score, gap analysis, and the single checklist to run the whole SEO relaunch against — accounts, theme, collections, every product, content, off-site. Tick as you go. (Snapshot: 357 products · 160 published · 21 pages.)</p>
+</header>
+<div class="wrap">
+
+  <!-- SCORECARD -->
+  <h2 class="sec" style="border-top:0;margin-top:24px">The Score — <em>5.5 / 10</em></h2>
+  <p>Honest read: <strong>a solid foundation with big, high-value gaps.</strong> You're not starting from zero — meta titles/descriptions and basic alt text already exist — but the things that actually win rankings and rich results (schema, deep product content, clean catalog, off-site trust) are largely undone. The upside is huge because the fixes are concrete.</p>
+  <div class="score-hero">
+    <div class="score-badge"><span>5.5</span><small>out of 10</small></div>
+    <div class="bars">
+      <div class="bar"><span class="lbl">Meta titles &amp; descriptions</span><span class="track"><span class="fill g" style="width:80%"></span></span><span class="n">8.0</span></div>
+      <div class="bar"><span class="lbl">Image SEO / alt text</span><span class="track"><span class="fill y" style="width:55%"></span></span><span class="n">5.5</span></div>
+      <div class="bar"><span class="lbl">Structured data (schema)</span><span class="track"><span class="fill r" style="width:30%"></span></span><span class="n">3.0</span></div>
+      <div class="bar"><span class="lbl">Product content depth</span><span class="track"><span class="fill r" style="width:30%"></span></span><span class="n">3.0</span></div>
+      <div class="bar"><span class="lbl">Technical SEO</span><span class="track"><span class="fill y" style="width:60%"></span></span><span class="n">6.0</span></div>
+      <div class="bar"><span class="lbl">Catalog hygiene</span><span class="track"><span class="fill y" style="width:50%"></span></span><span class="n">5.0</span></div>
+      <div class="bar"><span class="lbl">Content / topical authority</span><span class="track"><span class="fill r" style="width:20%"></span></span><span class="n">2.0</span></div>
+      <div class="bar"><span class="lbl">Off-site &amp; foundations</span><span class="track"><span class="fill r" style="width:20%"></span></span><span class="n">2.0</span></div>
+    </div>
+  </div>
+
+  <h3>✅ What's already working</h3>
+  <ul class="plain">
+    <li><strong>~96% of products have custom meta titles + descriptions</strong> (a titles pass was clearly done) — format <code>Product | Kordovan Pakistan</code>.</li>
+    <li><strong>Every sampled product has image alt text</strong>, lazy-loading, and width/height on cards (good for Core Web Vitals / CLS).</li>
+    <li><strong>Collection pages carry <code>CollectionPage</code> + <code>ItemList</code> JSON-LD</strong>; theme <code>&lt;head&gt;</code> has canonical, Open Graph, favicon, mobile-first responsive.</li>
+    <li><strong>~55% of products already have a review rating</strong> metafield (4.6–5.0).</li>
+    <li>Clean, keyword-friendly URL structure on most products (except the "copy-of" ones — see below).</li>
+  </ul>
+
+  <h3>🔴 The gaps that are costing you</h3>
+  <ul class="plain">
+    <li><strong>No <code>Product</code> schema on the PDP</strong> → no price/stars/stock rich results in Google. Biggest single technical miss.</li>
+    <li><strong>No <code>Organization</code>, <code>BreadcrumbList</code>, or <code>FAQPage</code> schema</strong> anywhere.</li>
+    <li><strong>PDP enrichment metafields empty on 100% of products</strong> — <code>custom.subtitle</code>, <code>custom.benefits</code>, <code>custom.material</code>, <code>custom.fits</code>. The new PDP renders fallbacks until these are filled.</li>
+    <li><strong>Meta descriptions are templated/generic</strong> — same "Buy the X… free shipping, lifetime warranty" pattern → weak keyword differentiation.</li>
+    <li><strong>Alt text is inconsistent</strong> — many are filename-style ("// Black - Kordovan") not descriptive; full galleries not yet alt-tagged; images aren't the branded 5-shot set yet.</li>
+    <li><strong>Internal codes in public titles</strong> — "TP The…", "DT Crushable…" — and <strong>"copy-of-…" handles</strong> on duplicated products (bad URLs + optics).</li>
+    <li><strong>Messy product types &amp; tags</strong> — inconsistent casing, empty types, typos ("Kordovan Leathe"). Tags drive the kdv- smart collections, so this ripples.</li>
+    <li><strong>Reviews incomplete</strong> — rating exists on ~half, but <code>reviews.rating_count</code> + <code>custom.reviews</code> (text) needed for the stars + review block to render and for review rich snippets.</li>
+    <li><strong>Blog / content cluster essentially empty</strong> — no informational content = missing top-funnel + AI-citation surface.</li>
+    <li><strong>Off-site foundations unconfirmed</strong> — Search Console, Bing, GA4, Merchant Center, Google Business Profile.</li>
+    <li><strong>Junk/thin pages likely indexable</strong> — order-confirmation pages, empty "11 11 sale", "KODO promotion". Should be noindexed.</li>
+  </ul>
+
+  <div class="callout"><b>How to use this tracker</b> Work top-to-bottom by phase. Each item is a checkbox (ticks are saved only in your open browser tab — for shared tracking, mirror these into a Google Sheet). <span class="legend"><b class="who you" style="position:static">YOU</b> = your task · <b class="who me" style="position:static">ME</b> = I do it (draft theme / API) · <b class="who both" style="position:static">BOTH</b> = handoff. Priority: <span class="tag p1">P1</span> critical · <span class="tag p2">P2</span> important · <span class="tag p3">P3</span> polish.</span></p></div>
+
+  <!-- MASTER TRACKER -->
+  <h2 class="sec">Master Task Tracker</h2>
+
+  <details class="phase" open>
+    <summary>Phase 0 · Foundations &amp; Accounts <span class="who you">You</span></summary>
+    <label class="chk"><input type="checkbox"><span><b>Google Search Console</b> — verify the domain (DNS TXT via Cloudflare), submit <code>/sitemap.xml</code>. <span class="tag p1">P1</span></span></label>
+    <label class="chk"><input type="checkbox"><span><b>Bing Webmaster Tools</b> — verify + submit sitemap (Bing powers ChatGPT search). <span class="tag p1">P1</span></span></label>
+    <label class="chk"><input type="checkbox"><span><b>Google Analytics 4</b> — confirm GA4 installed &amp; tracking (via Shopify's Google channel). <span class="tag p2">P2</span></span></label>
+    <label class="chk"><input type="checkbox"><span><b>Google Merchant Center</b> — set up + connect Shopify feed for free Shopping listings. <span class="tag p2">P2</span></span></label>
+    <label class="chk"><input type="checkbox"><span><b>Google Business Profile</b> — claim/verify the Karachi store (Falcon St, Malir Cantt) for local pack. <span class="tag p2">P2</span></span></label>
+    <label class="chk"><input type="checkbox"><span><b>Bing Places</b> — mirror the GBP listing. <span class="tag p3">P3</span></span></label>
+  </details>
+
+  <details class="phase">
+    <summary>Phase 1 · Technical &amp; Schema (draft theme) <span class="who me">Me</span></summary>
+    <label class="chk"><input type="checkbox"><span><b>Product schema</b> — add <code>Product</code> JSON-LD to the PDP (name, image, description, brand, price, availability, aggregateRating when reviews present). Enables price/stars/stock rich results. <span class="tag p1">P1</span></span></label>
+    <label class="chk"><input type="checkbox"><span><b>Organization schema</b> — sitewide (name, logo, sameAs socials, contact) for brand entity + knowledge panel. <span class="tag p1">P1</span></span></label>
+    <label class="chk"><input type="checkbox"><span><b>BreadcrumbList schema</b> — on PDP + collection pages. <span class="tag p2">P2</span></span></label>
+    <label class="chk"><input type="checkbox"><span><b>FAQPage schema</b> — on the FAQs page (and Q&amp;A blocks in guides). <span class="tag p2">P2</span></span></label>
+    <label class="chk"><input type="checkbox"><span><b>Noindex thin/utility pages</b> — order-confirmation, "11 11 sale", KODO promotion, internal <code>/search</code>, cart, account. <span class="tag p2">P2</span></span></label>
+    <label class="chk"><input type="checkbox"><span><b>robots.txt.liquid</b> — allow major AI crawlers (GPTBot, PerplexityBot, etc.); keep cart/checkout disallowed. <span class="tag p3">P3</span></span></label>
+    <label class="chk"><input type="checkbox"><span><b>Canonicals on filtered/sorted collection URLs</b> — ensure <code>?filter…</code>/<code>?sort…</code> canonical to the clean URL. <span class="tag p2">P2</span></span></label>
+    <label class="chk"><input type="checkbox"><span><b>Enable Search &amp; Discovery filters</b> (admin) so collection filter pills populate. <span class="tag p3">P3</span></span></label>
+    <label class="chk"><input type="checkbox"><span><b>Logo, favicon, social share image</b> — upload transparent black PNG mark; set favicon + OG image. <span class="tag p2">P2</span></span></label>
+    <label class="chk"><input type="checkbox"><span><b>Core Web Vitals pass</b> — after theme is final, check LCP/INP/CLS in PageSpeed. <span class="tag p3">P3</span></span></label>
+  </details>
+
+  <details class="phase">
+    <summary>Phase 2 · Catalog Hygiene (pre-enrichment cleanup) <span class="who both">Both</span></summary>
+    <label class="chk"><input type="checkbox"><span><b>Finish the catalog trim</b> — unpublish store-only/bogus products (in progress). <span class="tag p1">P1</span> <em>· You</em></span></label>
+    <label class="chk"><input type="checkbox"><span><b>301 redirects</b> for every removed product URL → parent collection/home (no 404s). <span class="tag p1">P1</span> <em>· Me (bulk list)</em></span></label>
+    <label class="chk"><input type="checkbox"><span><b>Strip internal code prefixes</b> from public titles — "TP …", "DT …". <span class="tag p1">P1</span></span></label>
+    <label class="chk"><input type="checkbox"><span><b>Fix "copy-of-…" handles</b> on duplicated products (rename + redirect old handle). <span class="tag p2">P2</span></span></label>
+    <label class="chk"><input type="checkbox"><span><b>Normalize product types</b> — single consistent set (e.g. Wallet, Bag, Belt, Shoe, Jacket, Accessory); fill empty types. <span class="tag p2">P2</span></span></label>
+    <label class="chk"><input type="checkbox"><span><b>Clean tags</b> — fix typos ("Kordovan Leathe"), standardize the tags that power the 6 kdv- collections. <span class="tag p2">P2</span></span></label>
+    <label class="chk"><input type="checkbox"><span><b>Re-verify the 6 kdv- smart collections</b> populate correctly post-trim; flag any empty. <span class="tag p2">P2</span> <em>· Me</em></span></label>
+  </details>
+
+  <details class="phase">
+    <summary>Phase 3 · Collections (6 × kdv-) <span class="who me">Me → you approve</span></summary>
+    <p style="font-size:14px;color:var(--stone);margin:8px 0">For each: <code>kdv-wallets · kdv-bags · kdv-jackets · kdv-shoes · kdv-belts · kdv-accessories</code></p>
+    <label class="chk"><input type="checkbox"><span><b>Meta title + description</b> per collection (head-term targeted, e.g. "Leather Wallets in Pakistan"). <span class="tag p1">P1</span></span></label>
+    <label class="chk"><input type="checkbox"><span><b>200–300w editorial intro</b> per collection (unique, keyword-rich, internal links). <span class="tag p2">P2</span></span></label>
+    <label class="chk"><input type="checkbox"><span><b>Collection image + alt</b> where shown. <span class="tag p3">P3</span></span></label>
+  </details>
+
+  <details class="phase">
+    <summary>Phase 4 · Per-Product Enrichment (the big one — repeat per product) <span class="who both">Both</span></summary>
+    <div class="callout"><b>Run this checklist on every published product</b> — bestsellers first. Copy/fields = me; images/reviews = you. A per-product tracker spreadsheet (one row per product, these as columns) gets generated <em>after</em> the trim so it lists only the final catalog.</div>
+    <label class="chk"><input type="checkbox"><span><b>Title</b> — clean, keyword-first, no internal codes. <span class="tag p1">P1</span></span></label>
+    <label class="chk"><input type="checkbox"><span><b>Meta title ≤60</b> — <code>[Product] — [Material] Leather [Type] | Kordovan</code>. <span class="tag p2">P2</span></span></label>
+    <label class="chk"><input type="checkbox"><span><b>Meta description ≤160</b> — <em>unique</em> (not the template): benefit + material + feature + trust + CTA. <span class="tag p1">P1</span></span></label>
+    <label class="chk"><input type="checkbox"><span><b>Body description</b> — unique, benefit-first; keep Features + Dimensions. <span class="tag p2">P2</span></span></label>
+    <label class="chk"><input type="checkbox"><span><code>custom.subtitle</code> — material + type + benefit (shows under H1). <span class="tag p2">P2</span></span></label>
+    <label class="chk"><input type="checkbox"><span><code>custom.benefits</code> — 3 lines, one benefit each (buy-box bullets). <span class="tag p2">P2</span></span></label>
+    <label class="chk"><input type="checkbox"><span><code>custom.material</code> — e.g. "Full-Grain Cow Leather". <span class="tag p2">P2</span></span></label>
+    <label class="chk"><input type="checkbox"><span><code>custom.fits</code> — capacity <code>value|label</code> per line (+ <code>fits_title</code>/<code>fits_text</code>). <span class="tag p3">P3</span></span></label>
+    <label class="chk"><input type="checkbox"><span><b>5 images to spec</b> — flat-lay, in-hand, open/inside, texture macro, lifestyle (per §07 edit prompts). <span class="tag p1">P1</span> <em>· You</em></span></label>
+    <label class="chk"><input type="checkbox"><span><b>Unique descriptive alt text</b> on every image (not filename-style). <span class="tag p2">P2</span></span></label>
+    <label class="chk"><input type="checkbox"><span><b>File names</b> per convention <code>kordovan-[material]-[type]-[colour]-[view].jpg</code>. <span class="tag p3">P3</span> <em>· You</em></span></label>
+    <label class="chk"><input type="checkbox"><span><code>reviews.rating</code> + <code>reviews.rating_count</code> + <code>custom.reviews</code> (<code>Name|City|Text</code>). <span class="tag p2">P2</span> <em>· You author</em></span></label>
+    <label class="chk"><input type="checkbox"><span><b>Product type + tags</b> correct (drives kdv- collections + filters). <span class="tag p2">P2</span></span></label>
+    <label class="chk"><input type="checkbox"><span><b>Internal links</b> — related products; link from a relevant guide. <span class="tag p3">P3</span></span></label>
+  </details>
+
+  <details class="phase">
+    <summary>Phase 5 · Content &amp; Topical Authority <span class="who me">Me → you approve</span></summary>
+    <label class="chk"><input type="checkbox"><span><b>The Leather Guide</b> (full-grain vs top-grain vs crazy horse) — targets "types of leather". <span class="tag p2">P2</span></span></label>
+    <label class="chk"><input type="checkbox"><span><b>Best Leather Wallets in Pakistan</b> buying guide — AI-citation target. <span class="tag p2">P2</span></span></label>
+    <label class="chk"><input type="checkbox"><span><b>Leather Care Guide</b> — expand existing + add FAQ schema. <span class="tag p3">P3</span></span></label>
+    <label class="chk"><input type="checkbox"><span><b>Gift guides</b> (for him/her, corporate) — "leather gift pakistan". <span class="tag p3">P3</span></span></label>
+    <label class="chk"><input type="checkbox"><span>Each guide: front-loaded answer, Q&amp;A headings, comparison table, FAQ schema, internal links. <span class="tag p3">P3</span></span></label>
+  </details>
+
+  <details class="phase">
+    <summary>Phase 6 · Off-site, Local &amp; AEO <span class="who you">You</span></summary>
+    <label class="chk"><input type="checkbox"><span><b>Consistent NAP</b> (name/address/phone) across GBP, site, socials → local trust. <span class="tag p2">P2</span></span></label>
+    <label class="chk"><input type="checkbox"><span><b>Gather Google + Facebook reviews</b> — corroboration AI trusts. <span class="tag p2">P2</span></span></label>
+    <label class="chk"><input type="checkbox"><span><b>Citations / PR</b> — local press, "made in Pakistan" features, niche listicles. <span class="tag p3">P3</span></span></label>
+    <label class="chk"><input type="checkbox"><span><b>Social <code>sameAs</code></b> — keep IG/FB/TikTok/YouTube handles + bio facts consistent. <span class="tag p3">P3</span></span></label>
+  </details>
+
+  <details class="phase">
+    <summary>Phase 7 · Measurement (ongoing) <span class="who both">Both</span></summary>
+    <label class="chk"><input type="checkbox"><span><b>Rich Results Test</b> — validate Product/star/breadcrumb after schema ships. <span class="tag p2">P2</span></span></label>
+    <label class="chk"><input type="checkbox"><span><b>GSC monthly</b> — impressions, clicks, CTR, coverage, CWV. <span class="tag p3">P3</span></span></label>
+    <label class="chk"><input type="checkbox"><span><b>AI-citation log</b> — monthly prompts to ChatGPT/Gemini/Perplexity for "best leather wallet pakistan". <span class="tag p3">P3</span></span></label>
+    <label class="chk"><input type="checkbox"><span><b>Rank tracking</b> — head terms + product terms. <span class="tag p3">P3</span></span></label>
+  </details>
+
+  <div class="callout win"><b>Recommended order of attack</b>
+  <ol style="margin:6px 0 0 18px">
+    <li><strong>You:</strong> finish the catalog trim + Phase 0 accounts (GSC/Bing/Merchant/GBP).</li>
+    <li><strong>Me:</strong> Phase 1 schema + noindex on the draft theme, Phase 2 redirects &amp; title/handle/tag cleanup, Phase 3 collection copy — all shippable now without waiting on images.</li>
+    <li><strong>Both, product-by-product (Phase 4):</strong> your images/reviews + my copy/metafields, bestsellers first. This is the long pole — the per-product tracker sheet makes it systematic.</li>
+    <li><strong>Then</strong> content (Phase 5) + off-site (Phase 6), measure continuously (Phase 7).</li>
+  </ol></div>
+
+  <p style="margin-top:44px;color:var(--stone);font-size:13px;text-align:center">Kordovan · SEO Audit &amp; Tracker v1 · companion to <code>SEO_ARCHITECTURE.html</code> (strategy) &amp; <code>IMAGE_BRIEF.md</code> (image specs). Re-scored after each phase.</p>
+</div>
+</body>
+</html>
