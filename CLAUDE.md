@@ -142,15 +142,16 @@ lacks `write_customer_merge` scope, no workaround; direct API egress blocked).
   Purchase 9.3/10 (email/phone/name 100%) — HEALTHY, not the problem. Funnel
   events 6.3–6.9. The issue is SEMANTIC: great data on wrong event (order placed
   incl. 40% refusers). Second pixel "…(DO NOT USE)" 652254084055676 = dead.
-- **AUDIENCE BUILD (Jul 8 2026, IN PROGRESS):** seed shell created
-  `120253659969900428` "KV — Delivered Repeat Buyers (SEED, value-based)" (empty
-  — blocked at upload by Custom Audience ToS gate). Exclusion shell create BLOCKED
-  same ToS. **USER MUST ACCEPT** Custom Audience ToS:
-  business.facebook.com/ads/manage/customaudiences/tos/?act=995683712074843 —
-  then populate. Meta-ready CSVs delivered: META_seed_delivered_repeat_buyers.csv
-  (1,265 repeat-delivered buyers +value col) + META_exclude_cod_refusers.csv
-  (3,891 never-delivered). After seed populated → create value-based LLA 1/3/5%.
-  Sizes: delivered buyers 14,122 (all) / 1,265 (repeat 2+); never-delivered 3,891.
+- **AUDIENCE BUILD (Jul 8 2026) — DONE (except exclusion upload):** ToS accepted.
+  SEED `120253659969900428` "KV — Delivered Repeat Buyers (SEED, value-based)"
+  POPULATED (~1,050 matched, value-based, ACTIVE) via native CSV upload.
+  Value-based LLAs created off it: 1% `120253661268330428`, 3% `120253661269660428`,
+  5% `120253661272010428` (populating ~few hrs). EXCLUSION shell
+  `120253660257910428` "KV — COD Refusers EXCLUDE (never delivered)" CREATED but
+  **user still needs to upload META_exclude_cod_refusers.csv (3,891) into it**
+  (map email+phone, NO value col). Full seed of all 14,122 delivered buyers
+  available (seed_all.tsv) if we ever want a broader seed. Old polluted LLAs
+  ("Purchase 180"/"Pixel Purchasers") → PAUSE once new LLAs ready.
 - **STRICT AD RULE (locked):** EVERY ad set EXCLUDES "KV — COD Refusers EXCLUDE".
   COLD = value-based LLA 1–3% of Delivered Repeat Buyers seed (+exclude existing
   buyers). WARM = website/ATC/IC visitors (+exclude refusers +recent purchasers).
