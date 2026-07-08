@@ -138,8 +138,25 @@ lacks `write_customer_merge` scope, no workaround; direct API egress blocked).
   ~25 audience sprawl. Old inactive "Lifetime Fulfilled Customers" LLA had the
   right idea (fulfilled=delivered) but is off.
 - Uploading customer PII (hashed) to Meta needs explicit user OK each time.
-- Pixel EMQ check pending (tool needed approval). Data export files in scratchpad:
-  cancelled_orders.jsonl (5203), orders_12mo.jsonl (3468), serial_cod_refusers.csv.
+- **Pixel EMQ (dataset 1865080707652548 "Kordovan 2025 Dataset", CAPI live):**
+  Purchase 9.3/10 (email/phone/name 100%) — HEALTHY, not the problem. Funnel
+  events 6.3–6.9. The issue is SEMANTIC: great data on wrong event (order placed
+  incl. 40% refusers). Second pixel "…(DO NOT USE)" 652254084055676 = dead.
+- **AUDIENCE BUILD (Jul 8 2026, IN PROGRESS):** seed shell created
+  `120253659969900428` "KV — Delivered Repeat Buyers (SEED, value-based)" (empty
+  — blocked at upload by Custom Audience ToS gate). Exclusion shell create BLOCKED
+  same ToS. **USER MUST ACCEPT** Custom Audience ToS:
+  business.facebook.com/ads/manage/customaudiences/tos/?act=995683712074843 —
+  then populate. Meta-ready CSVs delivered: META_seed_delivered_repeat_buyers.csv
+  (1,265 repeat-delivered buyers +value col) + META_exclude_cod_refusers.csv
+  (3,891 never-delivered). After seed populated → create value-based LLA 1/3/5%.
+  Sizes: delivered buyers 14,122 (all) / 1,265 (repeat 2+); never-delivered 3,891.
+- **STRICT AD RULE (locked):** EVERY ad set EXCLUDES "KV — COD Refusers EXCLUDE".
+  COLD = value-based LLA 1–3% of Delivered Repeat Buyers seed (+exclude existing
+  buyers). WARM = website/ATC/IC visitors (+exclude refusers +recent purchasers).
+  PAUSE old "Purchase 180"/"Pixel Purchasers" LLAs (polluted w/ refusers).
+- Data export files in scratchpad: cancelled_orders.jsonl (5203), orders_12mo.jsonl
+  (3468), serial_cod_refusers.csv, META_*.csv.
 - **Prepaid discount LIVE on store:** code `PAYONLINE10` (10% off, active, unlimited).
   Deploy via WhatsApp order-confirmation reward (leak-proof, no app). Full enforce
   + COD fee + OTP later via PostEx XPay integration (user exploring) — PARKED.
