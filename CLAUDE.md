@@ -161,6 +161,16 @@ lacks `write_customer_merge` scope, no workaround; direct API egress blocked).
   Deploy via WhatsApp order-confirmation reward (leak-proof, no app). Full enforce
   + COD fee + OTP later via PostEx XPay integration (user exploring) — PARKED.
 
+## 🏬 PARKED — Catalog trim before SEO (user doing manually)
+User moved to own POS software (synced w/ Shopify). Is removing store-only / bogus /
+irrelevant products from the ONLINE store so the online catalog = only what's sold
+online. Cautions given: (1) UNPUBLISH from Online Store channel vs DELETE — deleting
+may break POS sync / remove POS record; only hard-delete truly-dead SKUs. (2) Removed
+products leave 404s → need URL redirects (build a bulk redirect list after). When user
+returns: re-audit trimmed catalog (count remaining online products, verify 6 kdv-
+smart collections still populate by tag, flag empty collections, set up redirects),
+THEN start SEO enrichment on the clean set.
+
 ## 📍 Session state (resume here)
 - **Workflow = mockup-first:** build static HTML mockup in `docs/mockups/` →
   user approves → THEN implement in Liquid → deploy once. (User's idea — avoids
