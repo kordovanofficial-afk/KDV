@@ -1,5 +1,9 @@
 # Kordovan — Project Memory
 
+> 💰 **HARD RULE (user, permanent): FREE options ONLY.** Never recommend or set up
+> anything paid — no paid apps, connectors, tools, or subscriptions. Always find the
+> zero-cost path (free tiers, native Shopify, export-CSV-and-share, self-hosted/open-source).
+
 Custom Shopify theme for **Kordovan**, a Pakistani full-grain leather brand
 (wallets, bags, small leather goods). This file is the persistent context for
 every session — read it first.
