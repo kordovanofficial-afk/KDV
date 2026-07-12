@@ -58,9 +58,22 @@ GitHub integration deploys). Theme files live at the **repo root** (NOT under
 - Do not create PRs unless explicitly asked.
 
 ## 🔌 Available integrations (MCP)
-Shopify, GitHub, Canva, Figma, Facebook Ads, Higgsfield.
+Shopify, GitHub, Canva, Figma, Facebook Ads, Higgsfield, Cloudflare.
 (Playwright is NOT available in this remote env — design is done in code, then
 pushed to the draft theme to preview in a browser.)
+- **Kordovan GSC (custom connector, FREE, LIVE-ish):** self-hosted Cloudflare Worker
+  MCP server in `tools/gsc-mcp-worker/` gives read access to Google Search Console.
+  Worker URL `kdv-seo-mcp.kordovan-official.workers.dev`, connector path `/mcp/<MCP_SECRET>`.
+  Tools: `gsc_list_sites`, `gsc_query`, `gsc_list_sitemaps`, `gsc_inspect_url`.
+  GSC_SITE = `sc-domain:kordovanleather.com`. Service acct
+  `kdv-seo-reader@kordovan-seo.iam.gserviceaccount.com` (read-only webmasters scope).
+  **STATUS:** connector connected at org level but flapped/wouldn't attach mid-session
+  (enabledInChat false). Fixed a transport bug (GET SSE → 405, echo protocolVersion,
+  DELETE 204) — user re-pasting worker.js + reconnecting in a FRESH chat. **On resume:
+  first `gsc_list_sites` to confirm live, then pull top queries/pages.** If still won't
+  attach → fallback = cron Worker snapshots GSC data into repo (free). TODO: user must
+  ROTATE the service-account private key (it was screenshotted) — new key + delete old,
+  update the GOOGLE_SA_PRIVATE_KEY secret. Bing/GA4 can be added to same Worker later.
 
 ## 📧 ACTIVE — Hosting/email cost migration (backend cleanup before SEO)
 Goal: kill TMDHosting "Starter" Linux hosting ($180/yr, renews in ~9 mo from Jul 2026)
