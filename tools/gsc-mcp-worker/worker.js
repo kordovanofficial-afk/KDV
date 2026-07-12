@@ -194,7 +194,7 @@ async function handleRpc(env, msg) {
   const { id, method, params } = msg;
   if (method === "initialize") {
     return rpcResult(id, {
-      protocolVersion: PROTOCOL_VERSION,
+      protocolVersion: (params && params.protocolVersion) || PROTOCOL_VERSION,
       capabilities: { tools: {} },
       serverInfo: { name: "kordovan-gsc", version: "1.0.0" },
     });
@@ -236,13 +236,22 @@ export default {
       return new Response("Not found", { status: 404 });
     }
 
-    // Simple health check
+    // GET: browsers get a health check; MCP clients that open an SSE stream get a
+    // spec-compliant 405 (this server has no server-initiated stream — request/response only).
     if (request.method === "GET") {
+      const accept = request.headers.get("Accept") || "";
+      if (accept.includes("text/event-stream")) {
+        return new Response(null, { status: 405, headers: { Allow: "POST", "Access-Control-Allow-Origin": "*" } });
+      }
       return new Response("Kordovan GSC MCP server — OK. POST JSON-RPC to this URL.", {
         status: 200, headers: { "Content-Type": "text/plain" },
       });
     }
 
+    if (request.method === "DELETE") {
+      // MCP session teardown — nothing to do (stateless)
+      return new Response(null, { status: 204, headers: { "Access-Control-Allow-Origin": "*" } });
+    }
     if (request.method !== "POST") return new Response("Method not allowed", { status: 405 });
 
     let payload;
