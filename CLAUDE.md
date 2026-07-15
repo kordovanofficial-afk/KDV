@@ -47,14 +47,14 @@ kordovan  (trunk)
 - ⚠️ **Theme must NOT be nested under `theme/`.** Shopify's GitHub integration
   deploys from the *branch root* only — a `theme/` folder breaks the draft sync.
   Grouping is for everything *around* the theme (docs/tools/ops), never the theme.
-- 🔀 **MIGRATION IN PROGRESS (Jul 15 2026):** renamed `shopify-theme-deploy` →
-  `kordovan` (streamlining for the rebuild). **PENDING USER ACTIONS:** (1) set
-  `kordovan` as the repo **default branch** (GitHub → Settings → Branches);
-  (2) **repoint Shopify's GitHub theme connection** to `kordovan` (Online Store →
-  Themes → the GitHub-connected theme). Until (2) is done, deploys still fire from
-  the old `shopify-theme-deploy` branch. Once repointed & verified, DELETE the
-  stray branches (`shopify-theme-deploy`, `claude/vigilant-euler-h81zbc`,
-  `claude/kordovan-gsc-connector-0ganbv`).
+- ✅ **MIGRATION DONE (Jul 15 2026):** `shopify-theme-deploy` → `kordovan`.
+  `kordovan` is the GitHub **default branch** and Shopify is connected to it via a
+  **NEW draft theme `165057069296` "KDV/kordovan"** (the old draft `164277190896`
+  was deleted by the user — all references to the old draft ID are obsolete; any
+  direct `themeFilesUpsert` pushes now target `165057069296`). Live theme
+  `162105917680` untouched. Sole leftover: stale remote branch
+  `shopify-theme-deploy` — the session git proxy refuses deletion pushes, so the
+  user deletes it once on GitHub (repo → Branches → 🗑). It has no unique commits.
 - Theme files live at the **repo root** (NOT under `theme/`): `assets/theme.css` +
   `theme.js`, `config/`, `layout/`, `locales/`, `sections/`, `snippets/`, `templates/`.
 - Header/footer sections are named **`site-header.liquid` / `site-footer.liquid`**
@@ -76,10 +76,10 @@ kordovan  (trunk)
 
 ## 🚦 Hard constraints (do not violate)
 - **Live theme `162105917680` — NEVER touch it.**
-- Draft / unpublished theme `164277190896` — the working preview.
+- Draft / unpublished theme `165057069296 "KDV/kordovan"` — the working preview.
 - Shopify GitHub integration deploys from the **`kordovan`** branch.
 - **Work on `kordovan`** (the source of truth). Pushing it triggers
-  the Shopify sync to draft theme `164277190896`. User authorized per-step deploys.
+  the Shopify sync to draft theme `165057069296`. User authorized per-step deploys.
 - Do not create PRs unless explicitly asked.
 
 ## 🔌 Available integrations (MCP)
@@ -340,5 +340,5 @@ template settings — Shopify's editor strips collection/handle settings from
   kdv-sale yet). Women's sub-links still use existing womens-* collections.
 
 ## ✅ Working loop
-Edit theme → push to draft theme `164277190896` (via Shopify) → review in browser
+Edit theme → push to draft theme `165057069296` (via Shopify) → review in browser
 → iterate. Keep to the BRAND_MOODBOARD spec at every step.
