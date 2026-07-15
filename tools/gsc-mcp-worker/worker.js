@@ -145,11 +145,49 @@ const TOOLS = [
       required: ["inspectionUrl"],
     },
   },
+  {
+    name: "gsc_debug",
+    description: "Diagnostics: shows the identity/env the Worker is actually using (never reveals secret material) and live-tests the Google token exchange.",
+    inputSchema: { type: "object", properties: {} },
+  },
 ];
+
+/* ---------- diagnostics (safe: no secret material leaves the Worker) ---------- */
+async function debugInfo(env) {
+  const email = env.GOOGLE_SA_EMAIL || "(unset)";
+  const key = env.GOOGLE_SA_PRIVATE_KEY || "";
+  // any char outside printable ASCII 33..126 is suspicious in an email (spaces, zero-width, unicode)
+  const suspicious = [...email]
+    .map((ch, i) => ({ index: i, codePoint: ch.codePointAt(0) }))
+    .filter((x) => x.codePoint < 33 || x.codePoint > 126);
+  let tokenTest = "OK — Google accepted the credentials and issued a token";
+  try {
+    _token = { value: null, exp: 0 }; // bypass cache, force a live exchange
+    await getToken(env);
+  } catch (e) {
+    tokenTest = e.message;
+  }
+  return {
+    sa_email_as_stored: email,
+    sa_email_length: email.length,
+    sa_email_suspicious_chars: suspicious, // should be []
+    key_present: key.length > 0,
+    key_length: key.length,
+    key_has_escaped_newlines: key.includes("\\n"),
+    key_has_real_newlines: key.includes("\n"),
+    key_starts_with_begin: key.trimStart().startsWith("-----BEGIN"),
+    key_ends_with_end: key.trimEnd().endsWith("-----"),
+    gsc_site: env.GSC_SITE || "(unset)",
+    token_test: tokenTest,
+  };
+}
 
 /* ---------- tool execution ---------- */
 async function runTool(env, name, args) {
   const site = args.siteUrl || env.GSC_SITE;
+  if (name === "gsc_debug") {
+    return await debugInfo(env);
+  }
   if (name === "gsc_list_sites") {
     return await gscFetch(env, `${GSC_BASE}/sites`);
   }
@@ -242,6 +280,11 @@ export default {
       const accept = request.headers.get("Accept") || "";
       if (accept.includes("text/event-stream")) {
         return new Response(null, { status: 405, headers: { Allow: "POST", "Access-Control-Allow-Origin": "*" } });
+      }
+      if (url.searchParams.has("debug")) {
+        return new Response(JSON.stringify(await debugInfo(env), null, 2), {
+          status: 200, headers: { "Content-Type": "application/json" },
+        });
       }
       return new Response("Kordovan GSC MCP server — OK. POST JSON-RPC to this URL.", {
         status: 200, headers: { "Content-Type": "text/plain" },
