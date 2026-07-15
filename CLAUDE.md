@@ -9,10 +9,10 @@ Custom Shopify theme for **Kordovan**, a Pakistani full-grain leather brand
 every session — read it first.
 
 ## 📐 Design source of truth
-- **`docs/BRAND_MOODBOARD.md`** — competitor teardown (top 10 global leather
+- **`docs/brand/BRAND_MOODBOARD.md`** — competitor teardown (top 10 global leather
   brands), refined "Quiet Heritage" palette, typography, full UX/SEO rulebook.
   **Always follow this when designing or editing the theme.**
-- **`docs/moodboard.html`** — open in a browser to *see* the palette + type specimens.
+- **`docs/brand/moodboard.html`** — open in a browser to *see* the palette + type specimens.
 
 ## 🎨 Active palette — "Quiet Heritage" (Kordovan 2.0)
 Refined from the original cognac/gold/off-white/charcoal set (cognac was muddy,
@@ -23,15 +23,40 @@ charcoal was too cold for leather):
 - Stone `#8B8174` (muted text) · Border `#DDD2C0` · Heritage Olive `#5A5A3C` (sparing accent)
 - Fonts: **Fraunces** (headings, replaces Playfair) + **Inter** (body)
 
-> ✅ APPLIED on `shopify-theme-deploy`: `assets/theme.css` `:root` tokens, the
+> ✅ APPLIED on `kordovan`: `assets/theme.css` `:root` tokens, the
 > Fraunces import, hardcoded gradients/shadows, and `config/settings_schema.json`
 > defaults are all migrated to Quiet Heritage. Headings = Fraunces 500.
 
-## 🗂 Theme structure & source of truth
-**Source of truth = the `shopify-theme-deploy` branch** (this is what Shopify's
-GitHub integration deploys). Theme files live at the **repo root** (NOT under
-`theme/`): `assets/theme.css` + `theme.js`, `config/`, `layout/`, `locales/`,
-`sections/`, `snippets/`, `templates/`.
+## 🗂 Repo structure & source of truth
+**Single source of truth = the `kordovan` branch.** Everything (theme, docs,
+tools, ops) lives here — one streamlined trunk for the brand rebuild.
+```
+kordovan  (trunk)
+├── assets/ config/ layout/ locales/     ← THEME — MUST stay at repo root
+├── sections/ snippets/ templates/       ←   (Shopify GitHub sync = branch root)
+├── docs/
+│   ├── brand/   (BRAND_MOODBOARD, DESIGN_SYSTEM, moodboard.html)
+│   ├── seo/     (SEO_ARCHITECTURE, SEO_AUDIT_TRACKER)
+│   ├── email/   (EMAIL_MIGRATION.html)
+│   ├── images/  (IMAGE_BRIEF.md)
+│   └── mockups/ (static HTML mockups — mockup-first workflow)
+├── tools/gsc-mcp-worker/                 ← FREE GSC connector (Cloudflare Worker)
+├── ops/                                  ← agent/session playbooks & working notes
+└── CLAUDE.md                             ← this file (read first every session)
+```
+- ⚠️ **Theme must NOT be nested under `theme/`.** Shopify's GitHub integration
+  deploys from the *branch root* only — a `theme/` folder breaks the draft sync.
+  Grouping is for everything *around* the theme (docs/tools/ops), never the theme.
+- 🔀 **MIGRATION IN PROGRESS (Jul 15 2026):** renamed `shopify-theme-deploy` →
+  `kordovan` (streamlining for the rebuild). **PENDING USER ACTIONS:** (1) set
+  `kordovan` as the repo **default branch** (GitHub → Settings → Branches);
+  (2) **repoint Shopify's GitHub theme connection** to `kordovan` (Online Store →
+  Themes → the GitHub-connected theme). Until (2) is done, deploys still fire from
+  the old `shopify-theme-deploy` branch. Once repointed & verified, DELETE the
+  stray branches (`shopify-theme-deploy`, `claude/vigilant-euler-h81zbc`,
+  `claude/kordovan-gsc-connector-0ganbv`).
+- Theme files live at the **repo root** (NOT under `theme/`): `assets/theme.css` +
+  `theme.js`, `config/`, `layout/`, `locales/`, `sections/`, `snippets/`, `templates/`.
 - Header/footer sections are named **`site-header.liquid` / `site-footer.liquid`**
   (renamed to avoid a Shopify customizer section-group conflict — do not rename back).
 - ⚠️ A second, unrelated theme history exists on `claude/vigilant-euler-h81zbc`
@@ -52,8 +77,8 @@ GitHub integration deploys). Theme files live at the **repo root** (NOT under
 ## 🚦 Hard constraints (do not violate)
 - **Live theme `162105917680` — NEVER touch it.**
 - Draft / unpublished theme `164277190896` — the working preview.
-- Shopify GitHub integration deploys from the **`shopify-theme-deploy`** branch.
-- **Work on `shopify-theme-deploy`** (the source of truth). Pushing it triggers
+- Shopify GitHub integration deploys from the **`kordovan`** branch.
+- **Work on `kordovan`** (the source of truth). Pushing it triggers
   the Shopify sync to draft theme `164277190896`. User authorized per-step deploys.
 - Do not create PRs unless explicitly asked.
 
@@ -67,13 +92,24 @@ pushed to the draft theme to preview in a browser.)
   Tools: `gsc_list_sites`, `gsc_query`, `gsc_list_sitemaps`, `gsc_inspect_url`.
   GSC_SITE = `sc-domain:kordovanleather.com`. Service acct
   `kdv-seo-reader@kordovan-seo.iam.gserviceaccount.com` (read-only webmasters scope).
-  **STATUS:** connector connected at org level but flapped/wouldn't attach mid-session
-  (enabledInChat false). Fixed a transport bug (GET SSE → 405, echo protocolVersion,
-  DELETE 204) — user re-pasting worker.js + reconnecting in a FRESH chat. **On resume:
-  first `gsc_list_sites` to confirm live, then pull top queries/pages.** If still won't
-  attach → fallback = cron Worker snapshots GSC data into repo (free). TODO: user must
-  ROTATE the service-account private key (it was screenshotted) — new key + delete old,
-  update the GOOGLE_SA_PRIVATE_KEY secret. Bing/GA4 can be added to same Worker later.
+  **STATUS Jul 15 2026 — TRANSPORT FIXED, CREDENTIAL BROKEN:** the transport bug
+  (GET SSE → 405, echo protocolVersion, DELETE 204) is resolved and the connector
+  now ATTACHES — `gsc_list_sites` executes end-to-end. BUT Google's token endpoint
+  rejects the service-account JWT: `invalid_grant — "Invalid grant: account not
+  found"`. That specific error (vs "Invalid JWT Signature") means the `iss` service
+  account / key no longer maps to a live account — i.e. the **key-rotation TODO
+  below happened (old key deleted / SA recreated) but the Worker's
+  `GOOGLE_SA_PRIVATE_KEY` secret was never updated to the new key.**
+  **FIX (user, unblocks everything):** (1) confirm/recreate SA
+  `kdv-seo-reader@kordovan-seo.iam.gserviceaccount.com` in GCP project
+  `kordovan-seo`; (2) SA → Keys → Add key (JSON), delete old keys; (3)
+  `cd tools/gsc-mcp-worker && wrangler secret put GOOGLE_SA_PRIVATE_KEY` (paste the
+  new `private_key`; also `GOOGLE_SA_EMAIL` if the SA email changed); (4) GSC →
+  Settings → Users & permissions → ensure the SA is added to
+  `sc-domain:kordovanleather.com`. **On resume after fix: `gsc_list_sites` to
+  confirm live, then pull top queries/pages.** Fallback if still stuck = cron
+  Worker snapshots GSC data into repo (free, same credential though). Bing/GA4 can
+  be added to the same Worker later.
 
 ## 📧 ACTIVE — Hosting/email cost migration (backend cleanup before SEO)
 Goal: kill TMDHosting "Starter" Linux hosting ($180/yr, renews in ~9 mo from Jul 2026)
@@ -87,7 +123,7 @@ Goal: kill TMDHosting "Starter" Linux hosting ($180/yr, renews in ~9 mo from Jul
   `shahid.butt@us.`, `marketing@`, `social@` (verified unused: not on site/
   Shopify/customers; socials are under user's personal Meta email). `kordovan`
   system catch-all — emptied (pure spam); NO catch-all in Zoho.
-- **Guide = `docs/EMAIL_MIGRATION.html`** (baby-steps, 8 phases + troubleshooting,
+- **Guide = `docs/email/EMAIL_MIGRATION.html`** (baby-steps, 8 phases + troubleshooting,
   delivered). User executing solo; reports back after the Phase 6 test checklist.
   Catch-all mailbox already emptied (was pure spam).
 - **STATUS Jul 4 2026 — MIGRATION EXECUTED ✅:** Zoho org live (5 users + sales@/
@@ -203,7 +239,7 @@ THEN start SEO enrichment on the clean set.
   sync); `sections/main-product.liquid` is a thin `{% render 'pdp-main' %}` wrapper
   pushed directly to the DRAFT theme via `themeFilesUpsert` (allowed on unpublished;
   blocked on live). If main-product ever reverts, re-upsert the wrapper.
-- **Done & deployed** to `shopify-theme-deploy`: Step 1 (Quiet Heritage palette +
+- **Done & deployed** to `kordovan`: Step 1 (Quiet Heritage palette +
   Fraunces + logo support), Step 2 (homepage scroll order, brand story copy,
   testimonial names, eyebrow fix).
 - **Homepage mockup** `docs/mockups/homepage-final.html` — APPROVED. **Homepage is
@@ -286,7 +322,7 @@ THEN start SEO enrichment on the clean set.
 
 ## 🖼 Image workflow (protocol)
 - **Every designed image slot = an image brief:** product/subject + ready-to-paste
-  GPT-image prompt + exact px size & aspect. Tracked in **`docs/IMAGE_BRIEF.md`**.
+  GPT-image prompt + exact px size & aspect. Tracked in **`docs/images/IMAGE_BRIEF.md`**.
 - Give new briefs inline whenever a new image slot is introduced.
 - **Label/copy on a tile must match the image in it** (no mismatched product names).
 - Product cards use real Shopify catalogue photos; hero/mega/collection/brand-story
