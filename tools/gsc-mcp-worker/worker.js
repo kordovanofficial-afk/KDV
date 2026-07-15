@@ -167,7 +167,14 @@ async function debugInfo(env) {
   } catch (e) {
     tokenTest = e.message;
   }
+  // names of ALL bindings the runtime actually received (values never shown)
+  const envBindings = Object.keys(env).map((k) => ({
+    name: k,
+    name_length: k.length,
+    hidden_chars_in_name: [...k].filter((ch) => ch.codePointAt(0) < 33 || ch.codePointAt(0) > 126).length,
+  }));
   return {
+    env_bindings_received: envBindings,
     sa_email_as_stored: email,
     sa_email_length: email.length,
     sa_email_suspicious_chars: suspicious, // should be []
