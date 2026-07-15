@@ -90,26 +90,26 @@ pushed to the draft theme to preview in a browser.)
   MCP server in `tools/gsc-mcp-worker/` gives read access to Google Search Console.
   Worker URL `kdv-seo-mcp.kordovan-official.workers.dev`, connector path `/mcp/<MCP_SECRET>`.
   Tools: `gsc_list_sites`, `gsc_query`, `gsc_list_sitemaps`, `gsc_inspect_url`.
-  GSC_SITE = `sc-domain:kordovanleather.com`. Service acct
-  `kdv-seo-reader@kordovan-seo.iam.gserviceaccount.com` (read-only webmasters scope).
-  **STATUS Jul 15 2026 — TRANSPORT FIXED, CREDENTIAL BROKEN:** the transport bug
-  (GET SSE → 405, echo protocolVersion, DELETE 204) is resolved and the connector
-  now ATTACHES — `gsc_list_sites` executes end-to-end. BUT Google's token endpoint
-  rejects the service-account JWT: `invalid_grant — "Invalid grant: account not
-  found"`. That specific error (vs "Invalid JWT Signature") means the `iss` service
-  account / key no longer maps to a live account — i.e. the **key-rotation TODO
-  below happened (old key deleted / SA recreated) but the Worker's
-  `GOOGLE_SA_PRIVATE_KEY` secret was never updated to the new key.**
-  **FIX (user, unblocks everything):** (1) confirm/recreate SA
-  `kdv-seo-reader@kordovan-seo.iam.gserviceaccount.com` in GCP project
-  `kordovan-seo`; (2) SA → Keys → Add key (JSON), delete old keys; (3)
-  `cd tools/gsc-mcp-worker && wrangler secret put GOOGLE_SA_PRIVATE_KEY` (paste the
-  new `private_key`; also `GOOGLE_SA_EMAIL` if the SA email changed); (4) GSC →
-  Settings → Users & permissions → ensure the SA is added to
-  `sc-domain:kordovanleather.com`. **On resume after fix: `gsc_list_sites` to
-  confirm live, then pull top queries/pages.** Fallback if still stuck = cron
-  Worker snapshots GSC data into repo (free, same credential though). Bing/GA4 can
-  be added to the same Worker later.
+  Service acct = **`kdv-gsc@kordovan-seo.iam.gserviceaccount.com`** (fresh SA,
+  Jul 15 2026; old `kdv-seo-reader@…` is a dead ghost — never reuse it). Key
+  rotated; old keys deleted.
+  **STATUS Jul 15 2026 — ✅ FULLY LIVE, DATA FLOWING.** Root cause of the 3-day
+  `invalid_grant "account not found"`: the `GOOGLE_SA_EMAIL` var sat in a SAVED-
+  BUT-NEVER-DEPLOYED config version (Cloudflare Settings page shows latest saved
+  config, while traffic serves the last DEPLOYED version — editing vars without
+  hitting Deploy does nothing; deploying from the code editor carries the OLD
+  bindings too). Fixed by delete+re-add of the var to force the deploy flow.
+  Worker now has a **`gsc_debug` tool + `?debug` GET param** (safe diagnostics:
+  env binding names, email as-stored, key shape, live token test — never leaks
+  secrets). Use it FIRST whenever the connector misbehaves.
+  ⚠️ **Property gotcha:** SA has access to the URL-prefix property
+  `https://kordovanleather.com/` (siteFullUser), NOT `sc-domain:…` — pass
+  `siteUrl: "https://kordovanleather.com/"` on every `gsc_query` (env `GSC_SITE`
+  still says `sc-domain:…`; either update the var in Cloudflare or keep
+  overriding). First data pull done (28d): brand queries dominate (pos ~1),
+  top money page = /collections/mens-leather-wallets (833 clicks, pos 10.2 =
+  page 2 — big headroom), cowboy-hats niche strong (CTR 13.8%, pos 4.8),
+  jackets high-impressions/low-CTR. Bing/GA4 can be added to the same Worker later.
 
 ## 📧 ACTIVE — Hosting/email cost migration (backend cleanup before SEO)
 Goal: kill TMDHosting "Starter" Linux hosting ($180/yr, renews in ~9 mo from Jul 2026)
