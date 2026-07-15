@@ -214,6 +214,30 @@ lacks `write_customer_merge` scope, no workaround; direct API egress blocked).
   Deploy via WhatsApp order-confirmation reward (leak-proof, no app). Full enforce
   + COD fee + OTP later via PostEx XPay integration (user exploring) — PARKED.
 
+## 🗺 SEO MASTER PLAN (user-confirmed Jul 15 2026 — three phases, in order)
+1. **Phase 1 — user cleans Shopify catalog** (trash-scrape, manual; see PARKED
+   section below for the re-audit checklist when done: counts, kdv- collections,
+   redirects for removed URLs, fresh alt audit).
+2. **Phase 2 — in-session SEO enrichment of surviving products (together):**
+   priority from GSC data — wallets first (mens-leather-wallets pos 10.2 /
+   14.5k impr = biggest prize), then cowboy hats (easy #1s), then jackets (fix
+   1.9% CTR titles/metas). Per product: title+meta, bulk pattern-based alt-text
+   backfill via API, description in brand voice, PDP metafields (subtitle/
+   benefits/material/fits/reviews). Per collection: editorial block + JSON-LD.
+3. **Phase 3 — automation for FUTURE products (only after 2 proves the pattern):**
+   free stack = Shopify custom app (user creates in admin, 5 steps, gives API
+   token) + webhook → Cloudflare Worker + Workers AI free tier (~10k neurons/day).
+   (a) auto-alt on product create/update (deterministic title/variant pattern +
+   vision assist, idempotent, never overwrites existing alts); (b) descriptions
+   NEVER auto-published — draft to metafield + `needs-seo-review` tag, human
+   approves; (c) nightly self-heal sweep. Worker can query our GSC connector for
+   real keywords per product.
+- **Alt audit baseline (Jul 15 2026, pre-trim):** 169 live products (192 active,
+  357 total), 1,316 images, **630 missing alt (47.9%)** across 80 products;
+  worst: Bella Duff 62/63, Diana Cross-body 46/47, TP bags ~26 each. Pattern:
+  first images have alts, extra variant/angle shots don't. Detail file
+  `alt_audit.jsonl` in scratchpad (session-local; re-export post-trim).
+
 ## 🏬 PARKED — Catalog trim before SEO (user doing manually)
 User moved to own POS software (synced w/ Shopify). Is removing store-only / bogus /
 irrelevant products from the ONLINE store so the online catalog = only what's sold
