@@ -40,6 +40,8 @@ kordovan  (trunk)
 │   ├── email/   (EMAIL_MIGRATION.html)
 │   ├── images/  (IMAGE_BRIEF.md)
 │   └── mockups/ (static HTML mockups — mockup-first workflow)
+├── .claude/skills/                       ← 7 vendored SEO skills (MIT, see its README;
+│                                            use during Phase-2 SEO pass; paid-API steps omitted)
 ├── tools/gsc-mcp-worker/                 ← FREE GSC connector (Cloudflare Worker)
 ├── ops/                                  ← agent/session playbooks & working notes
 └── CLAUDE.md                             ← this file (read first every session)
