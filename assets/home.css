@@ -618,12 +618,13 @@
 }
 
 /* PDP related products ("You may also like") */
-.kv-pdp__rel{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+.kv-pdp__rel{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+@media(max-width:1023px){ .kv-pdp__rel{grid-template-columns:repeat(3,1fr);} }
 .kv-pdp__pcard{display:block;color:inherit;}
 .kv-pdp__pcard .m{aspect-ratio:4/5;border-radius:10px;overflow:hidden;border:1px solid var(--border);background:#fff;}
 .kv-pdp__pcard .m img{width:100%;height:100%;object-fit:cover;transition:transform .6s cubic-bezier(.25,.46,.45,.94);}
 .kv-pdp__pcard:hover .m img{transform:scale(1.05);}
-.kv-pdp__pcard .n{font-family:var(--kv-heading);font-size:17px;margin-top:14px;color:var(--ink);font-weight:500;line-height:1.25;}
+.kv-pdp__pcard .n{font-family:var(--kv-heading);font-size:15.5px;margin-top:12px;color:var(--ink);font-weight:500;line-height:1.25;}
 .kv-pdp__pcard .meta{display:flex;justify-content:space-between;align-items:center;margin-top:5px;}
 .kv-pdp__pcard .p{color:var(--cognac);font-weight:500;font-size:14px;}
 .kv-pdp__pcard .s{color:var(--brass);font-size:11px;letter-spacing:1px;}
