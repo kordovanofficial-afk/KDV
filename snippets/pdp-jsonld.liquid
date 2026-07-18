@@ -1,0 +1,68 @@
+{%- comment -%}
+  Product JSON-LD (schema.org) — rendered on every PDP by pdp-main.
+  aggregateRating/review blocks appear only when the reviews metafields are set.
+  reviews.rating supports both the native `rating` type (object) and a plain number.
+{%- endcomment -%}
+{%- liquid
+  assign jl_rmeta = product.metafields.reviews.rating.value
+  assign jl_rating = jl_rmeta.rating | default: jl_rmeta
+  assign jl_revs = ''
+  if product.metafields.custom.reviews != blank
+    assign jl_lines = product.metafields.custom.reviews | newline_to_br | split: '<br />'
+    for jl_r in jl_lines
+      assign jl_p = jl_r | strip | split: '|'
+      if jl_p[2] != blank
+        capture jl_obj
+          echo '{"@type":"Review","reviewRating":{"@type":"Rating","ratingValue":"5","bestRating":"5"},"author":{"@type":"Person","name":'
+          echo jl_p[0] | strip | json
+          echo '},"reviewBody":'
+          echo jl_p[2] | strip | json
+          echo '}'
+        endcapture
+        if jl_revs == ''
+          assign jl_revs = jl_obj
+        else
+          assign jl_revs = jl_revs | append: ',' | append: jl_obj
+        endif
+      endif
+    endfor
+  endif
+-%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": {{ product.title | json }},
+  "url": {{ request.origin | append: product.url | json }},
+  "image": [{%- for img in product.images limit: 8 -%}{{ img | image_url: width: 1200 | json }}{% unless forloop.last %},{% endunless %}{%- endfor -%}],
+  "description": {{ product.description | strip_html | truncate: 500 | json }},
+  "sku": {{ product.selected_or_first_available_variant.sku | json }},
+  "brand": { "@type": "Brand", "name": {{ product.vendor | default: "Kordovan" | json }} },
+  "offers": [
+    {%- for variant in product.variants -%}
+    {
+      "@type": "Offer",
+      "name": {{ variant.title | json }},
+      "sku": {{ variant.sku | json }},
+      "url": {{ request.origin | append: variant.url | json }},
+      "priceCurrency": {{ cart.currency.iso_code | json }},
+      "price": {{ variant.price | money_without_currency | remove: ',' | json }},
+      "availability": "{% if variant.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
+      "itemCondition": "https://schema.org/NewCondition",
+      "seller": { "@type": "Organization", "name": "Kordovan" }
+    }{% unless forloop.last %},{% endunless %}
+    {%- endfor -%}
+  ]
+  {%- if jl_rating != blank and product.metafields.reviews.rating_count != blank -%},
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": {{ jl_rating | append: '' | json }},
+    "bestRating": "5",
+    "reviewCount": {{ product.metafields.reviews.rating_count | append: '' | json }}
+  }
+  {%- endif -%}
+  {%- if jl_revs != '' -%},
+  "review": [{{ jl_revs }}]
+  {%- endif -%}
+}
+</script>

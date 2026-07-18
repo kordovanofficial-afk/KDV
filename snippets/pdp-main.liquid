@@ -12,6 +12,8 @@
 {%- endcomment -%}
 {%- liquid
   assign v = product.selected_or_first_available_variant
+  assign rmeta = product.metafields.reviews.rating.value
+  assign rating_num = rmeta.rating | default: rmeta
   assign on_sale = false
   if v.compare_at_price > v.price
     assign on_sale = true
@@ -51,7 +53,7 @@
       {%- endif -%}
 
       {%- if product.metafields.reviews.rating != blank -%}
-        <div class="kv-pdp__rate"><span class="stars">★★★★★</span> <b>{{ product.metafields.reviews.rating }}</b> · <a href="#reviews">{{ product.metafields.reviews.rating_count | default: 0 }} reviews</a></div>
+        <div class="kv-pdp__rate"><span class="stars">★★★★★</span> <b>{{ rating_num }}</b> · <a href="#reviews">{{ product.metafields.reviews.rating_count | default: 0 }} reviews</a></div>
       {%- endif -%}
 
       <div class="kv-pdp__price product-info__price">
@@ -164,7 +166,7 @@
       <div class="kv-pdp__shead"><span class="eyebrow">Reviews</span><h2>What customers say.</h2></div>
       <div class="kv-pdp__rev">
         <div class="kv-pdp__revsum">
-          <div class="kv-pdp__revbig">{{ product.metafields.reviews.rating }}</div>
+          <div class="kv-pdp__revbig">{{ rating_num }}</div>
           <span class="stars">★★★★★</span>
           <div class="kv-pdp__revcnt">Based on {{ product.metafields.reviews.rating_count | default: 0 }} verified reviews</div>
         </div>
@@ -192,3 +194,4 @@
   <!-- STICKY MOBILE ATC -->
   <div class="kv-pdp__mbar"><span class="mp">{{ v.price | money }}</span><button type="button" onclick="document.querySelector('.kv-pdp .product-atc__add')?.click()">Add to Cart</button></div>
 </section>
+{% render 'pdp-jsonld' %}
