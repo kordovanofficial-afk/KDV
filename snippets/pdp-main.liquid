@@ -32,7 +32,7 @@
     <!-- GALLERY -->
     <div class="product-gallery">
       <div class="product-gallery__thumbs">
-        {%- for media in product.media limit: 8 -%}
+        {%- for media in product.media limit: 12 -%}
           <div class="product-gallery__thumb{% if forloop.first %} active{% endif %}" data-full="{{ media.preview_image | image_url: width: 900 }}">
             <img src="{{ media.preview_image | image_url: width: 160 }}" alt="{{ media.alt | escape | default: product.title | escape }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" width="76" height="92">
           </div>
@@ -73,7 +73,7 @@
           {%- endif -%}{%- endfor -%}
         {%- else -%}
           <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Full-grain leather that ages beautifully with use</li>
-          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Hand-stitched in Karachi for a seam that won't fray</li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Hand-finished for a seam that won't fray</li>
           <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Backed by our lifetime craftsmanship warranty</li>
         {%- endif -%}
       </ul>
@@ -110,7 +110,7 @@
       </form>
 
       <div class="kv-pdp__trust3">
-        <div><svg viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 8 8 8 8s8-3 8-8V6z"/><path d="m9 12 2 2 4-4"/></svg><span>100% genuine<br>full-grain leather</span></div>
+        <div><svg viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 8 8 8 8s8-3 8-8V6z"/><path d="m9 12 2 2 4-4"/></svg><span>100% genuine<br>leather</span></div>
         <div><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 3v5h-7z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg><span>Free delivery<br>over PKR 2,500</span></div>
         <div><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9 9 0 0 0-6.4 2.6L3 8"/><path d="M3 3v5h5"/></svg><span>7-day easy<br>returns</span></div>
       </div>
@@ -125,9 +125,9 @@
   <section class="kv-pdp__sec kv-pdp__sec--parch"><div class="kv-wrap">
     <div class="kv-pdp__shead"><span class="eyebrow">Why You'll Carry It for Years</span><h2>Built to a higher standard.</h2></div>
     <div class="kv-pdp__feat">
-      <div><svg viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 8 8 8 8s8-3 8-8V6z"/></svg><h3>Full-Grain Leather</h3><p>The top cut of the hide — it resists wear and ages into a rich, personal patina.</p></div>
+      <div><svg viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 8 8 8 8s8-3 8-8V6z"/></svg><h3>Genuine Leather</h3><p>Real hides, honestly tanned — leather that resists wear and ages into a rich, personal patina.</p></div>
       <div><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/></svg><h3>Considered Design</h3><p>Functional, minimal, and made to be used every single day.</p></div>
-      <div><svg viewBox="0 0 24 24"><path d="M12 2v20M5 7l7-5 7 5M5 7v10l7 5 7-5V7"/></svg><h3>Hand-Stitched</h3><p>Saddle-stitched by hand in Karachi so the seams never fray or pull apart.</p></div>
+      <div><svg viewBox="0 0 24 24"><path d="M12 2v20M5 7l7-5 7 5M5 7v10l7 5 7-5V7"/></svg><h3>Hand-Stitched</h3><p>Stitched and finished by hand so the seams never fray or pull apart.</p></div>
       <div><svg viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 8 8 8 8s8-3 8-8V6z"/><path d="m9 12 2 2 4-4"/></svg><h3>Lifetime Warranty</h3><p>If it fails because of how it was made, we repair or replace it.</p></div>
     </div>
   </div></section>
@@ -136,7 +136,19 @@
   {%- if product.metafields.custom.fits != blank -%}
     {%- assign fits = product.metafields.custom.fits | newline_to_br | split: '<br />' -%}
     <section class="kv-pdp__sec"><div class="kv-wrap"><div class="kv-pdp__fits">
-      <div class="img"><img src="{{ product.media[1].preview_image | default: product.featured_image | image_url: width: 900 }}" alt="{{ product.title | escape }} detail"></div>
+      {%- liquid
+        # prefer a wide/landscape shot (the lifestyle image) for this band
+        assign fits_img = blank
+        for im in product.images
+          if fits_img == blank and im.aspect_ratio > 1.2
+            assign fits_img = im
+          endif
+        endfor
+        if fits_img == blank
+          assign fits_img = product.media[1].preview_image | default: product.featured_image
+        endif
+      -%}
+      <div class="img"><img src="{{ fits_img | image_url: width: 1200 }}" alt="{{ fits_img.alt | escape | default: product.title | escape }}"></div>
       <div>
         <span class="eyebrow">Holds What Matters</span>
         <h2>{{ product.metafields.custom.fits_title | default: "Everything you need. Nothing you don't." }}</h2>

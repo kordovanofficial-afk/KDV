@@ -1,5 +1,8 @@
 {%- comment -%} "You may also like" — Quiet Heritage cards (.kv-pdp). Pulls from the product's first collection. {%- endcomment -%}
 {%- assign coll = product.collections.first -%}
+{%- for c in product.collections -%}
+  {%- if c.handle contains 'kdv-' -%}{%- assign coll = c -%}{%- break -%}{%- endif -%}
+{%- endfor -%}
 {%- if coll -%}
 <section class="kv-pdp"><div class="kv-pdp__sec"><div class="kv-wrap">
   <div class="kv-pdp__shead"><span class="eyebrow">Complete the Carry</span><h2>{{ section.settings.title | default: 'You may also like.' }}</h2></div>
@@ -7,7 +10,7 @@
     {%- assign shown = 0 -%}
     {%- assign limit = section.settings.products_to_show | default: 3 -%}
     {%- for p in coll.products -%}
-      {%- unless p.id == product.id or shown >= limit -%}
+      {%- unless p.id == product.id or shown >= limit or p.featured_image == blank -%}
         <a class="kv-pdp__pcard" href="{{ p.url }}">
           <div class="m"><img src="{{ p.featured_image | image_url: width: 600 }}" alt="{{ p.title | escape }}" loading="lazy" width="600" height="750"></div>
           <div class="n">{{ p.title | truncate: 44 }}</div>

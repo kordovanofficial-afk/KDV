@@ -245,12 +245,25 @@ class VariantSelector {
       this.currentVariant = match;
       this.updatePrice(match);
       this.updateAvailability(match);
+      this.updateImage(match);
       if (this.variantInput) this.variantInput.value = match.id;
       // Update URL without reload
       const url = new URL(window.location.href);
       url.searchParams.set('variant', match.id);
       window.history.replaceState({}, '', url.toString());
     }
+  }
+
+  updateImage(variant) {
+    // Swap the main gallery image to the variant's linked image (e.g. colour swatches)
+    const fi = variant.featured_image;
+    if (!fi || !fi.src) return;
+    const base = fi.src.split('?')[0];
+    const main = document.getElementById('product-main-image');
+    if (main) main.src = fi.src + (fi.src.includes('?') ? '&' : '?') + 'width=900';
+    document.querySelectorAll('.product-gallery__thumb').forEach(t => {
+      t.classList.toggle('active', (t.dataset.full || '').split('?')[0] === base);
+    });
   }
 
   updatePrice(variant) {
