@@ -45,5 +45,10 @@ was intentionally omitted rather than invent numbers (send counts → added in s
 ## NOT started yet (store-level SEO, pre-publish batch)
 - 301 redirects for cut products · collection-page editorial+meta+JSON-LD ·
   storefront filters (Search & Discovery) · PNG→WebP · handle cleanups (with redirects).
+- **Shopify category/taxonomy metafields** (Color, Material, Target gender, Wallet
+  features, Closure, Carry options…) — powers on-site FILTERS + Google Shopping feed,
+  not blue-link ranking. USER DECISION (Jul): batch this ONCE just before launch, after
+  the whole product list is enriched. Split: user bulk-edits repeating dropdowns
+  (Material=Leather, gender, closure); Claude API-sweeps Color + Wallet-features per product.
 
 _Last updated: after The Luke (22 wallets). Wallets remaining in kdv-wallets: ~13._
