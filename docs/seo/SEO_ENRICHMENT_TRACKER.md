@@ -52,8 +52,13 @@ was intentionally omitted rather than invent numbers (send counts → added in s
 - **Missing slot counts in source** (Fits block skipped): Kodo Vertical, Saffiano, Aristocrat, Bastion, Cleopatra, Kingsman. Send counts → block added.
 
 ## NOT started yet (store-level SEO, pre-publish batch)
-- 301 redirects for cut products · collection-page editorial+meta+JSON-LD ·
-  storefront filters (Search & Discovery) · PNG→WebP · handle cleanups (with redirects).
+- ✅ **Collection SEO — top 5 done** (Jul, pre-launch): mens-leather-wallets (title
+  de-stuffed + description + editorial), smart-wallets, cowboy-hats, mens-leather-jackets,
+  leather-bags — editorial block (`custom.editorial`) filled; existing metas kept. Remaining
+  collections (laptop-bags, office-bags, caps, belts, shoes, women's, gloves…) = post-launch.
+- ✅ **Collection filter bar bug FIXED** (was floating mid-grid) — now scrolls in-flow.
+- ✅ **Top-traffic redirects verified healthy** (Shopify auto-redirected deleted products).
+- 301 redirect FULL sweep of all GSC pages (beyond top-40) · PNG→WebP · handle cleanups.
 - **Shopify category/taxonomy metafields** (Color, Material, Target gender, Wallet
   features, Closure, Carry options…) — powers on-site FILTERS + Google Shopping feed,
   not blue-link ranking. USER DECISION (Jul): batch this ONCE just before launch, after
