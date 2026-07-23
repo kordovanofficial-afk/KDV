@@ -36,6 +36,15 @@ was intentionally omitted rather than invent numbers (send counts → added in s
 | 20 | The Hunter HM Wallet | ✅ →Bifold | ✅ | ✅ | ✅ | ✅ | ✅ (6 cards/1+1) | 4.8×11 | — |
 | 21 | The Kingsman Wallet | ✅ (name de-stuffed) →Bifold | ✅ | ✅ | ✅ | ✅ | — no slot count | 4.7×13 | ⚠️ 0 stock |
 | 22 | The Luke Minimalist Wallet | ✅ →Slim | ✅ | ✅ | ✅ | ✅ | ✅ | 4.9×29 | — |
+| 23 | The Luxurious Ladies Clutch | ✅ →Women's | ✅ | ✅ | ✅ | ✅ | ✅ | 4.8×20 | ⚠️ 0 stock all 3 |
+| 24 | The Mocha Mate Wallet | ✅ →Bifold | ✅ | ✅ | ✅ | ✅ | ✅ | 4.8×41 | — (best-seller) |
+| 25 | The Money Clip Minimal Wallet | ✅ →MoneyClip | ✅ | ✅ | ✅ | ✅ | ✅ | 4.8×24 | — |
+| 26 | The Nova Woven Clutch | ✅ →Women's | ✅ | ✅ | ✅ | ✅ | — no slot count | 4.7×14 | low stock; colours 1 photo |
+| 27 | The Razor RFID Smart Wallet | ✅ (title de-stuffed) | ✅ | ✅ | ✅ | ✅ | — no slot count | 4.8×20 | 6 colours; 5 variants 1 photo |
+| 28 | The Stallion Handcrafted Wallet | ✅ →Slim | ✅ | ✅ | ✅ | ✅ | — no slot count | 4.8×15 | — |
+| 29 | The Truckkr Bifold | ✅ →Bifold | ✅ | ✅ | ✅ | ✅ | — no slot count | 4.7×12 | ⚠️ 0 stock |
+| 30 | The Seamless Stitch-less Wallet | ✅ (title de-stuffed) →Slim | ✅ | ✅ | ✅ | ✅ | ✅ (10 cards) | 4.9×25 | — |
+| 31 | Bellezza Clutch | ✅ →Women's | ✅ | ✅ | ✅ | ✅ | — no slot count | 4.7×13 | Black 1 photo |
 
 ## Recurring flags to batch-fix (not per-product SEO)
 - **Stock zeros** (COD/POS sync?): CH Long, Elite Card Holder, Kodo Black, Armour, Gator, Kingsman, Shelby-Thomas(Thomas). Ranking a page that can't sell = wasted rank — verify these are real, not sync gaps.
@@ -51,4 +60,4 @@ was intentionally omitted rather than invent numbers (send counts → added in s
   the whole product list is enriched. Split: user bulk-edits repeating dropdowns
   (Material=Leather, gender, closure); Claude API-sweeps Color + Wallet-features per product.
 
-_Last updated: after The Luke (22 wallets). Wallets remaining in kdv-wallets: ~13._
+_Last updated: after Bellezza (31 wallets enriched). Wallets remaining: a handful._
