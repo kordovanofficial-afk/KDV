@@ -11,11 +11,11 @@
 
   <!-- HERO (compact, no big banner) -->
   <div class="kv-wrap kv-coll__hero">
-    <div class="kv-coll__crumb"><a href="{{ routes.root_url }}">Home</a> / {{ collection.title }}</div>
+    <div class="kv-coll__crumb"><a href="{{ routes.root_url }}">Home</a> / <a href="{{ collection.url }}">{{ collection.title }}</a>{%- if current_tags -%} / {{ current_tags | join: ', ' }}{%- endif -%}</div>
     <div class="kv-coll__hrow">
       <div>
-        <span class="eyebrow">The Collection</span>
-        <h1>{{ collection.title }}</h1>
+        <span class="eyebrow">{% if current_tags %}{{ collection.title }}{% else %}The Collection{% endif %}</span>
+        <h1>{% if current_tags %}{{ current_tags | join: ' · ' | capitalize }}{% else %}{{ collection.title }}{% endif %}</h1>
         {%- if collection.description != blank -%}
           <p>{{ collection.description | strip_html | truncatewords: 40 }}</p>
         {%- else -%}
