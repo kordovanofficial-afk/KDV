@@ -19,17 +19,66 @@ ViewContent 90D `120252468026250428`, All Visitors 180D `120252468018150428`
 **Excluded on BOTH (mandatory rule):** COD Refusers `120253660257910428` +
 Purchasers 180D `120252468019140428`
 
-## URL tracking — paste into EVERY ad's "URL parameters" field
+## Ads — ALL 4 CREATED, ALL PAUSED (user adds video, checks, publishes)
+
+| Ad ID | Ad name (= `utm_content`) | Ad set | Creative ID |
+|---|---|---|---|
+| `120254085488780428` | `AD_Bastion_Cold_PatinaAngle` | Cold | `981461181613343` |
+| `120254085520050428` | `AD_Razor_Cold_RFIDHook` | Cold | `1050075114629389` |
+| `120254085489810428` | `AD_Bastion_RT_StillHere` | Retarget | `1478447687652398` |
+| `120254085492090428` | `AD_Razor_RT_FinishOrder` | Retarget | `1519494712778431` |
+
+All: SHOP_NOW · `conversion_domain=kordovanleather.com` · image = the product's
+Shopify hero shot, standing in as a placeholder until the user swaps in video.
+Ad names are deliberately space-free so `utm_content` stays clean in analytics.
+
+Destination links (the full UTM string is baked into each creative's link, so
+nothing needs pasting into the "URL parameters" field):
+- Bastion → `/products/the-bastion-handcrafted-genuine-leather-bifold-wallet-for-men-slim-classic-everyday-wallet`
+- Razor → `/products/the-razor-rfid-smart-leather-wallet-kordovan`
+
+## URL tracking — already appended to every ad's destination link
 ```
 utm_source={{site_source_name}}&utm_medium=paid_social&utm_campaign={{campaign.name}}&utm_content={{ad.name}}&utm_term={{placement}}&utm_adset={{adset.name}}
 ```
 `{{placement}}` resolves to e.g. `Instagram_Stories`, `Facebook_Mobile_Feed`,
 `Instagram_Reels`; `{{site_source_name}}` → `fb` / `ig` / `an` / `msg`.
 Read in Shopify Analytics → Sessions by UTM, or GA4 → Traffic acquisition.
+⚠️ The Marketing API does not read `link_url` back on SHARE creatives, so this
+string could not be machine-verified after creation — eyeball it once in Ads
+Manager (Ad → Destination → Website URL) before publishing.
+
+## Copy per ad
+- **Bastion cold** — "Built to Age, Not Wear Out". Patina/ageing angle; claims
+  taken verbatim from the PDP (distressed cow leather, transparent ID window,
+  cash-fold, handcrafted in Pakistan, lifetime warranty). Rs 2,500.
+- **Razor cold** — "Slim, Leather, RFID-Safe". Skimming hook + elastic hold
+  system + six finishes. Rs 2,450 vs Rs 2,999 compare-at (a real listed sale).
+- **Bastion retarget** — "The Bastion — Still In Stock". Price reassurance, COD,
+  free delivery over Rs 2,500.
+- **Razor retarget** — "Your Razor Is Waiting". Colour choice + finish-the-order.
+
+Every claim was checked line-by-line against the live Shopify description — no
+"saddle-stitched" or blanket full-grain wording, per the sitewide claims rule.
 
 ## Products in scope (stock-led decision)
 Bastion (127 units) + Razor (81, has 18% compare-at = sale angle). Luke (39)
 optional 3rd for creative rotation. **Kodo Vertical 2.0 EXCLUDED — 14 units, Black 0.**
+
+## Before publishing — user checklist
+1. Swap the placeholder image for the video on each ad (video is the plan).
+2. Confirm the Instagram identity on each ad. `ads_get_ig_accounts` returns `[]`
+   for this account (missing `instagram_basic` grant on the API app), but Meta
+   did mint an `effective_instagram_media_id` for all four creatives, so IG
+   placements should deliver under the Page's linked IG account. Verify in the
+   ad's Identity section rather than assuming.
+3. Eyeball the destination URL + UTM string (see warning above).
+4. Confirm both ad sets still exclude "KV — COD Refusers EXCLUDE" — mandatory.
+
+Housekeeping: orphan creative `1824947595555604` (Razor cold v1, replaced for an
+unsupported "hand-finished edges" claim) is unused and could not be deleted —
+`ads_creative_delete` is not rolled out for this account. Ignore it; delete in
+Ads Manager if the library gets noisy.
 
 ## Rules
 - Days 0–3: no edits (every change resets learning).
