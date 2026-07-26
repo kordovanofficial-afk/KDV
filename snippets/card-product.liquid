@@ -26,22 +26,22 @@
           srcset every card shipped a 600px file into a ~180px phone slot.
         {%- endcomment -%}
         <img class="kv-pc__img1"
-             src="{{ product.featured_image | image_url: width: 600 }}"
-             srcset="{{ product.featured_image | image_url: width: 200 }} 200w,
-                     {{ product.featured_image | image_url: width: 300 }} 300w,
-                     {{ product.featured_image | image_url: width: 400 }} 400w,
-                     {{ product.featured_image | image_url: width: 600 }} 600w,
-                     {{ product.featured_image | image_url: width: 800 }} 800w"
+             src="{{ product.featured_image | image_url: width: 600, format: 'webp' }}"
+             srcset="{{ product.featured_image | image_url: width: 200, format: 'webp' }} 200w,
+                     {{ product.featured_image | image_url: width: 300, format: 'webp' }} 300w,
+                     {{ product.featured_image | image_url: width: 400, format: 'webp' }} 400w,
+                     {{ product.featured_image | image_url: width: 600, format: 'webp' }} 600w,
+                     {{ product.featured_image | image_url: width: 800, format: 'webp' }} 800w"
              sizes="(max-width: 640px) 48vw, (max-width: 1000px) 32vw, 30vw"
              alt="{{ product.featured_image.alt | escape | default: product.title | escape }}"
              loading="lazy" decoding="async" width="600" height="750">
         {%- if img2 -%}
           <img class="kv-pc__img2"
-               src="{{ img2 | image_url: width: 600 }}"
-               srcset="{{ img2 | image_url: width: 200 }} 200w,
-                       {{ img2 | image_url: width: 300 }} 300w,
-                       {{ img2 | image_url: width: 400 }} 400w,
-                       {{ img2 | image_url: width: 600 }} 600w"
+               src="{{ img2 | image_url: width: 600, format: 'webp' }}"
+               srcset="{{ img2 | image_url: width: 200, format: 'webp' }} 200w,
+                       {{ img2 | image_url: width: 300, format: 'webp' }} 300w,
+                       {{ img2 | image_url: width: 400, format: 'webp' }} 400w,
+                       {{ img2 | image_url: width: 600, format: 'webp' }} 600w"
                sizes="(max-width: 640px) 48vw, (max-width: 1000px) 32vw, 30vw"
                alt="" loading="lazy" decoding="async" width="600" height="750">
         {%- endif -%}

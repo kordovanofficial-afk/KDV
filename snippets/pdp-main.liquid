@@ -38,10 +38,10 @@
             already hold, instead of always fetching a fresh 900px file.
           {%- endcomment -%}
           <div class="product-gallery__thumb{% if forloop.first %} active{% endif %}"
-               data-full="{{ media.preview_image | image_url: width: 900 }}"
-               data-full-srcset="{{ media.preview_image | image_url: width: 500 }} 500w, {{ media.preview_image | image_url: width: 700 }} 700w, {{ media.preview_image | image_url: width: 900 }} 900w, {{ media.preview_image | image_url: width: 1200 }} 1200w">
-            <img src="{{ media.preview_image | image_url: width: 152 }}"
-                 srcset="{{ media.preview_image | image_url: width: 76 }} 76w, {{ media.preview_image | image_url: width: 152 }} 152w, {{ media.preview_image | image_url: width: 228 }} 228w"
+               data-full="{{ media.preview_image | image_url: width: 900, format: 'webp' }}"
+               data-full-srcset="{{ media.preview_image | image_url: width: 500, format: 'webp' }} 500w, {{ media.preview_image | image_url: width: 700, format: 'webp' }} 700w, {{ media.preview_image | image_url: width: 900, format: 'webp' }} 900w, {{ media.preview_image | image_url: width: 1200, format: 'webp' }} 1200w">
+            <img src="{{ media.preview_image | image_url: width: 152, format: 'webp' }}"
+                 srcset="{{ media.preview_image | image_url: width: 76, format: 'webp' }} 76w, {{ media.preview_image | image_url: width: 152, format: 'webp' }} 152w, {{ media.preview_image | image_url: width: 228, format: 'webp' }} 228w"
                  sizes="76px"
                  alt="{{ media.alt | escape | default: product.title | escape }}"
                  loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" decoding="async" width="76" height="92">
@@ -52,11 +52,11 @@
         {%- if v.available -%}<span class="kv-pdp__badge">In stock</span>{%- endif -%}
         {%- comment -%} LCP element on every PDP — eager, high priority, responsive. {%- endcomment -%}
         <img id="product-main-image"
-             src="{{ product.featured_image | image_url: width: 900 }}"
-             srcset="{{ product.featured_image | image_url: width: 500 }} 500w,
-                     {{ product.featured_image | image_url: width: 700 }} 700w,
-                     {{ product.featured_image | image_url: width: 900 }} 900w,
-                     {{ product.featured_image | image_url: width: 1200 }} 1200w"
+             src="{{ product.featured_image | image_url: width: 900, format: 'webp' }}"
+             srcset="{{ product.featured_image | image_url: width: 500, format: 'webp' }} 500w,
+                     {{ product.featured_image | image_url: width: 700, format: 'webp' }} 700w,
+                     {{ product.featured_image | image_url: width: 900, format: 'webp' }} 900w,
+                     {{ product.featured_image | image_url: width: 1200, format: 'webp' }} 1200w"
              sizes="(max-width: 900px) 94vw, 46vw"
              alt="{{ product.featured_image.alt | escape | default: product.title | escape }}"
              loading="eager" fetchpriority="high" decoding="async" width="900" height="1125">

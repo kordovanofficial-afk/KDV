@@ -9,6 +9,15 @@
 // ============================================================
 const KDV = {
   utils: {
+    // True only when speculatively downloading images is a fair trade for the
+    // visitor. Respects Data Saver and skips slow connections — a large share of
+    // our traffic is mobile data in Pakistan, where a prefetch costs real money.
+    canPrefetch() {
+      const c = navigator.connection;
+      if (!c) return true;
+      if (c.saveData) return false;
+      return !/(^|-)(slow-)?2g$/.test(c.effectiveType || '');
+    },
     formatMoney(cents, format) {
       const value = (cents / 100).toFixed(0);
       return `PKR ${Number(value).toLocaleString()}`;
@@ -160,11 +169,23 @@ class ProductGallery {
       thumb.addEventListener('touchstart', warm, { once: true, passive: true });
     });
 
-    // Once the page is idle, pull the rest of the gallery into cache so
-    // swiping and thumb clicks are instant instead of hitting the network.
-    const warmAll = () => this.thumbs.forEach(t => this.preload(t));
-    if ('requestIdleCallback' in window) requestIdleCallback(warmAll, { timeout: 3000 });
-    else setTimeout(warmAll, 1200);
+    // Warm ONLY the neighbours, and only after load, and only on a connection
+    // that can afford it. An earlier version prefetched every gallery image at
+    // idle — on a 10-image product that pulled ~2MB into the page load, which
+    // showed up as "enormous network payload" and starved the LCP image on slow
+    // connections. Instant switching is not worth that trade.
+    const warmNeighbours = () => {
+      if (!KDV.utils.canPrefetch()) return;
+      this.preload(this.thumbs[(this.currentIndex + 1) % this.thumbs.length]);
+      this.preload(this.thumbs[(this.currentIndex - 1 + this.thumbs.length) % this.thumbs.length]);
+    };
+    this.warmNeighbours = warmNeighbours;
+    const start = () => {
+      if ('requestIdleCallback' in window) requestIdleCallback(warmNeighbours, { timeout: 4000 });
+      else setTimeout(warmNeighbours, 2000);
+    };
+    if (document.readyState === 'complete') start();
+    else window.addEventListener('load', start, { once: true });
 
     // Touch swipe on main image
     let startX = 0;
@@ -221,6 +242,7 @@ class ProductGallery {
       }
       this.mainImg.src = src;
       this.mainImg.style.opacity = '1';
+      this.warmNeighbours?.();
     };
 
     if (next.decode) {

@@ -21,9 +21,9 @@
   {%- endif -%}
 
   <link rel="canonical" href="{{ canonical_url }}">
-  {%- comment -%} Every product image comes from the Shopify CDN — open that
-  connection during the initial HTML scan instead of at first image request. {%- endcomment -%}
-  <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+  {%- comment -%} No preconnect to cdn.shopify.com here — Shopify already emits
+  one via content_for_header, and PSI flagged >4 preconnects on this page.
+  Extra preconnects contend for sockets rather than helping. {%- endcomment -%}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -50,12 +50,12 @@
   {%- endcomment -%}
   {%- if template.name == 'product' and product.featured_image -%}
     <link rel="preload" as="image" fetchpriority="high"
-          imagesrcset="{{ product.featured_image | image_url: width: 500 }} 500w,
-                       {{ product.featured_image | image_url: width: 700 }} 700w,
-                       {{ product.featured_image | image_url: width: 900 }} 900w,
-                       {{ product.featured_image | image_url: width: 1200 }} 1200w"
+          imagesrcset="{{ product.featured_image | image_url: width: 500, format: 'webp' }} 500w,
+                       {{ product.featured_image | image_url: width: 700, format: 'webp' }} 700w,
+                       {{ product.featured_image | image_url: width: 900, format: 'webp' }} 900w,
+                       {{ product.featured_image | image_url: width: 1200, format: 'webp' }} 1200w"
           imagesizes="(max-width: 900px) 94vw, 46vw"
-          href="{{ product.featured_image | image_url: width: 900 }}">
+          href="{{ product.featured_image | image_url: width: 900, format: 'webp' }}">
   {%- endif -%}
 
   {%- if settings.favicon -%}

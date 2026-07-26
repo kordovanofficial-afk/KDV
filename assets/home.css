@@ -54,7 +54,7 @@
 .kv-nav>li:hover .kv-drop{opacity:1;visibility:visible;transform:none;}
 .kv-mega__in{display:grid;grid-template-columns:1fr 1fr 1fr 1.3fr;gap:44px;padding:38px 0;}
 .kv-simple__in{display:flex;gap:60px;padding:30px 0;}
-.kv-mcol h5{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--cognac);margin-bottom:15px;font-weight:600;font-family:var(--kv-body);}
+.kv-mcol h5,.kv-mcol .kv-mh{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--cognac);margin-bottom:15px;font-weight:600;font-family:var(--kv-body);}
 .kv-mcol ul{list-style:none;margin:0;padding:0;}
 .kv-mcol li{margin-bottom:10px;}
 .kv-mcol li a{font-size:14px;color:var(--walnut);}
@@ -64,7 +64,7 @@
 .kv-mfeat .kv-g{position:absolute;inset:0;background:linear-gradient(transparent 35%,rgba(36,28,22,.82));}
 .kv-mfeat .kv-c{position:absolute;left:16px;right:16px;bottom:14px;color:var(--canvas);}
 .kv-mfeat .kv-tag{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--brass-light);font-weight:600;}
-.kv-mfeat h4{font-family:var(--kv-heading);font-size:18px;color:#fff;margin:3px 0;font-weight:500;}
+.kv-mfeat h4,.kv-mfeat .kv-fh{font-family:var(--kv-heading);font-size:18px;color:#fff;margin:3px 0;font-weight:500;}
 .kv-mfeat .kv-lk{font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:#fff;border-bottom:1px solid var(--brass-light);padding-bottom:2px;}
 
 /* mobile menu */
@@ -858,8 +858,8 @@
 .kv-srch__close b{font-size:24px;line-height:1;color:var(--ink);font-weight:400;}
 .kv-srch__pop{max-width:1100px;margin:0 auto;padding:0 40px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
 .kv-srch__pop span{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);}
-.kv-srch__pop a{font-size:13px;border:1px solid var(--border);border-radius:99px;padding:7px 15px;color:var(--walnut);cursor:pointer;}
-.kv-srch__pop a:hover{border-color:var(--cognac);color:var(--cognac);}
+.kv-srch__pop a,.kv-srch__pop button{font-size:13px;font-family:var(--kv-body);background:none;border:1px solid var(--border);border-radius:99px;padding:7px 15px;color:var(--walnut);cursor:pointer;}
+.kv-srch__pop a:hover,.kv-srch__pop button:hover{border-color:var(--cognac);color:var(--cognac);}
 .kv-srch__body{flex:1;overflow-y:auto;}
 .kv-srch__grid{max-width:1100px;margin:0 auto;padding:34px 40px 60px;display:grid;grid-template-columns:250px 1fr;gap:48px;}
 .kv-srch__sect+.kv-srch__sect{margin-top:34px;}
