@@ -172,7 +172,10 @@
     fetch(url).then(function(r){return r.text();}).then(function(html){
       var doc=new DOMParser().parseFromString(html,'text/html');
       var newGrid=doc.getElementById('kv-grid'), grid=document.getElementById('kv-grid');
-      if(newGrid&&grid){ Array.prototype.forEach.call(newGrid.children,function(c){grid.appendChild(c);}); }
+      // .children is a LIVE HTMLCollection: appendChild moves the node out of it,
+      // shifting every later index down, so iterating it directly skipped every
+      // other product ("Showing 27 of 30"). Snapshot to a static array first.
+      if(newGrid&&grid){ Array.prototype.slice.call(newGrid.children).forEach(function(c){grid.appendChild(c);}); }
       var newBtn=doc.getElementById('kv-more');
       var shownEl=document.getElementById('kv-shown'), fill=document.getElementById('kv-fill');
       var total=parseInt(btn.getAttribute('data-total'))||0;

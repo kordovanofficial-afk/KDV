@@ -119,5 +119,23 @@
         "info": "Square transparent .png, 512 x 512px. Used for the browser tab and the iOS home-screen icon."
       }
     ]
+  },
+  {
+    "name": "Order tracking",
+    "settings": [
+      {
+        "type": "text",
+        "id": "courier_name",
+        "label": "Courier name",
+        "default": "PostEx",
+        "info": "Shown on the Track Your Order page."
+      },
+      {
+        "type": "text",
+        "id": "courier_tracking_url",
+        "label": "Courier tracking URL",
+        "info": "Paste your courier's public tracking URL and put {number} where the tracking number goes, e.g. https://example.com/track?cn={number}. Leave blank and the form hands off to WhatsApp instead."
+      }
+    ]
   }
 ]

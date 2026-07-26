@@ -1,0 +1,98 @@
+{%- comment -%}
+  Designed "Track Your Order" page body (handle: track-order). Styling = .kv-cp
+  plus the .kv-track block in home.css.
+
+  The footer link used to point at routes.account_url, which bounces a logged-out
+  visitor into Shopify's login flow — that was the "page keeps loading" report.
+
+  Courier destination is a THEME SETTING (settings.courier_tracking_url) with a
+  {number} placeholder, so the exact PostEx URL is pasted in admin rather than
+  guessed here. Until it is set, the form falls back to WhatsApp with the number
+  pre-filled, which is a working path from day one in this market.
+
+  NEXT STEP (see ops/TRACKING_INTEGRATION.md): swap the redirect for a fetch to
+  our Cloudflare Worker so status renders inline on this page.
+{%- endcomment -%}
+{%- liquid
+  assign wa = settings.whatsapp_number | default: '923332601161' | replace: '+', '' | replace: ' ', ''
+  assign courier = settings.courier_tracking_url
+  assign courier_name = settings.courier_name | default: 'our courier'
+-%}
+<div class="kv-cp">
+
+  <section class="phead">
+    <div class="wrap">
+      <span class="eyebrow">Order Tracking</span>
+      <h1>Where's my order?</h1>
+      <p>Enter the tracking number from your confirmation message and we'll take you straight to its live status.</p>
+    </div>
+  </section>
+
+  <section class="sec sec--tight"><div class="wrap wrap--narrow">
+    <form class="kv-track" id="kv-track"
+          data-courier="{{ courier | escape }}"
+          data-wa="{{ wa }}">
+      <label for="kv-track-no">Tracking number</label>
+      <div class="kv-track__row">
+        <input type="text" id="kv-track-no" name="tracking" inputmode="latin"
+               autocomplete="off" placeholder="e.g. 1234567890" required>
+        <button type="submit">Track →</button>
+      </div>
+      <p class="kv-track__hint">It's in your WhatsApp order-confirmation message and your dispatch email.</p>
+      <p class="kv-track__err" id="kv-track-err" hidden>Please enter your tracking number first.</p>
+    </form>
+
+    <div class="kv-track__alt">
+      <p><b>Don't have your tracking number?</b> Send us your order number and we'll look it up.</p>
+      <a class="kv-track__wa" href="https://wa.me/{{ wa }}?text={{ 'Hi Kordovan, I would like to track my order. My order number is ' | url_encode }}" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2z"/></svg>
+        Ask on WhatsApp
+      </a>
+      {%- if shop.customer_accounts_enabled -%}
+        <a class="kv-track__acct" href="{{ routes.account_url }}">Or sign in to see your order history</a>
+      {%- endif -%}
+    </div>
+  </div></section>
+
+  <section class="sec sec--tight"><div class="wrap wrap--narrow">
+    <div class="shead"><span class="eyebrow">What the statuses mean</span><h2>From our bench to your door.</h2></div>
+    <table class="tbl">
+      <tr><th>Status</th><th>What's happening</th></tr>
+      <tr><td><b>Order received</b></td><td>We have your order and are picking it from stock.</td></tr>
+      <tr><td><b>Dispatched</b></td><td>Handed to {{ courier_name }}. Tracking goes live within a few hours.</td></tr>
+      <tr><td><b>In transit</b></td><td>On its way to your city's delivery hub.</td></tr>
+      <tr><td><b>Out for delivery</b></td><td>With the rider today. Keep your phone reachable — riders call before arriving.</td></tr>
+      <tr><td><b>Delivered</b></td><td>Handed over and paid. Enjoy it.</td></tr>
+    </table>
+    <p style="text-align:center;margin-top:20px;color:var(--stone);font-size:14px">
+      Orders are dispatched within 1–2 business days. If tracking hasn't updated in 48 hours, message us — we'll chase it for you.
+    </p>
+  </div></section>
+
+</div>
+
+<script>
+(function(){
+  var f=document.getElementById('kv-track');
+  if(!f) return;
+  var err=document.getElementById('kv-track-err');
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var no=(document.getElementById('kv-track-no').value||'').trim();
+    if(!no){ if(err) err.hidden=false; return; }
+    if(err) err.hidden=true;
+    var courier=f.getAttribute('data-courier')||'';
+    var url;
+    if(courier && courier.indexOf('{number}')!==-1){
+      url=courier.replace('{number}',encodeURIComponent(no));
+    }else if(courier){
+      url=courier+encodeURIComponent(no);
+    }else{
+      // No courier URL configured yet — hand off to WhatsApp with the number,
+      // which is how most customers reach us anyway.
+      url='https://wa.me/'+f.getAttribute('data-wa')+'?text='+encodeURIComponent('Hi Kordovan, please track my order. Tracking number: '+no);
+    }
+    window.open(url,'_blank','noopener');
+  });
+})();
+</script>

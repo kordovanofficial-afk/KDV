@@ -906,3 +906,24 @@
 /* product card image placeholder (products without a photo) */
 .kv-pc__ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--parchment);}
 .kv-pc__ph span{font-family:var(--kv-heading);font-weight:600;letter-spacing:.18em;text-transform:uppercase;font-size:13px;color:var(--stone);}
+
+/* ============================================================
+   Track Your Order (.kv-track) — snippets/track-order.liquid
+   ============================================================ */
+.kv-track{max-width:620px;margin:0 auto;}
+.kv-track label{display:block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--stone);font-weight:600;margin-bottom:10px;}
+.kv-track__row{display:flex;gap:12px;}
+.kv-track input{flex:1;min-width:0;font-family:var(--kv-body);font-size:16px;color:var(--ink);background:#fff;border:1px solid var(--border);border-radius:8px;padding:16px 18px;}
+.kv-track input:focus{outline:none;border-color:var(--cognac);box-shadow:0 0 0 3px rgba(160,98,58,.12);}
+.kv-track button{flex:none;background:var(--cognac);color:#fff;border:none;border-radius:8px;font-family:var(--kv-body);font-weight:600;font-size:15px;letter-spacing:.03em;padding:16px 30px;cursor:pointer;transition:.2s;}
+.kv-track button:hover{background:var(--cognac-dark,#8a5230);}
+.kv-track__hint{font-size:13px;color:var(--stone);margin-top:12px;}
+.kv-track__err{font-size:13px;color:var(--oxblood,#8B2D2D);margin-top:10px;font-weight:500;}
+.kv-track__alt{max-width:620px;margin:34px auto 0;padding-top:26px;border-top:1px solid var(--border);text-align:center;}
+.kv-track__alt p{font-size:14.5px;color:var(--walnut);margin-bottom:16px;}
+.kv-track__wa{display:inline-flex;align-items:center;gap:9px;background:linear-gradient(135deg,#1f6e4d,#13593c);color:#fff;font-size:14px;font-weight:500;padding:13px 22px;border-radius:8px;text-decoration:none;}
+.kv-track__acct{display:block;margin-top:16px;font-size:13.5px;color:var(--ink);text-decoration:underline;}
+@media(max-width:560px){
+  .kv-track__row{flex-direction:column;}
+  .kv-track button{width:100%;}
+}

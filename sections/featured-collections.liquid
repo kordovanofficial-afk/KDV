@@ -32,7 +32,19 @@
       {%- for handle in sm_handles -%}
         {%- assign coll = collections[handle] -%}
         {%- assign label = sm_labels[forloop.index0] -%}
-        <a class="kv-coll" href="{{ coll.url | default: '/collections/' | append: handle }}">
+        {%- comment -%}
+          Build the URL in liquid, not with a filter chain. `coll.url | default:
+          '/collections/' | append: handle` looks like a fallback but `append`
+          runs unconditionally, so a real collection produced
+          /collections/kdv-bags + kdv-bags = /collections/kdv-bagskdv-bags → 404
+          on all four tiles. Wallets escaped it only because it has no append.
+        {%- endcomment -%}
+        {%- if coll -%}
+          {%- assign coll_url = coll.url -%}
+        {%- else -%}
+          {%- assign coll_url = '/collections/' | append: handle -%}
+        {%- endif -%}
+        <a class="kv-coll" href="{{ coll_url }}">
           <img class="kv-coll__img" src="{{ cdn }}{{ sm_imgs[forloop.index0] }}?v=1782029619&width=760" alt="{{ label }}" loading="lazy">
           <div class="kv-coll__g"></div>
           <div class="kv-coll__c">

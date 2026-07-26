@@ -68,7 +68,9 @@
     fetch(url).then(function(r){return r.text();}).then(function(html){
       var doc=new DOMParser().parseFromString(html,'text/html');
       var ng=doc.getElementById('kv-grid'), g=document.getElementById('kv-grid');
-      if(ng&&g){ Array.prototype.forEach.call(ng.children,function(c){g.appendChild(c);}); }
+      // Live HTMLCollection — snapshot before moving nodes, or every other
+      // result is skipped. Same bug as the collection grid.
+      if(ng&&g){ Array.prototype.slice.call(ng.children).forEach(function(c){g.appendChild(c);}); }
       var nb=doc.getElementById('kv-more'), s=document.getElementById('kv-shown');
       if(g&&s){ s.textContent=g.children.length; }
       if(nb){ btn.setAttribute('href',nb.getAttribute('href')); btn.textContent='Load More'; } else { btn.remove(); }
