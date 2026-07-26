@@ -46,8 +46,19 @@ Leave this Cloud Shell window open — you come back to it in Part 3.
 > choose tab **Specialty and previous generation** → **VM.Standard.E2.1.Micro**.
 > That is also free and works perfectly well for this.
 
-**2.5** Scroll to **Networking**. Leave everything as it is, but check that
-**Assign a public IPv4 address** is **Yes**.
+**2.5** Scroll to **Networking**. A brand-new Oracle account has no network yet,
+so the default "Select existing…" options are empty and greyed out. You must
+create one — three clicks:
+
+- Under **Primary network** → tick **Create new virtual cloud network**
+  *(leave the auto-filled names exactly as they are)*
+- Under **Subnet** → tick **Create new public subnet**
+  — the word **public** matters
+- Scroll to **Public IPv4 address assignment** → turn
+  **Automatically assign public IPv4 address** **ON**
+
+> The warning *"You must select a public subnet to assign a public IPv4 address"*
+> disappears once the subnet is set to public. Ignore the IPv6 section entirely.
 
 **2.6** Scroll to **Add SSH keys**. Choose **Paste public keys**.
 Paste the long `ssh-rsa AAAA…` line you copied in step 1.4.
@@ -125,6 +136,8 @@ Then I connect the Worker and build the order messages.
 | What you see | What to do |
 |---|---|
 | "Out of capacity" creating the server | Use **VM.Standard.E2.1.Micro** instead (step 2.4) |
+| Networking dropdowns empty / greyed out | Fresh account has no network. Pick **Create new virtual cloud network** + **Create new public subnet** (step 2.5) |
+| "You must select a public subnet…" warning | Subnet is set to private. Choose **Create new public subnet** (step 2.5) |
 | `Permission denied (publickey)` | The key in step 2.6 was not pasted correctly. Delete the instance, redo Part 2 |
 | Install stops with a red error | Copy the last 10 lines and send them to me |
 | Web address does not open | On the server run: `pm2 logs tunnel --lines 30 --nostream` and send me the output |
