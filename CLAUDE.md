@@ -186,6 +186,10 @@ lacks `write_customer_merge` scope, no workaround; direct API egress blocked).
   work). User's own profiles: business phone 3332601161 cluster.
 
 ## 📣 Meta Ads (SCOPED — Kordovan 2025 ONLY)
+> 📕 **READ `ops/ADS_PLAYBOOK_PK.md` FIRST for any ads work.** Real PKR benchmarks,
+> COD unit economics (cold is currently under water, retargeting is very
+> profitable), the ~2x Meta attribution overstatement, and the delivery mechanics
+> that bite us. It overrides every number in the vendored ad skills.
 - **ONLY account to ever touch/reference: `995683712074843` ("Kordovan 2025", PKR,
   ACTIVE).** User locked scope Jul 7 2026. IGNORE all others (Kordovan Leather
   337…255 = DISABLED/flagged; Kordovan 2.0 492…061 = closed; Corporate 136…323;

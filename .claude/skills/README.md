@@ -40,20 +40,30 @@ definitions live in `.claude/agents/`.
   `Platform-Specific Ad Copy Generator`, `Google Ads Keyword Strategy`,
   `Video Ad Script Writer`) — renamed to their slugs so they resolve.
 
-**Relevance to Kordovan, honestly graded:**
-- **Live use:** `ads-hooks`, `ads-copy`, `ads-creative`, `ads-video`, `ads-testing`,
-  `ads-landing`, `ads-audit`, `ads-budget`, `ads-funnel`, `ads-audience`.
-- **Situational:** `ads-competitors` (pair it with the `ads_library_search` tool we
-  already have — free), `ads-strategy` / `ads-quick` (whole-account passes),
-  `ads-report-pdf` (needs `reportlab`, a free lib — see `tools/ads-report/`).
-- **Parked:** `ads-keywords` is Google Ads only. We run no Google Ads, and organic
-  keyword work is already served by the GSC connector.
+**PRUNED Jul 26 2026 to 7 skills** — user directive: "keep ourselves focused on the
+things that matter truly in details for our market only." Kept the ones that make
+things we actually ship; deleted the ones that generate strategy decks we don't need
+or assume platforms/currencies we don't use.
+
+- **KEPT:** `ads-hooks`, `ads-copy`, `ads-creative`, `ads-video`, `ads-testing`,
+  `ads-landing`, `ads-audit`.
+- **DELETED:** `ads` (orchestrator for the deleted set) · `ads-keywords` (Google Ads
+  only — we run none) · `ads-strategy` + `ads-quick` (URL-inferred whole-account
+  passes; we have real first-party data that beats inference) · `ads-audience`
+  (invents personas from a website; our audiences are built from actual delivered
+  buyers) · `ads-budget` (allocates across Google/LinkedIn/TikTok in USD $1K–$10K —
+  wrong platforms, wrong currency) · `ads-funnel` (multi-platform TOFU/MOFU/BOFU;
+  ours is already built and Meta-only) · `ads-competitors` (Western swipe-file
+  method) · `ads-report-pdf` (agency client deliverable — we are the client).
+- Also deleted `.claude/agents/` (5 agents existed only to fan out `ads-strategy`)
+  and `tools/ads-report/`.
 
 ---
 
 ## ⚠️ Read the ads skills against project rules, not as gospel
-These are generic US/EU-market playbooks. Where they conflict with `CLAUDE.md`,
-`CLAUDE.md` wins:
+These are generic US/EU-market playbooks. **`ops/ADS_PLAYBOOK_PK.md` holds our real
+PKR benchmarks, COD unit economics and attribution correction — it overrides any
+number in these skills.** Where they conflict with `CLAUDE.md`, `CLAUDE.md` wins:
 - Any suggestion to buy a tool/app/subscription → **FREE-only rule** overrides.
 - Their CPM/CPC/CPA benchmarks are USD Western-market and are **wrong for PKR
   Pakistan** — use our own actuals in `ops/ADS_LAUNCH_JUL26.md`.
