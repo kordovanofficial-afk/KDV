@@ -17,7 +17,7 @@
       {%- if section.settings.logo -%}
         <img class="kv-logo--mark{% unless section.settings.logo_light %} kv-logo--auto{% endunless %}"
              src="{{ section.settings.logo | image_url: width: 320 }}"
-             alt="{{ shop.name }} logo"
+             alt="{{ shop.name }} logo" decoding="async" fetchpriority="high"
              width="{{ section.settings.logo.width }}" height="{{ section.settings.logo.height }}" loading="eager">
       {%- else -%}{{ shop.name }}{%- endif -%}
     </a>
@@ -30,7 +30,7 @@
           <div class="kv-mcol"><h5>Men's Wallets</h5><ul><li><a href="{{ routes.collections_url }}/mens-leather-wallets/bifold-wallet">Bifold Wallets</a></li><li><a href="{{ routes.collections_url }}/mens-leather-wallets/card-holder">Cardholders</a></li><li><a href="{{ routes.collections_url }}/mens-leather-wallets/money-clip">Money Clips</a></li><li><a href="{{ routes.collections_url }}/mens-leather-wallets/long-wallet">Long Wallets</a></li></ul></div>
           <div class="kv-mcol"><h5>Women's Wallets</h5><ul><li><a href="{{ routes.collections_url }}/womens-leather-wallets">Ladies Wallets</a></li><li><a href="{{ routes.collections_url }}/womens-leather-wallets/clutch">Clutches</a></li><li><a href="{{ routes.collections_url }}/women">View all Women's</a></li></ul></div>
           <div class="kv-mcol"><h5>Smart &amp; RFID</h5><ul><li><a href="{{ routes.collections_url }}/rfid-wallets">RFID Wallets</a></li><li><a href="{{ routes.collections_url }}/smart-wallets">Smart Wallets</a></li><li><a href="{{ routes.collections_url }}/kodo-by-kordovan">The KODO</a></li></ul></div>
-          <a class="kv-mfeat" href="{{ routes.all_products_collection_url }}"><img src="https://cdn.shopify.com/s/files/1/0267/9164/1277/files/KODO.png?v=1782021735&width=560" style="object-position:50% 34%" alt="KODO Smart Wallet"><div class="kv-g"></div><div class="kv-c"><div class="kv-tag">Pakistan's First RFID Wallet</div><h4>The KODO Smart Wallet</h4><span class="kv-lk">Shop the KODO →</span></div></a>
+          <a class="kv-mfeat" href="{{ routes.all_products_collection_url }}"><img src="https://cdn.shopify.com/s/files/1/0267/9164/1277/files/KODO.png?v=1782021735&width=560" style="object-position:50% 34%" alt="KODO Smart Wallet" loading="lazy" decoding="async" width="560" height="700"><div class="kv-g"></div><div class="kv-c"><div class="kv-tag">Pakistan's First RFID Wallet</div><h4>The KODO Smart Wallet</h4><span class="kv-lk">Shop the KODO →</span></div></a>
         </div></div>
       </li>
 
@@ -44,7 +44,7 @@
       <li><a href="{{ routes.collections_url }}/kdv-jackets">Jackets <svg class="kv-car" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg></a>
         <div class="kv-drop"><div class="kv-wrap kv-mega__in">
           <div class="kv-mcol"><h5>Shop Jackets</h5><ul><li><a href="{{ routes.collections_url }}/mens-leather-jackets">Men's Jackets</a></li><li><a href="{{ routes.collections_url }}/womens-leather-jackets">Women's Jackets</a></li><li><a href="{{ routes.collections_url }}/kdv-jackets">View all Jackets</a></li></ul></div>
-          <a class="kv-mfeat" href="{{ routes.collections_url }}/kdv-jackets"><img src="https://cdn.shopify.com/s/files/1/0267/9164/1277/files/Jacket.png?v=1782021735&width=560" alt="Men's Leather Jackets"><div class="kv-g"></div><div class="kv-c"><div class="kv-tag">Heirloom Outerwear</div><h4>Men's Leather Jackets</h4><span class="kv-lk">Shop jackets →</span></div></a>
+          <a class="kv-mfeat" href="{{ routes.collections_url }}/kdv-jackets"><img src="https://cdn.shopify.com/s/files/1/0267/9164/1277/files/Jacket.png?v=1782021735&width=560" alt="Men's Leather Jackets" loading="lazy" decoding="async" width="560" height="700"><div class="kv-g"></div><div class="kv-c"><div class="kv-tag">Heirloom Outerwear</div><h4>Men's Leather Jackets</h4><span class="kv-lk">Shop jackets →</span></div></a>
         </div></div>
       </li>
 

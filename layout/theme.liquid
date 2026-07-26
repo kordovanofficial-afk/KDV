@@ -21,8 +21,22 @@
   {%- endif -%}
 
   <link rel="canonical" href="{{ canonical_url }}">
+  {%- comment -%} Every product image comes from the Shopify CDN — open that
+  connection during the initial HTML scan instead of at first image request. {%- endcomment -%}
+  <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  {%- comment -%}
+    Fonts load non-blocking: fetched as a stylesheet with media="print" so it
+    never blocks first paint, then flipped to media="all" once it arrives.
+    display=swap means text is visible immediately in the fallback face.
+    Was an @import inside theme.css — see the note there; do not revert.
+  {%- endcomment -%}
+  {%- assign kv_fonts = 'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap' -%}
+  <link rel="preload" as="style" href="{{ kv_fonts }}">
+  <link rel="stylesheet" href="{{ kv_fonts }}" media="print" onload="this.media='all';this.onload=null">
+  <noscript><link rel="stylesheet" href="{{ kv_fonts }}"></noscript>
 
   {%- if settings.favicon -%}
     <link rel="icon" type="image/png" sizes="32x32" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">

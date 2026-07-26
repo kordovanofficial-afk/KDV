@@ -1,13 +1,43 @@
+{%- comment -%}
+  The hero is the homepage LCP element. It used to be a CSS background-image
+  hardcoded at width 2400 — a single desktop-sized file shipped to every phone,
+  and one the browser cannot even discover until CSS has parsed and the element
+  is laid out. It is now a real <img>: responsive via srcset, discovered in the
+  initial HTML scan, and marked fetchpriority="high". Visual result is identical
+  (object-fit:cover + object-position matching the old background rules).
+  Do not revert it to a background-image.
+{%- endcomment -%}
 {%- liquid
-  if section.settings.image
-    assign hero_image = section.settings.image | image_url: width: 2400
-  else
-    assign hero_image = 'https://cdn.shopify.com/s/files/1/0267/9164/1277/files/hero.png?v=1782022757&width=2400'
-  endif
+  assign hero_alt = section.settings.image.alt | default: 'Kordovan full-grain leather'
+  unless section.settings.image
+    assign fb = 'https://cdn.shopify.com/s/files/1/0267/9164/1277/files/hero.png?v=1782022757'
+  endunless
 -%}
 
 <section class="kv-home kv-hero">
-  <div class="kv-hero__photo" style="background-image:url('{{ hero_image }}');"></div>
+  <div class="kv-hero__photo">
+    {%- if section.settings.image -%}
+      <img src="{{ section.settings.image | image_url: width: 1600, format: 'webp' }}"
+           srcset="{{ section.settings.image | image_url: width: 600, format: 'webp' }} 600w,
+                   {{ section.settings.image | image_url: width: 900, format: 'webp' }} 900w,
+                   {{ section.settings.image | image_url: width: 1200, format: 'webp' }} 1200w,
+                   {{ section.settings.image | image_url: width: 1600, format: 'webp' }} 1600w,
+                   {{ section.settings.image | image_url: width: 2000, format: 'webp' }} 2000w,
+                   {{ section.settings.image | image_url: width: 2400, format: 'webp' }} 2400w"
+           sizes="100vw" alt="{{ hero_alt | escape }}"
+           loading="eager" fetchpriority="high" decoding="async">
+    {%- else -%}
+      <img src="{{ fb }}&width=1600&format=webp"
+           srcset="{{ fb }}&width=600&format=webp 600w,
+                   {{ fb }}&width=900&format=webp 900w,
+                   {{ fb }}&width=1200&format=webp 1200w,
+                   {{ fb }}&width=1600&format=webp 1600w,
+                   {{ fb }}&width=2000&format=webp 2000w,
+                   {{ fb }}&width=2400&format=webp 2400w"
+           sizes="100vw" alt="{{ hero_alt | escape }}"
+           loading="eager" fetchpriority="high" decoding="async">
+    {%- endif -%}
+  </div>
   <div class="kv-hero__scrim"></div>
   <div class="kv-wrap kv-hero__inner"><div class="kv-hero__c">
     {%- if section.settings.eyebrow != blank -%}<span class="kv-eyebrow">{{ section.settings.eyebrow }}</span>{%- endif -%}

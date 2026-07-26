@@ -33,14 +33,33 @@
     <div class="product-gallery">
       <div class="product-gallery__thumbs">
         {%- for media in product.media limit: 12 -%}
-          <div class="product-gallery__thumb{% if forloop.first %} active{% endif %}" data-full="{{ media.preview_image | image_url: width: 900 }}">
-            <img src="{{ media.preview_image | image_url: width: 160 }}" alt="{{ media.alt | escape | default: product.title | escape }}" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" width="76" height="92">
+          {%- comment -%}
+            data-full-srcset lets the swap reuse a resolution the browser may
+            already hold, instead of always fetching a fresh 900px file.
+          {%- endcomment -%}
+          <div class="product-gallery__thumb{% if forloop.first %} active{% endif %}"
+               data-full="{{ media.preview_image | image_url: width: 900 }}"
+               data-full-srcset="{{ media.preview_image | image_url: width: 500 }} 500w, {{ media.preview_image | image_url: width: 700 }} 700w, {{ media.preview_image | image_url: width: 900 }} 900w, {{ media.preview_image | image_url: width: 1200 }} 1200w">
+            <img src="{{ media.preview_image | image_url: width: 152 }}"
+                 srcset="{{ media.preview_image | image_url: width: 76 }} 76w, {{ media.preview_image | image_url: width: 152 }} 152w, {{ media.preview_image | image_url: width: 228 }} 228w"
+                 sizes="76px"
+                 alt="{{ media.alt | escape | default: product.title | escape }}"
+                 loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" decoding="async" width="76" height="92">
           </div>
         {%- endfor -%}
       </div>
       <div class="product-gallery__main">
         {%- if v.available -%}<span class="kv-pdp__badge">In stock</span>{%- endif -%}
-        <img id="product-main-image" src="{{ product.featured_image | image_url: width: 900 }}" alt="{{ product.featured_image.alt | escape | default: product.title | escape }}" loading="eager" fetchpriority="high" width="900" height="1125">
+        {%- comment -%} LCP element on every PDP — eager, high priority, responsive. {%- endcomment -%}
+        <img id="product-main-image"
+             src="{{ product.featured_image | image_url: width: 900 }}"
+             srcset="{{ product.featured_image | image_url: width: 500 }} 500w,
+                     {{ product.featured_image | image_url: width: 700 }} 700w,
+                     {{ product.featured_image | image_url: width: 900 }} 900w,
+                     {{ product.featured_image | image_url: width: 1200 }} 1200w"
+             sizes="(max-width: 900px) 94vw, 46vw"
+             alt="{{ product.featured_image.alt | escape | default: product.title | escape }}"
+             loading="eager" fetchpriority="high" decoding="async" width="900" height="1125">
       </div>
     </div>
 
@@ -148,7 +167,7 @@
           assign fits_img = product.media[1].preview_image | default: product.featured_image
         endif
       -%}
-      <div class="img"><img src="{{ fits_img | image_url: width: 1200 }}" alt="{{ fits_img.alt | escape | default: product.title | escape }}"></div>
+      <div class="img"><img src="{{ fits_img | image_url: width: 1000 }}" srcset="{{ fits_img | image_url: width: 600 }} 600w, {{ fits_img | image_url: width: 1000 }} 1000w, {{ fits_img | image_url: width: 1400 }} 1400w" sizes="(max-width:900px) 94vw, 50vw" alt="{{ fits_img.alt | escape | default: product.title | escape }}" loading="lazy" decoding="async" width="1000" height="750"></div>
       <div>
         <span class="eyebrow">Holds What Matters</span>
         <h2>{{ product.metafields.custom.fits_title | default: "Everything you need. Nothing you don't." }}</h2>

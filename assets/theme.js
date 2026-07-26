@@ -154,7 +154,17 @@ class ProductGallery {
   init() {
     this.thumbs.forEach((thumb, i) => {
       thumb.addEventListener('click', () => this.goTo(i));
+      // Warm the full-size image on intent, so the click is already cached.
+      const warm = () => this.preload(thumb);
+      thumb.addEventListener('mouseenter', warm, { once: true, passive: true });
+      thumb.addEventListener('touchstart', warm, { once: true, passive: true });
     });
+
+    // Once the page is idle, pull the rest of the gallery into cache so
+    // swiping and thumb clicks are instant instead of hitting the network.
+    const warmAll = () => this.thumbs.forEach(t => this.preload(t));
+    if ('requestIdleCallback' in window) requestIdleCallback(warmAll, { timeout: 3000 });
+    else setTimeout(warmAll, 1200);
 
     // Touch swipe on main image
     let startX = 0;
@@ -169,21 +179,60 @@ class ProductGallery {
     }, { passive: true });
   }
 
+  // Fetch a thumb's full-size image into the browser cache. Idempotent.
+  preload(thumb) {
+    if (!thumb || thumb.dataset.warmed) return;
+    const src = thumb.dataset.full;
+    if (!src) return;
+    thumb.dataset.warmed = '1';
+    const img = new Image();
+    if (thumb.dataset.fullSrcset) {
+      img.srcset = thumb.dataset.fullSrcset;
+      img.sizes = this.mainImg?.sizes || '(max-width: 900px) 94vw, 46vw';
+    }
+    img.src = src;
+  }
+
   goTo(index) {
     const thumb = this.thumbs[index];
     if (!thumb) return;
     const src = thumb.dataset.full || thumb.querySelector('img')?.src;
     if (!src || !this.mainImg) return;
 
-    this.mainImg.style.opacity = '0';
-    setTimeout(() => {
-      this.mainImg.src = src;
-      this.mainImg.style.opacity = '1';
-    }, 150);
-
     this.thumbs[this.currentIndex]?.classList.remove('active');
     thumb.classList.add('active');
     this.currentIndex = index;
+
+    // The old version faded out on a fixed 150ms timer and set opacity back to
+    // 1 immediately — before the new file had downloaded. That is what made
+    // switching feel slow: you watched a blank frame until the network caught
+    // up. Now we decode first, then swap and fade in a single frame.
+    const next = new Image();
+    if (thumb.dataset.fullSrcset) {
+      next.srcset = thumb.dataset.fullSrcset;
+      next.sizes = this.mainImg.sizes || '(max-width: 900px) 94vw, 46vw';
+    }
+    next.src = src;
+
+    const show = () => {
+      if (this.currentIndex !== index) return; // a newer swipe won
+      if (thumb.dataset.fullSrcset) {
+        this.mainImg.srcset = thumb.dataset.fullSrcset;
+      }
+      this.mainImg.src = src;
+      this.mainImg.style.opacity = '1';
+    };
+
+    if (next.decode) {
+      this.mainImg.style.opacity = '0.35';
+      next.decode().then(show).catch(show);
+    } else if (next.complete) {
+      show();
+    } else {
+      this.mainImg.style.opacity = '0.35';
+      next.onload = show;
+      next.onerror = show;
+    }
   }
 
   next() { this.goTo((this.currentIndex + 1) % this.thumbs.length); }
@@ -260,7 +309,14 @@ class VariantSelector {
     if (!fi || !fi.src) return;
     const base = fi.src.split('?')[0];
     const main = document.getElementById('product-main-image');
-    if (main) main.src = fi.src + (fi.src.includes('?') ? '&' : '?') + 'width=900';
+    if (main) {
+      const at = w => base + '?width=' + w;
+      // The main image now carries a srcset, and srcset beats src — leaving the
+      // old one in place would keep showing the previous colour. Replace both.
+      main.srcset = [500, 700, 900, 1200].map(w => at(w) + ' ' + w + 'w').join(', ');
+      main.sizes = main.sizes || '(max-width: 900px) 94vw, 46vw';
+      main.src = at(900);
+    }
     document.querySelectorAll('.product-gallery__thumb').forEach(t => {
       t.classList.toggle('active', (t.dataset.full || '').split('?')[0] === base);
     });

@@ -32,7 +32,7 @@
       {%- for p in xcoll.products -%}
         {%- if p.available and n < 2 -%}
           <div class="xs">
-            <a class="xs__img" href="{{ p.url }}"><img src="{{ p.featured_image | image_url: width: 120 }}" alt="{{ p.title | escape }}"></a>
+            <a class="xs__img" href="{{ p.url }}"><img src="{{ p.featured_image | image_url: width: 96 }}" srcset="{{ p.featured_image | image_url: width: 96 }} 96w, {{ p.featured_image | image_url: width: 144 }} 144w" sizes="48px" alt="{{ p.title | escape }}" loading="lazy" decoding="async" width="48" height="58"></a>
             <div class="xs__i"><a href="{{ p.url }}" class="xs__n">{{ p.title }}</a><div class="xs__p">{{ p.price | money }}</div></div>
             {%- if p.variants.size == 1 -%}
               <button class="xs__add product-card__quick-add" data-variant-id="{{ p.selected_or_first_available_variant.id }}">+ Add</button>

@@ -3,8 +3,12 @@
    Design: Editorial Craft-Luxury | Mobile-First
    ============================================================ */
 
-/* --- Google Fonts Import --- */
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@300;400;500;600&display=swap');
+/* --- Google Fonts ---
+   Deliberately NOT an @import. An @import here forced a 3-deep serial chain
+   before any text could paint: theme.css downloads -> parses -> only THEN
+   requests fonts.googleapis.com -> which then requests fonts.gstatic.com.
+   The <link> now lives in layout/theme.liquid so it is discovered in the initial
+   HTML scan and fetched in parallel. Do not move it back here. */
 
 /* ============================================================
    1. DESIGN TOKENS
