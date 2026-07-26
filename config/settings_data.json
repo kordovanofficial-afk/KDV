@@ -18,7 +18,7 @@
     "free_shipping_bar": true,
     "free_shipping_threshold": "3000",
     "favicon": "shopify://shop_images/Kordovan_Logo.png",
-    "tracking_api_url": "https://<your-worker-host>/track</your-worker-host>",
+    "tracking_api_url": "https://kordovan-postex-sync.kordovan-official.workers.dev/track",
     "sections": {
       "site-header": {
         "type": "site-header",
