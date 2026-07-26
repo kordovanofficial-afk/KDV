@@ -356,6 +356,27 @@ THEN start SEO enrichment on the clean set.
 - Logo: user is uploading manually (Header → "Logo (dark mark)"); needs a
   TRANSPARENT-bg black PNG (their source had a white bg). Favicon/social TODO.
 
+## ⚡ Performance rules (Jul 26 2026 pass — do not regress)
+- **Fonts must stay a `<link>` in `layout/theme.liquid`.** Never put the Google
+  Fonts call back as `@import` in `theme.css` — that forced a 3-deep serial chain
+  (css → googleapis → gstatic) before first paint.
+- **Hero is a real `<img>`, not a CSS background.** Backgrounds are invisible to
+  the browser's preload scanner and can't be responsive; the hero is the homepage
+  LCP element. `object-fit:cover` + `object-position:center right` reproduce the
+  old framing.
+- **Every new `<img>` needs `srcset` + `sizes` + `width`/`height` + `loading`.**
+  A bare `image_url: width: 600` ships a desktop file to a 180px phone slot.
+  Above-fold → `loading="eager" fetchpriority="high"`; everything else → `lazy`.
+- **Gallery swaps decode before painting** (`assets/theme.js` `goTo`/`preload`).
+  Never reintroduce a fixed `setTimeout` fade — it shows a blank frame while the
+  file downloads. Anything that changes the main image must set **`srcset` as well
+  as `src`**, or the browser keeps painting the old one.
+- ⚠️ `theme.css` holds the `:root` design tokens that `home.css` depends on —
+  it cannot be dropped even though it is largely legacy styling.
+- Verify before pushing: `node --check assets/theme.js` + div/liquid tag balance.
+  The site cannot be loaded from this environment (proxy denies
+  `kordovanleather.com`), so static checks are the only safety net.
+
 ## 🖼 Image workflow (protocol)
 - **Every designed image slot = an image brief:** product/subject + ready-to-paste
   GPT-image prompt + exact px size & aspect. Tracked in **`docs/images/IMAGE_BRIEF.md`**.
