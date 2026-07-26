@@ -116,7 +116,7 @@
         "type": "image_picker",
         "id": "favicon",
         "label": "Favicon image",
-        "info": "16 x 16px .png recommended"
+        "info": "Square transparent .png, 512 x 512px. Used for the browser tab and the iOS home-screen icon."
       }
     ]
   }

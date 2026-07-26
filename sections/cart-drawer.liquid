@@ -30,7 +30,7 @@
       <h3>Complete your carry</h3>
       {%- assign n = 0 -%}
       {%- for p in xcoll.products -%}
-        {%- if p.available and n < 3 -%}
+        {%- if p.available and n < 2 -%}
           <div class="xs">
             <a class="xs__img" href="{{ p.url }}"><img src="{{ p.featured_image | image_url: width: 120 }}" alt="{{ p.title | escape }}"></a>
             <div class="xs__i"><a href="{{ p.url }}" class="xs__n">{{ p.title }}</a><div class="xs__p">{{ p.price | money }}</div></div>
