@@ -27,7 +27,9 @@
       },
       "cart-drawer": {
         "type": "cart-drawer",
-        "settings": {}
+        "settings": {
+          "upsell_collection": ""
+        }
       },
       "site-footer": {
         "type": "site-footer",
