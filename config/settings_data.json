@@ -19,6 +19,7 @@
     "free_shipping_threshold": "3000",
     "favicon": "shopify://shop_images/Kordovan_Logo.png",
     "tracking_api_url": "https://kordovan-postex-sync.kordovan-official.workers.dev/track",
+    "courier_tracking_url": "https://postex.pk/tracking?cn={number}",
     "sections": {
       "site-header": {
         "type": "site-header",
