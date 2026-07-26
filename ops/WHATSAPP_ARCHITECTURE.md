@@ -59,6 +59,50 @@ cart-only visitors are anonymous. Chase the ones we can identify.
 
 ---
 
+## 🔴 Availability — the laptop closes, orders do not
+
+The office laptop shuts at closing time; online orders arrive at 2am. Two layers
+solve this, and **layer 1 is mandatory either way** — any host can go down.
+
+### Layer 1 — the queue lives in the WORKER, not the bridge (build this)
+The Worker never sends directly. It **enqueues in KV** and drains on its existing
+hourly cron:
+
+```
+event → Worker writes {to, text, ref, attempts} to KV queue
+     → every cron tick: if bridge /health is up, drain oldest first
+     → send fails or bridge offline? leave it queued, retry next hour
+     → give up after 24h, tag the order 📞 NO WHATSAPP — CALL
+```
+
+Nothing is ever lost to a closed laptop. It also makes the system survive
+reboots, power cuts and internet drops — which a 24/7 server would not fix by
+itself.
+
+**How big is the real gap?** Smaller than it looks, because we already refuse to
+message between 21:00 and 09:00 PKT. A 2am order was never going to be messaged
+at 2am. If the laptop runs ~11:00–20:00, the only true delay is orders placed
+20:00–21:00 and 09:00–11:00 — a couple of hours, same day. For a COD
+confirmation that is acceptable.
+
+### Layer 2 — optional: move the bridge to a free always-on host
+Only needed if same-morning is not good enough.
+
+| Option | Cost | Reality |
+|---|---|---|
+| **Oracle Cloud Always Free** | Free forever | 4 ARM cores / 24GB. Best option. Needs a card for identity check (not charged). ARM capacity is often unavailable in popular regions — may take a few tries. |
+| **Google Cloud e2-micro** | Free forever | 1 small VM, US regions. Reliable to get, tighter on RAM but fine for Baileys. |
+| Render / Railway free | Free | ❌ Sleeps on idle, which kills the WebSocket. Useless here. |
+| Old Android + Termux | Free | Works, but Android kills background processes. Fragile. |
+| Cheap VPS | ~$4/mo | Simplest, but breaks the FREE-only rule. User's call. |
+
+Moving the bridge changes nothing in the architecture — same files, same
+contract. Only the tunnel address changes.
+
+**Recommendation:** build layer 1 now and run on the laptop. Live with it for two
+weeks. If the delay actually costs orders, move to Oracle then — with real data
+rather than a guess.
+
 ## Message set
 
 **Transactional** (safe, expected, low report risk):
