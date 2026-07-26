@@ -121,9 +121,16 @@
 
   function render(data,no){
     if(!data||!data.ok){
-      var msg=(data&&data.message)||'We could not reach tracking just now.';
+      // Heading must match the actual failure. Saying "Not found yet" when our
+      // own service is unreachable tells the customer their number is wrong,
+      // which is both untrue and unhelpful.
+      var code=(data&&data.error)||'unreachable';
+      var head=code==='not_found' ? 'Not found yet'
+             : code==='invalid_number' ? 'Check that number'
+             : "We can't reach tracking";
+      var msg=(data&&data.message)||'Our tracking service is not responding right now. Your order is unaffected — message us and we will check it for you.';
       return open('<div class="kv-tm__state kv-tm__state--warn">'+
-        '<h3 id="kv-tm-h">Not found yet</h3><p>'+esc(msg)+'</p></div>',no);
+        '<h3 id="kv-tm-h">'+esc(head)+'</h3><p>'+esc(msg)+'</p></div>',no);
     }
     var h='<div class="kv-tm__head"><span class="kv-tm__no">'+esc(data.trackingNumber)+'</span>'+
           '<h3 id="kv-tm-h">'+esc(data.status||'In progress')+'</h3>'+
@@ -152,10 +159,16 @@
     if(api){
       var btn=f.querySelector('button[type=submit]'), label=btn.textContent;
       btn.disabled=true; btn.textContent='Checking…';
-      fetch(api+(api.indexOf('?')===-1?'?':'&')+'cn='+encodeURIComponent(no),{headers:{'Accept':'application/json'}})
+      var target=api+(api.indexOf('?')===-1?'?':'&')+'cn='+encodeURIComponent(no);
+      fetch(target,{headers:{'Accept':'application/json'}})
         .then(function(r){ return r.json().catch(function(){ return null; }); })
         .then(function(d){ render(d,no); })
-        .catch(function(){ render({ok:false,message:'Tracking is temporarily unavailable. Please try again shortly.'},no); })
+        .catch(function(e){
+          // Network-level failure: wrong Worker URL, Worker offline, or CORS.
+          // Surfaced in the console so the URL actually being called is visible.
+          console.error('[kv-track] could not reach tracking API:',target,e);
+          render({ok:false,error:'unreachable'},no);
+        })
         .then(function(){ btn.disabled=false; btn.textContent=label; });
       return;
     }
