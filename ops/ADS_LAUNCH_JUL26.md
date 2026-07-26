@@ -80,6 +80,23 @@ unsupported "hand-finished edges" claim) is unused and could not be deleted —
 `ads_creative_delete` is not rolled out for this account. Ignore it; delete in
 Ads Manager if the library gets noisy.
 
+## Legacy "Retarget" campaign — audited + fixed Jul 26 2026
+Campaign `120228534676850428` / ad set `120228534676860428`. Despite the name it
+retargets NOTHING: no custom audiences at all, broad PK 18–65 with
+`advantage_audience: 1`. It was running with **no COD-refuser exclusion**, i.e.
+advertising to the 3,891 refusers — a direct breach of the locked ad rule.
+**FIXED:** `KV — COD Refusers EXCLUDE 120253660257910428` added and the ad set
+re-activated (the API force-pauses on a targeting edit — always re-activate and
+verify). Purchasers 180D deliberately NOT excluded here: repeat buyers are worth
+keeping in a broad/warm pool. Learning phase reset on the edit — its CTR 6.88% /
+CPC PKR 4.12 will wobble for a few days before it settles.
+
+## Attribution reality check (Jul 19–22 actuals)
+Meta claimed **PKR 37,850** revenue on PKR 3,820 spend (~9.9x). Shopify attributes
+only **7 orders / ~PKR 18,500** to Meta over the same window, 1 later cancelled →
+real ROAS ≈ **4.3x**. Meta overstates ~2x via view-through credit on Google/direct
+orders. **Budget against 4–5x, not the dashboard number.**
+
 ## Rules
 - Days 0–3: no edits (every change resets learning).
 - Day 4: kill ads with 0 ATC after PKR 1,500 spend.
