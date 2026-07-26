@@ -60,7 +60,7 @@ from orange **PROVISIONING** to green **RUNNING**.
 
 ---
 
-# PART 3 — Install everything (one paste)
+# PART 3 — Install everything (three lines)
 
 **3.1** Go back to the black **Cloud Shell** window from Part 1.
 
@@ -72,36 +72,19 @@ ssh -o StrictHostKeyChecking=no ubuntu@YOUR_IP_HERE
 
 The prompt changes to `ubuntu@kordovan-whatsapp:~$`. **You are now on the server.**
 
-**3.3** Paste this whole block, Enter. It downloads the bridge:
+**3.3** Paste this one line and press Enter:
 
 ```
-mkdir -p ~/wa-bridge && cd ~/wa-bridge && nano server.js
+sudo apt-get update -qq && sudo apt-get install -y -qq git && git clone -q https://github.com/kordovanofficial-afk/KDV.git && cd KDV/tools/wa-bridge && bash install.sh
 ```
 
-**3.4** A text editor opens. **Paste the entire contents of `server.js`**
-(the file Claude sent you). Then press:
-- **Ctrl+O** then **Enter**  (saves)
-- **Ctrl+X**                 (exits)
+That is it. It downloads everything itself — no files to open, nothing to copy.
 
-**3.5** Now the same for the installer:
+Now wait. It takes 3–5 minutes and prints progress as it goes. Do not close the
+window.
 
-```
-nano install.sh
-```
-Paste the entire contents of `install.sh`. **Ctrl+O**, **Enter**, **Ctrl+X**.
-
-**3.6** Run it:
-
-```
-bash install.sh
-```
-
-Now wait. It takes 3–5 minutes and prints progress. Do not close the window.
-
-**3.7** When it finishes it prints a green **DONE** box with three things.
-**Copy that whole box somewhere safe** — it has your passwords in it.
-
----
+**3.4** When it finishes it prints a green **DONE** box with three things.
+**Copy that whole box somewhere safe** — it contains your passwords.
 
 # PART 4 — Link WhatsApp
 
