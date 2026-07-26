@@ -119,6 +119,22 @@ pushed to the draft theme to preview in a browser.)
   page 2 — big headroom), cowboy-hats niche strong (CTR 13.8%, pos 4.8),
   jackets high-impressions/low-CTR. Bing/GA4 can be added to the same Worker later.
 
+## 📦 PostEx / COD automation (Cloudflare Worker)
+- **`kordovan-postex-sync`** — host `kordovan-postex-sync.kordovan-official.workers.dev`
+  (workers.dev route enabled + Public; no custom domain). Hourly cron + PostEx
+  webhook: marks Delivered COD orders **paid** in Shopify, notes RTOs. Holds
+  `POSTEX_TOKEN`, `SHOPIFY_*`, `SYNC_KV`, `SYNC_SECRET`.
+- PostEx API: `https://api.postex.pk/services/integration/api/order/v1`,
+  `GET /track-order/{cn}`, auth header **`token:`**, status in `dist.transactionStatus`.
+- **v5.0 (Jul 26 2026)** adds public `GET /track?cn=` for the storefront Track
+  Your Order page. ⚠️ It is a strict ALLOWLIST (status/city/timestamps only) —
+  never a passthrough: `dist` carries customer name, phone, address and COD
+  amount, and tracking numbers are guessable. See `ops/TRACKING_INTEGRATION.md`.
+- ⚠️ The Worker ROOT url returns `{"error":"Not found"}` by design. The
+  dashboard "Visit" button opens root, so it always looks broken. Use `/health`.
+- Full source of truth for the Worker: `tools/postex-worker/worker.js` (paste
+  whole file into the Cloudflare editor, then **Deploy** — saving ≠ deploying).
+
 ## 📧 ACTIVE — Hosting/email cost migration (backend cleanup before SEO)
 Goal: kill TMDHosting "Starter" Linux hosting ($180/yr, renews in ~9 mo from Jul 2026)
 → total ~$20/yr. Site is 100% on Shopify; hosting only serves DNS + cPanel email.

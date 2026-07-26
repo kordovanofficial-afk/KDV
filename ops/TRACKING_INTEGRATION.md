@@ -1,5 +1,17 @@
 # Order tracking — live PostEx status on the storefront
 
+## Confirmed URLs (verified in the Cloudflare dashboard, Jul 26 2026)
+Worker host: **`kordovan-postex-sync.kordovan-official.workers.dev`**
+(workers.dev route ENABLED, visibility Public, no custom domains.)
+
+- Health:    `https://kordovan-postex-sync.kordovan-official.workers.dev/health`
+- Tracking:  `https://kordovan-postex-sync.kordovan-official.workers.dev/track`
+- Theme setting *Live tracking API* takes the **/track** URL above.
+
+⚠️ The ROOT url returns `{"error":"Not found"}` — that is correct, not a fault.
+The dashboard's blue **Visit** button opens the root, so it always looks broken.
+Only /health, /track, /track-debug, /webhook/postex, /sync and /stats respond.
+
 ## What exists already
 `kordovan-postex-sync` (Cloudflare Worker, created Jun 26 2026) polls PostEx
 hourly + takes webhooks, marks Delivered COD orders as **paid** in Shopify, and
