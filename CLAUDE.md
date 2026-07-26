@@ -77,11 +77,17 @@ kordovan  (trunk)
 - TODO when the file is provided: also set it as favicon + social share image.
 
 ## 🚦 Hard constraints (do not violate)
-- **Live theme `162105917680` — NEVER touch it.**
-- Draft / unpublished theme `165057069296 "KDV/kordovan"` — the working preview.
+- ⚠️ **ROLES FLIPPED Jul 25 2026 — `165057069296 "KDV/kordovan"` IS NOW THE LIVE
+  `MAIN` THEME.** The user published it (theme record shows role MAIN, updated
+  2026-07-25T02:45Z); the old live theme `162105917680` is now UNPUBLISHED and is
+  the fallback/rollback copy. The old "never touch 162105917680" rule is obsolete
+  — that ID is no longer serving customers.
+- 🔴 **Consequence: pushing `kordovan` now deploys STRAIGHT TO THE LIVE STORE.**
+  There is no draft buffer any more. Every theme commit is a production release
+  during paid-ads spend. Review carefully; prefer a mockup or a duplicate theme
+  for anything structural.
 - Shopify GitHub integration deploys from the **`kordovan`** branch.
-- **Work on `kordovan`** (the source of truth). Pushing it triggers
-  the Shopify sync to draft theme `165057069296`. User authorized per-step deploys.
+- **Work on `kordovan`** (the source of truth). User authorized per-step deploys.
 - Do not create PRs unless explicitly asked.
 
 ## 🔌 Available integrations (MCP)
