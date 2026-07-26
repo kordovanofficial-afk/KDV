@@ -44,6 +44,10 @@
 .kv-actions{justify-self:end;display:flex;gap:18px;align-items:center;}
 .kv-actions a{color:inherit;display:flex;}
 .kv-actions svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.4;}
+.kv-trk{align-items:center;gap:7px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;font-weight:600;
+  border:1px solid currentColor;border-radius:99px;padding:7px 14px 7px 12px;opacity:.85;transition:.2s;white-space:nowrap;}
+.kv-trk:hover{opacity:1;background:var(--cognac);border-color:var(--cognac);color:#fff;}
+.kv-actions .kv-trk svg{width:16px;height:16px;}
 .kv-cart{position:relative;}
 .kv-cart i{position:absolute;top:-7px;right:-9px;background:var(--cognac);color:#fff;font-size:9px;font-weight:600;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-style:normal;}
 .kv-burger{display:none;flex-direction:column;gap:4px;cursor:pointer;background:none;border:none;padding:0;color:inherit;}
@@ -73,11 +77,21 @@
 .kv-mmenu__top{display:flex;justify-content:space-between;align-items:center;margin-bottom:30px;}
 .kv-mmenu a{font-family:var(--kv-heading);font-size:26px;padding:14px 0;border-bottom:1px solid rgba(247,242,234,.1);color:var(--canvas);}
 .kv-mclose{background:none;border:none;color:var(--canvas);font-size:28px;cursor:pointer;line-height:1;}
+.kv-mmenu a.kv-mmenu__trk{display:flex;align-items:center;gap:10px;font-family:var(--kv-body);font-size:15px;
+  letter-spacing:.06em;text-transform:uppercase;font-weight:600;color:var(--brass-light);border-bottom:none;margin-top:8px;}
+.kv-mmenu__trk svg{width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.5;flex:none;}
 
+@media(max-width:1180px){
+  .kv-trk span{display:none;}
+  .kv-trk{padding:7px;border-radius:50%;}
+}
 @media(max-width:1000px){
   .kv-nav,.kv-actions .kv-search,.kv-actions .kv-acct{display:none;}
   .kv-burger{display:flex;}
   .kv-drop{display:none;}
+  /* On phones the burger menu carries its own Track link, so drop the pill
+     rather than crowd the logo row. */
+  .kv-actions .kv-trk{display:none;}
 }
 @media(max-width:640px){
   .kv-wrap{padding:0 20px;}
