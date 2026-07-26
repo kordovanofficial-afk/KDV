@@ -5,7 +5,44 @@ and RTO cost. Status: **PLAN ONLY — nothing built, decisions needed first.**
 
 ---
 
-## ⚠️ The FREE-only rule conflict — read first
+## 🔄 REVISED Jul 26 2026 — check the existing app BEFORE building anything
+
+The user already runs a WhatsApp automation app on this same Shopify store for
+POS: receipts, review reminders, 90-day win-back discounts, all automatic.
+
+**Key reframe: POS orders and online orders are the same Shopify objects in the
+same store.** Almost every WhatsApp/Shopify app triggers on `orders/create` and
+filters by sales channel. So online-order messaging is very likely a *scope
+setting already in that app*, not a build. Check that first — it makes most of
+the plan below unnecessary and costs nothing extra.
+
+**What the app cannot know: PostEx delivery status.** It only sees Shopify
+events. Our Worker is the only thing that sees PostEx transitions.
+
+### The hybrid — the actual recommendation
+Let the Worker create the trigger the app already reacts to:
+
+```
+PostEx status change → kordovan-postex-sync Worker
+                     → writes a TAG on the Shopify order
+                       (wa-dispatched / wa-out-for-delivery / wa-delivered)
+                     → Shopify Flow (free, already in use for FRAUD RISK)
+                     → the WhatsApp app's Flow action sends the message
+```
+
+Nothing new is paid for, no Meta Business verification, no template approval, no
+new API. It reuses three things already running: the Worker, Shopify Flow, and
+the app. The Worker already writes to Shopify (it marks orders paid and adds
+notes), so adding `tagsAdd` is a few lines.
+
+⚠️ **Verify first — how was the app connected?** If setup involved **scanning a
+QR code** with the phone's WhatsApp, it is a WhatsApp *Web session* integration
+(Baileys / whatsapp-web.js class), NOT the official Cloud API. Those violate ToS
+and get numbers permanently banned. Low POS volume may fly under the radar;
+adding every online order plus delivery updates raises that risk a lot. If it is
+QR-based, do not scale it — migrate to the official API instead.
+
+## ⚠️ The FREE-only rule conflict — read first (applies ONLY if building fresh)
 
 **The WhatsApp Cloud API is not free for business-initiated messages.** Meta
 charges per *utility template* (order/shipping notifications). There is no free
@@ -112,3 +149,17 @@ Meta webhook (button replies) ────────────┘     KV: de
 - Every template must carry a real opt-out line.
 - Tag COD refusers: a `FRAUD RISK` customer should get confirmation-required
   treatment, not a normal flow.
+
+
+---
+
+## Confirmed from live order data (Jul 26 2026)
+Orders carry `hxs_courier_*` custom attributes written by the PostEx Shopify app:
+- `hxs_courier_tracking` — the CN number (already read by the Worker)
+- `hxs_courier_url` — **`https://postex.pk/tracking?cn={number}`**
+  ← this is PostEx's real PUBLIC tracking URL, previously unknown and deliberately
+  not guessed. Use it for the theme's `courier_tracking_url` fallback setting.
+- `hxs_courier_label` — merchant invoice PDF (internal, do not expose)
+
+Orders are tagged `PostEx` on dispatch — a usable Flow trigger for a
+"your order has shipped" WhatsApp message with no Worker change at all.
