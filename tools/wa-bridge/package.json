@@ -4,12 +4,16 @@
   "private": true,
   "description": "WhatsApp session bridge for Kordovan. Holds the session only - no Shopify access, no order data.",
   "main": "server.js",
-  "scripts": { "start": "node server.js" },
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
     "@whiskeysockets/baileys": "^6.7.9",
     "express": "^4.21.2",
     "pino": "^9.5.0",
-    "qrcode-terminal": "^0.12.0"
+    "qrcode": "^1.5.4"
   },
-  "engines": { "node": ">=20" }
+  "engines": {
+    "node": ">=20"
+  }
 }

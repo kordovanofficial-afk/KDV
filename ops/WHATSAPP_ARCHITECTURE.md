@@ -10,12 +10,25 @@ bridge whose only job is to hold the WhatsApp session — it never sees an order
 
 **Baileys cannot run on Cloudflare Workers.** It needs a WebSocket held open 24/7,
 in-memory session state and full Node crypto. Workers are stateless and
-short-lived. So something must run on an always-on machine — the office laptop.
+short-lived. So something must run on an always-on machine.
 
-That machine runs **`tools/wa-bridge/`**, written here, pasted there. It is
-deliberately dumb: send text, forward replies. It holds no Shopify token, no order
-data, no customer list. If that laptop is lost or the code leaks, nothing about
-the business leaks with it.
+**Decision (user, Jul 26 2026): NOT the office laptop.** It closes at night, and
+the user wants to be able to check the system whenever they like. The bridge runs
+on a **free always-on cloud VM** (Oracle Always Free, or GCP e2-micro), managed by
+pm2 so it survives reboots, exposed through a free Cloudflare Tunnel.
+
+Pairing does not need SSH or TeamViewer: the bridge serves the QR as a **web page**
+(`/qr?k=ADMIN_KEY`), so the team opens a link on any phone and scans. There is also
+a live **`/status?k=ADMIN_KEY`** page — connection state, queue depth, sends,
+last error — for checking in at any time.
+
+`tools/wa-bridge/` is deliberately dumb: send text, forward replies. It holds no
+Shopify token, no order data, no customer list. If that box is compromised or the
+code is shared, nothing about the business goes with it.
+
+Two secrets, deliberately separate: `BRIDGE_SECRET` (Worker ⇄ bridge, in headers)
+and `ADMIN_KEY` (browser pages only). The send secret must never appear in a URL,
+browser history or a screenshot of the status page.
 
 ```
                     ┌─────────────────────────────────────┐
@@ -26,7 +39,7 @@ Hourly cron      ──►│  KV: state + dedupe                 │
                                    │ POST /send  {to, text, ref}
                                    ▼      (Cloudflare Tunnel, free)
                     ┌─────────────────────────────────────┐
-                    │  wa-bridge  ·  office laptop        │
+                    │  wa-bridge  ·  free always-on VM    │
                     │  Baileys session · jitter · queue   │
                     └──────────────┬──────────────────────┘
                                    │ POST /wa-inbound  {from, text}
