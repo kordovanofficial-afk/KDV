@@ -1,152 +1,168 @@
-# WhatsApp order confirmation — build spec & interface contract
+# WhatsApp automation — architecture (single-owner build)
 
-Two systems, two builders, one HTTP contract. This file is the agreement so both
-sides can be built independently without stepping on each other.
-
----
-
-## The split — and why it falls here
-
-| | Owner | Why |
-|---|---|---|
-| **Baileys box** (office laptop) — holds the WhatsApp session, sends text, receives replies | The other AI | It built the POS bot, knows that codebase, and can test on the machine. |
-| **Worker + all Shopify writes** — decides what to send, tags orders, cancels orders, dedupes | This project | It already polls PostEx, holds Shopify credentials + KV, and carries the COD/FRAUD-RISK rules. |
-
-### 🔴 The Baileys box must NEVER write to Shopify
-All order mutations — tags, notes, cancellation — happen in the Worker, one place,
-with one set of guardrails. The box is a **dumb pipe**: it sends text and forwards
-replies. Reasons:
-
-1. **Cancellation is irreversible.** `orderCancel` cannot be undone. It must exist
-   in exactly one code path with all the checks below, not in two systems that can
-   drift apart.
-2. The other AI then needs **no Shopify credentials at all** — smaller blast radius
-   if that laptop is ever compromised or the code is shared.
-3. Dedupe/idempotency needs one source of truth (KV). Two writers race.
+**Decision Jul 26 2026:** built entirely within this project. No other AI, no
+third party gets Shopify credentials or customer data. The office laptop runs a
+bridge whose only job is to hold the WhatsApp session — it never sees an order.
 
 ---
 
-## Contract A — Worker ➜ Baileys box (send a message)
+## The one hard constraint
 
-```http
-POST https://<tunnel-host>/send
-X-KV-Secret: <shared secret>
-Content-Type: application/json
+**Baileys cannot run on Cloudflare Workers.** It needs a WebSocket held open 24/7,
+in-memory session state and full Node crypto. Workers are stateless and
+short-lived. So something must run on an always-on machine — the office laptop.
 
-{
-  "to": "923001234567",          // digits only, country code, no + and no leading 0
-  "text": "Your order KDV#22412 …",
-  "ref": "22412:awaiting_confirm" // echoed back; used for logging/dedupe
-}
+That machine runs **`tools/wa-bridge/`**, written here, pasted there. It is
+deliberately dumb: send text, forward replies. It holds no Shopify token, no order
+data, no customer list. If that laptop is lost or the code leaks, nothing about
+the business leaks with it.
+
+```
+                    ┌─────────────────────────────────────┐
+Shopify webhooks ──►│  kordovan-postex-sync Worker        │
+PostEx status    ──►│  ALL logic · ALL Shopify writes     │
+Hourly cron      ──►│  KV: state + dedupe                 │
+                    └──────────────┬──────────────────────┘
+                                   │ POST /send  {to, text, ref}
+                                   ▼      (Cloudflare Tunnel, free)
+                    ┌─────────────────────────────────────┐
+                    │  wa-bridge  ·  office laptop        │
+                    │  Baileys session · jitter · queue   │
+                    └──────────────┬──────────────────────┘
+                                   │ POST /wa-inbound  {from, text}
+                                   ▼
+                            WhatsApp ⇄ customer
 ```
 
-**Response — must distinguish "no WhatsApp" from "failed":**
+---
+
+## ⚠️ What can and cannot be built
+
+| Ask | Verdict |
+|---|---|
+| Order placed → confirm / cancel | ✅ Phone is on the order |
+| Delivery status updates | ✅ Worker already sees every PostEx transition |
+| Delivered → review request | ✅ |
+| **Abandoned checkout → discount** | ✅ **High value.** Phone captured at checkout |
+| **Add-to-cart → discount** | ❌ **Not possible.** See below |
+
+### Why add-to-cart messaging cannot work
+Adding to cart captures **no identity** — no phone, no email, nothing. Almost all
+Kordovan traffic is guest COD, so there is no one to message. Any tool promising
+this either (a) only covers logged-in customers, which is a tiny slice here, or
+(b) is guessing. It is not a limitation of our build; the data does not exist.
+
+**The recoverable gap is checkout, not cart.** Store data Jul 19–23: ~12 sessions
+add to cart daily, ~8–12 reach checkout, ~5 complete. The people who reach
+checkout give us a phone number — those are reachable and worth chasing. The
+cart-only visitors are anonymous. Chase the ones we can identify.
+
+---
+
+## Message set
+
+**Transactional** (safe, expected, low report risk):
+1. Order placed → confirm/cancel ask
+2. Out for delivery → "keep PKR X ready" ← highest RTO saving
+3. Delivered → thanks + review request
+
+**Marketing** (higher risk — see below):
+4. Abandoned checkout → recovery discount, **once**, 2–4h after abandonment
+
+### 🔴 Abandoned checkout is marketing, not transactional
+This is the message most likely to be reported as spam, and reports are what kill
+a Baileys number. Rules, non-negotiable:
+- **One message. Ever.** No second nudge, no drip.
+- Only if the checkout is 2–24h old and still incomplete.
+- Never to a `FRAUD RISK` customer, and never to someone who got one this month.
+- Use a **dedicated discount code** (e.g. `COMEBACK10`), never `PAYONLINE10` —
+  that one stays reserved for the prepaid nudge inside order confirmation.
+- Opt-out line on every message, honoured permanently in KV.
+
+If reports start appearing, this is the first thing to switch off — the
+transactional messages are worth far more and must not be risked for it.
+
+---
+
+## Contract A — Worker ➜ bridge
+
+```http
+POST https://<tunnel-host>/send      X-Bridge-Secret: <secret>
+{ "to": "923001234567", "text": "…", "ref": "22412:confirm" }
+```
 ```json
 { "ok": true,  "sent": true }
-{ "ok": true,  "sent": false, "reason": "not_on_whatsapp" }   // ← drives the CALL tag
+{ "ok": true,  "sent": false, "reason": "not_on_whatsapp" }   → drives the CALL tag
 { "ok": false, "error": "session_disconnected" }
 ```
 
-Box responsibilities:
-- Check `onWhatsApp()` **before** sending. Never send blind to dead numbers — that
-  pattern looks like scraping and is a ban signal.
-- Random **3–10s jitter** before each send. Never burst.
-- Queue anything outside **09:00–21:00 PKT** until morning.
-- Reject requests without the correct `X-KV-Secret`.
-
-## Contract B — Baileys box ➜ Worker (a customer replied)
+## Contract B — bridge ➜ Worker
 
 ```http
 POST https://kordovan-postex-sync.kordovan-official.workers.dev/wa-inbound
-X-KV-Secret: <shared secret>
-
+X-Bridge-Secret: <secret>
 { "from": "923001234567", "text": "confirm", "ts": 1785000000 }
 ```
 
-Box responsibilities:
-- Forward **only 1:1 customer messages**. Never groups, never status broadcasts,
-  never messages from the team's own number.
-- Forward raw text. **Do not interpret it** — the Worker decides what counts as a
-  confirm or a cancel. One parser, one place.
-- Fire-and-forget; a non-200 must not crash the session.
-
-⚠️ Both sessions on this number receive **all** inbound messages, including POS
-customers replying to receipts and general enquiries. The Worker answers only
-senders who match an order awaiting confirmation and stays silent otherwise, so
-the team's existing manual reply workflow is untouched.
+The bridge forwards raw text and **never interprets it**. Only 1:1 messages —
+never groups, never status, never our own sends. The Worker replies only to
+senders it can match to an order awaiting confirmation and stays silent otherwise,
+so the team's manual reply workflow is untouched.
 
 ---
 
-## Phone normalisation (Pakistan) — get this right or nothing matches
+## Phone normalisation (Pakistan) — silent killer if wrong
 
-Shopify stores `+923001234567`; some orders carry `03001234567`; WhatsApp JIDs are
+Shopify has `+923001234567`, some orders `03001234567`, WhatsApp
 `923001234567@s.whatsapp.net`. Normalise **both sides** to bare `923XXXXXXXXX`:
 
-1. Strip everything non-digit.
-2. Leading `0092` → `92`; leading `00` → drop.
-3. Leading `0` (e.g. `03001234567`) → replace with `92`.
-4. Bare `3001234567` (10 digits starting 3) → prefix `92`.
-5. Valid PK mobile = `92` + `3` + 9 digits = **12 digits total**. Anything else →
-   treat as unreachable and tag for a manual call.
+1. Strip non-digits
+2. `0092…` → `92…` · leading `00` → drop
+3. Leading `0` → replace with `92`
+4. Bare 10 digits starting `3` → prefix `92`
+5. Valid = 12 digits, `92` + `3` + 9. Otherwise → unreachable, tag for a call.
 
 ---
 
-## Order state — visible in Shopify admin as tags
+## Order state — Shopify tags (matches the existing `⛔ FRAUD RISK` convention)
 
-Follows the existing emoji-tag convention (`⛔ FRAUD RISK`) so staff read it at a glance.
+| Tag | Meaning |
+|---|---|
+| `⏳ WA SENT` | Confirmation asked |
+| `✅ WA CONFIRMED` | Customer confirmed |
+| `🚫 WA CANCELLED` | Cancelled on customer request |
+| `📞 NO WHATSAPP — CALL` | Unreachable — team must phone |
+| `⚠️ WA NO REPLY` | Silent after 12h |
+| `↩️ WA CANCEL AFTER DISPATCH` | Too late to cancel — handle as RTO |
 
-| Tag | Meaning | Set when |
-|---|---|---|
-| `⏳ WA SENT` | Confirmation asked | Message delivered |
-| `✅ WA CONFIRMED` | Customer said yes | Reply parsed as confirm |
-| `🚫 WA CANCELLED` | Customer said no → order cancelled | Reply parsed as cancel + all checks pass |
-| `📞 NO WHATSAPP — CALL` | Not reachable on WhatsApp | `sent:false, not_on_whatsapp` |
-| `⚠️ WA NO REPLY` | Silent after 12h | Follow-up sweep |
+## 🔴 Cancellation guardrails — all mandatory
 
-`📞 NO WHATSAPP — CALL` is the requirement "if a customer doesn't have WhatsApp it
-stays untouched" — but *actively surfaced* so the team knows to phone, rather than
-silently doing nothing.
+`orderCancel` is irreversible.
 
----
+1. **Identity** — sender must normalise to the phone on that order. This is the
+   check that makes auto-cancel safe rather than reckless.
+2. **Exact keyword** on the whole trimmed message — "don't cancel it" must not cancel.
+3. **Unfulfilled only** — else tag `↩️ WA CANCEL AFTER DISPATCH`.
+4. **COD only** (`financial_status: pending`).
+5. **Exactly one** matching open order, else ask which and tag for a human.
+6. **Restock**, reason `CUSTOMER`, note the raw message + timestamp.
+7. **Within 24h** of the ask.
 
-## 🔴 Cancellation guardrails — every one is mandatory
-
-`orderCancel` is irreversible. All of these must pass:
-
-1. **Identity:** the reply must come from a number that normalises to the phone on
-   that order. Never cancel on a sender we cannot match. This is the security
-   property that makes the whole thing safe.
-2. **Exact keyword** only — `cancel` / `منسوخ`, matched on the whole trimmed
-   message. Never substring: "don't cancel it" must not cancel it.
-3. **Unfulfilled only.** If already dispatched, do NOT cancel — tag
-   `↩️ WA CANCEL AFTER DISPATCH` and let the team handle the RTO.
-4. **COD only** (`financial_status: pending`). Anything paid goes to a human.
-5. **One order.** If the sender has several awaiting confirmation, do not guess —
-   reply asking which order number, and tag for the team.
-6. **Restock** on cancel, reason `CUSTOMER`, and write a note recording the
-   message text and timestamp.
-7. **Time bound:** only within 24h of the confirmation request. Later replies are
-   ambiguous — tag, don't act.
-
-Confirmation is safe to automate; cancellation is destructive. When in doubt the
-system must **tag and defer to a human**, never guess.
+Confirmation is safe to automate. Cancellation must **tag and defer to a human**
+whenever anything is ambiguous.
 
 ---
 
 ## Build order
-1. Worker: send + tags + `📞 NO WHATSAPP` (no reply handling). Value on day one.
-2. Box: `/send` endpoint + jitter + `onWhatsApp()` + business hours.
-3. Cloudflare Tunnel so the Worker can reach the laptop.
-4. Worker: `/wa-inbound`, confirm parsing, `✅ WA CONFIRMED`.
-5. Cancellation last, with every guardrail above, tested on a dummy order first.
+1. **`tools/wa-bridge/`** on the laptop + Cloudflare Tunnel ← start here
+2. Worker: outbound sends, `⏳ WA SENT`, `📞 NO WHATSAPP — CALL`
+3. Worker: `/wa-inbound` + confirm parsing
+4. Cancellation, with every guardrail, tested on a dummy order first
+5. Abandoned checkout recovery, last, watched closely
 
-## Open risks
-- **Linked-device limit:** WhatsApp allows ~4 companion devices. Check
-  Settings → Linked devices. Extending the *existing* session avoids this entirely;
-  a second session does not.
-- **Office laptop = single point of failure.** If it sleeps or loses power, sends
-  stop. The Worker must treat send failures as non-fatal and retry, never block
-  the PostEx sync.
-- **One number carries everything.** POS receipts, online orders, delivery
-  updates and the public contact line are all the same account. A ban takes all of
-  it. Accepted by the user with eyes open (Jul 26 2026).
+## Known risks
+- **Laptop is a single point of failure.** Sends stop if it sleeps or reboots.
+  The Worker treats send failure as non-fatal and never blocks the PostEx sync.
+- **Linked-device limit** ~4. Check Settings → Linked devices before scanning.
+- **One number carries everything** — POS, online, delivery, public contact. A ban
+  takes all of it. Accepted by the user, eyes open, Jul 26 2026.
