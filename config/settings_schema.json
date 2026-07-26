@@ -125,6 +125,12 @@
     "settings": [
       {
         "type": "text",
+        "id": "tracking_api_url",
+        "label": "Live tracking API (Cloudflare Worker)",
+        "info": "Full URL of the Worker's /track endpoint, e.g. https://kordovan-postex-sync.<subdomain>.workers.dev/track \u2014 when set, status shows in a popup instead of redirecting."
+      },
+      {
+        "type": "text",
         "id": "courier_name",
         "label": "Courier name",
         "default": "PostEx",

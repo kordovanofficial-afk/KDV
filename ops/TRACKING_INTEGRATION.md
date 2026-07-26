@@ -1,43 +1,56 @@
-# Order tracking — current state & the PostEx plan
+# Order tracking — live PostEx status on the storefront
 
-## Live now (Jul 26 2026)
-- Shopify page **Track Your Order**, handle `track-order` (id 163952820464), published.
-- Bespoke template `snippets/track-order.liquid`, dispatched by handle in
-  `sections/main-page.liquid`. Styling `.kv-track` in `home.css`.
-- Footer "Track Your Order" now points at `/pages/track-order`. It previously
-  pointed at `routes.account_url`, which bounced logged-out visitors into
-  Shopify's login flow — that was the "page keeps loading" bug.
+## What exists already
+`kordovan-postex-sync` (Cloudflare Worker, created Jun 26 2026) polls PostEx
+hourly + takes webhooks, marks Delivered COD orders as **paid** in Shopify, and
+notes RTOs. **It already holds `POSTEX_TOKEN`**, so no new credential is needed.
 
-## Configure before this is fully useful
-Theme editor → **Theme settings → Order tracking**:
-- `courier_name` (default "PostEx")
-- `courier_tracking_url` — paste PostEx's PUBLIC tracking URL with `{number}`
-  where the tracking number goes, e.g. `https://…/track?cn={number}`.
+Confirmed PostEx contract, read from that Worker's source:
+- Base: `https://api.postex.pk/services/integration/api/order/v1`
+- `GET /track-order/{trackingNumber}`, auth header **`token: <POSTEX_TOKEN>`**
+- Returns `{ statusCode, statusMessage, dist: {...} }`; `dist.transactionStatus`
+  carries the status. `statusCode '404'` / `RECORD NOT FOUND` for unknown numbers.
 
-⚠️ The exact PostEx URL was deliberately NOT hardcoded. Guessing it would ship a
-broken link to customers. Until it is set, the form hands off to WhatsApp with
-the tracking number pre-filled — a working path, and the channel most Pakistani
-customers use anyway.
+## What was added (Jul 26 2026)
+- `tools/postex-worker/track-endpoint.js` — a **public** `GET /track?cn=` endpoint
+  to paste into the existing Worker.
+- `snippets/track-order.liquid` — fetches it and renders a status modal with a
+  timeline. Falls back to the courier URL, then WhatsApp, so it is never a dead end.
 
-## Phase 2 — status rendered inline (the user's actual ask)
-Goal: customer types a number, our page shows the status, without leaving the site.
+## 🔴 Security — the reason this is not a passthrough
+The endpoint is public and keyed only by a tracking number, and PostEx numbers
+are guessable. `dist` contains **customer name, phone, delivery address and the
+COD amount**. Returning it raw would let anyone enumerate numbers and harvest the
+customer base — worse than any bug on the site.
 
-FREE stack, mirroring `tools/gsc-mcp-worker/`:
-1. **Cloudflare Worker** (free tier) holding the PostEx API token as a secret.
-   The token must never reach the browser, so a proxy is mandatory — the theme
-   cannot call PostEx directly.
-2. Worker exposes `GET /track?cn=<number>` → normalises PostEx's response to
-   `{status, updatedAt, city, history[]}`.
-3. Restrict by `Origin: https://kordovanleather.com` and rate-limit per IP;
-   an open proxy over a courier API is an abuse vector.
-4. `snippets/track-order.liquid` swaps `window.open` for a `fetch` to the Worker
-   and renders a status timeline. The status table already on the page is the
-   intended visual vocabulary.
+So `sanitiseTrack()` is a strict **allowlist**: only `status`, `city`,
+`updatedAt` and a status/timestamp `history` are emitted. Never add a field
+without asking whether a stranger holding a guessed number should see it.
+Also in place: origin restricted to kordovanleather.com, tracking-number format
+validation before any upstream call, and a 120s edge cache so repeat/enumeration
+hits cost PostEx nothing.
 
-**Blocked on the user providing:** PostEx API base URL, auth header format, and
-a token. Their merchant portal → API//Developer section has these.
+⚠️ **Still recommended:** add a Cloudflare **Rate Limiting** rule on `/track`
+(e.g. 20 req/min per IP). The free tier includes one rule. The edge cache blunts
+repeats but does not stop a wide sweep across many distinct numbers.
 
-## Note on Shopify's own tracking
-Shopify order-status URLs are per-order and tokenised, so they cannot be looked
-up from a number alone — a courier lookup is the only way to serve guests, and
-~all our orders are guest COD.
+## Deploy steps (user)
+1. Cloudflare → Workers → `kordovan-postex-sync` → **Edit code**.
+2. Paste the three functions from `tools/postex-worker/track-endpoint.js`, and add
+   the two routes (commented at the top of that file) into `fetch()` above the
+   final 404.
+3. **Click Deploy.** ⚠️ Saving is not deploying — this exact trap cost 3 days on
+   the GSC worker (see CLAUDE.md). Traffic serves the last *deployed* version.
+4. Verify: `curl "https://<worker-host>/track?cn=<a real tracking number>"`
+   → should return `{ok:true,status:...}` and **no** name/phone/address.
+5. Shopify → Theme settings → **Order tracking** → set
+   **Live tracking API** to `https://<worker-host>/track`.
+
+Optional one-off: `/track-debug?cn=…` with the `X-Sync-Secret` header returns
+only the *key names* PostEx sends (never values), so the allowlist can be checked
+against the real payload safely. Remove the route afterwards.
+
+## Fallback order in the theme
+1. `tracking_api_url` set → live status modal
+2. else `courier_tracking_url` → opens courier page in a new tab
+3. else → WhatsApp with the tracking number pre-filled

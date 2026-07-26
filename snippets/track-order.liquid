@@ -5,17 +5,22 @@
   The footer link used to point at routes.account_url, which bounces a logged-out
   visitor into Shopify's login flow — that was the "page keeps loading" report.
 
-  Courier destination is a THEME SETTING (settings.courier_tracking_url) with a
-  {number} placeholder, so the exact PostEx URL is pasted in admin rather than
-  guessed here. Until it is set, the form falls back to WhatsApp with the number
-  pre-filled, which is a working path from day one in this market.
+  Live status comes from our own Cloudflare Worker (kordovan-postex-sync), which
+  already holds the PostEx token for the COD auto-payment sync. Setting
+  `settings.tracking_api_url` to its /track endpoint turns on the in-page modal.
 
-  NEXT STEP (see ops/TRACKING_INTEGRATION.md): swap the redirect for a fetch to
-  our Cloudflare Worker so status renders inline on this page.
+  Fallback order, so the page is never a dead end:
+    1. tracking_api_url set  → live status in a modal (best)
+    2. courier_tracking_url  → opens the courier's own page in a new tab
+    3. neither               → WhatsApp with the number pre-filled
+
+  The Worker returns ONLY status/city/timestamps — never name, phone, address or
+  order value. See tools/postex-worker/track-endpoint.js for why that matters.
 {%- endcomment -%}
 {%- liquid
   assign wa = settings.whatsapp_number | default: '923332601161' | replace: '+', '' | replace: ' ', ''
   assign courier = settings.courier_tracking_url
+  assign api = settings.tracking_api_url
   assign courier_name = settings.courier_name | default: 'our courier'
 -%}
 <div class="kv-cp">
@@ -30,6 +35,7 @@
 
   <section class="sec sec--tight"><div class="wrap wrap--narrow">
     <form class="kv-track" id="kv-track"
+          data-api="{{ api | escape }}"
           data-courier="{{ courier | escape }}"
           data-wa="{{ wa }}">
       <label for="kv-track-no">Tracking number</label>
@@ -69,6 +75,16 @@
     </p>
   </div></section>
 
+  <!-- STATUS MODAL -->
+  <div class="kv-tm" id="kv-tm" hidden>
+    <div class="kv-tm__ov" data-close></div>
+    <div class="kv-tm__box" role="dialog" aria-modal="true" aria-labelledby="kv-tm-h">
+      <button class="kv-tm__x" type="button" aria-label="Close" data-close>&times;</button>
+      <div class="kv-tm__body" id="kv-tm-body"></div>
+      <a class="kv-tm__wa" id="kv-tm-wa" href="#" target="_blank" rel="noopener">Need help? Message us on WhatsApp</a>
+    </div>
+  </div>
+
 </div>
 
 <script>
@@ -76,23 +92,82 @@
   var f=document.getElementById('kv-track');
   if(!f) return;
   var err=document.getElementById('kv-track-err');
+  var modal=document.getElementById('kv-tm');
+  var body=document.getElementById('kv-tm-body');
+  var waLink=document.getElementById('kv-tm-wa');
+  var wa=f.getAttribute('data-wa');
+  var api=(f.getAttribute('data-api')||'').trim();
+  var courier=(f.getAttribute('data-courier')||'').trim();
+
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+
+  function open(html,no){
+    body.innerHTML=html;
+    waLink.href='https://wa.me/'+wa+'?text='+encodeURIComponent('Hi Kordovan, I need help with my order. Tracking number: '+no);
+    modal.hidden=false;
+    document.body.style.overflow='hidden';
+  }
+  function close(){ modal.hidden=true; document.body.style.overflow=''; }
+  modal.addEventListener('click',function(e){ if(e.target.hasAttribute('data-close')) close(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&!modal.hidden) close(); });
+
+  function fmt(d){
+    if(!d) return '';
+    var t=new Date(d);
+    if(isNaN(t)) return esc(d);
+    return t.toLocaleString('en-PK',{day:'numeric',month:'short',hour:'numeric',minute:'2-digit'});
+  }
+
+  function render(data,no){
+    if(!data||!data.ok){
+      var msg=(data&&data.message)||'We could not reach tracking just now.';
+      return open('<div class="kv-tm__state kv-tm__state--warn">'+
+        '<h3 id="kv-tm-h">Not found yet</h3><p>'+esc(msg)+'</p></div>',no);
+    }
+    var h='<div class="kv-tm__head"><span class="kv-tm__no">'+esc(data.trackingNumber)+'</span>'+
+          '<h3 id="kv-tm-h">'+esc(data.status||'In progress')+'</h3>'+
+          (data.city?'<p class="kv-tm__city">'+esc(data.city)+'</p>':'')+
+          (data.updatedAt?'<p class="kv-tm__upd">Updated '+fmt(data.updatedAt)+'</p>':'')+
+          '</div>';
+    if(data.history&&data.history.length){
+      h+='<ol class="kv-tm__tl">';
+      for(var i=data.history.length-1;i>=0;i--){
+        var s=data.history[i];
+        h+='<li'+(i===data.history.length-1?' class="on"':'')+'><b>'+esc(s.status)+'</b>'+
+           (s.at?'<span>'+fmt(s.at)+'</span>':'')+'</li>';
+      }
+      h+='</ol>';
+    }
+    open(h,no);
+  }
+
   f.addEventListener('submit',function(e){
     e.preventDefault();
     var no=(document.getElementById('kv-track-no').value||'').trim();
     if(!no){ if(err) err.hidden=false; return; }
     if(err) err.hidden=true;
-    var courier=f.getAttribute('data-courier')||'';
-    var url;
-    if(courier && courier.indexOf('{number}')!==-1){
-      url=courier.replace('{number}',encodeURIComponent(no));
-    }else if(courier){
-      url=courier+encodeURIComponent(no);
-    }else{
-      // No courier URL configured yet — hand off to WhatsApp with the number,
-      // which is how most customers reach us anyway.
-      url='https://wa.me/'+f.getAttribute('data-wa')+'?text='+encodeURIComponent('Hi Kordovan, please track my order. Tracking number: '+no);
+
+    // 1. Live status via our Worker (preferred).
+    if(api){
+      var btn=f.querySelector('button[type=submit]'), label=btn.textContent;
+      btn.disabled=true; btn.textContent='Checking…';
+      fetch(api+(api.indexOf('?')===-1?'?':'&')+'cn='+encodeURIComponent(no),{headers:{'Accept':'application/json'}})
+        .then(function(r){ return r.json().catch(function(){ return null; }); })
+        .then(function(d){ render(d,no); })
+        .catch(function(){ render({ok:false,message:'Tracking is temporarily unavailable. Please try again shortly.'},no); })
+        .then(function(){ btn.disabled=false; btn.textContent=label; });
+      return;
     }
-    window.open(url,'_blank','noopener');
+    // 2. Courier's own page.
+    if(courier){
+      var url=courier.indexOf('{number}')!==-1
+        ? courier.replace('{number}',encodeURIComponent(no))
+        : courier+encodeURIComponent(no);
+      window.open(url,'_blank','noopener'); return;
+    }
+    // 3. WhatsApp — never leave the customer with nothing.
+    window.open('https://wa.me/'+wa+'?text='+encodeURIComponent('Hi Kordovan, please track my order. Tracking number: '+no),'_blank','noopener');
   });
 })();
 </script>

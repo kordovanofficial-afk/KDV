@@ -927,3 +927,25 @@
   .kv-track__row{flex-direction:column;}
   .kv-track button{width:100%;}
 }
+
+/* Track Your Order — live status modal (.kv-tm) */
+.kv-tm{position:fixed;inset:0;z-index:400;display:flex;align-items:center;justify-content:center;padding:20px;}
+.kv-tm[hidden]{display:none;}
+.kv-tm__ov{position:absolute;inset:0;background:rgba(20,13,7,.55);}
+.kv-tm__box{position:relative;background:var(--canvas);border-radius:14px;max-width:460px;width:100%;max-height:85vh;overflow-y:auto;padding:30px 28px 24px;box-shadow:0 24px 60px rgba(20,13,7,.3);}
+.kv-tm__x{position:absolute;top:12px;right:16px;background:none;border:none;font-size:26px;line-height:1;color:var(--stone);cursor:pointer;}
+.kv-tm__no{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);font-weight:600;}
+.kv-tm__box h3{font-family:var(--kv-heading);font-weight:500;font-size:26px;color:var(--ink);margin:8px 0 4px;line-height:1.2;}
+.kv-tm__city{font-size:14px;color:var(--walnut);margin:0;}
+.kv-tm__upd{font-size:12.5px;color:var(--stone);margin:6px 0 0;}
+.kv-tm__head{border-bottom:1px solid var(--border);padding-bottom:18px;margin-bottom:18px;}
+.kv-tm__tl{list-style:none;margin:0;padding:0;}
+.kv-tm__tl li{position:relative;padding:0 0 18px 24px;border-left:2px solid var(--border);}
+.kv-tm__tl li:last-child{border-left-color:transparent;padding-bottom:0;}
+.kv-tm__tl li::before{content:"";position:absolute;left:-7px;top:3px;width:12px;height:12px;border-radius:50%;background:var(--border);}
+.kv-tm__tl li.on::before{background:var(--cognac);box-shadow:0 0 0 4px rgba(160,98,58,.15);}
+.kv-tm__tl li b{display:block;font-size:14.5px;font-weight:500;color:var(--ink);}
+.kv-tm__tl li span{font-size:12.5px;color:var(--stone);}
+.kv-tm__state{text-align:center;padding:8px 0 4px;}
+.kv-tm__state p{font-size:14.5px;color:var(--walnut);line-height:1.6;}
+.kv-tm__wa{display:block;text-align:center;margin-top:20px;padding-top:16px;border-top:1px solid var(--border);font-size:13.5px;color:var(--cognac);text-decoration:underline;}
