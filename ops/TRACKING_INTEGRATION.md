@@ -34,21 +34,26 @@ hits cost PostEx nothing.
 (e.g. 20 req/min per IP). The free tier includes one rule. The edge cache blunts
 repeats but does not stop a wide sweep across many distinct numbers.
 
-## Deploy steps (user)
-1. Cloudflare → Workers → `kordovan-postex-sync` → **Edit code**.
-2. Paste the three functions from `tools/postex-worker/track-endpoint.js`, and add
-   the two routes (commented at the top of that file) into `fetch()` above the
-   final 404.
-3. **Click Deploy.** ⚠️ Saving is not deploying — this exact trap cost 3 days on
-   the GSC worker (see CLAUDE.md). Traffic serves the last *deployed* version.
-4. Verify: `curl "https://<worker-host>/track?cn=<a real tracking number>"`
-   → should return `{ok:true,status:...}` and **no** name/phone/address.
-5. Shopify → Theme settings → **Order tracking** → set
-   **Live tracking API** to `https://<worker-host>/track`.
+## Deploy steps — copy the WHOLE file, nothing to merge
+`tools/postex-worker/worker.js` is the **complete** Worker: the existing v4 sync
+plus the new endpoints. Nothing has to be pasted "in the right place".
 
-Optional one-off: `/track-debug?cn=…` with the `X-Sync-Secret` header returns
-only the *key names* PostEx sends (never values), so the allowlist can be checked
-against the real payload safely. Remove the route afterwards.
+1. Cloudflare → Workers & Pages → **kordovan-postex-sync** → **Edit code**.
+2. Click in the code area, **Ctrl+A** (select all), **Delete**.
+3. Paste the entire contents of `tools/postex-worker/worker.js`.
+4. Click **Deploy** (top right).
+   ⚠️ **Saving is NOT deploying.** Traffic serves the last *deployed* version.
+   This exact trap cost 3 days on the GSC worker — see CLAUDE.md.
+5. Nothing else changes: no new variables, no new secrets. It reuses the
+   POSTEX_TOKEN, SHOPIFY_* and SYNC_KV bindings already on the Worker.
+6. Check it still works: open `https://<worker-host>/health` → `{"status":"ok"}`.
+7. Then Shopify → Online Store → Themes → Customize → **Theme settings →
+   Order tracking** → paste `https://<worker-host>/track` into
+   **Live tracking API**. Save.
+
+Verify before trusting it: open `https://<worker-host>/track?cn=<a real number>`
+in a browser. It must show status/city/history and **no customer name, phone
+or address**. If PII appears, unset the theme setting immediately and tell me.
 
 ## Fallback order in the theme
 1. `tracking_api_url` set → live status modal
