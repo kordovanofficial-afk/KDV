@@ -38,6 +38,26 @@
   <link rel="stylesheet" href="{{ kv_fonts }}" media="print" onload="this.media='all';this.onload=null">
   <noscript><link rel="stylesheet" href="{{ kv_fonts }}"></noscript>
 
+  {%- comment -%}
+    PDP LCP preload. The main product image is the LCP element on every product
+    page, but it sits below the announcement bar, header and breadcrumb in the
+    DOM, so the browser only reaches it after parsing a chunk of markup and the
+    stylesheets. Preloading here starts the download during the initial head
+    scan instead.
+    ⚠️ imagesrcset/imagesizes MUST stay identical to the <img> in
+    snippets/pdp-main.liquid — if they drift, the browser downloads the image
+    twice and this becomes a pessimisation. Change both together.
+  {%- endcomment -%}
+  {%- if template.name == 'product' and product.featured_image -%}
+    <link rel="preload" as="image" fetchpriority="high"
+          imagesrcset="{{ product.featured_image | image_url: width: 500 }} 500w,
+                       {{ product.featured_image | image_url: width: 700 }} 700w,
+                       {{ product.featured_image | image_url: width: 900 }} 900w,
+                       {{ product.featured_image | image_url: width: 1200 }} 1200w"
+          imagesizes="(max-width: 900px) 94vw, 46vw"
+          href="{{ product.featured_image | image_url: width: 900 }}">
+  {%- endif -%}
+
   {%- if settings.favicon -%}
     <link rel="icon" type="image/png" sizes="32x32" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ settings.favicon | image_url: width: 16, height: 16 }}">
