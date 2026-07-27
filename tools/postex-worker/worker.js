@@ -40,7 +40,12 @@ const RTO_STATUSES     = ['Returned', 'Out For Return'];
 const OUT_FOR_DELIVERY = 'out for delivery';   // matched lowercase; PostEx casing varies
 
 // ─── WhatsApp ───────────────────────────────────────────────────────────────
-const WA_HOURS_START = 9;      // 09:00 PKT — bridge enforces this too
+// Quiet hours apply to MARKETING only (kind: 'mktg'). Transactional messages —
+// order confirmations, delivery updates — go out 24/7: an order placed at 2am
+// needs its confirm/cancel window immediately, and the customer is expecting to
+// hear from us because they just checked out. Unsolicited offers at 2am are the
+// thing that earns spam reports, so those still wait for morning.
+const WA_HOURS_START = 9;      // 09:00 PKT — marketing only
 const WA_HOURS_END   = 21;
 const WA_MAX_TRIES   = 24;     // ~24h of hourly retries, then give up
 const WA_QUEUE_CAP   = 12;     // max drained per cron tick
@@ -278,8 +283,11 @@ function pktHour() {
 }
 const waWithinHours = () => { const h = pktHour(); return h >= WA_HOURS_START && h < WA_HOURS_END; };
 
-/** Queue a message. `ref` makes the send idempotent across cron re-runs. */
-async function waEnqueue(env, { to, text, ref }) {
+/**
+ * Queue a message. `ref` makes the send idempotent across cron re-runs.
+ * `kind` is 'txn' (default, sends at any hour) or 'mktg' (holds for 09–21 PKT).
+ */
+async function waEnqueue(env, { to, text, ref, kind }) {
   if (!env.SYNC_KV) return { ok: false, error: 'no_kv' };
   const phone = normalisePK(to);
   if (!phone || !text) return { ok: false, error: 'bad_input' };
@@ -290,18 +298,20 @@ async function waEnqueue(env, { to, text, ref }) {
   if (await env.SYNC_KV.get(`wasent:${ref}`)) return { ok: false, error: 'already_sent' };
 
   const key = `waq:${Date.now()}:${Math.random().toString(36).slice(2, 8)}`;
-  await env.SYNC_KV.put(key, JSON.stringify({ to: phone, text, ref, tries: 0, firstAt: Date.now() }),
-    { expirationTtl: 60 * 60 * 30 });
+  await env.SYNC_KV.put(key, JSON.stringify({
+    to: phone, text, ref, tries: 0, firstAt: Date.now(),
+    kind: kind === 'mktg' ? 'mktg' : 'txn',
+  }), { expirationTtl: 60 * 60 * 30 });
   return { ok: true, queued: key };
 }
 
 /** Hand one message to the bridge. Returns the bridge's own verdict. */
-async function waSendViaBridge(env, to, text, ref) {
+async function waSendViaBridge(env, to, text, ref, kind) {
   if (!env.BRIDGE_URL || !env.BRIDGE_SECRET) return { ok: false, error: 'bridge_not_configured' };
   const res = await fetch(`${env.BRIDGE_URL.replace(/\/+$/, '')}/send`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'X-Bridge-Secret': env.BRIDGE_SECRET },
-    body: JSON.stringify({ to, text, ref }),
+    body: JSON.stringify({ to, text, ref, kind: kind === 'mktg' ? 'mktg' : 'txn' }),
   });
   return res.json();
 }
@@ -312,19 +322,24 @@ async function waSendViaBridge(env, to, text, ref) {
  * silence is worse than a wrong channel.
  */
 async function waDrain(env) {
-  const out = { drained: 0, sent: 0, noWhatsapp: 0, retry: 0, gaveUp: 0, skippedHours: 0 };
+  const out = { drained: 0, sent: 0, noWhatsapp: 0, retry: 0, gaveUp: 0, heldMarketing: 0 };
   if (!env.SYNC_KV) return out;
-  if (!waWithinHours()) { out.skippedHours = 1; return out; }   // bridge also guards this
+  const hoursOpen = waWithinHours();
 
   const list = await env.SYNC_KV.list({ prefix: 'waq:', limit: WA_QUEUE_CAP });
   for (const k of list.keys) {
     const raw = await env.SYNC_KV.get(k.name);
     if (!raw) continue;
     let job; try { job = JSON.parse(raw); } catch { await env.SYNC_KV.delete(k.name); continue; }
+
+    // Marketing waits for daylight. Transactional never does — leave the job
+    // untouched (no `tries` increment, so holding overnight cannot burn through
+    // the retry budget and give up on it).
+    if (job.kind === 'mktg' && !hoursOpen) { out.heldMarketing++; continue; }
     out.drained++;
 
     let r;
-    try { r = await waSendViaBridge(env, job.to, job.text, job.ref); }
+    try { r = await waSendViaBridge(env, job.to, job.text, job.ref, job.kind); }
     catch (e) { r = { ok: false, error: e.message }; }
 
     if (r.ok && r.sent) {
@@ -364,7 +379,8 @@ async function waStatus(env) {
   } catch (e) { bridge = `unreachable: ${e.message}`; }
   return {
     queued: q.keys.length,
-    withinHours: waWithinHours(),
+    transactionalSending: '24/7',
+    marketingWindowOpen: waWithinHours(),   // 09–21 PKT, marketing only
     pktHour: pktHour(),
     bridgeConfigured: Boolean(env.BRIDGE_URL && env.BRIDGE_SECRET),
     bridge,

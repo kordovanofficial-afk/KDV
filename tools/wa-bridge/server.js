@@ -34,7 +34,7 @@ const BRIDGE_SECRET  = process.env.BRIDGE_SECRET || '';   // Worker ⇄ bridge
 const ADMIN_KEY      = process.env.ADMIN_KEY || '';       // browser pages only
 const WORKER_INBOUND = process.env.WORKER_INBOUND || '';
 const AUTH_DIR       = process.env.AUTH_DIR || './auth';
-const HOURS_START    = 9;    // 09:00 PKT
+const HOURS_START    = 9;    // 09:00 PKT — MARKETING ONLY; order messages send 24/7
 const HOURS_END      = 21;   // 21:00 PKT
 const JITTER_MIN_MS  = 3000;
 const JITTER_MAX_MS  = 10000;
@@ -83,7 +83,19 @@ async function drain() {
   if (draining) return;
   draining = true;
   while (queue.length) {
-    if (!withinHours()) { await sleep(5 * 60 * 1000); continue; }  // hold till morning
+    // Quiet hours apply to marketing only. Order confirmations and delivery
+    // updates go out at any hour — a 2am order needs its confirm/cancel window
+    // straight away, and the customer just checked out so the message is
+    // expected. Peek before shifting so a held marketing job does not block the
+    // transactional ones behind it.
+    if (queue[0].kind === 'mktg' && !withinHours()) {
+      const i = queue.findIndex(j => j.kind !== 'mktg');
+      // Nothing sendable: nap briefly rather than till morning, so a
+      // transactional message arriving mid-nap is not stuck behind the hold.
+      if (i === -1) { await sleep(60 * 1000); continue; }
+      queue.unshift(queue.splice(i, 1)[0]);
+      continue;
+    }
     if (!connected) { await sleep(15000); continue; }
     const job = queue.shift();
     try {
@@ -173,7 +185,7 @@ const admin = (req, res, next) =>
   req.query.k === ADMIN_KEY ? next() : res.status(401).send('Unauthorized');
 
 app.get('/health', (_req, res) =>
-  res.json({ ok: true, connected, queued: queue.length, withinHours: withinHours() }));
+  res.json({ ok: true, connected, queued: queue.length, marketingWindowOpen: withinHours() }));
 
 /** Pairing QR in the browser — no SSH, no TeamViewer. Auto-refreshes. */
 app.get('/qr', admin, (_req, res) => {
@@ -216,7 +228,8 @@ td{padding:9px 0;border-bottom:1px solid #eee}td:last-child{text-align:right}
 <div class="c"><h1>WhatsApp bridge</h1><table>
 ${row('WhatsApp', connected ? '<span class="on">connected</span>' : '<span class="off">disconnected</span>')}
 ${row('Queued right now', queue.length)}
-${row('Sending window (09–21 PKT)', withinHours() ? '<span class="on">open</span>' : 'closed — holding')}
+${row('Order messages', '<span class="on">24/7 — always sending</span>')}
+${row('Marketing window (09–21 PKT)', withinHours() ? '<span class="on">open</span>' : 'closed — holding')}
 ${row('Hour in Pakistan', pktHour() + ':00')}
 ${row('Sent since restart', stats.sent)}
 ${row('Failed since restart', stats.failed)}
@@ -232,7 +245,7 @@ app.post('/send', (req, res, next) => {
   if (req.get('X-Bridge-Secret') !== BRIDGE_SECRET) return res.status(401).json({ ok: false, error: 'unauthorized' });
   next();
 }, async (req, res) => {
-  const { to, text, ref } = req.body || {};
+  const { to, text, ref, kind } = req.body || {};
   const num = normalisePK(to);
   if (!num || !text) return res.status(400).json({ ok: false, error: 'bad_request' });
   if (!connected || !sock) return res.status(503).json({ ok: false, error: 'session_disconnected' });
@@ -243,7 +256,7 @@ app.post('/send', (req, res, next) => {
   try {
     const [found] = await sock.onWhatsApp(num);
     if (!found?.exists) return res.json({ ok: true, sent: false, reason: 'not_on_whatsapp' });
-    queue.push({ jid: found.jid, text, ref });
+    queue.push({ jid: found.jid, text, ref, kind: kind === 'mktg' ? 'mktg' : 'txn' });
     drain();
     return res.json({ ok: true, sent: true, queued: queue.length });
   } catch (e) {

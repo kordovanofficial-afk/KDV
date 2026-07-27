@@ -92,11 +92,9 @@ Nothing is ever lost to a closed laptop. It also makes the system survive
 reboots, power cuts and internet drops — which a 24/7 server would not fix by
 itself.
 
-**How big is the real gap?** Smaller than it looks, because we already refuse to
-message between 21:00 and 09:00 PKT. A 2am order was never going to be messaged
-at 2am. If the laptop runs ~11:00–20:00, the only true delay is orders placed
-20:00–21:00 and 09:00–11:00 — a couple of hours, same day. For a COD
-confirmation that is acceptable.
+⚠️ **Superseded Jul 27 2026 — see "Sending hours" below.** Transactional
+messages no longer wait for morning, so the always-on host is doing real work
+overnight rather than just being tidy.
 
 ### Layer 2 — optional: move the bridge to a free always-on host
 Only needed if same-morning is not good enough.
@@ -115,6 +113,28 @@ contract. Only the tunnel address changes.
 **Recommendation:** build layer 1 now and run on the laptop. Live with it for two
 weeks. If the delay actually costs orders, move to Oracle then — with real data
 rather than a guess.
+
+## ⏰ Sending hours (changed Jul 27 2026, user decision)
+
+**Transactional messages send 24/7. Quiet hours apply to marketing only.**
+
+An order placed at 2am needs its confirm/cancel window immediately — holding it
+until 09:00 wastes the hours when a customer is most likely to change their
+mind, which is the entire point of the confirmation. The customer just checked
+out, so the message is expected, not unsolicited. That is what makes it low
+report risk despite the hour.
+
+Marketing (abandoned-checkout recovery) still waits for 09:00–21:00 PKT. An
+unsolicited discount offer at 2am is exactly what earns a spam report, and
+reports are what ban the number — the same number that carries POS, online and
+public contact.
+
+Implemented as a `kind` on every queued job: `'txn'` (default) or `'mktg'`.
+Enforced in both places, and they must agree:
+- Worker `waDrain` — holds `mktg` jobs outside the window **without** counting a
+  retry, so an overnight hold cannot exhaust `WA_MAX_TRIES` and give up.
+- Bridge `drain()` — peeks at the head of the queue and rotates a sendable
+  transactional job forward rather than letting a held marketing job block it.
 
 ## Message set
 
