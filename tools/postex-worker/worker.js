@@ -410,15 +410,22 @@ async function shopifyGQL(query, variables, token, env) {
   return d.data;
 }
 
-/** Tag an order. Never throws — a tagging failure must not break a send. */
+/**
+ * Tag an order. Never throws — a tagging failure must not break a send.
+ * Returns null on success, or the error message, so callers can record why a
+ * tag never appeared instead of the failure vanishing into the console.
+ */
 async function tagOrderSafe(env, orderIdNum, tags) {
   try {
     const token = await getShopifyToken(env);
-    await shopifyGQL(
+    const d = await shopifyGQL(
       `mutation($id: ID!, $tags: [String!]!) {
          tagsAdd(id: $id, tags: $tags) { userErrors { message } } }`,
       { id: `gid://shopify/Order/${orderIdNum}`, tags }, token, env);
-  } catch (e) { console.error('tagOrderSafe:', e.message); }
+    const errs = d?.tagsAdd?.userErrors || [];
+    if (errs.length) return errs.map(e => e.message).join('; ');
+    return null;
+  } catch (e) { console.error('tagOrderSafe:', e.message); return e.message; }
 }
 
 // ─── Message copy ────────────────────────────────────────────────────────────
@@ -491,8 +498,11 @@ async function recordWebhookHit(env, request, supplied, authed) {
 async function getWebhookHits(env) {
   const raw  = env.SYNC_KV ? await env.SYNC_KV.get('wahook:hits') : null;
   const hits = raw ? JSON.parse(raw) : [];
+  const lastRaw = env.SYNC_KV ? await env.SYNC_KV.get('wahook:lastorder') : null;
   return {
     now: new Date().toISOString(),
+    lastOrderProcessing: lastRaw ? JSON.parse(lastRaw) : null,
+    whatsapp: await waStatus(env),
     totalRecorded: hits.length,
     verdict: hits.length === 0
       ? 'Nothing has EVER called /shopify-order. Shopify is not sending — the webhook is missing, points somewhere else, or is on the wrong event.'
@@ -547,29 +557,75 @@ function waAuthDiagnosis(supplied, env) {
 
 // ─── New order → confirmation ask ────────────────────────────────────────────
 
+/**
+ * This runs inside ctx.waitUntil, AFTER the 200 has gone back to Shopify, so a
+ * throw in here is invisible from every angle — Shopify sees success, the order
+ * gets no tag, no message is sent, and nothing surfaces anywhere. The trace
+ * below is written whatever happens (note the `finally`) and is readable via
+ * ?probe=1, so a silent failure always leaves evidence.
+ */
 async function handleNewOrder(request, env) {
-  let order;
-  try { order = await request.json(); } catch { return; }
-  if (!order?.id) return;
+  const trace = { at: new Date().toISOString(), stage: 'start' };
+  try {
+    let order;
+    try { order = await request.json(); } catch { trace.stage = 'bad_json'; return; }
+    if (!order?.id) { trace.stage = 'no_order_id'; return; }
 
-  const phone = normalisePK(
-    order.phone || order.shipping_address?.phone || order.billing_address?.phone || order.customer?.phone);
-  if (!phone) { await tagOrderSafe(env, order.id, ['📞 NO WHATSAPP — CALL']); return; }
+    trace.orderId         = order.id;
+    trace.orderName       = order.name;
+    trace.financialStatus = order.financial_status || null;
+    trace.lineItemCount   = (order.line_items || []).length;
 
-  // Prepaid orders do not need a COD confirmation.
-  if (order.financial_status && order.financial_status !== 'pending') return;
+    const phone = normalisePK(
+      order.phone || order.shipping_address?.phone || order.billing_address?.phone || order.customer?.phone);
+    trace.phoneNormalised = Boolean(phone);
+    trace.phoneTail = phone ? `…${phone.slice(-4)}` : null;
 
-  // Remember who this phone belongs to so a bare "CONFIRM" can be matched back.
-  if (env.SYNC_KV) {
-    await env.SYNC_KV.put(`wapend:${phone}`, JSON.stringify({
-      orderId: order.id, name: order.name, total: order.total_price, at: Date.now(),
-    }), { expirationTtl: 60 * 60 * 48 });
-  }
+    if (!phone) {
+      trace.stage = 'no_usable_phone';
+      trace.tagError = await tagOrderSafe(env, order.id, ['📞 NO WHATSAPP — CALL']);
+      return;
+    }
 
-  const r = await waEnqueue(env, { to: phone, text: msgOrderPlaced(order), ref: `${order.id}:placed` });
-  if (r.ok) {
-    await tagOrderSafe(env, order.id, ['⏳ WA SENT']);
-    await waDrain(env);            // try immediately; the queue is the safety net
+    // Prepaid orders do not need a COD confirmation.
+    if (order.financial_status && order.financial_status !== 'pending') {
+      trace.stage = 'skipped_not_cod';
+      return;
+    }
+
+    // Remember who this phone belongs to so a bare "CONFIRM" can be matched back.
+    if (env.SYNC_KV) {
+      await env.SYNC_KV.put(`wapend:${phone}`, JSON.stringify({
+        orderId: order.id, name: order.name, total: order.total_price, at: Date.now(),
+      }), { expirationTtl: 60 * 60 * 48 });
+    }
+
+    trace.stage = 'composing';
+    const text = msgOrderPlaced(order);
+    trace.messageLength = text.length;
+
+    trace.stage = 'enqueueing';
+    const r = await waEnqueue(env, { to: phone, text, ref: `${order.id}:placed` });
+    trace.enqueue = r;
+
+    if (r.ok) {
+      trace.stage = 'tagging';
+      trace.tagError = await tagOrderSafe(env, order.id, ['⏳ WA SENT']);
+      trace.stage = 'draining';
+      trace.drain = await waDrain(env);   // try immediately; the queue is the safety net
+      trace.stage = 'done';
+    } else {
+      trace.stage = 'enqueue_refused';
+    }
+  } catch (e) {
+    trace.stage = trace.stage + '_THREW';
+    trace.error = e.message;
+    trace.stack = String(e.stack || '').split('\n').slice(0, 3).join(' | ');
+  } finally {
+    if (env.SYNC_KV) {
+      await env.SYNC_KV.put('wahook:lastorder', JSON.stringify(trace),
+        { expirationTtl: 60 * 60 * 24 * 7 }).catch(() => {});
+    }
   }
 }
 
