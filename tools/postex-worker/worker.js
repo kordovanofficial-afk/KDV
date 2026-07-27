@@ -123,7 +123,7 @@ export default {
     if (url.pathname === '/shopify-order') {
       const s = url.searchParams.get('s');
       if (!s || (s !== env.WEBHOOK_TOKEN && s !== env.SYNC_SECRET))
-        return new Response('Unauthorized', { status: 401 });
+        return Response.json(waAuthDiagnosis(s, env), { status: 401, headers: cors });
       ctx.waitUntil(handleNewOrder(request, env));
       return new Response('OK', { status: 200 });   // ack fast; Shopify retries on slow
     }
@@ -435,6 +435,36 @@ Your Kordovan order *${order.name}* has been delivered. Good leather only gets b
 
 ${STORE_URL}
 _Reply STOP to stop updates._`;
+}
+
+/**
+ * Why a 401 happened, without leaking the secret.
+ *
+ * A bare "Unauthorized" cannot distinguish "the variable never reached the
+ * Worker" from "the token in the URL is wrong" — and those need opposite fixes.
+ * This reports SHAPES only: binding names, lengths, and whether the two would
+ * match after trimming. No part of either token is ever echoed back, so this is
+ * safe to leave on a public route.
+ */
+function waAuthDiagnosis(supplied, env) {
+  const cfg = env.WEBHOOK_TOKEN;
+  let diagnosis;
+  if (!cfg)           diagnosis = 'WEBHOOK_TOKEN is NOT set on this Worker. The variable did not reach the deployed version — add it, then Deploy.';
+  else if (!supplied) diagnosis = 'The URL has no ?s= value at all.';
+  else if (supplied.trim() === cfg.trim())
+                      diagnosis = 'They match except for whitespace — one of them has a stray space or newline. Re-add the variable, taking care not to copy a trailing space.';
+  else if (cfg.startsWith(supplied) || supplied.startsWith(cfg))
+                      diagnosis = 'One is a truncated copy of the other — the URL token was probably cut short when it was copied. Re-paste the full URL into the webhook.';
+  else                diagnosis = 'The token in the URL is a different value from WEBHOOK_TOKEN.';
+
+  return {
+    error: 'Unauthorized',
+    diagnosis,
+    suppliedLength:   supplied ? supplied.length : 0,
+    configuredLength: cfg ? cfg.length : 0,
+    expectedLength:   36,
+    bindings: Object.keys(env).sort(),   // names only — never values
+  };
 }
 
 // ─── New order → confirmation ask ────────────────────────────────────────────
