@@ -113,3 +113,58 @@ orders. **Budget against 4–5x, not the dashboard number.**
 Cold CPA will run higher than blended; AOV drops to ~3,000 on 2,450–2,500 wallets.
 Expect ~8 placed orders/day → ~5 delivered → ~PKR 450k delivered revenue/month
 on 150k spend (~3x on money banked). Margin on the two SKUs decides profitability.
+
+---
+
+## 🔧 Optimisation pass — Jul 28 2026 (executed via API)
+
+Two days of data on the Jul 26 launch. Creative left untouched at the user's
+instruction; every change below is a delivery/budget setting.
+
+### What the data said
+Normalised to daily spend (new campaigns ran 2 days, old Retarget 7):
+
+| Campaign | PKR/day | Placed CPA | Cost/LPV | CTR |
+|---|---|---|---|---|
+| Retarget (old, since May 2025) | ~919 | **804** | **7.10** | **4.34%** |
+| KV \| Cold \| Wallet Launch | **4,168** | 2,084 | 47.91 | 1.58% |
+| KV \| Retarget \| Warm 30-180D | 1,070 | 2,141 | 19.12 | 2.25% |
+
+The proven winner was funded at a fifth of the cold campaign.
+
+Cold placement split (PKR 8,336): **Reels took 65%** — Instagram Reels 3,214
+(CTR 0.82%, PKR 64/LPV) and **Facebook Reels 2,233 (CTR 1.19%, PKR 93/LPV,
+ZERO purchases)** — while Feed ran at PKR 33/LPV and CTR 2.49%. The account's
+"low CTR" was largely a weighted average dragged down by Reels, not a creative
+failure. Audience Network showed 45–50% CTR on single-digit impressions —
+misclick traffic that also pollutes the optimiser's training signal.
+
+### Changes made
+1. **Cold ad set `120254085361120428`** → Advantage+ placements replaced with
+   manual: Facebook (feed, profile_feed, marketplace, video_feeds, story,
+   search, instream_video) + Instagram (stream, story, explore, explore_home,
+   **reels**, profile_feed, ig_search). Drops **Audience Network, Messenger and
+   Facebook Reels**. Instagram Reels KEPT — it produced 3 of the 4 purchases and
+   4 conversions is far too thin to kill a converting placement on.
+2. **Warm ad set `120254085374720428` + campaign `120254085373920428`** → PAUSED.
+   It was bidding against the old Retarget for the same warm pool and losing
+   2.7x on cost per landing page view.
+3. **Retarget campaign `120228534676850428`** → daily budget PKR 900 → **2,100**
+   (absorbs the paused warm budget).
+
+⚠️ Threads placement could not be set — the API rejects both `feed` and
+`threads_feed` for `threads_positions`. Threads is therefore excluded from the
+cold ad set. It was PKR 63 of spend on 7 LPVs, so the loss is negligible, but
+worth revisiting since its cost/LPV (9.05) was the best of any placement.
+
+⚠️ **The budget edit force-paused the Retarget campaign** (`status_forced_to_
+paused: true`) — the same API behaviour seen on the Jul 26 targeting edit.
+Reactivated and verified ACTIVE. **Always re-read status after any edit.**
+
+### Not done (deliberately held)
+- Inverting the cold/warm budget split further — wait until the above lands so
+  the improvement is attributable.
+- Splitting `AD_Razor_Cold_RFIDHook` into its own ad set. It has a **32.3%
+  3-sec-play rate vs Bastion's 11.3%** and half the cost per video view, but
+  received only 1,103 of 16,150 impressions because Meta allocated on two days
+  of purchase data. Same video, new container — worth doing next.
