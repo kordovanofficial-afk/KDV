@@ -60,6 +60,28 @@
       </div>
     </div>
 
+    {%- comment -%}
+      Legal links. Payment providers require Privacy Policy and Terms of Service
+      to be reachable from every page. These point at Shopify's hosted policy
+      pages (/policies/...), so the text stays in Settings → Policies and there
+      is only ever one copy to keep current.
+    {%- endcomment -%}
+    <ul class="kv-flegal">
+      {%- if shop.privacy_policy != blank -%}
+        <li><a href="{{ shop.privacy_policy.url }}">Privacy Policy</a></li>
+      {%- endif -%}
+      {%- if shop.terms_of_service != blank -%}
+        <li><a href="{{ shop.terms_of_service.url }}">Terms of Service</a></li>
+      {%- endif -%}
+      {%- if shop.refund_policy != blank -%}
+        <li><a href="{{ shop.refund_policy.url }}">Refund Policy</a></li>
+      {%- endif -%}
+      {%- if shop.shipping_policy != blank -%}
+        <li><a href="{{ shop.shipping_policy.url }}">Shipping Policy</a></li>
+      {%- endif -%}
+      <li><a href="/pages/track-order">Track Your Order</a></li>
+    </ul>
+
     <div class="kv-ftr__bottom">
       <span class="kv-fcopy">© {{ 'now' | date: '%Y' }} {{ shop.name }} · Handcrafted in Pakistan 🇵🇰</span>
       <div class="kv-fpay"><span>Cash on Delivery</span><span>Visa</span><span>Mastercard</span><span>Easypaisa</span><span>JazzCash</span></div>

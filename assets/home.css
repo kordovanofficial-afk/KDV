@@ -280,6 +280,10 @@
 .kv-fconnect .addr{display:flex;gap:7px;margin-top:14px;font-size:13px;line-height:1.5;color:rgba(247,242,234,.72);}
 .kv-fconnect .addr svg{width:15px;height:15px;stroke:var(--brass-light);fill:none;stroke-width:1.6;flex:none;margin-top:2px;}
 .kv-fconnect .hours{margin-top:12px;font-size:12px;color:var(--stone);}
+.kv-flegal{display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px;list-style:none;margin:0;padding:26px 0 0;border-top:1px solid rgba(247,242,234,.1);}
+.kv-flegal a{font-size:12px;color:var(--stone);text-decoration:none;transition:color .2s ease;}
+.kv-flegal a:hover{color:var(--brass-light);text-decoration:underline;text-underline-offset:3px;}
+.kv-flegal + .kv-ftr__bottom{border-top:0;padding-top:18px;}
 .kv-ftr__bottom{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:30px 0 0;border-top:1px solid rgba(247,242,234,.1);flex-wrap:wrap;}
 .kv-fcopy{font-size:12px;color:var(--stone);}
 .kv-fpay{display:flex;gap:7px;flex-wrap:wrap;}
