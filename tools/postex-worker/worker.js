@@ -453,11 +453,13 @@ function waAuthDiagnosis(supplied, env) {
   else if (!supplied) diagnosis = 'The URL has no ?s= value at all.';
   else if (supplied.trim() === cfg.trim())
                       diagnosis = 'They match except for whitespace — one of them has a stray space or newline. Re-add the variable, taking care not to copy a trailing space.';
-  else if (cfg.startsWith(supplied) || supplied.startsWith(cfg))
-                      diagnosis = 'One is a truncated copy of the other — the URL token was probably cut short when it was copied. Re-paste the full URL into the webhook.';
+  else if (supplied.startsWith(cfg))
+                      diagnosis = 'The correct token is there, with extra characters stuck on the end. See unexpectedSuffix below — delete exactly that from the URL.';
+  else if (cfg.startsWith(supplied))
+                      diagnosis = 'The token in the URL is cut short. Re-paste the full URL into the webhook.';
   else                diagnosis = 'The token in the URL is a different value from WEBHOOK_TOKEN.';
 
-  return {
+  const out = {
     error: 'Unauthorized',
     diagnosis,
     suppliedLength:   supplied ? supplied.length : 0,
@@ -465,6 +467,16 @@ function waAuthDiagnosis(supplied, env) {
     expectedLength:   36,
     bindings: Object.keys(env).sort(),   // names only — never values
   };
+
+  // Safe to echo: this is the junk AFTER a full correct token, so it is by
+  // definition not part of the secret. It is the only way to see what got
+  // picked up during the copy — invisible characters included.
+  if (supplied && cfg && supplied.startsWith(cfg) && supplied !== cfg) {
+    const extra = supplied.slice(cfg.length);
+    out.unexpectedSuffix = extra;
+    out.unexpectedSuffixCodes = [...extra].map(c => c.charCodeAt(0));
+  }
+  return out;
 }
 
 // ─── New order → confirmation ask ────────────────────────────────────────────
