@@ -13,6 +13,11 @@ GREEN='\033[0;32m'; YEL='\033[1;33m'; NC='\033[0m'
 say() { echo -e "${GREEN}==>${NC} $1"; }
 
 DIR="$HOME/wa-bridge"
+# Absolute path to the folder this script lives in. Must be captured BEFORE the
+# `cd` below — a relative "$(dirname $0)" resolves against the CURRENT directory,
+# so after cd it pointed at the destination instead of the repo. That is what
+# caused "server.js not found next to install.sh".
+SRC_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 WORKER_INBOUND="https://kordovan-postex-sync.kordovan-official.workers.dev/wa-inbound"
 
 # ── 1. System packages ──────────────────────────────────────────────────────
@@ -57,12 +62,12 @@ cat > package.json <<'PKGEOF'
 }
 PKGEOF
 
-# ── 4. server.js is fetched from the repo copy placed next to this script ────
-if [ ! -f "$DIR/server.js" ]; then
-  if [ -f "$(dirname "$0")/server.js" ]; then
-    cp "$(dirname "$0")/server.js" "$DIR/server.js"
+# ── 4. Copy server.js from the repo (always refresh, so re-running updates it) ─
+if true; then
+  if [ -f "$SRC_DIR/server.js" ]; then
+    cp "$SRC_DIR/server.js" "$DIR/server.js"
   else
-    echo "ERROR: server.js not found next to install.sh. Put both files in the same folder."
+    echo "ERROR: server.js not found in $SRC_DIR"
     exit 1
   fi
 fi
