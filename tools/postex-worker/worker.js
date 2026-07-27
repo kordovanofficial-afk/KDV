@@ -127,8 +127,18 @@ export default {
     // accepted so an already-registered webhook keeps working.
     if (url.pathname === '/shopify-order') {
       const s = url.searchParams.get('s');
-      if (!s || (s !== env.WEBHOOK_TOKEN && s !== env.SYNC_SECRET))
-        return Response.json(waAuthDiagnosis(s, env), { status: 401, headers: cors });
+      const authed = Boolean(s) && (s === env.WEBHOOK_TOKEN || s === env.SYNC_SECRET);
+
+      // ?probe=1 → read the breadcrumb trail instead of processing an order.
+      if (authed && url.searchParams.get('probe') === '1')
+        return Response.json(await getWebhookHits(env), { headers: cors });
+
+      // Record EVERY hit, accepted or rejected, BEFORE the auth check. Without
+      // this there is no way to distinguish "Shopify never called" from
+      // "Shopify called and we turned it away" — and those need opposite fixes.
+      ctx.waitUntil(recordWebhookHit(env, request, s, authed));
+
+      if (!authed) return Response.json(waAuthDiagnosis(s, env), { status: 401, headers: cors });
       ctx.waitUntil(handleNewOrder(request, env));
       return new Response('OK', { status: 200 });   // ack fast; Shopify retries on slow
     }
@@ -451,6 +461,46 @@ Your Kordovan order *${order.name}* has been delivered. Good leather only gets b
 
 ${STORE_URL}
 _Reply STOP to stop updates._`;
+}
+
+/**
+ * Breadcrumb trail for /shopify-order. Keeps the last 8 hits so a silent
+ * failure can be told apart from a rejected one. Shopify stamps its own
+ * headers on every webhook, so their presence proves the caller was Shopify
+ * and not something else knocking.
+ */
+async function recordWebhookHit(env, request, supplied, authed) {
+  if (!env.SYNC_KV) return;
+  try {
+    const hit = {
+      at: new Date().toISOString(),
+      authed,
+      method: request.method,
+      suppliedLength: supplied ? supplied.length : 0,
+      shopifyTopic:  request.headers.get('X-Shopify-Topic')       || null,
+      shopifyDomain: request.headers.get('X-Shopify-Shop-Domain') || null,
+    };
+    const raw  = await env.SYNC_KV.get('wahook:hits');
+    const hits = raw ? JSON.parse(raw) : [];
+    hits.unshift(hit);
+    await env.SYNC_KV.put('wahook:hits', JSON.stringify(hits.slice(0, 8)),
+      { expirationTtl: 60 * 60 * 24 * 7 });
+  } catch (e) { console.error('recordWebhookHit:', e.message); }
+}
+
+async function getWebhookHits(env) {
+  const raw  = env.SYNC_KV ? await env.SYNC_KV.get('wahook:hits') : null;
+  const hits = raw ? JSON.parse(raw) : [];
+  return {
+    now: new Date().toISOString(),
+    totalRecorded: hits.length,
+    verdict: hits.length === 0
+      ? 'Nothing has EVER called /shopify-order. Shopify is not sending — the webhook is missing, points somewhere else, or is on the wrong event.'
+      : (hits.some(h => h.authed && h.shopifyTopic)
+          ? 'Shopify has reached this Worker successfully. If orders are still untagged, the problem is after the webhook.'
+          : 'Something called, but was rejected or was not Shopify. Check the entries below.'),
+    hits,
+  };
 }
 
 /**
