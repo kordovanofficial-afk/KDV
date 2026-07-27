@@ -2,13 +2,14 @@
  * KORDOVAN × POSTEX SYNC WORKER v6.0
  *
  * v6.0 (Jul 27 2026) — WhatsApp order confirmation + delivery updates.
- *   POST /shopify-order?s=SYNC_SECRET   Shopify orders/create webhook
+ *   POST /shopify-order?s=WEBHOOK_TOKEN Shopify orders/create webhook
  *   POST /wa-inbound                    replies forwarded by the bridge
  *   GET  /wa-status?s=SYNC_SECRET       queue depth + bridge reachability
  *
  * Messages are QUEUED IN KV, never sent inline, and drained on the hourly cron.
  * The bridge lives on a small VM that can reboot or lose network; queueing means
- * nothing is lost when it does. Requires env: BRIDGE_URL, BRIDGE_SECRET.
+ * nothing is lost when it does.
+ * Requires env: BRIDGE_URL, BRIDGE_SECRET, WEBHOOK_TOKEN.
  *
  * v5.0
  *
@@ -115,8 +116,13 @@ export default {
     }
 
     // ─── WhatsApp ─────────────────────────────────────────────────────────────
+    // Authenticated with its OWN token, not SYNC_SECRET. The URL is stored in
+    // Shopify admin and echoed in delivery logs, so it must not carry the secret
+    // that also unlocks /sync, /stats and /wa-drain. SYNC_SECRET is still
+    // accepted so an already-registered webhook keeps working.
     if (url.pathname === '/shopify-order') {
-      if (url.searchParams.get('s') !== env.SYNC_SECRET)
+      const s = url.searchParams.get('s');
+      if (!s || (s !== env.WEBHOOK_TOKEN && s !== env.SYNC_SECRET))
         return new Response('Unauthorized', { status: 401 });
       ctx.waitUntil(handleNewOrder(request, env));
       return new Response('OK', { status: 200 });   // ack fast; Shopify retries on slow

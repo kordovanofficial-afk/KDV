@@ -224,7 +224,26 @@ Worker endpoints added:
 KV namespaces: `waq:` queue · `wasent:` dedupe (30d) · `wapend:` phone→order (48h)
 · `waopt:` opt-out (permanent).
 
-Env needed on the Worker: **BRIDGE_URL**, **BRIDGE_SECRET** (secret).
+Env needed on the Worker: **BRIDGE_URL**, **BRIDGE_SECRET** (secret),
+**WEBHOOK_TOKEN** (secret).
+
+### Why `/shopify-order` has its own token
+The callback URL is stored in Shopify admin and echoed in every delivery-log
+entry, so it must not carry `SYNC_SECRET` — that one also unlocks `/sync`,
+`/stats` and `/wa-drain`. `WEBHOOK_TOKEN` is scoped to this one route and can be
+rotated by editing the webhook URL, without touching the PostEx sync.
+`SYNC_SECRET` is still accepted so nothing breaks if it was registered that way.
+
+### ⚠️ The webhook must be created by hand
+`webhookSubscriptionCreate` is refused by the Shopify connector's safety policy
+(category `data_exfiltration` — it routes store data to an external host). That
+is the correct call for a generic guard, so we do not work around it: the user
+creates it in **Settings → Notifications → Webhooks**, event **Order creation**,
+format **JSON**. Same result, one manual step.
+
+Without the webhook the system still works — the hourly cron drains the queue —
+but nothing enqueues an order-placed message, so confirmation asks would never
+fire. The webhook is what makes it instant.
 
 Verified before shipping: every v5 function byte-identical except
 `getOpenCODOrders`, which gained phone/customer/shipping_address/line_items —
