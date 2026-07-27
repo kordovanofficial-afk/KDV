@@ -23,6 +23,19 @@ if ! command -v node >/dev/null 2>&1; then
 fi
 say "Node $(node -v) ready"
 
+# ── 1b. Swap — the free E2.1.Micro shape has only 1GB RAM and `npm install`
+#        for Baileys will OOM without it. Harmless on bigger boxes (skipped).
+MEM_MB=$(free -m | awk '/^Mem:/{print $2}')
+if [ "$MEM_MB" -lt 2048 ] && [ ! -f /swapfile ]; then
+  say "Only ${MEM_MB}MB RAM — adding 2GB swap so the install does not run out of memory…"
+  sudo fallocate -l 2G /swapfile 2>/dev/null || sudo dd if=/dev/zero of=/swapfile bs=1M count=2048 status=none
+  sudo chmod 600 /swapfile
+  sudo mkswap /swapfile >/dev/null
+  sudo swapon /swapfile
+  grep -q '/swapfile' /etc/fstab || echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab >/dev/null
+  say "Swap active"
+fi
+
 # ── 2. Folder ───────────────────────────────────────────────────────────────
 mkdir -p "$DIR" && cd "$DIR"
 

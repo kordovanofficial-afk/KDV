@@ -42,9 +42,13 @@ Leave this Cloud Shell window open — you come back to it in Part 3.
 - Click **Change shape** → tab **Ampere** → tick **VM.Standard.A1.Flex**
   → set **OCPUs = 1**, **Memory = 6 GB** → **Select shape**
 
-> ⚠️ If you see **"Out of capacity"** — very common — go back to *Change shape*,
-> choose tab **Specialty and previous generation** → **VM.Standard.E2.1.Micro**.
-> That is also free and works perfectly well for this.
+> ⚠️ **"Out of capacity for shape VM.Standard.A1.Flex"** — this happens to almost
+> everyone; Oracle's free ARM capacity is heavily oversubscribed. Dubai has only
+> one availability domain so there is nothing to switch to. Fix: click
+> **Previous** → **Change shape** → tab **Specialty and previous generation** →
+> **VM.Standard.E2.1.Micro** → **Select shape** → **Create**.
+> Also Always Free, and fine for this. It has 1GB RAM, so the installer adds a
+> 2GB swap file automatically — without it `npm install` runs out of memory.
 
 **2.5** Scroll to **Networking**. A brand-new Oracle account has no network yet,
 so the default "Select existing…" options are empty and greyed out. You must
