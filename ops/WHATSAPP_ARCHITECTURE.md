@@ -269,6 +269,36 @@ Verified before shipping: every v5 function byte-identical except
 `getOpenCODOrders`, which gained phone/customer/shipping_address/line_items —
 the messages need them. The COD payment path is untouched.
 
+## 🐛 Gotcha — never read a request body inside `ctx.waitUntil`
+
+Cost an hour on Jul 27 2026 and looked exactly like a misconfigured webhook.
+
+```js
+ctx.waitUntil(handleNewOrder(request, env));   // ❌ reads body later
+return new Response('OK', { status: 200 });    //    body dies here
+```
+
+Once the fetch handler returns its Response, the request body stream is
+disposed. `ctx.waitUntil` extends the **Worker's** lifetime, not the body's, so
+a later `await request.json()` reads a cancelled stream and throws. The throw
+happens after the 200 has been sent, so Shopify records a successful delivery
+and nothing surfaces anywhere — no tag, no message, no error.
+
+Always parse first, then hand the plain object over:
+
+```js
+let order = null;
+try { order = await request.json(); } catch (e) { console.error(e.message); }
+ctx.waitUntil(handleNewOrder(order, env));
+return new Response('OK', { status: 200 });
+```
+
+Fixed on all three POST routes: `/shopify-order`, `/wa-inbound`,
+`/webhook/postex`. **`/webhook/postex` had carried this bug since v1** — the
+PostEx delivery webhook has therefore never worked, and every COD order marked
+paid to date was caught by the hourly cron instead. Nothing was lost; payments
+just landed up to an hour later than they should have.
+
 ## Build order
 1. **`tools/wa-bridge/`** on the laptop + Cloudflare Tunnel ← start here
 2. Worker: outbound sends, `⏳ WA SENT`, `📞 NO WHATSAPP — CALL`

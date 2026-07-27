@@ -102,8 +102,14 @@ export default {
       }
     }
 
+    // ⚠️ Read the body BEFORE returning. Once the fetch handler returns its
+    // Response, the request body stream is disposed — ctx.waitUntil keeps the
+    // Worker alive but NOT the body, so an await request.json() in there reads
+    // a cancelled stream and throws. Parse first, hand the plain object over.
     if (url.pathname === '/webhook/postex') {
-      ctx.waitUntil(handleWebhook(request, env));
+      let payload = null;
+      try { payload = await request.json(); } catch (e) { console.error('postex webhook parse:', e.message); }
+      ctx.waitUntil(handleWebhook(payload, env));
       return new Response('OK', { status: 200 });
     }
 
@@ -136,17 +142,28 @@ export default {
       // Record EVERY hit, accepted or rejected, BEFORE the auth check. Without
       // this there is no way to distinguish "Shopify never called" from
       // "Shopify called and we turned it away" — and those need opposite fixes.
-      ctx.waitUntil(recordWebhookHit(env, request, s, authed));
+      ctx.waitUntil(recordWebhookHit(env, {
+        method: request.method,
+        suppliedLength: s ? s.length : 0,
+        shopifyTopic:  request.headers.get('X-Shopify-Topic')       || null,
+        shopifyDomain: request.headers.get('X-Shopify-Shop-Domain') || null,
+      }, authed));
 
       if (!authed) return Response.json(waAuthDiagnosis(s, env), { status: 401, headers: cors });
-      ctx.waitUntil(handleNewOrder(request, env));
+
+      // Body first — see the note on /webhook/postex above.
+      let order = null;
+      try { order = await request.json(); } catch (e) { console.error('shopify-order parse:', e.message); }
+      ctx.waitUntil(handleNewOrder(order, env));
       return new Response('OK', { status: 200 });   // ack fast; Shopify retries on slow
     }
 
     if (url.pathname === '/wa-inbound') {
       if (request.headers.get('X-Bridge-Secret') !== env.BRIDGE_SECRET)
         return Response.json({ error: 'Unauthorized' }, { status: 401, headers: cors });
-      ctx.waitUntil(handleInbound(request, env));
+      let inbound = null;
+      try { inbound = await request.json(); } catch (e) { console.error('wa-inbound parse:', e.message); }
+      ctx.waitUntil(handleInbound(inbound, env));
       return new Response('OK', { status: 200 });
     }
 
@@ -476,17 +493,10 @@ _Reply STOP to stop updates._`;
  * headers on every webhook, so their presence proves the caller was Shopify
  * and not something else knocking.
  */
-async function recordWebhookHit(env, request, supplied, authed) {
+async function recordWebhookHit(env, meta, authed) {
   if (!env.SYNC_KV) return;
   try {
-    const hit = {
-      at: new Date().toISOString(),
-      authed,
-      method: request.method,
-      suppliedLength: supplied ? supplied.length : 0,
-      shopifyTopic:  request.headers.get('X-Shopify-Topic')       || null,
-      shopifyDomain: request.headers.get('X-Shopify-Shop-Domain') || null,
-    };
+    const hit = { at: new Date().toISOString(), authed, ...meta };
     const raw  = await env.SYNC_KV.get('wahook:hits');
     const hits = raw ? JSON.parse(raw) : [];
     hits.unshift(hit);
@@ -564,12 +574,11 @@ function waAuthDiagnosis(supplied, env) {
  * below is written whatever happens (note the `finally`) and is readable via
  * ?probe=1, so a silent failure always leaves evidence.
  */
-async function handleNewOrder(request, env) {
+async function handleNewOrder(order, env) {
   const trace = { at: new Date().toISOString(), stage: 'start' };
   try {
-    let order;
-    try { order = await request.json(); } catch { trace.stage = 'bad_json'; return; }
-    if (!order?.id) { trace.stage = 'no_order_id'; return; }
+    if (!order)     { trace.stage = 'no_payload';   return; }
+    if (!order.id)  { trace.stage = 'no_order_id';  return; }
 
     trace.orderId         = order.id;
     trace.orderName       = order.name;
@@ -631,8 +640,8 @@ async function handleNewOrder(request, env) {
 
 // ─── Customer replies ────────────────────────────────────────────────────────
 
-async function handleInbound(request, env) {
-  let body; try { body = await request.json(); } catch { return; }
+async function handleInbound(body, env) {
+  if (!body) return;
   const phone = normalisePK(body?.from);
   const text  = String(body?.text || '').trim();
   if (!phone || !text) return;
@@ -811,10 +820,8 @@ async function getShopifyToken(env) {
 
 // ─── Webhook Handler ──────────────────────────────────────────────────────────
 
-async function handleWebhook(request, env) {
-  let payload;
-  try { payload = await request.json(); }
-  catch (e) { console.error('Webhook parse failed:', e.message); return; }
+async function handleWebhook(payload, env) {
+  if (!payload) { console.error('Webhook: no payload'); return; }
 
   console.log('Webhook received:', JSON.stringify(payload));
 
