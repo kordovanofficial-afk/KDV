@@ -210,6 +210,26 @@ whenever anything is ambiguous.
 
 ---
 
+## ✅ BUILT — Worker v6.0 (Jul 27 2026)
+Bridge live on Oracle VM 84.235.252.73, WhatsApp linked, status page green.
+
+Worker endpoints added:
+| Route | Purpose |
+|---|---|
+| `POST /shopify-order?s=SYNC_SECRET` | Shopify orders/create → confirmation ask |
+| `POST /wa-inbound` | bridge forwards replies (X-Bridge-Secret) |
+| `GET /wa-status?s=SYNC_SECRET` | queue depth + bridge reachability |
+| `GET /wa-drain?s=SYNC_SECRET` | force a queue drain (testing) |
+
+KV namespaces: `waq:` queue · `wasent:` dedupe (30d) · `wapend:` phone→order (48h)
+· `waopt:` opt-out (permanent).
+
+Env needed on the Worker: **BRIDGE_URL**, **BRIDGE_SECRET** (secret).
+
+Verified before shipping: every v5 function byte-identical except
+`getOpenCODOrders`, which gained phone/customer/shipping_address/line_items —
+the messages need them. The COD payment path is untouched.
+
 ## Build order
 1. **`tools/wa-bridge/`** on the laptop + Cloudflare Tunnel ← start here
 2. Worker: outbound sends, `⏳ WA SENT`, `📞 NO WHATSAPP — CALL`

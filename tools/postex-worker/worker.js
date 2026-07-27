@@ -1,5 +1,16 @@
 /**
- * KORDOVAN × POSTEX SYNC WORKER v5.0
+ * KORDOVAN × POSTEX SYNC WORKER v6.0
+ *
+ * v6.0 (Jul 27 2026) — WhatsApp order confirmation + delivery updates.
+ *   POST /shopify-order?s=SYNC_SECRET   Shopify orders/create webhook
+ *   POST /wa-inbound                    replies forwarded by the bridge
+ *   GET  /wa-status?s=SYNC_SECRET       queue depth + bridge reachability
+ *
+ * Messages are QUEUED IN KV, never sent inline, and drained on the hourly cron.
+ * The bridge lives on a small VM that can reboot or lose network; queueing means
+ * nothing is lost when it does. Requires env: BRIDGE_URL, BRIDGE_SECRET.
+ *
+ * v5.0
  *
  * v5.0 (Jul 26 2026) — adds a PUBLIC tracking endpoint for the storefront:
  *   GET /track?cn=<trackingNumber>
@@ -25,6 +36,14 @@ const SHOPIFY_API  = '2024-01';
 
 const DELIVERED_STATUS = 'Delivered';
 const RTO_STATUSES     = ['Returned', 'Out For Return'];
+const OUT_FOR_DELIVERY = 'out for delivery';   // matched lowercase; PostEx casing varies
+
+// ─── WhatsApp ───────────────────────────────────────────────────────────────
+const WA_HOURS_START = 9;      // 09:00 PKT — bridge enforces this too
+const WA_HOURS_END   = 21;
+const WA_MAX_TRIES   = 24;     // ~24h of hourly retries, then give up
+const WA_QUEUE_CAP   = 12;     // max drained per cron tick
+const STORE_URL      = 'https://kordovanleather.com';
 
 // Storefront origins allowed to call the public /track endpoint.
 const TRACK_ALLOWED_ORIGINS = [
@@ -36,7 +55,10 @@ const TRACK_ALLOWED_ORIGINS = [
 
 export default {
   async scheduled(event, env, ctx) {
-    ctx.waitUntil(runPollSync(env));
+    ctx.waitUntil((async () => {
+      await runPollSync(env);
+      await waDrain(env);        // retry anything the bridge could not take earlier
+    })());
   },
 
   async fetch(request, env, ctx) {
@@ -90,6 +112,33 @@ export default {
       if (request.headers.get('X-Sync-Secret') !== env.SYNC_SECRET)
         return Response.json({ error: 'Unauthorized' }, { status: 401, headers: cors });
       return Response.json(await getStats(env), { headers: cors });
+    }
+
+    // ─── WhatsApp ─────────────────────────────────────────────────────────────
+    if (url.pathname === '/shopify-order') {
+      if (url.searchParams.get('s') !== env.SYNC_SECRET)
+        return new Response('Unauthorized', { status: 401 });
+      ctx.waitUntil(handleNewOrder(request, env));
+      return new Response('OK', { status: 200 });   // ack fast; Shopify retries on slow
+    }
+
+    if (url.pathname === '/wa-inbound') {
+      if (request.headers.get('X-Bridge-Secret') !== env.BRIDGE_SECRET)
+        return Response.json({ error: 'Unauthorized' }, { status: 401, headers: cors });
+      ctx.waitUntil(handleInbound(request, env));
+      return new Response('OK', { status: 200 });
+    }
+
+    if (url.pathname === '/wa-status') {
+      if (url.searchParams.get('s') !== env.SYNC_SECRET)
+        return Response.json({ error: 'Unauthorized' }, { status: 401, headers: cors });
+      return Response.json(await waStatus(env), { headers: cors });
+    }
+
+    if (url.pathname === '/wa-drain') {
+      if (url.searchParams.get('s') !== env.SYNC_SECRET)
+        return Response.json({ error: 'Unauthorized' }, { status: 401, headers: cors });
+      return Response.json(await waDrain(env), { headers: cors });
     }
 
     return Response.json({ error: 'Not found' }, { status: 404, headers: cors });
@@ -195,6 +244,335 @@ function sanitiseTrack(dist, cn) {
     updatedAt: pick('transactionDate', 'updatedAt', 'modifiedDatetime', 'orderDate'),
     history,
   };
+}
+
+
+// ═══════════════════════════════════════════════════════════════════════════
+// WHATSAPP  —  queue, messaging, order state
+//
+// Nothing is sent inline. Everything is queued in KV and drained on the hourly
+// cron (plus one immediate attempt). The bridge runs on a small VM that can
+// reboot, lose network or be rate-limited; queueing means a customer message is
+// never silently lost because the box happened to be down.
+// ═══════════════════════════════════════════════════════════════════════════
+
+/** Pakistan phone normalisation → bare 923XXXXXXXXX. MUST match the bridge. */
+function normalisePK(raw) {
+  let d = String(raw || '').replace(/\D/g, '');
+  if (d.startsWith('0092')) d = d.slice(2);
+  else if (d.startsWith('00')) d = d.slice(2);
+  if (d.startsWith('0')) d = '92' + d.slice(1);
+  if (d.length === 10 && d.startsWith('3')) d = '92' + d;
+  return /^923\d{9}$/.test(d) ? d : null;
+}
+
+function pktHour() {
+  const now = new Date();
+  return new Date(now.getTime() + (300 + now.getTimezoneOffset()) * 60000).getHours();
+}
+const waWithinHours = () => { const h = pktHour(); return h >= WA_HOURS_START && h < WA_HOURS_END; };
+
+/** Queue a message. `ref` makes the send idempotent across cron re-runs. */
+async function waEnqueue(env, { to, text, ref }) {
+  if (!env.SYNC_KV) return { ok: false, error: 'no_kv' };
+  const phone = normalisePK(to);
+  if (!phone || !text) return { ok: false, error: 'bad_input' };
+
+  // Never message someone who asked us to stop. Permanent, no expiry.
+  if (await env.SYNC_KV.get(`waopt:${phone}`)) return { ok: false, error: 'opted_out' };
+  // Already sent this exact thing — the cron re-runs, duplicates get you blocked.
+  if (await env.SYNC_KV.get(`wasent:${ref}`)) return { ok: false, error: 'already_sent' };
+
+  const key = `waq:${Date.now()}:${Math.random().toString(36).slice(2, 8)}`;
+  await env.SYNC_KV.put(key, JSON.stringify({ to: phone, text, ref, tries: 0, firstAt: Date.now() }),
+    { expirationTtl: 60 * 60 * 30 });
+  return { ok: true, queued: key };
+}
+
+/** Hand one message to the bridge. Returns the bridge's own verdict. */
+async function waSendViaBridge(env, to, text, ref) {
+  if (!env.BRIDGE_URL || !env.BRIDGE_SECRET) return { ok: false, error: 'bridge_not_configured' };
+  const res = await fetch(`${env.BRIDGE_URL.replace(/\/+$/, '')}/send`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'X-Bridge-Secret': env.BRIDGE_SECRET },
+    body: JSON.stringify({ to, text, ref }),
+  });
+  return res.json();
+}
+
+/**
+ * Drain the queue. Leaves anything it cannot deliver in place for the next tick.
+ * After WA_MAX_TRIES (~24h) it gives up and flags the order for a phone call —
+ * silence is worse than a wrong channel.
+ */
+async function waDrain(env) {
+  const out = { drained: 0, sent: 0, noWhatsapp: 0, retry: 0, gaveUp: 0, skippedHours: 0 };
+  if (!env.SYNC_KV) return out;
+  if (!waWithinHours()) { out.skippedHours = 1; return out; }   // bridge also guards this
+
+  const list = await env.SYNC_KV.list({ prefix: 'waq:', limit: WA_QUEUE_CAP });
+  for (const k of list.keys) {
+    const raw = await env.SYNC_KV.get(k.name);
+    if (!raw) continue;
+    let job; try { job = JSON.parse(raw); } catch { await env.SYNC_KV.delete(k.name); continue; }
+    out.drained++;
+
+    let r;
+    try { r = await waSendViaBridge(env, job.to, job.text, job.ref); }
+    catch (e) { r = { ok: false, error: e.message }; }
+
+    if (r.ok && r.sent) {
+      out.sent++;
+      await env.SYNC_KV.put(`wasent:${job.ref}`, '1', { expirationTtl: 60 * 60 * 24 * 30 });
+      await env.SYNC_KV.delete(k.name);
+
+    } else if (r.ok && r.sent === false && r.reason === 'not_on_whatsapp') {
+      // Not a failure — actionable information. Tell the team to phone them.
+      out.noWhatsapp++;
+      await env.SYNC_KV.delete(k.name);
+      const orderId = (job.ref || '').split(':')[0];
+      if (orderId) await tagOrderSafe(env, orderId, ['📞 NO WHATSAPP — CALL']);
+
+    } else {
+      job.tries = (job.tries || 0) + 1;
+      if (job.tries >= WA_MAX_TRIES) {
+        out.gaveUp++;
+        await env.SYNC_KV.delete(k.name);
+        const orderId = (job.ref || '').split(':')[0];
+        if (orderId) await tagOrderSafe(env, orderId, ['📞 NO WHATSAPP — CALL']);
+      } else {
+        out.retry++;
+        await env.SYNC_KV.put(k.name, JSON.stringify(job), { expirationTtl: 60 * 60 * 30 });
+      }
+    }
+  }
+  return out;
+}
+
+async function waStatus(env) {
+  const q = env.SYNC_KV ? await env.SYNC_KV.list({ prefix: 'waq:', limit: 1000 }) : { keys: [] };
+  let bridge = 'unknown';
+  try {
+    const r = await fetch(`${(env.BRIDGE_URL || '').replace(/\/+$/, '')}/health`);
+    bridge = r.ok ? await r.json() : `http_${r.status}`;
+  } catch (e) { bridge = `unreachable: ${e.message}`; }
+  return {
+    queued: q.keys.length,
+    withinHours: waWithinHours(),
+    pktHour: pktHour(),
+    bridgeConfigured: Boolean(env.BRIDGE_URL && env.BRIDGE_SECRET),
+    bridge,
+  };
+}
+
+// ─── Shopify GraphQL (the REST helper above stays for the payment path) ──────
+
+async function shopifyGQL(query, variables, token, env) {
+  const res = await fetch(`https://${env.SHOPIFY_STORE}/admin/api/${SHOPIFY_API}/graphql.json`, {
+    method: 'POST',
+    headers: { 'X-Shopify-Access-Token': token, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ query, variables }),
+  });
+  const d = await res.json();
+  if (d.errors) throw new Error(JSON.stringify(d.errors).slice(0, 200));
+  return d.data;
+}
+
+/** Tag an order. Never throws — a tagging failure must not break a send. */
+async function tagOrderSafe(env, orderIdNum, tags) {
+  try {
+    const token = await getShopifyToken(env);
+    await shopifyGQL(
+      `mutation($id: ID!, $tags: [String!]!) {
+         tagsAdd(id: $id, tags: $tags) { userErrors { message } } }`,
+      { id: `gid://shopify/Order/${orderIdNum}`, tags }, token, env);
+  } catch (e) { console.error('tagOrderSafe:', e.message); }
+}
+
+// ─── Message copy ────────────────────────────────────────────────────────────
+
+const waFirstName = o =>
+  (o?.customer?.first_name || o?.shipping_address?.first_name || '').trim().split(' ')[0] || 'there';
+
+const waMoney = v => `PKR ${Math.round(Number(v || 0)).toLocaleString('en-PK')}`;
+
+function msgOrderPlaced(order) {
+  const items = (order.line_items || [])
+    .map(li => `• ${li.title}${li.quantity > 1 ? ` ×${li.quantity}` : ''}`).join('\n');
+  const city = order.shipping_address?.city || '';
+  return `Assalam o Alaikum ${waFirstName(order)} 👋
+
+Thank you for your Kordovan order *${order.name}*:
+${items}
+
+Total: *${waMoney(order.total_price)}* (Cash on Delivery)${city ? `\nDelivery to: ${city}` : ''}
+
+Please reply *CONFIRM* to lock your order, or *CANCEL* if you have changed your mind.
+
+— Kordovan
+_Reply STOP to stop updates._`;
+}
+
+function msgOutForDelivery(order) {
+  return `${waFirstName(order)}, your Kordovan order *${order.name}* is out for delivery today 🛵
+
+Please keep *${waMoney(order.total_price)}* ready and stay reachable — the rider will call before arriving.
+
+Track it: ${STORE_URL}/pages/track-order
+_Reply STOP to stop updates._`;
+}
+
+function msgDelivered(order) {
+  return `Shukriya ${waFirstName(order)} 🙏
+
+Your Kordovan order *${order.name}* has been delivered. Good leather only gets better with use — if anything is not right, just reply here and we will sort it.
+
+${STORE_URL}
+_Reply STOP to stop updates._`;
+}
+
+// ─── New order → confirmation ask ────────────────────────────────────────────
+
+async function handleNewOrder(request, env) {
+  let order;
+  try { order = await request.json(); } catch { return; }
+  if (!order?.id) return;
+
+  const phone = normalisePK(
+    order.phone || order.shipping_address?.phone || order.billing_address?.phone || order.customer?.phone);
+  if (!phone) { await tagOrderSafe(env, order.id, ['📞 NO WHATSAPP — CALL']); return; }
+
+  // Prepaid orders do not need a COD confirmation.
+  if (order.financial_status && order.financial_status !== 'pending') return;
+
+  // Remember who this phone belongs to so a bare "CONFIRM" can be matched back.
+  if (env.SYNC_KV) {
+    await env.SYNC_KV.put(`wapend:${phone}`, JSON.stringify({
+      orderId: order.id, name: order.name, total: order.total_price, at: Date.now(),
+    }), { expirationTtl: 60 * 60 * 48 });
+  }
+
+  const r = await waEnqueue(env, { to: phone, text: msgOrderPlaced(order), ref: `${order.id}:placed` });
+  if (r.ok) {
+    await tagOrderSafe(env, order.id, ['⏳ WA SENT']);
+    await waDrain(env);            // try immediately; the queue is the safety net
+  }
+}
+
+// ─── Customer replies ────────────────────────────────────────────────────────
+
+async function handleInbound(request, env) {
+  let body; try { body = await request.json(); } catch { return; }
+  const phone = normalisePK(body?.from);
+  const text  = String(body?.text || '').trim();
+  if (!phone || !text) return;
+
+  const norm = text.toLowerCase().replace(/[^a-z؀-ۿ]/g, '');
+
+  // Opt-out is honoured for anyone, order or not, permanently.
+  if (norm === 'stop' || norm === 'unsubscribe') {
+    if (env.SYNC_KV) await env.SYNC_KV.put(`waopt:${phone}`, '1');
+    return;
+  }
+
+  if (!env.SYNC_KV) return;
+  const pendRaw = await env.SYNC_KV.get(`wapend:${phone}`);
+  if (!pendRaw) return;   // not awaiting anything from this number — stay silent
+  let pend; try { pend = JSON.parse(pendRaw); } catch { return; }
+
+  const isConfirm = ['confirm', 'confirmed', 'yes', 'ok', 'okay', 'haan', 'han', 'jee', 'ji', 'theek'].includes(norm);
+  const isCancel  = ['cancel', 'cancelled', 'cancelorder', 'no'].includes(norm);
+
+  if (isConfirm) {
+    await tagOrderSafe(env, pend.orderId, ['✅ WA CONFIRMED']);
+    await env.SYNC_KV.delete(`wapend:${phone}`);
+    await waEnqueue(env, {
+      to: phone,
+      text: `Shukriya! Your order *${pend.name}* is confirmed ✅\n\nWe will dispatch it shortly and send you the tracking details.\n\n— Kordovan`,
+      ref: `${pend.orderId}:confirmack`,
+    });
+    await waDrain(env);
+    return;
+  }
+
+  if (isCancel) {
+    await handleCancelRequest(env, phone, pend, text);
+    return;
+  }
+
+  // Anything else is a real conversation — leave it for the team's phone.
+}
+
+/**
+ * Cancellation. orderCancel is IRREVERSIBLE, so every guardrail below is
+ * mandatory and anything ambiguous is handed to a human instead of guessed.
+ */
+async function handleCancelRequest(env, phone, pend, rawText) {
+  const token = await getShopifyToken(env);
+
+  const data = await shopifyGQL(
+    `query($id: ID!) { order(id: $id) {
+        id name displayFinancialStatus displayFulfillmentStatus cancelledAt
+        phone shippingAddress { phone }
+      } }`,
+    { id: `gid://shopify/Order/${pend.orderId}` }, token, env);
+
+  const o = data?.order;
+  if (!o || o.cancelledAt) { await env.SYNC_KV.delete(`wapend:${phone}`); return; }
+
+  // 1. IDENTITY — the sender must be the phone on the order. This is the check
+  //    that makes auto-cancel safe rather than reckless.
+  const orderPhone = normalisePK(o.phone || o.shippingAddress?.phone);
+  if (!orderPhone || orderPhone !== phone) {
+    await tagOrderSafe(env, pend.orderId, ['⚠️ WA CANCEL — VERIFY']);
+    return;
+  }
+
+  // 2. Already dispatched → too late to cancel; this is an RTO decision.
+  if (o.displayFulfillmentStatus === 'FULFILLED') {
+    await tagOrderSafe(env, pend.orderId, ['↩️ WA CANCEL AFTER DISPATCH']);
+    await env.SYNC_KV.delete(`wapend:${phone}`);
+    await waEnqueue(env, {
+      to: phone,
+      text: `Your order *${pend.name}* has already been dispatched, so we cannot cancel it automatically.\n\nOur team will call you shortly to sort this out.\n\n— Kordovan`,
+      ref: `${pend.orderId}:cancellate`,
+    });
+    await waDrain(env);
+    return;
+  }
+
+  // 3. COD only. Anything paid involves a refund — that goes to a human.
+  if (o.displayFinancialStatus !== 'PENDING') {
+    await tagOrderSafe(env, pend.orderId, ['⚠️ WA CANCEL — VERIFY']);
+    return;
+  }
+
+  const res = await shopifyGQL(
+    `mutation($id: ID!) {
+       orderCancel(orderId: $id, reason: CUSTOMER, refund: false,
+                   restock: true, notifyCustomer: false) {
+         userErrors { message } } }`,
+    { id: `gid://shopify/Order/${pend.orderId}` }, token, env);
+
+  const errs = res?.orderCancel?.userErrors || [];
+  if (errs.length) {
+    console.error('orderCancel:', JSON.stringify(errs));
+    await tagOrderSafe(env, pend.orderId, ['⚠️ WA CANCEL — VERIFY']);
+    return;
+  }
+
+  await tagOrderSafe(env, pend.orderId, ['🚫 WA CANCELLED']);
+  await addOrderNote(pend.orderId,
+    `🚫 Cancelled on customer request via WhatsApp\nFrom: ${phone}\nMessage: "${rawText}"\nAt: ${new Date().toLocaleString('en-PK', { timeZone: 'Asia/Karachi' })}`,
+    token, env);
+  await env.SYNC_KV.delete(`wapend:${phone}`);
+
+  await waEnqueue(env, {
+    to: phone,
+    text: `Your order *${pend.name}* has been cancelled as requested.\n\nIf that was a mistake, just reply here and we will help you reorder.\n\n— Kordovan`,
+    ref: `${pend.orderId}:cancelack`,
+  });
+  await waDrain(env);
 }
 
 // ─── Token Management ─────────────────────────────────────────────────────────
@@ -393,10 +771,17 @@ async function runPollSync(env) {
             await markOrderPaid(o.id, String(amount), tn, o.name, token, env);
             result.markedPaid++;
             log(`Order #${o.order_number} ✅ marked paid (PKR ${amount})`);
+            // Delivered → thank-you. ref keeps it to exactly one per order.
+            const phD = normalisePK(o.phone || o.shipping_address?.phone || o.customer?.phone);
+            if (phD) await waEnqueue(env, { to: phD, text: msgDelivered(o), ref: `${o.id}:delivered` });
           } catch (e) {
             log(`Order #${o.order_number} mark paid ERROR: ${e.message}`);
             result.errors++;
           }
+        } else if (String(status).toLowerCase() === OUT_FOR_DELIVERY) {
+          const phO = normalisePK(o.phone || o.shipping_address?.phone || o.customer?.phone);
+          if (phO) await waEnqueue(env, { to: phO, text: msgOutForDelivery(o), ref: `${o.id}:ofd` });
+          result.skipped++;
         } else if (RTO_STATUSES.includes(status)) {
           try {
             await addOrderNote(o.id,
@@ -490,7 +875,7 @@ async function shopifyFetch(path, token, env, options = {}) {
 
 async function getOpenCODOrders(token, env) {
   const data = await shopifyFetch(
-    `/orders.json?status=any&financial_status=pending&fulfillment_status=fulfilled&limit=250&fields=id,order_number,name,financial_status,total_price,payment_gateway,fulfillments,note_attributes`,
+    `/orders.json?status=any&financial_status=pending&fulfillment_status=fulfilled&limit=250&fields=id,order_number,name,financial_status,total_price,payment_gateway,fulfillments,note_attributes,phone,customer,shipping_address,line_items`,
     token, env
   );
   return (data.orders || []).filter(o => {
