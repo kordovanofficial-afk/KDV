@@ -47,7 +47,8 @@ if (!BRIDGE_SECRET || !ADMIN_KEY) {
 let sock = null;
 let connected = false;
 let currentQR = null;          // data-URL of the pairing QR, null once linked
-const stats = { startedAt: Date.now(), sent: 0, failed: 0, lastSent: null, lastError: null, lastInbound: null };
+const stats = { startedAt: Date.now(), sent: 0, failed: 0, lastSent: null, lastError: null,
+                lastInbound: null, lastInboundRaw: null };
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -152,15 +153,41 @@ async function connect() {
       try {
         const jid = m.key?.remoteJid || '';
         if (m.key?.fromMe) continue;                      // our own sends
-        if (!jid.endsWith('@s.whatsapp.net')) continue;   // groups, status, channels
+        // Exclude what is never ours to answer. Do NOT allowlist
+        // @s.whatsapp.net here: WhatsApp is migrating 1:1 chats to LID
+        // addressing, so replies now arrive as <id>@lid and an allowlist drops
+        // them silently — sends keep working, replies vanish, nothing errors.
+        if (jid.endsWith('@g.us') || jid.endsWith('@broadcast')
+            || jid.endsWith('@newsletter') || jid === 'status@broadcast') continue;
+
         const text = m.message?.conversation
                   || m.message?.extendedTextMessage?.text
                   || m.message?.buttonsResponseMessage?.selectedDisplayText
                   || m.message?.listResponseMessage?.title
                   || '';
         if (!text.trim()) continue;
-        const from = normalisePK(jid.split('@')[0]);
-        if (!from) continue;
+
+        // The number inside a @lid JID is NOT a phone number. The real one
+        // travels alongside it, under a key name that has moved between
+        // Baileys versions — so try each, and fall back to the JID itself for
+        // classic @s.whatsapp.net chats.
+        let from = '';
+        for (const c of [m.key?.senderPn, m.key?.participantPn, m.key?.remoteJidAlt,
+                         m.key?.participantAlt, m.participant, jid]) {
+          const n = normalisePK(String(c || '').split('@')[0]);
+          if (n) { from = n; break; }
+        }
+
+        // Recorded whether or not resolution worked, so an unrecognised
+        // address shows up on the status page instead of disappearing.
+        stats.lastInboundRaw = {
+          jid, resolved: from || null,
+          text: text.trim().slice(0, 24), at: new Date().toISOString(),
+        };
+        if (!from) {
+          console.warn('[recv-unresolved]', jid, JSON.stringify(m.key || {}));
+          continue;
+        }
 
         stats.lastInbound = { from, at: new Date().toISOString() };
         await fetch(WORKER_INBOUND, {
@@ -236,6 +263,7 @@ ${row('Failed since restart', stats.failed)}
 ${row('Uptime', hrs)}
 ${row('Last sent', stats.lastSent ? esc(stats.lastSent.ref) + '<br><small>' + esc(stats.lastSent.at) + '</small>' : '—')}
 ${row('Last reply in', stats.lastInbound ? esc(stats.lastInbound.from) + '<br><small>' + esc(stats.lastInbound.at) + '</small>' : '—')}
+${row('Last message seen (any address)', stats.lastInboundRaw ? esc(stats.lastInboundRaw.jid) + '<br><small>resolved: ' + esc(String(stats.lastInboundRaw.resolved)) + ' · ' + esc(stats.lastInboundRaw.at) + '</small>' : '—')}
 ${row('Last error', stats.lastError ? '<span class="off">' + esc(stats.lastError.msg) + '</span><br><small>' + esc(stats.lastError.at) + '</small>' : 'none')}
 </table><p><small>Refreshes every 20s. ${connected ? '' : '<a href="/qr?k=' + encodeURIComponent(ADMIN_KEY) + '">Link WhatsApp →</a>'}</small></p></div>
 <script>setTimeout(()=>location.reload(),20000)</script>`);

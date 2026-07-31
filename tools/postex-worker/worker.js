@@ -325,6 +325,27 @@ function pktHour() {
 const waWithinHours = () => { const h = pktHour(); return h >= WA_HOURS_START && h < WA_HOURS_END; };
 
 /**
+ * Send priority. Lower goes first.
+ *
+ * A confirmation ask is worth most in the minutes after checkout — that is the
+ * window in which a customer changes their mind, and the entire point of the
+ * message. An out-for-delivery notice can wait an hour. Draining strictly
+ * oldest-first meant a busy dispatch day pushed live confirmations behind a
+ * backlog of bulk notifications, which is exactly backwards.
+ *
+ * Derived from `ref` so jobs queued before this existed still sort correctly.
+ */
+function waPriority(ref, kind) {
+  if (kind === 'mktg') return 3;
+  const r = String(ref || '');
+  if (r.endsWith(':placed')) return 0;                       // the confirm/cancel ask
+  if (r.endsWith(':confirmack') || r.endsWith(':cancelack')
+      || r.endsWith(':cancellate')) return 0;                // replies to a live conversation
+  if (r.endsWith(':ofd')) return 2;                          // useful, not urgent
+  return 1;
+}
+
+/**
  * Queue a message. `ref` makes the send idempotent across cron re-runs.
  * `kind` is 'txn' (default, sends at any hour) or 'mktg' (holds for 09–21 PKT).
  */
@@ -342,6 +363,7 @@ async function waEnqueue(env, { to, text, ref, kind }) {
   await env.SYNC_KV.put(key, JSON.stringify({
     to: phone, text, ref, tries: 0, firstAt: Date.now(),
     kind: kind === 'mktg' ? 'mktg' : 'txn',
+    prio: waPriority(ref, kind),
   }), { expirationTtl: 60 * 60 * 30 });
   return { ok: true, queued: key };
 }
@@ -367,11 +389,23 @@ async function waDrain(env) {
   if (!env.SYNC_KV) return out;
   const hoursOpen = waWithinHours();
 
-  const list = await env.SYNC_KV.list({ prefix: 'waq:', limit: WA_QUEUE_CAP });
-  for (const k of list.keys) {
+  // Load a wide page, then sort by priority before sending. KV lists
+  // lexicographically, which is oldest-first — that buried live confirmations
+  // behind bulk delivery notices. Sort in memory instead of relying on key order
+  // so jobs queued before waPriority existed are ranked correctly too.
+  const page = await env.SYNC_KV.list({ prefix: 'waq:', limit: 100 });
+  const loaded = [];
+  for (const k of page.keys) {
     const raw = await env.SYNC_KV.get(k.name);
     if (!raw) continue;
     let job; try { job = JSON.parse(raw); } catch { await env.SYNC_KV.delete(k.name); continue; }
+    if (job.prio === undefined) job.prio = waPriority(job.ref, job.kind);
+    loaded.push({ name: k.name, job });
+  }
+  loaded.sort((a, b) => (a.job.prio - b.job.prio) || ((a.job.firstAt || 0) - (b.job.firstAt || 0)));
+
+  for (const { name: keyName, job } of loaded.slice(0, WA_QUEUE_CAP)) {
+    const k = { name: keyName };
 
     // Marketing waits for daylight. Transactional never does — leave the job
     // untouched (no `tries` increment, so holding overnight cannot burn through
