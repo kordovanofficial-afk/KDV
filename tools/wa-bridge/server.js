@@ -54,6 +54,11 @@ const stats = { startedAt: Date.now(), sent: 0, failed: 0, lastSent: null, lastE
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const jitter = () => JITTER_MIN_MS + Math.floor(Math.random() * (JITTER_MAX_MS - JITTER_MIN_MS));
+// Replying to someone who JUST messaged us is the lowest-risk send there is —
+// it is ordinary conversation, not outreach. Making a customer wait 3-10s (plus
+// any queue) for an acknowledgement reads as broken, so priority sends get a
+// short human-looking pause instead of the full anti-burst delay.
+const fastJitter = () => 400 + Math.floor(Math.random() * 900);
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
 /** Pakistan phone normalisation → bare 92XXXXXXXXXX. Must match the Worker exactly. */
@@ -100,7 +105,7 @@ async function drain() {
     if (!connected) { await sleep(15000); continue; }
     const job = queue.shift();
     try {
-      await sleep(jitter());
+      await sleep(job.prio === 0 ? fastJitter() : jitter());
       await sock.sendMessage(job.jid, { text: job.text });
       stats.sent++; stats.lastSent = { ref: job.ref, at: new Date().toISOString() };
       console.log(`[sent] ${job.ref || ''} → ${job.jid}`);
@@ -273,7 +278,7 @@ app.post('/send', (req, res, next) => {
   if (req.get('X-Bridge-Secret') !== BRIDGE_SECRET) return res.status(401).json({ ok: false, error: 'unauthorized' });
   next();
 }, async (req, res) => {
-  const { to, text, ref, kind } = req.body || {};
+  const { to, text, ref, kind, prio } = req.body || {};
   const num = normalisePK(to);
   if (!num || !text) return res.status(400).json({ ok: false, error: 'bad_request' });
   if (!connected || !sock) return res.status(503).json({ ok: false, error: 'session_disconnected' });
@@ -284,7 +289,10 @@ app.post('/send', (req, res, next) => {
   try {
     const [found] = await sock.onWhatsApp(num);
     if (!found?.exists) return res.json({ ok: true, sent: false, reason: 'not_on_whatsapp' });
-    queue.push({ jid: found.jid, text, ref, kind: kind === 'mktg' ? 'mktg' : 'txn' });
+    const job = { jid: found.jid, text, ref, kind: kind === 'mktg' ? 'mktg' : 'txn', prio: Number(prio) || 0 };
+    // Priority 0 (confirm/cancel asks and replies in a live conversation) goes
+    // to the FRONT — it must not sit behind a batch of delivery notices.
+    if (job.prio === 0) queue.unshift(job); else queue.push(job);
     drain();
     return res.json({ ok: true, sent: true, queued: queue.length });
   } catch (e) {

@@ -374,7 +374,11 @@ async function waSendViaBridge(env, to, text, ref, kind) {
   const res = await fetch(`${env.BRIDGE_URL.replace(/\/+$/, '')}/send`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'X-Bridge-Secret': env.BRIDGE_SECRET },
-    body: JSON.stringify({ to, text, ref, kind: kind === 'mktg' ? 'mktg' : 'txn' }),
+    body: JSON.stringify({
+      to, text, ref,
+      kind: kind === 'mktg' ? 'mktg' : 'txn',
+      prio: waPriority(ref, kind),   // 0 = jump the bridge queue, short jitter
+    }),
   });
   return res.json();
 }
