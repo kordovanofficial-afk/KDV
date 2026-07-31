@@ -428,3 +428,64 @@ the reasoning in §9 does not.
 Left at 20-55 deliberately. It has already had learning reset twice tonight by
 placement edits, and it gets paused at TOF cutover anyway. Another reset for an
 ad set about to be retired is churn, not improvement.
+
+
+---
+
+## 12. Catalogue / DPA campaign BUILT (paused) — Aug 1 2026
+
+`KV | BOF | Catalogue DPA | Aug26` — **`120254220293930428`**
+Ad set `DPA | Product Intent (VC+ATC+IC, no purchase) | All Products` —
+**`120254220299340428`**, PKR 1,000/day, ABO.
+
+Product set: **All Products `608788148654460` — 165 products**, the whole store.
+Catalogue `1015378560682303`. Live pixel matches at **99.94%**, so dynamic ads
+are fully supported.
+
+### Why this is NOT the same as the Retarget campaign
+| | Retarget (`120228534676850428`) | DPA (this) |
+|---|---|---|
+| Ad | ONE creative, same for everyone | auto-generated per viewer |
+| What they see | the same video | **the exact product they browsed** |
+| Coverage | whatever is in the creative | all 165 products |
+| New product | needs a new ad built | appears automatically |
+
+### Retarget's lifetime record — respected, not overwritten
+PKR 342,319 spent · **583 purchases** · CPA **587** · ROAS **6.70x** (May 2025 –
+Aug 2026). Best CPA of any campaign, and 583 conversions is properly powered.
+Two caveats: it earned that as a **broad** campaign, and its Meta ROAS is the
+one measured as ~2.6x overstated, so real first-click is likely 2.5-3x. Its
+warm-only performance is unproven as of Aug 1.
+
+### Can they run together?
+**Yes, with managed overlap.** Both touch warm users, so they compete in the
+auction. Mitigated by giving each a different job:
+- **DPA** → product-intent only: ViewContent 90D + ATC 180D + IC 180D, all
+  "no purchase". Excludes Purchasers 180D and COD Refusers.
+- **Retarget** → the broad warm + buyer pool with brand creative.
+
+⚠️ Overlap is **not eliminated** — ViewContent/ATC/IC users are also inside
+Retarget's "All Website Visitors 180D". To remove it entirely, exclude those
+three audiences from Retarget. **Not done — needs the user's approval**, and it
+would strip Retarget of its highest-intent segment, so it is a real trade-off
+rather than an obvious win.
+
+The larger risk at this account's scale is **conversion fragmentation**: ~3
+conversions/day across what is now 5 ad sets. Each one takes longer to leave
+learning. Accepted deliberately.
+
+⚠️ `product_audience_specs` (native DPA product-level retargeting) could not be
+set — the API rejects both documented shapes of the `rule` field. The custom-
+audience equivalent above achieves the same targeting; Meta still selects each
+viewer's products from their own pixel history, so the dynamic behaviour is
+unaffected.
+
+### Budget after this addition
+| Campaign | PKR/day |
+|---|---|
+| TOF-A Mocha Mate | 1,500 |
+| TOF-B Razor | 1,500 |
+| Retarget (warm + buyers) | 1,500 |
+| **DPA catalogue** | **1,000** |
+| Old cold (retire at cutover) | 3,800 |
+| **Total once old cold is paused** | **5,500** |
