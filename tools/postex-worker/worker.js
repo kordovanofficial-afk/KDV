@@ -176,7 +176,7 @@ export default {
     }
 
     if (url.pathname === '/wa-status') {
-      if (url.searchParams.get('s') !== env.SYNC_SECRET)
+      if (!waAdminOk(url, env))
         return Response.json({ error: 'Unauthorized' }, { status: 401, headers: cors });
       return Response.json(await waStatus(env), { headers: cors });
     }
@@ -185,7 +185,7 @@ export default {
     // queue has accumulated junk that must not reach customers. Requires an
     // explicit confirm=yes so a stray click cannot wipe pending messages.
     if (url.pathname === '/wa-purge') {
-      if (url.searchParams.get('s') !== env.SYNC_SECRET)
+      if (!waAdminOk(url, env))
         return Response.json({ error: 'Unauthorized' }, { status: 401, headers: cors });
       if (url.searchParams.get('confirm') !== 'yes')
         return Response.json({ error: 'add &confirm=yes to actually purge' }, { status: 400, headers: cors });
@@ -193,13 +193,13 @@ export default {
     }
 
     if (url.pathname === '/wa-abandoned') {
-      if (url.searchParams.get('s') !== env.SYNC_SECRET)
+      if (!waAdminOk(url, env))
         return Response.json({ error: 'Unauthorized' }, { status: 401, headers: cors });
       return Response.json(await runAbandonedCheckouts(env), { headers: cors });
     }
 
     if (url.pathname === '/wa-drain') {
-      if (url.searchParams.get('s') !== env.SYNC_SECRET)
+      if (!waAdminOk(url, env))
         return Response.json({ error: 'Unauthorized' }, { status: 401, headers: cors });
       return Response.json(await waDrain(env), { headers: cors });
     }
@@ -207,6 +207,20 @@ export default {
     return Response.json({ error: 'Not found' }, { status: 404, headers: cors });
   }
 };
+
+/**
+ * Admin auth for the WhatsApp operations endpoints.
+ *
+ * Accepts WEBHOOK_TOKEN as well as SYNC_SECRET. Cloudflare secrets cannot be
+ * read back from the dashboard, so an endpoint gated ONLY on SYNC_SECRET is
+ * unusable by the person who needs it in an emergency — which is exactly when
+ * these endpoints matter. WEBHOOK_TOKEN is scoped to this Worker and rotatable
+ * on its own, so widening to it costs nothing.
+ */
+function waAdminOk(url, env) {
+  const s = url.searchParams.get('s');
+  return Boolean(s) && (s === env.SYNC_SECRET || s === env.WEBHOOK_TOKEN);
+}
 
 // ─── PUBLIC TRACKING ──────────────────────────────────────────────────────────
 
