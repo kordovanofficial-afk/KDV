@@ -181,6 +181,17 @@ export default {
       return Response.json(await waStatus(env), { headers: cors });
     }
 
+    // EMERGENCY: throw away everything queued without sending it. Use when the
+    // queue has accumulated junk that must not reach customers. Requires an
+    // explicit confirm=yes so a stray click cannot wipe pending messages.
+    if (url.pathname === '/wa-purge') {
+      if (url.searchParams.get('s') !== env.SYNC_SECRET)
+        return Response.json({ error: 'Unauthorized' }, { status: 401, headers: cors });
+      if (url.searchParams.get('confirm') !== 'yes')
+        return Response.json({ error: 'add &confirm=yes to actually purge' }, { status: 400, headers: cors });
+      return Response.json(await waPurge(env), { headers: cors });
+    }
+
     if (url.pathname === '/wa-abandoned') {
       if (url.searchParams.get('s') !== env.SYNC_SECRET)
         return Response.json({ error: 'Unauthorized' }, { status: 401, headers: cors });
@@ -359,12 +370,20 @@ async function waEnqueue(env, { to, text, ref, kind }) {
   // Already sent this exact thing — the cron re-runs, duplicates get you blocked.
   if (await env.SYNC_KV.get(`wasent:${ref}`)) return { ok: false, error: 'already_sent' };
 
+  // 🔴 And already WAITING to be sent. `wasent:` is only written on a
+  // successful send, so while the bridge was down the hourly cron re-queued the
+  // same message every hour as a separate job — then flushed all of them the
+  // moment it came back, hammering customers with ~10 identical messages.
+  // This marker makes a ref un-queueable while a copy is still pending.
+  if (await env.SYNC_KV.get(`waqref:${ref}`)) return { ok: false, error: 'already_queued' };
+
   const key = `waq:${Date.now()}:${Math.random().toString(36).slice(2, 8)}`;
   await env.SYNC_KV.put(key, JSON.stringify({
     to: phone, text, ref, tries: 0, firstAt: Date.now(),
     kind: kind === 'mktg' ? 'mktg' : 'txn',
     prio: waPriority(ref, kind),
   }), { expirationTtl: 60 * 60 * 30 });
+  await env.SYNC_KV.put(`waqref:${ref}`, key, { expirationTtl: 60 * 60 * 30 });
   return { ok: true, queued: key };
 }
 
@@ -408,14 +427,31 @@ async function waDrain(env) {
   }
   loaded.sort((a, b) => (a.job.prio - b.job.prio) || ((a.job.firstAt || 0) - (b.job.firstAt || 0)));
 
+  const seenRefs = new Set();     // never send the same ref twice in one run
+  const perNumber = new Map();    // and never flood one person in one run
+
   for (const { name: keyName, job } of loaded.slice(0, WA_QUEUE_CAP)) {
     const k = { name: keyName };
+
+    // 🔴 Duplicate guards. Historic duplicates are already sitting in KV from
+    // the days the bridge was down, so it is not enough to stop NEW ones being
+    // queued — the existing copies must be dropped rather than delivered.
+    if (seenRefs.has(job.ref) || await env.SYNC_KV.get(`wasent:${job.ref}`)) {
+      out.duplicates = (out.duplicates || 0) + 1;
+      await env.SYNC_KV.delete(k.name);
+      continue;
+    }
+    const nCount = perNumber.get(job.to) || 0;
+    if (nCount >= 2) { out.throttledPerNumber = (out.throttledPerNumber || 0) + 1; continue; }
 
     // Marketing waits for daylight. Transactional never does — leave the job
     // untouched (no `tries` increment, so holding overnight cannot burn through
     // the retry budget and give up on it).
     if (job.kind === 'mktg' && !hoursOpen) { out.heldMarketing++; continue; }
     out.drained++;
+
+    seenRefs.add(job.ref);
+    perNumber.set(job.to, (perNumber.get(job.to) || 0) + 1);
 
     let r;
     try { r = await waSendViaBridge(env, job.to, job.text, job.ref, job.kind); }
@@ -425,11 +461,13 @@ async function waDrain(env) {
       out.sent++;
       await env.SYNC_KV.put(`wasent:${job.ref}`, '1', { expirationTtl: 60 * 60 * 24 * 30 });
       await env.SYNC_KV.delete(k.name);
+      await env.SYNC_KV.delete(`waqref:${job.ref}`);
 
     } else if (r.ok && r.sent === false && r.reason === 'not_on_whatsapp') {
       // Not a failure — actionable information. Tell the team to phone them.
       out.noWhatsapp++;
       await env.SYNC_KV.delete(k.name);
+      await env.SYNC_KV.delete(`waqref:${job.ref}`);
       const orderId = (job.ref || '').split(':')[0];
       if (orderId) await tagOrderSafe(env, orderId, ['📞 NO WHATSAPP — CALL']);
 
@@ -438,6 +476,7 @@ async function waDrain(env) {
       if (job.tries >= WA_MAX_TRIES) {
         out.gaveUp++;
         await env.SYNC_KV.delete(k.name);
+        await env.SYNC_KV.delete(`waqref:${job.ref}`);
         const orderId = (job.ref || '').split(':')[0];
         if (orderId) await tagOrderSafe(env, orderId, ['📞 NO WHATSAPP — CALL']);
       } else {
@@ -445,6 +484,41 @@ async function waDrain(env) {
         await env.SYNC_KV.put(k.name, JSON.stringify(job), { expirationTtl: 60 * 60 * 30 });
       }
     }
+  }
+  return out;
+}
+
+/**
+ * Delete every queued message without sending. Also marks each ref as sent, so
+ * the hourly cron does not simply re-queue what was just discarded — that is
+ * what would turn a purge into a loop.
+ */
+async function waPurge(env) {
+  const out = { deleted: 0, refsSuppressed: 0 };
+  if (!env.SYNC_KV) return out;
+  for (const prefix of ['waq:', 'waqref:']) {
+    let cursor;
+    do {
+      const page = await env.SYNC_KV.list({ prefix, limit: 1000, cursor });
+      for (const k of page.keys) {
+        if (prefix === 'waq:') {
+          const raw = await env.SYNC_KV.get(k.name);
+          if (raw) {
+            try {
+              const job = JSON.parse(raw);
+              if (job.ref) {
+                await env.SYNC_KV.put(`wasent:${job.ref}`, 'purged',
+                  { expirationTtl: 60 * 60 * 24 * 30 });
+                out.refsSuppressed++;
+              }
+            } catch {}
+          }
+        }
+        await env.SYNC_KV.delete(k.name);
+        out.deleted++;
+      }
+      cursor = page.list_complete ? null : page.cursor;
+    } while (cursor);
   }
   return out;
 }
