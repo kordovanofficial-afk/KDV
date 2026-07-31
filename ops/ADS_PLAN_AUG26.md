@@ -332,3 +332,54 @@ ig_search.
 3. Activate campaign → both ad sets → both ads (all four levels)
 4. Pause the old cold ad set `120254085361120428` at cutover — **not before**,
    or there is a gap in prospecting
+
+
+---
+
+## 10. 🔴 CORRECTION — placement cuts were wrong (Aug 1 2026)
+
+**Two of the three placement cuts in §4 were reversed.** They were made on 3-5
+days of data with single-digit conversions. The user challenged them and was
+right. Lifetime data (Mar 2025 - Aug 2026):
+
+| Placement | Spend | Purchases | CPA | ROAS | Verdict |
+|---|---|---|---|---|---|
+| feed | 980,259 | 1,240 | 791 | 4.69x | keep |
+| **facebook_reels** | **465,842** | **595** | **783** | **4.69x** | **RESTORED** |
+| instagram_reels | 405,425 | 599 | **677** | **4.91x** | keep |
+| **instagram_stories** | **80,741** | **109** | **741** | **3.78x** | **RESTORED** |
+| facebook_stories | 18,608 | 28 | 665 | 6.23x | keep |
+| search | 10,040 | 24 | **418** | **6.24x** | keep |
+| threads_feed | 3,361 | 6 | 560 | **6.91x** | keep (API cannot set it) |
+| instagram_explore | 4,265 | 5 | 853 | 7.38x | keep |
+| facebook_profile_feed | 2,176 | 8 | 272 | 16.4x | keep |
+| marketplace | 5,118 | 5 | 1,024 | 2.62x | keep — too few conversions to cut |
+| instream_video | 4,054 | 4 | 1,014 | 2.69x | keep — same |
+| **an_classic (Audience Network)** | 16,084 | 6 | **2,681** | **1.54x** | **CUT — stands** |
+| **rewarded_video** | 9,946 | 1 | **9,946** | **0.21x** | **CUT — stands** |
+| messenger_inbox | 36 | 0 | — | — | cut |
+
+### The statistics, because this is the lesson
+- **Facebook Reels:** PKR 2,233 at its true 783 CPA expects **2.9 purchases**.
+  Observing 0 has probability e^-2.9 = **5.8%**. Unlucky, not evidence.
+- **Instagram Stories:** PKR 733 at its true 741 CPA expects **0.99 purchases**.
+  Observing 0 has probability e^-0.99 = **37%**. Completely meaningless.
+
+**Rule adopted: never cut a placement, product or audience on fewer than ~25
+expected conversions.** Below that, absence of conversions is noise. Check the
+lifetime window before acting on a short one — a placement carrying six figures
+of historic spend deserves more than a five-day look.
+
+Audience Network survives the test and stays cut: 6 purchases on PKR 16,084 is
+~20 expected at blended CPA, and 1.54x ROAS against a 4.69x account blend is a
+real, sufficiently-powered gap.
+
+### Standing placement set (corrected)
+Facebook: feed, profile_feed, marketplace, video_feeds, **story**,
+search, instream_video, **facebook_reels**
+Instagram: stream, **story**, explore, explore_home, reels, profile_feed, ig_search
+**Excluded: Audience Network, Messenger only.**
+
+Applied to: TOF-A `120254219931990428`, TOF-B `120254219933170428`,
+and the live cold ad set `120254085361120428` (force-paused on edit,
+reactivated and verified ACTIVE).
