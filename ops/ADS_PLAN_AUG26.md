@@ -383,3 +383,48 @@ Instagram: stream, **story**, explore, explore_home, reels, profile_feed, ig_sea
 Applied to: TOF-A `120254219931990428`, TOF-B `120254219933170428`,
 and the live cold ad set `120254085361120428` (force-paused on edit,
 reactivated and verified ACTIVE).
+
+
+---
+
+## 11. 🔴 CORRECTION 2 — age and gender, checked against lifetime (Aug 1 2026)
+
+Same discipline applied to §9's demographic decisions. Lifetime, Mar 2025 - Aug 2026:
+
+### Age
+| Age | Spend | Purchases | CPA | ROAS | 90-day said | Verdict |
+|---|---|---|---|---|---|---|
+| 18-24 | 241,067 | **383** | **629** | **5.38x** | 6.60x | widening to 18 CONFIRMED |
+| 25-34 | 811,489 | **1,185** | 685 | 4.95x | 4.45x | keep |
+| 35-44 | 576,131 | **677** | 851 | 4.32x | 3.86x | keep |
+| 45-54 | 248,827 | **253** | 984 | **4.07x** | 5.65x | keep (weakest, still fine) |
+| 55-64 | 92,831 | **100** | 928 | **4.48x** | **2.89x** | **CUT REVERSED** |
+| 65+ | 38,883 | **37** | 1,051 | **4.56x** | **3.10x** | **CUT REVERSED** |
+
+**Every age bucket runs between 4.07x and 5.38x.** None justifies exclusion.
+The 90-day read had 12 purchases in 55-64 — its CPA actually matched lifetime
+almost exactly, but AOV wobbled on 12 orders and dragged ROAS to 2.89x. Noise.
+
+**Age set to 18-65 on both TOF ad sets.** No upper cap. Restricting on no
+evidence is the same error as the placement cuts.
+
+⚠️ Caveat carried forward: lifetime age data is dominated by
+retargeting/broad campaigns where older warm buyers convert well. There is not
+yet enough cold-specific data to know whether older ages behave the same in
+prospecting. Re-check once the TOF ad sets have ~25 conversions each.
+
+### Gender — right conclusion, WRONG reason
+| Gender | Purchases | CPA | AOV | ROAS |
+|---|---|---|---|---|
+| Female | 158 | **1,029** | **7,066** | **6.87x** |
+| Male | **2,467** | **745** | 3,351 | 4.50x |
+
+The §9 claim that "women convert cheaper" was wrong — lifetime shows women cost
+**38% MORE** per order. They are valuable because AOV is **more than double**,
+not because acquisition is cheap. Leaving gender unrestricted remains correct;
+the reasoning in §9 does not.
+
+### Not changed: the live cold ad set (`120254085361120428`)
+Left at 20-55 deliberately. It has already had learning reset twice tonight by
+placement edits, and it gets paused at TOF cutover anyway. Another reset for an
+ad set about to be retired is churn, not improvement.
