@@ -245,3 +245,90 @@ the same catalogue again.
 
 **To spend more on retargeting, fix top-funnel volume first.** That is the whole
 argument for the TOF restructure in section 3.
+
+---
+
+## 9. TOF campaign BUILT (paused) — Jul 31 2026
+
+`KV | TOF | Smart Wallets | Aug26` — **`120254219929940428`**
+
+| Ad set | ID | Budget |
+|---|---|---|
+| TOF-A \| Mocha Mate \| LLA 1%+3% Value (All Delivered) | `120254219931990428` | PKR 1,500/day |
+| TOF-B \| Razor \| LLA 1%+3% Value (All Delivered) | `120254219933170428` | PKR 1,500/day |
+
+**ABO, not CBO — deliberate.** No campaign-level budget. Campaign budget
+optimisation would let Meta move money between Mocha Mate and Razor, which is
+the exact failure that gave Bastion 99% of spend inside one ad set. With ABO the
+two budgets are ring-fenced and the comparison is real.
+
+### Every setting, and the evidence for it
+
+| Setting | Value | Why |
+|---|---|---|
+| Objective | OUTCOME_SALES | matches the account's working campaigns |
+| Optimization | OFFSITE_CONVERSIONS + `custom_event_type: PURCHASE` | optimise on purchases, not ATC/IC. Lower volume, but ATC optimisation imports refusers |
+| Pixel | `1865080707652548` (Kordovan 2025 Dataset) | EMQ 9.3/10 on Purchase, CAPI live |
+| Bid strategy | Highest volume (autobid) | a cost cap at ~1,000 would throttle a new ad set to nothing while cold sits at 2,180. Revisit once CPA stabilises |
+| Attribution | 7-day click / 1-day view | Meta default, correct for a considered COD purchase |
+| Billing | Impressions | standard |
+| **Age** | **18–54** | see below — CHANGED from the old 20–55 |
+| **Gender** | **unrestricted** | see below |
+| Geo | PK, `location_types: home + recent` | explicit, since omitting it triggers Meta error #1870194 |
+| Advantage+ Audience | **0 (off)** | at 1 it treats audiences as a hint and expands — that is what turned "Retarget" into a broad campaign |
+| Targeting relaxation | lookalike 0, custom_audience 0 | no creep outside the lookalikes |
+| Placements | manual (below) | data-driven, see §4 |
+| Pacing | standard | even delivery, no front-loading |
+
+### 🔴 Age changed to 18–54, from 20–55
+Account data, last 90 days, by age:
+
+| Age | Spend | CPA | ROAS |
+|---|---|---|---|
+| **18–24** | 42,233 | **586** | **6.60x** |
+| 25–34 | 92,562 | 740 | 4.45x |
+| 35–44 | 61,601 | 1,027 | 3.86x |
+| 45–54 | 30,347 | 1,084 | 5.65x (AOV **6,122** — the high-ticket buyers) |
+| 55–64 | 11,757 | 980 | **2.89x** |
+| 65+ | 4,241 | 848 | 3.10x |
+
+The old 20–55 setting **excluded 18–19, inside the best-performing bucket**, and
+included 55+, the weakest. Now 18–54.
+
+⚠️ **Caveat, stated honestly:** those ROAS figures are Meta's, counted on orders
+PLACED, not delivered. Young COD buyers are the classic refuser profile, so
+18–24's apparent efficiency may not fully survive refusal. What makes widening
+defensible is that the lookalike is now seeded on **delivered** buyers only —
+it already encodes "people like those who actually accepted the parcel". Watch
+18–24's refusal rate specifically in the first month.
+
+### 🔴 Gender left unrestricted — women are underweighted
+| Gender | Spend share | CTR | CPA | ROAS | AOV |
+|---|---|---|---|---|---|
+| Male | **93.5%** | 3.54% | 818 | 4.55x | 3,722 |
+| **Female** | **6.2%** | **5.55%** | **683** | **6.65x** | **4,540** |
+
+Women click more, convert cheaper and spend more per order — on 6% of budget.
+Gift buyers. Never restrict this campaign to men.
+
+### Audiences
+**Included:** LLA 1% Value `120254216730060428` + LLA 3% Value `120254216735280428`
+**Excluded (3):** COD Refusers `120253660257910428` · All Delivered Buyers SEED
+`120254215371460428` · Purchasers 180D `120252468019140428`
+
+Excluding both buyer lists means prospecting never pays to reach an existing
+customer — those belong to Retarget.
+
+### Placements
+Facebook: feed, profile_feed, marketplace, video_feeds, story, search,
+instream_video. Instagram: stream, explore, explore_home, reels, profile_feed,
+ig_search.
+**Excluded: Instagram Stories (66.62/LPV, 0 purchases), Facebook Reels
+(93.06/LPV, 0 purchases), Audience Network (45% CTR = bot traffic), Messenger.**
+
+### Still to do before launch
+1. User attaches creatives (Mocha Mate cinematic from IG; Razor RFID hook)
+2. Lookalikes must finish populating
+3. Activate campaign → both ad sets → both ads (all four levels)
+4. Pause the old cold ad set `120254085361120428` at cutover — **not before**,
+   or there is a gap in prospecting
