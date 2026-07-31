@@ -184,3 +184,48 @@ wallet).** The creative is fine; the products behind it cannot carry a cold CPA.
 | The Razor // RFID | 31 | 21 | new (Apr 2026), ramping, 81 in stock |
 | RFID Protected KODO | 59 | 16 | steady |
 
+
+---
+
+## 7. Audience rebuild — Jul 31 2026
+
+**The old seed was 7% of the available pool.** `KV — Delivered Repeat Buyers`
+(1,000–1,100 matched) contained only customers with **2+ delivered orders**.
+A full export found **13,919 delivered buyers**, of which just **1,233 are
+repeat buyers** — confirming the old seed was the repeat slice and the other
+12,700 were never used. Meta's lookalike quality scales with seed size up to
+~50,000, so the account had been modelling on the documented minimum.
+
+| Audience | ID | Matched |
+|---|---|---|
+| **KV — All Delivered Buyers SEED value Jul31** | `120254215371460428` | **9,600–11,300** (75% match rate) |
+| KV — LLA 1% Value (All Delivered) [Jul31] | `120254216730060428` | populating |
+| KV — LLA 3% Value (All Delivered) [Jul31] | `120254216735280428` | populating |
+| *(old)* KV — Delivered Repeat Buyers | `120253659969900428` | 1,000–1,100 |
+
+### How the file was built (repeat this when refreshing)
+1. `bulkOperationRunQuery` over `orders(query: "financial_status:paid")` — on a
+   COD store, PAID means our Worker saw PostEx mark it Delivered, so PAID +
+   not-cancelled **is** the delivered-buyer definition.
+2. Dedupe by customer id, sum order totals into a lifetime value.
+3. **Cap value at the 99th percentile (PKR 38,000).** Median buyer is PKR 2,450
+   and the top account was PKR 413,337 — 168x. Uncapped, a value-based
+   lookalike hunts for wholesale-scale accounts instead of retail wallet
+   buyers. Affects ~1% of rows.
+4. Exclude internal profiles (business phones 3332601161 / 3009120000,
+   Asad Janjua, Umair Khan).
+5. **KEEP the `mcc` records** — 829 of them, PKR 10.8M combined. `mcc` = Malir
+   Cantt Customer, the physical store. They are in-store buyers: paid on the
+   spot, zero COD refusal risk, the best records in the file. Side effect: they
+   pull the lookalike slightly toward Karachi.
+6. Upload via **Ads Manager → Customer list**, NOT the API — 14k rows inline
+   through an agent context is slow and puts the whole customer list in a
+   transcript for no benefit.
+
+⚠️ **A customer-list audience is a static snapshot. It does not grow.** Refresh
+quarterly, or the seed silently decays as new buyers accumulate outside it.
+
+### Not yet done
+Cold ad set `120254085361120428` still targets the OLD lookalikes. Swap only
+once the two new ones report a real size — swapping while they are empty leaves
+the ad set with nothing to target. Keep the old audiences until then.
