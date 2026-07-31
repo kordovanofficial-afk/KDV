@@ -201,3 +201,47 @@ order alone.
 4. Split TOF into Mocha Mate and Razor, one ad each; retire the Bastion cold ad
 5. Rebuild MOF
 6. Rename and trim Broad
+
+---
+
+## 8. Retarget budget sizing — rule, not a number (set Jul 31 2026)
+
+**Set to PKR 1,500/day** (from 2,100) the day the campaign was narrowed from
+broad to warm-only. Not because 2,100 was wrong — it implies a reachable pool of
+~21,000, which is plausible — but because every efficiency number we had
+described the BROAD version. A week at a conservative level buys a clean
+frequency reading on the audience it actually has now.
+
+### The formula
+```
+daily budget = (reachable warm pool x target weekly frequency x CPM) / 7,000
+```
+At frequency 2.5/week and the observed CPM of 250-280:
+
+| Reachable pool | Daily budget |
+|---|---|
+| 15,000 | ~1,500 |
+| 20,000 | ~2,000 |
+| 25,000 | ~2,500 |
+| 30,000 | ~3,000 |
+
+### Scaling rule — measure, do not guess
+| Weekly frequency | Action |
+|---|---|
+| under 2.0 | raise 25% — under-serving the pool |
+| 2.0 - 3.0 | correct, hold |
+| over 3.5 | cut 25% — fatiguing the same people |
+| any level, CPM rising while CTR falls | pool is saturated regardless of frequency |
+
+### 🔴 The pool is CONTRACTING, not building
+Store sessions, ignoring the March spike: **16,745 (Apr) → 11,882 (Jul), down
+29% in four months.** Unique visitors 13,767 → 9,545.
+
+A retargeting audience is only a memory of top-funnel traffic. Retargeting spend
+therefore **cannot** be scaled by decision — its ceiling is set by how many new
+people enter the funnel. At ~10,000 new visitors/month this campaign tops out
+around **PKR 2,500-3,000/day**; past that you are paying to show the same people
+the same catalogue again.
+
+**To spend more on retargeting, fix top-funnel volume first.** That is the whole
+argument for the TOF restructure in section 3.
