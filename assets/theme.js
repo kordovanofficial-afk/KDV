@@ -547,7 +547,7 @@ class CartDrawer {
 
   renderShip(cart) {
     if (!this.shipEl) return;
-    const threshold = 250000; // PKR 2,500 in minor units (paisa)
+    const threshold = 550000; // PKR 5,500 in minor units (paisa)
     const t = cart.total_price;
     if (t >= threshold) {
       this.shipEl.classList.add('unlocked');
