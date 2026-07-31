@@ -127,3 +127,60 @@ From the vendored `meta-ads-analyzer` references — the three that apply here:
 Not every product is hand-stitched, saddle-stitched, or made in Karachi. Never
 write a universal craft claim into ad copy. Pull claims from the specific
 product's Shopify description only — see the Bronco incident in `CLAUDE.md`.
+
+---
+
+## 6. Unit economics with REAL COGS (user-supplied, Jul 31 2026)
+
+**COGS:** machine-made wallets **PKR 550–800** (use 675 avg). Purely handcrafted
+**PKR 1,200–1,800** (use 1,500 avg). This replaces the 50%-margin guess in §3 —
+actual gross margin on a PKR 2,500 wallet is **~73%**, on a PKR 4,200 one **~84%**.
+
+### 🔴 The metric nobody was watching: per-product refusal rate
+
+Shopify `returns` on a COD store = refused/RTO deliveries. It is **not**
+discounting — discounts across every wallet are under 10% of gross. Refusal
+varies more than 8x between products:
+
+| Wallet (12m) | Price | Orders | Return % | Profit / PLACED order |
+|---|---|---|---|---|
+| The Aristocrat | 4,200 | 50 | **7.2%** | **~3,005** |
+| Bronco Handcrafted | 6,200 | 43 | 27.7% | **~2,913** |
+| The Truckkr | 3,800 | 62 | 22.1% | ~2,106 |
+| Shelby & Thomas | 2,800 | 70 | 20.5% | ~1,500 |
+| Plain Bifold Nappa | 2,400 | 55 | **13.3%** | ~1,485 |
+| RFID Protected KODO | 2,300–2,500 | 59 | 33.4% | ~1,128 |
+| The Razor // RFID | 2,450 | 31 | 34.4% | ~1,029 |
+| The Mocha Mate | 3,200 | 227 | 49.2% | ~988 |
+| Kodo Vertical 2.0 | 2,450 | 248 | 35.6% | ~968 |
+| The Hunter HM | 3,200 | 32 | **63.4%** | ~855 |
+| **The Bastion Bifold** | 2,500 | 405 | **48.1%** | **~720** |
+| Rigor Wallet Lite | 1,499 | 109 | 41.7% | ~462 |
+
+Profit/placed-order = net_sales − (units × COGS) − (failed deliveries ×
+~PKR 250 RTO shipping), divided by orders placed. It is the **maximum CPA that
+breaks even**, because ad spend is incurred per order PLACED, not per delivered.
+
+**Pattern: higher price → dramatically lower refusal.** A PKR 4,200 wallet
+refuses at 7%; a PKR 1,499 one at 42%. Cheap COD orders are impulse promises;
+expensive ones are considered purchases. This inverts the instinct to advertise
+the cheapest product to win volume.
+
+### What this means for the current ads
+Cold placed CPA is **PKR 1,979**. Cross-referenced against the table above,
+cold prospecting is only profitable on **Bronco (2,913)** and **The Aristocrat
+(3,005)** — and marginally on Truckkr. It loses money on everything else.
+
+⚠️ **We have been advertising `AD_Bastion_Cold_PatinaAngle` (Bastion, ~720/order,
+48% refusal — the worst economics of any major wallet) and
+`AD_Razor_Cold_RFIDHook` (Razor, ~1,029/order, and the slowest-selling smart
+wallet).** The creative is fine; the products behind it cannot carry a cold CPA.
+
+### Smart Wallet category — demand ranking
+| | 12-month orders | 90-day orders | Trend |
+|---|---|---|---|
+| The Mocha Mate | 227 | **69** | strong, current leader |
+| Kodo Vertical 2.0 | **248** | 19 | historical champion, **collapsing** (14 in stock) |
+| The Razor // RFID | 31 | 21 | new (Apr 2026), ramping, 81 in stock |
+| RFID Protected KODO | 59 | 16 | steady |
+
