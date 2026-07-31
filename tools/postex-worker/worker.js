@@ -51,6 +51,13 @@ const WA_MAX_TRIES   = 24;     // ~24h of hourly retries, then give up
 const WA_QUEUE_CAP   = 12;     // max drained per cron tick
 const STORE_URL      = 'https://kordovanleather.com';
 
+// ─── Abandoned checkout recovery (MARKETING — see guardrails on runAbandoned) ─
+const WA_AC_MIN_AGE_H = 2;            // give them time to come back on their own
+const WA_AC_MAX_AGE_H = 24;           // older than this and the moment has passed
+const WA_AC_CODE      = 'COMEBACK10'; // NEVER PAYONLINE10 — that stays reserved
+const WA_AC_CAP_DAYS  = 30;           // at most one recovery message per number
+const WA_AC_BATCH     = 10;           // per cron tick
+
 // Storefront origins allowed to call the public /track endpoint.
 const TRACK_ALLOWED_ORIGINS = [
   'https://kordovanleather.com',
@@ -62,8 +69,9 @@ const TRACK_ALLOWED_ORIGINS = [
 export default {
   async scheduled(event, env, ctx) {
     ctx.waitUntil((async () => {
-      await runPollSync(env);
-      await waDrain(env);        // retry anything the bridge could not take earlier
+      await runPollSync(env);              // payment sync FIRST — never blocked by WhatsApp
+      await runAbandonedCheckouts(env);    // no-op unless WA_ABANDONED === 'on'
+      await waDrain(env);                  // send anything queued, plus earlier retries
     })());
   },
 
@@ -171,6 +179,12 @@ export default {
       if (url.searchParams.get('s') !== env.SYNC_SECRET)
         return Response.json({ error: 'Unauthorized' }, { status: 401, headers: cors });
       return Response.json(await waStatus(env), { headers: cors });
+    }
+
+    if (url.pathname === '/wa-abandoned') {
+      if (url.searchParams.get('s') !== env.SYNC_SECRET)
+        return Response.json({ error: 'Unauthorized' }, { status: 401, headers: cors });
+      return Response.json(await runAbandonedCheckouts(env), { headers: cors });
     }
 
     if (url.pathname === '/wa-drain') {
@@ -408,6 +422,7 @@ async function waStatus(env) {
     queued: q.keys.length,
     transactionalSending: '24/7',
     marketingWindowOpen: waWithinHours(),   // 09–21 PKT, marketing only
+    abandonedCheckoutRecovery: env.WA_ABANDONED === 'on' ? 'ON' : 'OFF (set WA_ABANDONED=on)',
     pktHour: pktHour(),
     bridgeConfigured: Boolean(env.BRIDGE_URL && env.BRIDGE_SECRET),
     bridge,
@@ -561,6 +576,109 @@ function waAuthDiagnosis(supplied, env) {
     const extra = supplied.slice(cfg.length);
     out.unexpectedSuffix = extra;
     out.unexpectedSuffixCodes = [...extra].map(c => c.charCodeAt(0));
+  }
+  return out;
+}
+
+// ─── Abandoned checkout recovery ─────────────────────────────────────────────
+
+function msgAbandoned(co, firstItem) {
+  const name = (co.customer?.first_name || co.shipping_address?.first_name || '').trim().split(' ')[0] || 'there';
+  return `${name}, you left something behind 👀
+
+Your *${firstItem}* is still in your cart.
+
+Here is *10% off* if you complete your order today — use code *${WA_AC_CODE}* at checkout.
+
+${co.abandoned_checkout_url || STORE_URL}
+
+— Kordovan
+_Reply STOP to stop updates._`;
+}
+
+/**
+ * ⚠️ THIS IS MARKETING, NOT TRANSACTIONAL.
+ * It is the message most likely to be reported as spam, and reports are what
+ * get a Baileys number banned — the same number that carries POS, online orders
+ * and public contact. Every guardrail below is mandatory:
+ *
+ *   1. OFF unless env WA_ABANDONED === 'on'. Kill switch, default off.
+ *   2. One message per phone per 30 days, and one per checkout ever.
+ *   3. Only 2–24h old and still incomplete.
+ *   4. Never to a FRAUD RISK customer.
+ *   5. Never to someone who already ordered since abandoning.
+ *   6. kind 'mktg' → held outside 09:00–21:00 PKT.
+ *   7. Opt-out (STOP) honoured permanently — enforced inside waEnqueue.
+ *   8. COMEBACK10, never PAYONLINE10.
+ *
+ * If spam reports appear, set WA_ABANDONED to anything but 'on'. The
+ * transactional messages are worth far more and must not be risked for this.
+ */
+async function runAbandonedCheckouts(env) {
+  const out = { enabled: false, scanned: 0, queued: 0, skipped: {} };
+  const skip = k => { out.skipped[k] = (out.skipped[k] || 0) + 1; };
+  if (!env.SYNC_KV) return out;
+  if (env.WA_ABANDONED !== 'on') return out;      // guardrail 1
+  out.enabled = true;
+
+  let token;
+  try { token = await getShopifyToken(env); } catch (e) { out.error = e.message; return out; }
+
+  const now = Date.now();
+  const minC = new Date(now - WA_AC_MAX_AGE_H * 3600e3).toISOString();
+  const maxC = new Date(now - WA_AC_MIN_AGE_H * 3600e3).toISOString();
+
+  let data;
+  try {
+    data = await shopifyFetch(
+      `/checkouts.json?limit=250&created_at_min=${encodeURIComponent(minC)}&created_at_max=${encodeURIComponent(maxC)}`,
+      token, env);
+  } catch (e) { out.error = e.message; return out; }
+
+  for (const co of (data.checkouts || [])) {
+    if (out.queued >= WA_AC_BATCH) break;
+    out.scanned++;
+
+    if (co.completed_at) { skip('completed'); continue; }              // guardrail 3
+
+    const phone = normalisePK(co.phone || co.shipping_address?.phone
+      || co.billing_address?.phone || co.customer?.phone);
+    if (!phone) { skip('no_phone'); continue; }
+
+    const coKey = `waac:${co.token || co.id}`;
+    if (await env.SYNC_KV.get(coKey)) { skip('already_messaged'); continue; }   // guardrail 2
+    if (await env.SYNC_KV.get(`waacph:${phone}`)) { skip('capped_30d'); continue; }
+
+    // Guardrail 5 — did they order anyway? Never chase a customer who bought.
+    try {
+      const o = await shopifyFetch(
+        `/orders.json?status=any&limit=5&created_at_min=${encodeURIComponent(co.created_at)}&fields=id,phone,shipping_address`,
+        token, env);
+      const bought = (o.orders || []).some(x =>
+        normalisePK(x.phone || x.shipping_address?.phone) === phone);
+      if (bought) { skip('already_ordered'); continue; }
+    } catch { /* non-fatal — a lookup failure must not block the run */ }
+
+    // Guardrail 4 — never message a known COD refuser.
+    if (co.customer?.id) {
+      try {
+        const c = await shopifyFetch(`/customers/${co.customer.id}.json?fields=tags`, token, env);
+        if (String(c.customer?.tags || '').toUpperCase().includes('FRAUD RISK')) {
+          skip('fraud_risk'); continue;
+        }
+      } catch { /* non-fatal */ }
+    }
+
+    const firstItem = co.line_items?.[0]?.title || 'order';
+    const r = await waEnqueue(env, {
+      to: phone, text: msgAbandoned(co, firstItem),
+      ref: `ac${co.token || co.id}:recover`, kind: 'mktg',      // guardrail 6
+    });
+    if (!r.ok) { skip(r.error || 'enqueue_failed'); continue; }
+
+    await env.SYNC_KV.put(coKey, '1', { expirationTtl: 60 * 60 * 24 * 90 });
+    await env.SYNC_KV.put(`waacph:${phone}`, '1', { expirationTtl: 60 * 60 * 24 * WA_AC_CAP_DAYS });
+    out.queued++;
   }
   return out;
 }

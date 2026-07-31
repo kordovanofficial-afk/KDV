@@ -312,3 +312,47 @@ just landed up to an hour later than they should have.
 - **Linked-device limit** ~4. Check Settings → Linked devices before scanning.
 - **One number carries everything** — POS, online, delivery, public contact. A ban
   takes all of it. Accepted by the user, eyes open, Jul 26 2026.
+
+---
+
+## ✅ Requirements audit — Jul 31 2026 (before handing the QR to the team)
+
+| Requirement (user's words) | Status |
+|---|---|
+| "when a customer confirms, I need that order to be mentioned in that order somehow as confirmed" | ✅ tag `✅ WA CONFIRMED` |
+| "if they cancel, the bot automatically cancels that order" | ✅ `orderCancel` + restock + note, behind 7 guardrails |
+| "if a customer doesn't have WhatsApp, it stays untouched so our team can call manually" | ✅ tag `📞 NO WHATSAPP — CALL`, no order mutation |
+| "automatic delivery status updates" | ✅ out-for-delivery + delivered, off the PostEx poll |
+| "up and running all day long" | ✅ 24/7 transactional (Jul 27) |
+| "automated discount whatsapp message to abandoned checkouts" | ✅ **built Jul 31** — `runAbandonedCheckouts` |
+| "automated discount … to add to carts" | ❌ **impossible** — add-to-cart captures no identity. Not a build gap; the data does not exist. See §"Why add-to-cart messaging cannot work". |
+| "reduce COD returns" | ⏳ machinery complete, unproven until inbound replies work |
+
+### Abandoned checkout recovery — built, shipped OFF
+`runAbandonedCheckouts()` runs on the hourly cron, between the payment sync and
+the queue drain. **It does nothing until `WA_ABANDONED` is set to `on`.** That
+default is deliberate: it is the only marketing message in the system and the
+one most likely to draw a spam report.
+
+Discount code **`COMEBACK10`** (10%, all products, all customers) created in
+Shopify Jul 31, id `gid://shopify/DiscountCodeNode/1480713568496`.
+`PAYONLINE10` is NOT used here — it stays reserved for the prepaid nudge inside
+the order confirmation.
+
+Guardrails, all enforced in code:
+1. Kill switch `WA_ABANDONED`, default off
+2. One message per checkout **ever** (`waac:` 90d) and one per phone per **30 days** (`waacph:`)
+3. Only checkouts 2–24h old and still incomplete
+4. Never to a `FRAUD RISK` customer (customer tag lookup)
+5. Never to someone who has ordered since abandoning
+6. `kind: 'mktg'` → held outside 09:00–21:00 PKT
+7. `STOP` opt-out honoured permanently (inside `waEnqueue`)
+
+Manual run for testing: `GET /wa-abandoned?s=SYNC_SECRET`.
+Visible in `/wa-status` as `abandonedCheckoutRecovery`.
+
+### Known open item
+Inbound replies fail with Signal `Bad MAC` — the WhatsApp session on the VM is
+corrupted. Fix is a clean re-link (delete `~/wa-bridge/auth`, re-scan). The
+`/wa-inbound` body-parse bug that would ALSO have broken replies was fixed in
+the same pass as `/shopify-order`, so after the re-link the path is clean.
