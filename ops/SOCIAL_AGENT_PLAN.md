@@ -119,9 +119,36 @@ Reuses patterns already proven in `tools/postex-worker/worker.js`:
 ## 7. Status
 
 - [x] Layer 1 guide written and delivered — `docs/social/SOCIAL_AUTOMATION.html`
-- [ ] Phase 0 (Shopify shipping rate) — **user, blocks Layer 1 go-live**
-- [ ] Layer 1 switched on
+      (rebuilt Aug 1 as 14 self-contained tasks with per-field copy buttons —
+      the first version put the copy in an appendix and was unusable in practice)
+- [x] Shopify shipping rate verified live: Rs 250 up to 5,499, free from 5,500,
+      no gap between the conditions
+- [x] **Layer 1 switched on — Aug 1 2026.** User built it, trimmed a few items
+      they judged unnecessary. Trimmed set not yet confirmed against the
+      load-bearing ones (see below).
 - [ ] Meta app created / identified
 - [ ] Worker built
 - [ ] Screencast + App Review submitted
 - [ ] Approved, app Live
+
+### ⚠️ The three items in that guide that are load-bearing
+If any of these were among the trimmed items, the setup misbehaves silently:
+1. **Automation ordering** — Meta fires the first keyword match, so
+   "where is my order" must sit above "how do I order", and the latter must not
+   carry the bare keyword `order`. Otherwise a late-parcel complaint is answered
+   with how-to-buy instructions.
+2. **Instagram ticked on every automation** — Meta sometimes defaults new ones
+   to Facebook only. Looks built, does nothing on IG.
+3. **Excluded keywords** — without them, `"price bohat zyada hai"` and
+   `"fraud hai ye"` match price triggers and get answered with a sales pitch,
+   publicly.
+
+### First data checkpoint — ~Aug 8
+Business Suite reports how often each automation fires. That is the intent
+ranking the comment scrape would have produced, generated for free by running.
+It becomes the spec for Layer 2 — no manual comment collection needed.
+
+⚠️ Reading historical comments directly is **not possible from this session**:
+the environment's network policy denies `facebook.com` and `instagram.com` at
+the gateway (403 to CONNECT, confirmed Aug 1), the ads MCP connector has no
+comment tools, and no browser is provisioned. Do not re-attempt.
