@@ -548,7 +548,11 @@ async function waStatus(env) {
     queued: q.keys.length,
     transactionalSending: '24/7',
     marketingWindowOpen: waWithinHours(),   // 09–21 PKT, marketing only
-    abandonedCheckoutRecovery: env.WA_ABANDONED === 'on' ? 'ON' : 'OFF (set WA_ABANDONED=on)',
+    abandonedCheckoutRecovery: waAbandonedOn(env) ? 'ON' : 'OFF (set WA_ABANDONED=on)',
+    // Diagnostic, not a secret. Distinguishes "variable never reached the
+    // deployed version" (null) from "reached it with a value we reject"
+    // (a string) — the two failure modes look identical in the dashboard.
+    waAbandonedRaw: env.WA_ABANDONED === undefined ? null : JSON.stringify(String(env.WA_ABANDONED)),
     pktHour: pktHour(),
     bridgeConfigured: Boolean(env.BRIDGE_URL && env.BRIDGE_SECRET),
     bridge,
@@ -708,6 +712,20 @@ function waAuthDiagnosis(supplied, env) {
 
 // ─── Abandoned checkout recovery ─────────────────────────────────────────────
 
+/**
+ * Is abandoned-checkout recovery switched on?
+ *
+ * This used to be a strict `env.WA_ABANDONED === 'on'`, which meant "ON",
+ * "On", "true", "1" or a value with a stray space silently did nothing while
+ * looking perfectly correct in the Cloudflare dashboard — indistinguishable
+ * from the saved-but-never-deployed failure that has already cost this project
+ * days. Accept the obvious truthy spellings; only the deploy problem is left.
+ */
+function waAbandonedOn(env) {
+  const v = String(env.WA_ABANDONED ?? '').trim().toLowerCase();
+  return v === 'on' || v === 'true' || v === '1' || v === 'yes' || v === 'enabled';
+}
+
 function msgAbandoned(co, firstItem) {
   const name = (co.customer?.first_name || co.shipping_address?.first_name || '').trim().split(' ')[0] || 'there';
   return `${name}, you left something behind 👀
@@ -744,7 +762,7 @@ async function runAbandonedCheckouts(env) {
   const out = { enabled: false, scanned: 0, queued: 0, skipped: {} };
   const skip = k => { out.skipped[k] = (out.skipped[k] || 0) + 1; };
   if (!env.SYNC_KV) return out;
-  if (env.WA_ABANDONED !== 'on') return out;      // guardrail 1
+  if (!waAbandonedOn(env)) return out;             // guardrail 1
   out.enabled = true;
 
   let token;
