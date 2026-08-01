@@ -489,3 +489,95 @@ unaffected.
 | **DPA catalogue** | **1,000** |
 | Old cold (retire at cutover) | 3,800 |
 | **Total once old cold is paused** | **5,500** |
+
+---
+
+## 13. 🔴 CORRECTION 3 — lookalike "1000/1000" is a placeholder (Aug 1 2026)
+
+I told the user three times that the new lookalikes were still populating. That
+was wrong, and it cost most of a day.
+
+The signals I read as "not ready":
+```
+approximate_count_lower_bound: 1000
+approximate_count_upper_bound: 1000
+time_updated == time_created
+```
+
+Control test — the **old** lookalike `120253661268330428`, created Jul 8 and
+**actively delivering** in the cold ad set all week, returns *identically*:
+```
+approximate_count_lower_bound: 1000, approximate_count_upper_bound: 1000
+time_created: 2026-07-08T01:54:47-07:00
+time_updated: 2026-07-08T01:54:47-07:00
+delivery_status: ACTIVE, operation_status_code: 200
+```
+
+**Conclusion: those three fields are API placeholders on lookalike audiences.
+They never move, populated or not.** The only fields that mean anything are
+`delivery_status: ACTIVE` and `operation_status_code: 200` — both of which the
+new lookalikes have had since creation.
+
+**Rule going forward:** never gate a launch on `approximate_count` or
+`time_updated` for a LOOKALIKE. Read `delivery_status` / `operation_status_code`,
+and if in doubt compare against a lookalike known to be delivering.
+
+LLA 1% `120254216730060428` and LLA 3% `120254216735280428` (seed
+`120254215371460428`, ~9,600–11,300 delivered buyers) are **ready**.
+
+## 14. Ads BUILT (paused drafts) — Aug 1 2026
+
+Three ads, one per ad set, as required by §2.
+
+| Ad | ID | Ad set | Creative ID | Media |
+|---|---|---|---|---|
+| `AD_TOF-A_MochaMate_Cinematic_v1` | `120254225134060428` | `120254219931990428` | `1348745714110769` | ⚠️ **placeholder — swap in the cinematic** |
+| `AD_TOF-B_Razor_RFIDHook_v1` | `120254225135250428` | `120254219933170428` | `1453005006886490` | ✅ final (`broad explainer razor insta.mp4`, video `837381082031211`) |
+| `AD_BOF_DPA_AllProducts_v1` | `120254225136670428` | `120254220299340428` | `2231852510967262` | ✅ none needed — media comes from the catalogue |
+
+All three: `status: PAUSED`, `conversion_domain: kordovanleather.com`,
+CTA `SHOP_NOW`, Page `2738478432836892`.
+
+### UTM tagging — set via creative `url_tags`, not glued onto the link
+`url_tags` is the same field as Ads Manager's ad-level **URL parameters** box.
+Meta appends it to whatever URL the click resolves to — which is the only
+mechanism that works for a **catalogue ad**, where each card's destination is a
+different product URL pulled from the feed. Putting UTMs inside `link_url`
+would have tagged the TOF ads and silently lost every DPA click.
+
+```
+utm_source={{site_source_name}}      → fb / ig / an / msg (real platform, not a guess)
+utm_medium=paid_social
+utm_campaign=KV_TOF_SmartWallets_Aug26   |   KV_BOF_Catalogue_DPA_Aug26
+utm_content=TOFA_MochaMate_Cinematic | TOFB_Razor_RFIDHook | BOF_DPA_AllProducts
+utm_term={{placement}}               → which surface actually converted
+utm_id={{campaign.id}}
+fb_adset={{adset.id}}&fb_ad={{ad.id}}
+```
+
+This is what makes Shopify's first-click attribution readable against Meta's
+last-touch — the ~2x overstatement in `ADS_PLAYBOOK_PK.md` can finally be
+measured per ad set rather than estimated.
+
+### Copy — written against the real catalogue, Aug 1
+Prices verified live in Shopify, not from memory:
+Mocha Mate **Rs 3,200** (`/products/mocha-mate`, 33 in stock, 1 variant) ·
+Razor **Rs 2,450** was 2,999 (`/products/the-razor-rfid-smart-leather-wallet-kordovan`,
+81 in stock, 6 colours).
+
+Every ad carries the COD line, the lifetime craftsmanship warranty, and
+**"Free delivery on orders over Rs 5,500"** — the new threshold, doing basket-
+building work inside the ad itself, since one wallet does not reach it.
+`PAYONLINE10` appears in **none** of them (WhatsApp-only, per the standing rule).
+
+### Known gaps, deliberate
+1. **Mocha Mate media is a placeholder** — the account's older Mocha Mate video
+   `972742055676866`. The cinematic is still only on Instagram. Swapping it in
+   Ads Manager rewrites the creative and keeps copy, link, UTMs and CTA.
+2. **No `instagram_user_id`** — `ads_get_ig_accounts` returns `[]` (the
+   `instagram_basic` permission is not granted to this connector). Ads will run
+   on Instagram under the Page identity. Worth setting the IG account by hand in
+   the ad's Identity section at the same time as the video upload.
+3. **Advantage+ creative enhancements left at account default.** For a cinematic
+   asset, consider turning them off so Meta does not add music/filters over it.
+4. `threads_feed` placement still not settable via API (6.91x ROAS — add by hand).
