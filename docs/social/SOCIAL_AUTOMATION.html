@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Kordovan — Instagram &amp; Facebook Auto-Replies (Layer 1)</title>
+<title>Kordovan — Auto-Replies Setup (do these 14 tasks in order)</title>
 <style>
   :root{
     --canvas:#F7F2EA; --parchment:#ECE3D4; --ink:#241C16; --walnut:#4A3528;
@@ -12,257 +12,164 @@
     --heading:Georgia,'Times New Roman',serif; --body:-apple-system,'Segoe UI',Inter,Arial,sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  body{background:var(--canvas);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.75}
-  .wrap{max-width:880px;margin:0 auto;padding:48px 24px 90px}
-  header.hero{background:var(--ink);color:var(--canvas);padding:56px 24px;text-align:center}
+  body{background:var(--canvas);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.7}
+  .wrap{max-width:820px;margin:0 auto;padding:32px 18px 90px}
+  header.hero{background:var(--ink);color:var(--canvas);padding:44px 20px;text-align:center}
   header.hero .eyebrow{color:var(--brass);text-transform:uppercase;letter-spacing:.18em;font-size:11px;font-weight:600}
-  header.hero h1{font-family:var(--heading);font-weight:500;font-size:clamp(30px,5vw,44px);margin:10px 0 8px}
-  header.hero p{color:#D8C39A;max-width:640px;margin:0 auto;font-size:15px}
-  h2.phase{font-family:var(--heading);font-weight:500;font-size:clamp(24px,3.4vw,32px);margin:64px 0 6px;padding-top:24px;border-top:1px solid var(--border)}
-  h2.phase .num{display:inline-block;background:var(--cognac);color:#fff;border-radius:6px;font-size:15px;font-family:var(--body);font-weight:600;padding:3px 12px;margin-right:12px;vertical-align:middle}
-  .when{color:var(--stone);font-size:13px;text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:18px}
-  h3{font-family:var(--heading);font-weight:500;font-size:20px;margin:34px 0 10px;color:var(--walnut)}
-  h4{font-family:var(--body);font-weight:600;font-size:15px;margin:22px 0 6px;color:var(--cognac-dark)}
-  p{margin:10px 0}
-  .goal{background:var(--parchment);border:1px solid var(--border);border-radius:12px;padding:26px 30px;margin:30px 0}
-  table{border-collapse:collapse;width:100%;margin:16px 0;background:#fff;border:1px solid var(--border);border-radius:8px;overflow:hidden;font-size:14.5px}
-  th{background:var(--parchment);text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--cognac);padding:10px 14px}
-  td{padding:10px 14px;border-top:1px solid var(--border);vertical-align:top}
-  .overflow{overflow-x:auto}
-  ol.steps{counter-reset:s;list-style:none;margin:14px 0}
-  ol.steps>li{position:relative;padding:14px 18px 14px 60px;background:#fff;border:1px solid var(--border);border-radius:10px;margin:10px 0;counter-increment:s}
-  ol.steps>li::before{content:counter(s);position:absolute;left:16px;top:14px;width:28px;height:28px;border-radius:50%;background:var(--cognac);color:#fff;font-weight:600;font-size:14px;display:flex;align-items:center;justify-content:center}
-  label.chk{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px 16px;margin:8px 0;cursor:pointer}
-  label.chk input{margin-top:5px;accent-color:var(--cognac);width:16px;height:16px;flex:none}
-  label.chk:has(input:checked){background:#F0EDE2;color:var(--stone);text-decoration:line-through}
-  code,kbd{background:var(--parchment);border:1px solid var(--border);border-radius:4px;padding:1px 7px;font-size:.88em;font-family:Consolas,Menlo,monospace;color:var(--cognac-dark);word-break:break-all}
-  b.ui{color:var(--cognac-dark)}
-  .callout{border-left:4px solid var(--brass);background:#fff;border-radius:0 10px 10px 0;padding:14px 20px;margin:18px 0;font-size:15px}
-  .callout.stop{border-left-color:var(--oxblood);background:#FBF1EF}
-  .callout.win{border-left-color:var(--pine);background:#F0F5F1}
-  .callout b:first-child{text-transform:uppercase;letter-spacing:.06em;font-size:12px;display:block;margin-bottom:4px}
-  .callout.stop b:first-child{color:var(--oxblood)}
-  .callout.win b:first-child{color:var(--pine)}
-  .callout:not(.stop):not(.win) b:first-child{color:var(--brass)}
-  .toc{background:#fff;border:1px solid var(--border);border-radius:12px;padding:22px 28px;margin:30px 0}
-  .toc a{color:var(--cognac);text-decoration:none;display:block;padding:5px 0;border-bottom:1px dashed var(--border);font-size:15px}
-  .toc a:last-child{border-bottom:0}
-  .toc b{display:inline-block;width:74px;color:var(--stone);font-size:12px;text-transform:uppercase;letter-spacing:.06em}
-  ul.plain{margin:8px 0 8px 22px}
-  ul.plain li{margin:5px 0}
-  .copy{background:#fff;border:1px solid var(--border);border-left:4px solid var(--cognac);border-radius:0 10px 10px 0;padding:16px 20px;margin:10px 0;white-space:pre-wrap;font-size:15px;line-height:1.65}
-  .trig{background:var(--parchment);border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin:8px 0;font-size:13.5px;font-family:Consolas,Menlo,monospace;color:var(--cognac-dark);word-break:break-word}
-  .trig::before{content:'TRIGGER WORDS';display:block;font-family:var(--body);font-size:10px;letter-spacing:.08em;color:var(--stone);margin-bottom:4px}
+  header.hero h1{font-family:var(--heading);font-weight:500;font-size:clamp(26px,5vw,38px);margin:10px 0 8px}
+  header.hero p{color:#D8C39A;max-width:600px;margin:0 auto;font-size:15px}
+
+  /* progress */
+  .prog{position:sticky;top:0;z-index:50;background:var(--canvas);border-bottom:1px solid var(--border);padding:10px 18px;display:flex;align-items:center;gap:12px;font-size:13px;font-weight:600;color:var(--stone)}
+  .prog .bar{flex:1;height:8px;background:var(--parchment);border-radius:99px;overflow:hidden}
+  .prog .bar i{display:block;height:100%;width:0;background:var(--cognac);transition:width .25s}
+
+  /* task card */
+  .task{background:#fff;border:1px solid var(--border);border-radius:14px;margin:22px 0;overflow:hidden}
+  .task.done{opacity:.55}
+  .task > .head{display:flex;gap:14px;align-items:flex-start;padding:20px 22px 14px;border-bottom:1px solid var(--border);background:var(--parchment)}
+  .task .n{flex:none;width:34px;height:34px;border-radius:50%;background:var(--cognac);color:#fff;font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center}
+  .task.done .n{background:var(--pine)}
+  .task .n.stop{background:var(--oxblood)}
+  .task h2{font-family:var(--heading);font-weight:500;font-size:21px;line-height:1.3;margin:2px 0 2px}
+  .task .sub{font-size:13.5px;color:var(--stone)}
+  .body{padding:18px 22px 22px}
+
+  .where{background:#FBF8F2;border:1px dashed var(--border);border-radius:9px;padding:12px 16px;margin:0 0 16px;font-size:14.5px}
+  .where b{display:block;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--cognac);margin-bottom:3px}
+  .where .path{font-weight:600;color:var(--walnut)}
+
+  ol.mini{list-style:none;counter-reset:m;margin:4px 0 4px}
+  ol.mini li{counter-increment:m;position:relative;padding:6px 0 6px 30px;font-size:15px}
+  ol.mini li::before{content:counter(m)".";position:absolute;left:4px;top:6px;color:var(--cognac);font-weight:700;font-size:14px}
+
+  .fieldlabel{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:18px 0 0}
+  .fieldlabel span{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--cognac);font-weight:700}
+  button.copy{border:1px solid var(--cognac);background:#fff;color:var(--cognac-dark);border-radius:7px;padding:5px 14px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:var(--body);flex:none}
+  button.copy:hover{background:var(--cognac);color:#fff}
+  button.copy.ok{background:var(--pine);border-color:var(--pine);color:#fff}
+  .box{background:#FDFCFA;border:1px solid var(--border);border-left:3px solid var(--cognac);border-radius:0 9px 9px 0;padding:13px 16px;margin:6px 0 0;white-space:pre-wrap;font-size:14.5px;line-height:1.6}
+  .box.kw{font-family:Consolas,Menlo,monospace;font-size:12.5px;line-height:1.75;color:var(--cognac-dark);word-break:break-word;border-left-color:var(--brass)}
+  .box.no{border-left-color:var(--oxblood);background:#FCF4F3}
+
+  label.chk{display:flex;gap:11px;align-items:center;background:var(--parchment);border-top:1px solid var(--border);padding:14px 22px;cursor:pointer;font-weight:600;font-size:14.5px}
+  label.chk input{accent-color:var(--pine);width:19px;height:19px;flex:none}
+
+  .note{border-left:4px solid var(--brass);background:#FFFDF8;border-radius:0 9px 9px 0;padding:12px 16px;margin:16px 0 0;font-size:14px}
+  .note.stop{border-left-color:var(--oxblood);background:#FBF1EF}
+  .note.win{border-left-color:var(--pine);background:#F1F6F2}
+  .note b:first-child{display:block;text-transform:uppercase;letter-spacing:.06em;font-size:10.5px;margin-bottom:3px;color:var(--brass)}
+  .note.stop b:first-child{color:var(--oxblood)}
+  .note.win b:first-child{color:var(--pine)}
+
+  .sec{font-family:var(--heading);font-size:15px;letter-spacing:.02em;color:var(--stone);text-transform:uppercase;margin:44px 0 -6px;padding-top:20px;border-top:2px solid var(--border);font-weight:600}
+  code{background:var(--parchment);border:1px solid var(--border);border-radius:4px;padding:1px 6px;font-size:.88em;font-family:Consolas,Menlo,monospace;color:var(--cognac-dark)}
+  .done-banner{background:#F1F6F2;border:1px solid var(--pine);border-radius:12px;padding:18px 22px;margin:22px 0;font-size:15px}
+  .done-banner b{color:var(--pine)}
 </style>
 </head>
 <body>
 
 <header class="hero">
-  <div class="eyebrow">Kordovan · Social Automation — Layer 1</div>
-  <h1>Instagram &amp; Facebook auto-replies, without an app</h1>
-  <p>Everything here is native to Meta, completely free, and needs no developer account, no App Review and no code. This is the layer that takes the daily load off you <em>this week</em>. The custom agent (Layer 2) comes after — it does not replace any of this, it sits on top of it.</p>
+  <div class="eyebrow">Kordovan · Instagram &amp; Facebook auto-replies</div>
+  <h1>14 tasks. Do them top to bottom.</h1>
+  <p>Every task is self-contained — the exact place to click, the exact words to paste, and a Copy button for each one. You never need to scroll back for anything. Tick each box as you finish; your ticks are saved even if you close the page.</p>
 </header>
+
+<div class="prog"><span id="pcount">0 / 14</span><span class="bar"><i id="pbar"></i></span></div>
 
 <div class="wrap">
 
-  <div class="goal">
-    <h3 style="margin-top:0">What you're switching on</h3>
-    <div class="overflow"><table>
-      <tr><th>Tool</th><th>Where</th><th>What it kills</th></tr>
-      <tr><td><b>Comment → auto public reply</b></td><td>Business Suite</td><td>The "price?" flood under every Reel</td></tr>
-      <tr><td><b>Comment → auto DM</b></td><td>Business Suite</td><td>Moves the buyer into a private chat automatically</td></tr>
-      <tr><td><b>Instant reply</b></td><td>Messenger + Instagram</td><td>The "is anyone there?" gap</td></tr>
-      <tr><td><b>Away message</b></td><td>Messenger + Instagram</td><td>Night / Sunday messages sitting unanswered</td></tr>
-      <tr><td><b>FAQs</b></td><td>Messenger + Instagram</td><td>The same 8 questions, forever</td></tr>
-      <tr><td><b>Saved Replies</b></td><td>Business Suite Inbox</td><td>Typing the long answers by hand</td></tr>
-    </table></div>
-    <p style="margin-bottom:0"><b>Cost: PKR 0.</b> All of it is built into the Business Suite you already have because you run ads.</p>
+  <div class="done-banner">
+    <b>✔ Already done for you — nothing to do here.</b><br>
+    Your Shopify shipping rate is correct and verified: <b>Rs 250</b> up to Rs 5,499, <b>free</b> from Rs 5,500. Every reply below quotes those exact numbers, so the site and the auto-replies agree.
   </div>
 
-  <div class="callout stop"><b>Do Phase 0 first — it is not optional</b>
-  These auto-replies will quote your delivery charge and free-delivery threshold to hundreds of people a day. Your Shopify shipping rate is still on the <b>old</b> numbers, so right now a customer with a Rs 3,000 basket hits a checkout that has no valid rate. Fix that before you turn any of this on, or you will be automating a wrong promise at scale.</div>
+  <div class="note stop"><b>The one rule that matters</b>
+  Build the automations in the number order below. Meta fires the <b>first</b> automation whose keywords match, so Task 1 must genuinely be first — otherwise a customer complaining about a late parcel gets answered with a sales pitch.</div>
 
-  <div class="toc">
-    <a href="#p0"><b>Phase 0</b> Fix the Shopify shipping rate (5 minutes, do first)</a>
-    <a href="#p1"><b>Phase 1</b> Facebook Page — comment auto-reply + auto-DM</a>
-    <a href="#p2"><b>Phase 2</b> Messenger — instant reply, away message, FAQs</a>
-    <a href="#p3"><b>Phase 3</b> Instagram — the same three, plus story replies</a>
-    <a href="#p4"><b>Phase 4</b> Saved Replies — the fast manual layer</a>
-    <a href="#p5"><b>Phase 5</b> Test it, then watch it for a week</a>
-    <a href="#copy"><b>Appendix</b> Every reply, ready to copy</a>
+  <div class="sec">Part 1 · Comment auto-replies (Tasks 1–7)</div>
+
+  <!-- ═══════════ TASK 1 ═══════════ -->
+  <div class="task" id="t1">
+    <div class="head">
+      <div class="n stop">1</div>
+      <div><h2>"Where is my order?"</h2><div class="sub">Must be built FIRST · DM only, no public reply</div></div>
+    </div>
+    <div class="body">
+      <div class="where"><b>Go here</b>
+        <span class="path">business.facebook.com → Inbox → Automations → Create automation → "Comments on posts"</span>
+      </div>
+      <ol class="mini">
+        <li>Name it <code>1 - Order status</code></li>
+        <li>Tick <b>both</b> Facebook and Instagram</li>
+        <li>Apply to <b>All posts and reels</b> — not one specific post</li>
+        <li>Trigger: <b>Specific keywords</b> → paste the keywords below</li>
+        <li>Turn <b>Reply in comments OFF</b> ← important</li>
+        <li>Turn <b>Send a message ON</b> → paste the message below</li>
+        <li>Save and set it Live</li>
+      </ol>
+
+      <div class="fieldlabel"><span>Paste into: Keywords</span><button class="copy">Copy</button></div>
+      <div class="box kw">where is my order, wheres my order, order status, my order, mera order, mera parcel, order kahan, order kidhar, order kab ayega, tracking, tracking number, track, cn number, cn no, parcel, kidhar, nahi mila, nahi aya, nahi aaya, abhi tak nahi, still not received, not received, not delivered, delivered nahi, kahan hai mera</div>
+
+      <div class="fieldlabel"><span>Paste into: Send a message</span><button class="copy">Copy</button></div>
+      <div class="box">Happy to check that for you.
+
+You can track your parcel any time here:
+👉 kordovanleather.com/pages/track-order
+
+If you send me your order number or the phone number you ordered with, I'll look it up personally.</div>
+
+      <div class="note stop"><b>Why no public reply on this one</b>
+      Never confirm or discuss someone's individual order in a public comment thread. Everyone scrolling past sees it.</div>
+    </div>
+    <label class="chk"><input type="checkbox"> Task 1 done</label>
   </div>
 
-  <!-- ───────────────────────── PHASE 0 ───────────────────────── -->
-  <h2 class="phase" id="p0"><span class="num">0</span>Fix the Shopify shipping rate</h2>
-  <div class="when">Before anything else · ~5 minutes</div>
+  <!-- ═══════════ TASK 2 ═══════════ -->
+  <div class="task" id="t2">
+    <div class="head">
+      <div class="n">2</div>
+      <div><h2>"Price?"</h2><div class="sub">The big one — this is most of your comment volume</div></div>
+    </div>
+    <div class="body">
+      <div class="where"><b>Go here</b>
+        <span class="path">business.facebook.com → Inbox → Automations → Create automation → "Comments on posts"</span>
+      </div>
+      <ol class="mini">
+        <li>Name it <code>2 - Price</code></li>
+        <li>Tick <b>both</b> Facebook and Instagram</li>
+        <li>Apply to <b>All posts and reels</b></li>
+        <li>Trigger: <b>Specific keywords</b> → paste the keywords below</li>
+        <li>Turn <b>Reply in comments ON</b> → paste all <b>four</b> public replies (use "Add variation" for each)</li>
+        <li>Turn <b>Send a message ON</b> → paste the message below</li>
+        <li>Save and set it Live</li>
+      </ol>
 
-  <p>Shopify admin → <b class="ui">Settings</b> → <b class="ui">Shipping and delivery</b> → your delivery profile → <b class="ui">Manage rates</b>.</p>
+      <div class="fieldlabel"><span>Paste into: Keywords</span><button class="copy">Copy</button></div>
+      <div class="box kw">price, prices, pricing, pric, prise, prize, rate, rates, ret, cost, costs, how much, howmuch, hw much, whats the price, what is the price, amount, rs, pkr, rupees, rupay, kitna, kitne, kitnay, kitni, kitny, ktna, ktne, ktni, katna, kitne ka, kitne ki, kitna hai, kitne ka hai, qeemat, qimat, keemat, qemat, qeymat, kimat, daam, dam, btao, bta, btana, bata, batao, batayen, bataye, btadain, kia price, kya price, kya rate, kia rate, rate btao, price btao, price plz, price please, قیمت, ریٹ</div>
 
-  <ol class="steps">
-    <li>Find the <b>Rs 250</b> rate. Edit its condition: <b>maximum order price</b> from <code>2,499</code> → <code>5,499</code>.</li>
-    <li>Find the <b>Free</b> rate. Edit its condition: <b>minimum order price</b> from <code>2,500</code> → <code>5,500</code>.</li>
-    <li>Save both.</li>
-  </ol>
+      <div class="note"><b>Why "prize" and "pric" are in there</b>
+      They are the most common misspellings of "price" in Pakistani comments, and almost every brand's automation misses them. Leave them in.</div>
 
-  <div class="callout stop"><b>Change both, or checkout breaks</b>
-  If you only raise the free-shipping minimum, every basket between Rs 2,500 and Rs 5,499 falls into a gap with no matching rate and the customer sees "no shipping available". Both edits, same sitting.</div>
+      <div class="fieldlabel"><span>Paste into: Public reply — variation 1</span><button class="copy">Copy</button></div>
+      <div class="box">Sent you the price in your inbox 📩 — full details and colours are on kordovanleather.com</div>
 
-  <label class="chk"><input type="checkbox"> Rs 250 rate max is now <b>5,499</b></label>
-  <label class="chk"><input type="checkbox"> Free rate min is now <b>5,500</b></label>
-  <label class="chk"><input type="checkbox">Tested: added a Rs 3,000 item to cart and reached checkout with a Rs 250 rate showing</label>
+      <div class="fieldlabel"><span>Paste into: Public reply — variation 2</span><button class="copy">Copy</button></div>
+      <div class="box">Just messaged you the price 📩 Cash on delivery is available nationwide.</div>
 
-  <!-- ───────────────────────── PHASE 1 ───────────────────────── -->
-  <h2 class="phase" id="p1"><span class="num">1</span>Facebook — comment auto-reply + auto-DM</h2>
-  <div class="when">The single highest-value switch in this document</div>
+      <div class="fieldlabel"><span>Paste into: Public reply — variation 3</span><button class="copy">Copy</button></div>
+      <div class="box">Check your inbox — price and colours sent 📩</div>
 
-  <p>This is the one that will change your day. When someone comments <em>"price"</em> under a Reel, Meta posts a public reply <b>and</b> opens a private message with that person — automatically, in seconds, at 3am.</p>
+      <div class="fieldlabel"><span>Paste into: Public reply — variation 4</span><button class="copy">Copy</button></div>
+      <div class="box">Details are in your DMs 📩 You can also see everything at kordovanleather.com</div>
 
-  <p>Go to <b class="ui">business.facebook.com</b> → <b class="ui">Inbox</b> → <b class="ui">Automations</b> (left sidebar). Click <b class="ui">Create automation</b>.</p>
+      <div class="note"><b>Use all four</b>
+      Meta rotates them. The same reply repeated under one post looks robotic and Facebook can down-rank it.</div>
 
-  <div class="callout"><b>If the menu looks different</b>
-  Meta moves this around. Look for anything named <b>Automations</b>, <b>Automated responses</b>, or <b>Auto-reply to comments</b> — inside Inbox, or under Business Suite → All tools → Inbox. It is the same feature under whichever name your account shows.</div>
-
-  <h3>1a. The price automation</h3>
-  <ol class="steps">
-    <li>Choose the template <b class="ui">Comments on posts</b> (or "Reply to comments" / "Comment to DM").</li>
-    <li>Apply it to <b>All posts and reels</b>, not one specific post — otherwise you will be re-doing this every time you post.</li>
-    <li>Set the trigger to <b>specific keywords</b> and paste the trigger list from the appendix.</li>
-    <li>Turn ON both <b class="ui">Reply in comments</b> and <b class="ui">Send a message</b>.</li>
-    <li>Paste the public reply and the DM from the appendix.</li>
-    <li>Save and set it <b>Live</b>.</li>
-  </ol>
-
-  <div class="callout"><b>Write 3–4 variations of the public reply</b>
-  Meta rotates them. Identical repeated comments under the same post look robotic and Facebook can down-rank them. Four variations are supplied in the appendix — use all of them.</div>
-
-  <h3>1b. Repeat for the other intents</h3>
-  <p>Build one automation per intent, in this order of value:</p>
-  <p><b>Build them in this exact order</b> — Meta fires the first automation whose keywords match, so the narrow ones must sit above the broad ones:</p>
-  <ol class="steps">
-    <li><b>Order status / where is my parcel</b> — <span style="color:var(--oxblood)"><b>DM only, public reply OFF.</b></span> Must be first, or a late-parcel complaint gets answered with a sales pitch.</li>
-    <li><b>Price</b> — the flood (built above)</li>
-    <li><b>COD / delivery charges</b></li>
-    <li><b>Delivery time</b></li>
-    <li><b>Is it real leather</b></li>
-    <li><b>Availability &amp; colours</b></li>
-    <li><b>"How do I order"</b> — last, because it is the broadest</li>
-  </ol>
-
-  <label class="chk"><input type="checkbox">Order-status automation live, <b>first in the list</b> — DM only, public reply OFF</label>
-  <label class="chk"><input type="checkbox">Price automation live, applied to all posts and reels</label>
-  <label class="chk"><input type="checkbox">COD / delivery-charge automation live</label>
-  <label class="chk"><input type="checkbox">Delivery-time automation live</label>
-  <label class="chk"><input type="checkbox">"Is it real leather" automation live</label>
-  <label class="chk"><input type="checkbox">Availability &amp; colours automation live</label>
-  <label class="chk"><input type="checkbox">"How to order" automation live, <b>last in the list</b>, with no bare <code>order</code> keyword</label>
-
-  <!-- ───────────────────────── PHASE 2 ───────────────────────── -->
-  <h2 class="phase" id="p2"><span class="num">2</span>Messenger — instant reply, away message, FAQs</h2>
-  <div class="when">Same Automations screen · ~15 minutes</div>
-
-  <h3>2a. Instant reply</h3>
-  <p>Fires on the first message from anyone who has never messaged you. Its job is to buy you time and set an expectation — not to sell.</p>
-  <label class="chk"><input type="checkbox">Instant reply ON for Messenger, copy pasted from appendix</label>
-
-  <h3>2b. Away message</h3>
-  <p>Your stated hours are <b>Mon–Sat, 12 PM – 10 PM PKT</b> (that is what your shipping policy tells customers, so keep it consistent). Set the away schedule to everything outside that, including all day Sunday.</p>
-  <label class="chk"><input type="checkbox">Away message ON, schedule set to 10 PM – 12 PM and all Sunday</label>
-
-  <h3>2c. FAQs</h3>
-  <p>These show as tappable buttons when someone opens your chat. Meta usually allows four — use the four in the appendix, in that order. They are ranked by how often they block a sale.</p>
-  <label class="chk"><input type="checkbox">4 FAQs added with answers</label>
-
-  <!-- ───────────────────────── PHASE 3 ───────────────────────── -->
-  <h2 class="phase" id="p3"><span class="num">3</span>Instagram — the same three</h2>
-  <div class="when">~15 minutes</div>
-
-  <p>Instagram automations live in the same Business Suite Automations screen — when you create each one, tick <b class="ui">Instagram</b> as well as <b class="ui">Messenger</b>. Some settings only exist in the Instagram app itself.</p>
-
-  <h3>3a. In Business Suite</h3>
-  <p>Re-run Phase 1 and Phase 2 with the Instagram channel ticked. Most automations let you select both channels at once — if so, you may have already done this. Open each automation you built and confirm Instagram is on.</p>
-  <label class="chk"><input type="checkbox">Every automation from Phases 1–2 has Instagram ticked</label>
-
-  <h3>3b. In the Instagram app</h3>
-  <p>Instagram app → your profile → <b class="ui">☰</b> → <b class="ui">Business tools and controls</b>:</p>
-  <ul class="plain">
-    <li><b class="ui">Saved replies</b> — the shortcuts from Phase 4</li>
-    <li><b class="ui">Frequently asked questions</b> — same four</li>
-    <li><b class="ui">Welcome message</b> — the instant reply</li>
-  </ul>
-  <label class="chk"><input type="checkbox">Instagram app: saved replies, FAQs and welcome message set</label>
-
-  <div class="callout win"><b>Story replies are your warmest lead</b>
-  Someone replying to a Story is further down the funnel than any comment. Do not let those sit overnight — the away message covers them, but check Story replies first every morning.</div>
-
-  <!-- ───────────────────────── PHASE 4 ───────────────────────── -->
-  <h2 class="phase" id="p4"><span class="num">4</span>Saved Replies — the fast manual layer</h2>
-  <div class="when">~10 minutes · pays for itself in two days</div>
-
-  <p>Automations handle the predictable. Saved Replies handle everything else — you pick from a list instead of typing the same paragraph for the hundredth time.</p>
-  <p>Business Suite → <b class="ui">Inbox</b> → <b class="ui">Saved replies</b> → <b class="ui">Create reply</b>. Give each a short shortcut so you can find it fast.</p>
-
-  <div class="overflow"><table>
-    <tr><th>Shortcut</th><th>Use it for</th></tr>
-    <tr><td><code>leather</code></td><td>"Is it original leather?"</td></tr>
-    <tr><td><code>warranty</code></td><td>Warranty and returns</td></tr>
-    <tr><td><code>track</code></td><td>Where is my order</td></tr>
-    <tr><td><code>store</code></td><td>Shop address and hours</td></tr>
-    <tr><td><code>size</code></td><td>Dimensions / capacity questions</td></tr>
-    <tr><td><code>bulk</code></td><td>Corporate and bulk enquiries</td></tr>
-  </table></div>
-
-  <label class="chk"><input type="checkbox">All 6 saved replies created</label>
-
-  <!-- ───────────────────────── PHASE 5 ───────────────────────── -->
-  <h2 class="phase" id="p5"><span class="num">5</span>Test it, then watch it for a week</h2>
-  <div class="when">15 minutes today, then five minutes a day</div>
-
-  <h3>Test from a phone that is not an admin</h3>
-  <ol class="steps">
-    <li>Comment <b>"price?"</b> on a recent Reel from a personal account. You should get a public reply <b>and</b> a DM within about a minute.</li>
-    <li>Message the Page from that account — instant reply should fire, FAQ buttons should appear.</li>
-    <li>Message at 11 PM — away message should fire instead.</li>
-    <li>Comment <b>"where is my order"</b> — you should get a DM and <b>no public reply</b>.</li>
-  </ol>
-
-  <label class="chk"><input type="checkbox">All four tests pass on Facebook</label>
-  <label class="chk"><input type="checkbox">All four tests pass on Instagram</label>
-
-  <div class="callout stop"><b>Read every auto-reply that goes out for the first three days</b>
-  Keyword matching is blunt. "How much for the jacket" and "how much delivery" both contain the price trigger and will get the same answer. Watch for the mismatches and add the missing keyword to the right automation. After three days it settles.</div>
-
-  <h3>What to tell me after a week</h3>
-  <ul class="plain">
-    <li>Roughly what share of messages you still answer by hand</li>
-    <li>The questions the automations keep getting <em>wrong</em></li>
-    <li>The questions that come up a lot and have no automation yet</li>
-  </ul>
-  <p>That list is exactly what Layer 2 gets built around — so it is trained on your real inbox rather than my guesses.</p>
-
-  <!-- ───────────────────────── APPENDIX ───────────────────────── -->
-  <h2 class="phase" id="copy"><span class="num">A</span>Every reply, ready to copy</h2>
-  <div class="when">Brand voice · prices verified against the live store</div>
-
-  <div class="callout"><b>Why the triggers are in Roman Urdu but the answers are in English</b>
-  People type <em>"kitne ka hai"</em> and <em>"rate btao"</em>. Your site, ads and packaging are English. So: catch them in the language they type, answer in the language of the brand. The top two answers carry a short Urdu line as well.</div>
-
-  <h3>Price</h3>
-  <div class="trig">price, prices, pricing, pric, prise, prize, prize?, rate, rates, ret, cost, costs, how much, howmuch, hw much, whats the price, what is the price, amount, rs, pkr, rupees, rupay, kitna, kitne, kitnay, kitni, kitny, ktna, ktne, ktni, katna, kitne ka, kitne ki, kitna hai, kitne ka hai, qeemat, qimat, keemat, qemat, qeymat, kimat, daam, dam, daaam, btao, bta, btana, bata, batao, batayen, bataye, btadain, bta dain, kia price, kya price, kya rate, kia rate, rate btao, price btao, price plz, price please, قیمت, ریٹ</div>
-
-  <div class="callout"><b>Why "prize" is in that list</b>
-  It is the single most common misspelling of "price" in Pakistani comments, and almost every brand's automation misses it. Same for <code>pric</code> and <code>prise</code>. Leave them in.</div>
-
-  <h4>Public reply — variation 1</h4>
-  <div class="copy">Sent you the price in your inbox 📩 — full details and colours are on kordovanleather.com</div>
-  <h4>Public reply — variation 2</h4>
-  <div class="copy">Just messaged you the price 📩 Cash on delivery is available nationwide.</div>
-  <h4>Public reply — variation 3</h4>
-  <div class="copy">Check your inbox — price and colours sent 📩</div>
-  <h4>Public reply — variation 4</h4>
-  <div class="copy">Details are in your DMs 📩 You can also see everything at kordovanleather.com</div>
-
-  <h4>The DM</h4>
-  <div class="copy">Thanks for your interest in Kordovan 🐎
+      <div class="fieldlabel"><span>Paste into: Send a message</span><button class="copy">Copy</button></div>
+      <div class="box">Thanks for your interest in Kordovan 🐎
 
 You'll find the price, all colours and full details here:
 👉 kordovanleather.com
@@ -275,15 +182,36 @@ Qeemat aur tamam colours website par mojood hain.
 • Lifetime craftsmanship warranty
 
 Tell me which piece you're looking at and I'll help you pick the right one.</div>
+    </div>
+    <label class="chk"><input type="checkbox"> Task 2 done</label>
+  </div>
 
-  <h3>COD &amp; delivery charges</h3>
-  <div class="trig">cod, c.o.d, c o d, cod hai, cod he, cod h, cod available, cash on delivery, cash on, cash, delivery pe, delivery par, delivery pay, advance, advance payment, advance to nahi, no advance, peshgi, payment, pay, paisay, paise, paisa, online payment, easypaisa, easy paisa, jazzcash, jazz cash, bank transfer, delivery charge, delivery charges, delivery kitne ki, shipping, shipping charge, shipping charges, courier, courier charges, free delivery, free shipping, mufat, muft</div>
+  <!-- ═══════════ TASK 3 ═══════════ -->
+  <div class="task" id="t3">
+    <div class="head">
+      <div class="n">3</div>
+      <div><h2>"COD? Delivery charges?"</h2><div class="sub">Payment and shipping cost questions</div></div>
+    </div>
+    <div class="body">
+      <div class="where"><b>Go here</b>
+        <span class="path">business.facebook.com → Inbox → Automations → Create automation → "Comments on posts"</span>
+      </div>
+      <ol class="mini">
+        <li>Name it <code>3 - COD and charges</code></li>
+        <li>Tick <b>both</b> Facebook and Instagram · Apply to <b>All posts and reels</b></li>
+        <li>Trigger: <b>Specific keywords</b> → paste below</li>
+        <li><b>Reply in comments ON</b> + <b>Send a message ON</b> → paste both below</li>
+        <li>Save and set it Live</li>
+      </ol>
 
-  <h4>Public reply</h4>
-  <div class="copy">Yes — cash on delivery, anywhere in Pakistan 🇵🇰 Details sent to your inbox 📩</div>
+      <div class="fieldlabel"><span>Paste into: Keywords</span><button class="copy">Copy</button></div>
+      <div class="box kw">cod, c.o.d, c o d, cod hai, cod he, cod h, cod available, cash on delivery, cash on, cash, delivery pe, delivery par, delivery pay, advance, advance payment, advance to nahi, no advance, peshgi, payment, pay, paisay, paise, paisa, online payment, easypaisa, easy paisa, jazzcash, jazz cash, bank transfer, delivery charge, delivery charges, delivery kitne ki, shipping, shipping charge, shipping charges, courier, courier charges, free delivery, free shipping, mufat, muft</div>
 
-  <h4>The DM</h4>
-  <div class="copy">Yes — cash on delivery is available across Pakistan. No advance payment. You pay the rider when your parcel reaches your door.
+      <div class="fieldlabel"><span>Paste into: Public reply</span><button class="copy">Copy</button></div>
+      <div class="box">Yes — cash on delivery, anywhere in Pakistan 🇵🇰 Details sent to your inbox 📩</div>
+
+      <div class="fieldlabel"><span>Paste into: Send a message</span><button class="copy">Copy</button></div>
+      <div class="box">Yes — cash on delivery is available across Pakistan. No advance payment. You pay the rider when your parcel reaches your door.
 
 Poore Pakistan mein cash on delivery available hai.
 
@@ -292,15 +220,36 @@ Poore Pakistan mein cash on delivery available hai.
 • Prefer to pay online? Card, Easypaisa and JazzCash all work at checkout
 
 Order here 👉 kordovanleather.com</div>
+    </div>
+    <label class="chk"><input type="checkbox"> Task 3 done</label>
+  </div>
 
-  <h3>Delivery time</h3>
-  <div class="trig">delivery time, how many days, how long, how long does, when will i get, when will it, kitne din, kitney din, kitne dinn, kitne dino, kitne dinon, kitna time, kitni der, kitna waqt, kab, kab tak, kab ayega, kab aye ga, kab milega, kab mile ga, kab tak ayega, pohanchega, pohnchay ga, pohanche ga, ponhchay, pahunchega, pahunche ga, days, day, dispatch, deliver, delivery kab</div>
+  <!-- ═══════════ TASK 4 ═══════════ -->
+  <div class="task" id="t4">
+    <div class="head">
+      <div class="n">4</div>
+      <div><h2>"How many days for delivery?"</h2><div class="sub">Delivery timing</div></div>
+    </div>
+    <div class="body">
+      <div class="where"><b>Go here</b>
+        <span class="path">business.facebook.com → Inbox → Automations → Create automation → "Comments on posts"</span>
+      </div>
+      <ol class="mini">
+        <li>Name it <code>4 - Delivery time</code></li>
+        <li>Tick <b>both</b> Facebook and Instagram · Apply to <b>All posts and reels</b></li>
+        <li>Trigger: <b>Specific keywords</b> → paste below</li>
+        <li><b>Reply in comments ON</b> + <b>Send a message ON</b> → paste both below</li>
+        <li>Save and set it Live</li>
+      </ol>
 
-  <h4>Public reply</h4>
-  <div class="copy">2–4 days for Karachi, Lahore and Islamabad, 3–6 days elsewhere in Pakistan. Details in your inbox 📩</div>
+      <div class="fieldlabel"><span>Paste into: Keywords</span><button class="copy">Copy</button></div>
+      <div class="box kw">delivery time, how many days, how long, how long does, when will i get, when will it, kitne din, kitney din, kitne dinn, kitne dino, kitne dinon, kitna time, kitni der, kitna waqt, kab, kab tak, kab ayega, kab aye ga, kab milega, kab mile ga, kab tak ayega, pohanchega, pohnchay ga, pohanche ga, ponhchay, pahunchega, pahunche ga, days, day, dispatch, deliver, delivery kab</div>
 
-  <h4>The DM</h4>
-  <div class="copy">Here's how long it takes:
+      <div class="fieldlabel"><span>Paste into: Public reply</span><button class="copy">Copy</button></div>
+      <div class="box">2–4 days for Karachi, Lahore and Islamabad, 3–6 days elsewhere in Pakistan. Details in your inbox 📩</div>
+
+      <div class="fieldlabel"><span>Paste into: Send a message</span><button class="copy">Copy</button></div>
+      <div class="box">Here's how long it takes:
 
 • Karachi, Lahore, Islamabad — 2 to 4 working days
 • All other cities — 3 to 6 working days
@@ -308,18 +257,110 @@ Order here 👉 kordovanleather.com</div>
 We pack and dispatch within 1–2 working days, and you get a tracking number by WhatsApp as soon as it leaves us.
 
 Order here 👉 kordovanleather.com</div>
+    </div>
+    <label class="chk"><input type="checkbox"> Task 4 done</label>
+  </div>
 
-  <h3>How to order</h3>
-  <div class="trig">how to order, how do i order, how can i order, how can i buy, where to buy, where can i buy, order kaise, kaise order, kaise mangwaun, kaise mangwao, kaise le, kaise lein, order karna, order karna hai, order karwana, mangwana, mangwana hai, manga, mangwao, kahan se milega, kahan se le, kahan milta, kahan milega, link, link do, link dein, link plz, website, site, purchase</div>
+  <!-- ═══════════ TASK 5 ═══════════ -->
+  <div class="task" id="t5">
+    <div class="head">
+      <div class="n">5</div>
+      <div><h2>"Is it real leather?"</h2><div class="sub">Blocks as many sales as price does</div></div>
+    </div>
+    <div class="body">
+      <div class="where"><b>Go here</b>
+        <span class="path">business.facebook.com → Inbox → Automations → Create automation → "Comments on posts"</span>
+      </div>
+      <ol class="mini">
+        <li>Name it <code>5 - Real leather</code></li>
+        <li>Tick <b>both</b> Facebook and Instagram · Apply to <b>All posts and reels</b></li>
+        <li>Trigger: <b>Specific keywords</b> → paste below</li>
+        <li><b>Reply in comments ON</b> + <b>Send a message ON</b> → paste both below</li>
+        <li>Save and set it Live</li>
+      </ol>
 
-  <div class="callout stop"><b>Do not put the bare word "order" in this list</b>
-  It also appears in "where is my order", so a customer chasing a late parcel would get sent how-to-buy instructions. Keep <code>order</code> out of this automation entirely, and place the <b>order-status</b> automation ABOVE this one in the list — Meta fires the first match.</div>
+      <div class="fieldlabel"><span>Paste into: Keywords</span><button class="copy">Copy</button></div>
+      <div class="box kw">original, orignal, originl, genuine, genuine leather, real leather, pure leather, asli, asli hai, asli leather, asal, chamra, chamda, leather hai, pure hai, quality, fake, duplicate, copy, china, rexine</div>
 
-  <h4>Public reply</h4>
-  <div class="copy">Straight from kordovanleather.com — cash on delivery, no advance. Sent you the steps 📩</div>
+      <div class="fieldlabel"><span>Paste into: Public reply</span><button class="copy">Copy</button></div>
+      <div class="box">Genuine full-grain cow leather, cut and stitched by hand in Pakistan 🇵🇰 Full details sent to your inbox 📩</div>
 
-  <h4>The DM</h4>
-  <div class="copy">Ordering takes about a minute:
+      <div class="fieldlabel"><span>Paste into: Send a message</span><button class="copy">Copy</button></div>
+      <div class="box">Yes — genuine full-grain cow leather. Not bonded, not PU, not rexine.
+
+Asli chamray ka hai, hath se Pakistan mein banaya gaya.
+
+Real leather softens and darkens as you carry it and develops its own patina. Fake leather peels. That is why we can put a lifetime craftsmanship warranty on every piece.
+
+See it up close 👉 kordovanleather.com</div>
+    </div>
+    <label class="chk"><input type="checkbox"> Task 5 done</label>
+  </div>
+
+  <!-- ═══════════ TASK 6 ═══════════ -->
+  <div class="task" id="t6">
+    <div class="head">
+      <div class="n">6</div>
+      <div><h2>"Available? What colours?"</h2><div class="sub">Stock and colour questions</div></div>
+    </div>
+    <div class="body">
+      <div class="where"><b>Go here</b>
+        <span class="path">business.facebook.com → Inbox → Automations → Create automation → "Comments on posts"</span>
+      </div>
+      <ol class="mini">
+        <li>Name it <code>6 - Stock and colours</code></li>
+        <li>Tick <b>both</b> Facebook and Instagram · Apply to <b>All posts and reels</b></li>
+        <li>Trigger: <b>Specific keywords</b> → paste below</li>
+        <li><b>Reply in comments ON</b> + <b>Send a message ON</b> → paste both below</li>
+        <li>Save and set it Live</li>
+      </ol>
+
+      <div class="fieldlabel"><span>Paste into: Keywords</span><button class="copy">Copy</button></div>
+      <div class="box kw">available, availabe, avaliable, avail, availability, stock, in stock, stock hai, stock mein, out of stock, dastyab, mojood, mil sakta, mil jayega, colour, color, colours, colors, kaunsa colour, konsa color, konsa rang, rang, black, brown, tan, kya colours, what colours</div>
+
+      <div class="fieldlabel"><span>Paste into: Public reply</span><button class="copy">Copy</button></div>
+      <div class="box">Live stock and every colour are on the website — sent you the link 📩</div>
+
+      <div class="fieldlabel"><span>Paste into: Send a message</span><button class="copy">Copy</button></div>
+      <div class="box">Every colour we currently have in stock is live on the website — if you can add it to cart, we have it:
+👉 kordovanleather.com
+
+Jo colour website par hai, wo stock mein hai.
+
+Tell me which piece you're after and I'll point you to the right page.</div>
+    </div>
+    <label class="chk"><input type="checkbox"> Task 6 done</label>
+  </div>
+
+  <!-- ═══════════ TASK 7 ═══════════ -->
+  <div class="task" id="t7">
+    <div class="head">
+      <div class="n">7</div>
+      <div><h2>"How do I order?"</h2><div class="sub">Build this one LAST — it is the broadest</div></div>
+    </div>
+    <div class="body">
+      <div class="where"><b>Go here</b>
+        <span class="path">business.facebook.com → Inbox → Automations → Create automation → "Comments on posts"</span>
+      </div>
+      <ol class="mini">
+        <li>Name it <code>7 - How to order</code></li>
+        <li>Tick <b>both</b> Facebook and Instagram · Apply to <b>All posts and reels</b></li>
+        <li>Trigger: <b>Specific keywords</b> → paste below</li>
+        <li><b>Reply in comments ON</b> + <b>Send a message ON</b> → paste both below</li>
+        <li>Save and set it Live</li>
+      </ol>
+
+      <div class="fieldlabel"><span>Paste into: Keywords</span><button class="copy">Copy</button></div>
+      <div class="box kw">how to order, how do i order, how can i order, how can i buy, where to buy, where can i buy, order kaise, kaise order, kaise mangwaun, kaise mangwao, kaise le, kaise lein, order karna, order karna hai, order karwana, mangwana, mangwana hai, manga, mangwao, kahan se milega, kahan se le, kahan milta, kahan milega, link, link do, link dein, link plz, website, site, purchase</div>
+
+      <div class="note stop"><b>Do NOT add the single word "order" to this list</b>
+      It also appears in "where is my order" (Task 1). A customer chasing a late parcel would get sent how-to-buy instructions instead. The list above deliberately leaves it out.</div>
+
+      <div class="fieldlabel"><span>Paste into: Public reply</span><button class="copy">Copy</button></div>
+      <div class="box">Straight from kordovanleather.com — cash on delivery, no advance. Sent you the steps 📩</div>
+
+      <div class="fieldlabel"><span>Paste into: Send a message</span><button class="copy">Copy</button></div>
+      <div class="box">Ordering takes about a minute:
 
 1. Go to kordovanleather.com
 2. Pick your piece and colour, then Add to Cart
@@ -329,56 +370,156 @@ Order here 👉 kordovanleather.com</div>
 We'll confirm on WhatsApp, then dispatch. You pay the rider at your door.
 
 Any trouble at checkout, message us here or on WhatsApp: wa.me/923332601161</div>
+    </div>
+    <label class="chk"><input type="checkbox"> Task 7 done</label>
+  </div>
 
-  <h3>Order status — DM ONLY</h3>
-  <div class="trig">where is my order, wheres my order, order status, my order, mera order, mera parcel, order kahan, order kidhar, order kab ayega, tracking, tracking number, track, cn number, cn no, parcel, kidhar, nahi mila, nahi aya, nahi aaya, abhi tak nahi, still not received, not received, not delivered, delivered nahi, kahan hai mera</div>
+  <div class="sec">Part 2 · Message auto-replies (Tasks 8–10)</div>
 
-  <div class="callout stop"><b>Public reply must be OFF on this one</b>
-  Never confirm or discuss an individual customer's order in a public comment thread. DM only.</div>
+  <!-- ═══════════ TASK 8 ═══════════ -->
+  <div class="task" id="t8">
+    <div class="head">
+      <div class="n">8</div>
+      <div><h2>Instant reply</h2><div class="sub">Fires on someone's first ever message to you</div></div>
+    </div>
+    <div class="body">
+      <div class="where"><b>Go here</b>
+        <span class="path">business.facebook.com → Inbox → Automations → "Instant reply"</span>
+      </div>
+      <ol class="mini">
+        <li>Switch it <b>ON</b></li>
+        <li>Tick <b>both</b> Facebook and Instagram</li>
+        <li>Replace the default text with the message below</li>
+        <li>Save</li>
+      </ol>
 
-  <h4>The DM</h4>
-  <div class="copy">Happy to check that for you.
+      <div class="fieldlabel"><span>Paste into: Message</span><button class="copy">Copy</button></div>
+      <div class="box">Thanks for messaging Kordovan 🐎
 
-You can track your parcel any time here:
-👉 kordovanleather.com/pages/track-order
+Everything — prices, colours and full details — is at kordovanleather.com
 
-If you send me your order number or the phone number you ordered with, I'll look it up personally.</div>
+• Cash on delivery all over Pakistan
+• Delivery Rs 250, free over Rs 5,500
+• Genuine leather, handcrafted in Pakistan
+• Lifetime craftsmanship warranty
 
-  <h3>Is it real leather?</h3>
-  <div class="trig">original, orignal, originl, genuine, genuine leather, real leather, pure leather, asli, asli hai, asli leather, asal, chamra, chamda, leather hai, pure hai, quality, fake, duplicate, copy, china, rexine</div>
+Tell me what you're looking for and someone from the team will be with you shortly.</div>
+    </div>
+    <label class="chk"><input type="checkbox"> Task 8 done</label>
+  </div>
 
-  <h4>Public reply</h4>
-  <div class="copy">Genuine full-grain cow leather, cut and stitched by hand in Pakistan 🇵🇰 Full details sent to your inbox 📩</div>
+  <!-- ═══════════ TASK 9 ═══════════ -->
+  <div class="task" id="t9">
+    <div class="head">
+      <div class="n">9</div>
+      <div><h2>Away message</h2><div class="sub">Outside 12 PM – 10 PM, and all day Sunday</div></div>
+    </div>
+    <div class="body">
+      <div class="where"><b>Go here</b>
+        <span class="path">business.facebook.com → Inbox → Automations → "Away message"</span>
+      </div>
+      <ol class="mini">
+        <li>Switch it <b>ON</b> · tick <b>both</b> Facebook and Instagram</li>
+        <li>Set the schedule so you are <b>available Monday–Saturday, 12:00 PM to 10:00 PM</b></li>
+        <li>Set <b>Sunday to unavailable / closed all day</b></li>
+        <li>Paste the message below · Save</li>
+      </ol>
 
-  <h4>The DM</h4>
-  <div class="copy">Yes — genuine full-grain cow leather. Not bonded, not PU, not rexine.
+      <div class="note"><b>Why these exact hours</b>
+      They are the hours printed in your shipping policy on the website. Keep them identical or customers catch the contradiction.</div>
 
-Asli chamray ka hai, hath se Pakistan mein banaya gaya.
+      <div class="fieldlabel"><span>Paste into: Message</span><button class="copy">Copy</button></div>
+      <div class="box">Thanks for messaging Kordovan 🐎
 
-Real leather softens and darkens as you carry it and develops its own patina. Fake leather peels. That is why we can put a lifetime craftsmanship warranty on every piece.
+Our team is here Monday to Saturday, 12 PM – 10 PM. We'll reply as soon as we're back.
 
-See it up close 👉 kordovanleather.com</div>
-
-  <h3>Availability &amp; colours</h3>
-  <div class="trig">available, availabe, avaliable, avail, availability, stock, in stock, stock hai, stock mein, out of stock, dastyab, mojood, mil sakta, mil jayega, colour, color, colours, colors, kaunsa colour, konsa color, konsa rang, rang, black, brown, tan, kya colours, what colours</div>
-
-  <h4>Public reply</h4>
-  <div class="copy">Live stock and every colour are on the website — sent you the link 📩</div>
-
-  <h4>The DM</h4>
-  <div class="copy">Every colour we currently have in stock is live on the website — if you can add it to cart, we have it:
+In the meantime you can browse and order any time — cash on delivery, no advance:
 👉 kordovanleather.com
 
-Jo colour website par hai, wo stock mein hai.
+Tracking an order? kordovanleather.com/pages/track-order</div>
+    </div>
+    <label class="chk"><input type="checkbox"> Task 9 done</label>
+  </div>
 
-Tell me which piece you're after and I'll point you to the right page.</div>
+  <!-- ═══════════ TASK 10 ═══════════ -->
+  <div class="task" id="t10">
+    <div class="head">
+      <div class="n">10</div>
+      <div><h2>The 4 FAQ buttons</h2><div class="sub">Tappable buttons when someone opens your chat</div></div>
+    </div>
+    <div class="body">
+      <div class="where"><b>Go here</b>
+        <span class="path">business.facebook.com → Inbox → Automations → "Frequently asked questions"</span>
+      </div>
+      <ol class="mini">
+        <li>Switch it <b>ON</b> · tick <b>both</b> Facebook and Instagram</li>
+        <li>Add the four question/answer pairs below, <b>in this order</b></li>
+        <li>Save</li>
+      </ol>
 
-  <div class="callout stop"><b>Never auto-reply to a complaint</b>
-  A comment like <em>"price bohat zyada hai"</em> or <em>"fraud hai ye"</em> contains your trigger words, and the automation will cheerfully answer it with a sales pitch in public. If Meta's automation screen offers an <b>excluded keywords</b> field, put these in it. If it does not, this is the main thing to watch during your first three days:
-  <div class="trig" style="margin-top:10px">scam, fraud, fake hai, ghatia, bakwas, faltu, worst, cheat, cheating, chor, paisay wapas, refund, complaint, kharab, damage, damaged, tuta, torn, late, bohat late, response nahi, reply nahi</div></div>
+      <div class="fieldlabel"><span>FAQ 1 — Question</span><button class="copy">Copy</button></div>
+      <div class="box">What are your prices?</div>
+      <div class="fieldlabel"><span>FAQ 1 — Answer</span><button class="copy">Copy</button></div>
+      <div class="box">All prices and colours are live at kordovanleather.com. Our wallets start around Rs 2,450, and delivery is free on orders over Rs 5,500. Tell me which piece caught your eye and I'll send the details.</div>
 
-  <h3>Instant reply — first message</h3>
-  <div class="copy">Thanks for messaging Kordovan 🐎
+      <div class="fieldlabel"><span>FAQ 2 — Question</span><button class="copy">Copy</button></div>
+      <div class="box">Do you offer cash on delivery?</div>
+      <div class="fieldlabel"><span>FAQ 2 — Answer</span><button class="copy">Copy</button></div>
+      <div class="box">Yes — cash on delivery anywhere in Pakistan, with no advance payment. Delivery is Rs 250, free over Rs 5,500. You can also pay by card, Easypaisa or JazzCash at checkout if you prefer.</div>
+
+      <div class="fieldlabel"><span>FAQ 3 — Question</span><button class="copy">Copy</button></div>
+      <div class="box">How long does delivery take?</div>
+      <div class="fieldlabel"><span>FAQ 3 — Answer</span><button class="copy">Copy</button></div>
+      <div class="box">2–4 working days for Karachi, Lahore and Islamabad, and 3–6 working days for other cities. We dispatch within 1–2 working days and send you a tracking number on WhatsApp.</div>
+
+      <div class="fieldlabel"><span>FAQ 4 — Question</span><button class="copy">Copy</button></div>
+      <div class="box">Is it real leather?</div>
+      <div class="fieldlabel"><span>FAQ 4 — Answer</span><button class="copy">Copy</button></div>
+      <div class="box">Yes — genuine full-grain cow leather, cut and stitched by hand in Pakistan. It softens and darkens with use rather than peeling like bonded leather. Every piece carries a lifetime craftsmanship warranty.</div>
+    </div>
+    <label class="chk"><input type="checkbox"> Task 10 done</label>
+  </div>
+
+  <div class="sec">Part 3 · Instagram app + saved replies (Tasks 11–13)</div>
+
+  <!-- ═══════════ TASK 11 ═══════════ -->
+  <div class="task" id="t11">
+    <div class="head">
+      <div class="n">11</div>
+      <div><h2>Check Instagram is ticked on all 10</h2><div class="sub">Two minutes · prevents half your setup doing nothing</div></div>
+    </div>
+    <div class="body">
+      <div class="where"><b>Go here</b>
+        <span class="path">business.facebook.com → Inbox → Automations (the list of everything you just built)</span>
+      </div>
+      <ol class="mini">
+        <li>Open each of the 10 automations one by one</li>
+        <li>Confirm <b>Instagram</b> is ticked as well as Facebook</li>
+        <li>If any is Facebook-only, tick Instagram and save</li>
+      </ol>
+      <div class="note stop"><b>Do not skip this</b>
+      Meta sometimes defaults new automations to Facebook only. If that happened, every Instagram comment is still landing on you by hand.</div>
+    </div>
+    <label class="chk"><input type="checkbox"> Task 11 done</label>
+  </div>
+
+  <!-- ═══════════ TASK 12 ═══════════ -->
+  <div class="task" id="t12">
+    <div class="head">
+      <div class="n">12</div>
+      <div><h2>Instagram app — welcome message + FAQs</h2><div class="sub">On your phone, in the Instagram app itself</div></div>
+    </div>
+    <div class="body">
+      <div class="where"><b>Go here</b>
+        <span class="path">Instagram app → your profile → ☰ menu → Business tools and controls</span>
+      </div>
+      <ol class="mini">
+        <li>Tap <b>Welcome message</b> → paste the message below → Save</li>
+        <li>Tap <b>Frequently asked questions</b> → add the same 4 questions from Task 10</li>
+      </ol>
+
+      <div class="fieldlabel"><span>Paste into: Welcome message</span><button class="copy">Copy</button></div>
+      <div class="box">Thanks for messaging Kordovan 🐎
 
 Everything — prices, colours and full details — is at kordovanleather.com
 
@@ -389,65 +530,148 @@ Everything — prices, colours and full details — is at kordovanleather.com
 
 Tell me what you're looking for and someone from the team will be with you shortly.</div>
 
-  <h3>Away message</h3>
-  <div class="copy">Thanks for messaging Kordovan 🐎
+      <div class="note win"><b>Check Story replies every morning</b>
+      Someone replying to a Story is warmer than any commenter — they are the closest to buying. Don't let those sit.</div>
+    </div>
+    <label class="chk"><input type="checkbox"> Task 12 done</label>
+  </div>
 
-Our team is here Monday to Saturday, 12 PM – 10 PM. We'll reply as soon as we're back.
+  <!-- ═══════════ TASK 13 ═══════════ -->
+  <div class="task" id="t13">
+    <div class="head">
+      <div class="n">13</div>
+      <div><h2>6 Saved Replies</h2><div class="sub">For the questions no automation covers — one click instead of typing</div></div>
+    </div>
+    <div class="body">
+      <div class="where"><b>Go here</b>
+        <span class="path">business.facebook.com → Inbox → Saved replies → Create reply</span>
+      </div>
+      <p style="font-size:14.5px;margin:0 0 4px">Create six. For each one, the shortcut name is in the label and the text is in the box.</p>
 
-In the meantime you can browse and order any time — cash on delivery, no advance:
-👉 kordovanleather.com
+      <div class="fieldlabel"><span>Shortcut: leather</span><button class="copy">Copy</button></div>
+      <div class="box">Every Kordovan piece is genuine full-grain cow leather, cut and stitched by hand here in Pakistan. It is not bonded or PU — real leather softens and darkens as you carry it, and develops its own patina. That is why we can back it with a lifetime craftsmanship warranty.</div>
 
-Tracking an order? kordovanleather.com/pages/track-order</div>
-
-  <h3>The four FAQ buttons</h3>
-
-  <h4>1 · "What are your prices?"</h4>
-  <div class="copy">All prices and colours are live at kordovanleather.com. Our wallets start around Rs 2,450, and delivery is free on orders over Rs 5,500. Tell me which piece caught your eye and I'll send the details.</div>
-
-  <h4>2 · "Do you offer cash on delivery?"</h4>
-  <div class="copy">Yes — cash on delivery anywhere in Pakistan, with no advance payment. Delivery is Rs 250, free over Rs 5,500. You can also pay by card, Easypaisa or JazzCash at checkout if you prefer.</div>
-
-  <h4>3 · "How long does delivery take?"</h4>
-  <div class="copy">2–4 working days for Karachi, Lahore and Islamabad, and 3–6 working days for other cities. We dispatch within 1–2 working days and send you a tracking number on WhatsApp.</div>
-
-  <h4>4 · "Is it real leather?"</h4>
-  <div class="copy">Yes — genuine full-grain cow leather, cut and stitched by hand in Pakistan. It softens and darkens with use rather than peeling like bonded leather. Every piece carries a lifetime craftsmanship warranty.</div>
-
-  <h3>Saved Replies (Phase 4)</h3>
-
-  <h4><code>leather</code></h4>
-  <div class="copy">Every Kordovan piece is genuine full-grain cow leather, cut and stitched by hand here in Pakistan. It is not bonded or PU — real leather softens and darkens as you carry it, and develops its own patina. That is why we can back it with a lifetime craftsmanship warranty.</div>
-
-  <h4><code>warranty</code></h4>
-  <div class="copy">Every piece carries a lifetime craftsmanship warranty — if the stitching or hardware fails in normal use, we repair or replace it.
+      <div class="fieldlabel"><span>Shortcut: warranty</span><button class="copy">Copy</button></div>
+      <div class="box">Every piece carries a lifetime craftsmanship warranty — if the stitching or hardware fails in normal use, we repair or replace it.
 
 You also have 7 days from delivery to return an unused item in its original condition. Message us here with your order number and we'll arrange it.</div>
 
-  <h4><code>track</code></h4>
-  <div class="copy">You can track your parcel any time here:
+      <div class="fieldlabel"><span>Shortcut: track</span><button class="copy">Copy</button></div>
+      <div class="box">You can track your parcel any time here:
 👉 kordovanleather.com/pages/track-order
 
 Send me your order number or the phone number you ordered with and I'll check it for you personally.</div>
 
-  <h4><code>store</code></h4>
-  <div class="copy">You're welcome to visit us and see the leather in person — our shop is in Malir Cantt, Karachi.
+      <div class="fieldlabel"><span>Shortcut: store</span><button class="copy">Copy</button></div>
+      <div class="box">You're welcome to visit us and see the leather in person — our shop is in Malir Cantt, Karachi.
 
 Our team is available Monday to Saturday, 12 PM – 10 PM.
 WhatsApp: wa.me/923332601161</div>
 
-  <h4><code>size</code></h4>
-  <div class="copy">Every product page on kordovanleather.com lists exact dimensions and what the piece holds — card slots, note compartment and coin pocket where fitted.
+      <div class="fieldlabel"><span>Shortcut: size</span><button class="copy">Copy</button></div>
+      <div class="box">Every product page on kordovanleather.com lists exact dimensions and what the piece holds — card slots, note compartment and coin pocket where fitted.
 
 Tell me which piece you're looking at and how much you normally carry, and I'll tell you honestly whether it will suit you.</div>
 
-  <h4><code>bulk</code></h4>
-  <div class="copy">We do corporate gifting and bulk orders, including custom branding on the leather.
+      <div class="fieldlabel"><span>Shortcut: bulk</span><button class="copy">Copy</button></div>
+      <div class="box">We do corporate gifting and bulk orders, including custom branding on the leather.
 
 Send the quantity, the pieces you have in mind and your deadline to corporate@kordovanleather.com and we'll come back with a quote.</div>
+    </div>
+    <label class="chk"><input type="checkbox"> Task 13 done</label>
+  </div>
 
-  <div class="callout win" style="margin-top:44px"><b>When all the boxes are ticked</b>
-  Tell me, and send the three answers from Phase 5. That real-inbox list is what Layer 2 gets built from — the custom agent that reads live stock, checks PostEx tracking, understands Roman Urdu properly, and hands the buyer over to WhatsApp where your orders actually close.</div>
+  <div class="sec">Part 4 · Test it (Task 14)</div>
+
+  <!-- ═══════════ TASK 14 ═══════════ -->
+  <div class="task" id="t14">
+    <div class="head">
+      <div class="n">14</div>
+      <div><h2>Test from a phone that is not an admin</h2><div class="sub">15 minutes · use a personal account, not the business one</div></div>
+    </div>
+    <div class="body">
+      <div class="note stop"><b>It must not be an admin account</b>
+      Meta does not fire automations for people who manage the Page. Testing from your own admin account shows you nothing.</div>
+
+      <ol class="mini">
+        <li>Comment <b>price?</b> on a recent Reel → expect a public reply <b>and</b> a DM within a minute</li>
+        <li>Comment <b>where is my order</b> → expect a DM and <b>no public reply</b></li>
+        <li>Comment <b>asli hai?</b> → expect the leather answer, not the price one</li>
+        <li>Message the Page → instant reply fires, 4 FAQ buttons appear</li>
+        <li>Message it after 10 PM → away message fires instead</li>
+        <li>Repeat steps 1 and 4 on <b>Instagram</b></li>
+      </ol>
+
+      <div class="note stop"><b>Then read every auto-reply for three days</b>
+      Keyword matching is blunt. "How much for the jacket" and "how much delivery" both contain price words and will get the same answer. Watch for the mismatches and move the keyword to the right automation. It settles after about three days.</div>
+
+      <div class="note stop"><b>Complaints will trigger the sales pitch</b>
+      A comment like <em>"price bohat zyada hai"</em> or <em>"fraud hai ye"</em> contains your trigger words. If any automation screen offers an <b>excluded keywords</b> field, paste this list into it. If it does not, this is the main thing to watch in those first three days.</div>
+
+      <div class="fieldlabel"><span>Paste into: Excluded keywords (if the field exists)</span><button class="copy">Copy</button></div>
+      <div class="box kw no">scam, fraud, fake hai, ghatia, bakwas, faltu, worst, cheat, cheating, chor, paisay wapas, refund, complaint, kharab, damage, damaged, tuta, torn, late, bohat late, response nahi, reply nahi</div>
+    </div>
+    <label class="chk"><input type="checkbox"> Task 14 done</label>
+  </div>
+
+  <div class="done-banner" style="margin-top:34px">
+    <b>When all 14 are ticked, tell me three things:</b><br>
+    1 · Roughly what share of messages you still answer by hand<br>
+    2 · Which questions the automations keep getting <b>wrong</b><br>
+    3 · Which questions come up a lot and have no automation yet<br><br>
+    That list is the spec for the custom agent — the one that reads live stock, checks PostEx tracking, and hands the buyer to WhatsApp. It gets built from your real inbox, not from my guesses.
+  </div>
 
 </div>
+
+<script>
+(function(){
+  // Copy buttons — each button copies the .box immediately after its label row
+  document.querySelectorAll('button.copy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var box = btn.parentElement.nextElementSibling;
+      if(!box) return;
+      var txt = box.innerText;
+      var done = function(){
+        var old = btn.textContent;
+        btn.textContent = 'Copied ✓'; btn.classList.add('ok');
+        setTimeout(function(){ btn.textContent = old; btn.classList.remove('ok'); }, 1400);
+      };
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(txt).then(done, function(){ fallback(txt, done); });
+      } else { fallback(txt, done); }
+    });
+  });
+  function fallback(txt, done){
+    var ta = document.createElement('textarea');
+    ta.value = txt; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); done(); }catch(e){}
+    document.body.removeChild(ta);
+  }
+
+  // Checkboxes — persist in localStorage, drive the progress bar
+  var boxes = document.querySelectorAll('.task label.chk input');
+  var bar = document.getElementById('pbar'), count = document.getElementById('pcount');
+  function key(i){ return 'kdv_social_task_' + i; }
+  function refresh(){
+    var n = 0;
+    boxes.forEach(function(b,i){
+      var card = b.closest('.task');
+      if(b.checked){ n++; card.classList.add('done'); } else { card.classList.remove('done'); }
+    });
+    count.textContent = n + ' / ' + boxes.length;
+    bar.style.width = (n / boxes.length * 100) + '%';
+  }
+  boxes.forEach(function(b,i){
+    try{ b.checked = localStorage.getItem(key(i)) === '1'; }catch(e){}
+    b.addEventListener('change', function(){
+      try{ localStorage.setItem(key(i), b.checked ? '1' : '0'); }catch(e){}
+      refresh();
+    });
+  });
+  refresh();
+})();
+</script>
 </body>
 </html>
