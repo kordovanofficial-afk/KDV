@@ -137,19 +137,24 @@
 
   <h3>1b. Repeat for the other intents</h3>
   <p>Build one automation per intent, in this order of value:</p>
-  <ul class="plain">
-    <li><b>Price</b> — the flood (done above)</li>
+  <p><b>Build them in this exact order</b> — Meta fires the first automation whose keywords match, so the narrow ones must sit above the broad ones:</p>
+  <ol class="steps">
+    <li><b>Order status / where is my parcel</b> — <span style="color:var(--oxblood)"><b>DM only, public reply OFF.</b></span> Must be first, or a late-parcel complaint gets answered with a sales pitch.</li>
+    <li><b>Price</b> — the flood (built above)</li>
     <li><b>COD / delivery charges</b></li>
     <li><b>Delivery time</b></li>
-    <li><b>"How do I order"</b></li>
-    <li><b>Order status / where is my parcel</b> — <span style="color:var(--oxblood)"><b>DM only, never a public reply.</b></span> Never discuss an individual's order in public comments.</li>
-  </ul>
+    <li><b>Is it real leather</b></li>
+    <li><b>Availability &amp; colours</b></li>
+    <li><b>"How do I order"</b> — last, because it is the broadest</li>
+  </ol>
 
+  <label class="chk"><input type="checkbox">Order-status automation live, <b>first in the list</b> — DM only, public reply OFF</label>
   <label class="chk"><input type="checkbox">Price automation live, applied to all posts and reels</label>
   <label class="chk"><input type="checkbox">COD / delivery-charge automation live</label>
   <label class="chk"><input type="checkbox">Delivery-time automation live</label>
-  <label class="chk"><input type="checkbox">"How to order" automation live</label>
-  <label class="chk"><input type="checkbox">Order-status automation live — <b>DM only</b>, public reply switched OFF</label>
+  <label class="chk"><input type="checkbox">"Is it real leather" automation live</label>
+  <label class="chk"><input type="checkbox">Availability &amp; colours automation live</label>
+  <label class="chk"><input type="checkbox">"How to order" automation live, <b>last in the list</b>, with no bare <code>order</code> keyword</label>
 
   <!-- ───────────────────────── PHASE 2 ───────────────────────── -->
   <h2 class="phase" id="p2"><span class="num">2</span>Messenger — instant reply, away message, FAQs</h2>
@@ -242,7 +247,10 @@
   People type <em>"kitne ka hai"</em> and <em>"rate btao"</em>. Your site, ads and packaging are English. So: catch them in the language they type, answer in the language of the brand. The top two answers carry a short Urdu line as well.</div>
 
   <h3>Price</h3>
-  <div class="trig">price, prices, pricing, rate, rates, cost, how much, howmuch, kitna, kitne, kitnay, qeemat, qimat, keemat, btao, bata, daam, dam, pkr, rs</div>
+  <div class="trig">price, prices, pricing, pric, prise, prize, prize?, rate, rates, ret, cost, costs, how much, howmuch, hw much, whats the price, what is the price, amount, rs, pkr, rupees, rupay, kitna, kitne, kitnay, kitni, kitny, ktna, ktne, ktni, katna, kitne ka, kitne ki, kitna hai, kitne ka hai, qeemat, qimat, keemat, qemat, qeymat, kimat, daam, dam, daaam, btao, bta, btana, bata, batao, batayen, bataye, btadain, bta dain, kia price, kya price, kya rate, kia rate, rate btao, price btao, price plz, price please, قیمت, ریٹ</div>
+
+  <div class="callout"><b>Why "prize" is in that list</b>
+  It is the single most common misspelling of "price" in Pakistani comments, and almost every brand's automation misses it. Same for <code>pric</code> and <code>prise</code>. Leave them in.</div>
 
   <h4>Public reply — variation 1</h4>
   <div class="copy">Sent you the price in your inbox 📩 — full details and colours are on kordovanleather.com</div>
@@ -269,7 +277,7 @@ Qeemat aur tamam colours website par mojood hain.
 Tell me which piece you're looking at and I'll help you pick the right one.</div>
 
   <h3>COD &amp; delivery charges</h3>
-  <div class="trig">cod, cash on delivery, cash, delivery charge, delivery charges, shipping, shipping charges, courier, charges, free delivery, free shipping, advance, payment</div>
+  <div class="trig">cod, c.o.d, c o d, cod hai, cod he, cod h, cod available, cash on delivery, cash on, cash, delivery pe, delivery par, delivery pay, advance, advance payment, advance to nahi, no advance, peshgi, payment, pay, paisay, paise, paisa, online payment, easypaisa, easy paisa, jazzcash, jazz cash, bank transfer, delivery charge, delivery charges, delivery kitne ki, shipping, shipping charge, shipping charges, courier, courier charges, free delivery, free shipping, mufat, muft</div>
 
   <h4>Public reply</h4>
   <div class="copy">Yes — cash on delivery, anywhere in Pakistan 🇵🇰 Details sent to your inbox 📩</div>
@@ -286,7 +294,7 @@ Poore Pakistan mein cash on delivery available hai.
 Order here 👉 kordovanleather.com</div>
 
   <h3>Delivery time</h3>
-  <div class="trig">delivery time, how many days, kitne din, kitney din, kab, kab tak, when will, how long, days, deliver, pohanchega, pohnchay ga, dispatch</div>
+  <div class="trig">delivery time, how many days, how long, how long does, when will i get, when will it, kitne din, kitney din, kitne dinn, kitne dino, kitne dinon, kitna time, kitni der, kitna waqt, kab, kab tak, kab ayega, kab aye ga, kab milega, kab mile ga, kab tak ayega, pohanchega, pohnchay ga, pohanche ga, ponhchay, pahunchega, pahunche ga, days, day, dispatch, deliver, delivery kab</div>
 
   <h4>Public reply</h4>
   <div class="copy">2–4 days for Karachi, Lahore and Islamabad, 3–6 days elsewhere in Pakistan. Details in your inbox 📩</div>
@@ -302,7 +310,10 @@ We pack and dispatch within 1–2 working days, and you get a tracking number by
 Order here 👉 kordovanleather.com</div>
 
   <h3>How to order</h3>
-  <div class="trig">how to order, how do i order, order kaise, kaise order, order karna, mangwana, how can i buy, buy, purchase, order</div>
+  <div class="trig">how to order, how do i order, how can i order, how can i buy, where to buy, where can i buy, order kaise, kaise order, kaise mangwaun, kaise mangwao, kaise le, kaise lein, order karna, order karna hai, order karwana, mangwana, mangwana hai, manga, mangwao, kahan se milega, kahan se le, kahan milta, kahan milega, link, link do, link dein, link plz, website, site, purchase</div>
+
+  <div class="callout stop"><b>Do not put the bare word "order" in this list</b>
+  It also appears in "where is my order", so a customer chasing a late parcel would get sent how-to-buy instructions. Keep <code>order</code> out of this automation entirely, and place the <b>order-status</b> automation ABOVE this one in the list — Meta fires the first match.</div>
 
   <h4>Public reply</h4>
   <div class="copy">Straight from kordovanleather.com — cash on delivery, no advance. Sent you the steps 📩</div>
@@ -320,7 +331,7 @@ We'll confirm on WhatsApp, then dispatch. You pay the rider at your door.
 Any trouble at checkout, message us here or on WhatsApp: wa.me/923332601161</div>
 
   <h3>Order status — DM ONLY</h3>
-  <div class="trig">where is my order, order status, my order, tracking, track, parcel, kahan hai, kidhar, nahi mila, not received, delivered nahi</div>
+  <div class="trig">where is my order, wheres my order, order status, my order, mera order, mera parcel, order kahan, order kidhar, order kab ayega, tracking, tracking number, track, cn number, cn no, parcel, kidhar, nahi mila, nahi aya, nahi aaya, abhi tak nahi, still not received, not received, not delivered, delivered nahi, kahan hai mera</div>
 
   <div class="callout stop"><b>Public reply must be OFF on this one</b>
   Never confirm or discuss an individual customer's order in a public comment thread. DM only.</div>
@@ -332,6 +343,39 @@ You can track your parcel any time here:
 👉 kordovanleather.com/pages/track-order
 
 If you send me your order number or the phone number you ordered with, I'll look it up personally.</div>
+
+  <h3>Is it real leather?</h3>
+  <div class="trig">original, orignal, originl, genuine, genuine leather, real leather, pure leather, asli, asli hai, asli leather, asal, chamra, chamda, leather hai, pure hai, quality, fake, duplicate, copy, china, rexine</div>
+
+  <h4>Public reply</h4>
+  <div class="copy">Genuine full-grain cow leather, cut and stitched by hand in Pakistan 🇵🇰 Full details sent to your inbox 📩</div>
+
+  <h4>The DM</h4>
+  <div class="copy">Yes — genuine full-grain cow leather. Not bonded, not PU, not rexine.
+
+Asli chamray ka hai, hath se Pakistan mein banaya gaya.
+
+Real leather softens and darkens as you carry it and develops its own patina. Fake leather peels. That is why we can put a lifetime craftsmanship warranty on every piece.
+
+See it up close 👉 kordovanleather.com</div>
+
+  <h3>Availability &amp; colours</h3>
+  <div class="trig">available, availabe, avaliable, avail, availability, stock, in stock, stock hai, stock mein, out of stock, dastyab, mojood, mil sakta, mil jayega, colour, color, colours, colors, kaunsa colour, konsa color, konsa rang, rang, black, brown, tan, kya colours, what colours</div>
+
+  <h4>Public reply</h4>
+  <div class="copy">Live stock and every colour are on the website — sent you the link 📩</div>
+
+  <h4>The DM</h4>
+  <div class="copy">Every colour we currently have in stock is live on the website — if you can add it to cart, we have it:
+👉 kordovanleather.com
+
+Jo colour website par hai, wo stock mein hai.
+
+Tell me which piece you're after and I'll point you to the right page.</div>
+
+  <div class="callout stop"><b>Never auto-reply to a complaint</b>
+  A comment like <em>"price bohat zyada hai"</em> or <em>"fraud hai ye"</em> contains your trigger words, and the automation will cheerfully answer it with a sales pitch in public. If Meta's automation screen offers an <b>excluded keywords</b> field, put these in it. If it does not, this is the main thing to watch during your first three days:
+  <div class="trig" style="margin-top:10px">scam, fraud, fake hai, ghatia, bakwas, faltu, worst, cheat, cheating, chor, paisay wapas, refund, complaint, kharab, damage, damaged, tuta, torn, late, bohat late, response nahi, reply nahi</div></div>
 
   <h3>Instant reply — first message</h3>
   <div class="copy">Thanks for messaging Kordovan 🐎
