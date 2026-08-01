@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kordovan — Instagram &amp; Facebook Auto-Replies (Layer 1)</title>
+<style>
+  :root{
+    --canvas:#F7F2EA; --parchment:#ECE3D4; --ink:#241C16; --walnut:#4A3528;
+    --cognac:#A0623A; --cognac-dark:#7E4B2C; --tan:#C08B5C; --brass:#B0894F;
+    --stone:#8B8174; --border:#DDD2C0; --pine:#2D6A4F; --oxblood:#8B2D2D;
+    --heading:Georgia,'Times New Roman',serif; --body:-apple-system,'Segoe UI',Inter,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--canvas);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.75}
+  .wrap{max-width:880px;margin:0 auto;padding:48px 24px 90px}
+  header.hero{background:var(--ink);color:var(--canvas);padding:56px 24px;text-align:center}
+  header.hero .eyebrow{color:var(--brass);text-transform:uppercase;letter-spacing:.18em;font-size:11px;font-weight:600}
+  header.hero h1{font-family:var(--heading);font-weight:500;font-size:clamp(30px,5vw,44px);margin:10px 0 8px}
+  header.hero p{color:#D8C39A;max-width:640px;margin:0 auto;font-size:15px}
+  h2.phase{font-family:var(--heading);font-weight:500;font-size:clamp(24px,3.4vw,32px);margin:64px 0 6px;padding-top:24px;border-top:1px solid var(--border)}
+  h2.phase .num{display:inline-block;background:var(--cognac);color:#fff;border-radius:6px;font-size:15px;font-family:var(--body);font-weight:600;padding:3px 12px;margin-right:12px;vertical-align:middle}
+  .when{color:var(--stone);font-size:13px;text-transform:uppercase;letter-spacing:.08em;font-weight:600;margin-bottom:18px}
+  h3{font-family:var(--heading);font-weight:500;font-size:20px;margin:34px 0 10px;color:var(--walnut)}
+  h4{font-family:var(--body);font-weight:600;font-size:15px;margin:22px 0 6px;color:var(--cognac-dark)}
+  p{margin:10px 0}
+  .goal{background:var(--parchment);border:1px solid var(--border);border-radius:12px;padding:26px 30px;margin:30px 0}
+  table{border-collapse:collapse;width:100%;margin:16px 0;background:#fff;border:1px solid var(--border);border-radius:8px;overflow:hidden;font-size:14.5px}
+  th{background:var(--parchment);text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--cognac);padding:10px 14px}
+  td{padding:10px 14px;border-top:1px solid var(--border);vertical-align:top}
+  .overflow{overflow-x:auto}
+  ol.steps{counter-reset:s;list-style:none;margin:14px 0}
+  ol.steps>li{position:relative;padding:14px 18px 14px 60px;background:#fff;border:1px solid var(--border);border-radius:10px;margin:10px 0;counter-increment:s}
+  ol.steps>li::before{content:counter(s);position:absolute;left:16px;top:14px;width:28px;height:28px;border-radius:50%;background:var(--cognac);color:#fff;font-weight:600;font-size:14px;display:flex;align-items:center;justify-content:center}
+  label.chk{display:flex;gap:10px;align-items:flex-start;background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px 16px;margin:8px 0;cursor:pointer}
+  label.chk input{margin-top:5px;accent-color:var(--cognac);width:16px;height:16px;flex:none}
+  label.chk:has(input:checked){background:#F0EDE2;color:var(--stone);text-decoration:line-through}
+  code,kbd{background:var(--parchment);border:1px solid var(--border);border-radius:4px;padding:1px 7px;font-size:.88em;font-family:Consolas,Menlo,monospace;color:var(--cognac-dark);word-break:break-all}
+  b.ui{color:var(--cognac-dark)}
+  .callout{border-left:4px solid var(--brass);background:#fff;border-radius:0 10px 10px 0;padding:14px 20px;margin:18px 0;font-size:15px}
+  .callout.stop{border-left-color:var(--oxblood);background:#FBF1EF}
+  .callout.win{border-left-color:var(--pine);background:#F0F5F1}
+  .callout b:first-child{text-transform:uppercase;letter-spacing:.06em;font-size:12px;display:block;margin-bottom:4px}
+  .callout.stop b:first-child{color:var(--oxblood)}
+  .callout.win b:first-child{color:var(--pine)}
+  .callout:not(.stop):not(.win) b:first-child{color:var(--brass)}
+  .toc{background:#fff;border:1px solid var(--border);border-radius:12px;padding:22px 28px;margin:30px 0}
+  .toc a{color:var(--cognac);text-decoration:none;display:block;padding:5px 0;border-bottom:1px dashed var(--border);font-size:15px}
+  .toc a:last-child{border-bottom:0}
+  .toc b{display:inline-block;width:74px;color:var(--stone);font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+  ul.plain{margin:8px 0 8px 22px}
+  ul.plain li{margin:5px 0}
+  .copy{background:#fff;border:1px solid var(--border);border-left:4px solid var(--cognac);border-radius:0 10px 10px 0;padding:16px 20px;margin:10px 0;white-space:pre-wrap;font-size:15px;line-height:1.65}
+  .trig{background:var(--parchment);border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin:8px 0;font-size:13.5px;font-family:Consolas,Menlo,monospace;color:var(--cognac-dark);word-break:break-word}
+  .trig::before{content:'TRIGGER WORDS';display:block;font-family:var(--body);font-size:10px;letter-spacing:.08em;color:var(--stone);margin-bottom:4px}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="eyebrow">Kordovan · Social Automation — Layer 1</div>
+  <h1>Instagram &amp; Facebook auto-replies, without an app</h1>
+  <p>Everything here is native to Meta, completely free, and needs no developer account, no App Review and no code. This is the layer that takes the daily load off you <em>this week</em>. The custom agent (Layer 2) comes after — it does not replace any of this, it sits on top of it.</p>
+</header>
+
+<div class="wrap">
+
+  <div class="goal">
+    <h3 style="margin-top:0">What you're switching on</h3>
+    <div class="overflow"><table>
+      <tr><th>Tool</th><th>Where</th><th>What it kills</th></tr>
+      <tr><td><b>Comment → auto public reply</b></td><td>Business Suite</td><td>The "price?" flood under every Reel</td></tr>
+      <tr><td><b>Comment → auto DM</b></td><td>Business Suite</td><td>Moves the buyer into a private chat automatically</td></tr>
+      <tr><td><b>Instant reply</b></td><td>Messenger + Instagram</td><td>The "is anyone there?" gap</td></tr>
+      <tr><td><b>Away message</b></td><td>Messenger + Instagram</td><td>Night / Sunday messages sitting unanswered</td></tr>
+      <tr><td><b>FAQs</b></td><td>Messenger + Instagram</td><td>The same 8 questions, forever</td></tr>
+      <tr><td><b>Saved Replies</b></td><td>Business Suite Inbox</td><td>Typing the long answers by hand</td></tr>
+    </table></div>
+    <p style="margin-bottom:0"><b>Cost: PKR 0.</b> All of it is built into the Business Suite you already have because you run ads.</p>
+  </div>
+
+  <div class="callout stop"><b>Do Phase 0 first — it is not optional</b>
+  These auto-replies will quote your delivery charge and free-delivery threshold to hundreds of people a day. Your Shopify shipping rate is still on the <b>old</b> numbers, so right now a customer with a Rs 3,000 basket hits a checkout that has no valid rate. Fix that before you turn any of this on, or you will be automating a wrong promise at scale.</div>
+
+  <div class="toc">
+    <a href="#p0"><b>Phase 0</b> Fix the Shopify shipping rate (5 minutes, do first)</a>
+    <a href="#p1"><b>Phase 1</b> Facebook Page — comment auto-reply + auto-DM</a>
+    <a href="#p2"><b>Phase 2</b> Messenger — instant reply, away message, FAQs</a>
+    <a href="#p3"><b>Phase 3</b> Instagram — the same three, plus story replies</a>
+    <a href="#p4"><b>Phase 4</b> Saved Replies — the fast manual layer</a>
+    <a href="#p5"><b>Phase 5</b> Test it, then watch it for a week</a>
+    <a href="#copy"><b>Appendix</b> Every reply, ready to copy</a>
+  </div>
+
+  <!-- ───────────────────────── PHASE 0 ───────────────────────── -->
+  <h2 class="phase" id="p0"><span class="num">0</span>Fix the Shopify shipping rate</h2>
+  <div class="when">Before anything else · ~5 minutes</div>
+
+  <p>Shopify admin → <b class="ui">Settings</b> → <b class="ui">Shipping and delivery</b> → your delivery profile → <b class="ui">Manage rates</b>.</p>
+
+  <ol class="steps">
+    <li>Find the <b>Rs 250</b> rate. Edit its condition: <b>maximum order price</b> from <code>2,499</code> → <code>5,499</code>.</li>
+    <li>Find the <b>Free</b> rate. Edit its condition: <b>minimum order price</b> from <code>2,500</code> → <code>5,500</code>.</li>
+    <li>Save both.</li>
+  </ol>
+
+  <div class="callout stop"><b>Change both, or checkout breaks</b>
+  If you only raise the free-shipping minimum, every basket between Rs 2,500 and Rs 5,499 falls into a gap with no matching rate and the customer sees "no shipping available". Both edits, same sitting.</div>
+
+  <label class="chk"><input type="checkbox"> Rs 250 rate max is now <b>5,499</b></label>
+  <label class="chk"><input type="checkbox"> Free rate min is now <b>5,500</b></label>
+  <label class="chk"><input type="checkbox">Tested: added a Rs 3,000 item to cart and reached checkout with a Rs 250 rate showing</label>
+
+  <!-- ───────────────────────── PHASE 1 ───────────────────────── -->
+  <h2 class="phase" id="p1"><span class="num">1</span>Facebook — comment auto-reply + auto-DM</h2>
+  <div class="when">The single highest-value switch in this document</div>
+
+  <p>This is the one that will change your day. When someone comments <em>"price"</em> under a Reel, Meta posts a public reply <b>and</b> opens a private message with that person — automatically, in seconds, at 3am.</p>
+
+  <p>Go to <b class="ui">business.facebook.com</b> → <b class="ui">Inbox</b> → <b class="ui">Automations</b> (left sidebar). Click <b class="ui">Create automation</b>.</p>
+
+  <div class="callout"><b>If the menu looks different</b>
+  Meta moves this around. Look for anything named <b>Automations</b>, <b>Automated responses</b>, or <b>Auto-reply to comments</b> — inside Inbox, or under Business Suite → All tools → Inbox. It is the same feature under whichever name your account shows.</div>
+
+  <h3>1a. The price automation</h3>
+  <ol class="steps">
+    <li>Choose the template <b class="ui">Comments on posts</b> (or "Reply to comments" / "Comment to DM").</li>
+    <li>Apply it to <b>All posts and reels</b>, not one specific post — otherwise you will be re-doing this every time you post.</li>
+    <li>Set the trigger to <b>specific keywords</b> and paste the trigger list from the appendix.</li>
+    <li>Turn ON both <b class="ui">Reply in comments</b> and <b class="ui">Send a message</b>.</li>
+    <li>Paste the public reply and the DM from the appendix.</li>
+    <li>Save and set it <b>Live</b>.</li>
+  </ol>
+
+  <div class="callout"><b>Write 3–4 variations of the public reply</b>
+  Meta rotates them. Identical repeated comments under the same post look robotic and Facebook can down-rank them. Four variations are supplied in the appendix — use all of them.</div>
+
+  <h3>1b. Repeat for the other intents</h3>
+  <p>Build one automation per intent, in this order of value:</p>
+  <ul class="plain">
+    <li><b>Price</b> — the flood (done above)</li>
+    <li><b>COD / delivery charges</b></li>
+    <li><b>Delivery time</b></li>
+    <li><b>"How do I order"</b></li>
+    <li><b>Order status / where is my parcel</b> — <span style="color:var(--oxblood)"><b>DM only, never a public reply.</b></span> Never discuss an individual's order in public comments.</li>
+  </ul>
+
+  <label class="chk"><input type="checkbox">Price automation live, applied to all posts and reels</label>
+  <label class="chk"><input type="checkbox">COD / delivery-charge automation live</label>
+  <label class="chk"><input type="checkbox">Delivery-time automation live</label>
+  <label class="chk"><input type="checkbox">"How to order" automation live</label>
+  <label class="chk"><input type="checkbox">Order-status automation live — <b>DM only</b>, public reply switched OFF</label>
+
+  <!-- ───────────────────────── PHASE 2 ───────────────────────── -->
+  <h2 class="phase" id="p2"><span class="num">2</span>Messenger — instant reply, away message, FAQs</h2>
+  <div class="when">Same Automations screen · ~15 minutes</div>
+
+  <h3>2a. Instant reply</h3>
+  <p>Fires on the first message from anyone who has never messaged you. Its job is to buy you time and set an expectation — not to sell.</p>
+  <label class="chk"><input type="checkbox">Instant reply ON for Messenger, copy pasted from appendix</label>
+
+  <h3>2b. Away message</h3>
+  <p>Your stated hours are <b>Mon–Sat, 12 PM – 10 PM PKT</b> (that is what your shipping policy tells customers, so keep it consistent). Set the away schedule to everything outside that, including all day Sunday.</p>
+  <label class="chk"><input type="checkbox">Away message ON, schedule set to 10 PM – 12 PM and all Sunday</label>
+
+  <h3>2c. FAQs</h3>
+  <p>These show as tappable buttons when someone opens your chat. Meta usually allows four — use the four in the appendix, in that order. They are ranked by how often they block a sale.</p>
+  <label class="chk"><input type="checkbox">4 FAQs added with answers</label>
+
+  <!-- ───────────────────────── PHASE 3 ───────────────────────── -->
+  <h2 class="phase" id="p3"><span class="num">3</span>Instagram — the same three</h2>
+  <div class="when">~15 minutes</div>
+
+  <p>Instagram automations live in the same Business Suite Automations screen — when you create each one, tick <b class="ui">Instagram</b> as well as <b class="ui">Messenger</b>. Some settings only exist in the Instagram app itself.</p>
+
+  <h3>3a. In Business Suite</h3>
+  <p>Re-run Phase 1 and Phase 2 with the Instagram channel ticked. Most automations let you select both channels at once — if so, you may have already done this. Open each automation you built and confirm Instagram is on.</p>
+  <label class="chk"><input type="checkbox">Every automation from Phases 1–2 has Instagram ticked</label>
+
+  <h3>3b. In the Instagram app</h3>
+  <p>Instagram app → your profile → <b class="ui">☰</b> → <b class="ui">Business tools and controls</b>:</p>
+  <ul class="plain">
+    <li><b class="ui">Saved replies</b> — the shortcuts from Phase 4</li>
+    <li><b class="ui">Frequently asked questions</b> — same four</li>
+    <li><b class="ui">Welcome message</b> — the instant reply</li>
+  </ul>
+  <label class="chk"><input type="checkbox">Instagram app: saved replies, FAQs and welcome message set</label>
+
+  <div class="callout win"><b>Story replies are your warmest lead</b>
+  Someone replying to a Story is further down the funnel than any comment. Do not let those sit overnight — the away message covers them, but check Story replies first every morning.</div>
+
+  <!-- ───────────────────────── PHASE 4 ───────────────────────── -->
+  <h2 class="phase" id="p4"><span class="num">4</span>Saved Replies — the fast manual layer</h2>
+  <div class="when">~10 minutes · pays for itself in two days</div>
+
+  <p>Automations handle the predictable. Saved Replies handle everything else — you pick from a list instead of typing the same paragraph for the hundredth time.</p>
+  <p>Business Suite → <b class="ui">Inbox</b> → <b class="ui">Saved replies</b> → <b class="ui">Create reply</b>. Give each a short shortcut so you can find it fast.</p>
+
+  <div class="overflow"><table>
+    <tr><th>Shortcut</th><th>Use it for</th></tr>
+    <tr><td><code>leather</code></td><td>"Is it original leather?"</td></tr>
+    <tr><td><code>warranty</code></td><td>Warranty and returns</td></tr>
+    <tr><td><code>track</code></td><td>Where is my order</td></tr>
+    <tr><td><code>store</code></td><td>Shop address and hours</td></tr>
+    <tr><td><code>size</code></td><td>Dimensions / capacity questions</td></tr>
+    <tr><td><code>bulk</code></td><td>Corporate and bulk enquiries</td></tr>
+  </table></div>
+
+  <label class="chk"><input type="checkbox">All 6 saved replies created</label>
+
+  <!-- ───────────────────────── PHASE 5 ───────────────────────── -->
+  <h2 class="phase" id="p5"><span class="num">5</span>Test it, then watch it for a week</h2>
+  <div class="when">15 minutes today, then five minutes a day</div>
+
+  <h3>Test from a phone that is not an admin</h3>
+  <ol class="steps">
+    <li>Comment <b>"price?"</b> on a recent Reel from a personal account. You should get a public reply <b>and</b> a DM within about a minute.</li>
+    <li>Message the Page from that account — instant reply should fire, FAQ buttons should appear.</li>
+    <li>Message at 11 PM — away message should fire instead.</li>
+    <li>Comment <b>"where is my order"</b> — you should get a DM and <b>no public reply</b>.</li>
+  </ol>
+
+  <label class="chk"><input type="checkbox">All four tests pass on Facebook</label>
+  <label class="chk"><input type="checkbox">All four tests pass on Instagram</label>
+
+  <div class="callout stop"><b>Read every auto-reply that goes out for the first three days</b>
+  Keyword matching is blunt. "How much for the jacket" and "how much delivery" both contain the price trigger and will get the same answer. Watch for the mismatches and add the missing keyword to the right automation. After three days it settles.</div>
+
+  <h3>What to tell me after a week</h3>
+  <ul class="plain">
+    <li>Roughly what share of messages you still answer by hand</li>
+    <li>The questions the automations keep getting <em>wrong</em></li>
+    <li>The questions that come up a lot and have no automation yet</li>
+  </ul>
+  <p>That list is exactly what Layer 2 gets built around — so it is trained on your real inbox rather than my guesses.</p>
+
+  <!-- ───────────────────────── APPENDIX ───────────────────────── -->
+  <h2 class="phase" id="copy"><span class="num">A</span>Every reply, ready to copy</h2>
+  <div class="when">Brand voice · prices verified against the live store</div>
+
+  <div class="callout"><b>Why the triggers are in Roman Urdu but the answers are in English</b>
+  People type <em>"kitne ka hai"</em> and <em>"rate btao"</em>. Your site, ads and packaging are English. So: catch them in the language they type, answer in the language of the brand. The top two answers carry a short Urdu line as well.</div>
+
+  <h3>Price</h3>
+  <div class="trig">price, prices, pricing, rate, rates, cost, how much, howmuch, kitna, kitne, kitnay, qeemat, qimat, keemat, btao, bata, daam, dam, pkr, rs</div>
+
+  <h4>Public reply — variation 1</h4>
+  <div class="copy">Sent you the price in your inbox 📩 — full details and colours are on kordovanleather.com</div>
+  <h4>Public reply — variation 2</h4>
+  <div class="copy">Just messaged you the price 📩 Cash on delivery is available nationwide.</div>
+  <h4>Public reply — variation 3</h4>
+  <div class="copy">Check your inbox — price and colours sent 📩</div>
+  <h4>Public reply — variation 4</h4>
+  <div class="copy">Details are in your DMs 📩 You can also see everything at kordovanleather.com</div>
+
+  <h4>The DM</h4>
+  <div class="copy">Thanks for your interest in Kordovan 🐎
+
+You'll find the price, all colours and full details here:
+👉 kordovanleather.com
+
+Qeemat aur tamam colours website par mojood hain.
+
+• Cash on delivery available all over Pakistan
+• Delivery Rs 250 — free on orders over Rs 5,500
+• Genuine leather, handcrafted in Pakistan
+• Lifetime craftsmanship warranty
+
+Tell me which piece you're looking at and I'll help you pick the right one.</div>
+
+  <h3>COD &amp; delivery charges</h3>
+  <div class="trig">cod, cash on delivery, cash, delivery charge, delivery charges, shipping, shipping charges, courier, charges, free delivery, free shipping, advance, payment</div>
+
+  <h4>Public reply</h4>
+  <div class="copy">Yes — cash on delivery, anywhere in Pakistan 🇵🇰 Details sent to your inbox 📩</div>
+
+  <h4>The DM</h4>
+  <div class="copy">Yes — cash on delivery is available across Pakistan. No advance payment. You pay the rider when your parcel reaches your door.
+
+Poore Pakistan mein cash on delivery available hai.
+
+• Delivery Rs 250
+• FREE on orders over Rs 5,500
+• Prefer to pay online? Card, Easypaisa and JazzCash all work at checkout
+
+Order here 👉 kordovanleather.com</div>
+
+  <h3>Delivery time</h3>
+  <div class="trig">delivery time, how many days, kitne din, kitney din, kab, kab tak, when will, how long, days, deliver, pohanchega, pohnchay ga, dispatch</div>
+
+  <h4>Public reply</h4>
+  <div class="copy">2–4 days for Karachi, Lahore and Islamabad, 3–6 days elsewhere in Pakistan. Details in your inbox 📩</div>
+
+  <h4>The DM</h4>
+  <div class="copy">Here's how long it takes:
+
+• Karachi, Lahore, Islamabad — 2 to 4 working days
+• All other cities — 3 to 6 working days
+
+We pack and dispatch within 1–2 working days, and you get a tracking number by WhatsApp as soon as it leaves us.
+
+Order here 👉 kordovanleather.com</div>
+
+  <h3>How to order</h3>
+  <div class="trig">how to order, how do i order, order kaise, kaise order, order karna, mangwana, how can i buy, buy, purchase, order</div>
+
+  <h4>Public reply</h4>
+  <div class="copy">Straight from kordovanleather.com — cash on delivery, no advance. Sent you the steps 📩</div>
+
+  <h4>The DM</h4>
+  <div class="copy">Ordering takes about a minute:
+
+1. Go to kordovanleather.com
+2. Pick your piece and colour, then Add to Cart
+3. Enter your name, phone number and address
+4. Choose Cash on Delivery — no advance payment
+
+We'll confirm on WhatsApp, then dispatch. You pay the rider at your door.
+
+Any trouble at checkout, message us here or on WhatsApp: wa.me/923332601161</div>
+
+  <h3>Order status — DM ONLY</h3>
+  <div class="trig">where is my order, order status, my order, tracking, track, parcel, kahan hai, kidhar, nahi mila, not received, delivered nahi</div>
+
+  <div class="callout stop"><b>Public reply must be OFF on this one</b>
+  Never confirm or discuss an individual customer's order in a public comment thread. DM only.</div>
+
+  <h4>The DM</h4>
+  <div class="copy">Happy to check that for you.
+
+You can track your parcel any time here:
+👉 kordovanleather.com/pages/track-order
+
+If you send me your order number or the phone number you ordered with, I'll look it up personally.</div>
+
+  <h3>Instant reply — first message</h3>
+  <div class="copy">Thanks for messaging Kordovan 🐎
+
+Everything — prices, colours and full details — is at kordovanleather.com
+
+• Cash on delivery all over Pakistan
+• Delivery Rs 250, free over Rs 5,500
+• Genuine leather, handcrafted in Pakistan
+• Lifetime craftsmanship warranty
+
+Tell me what you're looking for and someone from the team will be with you shortly.</div>
+
+  <h3>Away message</h3>
+  <div class="copy">Thanks for messaging Kordovan 🐎
+
+Our team is here Monday to Saturday, 12 PM – 10 PM. We'll reply as soon as we're back.
+
+In the meantime you can browse and order any time — cash on delivery, no advance:
+👉 kordovanleather.com
+
+Tracking an order? kordovanleather.com/pages/track-order</div>
+
+  <h3>The four FAQ buttons</h3>
+
+  <h4>1 · "What are your prices?"</h4>
+  <div class="copy">All prices and colours are live at kordovanleather.com. Our wallets start around Rs 2,450, and delivery is free on orders over Rs 5,500. Tell me which piece caught your eye and I'll send the details.</div>
+
+  <h4>2 · "Do you offer cash on delivery?"</h4>
+  <div class="copy">Yes — cash on delivery anywhere in Pakistan, with no advance payment. Delivery is Rs 250, free over Rs 5,500. You can also pay by card, Easypaisa or JazzCash at checkout if you prefer.</div>
+
+  <h4>3 · "How long does delivery take?"</h4>
+  <div class="copy">2–4 working days for Karachi, Lahore and Islamabad, and 3–6 working days for other cities. We dispatch within 1–2 working days and send you a tracking number on WhatsApp.</div>
+
+  <h4>4 · "Is it real leather?"</h4>
+  <div class="copy">Yes — genuine full-grain cow leather, cut and stitched by hand in Pakistan. It softens and darkens with use rather than peeling like bonded leather. Every piece carries a lifetime craftsmanship warranty.</div>
+
+  <h3>Saved Replies (Phase 4)</h3>
+
+  <h4><code>leather</code></h4>
+  <div class="copy">Every Kordovan piece is genuine full-grain cow leather, cut and stitched by hand here in Pakistan. It is not bonded or PU — real leather softens and darkens as you carry it, and develops its own patina. That is why we can back it with a lifetime craftsmanship warranty.</div>
+
+  <h4><code>warranty</code></h4>
+  <div class="copy">Every piece carries a lifetime craftsmanship warranty — if the stitching or hardware fails in normal use, we repair or replace it.
+
+You also have 7 days from delivery to return an unused item in its original condition. Message us here with your order number and we'll arrange it.</div>
+
+  <h4><code>track</code></h4>
+  <div class="copy">You can track your parcel any time here:
+👉 kordovanleather.com/pages/track-order
+
+Send me your order number or the phone number you ordered with and I'll check it for you personally.</div>
+
+  <h4><code>store</code></h4>
+  <div class="copy">You're welcome to visit us and see the leather in person — our shop is in Malir Cantt, Karachi.
+
+Our team is available Monday to Saturday, 12 PM – 10 PM.
+WhatsApp: wa.me/923332601161</div>
+
+  <h4><code>size</code></h4>
+  <div class="copy">Every product page on kordovanleather.com lists exact dimensions and what the piece holds — card slots, note compartment and coin pocket where fitted.
+
+Tell me which piece you're looking at and how much you normally carry, and I'll tell you honestly whether it will suit you.</div>
+
+  <h4><code>bulk</code></h4>
+  <div class="copy">We do corporate gifting and bulk orders, including custom branding on the leather.
+
+Send the quantity, the pieces you have in mind and your deadline to corporate@kordovanleather.com and we'll come back with a quote.</div>
+
+  <div class="callout win" style="margin-top:44px"><b>When all the boxes are ticked</b>
+  Tell me, and send the three answers from Phase 5. That real-inbox list is what Layer 2 gets built from — the custom agent that reads live stock, checks PostEx tracking, understands Roman Urdu properly, and hands the buyer over to WhatsApp where your orders actually close.</div>
+
+</div>
+</body>
+</html>
