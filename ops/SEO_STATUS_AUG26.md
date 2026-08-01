@@ -113,7 +113,8 @@ revenue, not August.**
 
 ## 6. Next, in order
 
-1. **Add the three redirects** (§4) — pending user approval
+1. ~~Add the three redirects~~ — **withdrawn, see the §4 correction.** Only the
+   one wrong glove redirect needs fixing. Superseded by §13.
 2. **Restock or merge `leather-caps` and `office-bags`** — 4 and 6 products is
    below the level that holds a position
 3. `mens-leather-shoes` sits at position 22.8 with 977 impressions and the
