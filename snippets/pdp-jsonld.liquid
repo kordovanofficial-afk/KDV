@@ -2,8 +2,37 @@
   Product JSON-LD (schema.org) — rendered on every PDP by pdp-main.
   aggregateRating/review blocks appear only when the reviews metafields are set.
   reviews.rating supports both the native `rating` type (object) and a plain number.
+
+  shippingDetails + hasMerchantReturnPolicy are what upgrade a "product snippet"
+  to a "merchant listing" in Google. Search Console reported all 95 valid items
+  missing both (Aug 3 2026). Every value below is taken from the live policies —
+  do not "improve" them without changing the policy pages too:
+
+    Shipping  Rs 250 flat, FREE at/over Rs 5,500  → docs/legal/shipping-policy.html
+              dispatch 1–2 business days, transit 2–4 days KHI/LHR/ISB,
+              3–6 elsewhere → declared as a 2–6 day range nationwide
+    Returns   7 days from delivery, customer ships it back, and for a change of
+              mind the RETURN SHIPPING IS THE CUSTOMER'S → ReturnShippingFees,
+              NOT FreeReturn. → docs/legal/refund-policy.html
 {%- endcomment -%}
 {%- liquid
+  assign jl_free_ship_min = 550000
+  assign jl_flat_ship = 250
+
+  # 37 products have no description at all, which Google reports as a missing
+  # required field. Fall back to something true and product-specific rather
+  # than one boilerplate string repeated across all of them.
+  assign jl_desc = product.description | strip_html | strip | truncate: 500
+  if jl_desc == blank
+    assign jl_type = product.type | downcase | default: 'leather piece'
+    capture jl_desc
+      echo product.title
+      echo ' — genuine leather '
+      echo jl_type
+      echo ' handcrafted in Pakistan by Kordovan. Cash on delivery nationwide, lifetime craftsmanship warranty.'
+    endcapture
+  endif
+
   assign jl_rmeta = product.metafields.reviews.rating.value
   assign jl_rating = jl_rmeta.rating | default: jl_rmeta
   assign jl_revs = ''
@@ -35,7 +64,7 @@
   "name": {{ product.title | json }},
   "url": {{ request.origin | append: product.url | json }},
   "image": [{%- for img in product.images limit: 8 -%}{{ img | image_url: width: 1200 | json }}{% unless forloop.last %},{% endunless %}{%- endfor -%}],
-  "description": {{ product.description | strip_html | truncate: 500 | json }},
+  "description": {{ jl_desc | json }},
   "sku": {{ product.selected_or_first_available_variant.sku | json }},
   "brand": { "@type": "Brand", "name": {{ product.vendor | default: "Kordovan" | json }} },
   "offers": [
@@ -49,7 +78,29 @@
       "price": {{ variant.price | money_without_currency | remove: ',' | json }},
       "availability": "{% if variant.available %}https://schema.org/InStock{% else %}https://schema.org/OutOfStock{% endif %}",
       "itemCondition": "https://schema.org/NewCondition",
-      "seller": { "@type": "Organization", "name": "Kordovan" }
+      "seller": { "@type": "Organization", "name": "Kordovan" },
+      "shippingDetails": {
+        "@type": "OfferShippingDetails",
+        "shippingRate": {
+          "@type": "MonetaryAmount",
+          "value": "{% if variant.price >= jl_free_ship_min %}0{% else %}{{ jl_flat_ship }}{% endif %}",
+          "currency": {{ cart.currency.iso_code | json }}
+        },
+        "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "PK" },
+        "deliveryTime": {
+          "@type": "ShippingDeliveryTime",
+          "handlingTime": { "@type": "QuantitativeValue", "minValue": 1, "maxValue": 2, "unitCode": "DAY" },
+          "transitTime": { "@type": "QuantitativeValue", "minValue": 2, "maxValue": 6, "unitCode": "DAY" }
+        }
+      },
+      "hasMerchantReturnPolicy": {
+        "@type": "MerchantReturnPolicy",
+        "applicableCountry": "PK",
+        "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+        "merchantReturnDays": 7,
+        "returnMethod": "https://schema.org/ReturnByMail",
+        "returnFees": "https://schema.org/ReturnShippingFees"
+      }
     }{% unless forloop.last %},{% endunless %}
     {%- endfor -%}
   ]
