@@ -256,3 +256,136 @@ Everything else in a normal Search Console audit is covered above.
 
 **No redirects to add beyond #1.** The earlier plan to add three was based on a
 wrong reading and has been withdrawn.
+
+---
+
+# Console audit part 2 — the UI-only reports (Aug 3 2026)
+
+User exported the five reports the API cannot reach. Everything below is from
+those exports, not inference.
+
+## 14. 🔴 Indexing — 277 indexed, 1,481 not
+
+| Reason | Pages | Verdict |
+|---|---|---|
+| **Crawled – currently not indexed** | **556** | 🔴 the big one |
+| Blocked by robots.txt | 255 | mostly normal (Shopify blocks cart/checkout/search/filters) |
+| **Not found (404)** | **227** | 🔴 **this is the trim damage** |
+| Alternative page with proper canonical | 171 | normal — variant + collection-scoped URLs |
+| Excluded by 'noindex' | 149 | normal Shopify |
+| Page with redirect | 98 | normal — our own redirects |
+| Discovered – currently not indexed | 24 | minor |
+| Soft 404 | 1 | minor |
+
+**16% of known URLs are indexed.** For a Shopify store that ratio is not as
+alarming as it sounds — the platform generates enormous URL surface
+(`/collections/X/products/Y`, tag filters, sort params), and most of the
+"blocked", "canonical" and "noindex" buckets are correct behaviour.
+
+**Two buckets are real:**
+
+### 227 × "Not found (404)"
+This is the catalogue trim, and it **vindicates the original concern** — just
+not the three URLs guessed at in §4. There are 227 of them. Each is a dead URL
+Google still has on file, and any that carried rankings is leaking.
+
+⚠️ **The export does not contain the URL list.** To act on this, drill into
+Coverage → "Not found (404)" in the Search Console UI and export **that**
+table. Without the list there is nothing to redirect.
+
+### 556 × "Crawled – currently not indexed"
+Google fetched these, understood them, and declined to index. Usually thin or
+duplicate content. At 161 published products, 556 is mostly Shopify URL bloat
+(collection-scoped product URLs and tag-filtered collection pages), which is
+why the mega menu linking to four tag-filtered wallet URLs (§5) is worth
+revisiting — those are exactly this shape of URL.
+
+Trend: not-indexed was 1,351 on Jun 2 and is 1,481 now. It grew ~130 across the
+trim period, consistent with the 227 404s appearing.
+
+## 15. 🔴 Merchant listings are collapsing — 296 → 95
+
+| Date | Valid items | Rich-result impressions |
+|---|---|---|
+| May 5 | **296** | 896 |
+| Jun 16 | 242 | 1,302 |
+| Jul 21 | 224 | 1,381 |
+| Jul 28 | 164 | 585 |
+| **Aug 1** | **95** | **234** |
+
+**Down 68% in three months, and 42% in the last four days alone.**
+
+The long decline tracks the catalogue trim — fewer products, fewer listings.
+The last four days are sharper than the trim alone explains; the likely cause
+is the **126 out-of-stock catalogue items** (see `ADS_PLAN_AUG26.md`), since
+out-of-stock products lose merchant-listing eligibility. Worth confirming as
+stock is replenished.
+
+### Every remaining valid item is missing the same two fields
+```
+Missing 'hasMerchantReturnPolicy' (in offers)   95 items
+Missing 'shippingDetails' (in offers)           95 items
+Missing 'description'                           37 items
+Invalid GTIN                                     4 items
+Critical issues                                  0
+```
+
+This is exactly what §9 predicted from the API, now confirmed item by item.
+**Both missing fields are one edit to `snippets/pdp-jsonld.liquid`** — the data
+is already settled: Rs 250 flat, free over Rs 5,500, 2–4 days Karachi/Lahore/
+Islamabad, 3–6 elsewhere, 7-day returns.
+
+The 37 missing descriptions are a genuine content gap — those products have no
+description in Shopify at all.
+
+## 16. Product snippets — the reviews gap, confirmed
+
+```
+Missing 'aggregateRating'   47 items
+Missing 'review'            47 items
+Critical issues              0
+Valid                       71
+```
+
+47 products render Product schema with no rating because no `reviews.rating`
+metafield is set on any of them. **Zero review stars in search results.**
+Typically worth +20–35% CTR at unchanged position — the largest single CTR
+lever available, and it needs no paid review app.
+
+## 17. ✅ Core Web Vitals — genuinely good, nothing to do
+
+| | Poor | Need improvement | Good |
+|---|---|---|---|
+| May 5 | 0 | **76** | 52 |
+| Jun 16 | 0 | 57 | 40 |
+| **Aug 1** | **0** | **8** | **108** |
+
+Only issue: 6 URLs with mobile LCP over 2.5s. **Zero "Poor" URLs.**
+
+The July performance pass (font `<link>`, real `<img>` hero, srcset, decode-
+before-paint) moved 76 need-improvement URLs down to 8. That work landed.
+Do not regress the rules in `CLAUDE.md` § Performance.
+
+## 18. ⚠️ Jackets is dropping right now
+
+| Window | Position | Impressions | Clicks |
+|---|---|---|---|
+| Jul 12–18 | **11.47** | 2,743 | 49 |
+| Jul 26 – Aug 1 | **17.80** | 2,182 | 49 |
+
+Six positions in two weeks. Clicks held only because CTR rose 1.79% → 2.25%.
+This is the one live negative trend in the account and it is the second-largest
+impression pool on the site. Watch it; if it keeps sliding, investigate before
+spending effort elsewhere.
+
+## 19. Priorities, revised against real data
+
+| # | Action | Who | Payoff |
+|---|---|---|---|
+| 1 | **Export the 404 URL list** from Coverage → Not found (404) | user, 1 min | unblocks 227 redirects |
+| 2 | **Add `shippingDetails` + `hasMerchantReturnPolicy`** to `pdp-jsonld.liquid` | me, ~1 hr | fixes all 95 merchant listings |
+| 3 | **Author reviews** into metafields on top sellers | user + me | +20–35% CTR via stars |
+| 4 | Fill descriptions on the 37 products missing them | user | merchant listing validity |
+| 5 | Watch jackets (§18) | — | second-biggest impression pool |
+| 6 | Fix the one wrong glove redirect (§4) | user, 2 min | small but simply wrong |
+| 7 | Core Web Vitals | **nothing** | already good |
