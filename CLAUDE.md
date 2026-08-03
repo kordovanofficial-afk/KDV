@@ -202,6 +202,21 @@ lacks `write_customer_merge` scope, no workaround; direct API egress blocked).
   work). User's own profiles: business phone 3332601161 cluster.
 
 ## 📣 Meta Ads (SCOPED — Kordovan 2025 ONLY)
+> 🔴 **STANDING RULE (user, Aug 3 2026): EVERY ad set targets these 9 CITIES ONLY.
+> Never `countries: ["PK"]` again.** PostEx delivers to cities, not villages —
+> country-wide targeting sent ~40% of orders to small towns and most were
+> cancelled, while still firing Purchase events that teach Meta to find more of
+> them (same failure mode as the COD refusers).
+> Meta city keys (verified live, use these directly in `geo_locations.cities`):
+> ```
+> Karachi 1800796 · Lahore 1807162 · Islamabad 1796084 · Rawalpindi 1822222
+> Faisalabad 1784775 · Multan 1814658 · Sialkot 1827865
+> Gujranwala 1792796 · Hyderabad 1795700
+> ```
+> ⚠️ **NO `radius`** on any of them — a radius re-includes the villages. Omitting
+> the key entirely = "current city only", which is what we want.
+> ⚠️ `targeting` is a FULL REPLACE via the API — fetch the ad set's existing
+> targeting and merge, or you will wipe the audiences and exclusions.
 > 📕 **READ `ops/ADS_PLAYBOOK_PK.md` FIRST for any ads work.** Real PKR benchmarks,
 > COD unit economics (cold is currently under water, retargeting is very
 > profitable), the ~2x Meta attribution overstatement, and the delivery mechanics
