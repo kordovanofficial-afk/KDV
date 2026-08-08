@@ -185,3 +185,88 @@ weeks**. It will not move position. Position needs the content layer.
    is correct**: Rebel at 33,600 vs 32,000, Alison at 26,000 vs 23,000
 5. Enable Search & Discovery filters, then add style/colour tags
 6. Re-check GSC around Sept 10 against the baseline above
+
+---
+
+# Top-10 blog rewritten — Aug 9 2026
+
+`/blogs/jackets/top-10-leather-jacket-brands-in-pakistan` — **handle
+deliberately unchanged**, it holds the ranking.
+
+## Why this page was the priority
+
+The "brand" query family in season (Nov 2025 – Feb 2026):
+
+| Query | Impressions | Position | CTR |
+|---|---|---|---|
+| top 10 leather jacket brands in pakistan | 5,435 | **1.58** | 15.7% |
+| top 10 ... **with price** | 1,407 | **1.10** | **21.4%** |
+| best jacket brands in pakistan | 3,050 | 3.02 | 4.85% |
+| **jacket brands in pakistan** | 2,120 | 6.42 | **1.46%** |
+| **jackets brands in pakistan** | 2,134 | 6.81 | **1.36%** |
+| mens jackets brands in pakistan | 1,538 | 8.50 | 0.98% |
+| leather jacket brands in pakistan | 739 | 3.49 | 10.8% |
+
+~22,000 seasonal impressions, ~1,600 clicks. **The page ranked #1.10 for a
+"with price" query and contained no prices at all.**
+
+## What was wrong with the old version
+
+- **Published Sept 2024, never updated.** Two years stale for a "top 10".
+- **Zero prices**, despite the highest-CTR query asking for them.
+- Every brand entry 2–4 vague sentences — "tough and durable", "stylish and
+  practical". Nothing a reader could act on.
+- Broken sentences ("To compare and evaluate the top 10 ... customer
+  satisfaction.") and meaningless phrases ("combine fashion and strategy").
+- Kordovan at #1 with the longest entry and no acknowledgement of bias —
+  exactly the pattern Google's helpful-content system demotes.
+- No comparison table, no FAQ, no methodology, ~900 words.
+
+## The rewrite — 1,835 words
+
+**The core decision: disclose the bias in the first box on the page.** A
+leather brand publishing "top 10 leather brands" and ranking itself first is
+only credible if it says so. The page now opens by admitting it, and the
+Kordovan entry lists three reasons *not* to buy from us — prepaid only, made-to-
+order wait, no try-on outside Karachi. That honesty is the single biggest
+differentiator against every competing list.
+
+Also added:
+- Comparison table (brand / best for / price band)
+- **"What a genuine leather jacket actually costs in Pakistan"** — the section
+  that answers the "with price" query, framed around price bands and what they
+  imply about the material
+- **"How to check the leather yourself"** — four physical tests. Genuinely
+  useful, and the kind of section that holds a reader on the page
+- Honest per-brand "Watch out for" on all ten
+- Style guide (biker / bomber / cafe racer / vintage)
+- City-specific winter sizing advice — Karachi vs the north
+- Six FAQs written against real question queries
+- Internal links to both jacket collections and the leather care guide
+- Title now carries **(2026)**; the exact-match phrase is preserved
+
+### 🔴 Why competitor prices are bands, not numbers
+A web search for current Pakistani brand prices returned Kordovan's own article
+as a source — circular — and no reliable live figures. Publishing invented
+prices for named competitors would be worse than publishing none. The page
+gives Kordovan's real range (Rs 22,000–35,000), honest bands for the rest, an
+explicit "checked August 2026" note, and tells the reader to verify on the
+brand's own site.
+
+## Honest score: 8/10, not 10/10
+
+Two things are missing, and neither is writing:
+
+1. **🔴 The post now has no images.** The old version had four; the rewrite
+   dropped them. They were generic 480×480 stock with weak alt text, but *some*
+   images beat none for engagement and image search. **This is a regression
+   until images are added back.** Needs: a header image, one shot per style
+   (biker/bomber/cafe racer), and descriptive alt text.
+2. **No FAQPage or BlogPosting structured data.** Six FAQs are written but not
+   marked up, so no FAQ rich result. Shopify strips `<script>` from article
+   bodies — this has to go in the theme's article template.
+
+Other gaps: the author is still "Jawad pasha" with no credentials or author
+page (E-E-A-T), and no product pages link back to this post.
+
+**Fix images + FAQ schema and this is a genuine 10.**
