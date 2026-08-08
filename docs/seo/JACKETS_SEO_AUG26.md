@@ -101,3 +101,87 @@ peaks.
 
 If CTR on the top jacket queries goes from ~3% to ~7% at unchanged positions,
 that is roughly **+5,000 clicks across the Nov–Feb season**.
+
+---
+
+# Follow-up, Aug 9 — corrections and self-assessment
+
+## 🔴 CORRECTION — the "14 jackets out of stock" warning was wrong
+
+The section above claimed 14 of 30 jackets were out of stock and therefore
+invisible to merchant listings and dynamic ads. **That was incorrect.**
+
+`totalInventory: 0` was read as "sold out". On a product with
+`tracksInventory: false` it means "there is nothing to count" — Shopify treats
+untracked variants as **always available**. The authoritative field is
+`variants.availableForSale`, and checking it showed **29 of 30 were already
+`true`**. Only one — the duplicate Alison, which was genuinely tracked at zero
+— was unavailable.
+
+**This is the second time in this session the same mistake was made:** earlier,
+`productByHandle` returning null was read as "the URL 404s", when it only meant
+the product was deleted and a redirect was serving the URL fine.
+
+**Rule: never infer a state from a proxy value. Query the field that actually
+governs the behaviour** — `availableForSale` for purchasability,
+URL Inspection for indexing, not `totalInventory` or a null lookup.
+
+## What was applied
+
+| Change | Count |
+|---|---|
+| SEO title + meta description rewritten | 30 products, 3 collections |
+| `inventoryItem.tracked` → false (made to order, sellable year-round) | 17 products / 97 variants |
+| `productType` "Motorcycle Jackets" → "Leather Jacket" | 8 products |
+| Empty collection body description filled + internal links | 1 |
+
+Verified after: all 30 are `productType: Leather Jacket`,
+`tracksInventory: false`, `availableForSale: true`.
+
+**Not done, deliberately:** style/colour filter tags. They do nothing until
+storefront filters are switched on in admin → Search & Discovery. Do both
+together or neither.
+
+## Self-assessment against standard e-commerce SEO practice
+
+**Overall: 7/10 — "metadata layer complete, content layer untouched."**
+
+| Area | Score | Reasoning |
+|---|---|---|
+| Query research | **9** | Used real Nov–Feb seasonal GSC data, not August and not guesses. Correctly identified that the failure was CTR-at-good-position, not ranking, and that price intent was the untapped angle. |
+| Factual accuracy | **9** | Caught PREPAID & MADE TO ORDER before writing COD onto 30 pages; verified free delivery was genuinely true at these price points; checked the returns policy before writing return schema. |
+| Title tags | **8** | All ≤60 chars (was 25/30 over), brand survives truncation, filler dropped before brand. Formulaic though — 30 near-identical structures. |
+| Collection pages | **8** | Head term + price in title, empty body filled, internal links added, cannibalisation with `kdv-jackets` removed. Body copy is thin at 3 paragraphs; competitors run 300–600 words. |
+| Meta descriptions | **7** | All ≤155 with price in every one. But template-generated and they read that way — no variation in hook between a Rs 22,000 and a Rs 35,000 jacket. |
+| Structured data | **7** | Product JSON-LD carries shipping + returns as of today. No BreadcrumbList, no FAQPage on the collection. |
+| **On-page content** | **3** | **Product body descriptions were not touched at all.** They still open with "PREPAID & MADE TO ORDER\nDescription:" — app boilerplate. This is the text Google actually reads for relevance and it matters more than the meta description. |
+| **Image alt text** | **2** | Not addressed. The July audit found 47.9% of images site-wide missing alt text. Leather jackets attract meaningful image-search traffic. |
+| Technical checks | **5** | Never verified what the PDP and collection render as H1, never checked whether jackets has the same internal-orphan problem that wallets had, handles left as-is (long and messy, but changing them risks redirects). |
+| Competitive analysis | **0** | None. No look at who outranks Kordovan for `leather jacket pakistan` or why. |
+| Measurement | **6** | Baseline is recorded above, but no explicit re-check date was set. |
+
+### The biggest miss
+**The blog post was ignored.** `top-10-leather-jacket-brands-in-pakistan` sits
+at **position 1.58 with 15.7% CTR and 852 clicks** — the single best-performing
+jacket asset on the site, and one of the few pages that already wins the
+"best/top brand" query family, which converts at 14–24% CTR. Refreshing and
+extending it for the new season is probably worth more than several of the
+product metas rewritten today, and it was not touched.
+
+### Honest summary
+The highest-leverage, evidence-based half of the job is done well and is
+factually sound. The half that requires writing real content — product body
+copy, alt text, expanding the blog — is untouched, and that is the half that
+moves rankings rather than click-through.
+
+Expect this work to lift **CTR on existing impressions within days to two
+weeks**. It will not move position. Position needs the content layer.
+
+## Next, in priority order
+1. Refresh and extend the top-10-brands blog post for the new season
+2. Rewrite product body descriptions (strip the boilerplate opener)
+3. Alt text across jacket images
+4. Resolve the two duplicate product pairs — **needs a decision on which price
+   is correct**: Rebel at 33,600 vs 32,000, Alison at 26,000 vs 23,000
+5. Enable Search & Discovery filters, then add style/colour tags
+6. Re-check GSC around Sept 10 against the baseline above
