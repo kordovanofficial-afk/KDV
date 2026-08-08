@@ -90,3 +90,71 @@ cards (line icons) and the cognac CTA band are intentionally image-free.
   collection headers, brand story) — the "art-directed" layer.
 - Once generated: upload in Shopify (theme editor / Files) or commit to
   `assets/`, then we wire them into the matching slot.
+
+---
+
+## Blog — Top 10 Leather Jacket Brands in Pakistan (2026)
+`/blogs/jackets/top-10-leather-jacket-brands-in-pakistan` · briefed Aug 9 2026
+
+Five slots. Shoot or generate, then upload to **Shopify → Content → Files**
+using the exact filenames below so they can be pulled and placed automatically.
+
+**House style for all five (Quiet Heritage):** natural daylight, matte finish,
+no gloss or specular highlights, muted palette — Alabaster `#F7F2EA`,
+Parchment `#ECE3D4`, Espresso `#241C16`, Walnut `#4A3528`, Cognac `#A0623A`.
+Editorial, restrained, heritage-menswear magazine. **No text, no logos, no
+watermarks.** JPG, sRGB, under 300 KB each after export.
+
+---
+
+### 1 · Header image
+**File:** `blog-jackets-hero.jpg` · **1600 × 900** (16:9)
+**Placement:** top of article, above the disclosure box
+**Alt text:** `Three genuine leather jackets — biker, bomber and cafe racer — laid flat on linen`
+
+> Editorial product photograph, flat overhead composition. Three genuine leather jackets laid slightly overlapping on a warm alabaster linen backdrop: a black sheepskin biker jacket with asymmetric zip, a dark brown bomber with ribbed cuffs, and a deep espresso cafe racer with a band collar. Soft directional daylight from the upper left, long gentle shadows. Matte leather, visible natural grain and stitching detail, no gloss. Muted palette of espresso brown, black and cognac against cream linen. Quiet, premium, understated heritage-menswear editorial styling. No text, no logos, no people. Medium format, 50mm, f/5.6, natural light.
+
+---
+
+### 2 · Leather grain macro
+**File:** `blog-jackets-grain-macro.jpg` · **1400 × 900** (14:9)
+**Placement:** inside "How to check the leather yourself", after the intro line
+**Alt text:** `Close-up of genuine sheepskin leather grain showing irregular natural pores`
+
+> Extreme macro photograph of genuine sheepskin leather surface, filling the frame. Irregular natural grain with visible pores of varying size and spacing, subtle tonal variation across the hide, a soft natural crease running diagonally. Deep walnut brown. Raking side light from the left to bring out the texture in relief. Matte, no sheen. Shallow depth of field falling off toward the edges. Photographic realism, no illustration, no text. 100mm macro lens, f/4.
+
+---
+
+### 3 · The four jacket styles
+**File:** `blog-jackets-four-styles.jpg` · **1600 × 900** (16:9)
+**Placement:** inside "Which style should you buy?", above the list
+**Alt text:** `Four leather jacket styles compared — biker, bomber, cafe racer and vintage distressed`
+
+> Four-panel grid, equal quarters separated by thin cream dividers. Each panel shows one leather jacket photographed straight-on against a plain parchment backdrop, identical lighting and framing across all four: (1) black biker jacket with asymmetric zip and belted waist, (2) brown bomber jacket with ribbed collar, cuffs and hem, (3) black cafe racer with minimal band collar and centre zip, (4) vintage distressed brown jacket with worn, faded finish. Soft even daylight, matte leather, no gloss. Consistent scale and centring so the silhouettes can be compared. No text, no labels, no people, no hangers visible.
+
+---
+
+### 4 · The workshop
+**File:** `blog-jackets-workshop.jpg` · **1400 × 900** (14:9)
+**Placement:** inside the "1. Kordovan" section, after the first paragraph
+**Alt text:** `Leather jacket panels being cut and stitched by hand in a Karachi workshop`
+**Why it matters:** this is the credibility image. A real workshop photo of your
+own bench beats anything generated — **prefer a real one if you can take it.**
+
+> Documentary photograph of a leather workshop bench. Hands of a craftsman guiding a panel of brown sheepskin leather under an industrial sewing machine, mid-stitch. Cutting patterns, a steel rule, chalk marks and thread spools on a worn wooden surface around it. Warm natural window light from the side, dust visible in the air. Muted, unstyled, honest — a working room rather than a set. Espresso and walnut tones with cream daylight. Face not visible. No text, no logos. 35mm, f/2.8, natural light, slight grain.
+
+---
+
+### 5 · Winter layering
+**File:** `blog-jackets-winter-layering.jpg` · **1400 × 900** (14:9)
+**Placement:** inside "Buying for a Pakistani winter"
+**Alt text:** `Brown leather jacket worn over a knit sweater showing room for winter layering`
+
+> Editorial lifestyle photograph, waist-up, shot from the side and slightly behind so the face is not visible. A man wearing an open dark brown leather jacket over a thick cream wool sweater, collar turned up, on a cold overcast morning. Soft flat winter daylight, muted background of a blurred street with warm stone tones. Focus on how the jacket sits over the knit — room across the chest and shoulders. Matte leather, natural fall of the fabric. Understated, documentary, not a fashion pose. No text, no logos, no visible branding.
+
+---
+
+### After upload
+Tell me they are in Files and I will pull the CDN URLs and place all five in
+the article with the alt text above, plus add the header image to the
+`BlogPosting` schema `image` property (currently omitted because none existed).
