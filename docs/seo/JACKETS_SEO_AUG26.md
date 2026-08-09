@@ -270,3 +270,43 @@ Other gaps: the author is still "Jawad pasha" with no credentials or author
 page (E-E-A-T), and no product pages link back to this post.
 
 **Fix images + FAQ schema and this is a genuine 10.**
+
+## Images placed — Aug 9 2026
+
+All five uploaded to Shopify Files and placed in the article. File-level alt
+text set on each `MediaImage` as well as on the `<img>` tags.
+
+| Slot | File | Native size | Placement |
+|---|---|---|---|
+| Header | `blog-jackets-hero.png` | 1672×941 | top, above the disclosure box |
+| Grain macro | `blog-jackets-grain-macro.png` | 1563×1006 | "How to check the leather yourself" (in a `<figure>` with caption) |
+| Four styles | `blog-jackets-four-styles.png` | 1672×941 | "Which style should you buy?" |
+| Workshop | `blog-jackets-workshop.png` | 1561×1007 | Kordovan entry (in a `<figure>` with caption) |
+| Winter layering | `blog-jackets-winter-layering.png` | 1537×1023 | "Buying for a Pakistani winter" |
+
+### They were uploaded as PNG — handled, not ignored
+PNGs at ~1600px would be multi-megabyte and would have wrecked the page's
+Core Web Vitals, which are currently clean (0 Poor URLs — see
+`SEO_STATUS_AUG26.md` §17). Every `<img>` therefore requests the Shopify CDN's
+`&width=` variants rather than the raw file:
+
+- `srcset` at 600w / 1000w / 1400–1600w with `sizes="(max-width: 768px) 100vw, 820px"`
+- explicit `width`/`height` on every image, so nothing shifts while loading (CLS)
+- header is `loading="eager" fetchpriority="high"` — it is the LCP element
+- the other four are `loading="lazy" decoding="async"`
+
+Shopify's CDN serves WebP to browsers that accept it when the width parameter
+is present, so the PNG source is not what visitors actually download. No need
+to re-export as JPG.
+
+`BlogPosting.image` now points at the header image; it was omitted before
+because no image existed.
+
+**This closes the two gaps that held the post at 8/10.**
+
+### Still open on this post
+- Author is `Jawad pasha` with no credentials or author page (E-E-A-T).
+  A named author with a short bio would help.
+- No product pages link back to this post.
+- Verify the rich result renders:
+  https://search.google.com/test/rich-results?url=https%3A%2F%2Fkordovanleather.com%2Fblogs%2Fjackets%2Ftop-10-leather-jacket-brands-in-pakistan
