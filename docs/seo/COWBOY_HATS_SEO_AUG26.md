@@ -174,3 +174,59 @@ this block is invisible as a link. Inline styles avoid a live-theme push.
 Add to `assets/home.css` under `.kv-coll__editin` — `ul/ol/li` spacing, `li::marker`
 in brass, and `a` in cognac with an underline, mirroring the existing `.kv-rte`
 rules. Would let the metafield copy drop the inline styles.
+
+---
+
+# Aug 10 — the PDP "fits" band. The real question.
+
+The block the user was pointing at is the PDP capacity band in
+`snippets/pdp-main.liquid` (line 155) — eyebrow, headline, paragraph, three
+stat tiles, and a wide image on the left. It is gated on one metafield:
+
+```liquid
+{%- if product.metafields.custom.fits != blank -%}
+```
+
+No `custom.fits`, no band. The image is not "image 5" by rule — the snippet
+walks `product.images` and takes the **first one with `aspect_ratio > 1.2`**,
+falling back to `product.media[1]`. On the hats that happens to be image 5,
+because all six carry four portrait shots (1122x1402) then one landscape
+lifestyle shot (1536x1024).
+
+## Coverage across the live catalogue
+
+**20 of 170 active products have `custom.fits`. All 20 are wallets.**
+
+Zero on jackets, hats, bags, shoes, belts, caps, gloves — and 11 wallets are
+missing it too, including **The Razor**, which is one of the two products
+carrying live paid traffic.
+
+| Category | Active | Has the band |
+|---|---|---|
+| Wallets (all sub-types) | ~31 | 20 |
+| Leather Jacket | 30 | 0 |
+| Hats | 6 | 0 → **6 (fixed Aug 10)** |
+| Bags / laptop / backpack / duffle | ~35 | 0 |
+| Shoes | ~22 | 0 |
+| Belts | ~11 | 0 |
+| Caps, gloves, cases, misc | ~35 | 0 |
+
+## Applied — all six hats
+
+`fits`, `fits_title` and `fits_text` written per hat. Size ranges are taken
+from the real variant options and differ per product — Clifford Faded Black is
+XL only, Clifford Rustic Brown is XL–XXL, the Studded Band is M–XL, the rest
+S–XL. No theme change was needed; the landscape image was already there.
+
+## ⚠️ One hardcoded string does not survive the move off wallets
+
+Line 172 is `<span class="eyebrow">Holds What Matters</span>` — wallet language.
+It reads wrong above a hat, and will read wrong above a jacket, a belt and a
+pair of shoes. Fix is one line:
+
+```liquid
+<span class="eyebrow">{{ product.metafields.custom.fits_eyebrow | default: "Holds What Matters" }}</span>
+```
+
+Additive, defaulted, changes nothing on any page that does not set the new
+metafield. **Needs the user's approval — pushing `kordovan` deploys live.**
