@@ -310,3 +310,44 @@ because no image existed.
 - No product pages link back to this post.
 - Verify the rich result renders:
   https://search.google.com/test/rich-results?url=https%3A%2F%2Fkordovanleather.com%2Fblogs%2Fjackets%2Ftop-10-leather-jacket-brands-in-pakistan
+
+---
+
+# Jacket photography — Aug 10 2026
+
+Per-jacket shot sheet built: **`docs/images/JACKETS_SHOT_SHEET.html`**, 30
+jackets x 5 shots = 150 self-contained prompts. Replaces the category-level
+jacket prompts in `shot-sheet.html`, which gave every jacket the same
+*"worn on a model, 3/4 torso crop"* line. Source data and art direction in
+`tools/jacket-shotsheet/`; rebuild with `python3 tools/jacket-shotsheet/build.py`.
+
+Two rules the sheet enforces on every prompt: **one locked male model and one
+locked female model** across the whole range, and **no half crops** — the whole
+garment, collar to hem, in frame on all five shots.
+
+## 🔴 CORRECTION — the "two duplicate product pairs" claim was wrong
+
+Section "Open — blocks the season" above lists Rebel (33,600 / 32,000) and
+Alison (26,000 / 23,000) as duplicate products needing a price decision.
+**Neither pair is a duplicate.** Both are single products carrying the wrong
+title:
+
+| Product | Title says | Handle + every image filename + every alt text say |
+|---|---|---|
+| 8137559245040 | Rebel, brown cafe racer | **Hawkeye brown double-breasted vintage coat** |
+| 8180219347184 | Alison, black women's biker | **Bliss maroon women's bomber** |
+
+The prices differ because they are different garments. **And the Aug 9 rewrite
+made the first one worse**: the old SEO title read "Hawkeye Brown Double
+Breasted Vintage Coat", which was correct, and it was overwritten with the
+Rebel title to match the (wrong) product title. That page now describes a cafe
+racer and shows a double-breasted coat.
+
+The user has since renamed 8180219347184 to **Sinclair Women's Bomber Jacket**;
+its SEO title still said "Alison" and was corrected on Aug 10.
+**8137559245040 still needs the user's decision** — rename the product to
+Hawkeye, or confirm the images are the wrong ones.
+
+Same root cause as the `totalInventory` and `productByHandle` errors: a value
+was taken as evidence of a thing it does not actually govern. A product title
+is not evidence of what the product is; the images are.

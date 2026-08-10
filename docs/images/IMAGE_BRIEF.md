@@ -84,6 +84,12 @@ cards (line icons) and the cognac CTA band are intentionally image-free.
 ---
 
 ## Notes
+- **Jackets have their own sheet.** Per-jacket, per-shot prompts for all 30
+  jackets live in **`docs/images/JACKETS_SHOT_SHEET.html`** (open it in a
+  browser — 150 copy buttons, progress saved locally). It supersedes the generic
+  "Jackets & Coats" rows in `shot-sheet.html`, which gave every jacket the same
+  category prompt. Regenerate with `python3 tools/jacket-shotsheet/build.py`;
+  the per-jacket art direction is editable in `tools/jacket-shotsheet/jackets.py`.
 - **Product cards** (bestsellers, collection/product pages) use **real catalogue
   photos** already on Shopify — no generation needed there.
 - These generated images are the **designed / styled** slots (hero, mega tiles,
