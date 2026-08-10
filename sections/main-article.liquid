@@ -1,0 +1,113 @@
+{%- comment -%}
+  Article template. NEW FILE — added Aug 9 2026.
+
+  ⚠️ WHY THIS EXISTS: the rebuilt theme went live on Jul 25 2026 with no
+  templates/article.* and no templates/blog.*, so every /blogs/... URL returned
+  404 for roughly two weeks. Google logged the top-10 jackets post — the site's
+  best organic asset — as "Not found (404)". Do not delete these templates.
+
+  Reuses the existing .kv-page / .kv-rte typography from assets/home.css so
+  articles match the content pages. Everything article-specific is scoped under
+  .kv-article in the style block below rather than added to home.css, so this
+  file cannot affect any other page.
+
+  The article featured image is deliberately NOT rendered here — article bodies
+  already carry their own inline images, and rendering both duplicates them.
+  The featured image is used on the blog listing cards instead.
+{%- endcomment -%}
+
+<style>
+  /* Scoped to .kv-article only — nothing here can reach another template. */
+
+  /* home.css hides the first heading in .kv-rte because content-page bodies
+     repeat their own title. Article bodies do not, so restore it here. */
+  .kv-article .kv-rte > h1:first-child,
+  .kv-article .kv-rte > h2:first-child { display: block; }
+
+  .kv-article__meta{
+    display:flex; gap:10px; align-items:center; justify-content:center;
+    flex-wrap:wrap; margin-top:18px;
+    font-size:13px; letter-spacing:.04em; color:var(--stone);
+  }
+  .kv-article__meta span{ display:inline-flex; align-items:center; gap:10px; }
+  .kv-article__meta span + span::before{
+    content:''; width:3px; height:3px; border-radius:50%;
+    background:var(--border); display:inline-block;
+  }
+
+  /* Article bodies contain images, figures and tables that .kv-rte does not
+     style. Constrain them so nothing can overflow the page. */
+  .kv-article .kv-rte img{
+    max-width:100%; height:auto; display:block; border-radius:8px; margin:28px 0;
+  }
+  .kv-article .kv-rte figure{ margin:28px 0; }
+  .kv-article .kv-rte figure img{ margin:0; }
+  .kv-article .kv-rte figcaption{
+    font-size:14px; color:var(--stone); margin-top:10px; line-height:1.6;
+  }
+  .kv-article .kv-rte table{
+    width:100%; border-collapse:collapse; margin:26px 0; font-size:15px;
+    background:#fff; border:1px solid var(--border); border-radius:8px; overflow:hidden;
+  }
+  .kv-article .kv-rte th{
+    background:var(--parchment); text-align:left; padding:11px 14px;
+    font-weight:600; color:var(--ink);
+  }
+  .kv-article .kv-rte td{ padding:10px 14px; border-top:1px solid var(--border); }
+  /* Wide tables must scroll inside themselves, never widen the page. */
+  .kv-article .kv-rte > div[style*="overflow"]{ max-width:100%; }
+
+  .kv-article__foot{
+    max-width:760px; margin:0 auto; padding:0 40px 96px; text-align:center;
+  }
+  .kv-article__back{
+    display:inline-block; font-size:14px; letter-spacing:.06em;
+    text-transform:uppercase; color:var(--cognac); text-decoration:none;
+    border-bottom:1px solid var(--border); padding-bottom:4px;
+  }
+  .kv-article__back:hover{ color:var(--cognac-dark); border-color:var(--cognac); }
+
+  @media (max-width:600px){
+    .kv-article__foot{ padding:0 22px 72px; }
+  }
+</style>
+
+<article class="kv-page kv-article">
+
+  <header class="kv-page__hero">
+    <div class="kv-wrap">
+      <span class="kv-eyebrow">{{ blog.title | escape }}</span>
+      <h1>{{ article.title | escape }}</h1>
+      <div class="kv-article__meta">
+        {%- if section.settings.show_date -%}
+          <span><time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%-d %B %Y' }}</time></span>
+        {%- endif -%}
+        {%- if section.settings.show_author and article.author != blank -%}
+          <span>{{ article.author | escape }}</span>
+        {%- endif -%}
+      </div>
+    </div>
+  </header>
+
+  <div class="kv-page__body">
+    <div class="kv-rte">
+      {{ article.content }}
+    </div>
+  </div>
+
+  <div class="kv-article__foot">
+    <a class="kv-article__back" href="{{ blog.url }}">← All {{ blog.title | escape }}</a>
+  </div>
+
+</article>
+
+{% schema %}
+{
+  "name": "Article",
+  "settings": [
+    { "type": "checkbox", "id": "show_date", "label": "Show published date", "default": true },
+    { "type": "checkbox", "id": "show_author", "label": "Show author", "default": false }
+  ],
+  "presets": [{ "name": "Article" }]
+}
+{% endschema %}

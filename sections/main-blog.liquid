@@ -1,0 +1,121 @@
+{%- comment -%}
+  Blog listing template. NEW FILE — added Aug 9 2026 alongside main-article.
+  See the note in sections/main-article.liquid for why these exist.
+
+  All styling is scoped under .kv-bloglist in the block below, so this file
+  cannot affect any other template.
+{%- endcomment -%}
+
+<style>
+  .kv-bloglist__grid{
+    max-width:1180px; margin:0 auto; padding:64px 40px 96px;
+    display:grid; grid-template-columns:repeat(3,1fr); gap:44px 32px;
+  }
+  .kv-bcard{ display:flex; flex-direction:column; text-decoration:none; }
+  .kv-bcard__img{
+    position:relative; width:100%; aspect-ratio:16/10; overflow:hidden;
+    border-radius:10px; background:var(--parchment);
+  }
+  .kv-bcard__img img{
+    width:100%; height:100%; object-fit:cover; display:block;
+    transition:transform .5s cubic-bezier(.2,.6,.2,1);
+  }
+  .kv-bcard:hover .kv-bcard__img img{ transform:scale(1.04); }
+  .kv-bcard__date{
+    margin:18px 0 8px; font-size:12px; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--stone);
+  }
+  .kv-bcard__title{
+    font-family:var(--kv-heading); font-weight:500; font-size:20px;
+    line-height:1.3; color:var(--ink); margin:0 0 10px;
+  }
+  .kv-bcard:hover .kv-bcard__title{ color:var(--cognac); }
+  .kv-bcard__excerpt{
+    font-family:var(--kv-body); font-weight:300; font-size:15px;
+    line-height:1.7; color:var(--walnut); margin:0;
+  }
+  .kv-bloglist__empty{
+    max-width:760px; margin:0 auto; padding:64px 40px 110px;
+    text-align:center; color:var(--stone); font-size:17px;
+  }
+  .kv-bloglist__pager{
+    display:flex; gap:10px; justify-content:center; align-items:center;
+    padding:0 0 96px; font-size:14px;
+  }
+  .kv-bloglist__pager a,.kv-bloglist__pager span{
+    padding:8px 14px; border:1px solid var(--border); border-radius:6px;
+    color:var(--walnut); text-decoration:none;
+  }
+  .kv-bloglist__pager a:hover{ border-color:var(--cognac); color:var(--cognac); }
+  .kv-bloglist__pager span[aria-current]{
+    background:var(--cognac); border-color:var(--cognac); color:#fff;
+  }
+
+  @media (max-width:900px){
+    .kv-bloglist__grid{ grid-template-columns:repeat(2,1fr); gap:34px 24px; padding:52px 24px 72px; }
+  }
+  @media (max-width:600px){
+    .kv-bloglist__grid{ grid-template-columns:1fr; gap:34px; padding:40px 22px 64px; }
+  }
+</style>
+
+<div class="kv-page kv-bloglist">
+
+  <header class="kv-page__hero">
+    <div class="kv-wrap">
+      <span class="kv-eyebrow">Journal</span>
+      <h1>{{ blog.title | escape }}</h1>
+    </div>
+  </header>
+
+  {%- paginate blog.articles by 12 -%}
+    {%- if blog.articles.size > 0 -%}
+      <div class="kv-bloglist__grid">
+        {%- for a in blog.articles -%}
+          <a class="kv-bcard" href="{{ a.url }}">
+            {%- if a.image -%}
+              <div class="kv-bcard__img">
+                <img
+                  src="{{ a.image | image_url: width: 800 }}"
+                  srcset="{{ a.image | image_url: width: 400 }} 400w, {{ a.image | image_url: width: 800 }} 800w, {{ a.image | image_url: width: 1200 }} 1200w"
+                  sizes="(max-width: 600px) 92vw, (max-width: 900px) 46vw, 360px"
+                  width="{{ a.image.width }}" height="{{ a.image.height }}"
+                  alt="{{ a.image.alt | default: a.title | escape }}"
+                  loading="{% if forloop.index <= 3 %}eager{% else %}lazy{% endif %}"
+                  decoding="async">
+              </div>
+            {%- endif -%}
+            <div class="kv-bcard__date">{{ a.published_at | date: '%-d %B %Y' }}</div>
+            <h2 class="kv-bcard__title">{{ a.title | escape }}</h2>
+            {%- if a.excerpt_or_content != blank -%}
+              <p class="kv-bcard__excerpt">{{ a.excerpt_or_content | strip_html | truncatewords: 26 }}</p>
+            {%- endif -%}
+          </a>
+        {%- endfor -%}
+      </div>
+
+      {%- if paginate.pages > 1 -%}
+        <nav class="kv-bloglist__pager" aria-label="Pagination">
+          {%- for part in paginate.parts -%}
+            {%- if part.is_link -%}
+              <a href="{{ part.url }}">{{ part.title }}</a>
+            {%- else -%}
+              <span{% if part.title == paginate.current_page %} aria-current="page"{% endif %}>{{ part.title }}</span>
+            {%- endif -%}
+          {%- endfor -%}
+        </nav>
+      {%- endif -%}
+    {%- else -%}
+      <p class="kv-bloglist__empty">Nothing here yet — new writing is on the way.</p>
+    {%- endif -%}
+  {%- endpaginate -%}
+
+</div>
+
+{% schema %}
+{
+  "name": "Blog",
+  "settings": [],
+  "presets": [{ "name": "Blog" }]
+}
+{% endschema %}
