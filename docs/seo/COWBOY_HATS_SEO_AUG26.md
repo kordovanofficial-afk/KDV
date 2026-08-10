@@ -119,3 +119,58 @@ Remaining gaps not addressed here: no image alt-text audit on hat images, no
 FAQ schema on the collection (the theme has no collection FAQ block), and the
 messy handle `copy-of-kordovans-crushable-...` which is not worth the redirect
 risk to change.
+
+---
+
+# 🔴 Aug 10 — the collection copy was not rendering. Fixed.
+
+User reported the editorial block on `/collections/cowboy-hats` was not
+showing what the wallets collection shows. It wasn't, and the cause is in
+`sections/main-collection.liquid`:
+
+| Where | What it renders |
+|---|---|
+| Hero, line 20 | `collection.description \| strip_html \| truncatewords: 40` |
+| Editorial block, line 129 | `collection.metafields.custom.editorial`, **else** a hardcoded generic fallback |
+
+**The collection body description is never rendered in full anywhere on the
+page.** The hero shows the first 40 words with all HTML stripped, and the block
+below the grid reads a *metafield*, not the body.
+
+So the ~500-word cowboy-hats body written on Aug 10 — sizing guide, style
+guide, price context, care, the Karachi shop mention — was invisible to both
+readers and Google. Only its first 40 words appeared, as one flat paragraph.
+Meanwhile the editorial block was still serving the old two-paragraph metafield
+from before the rewrite.
+
+Wallets looked correct by luck: `mens-leather-wallets` has a 35-word body that
+survives the truncation intact, and a populated `custom.editorial` metafield.
+
+## The fix — no theme change
+
+Split the copy the way the template expects:
+
+- `collection.description` → a 36-word summary, sized to survive `truncatewords: 40`
+- `custom.editorial` → the full long-form copy, which renders below the grid
+
+Links and lists carry **inline styles**, because `.kv-coll__editin` in
+`assets/home.css` has rules for `h2`, `h3` and `p` only — and `theme.css` sets a
+global `a { color: inherit; text-decoration: none }`, so an unstyled link in
+this block is invisible as a link. Inline styles avoid a live-theme push.
+
+## Same defect on other collections
+
+| Collection | Body | `custom.editorial` | Renders below grid |
+|---|---|---|---|
+| `cowboy-hats` | 36-word summary | full copy | ✅ fixed Aug 10 |
+| `mens-leather-wallets` | 35 words | set | ✅ fine |
+| `mens-leather-jackets` | ~90 words, **truncated to 40** | old generic copy | ⚠️ Aug 9 body is half-invisible |
+| `kdv-jackets` | **empty** | none | generic fallback |
+| `womens-leather-jackets` | **empty** | none | generic fallback |
+| `kdv-wallets` | ~70 words, **truncated** | none | generic fallback |
+
+## Optional theme polish (needs a live push, not done)
+
+Add to `assets/home.css` under `.kv-coll__editin` — `ul/ol/li` spacing, `li::marker`
+in brass, and `a` in cognac with an underline, mirroring the existing `.kv-rte`
+rules. Would let the metafield copy drop the inline styles.
