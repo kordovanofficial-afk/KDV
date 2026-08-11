@@ -230,3 +230,38 @@ pair of shoes. Fix is one line:
 
 Additive, defaulted, changes nothing on any page that does not set the new
 metafield. **Needs the user's approval — pushing `kordovan` deploys live.**
+
+## Wallets filled too — Aug 10
+
+The 11 wallet-family products that were missing the band now have it. All 11
+already had a landscape image, so no theme change and no new photography.
+
+| Product | Why it mattered |
+|---|---|
+| **The Razor** | live paid traffic, was the thinner of the two ad landing pages |
+| **KODO Vertical 2.0** | flagship line, no band at all |
+| The Bastion · The Truckkr · The Kingsman · Premium Saffiano · The Aristocrat · The Stallion | bifolds and slims |
+| Bellezza Clutch · The Cleopatra · The Nova | women's |
+
+### 🔴 No card counts were invented
+The wallets that already had this band use exact counts — `10|Cards held`,
+`12|Card slots`, `6|Card slots`. Those were read off the product photos.
+**The photos cannot be opened from this environment**, and not one of these 11
+descriptions states a card count — they all say "multiple card slots" or
+"dedicated card slots".
+
+So the tiles were built only from what each description states outright: RFID,
+the pull strap, the external zip compartment, the transparent ID window, the
+brass snap, the colour count, the leather type. Where a count was genuinely
+known it was used (`6|Leather finishes` on the Razor is verified against its
+six colour variants; `4|Colours` on the Nova against its description).
+
+**If exact card counts are wanted on these 11, someone who can see the wallets
+has to supply them.** Putting a made-up number on a live PDP is a factual claim
+to a customer, not a copy decision.
+
+## Coverage after this pass
+
+**37 of 170 active products** (was 20). Wallets and hats are now complete.
+Remaining: 30 jackets (user is shooting them), ~35 bags, ~22 shoes, ~11 belts,
+~35 caps/gloves/cases.
