@@ -165,3 +165,89 @@ steeper one.
    than the entire month's ad spend to date. Jackets at 22,000–35,000 are
    exactly that order, and the season starts in about eight weeks.
 5. August is still a testing month. The budgets are right where they should be.
+
+---
+
+# Aug 11 — TOF-B paused, and the case for a catalogue TOF
+
+`120254219933170428` TOF-B Razor set to PAUSED on the user's call.
+
+## Catalogue vs video for PROSPECTING — this account's own history
+
+Lifetime 2026 (1 Jan – 10 Aug), campaign level.
+
+**Catalogue creative, prospecting audiences**
+
+| Campaign | Spend | Purch | CPA | ROAS | CPM |
+|---|---|---|---|---|---|
+| **Complete Web Cata** (LLA 1–10%, from 8 May) | 29,968 | 58 | **517** | **7.49x** | 254 |
+| CBO TOP 1-2-3% LLA (cities 500k+, from Oct 25) | 53,542 | 75 | 714 | 5.41x | 265 |
+| Complete web cata rerun (from 8 Jun) | 5,490 | 4 | 1,373 | 2.34x | 223 |
+
+**Single-product video creative, prospecting audiences**
+
+| Campaign | Spend | Purch | CPA | ROAS | CPM |
+|---|---|---|---|---|---|
+| Mocha mate | 27,687 | 26 | 1,065 | 2.88x | 301 |
+| Razor | 28,060 | 24 | 1,169 | 2.44x | 385 |
+| KV TOF Smart Wallets Aug26 | 29,027 | 21 | 1,382 | 2.47x | 514 |
+| KV Cold Wallet Launch Jul26 | 23,496 | 11 | 2,136 | 1.53x | 543 |
+
+**Catalogue prospecting: ~89,000 spend, 137 purchases, CPA ~650.
+Video prospecting: ~108,270 spend, 82 purchases, CPA ~1,320.**
+
+Roughly **half the CPA on comparable spend**, and the mechanism is visible in
+the CPM column — catalogue formats bought impressions at 223–265, video at
+301–543.
+
+## Four caveats that will pull the number down
+
+1. **The winners used the polluted lookalikes.** "Complete Web Cata" targeted
+   LLAs of *Kodo Lifetime Customers* and *pixel Purchase* — order-placed seeds
+   that included the COD refusers — and carried **no refuser exclusion**
+   (it predates the Jul 8 audience build). Cancellation ran 30–36% then, so
+   7.49x reported is nearer **~5x realised**.
+2. **It ran `countries: ["PK"]`** — country-wide, against the current 9-city
+   rule. City-only inventory is more competitive, so expect a higher CPM than
+   the 254 it enjoyed. The better precedent is the CBO campaign, which used
+   `custom_locations` at min_population 500,000 and still returned **5.41x over
+   53,542** — geographically disciplined and a much larger sample.
+3. **`advantage_audience: 1` was ON in every catalogue winner.** The current
+   TOF-A/TOF-B ad sets run it at 0.
+4. **Catalogue hygiene.** Product set `608788148654460` (the one actively
+   advertised) has **137 items blocked**: 135 out of stock, 5 missing an image,
+   2 each missing title / availability / condition / price.
+
+## ✅ Jackets are already live in the catalogue
+
+Checked directly: **154 jacket items, all `availability: in stock`.** The Aug 9
+inventory untracking propagated through to Meta. The highest-AOV segment in the
+range (22,000–35,000) is fully eligible for dynamic ads right now, ahead of the
+season. That is the single best argument for putting catalogue creative in
+front of cold traffic.
+
+⚠️ Could not enumerate the 135 out-of-stock items — `ads_catalog_search_product`
+returns a spurious "Object with ID 'N'" error on `{}` and on `availability`
+filters (the N increments per call, so it looks like a bug in the connector,
+not a permissions problem). Name filters work. Worth a manual look in Commerce
+Manager.
+
+## Proposed replacement for TOF-B's freed 1,000/day — NOT created, awaiting approval
+
+| Setting | Value |
+|---|---|
+| Creative | Catalogue / DPA — no video needed |
+| Audience | Value-based LLA 1% + 3% of **Delivered Repeat Buyers** (`120253661268330428`, `120253661269660428`) — the clean Jul 8 seed |
+| Exclude | `120253660257910428` KV — COD Refusers EXCLUDE, plus existing buyers |
+| Geo | the 9 cities, **no radius** |
+| Age | 18–65, all genders |
+| Optimisation | OFFSITE_CONVERSIONS (Purchase) |
+| Budget | 1,000/day |
+
+Realistic expectation: **3–5x, not 7.49x** — the geo is tighter and the seed is
+smaller (though cleaner). If it beats TOF-A's 4.21x at a lower CPA it becomes
+the September prospecting engine.
+
+It also part-answers Test 1 in `AUGUST_TEST_PLAN.md`: holding the audience
+constant against TOF-A and changing only the creative format is a cleaner test
+than broad-vs-LLA, and it uses budget that is now idle.
