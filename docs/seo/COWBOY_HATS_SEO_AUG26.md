@@ -265,3 +265,20 @@ to a customer, not a copy decision.
 **37 of 170 active products** (was 20). Wallets and hats are now complete.
 Remaining: 30 jackets (user is shooting them), ~35 bags, ~22 shoes, ~11 belts,
 ~35 caps/gloves/cases.
+
+## Eyebrow made per-product — Aug 10 (commit 8cef0dc, deployed live)
+
+`snippets/pdp-main.liquid` line 172 was a hardcoded `Holds What Matters`.
+Now:
+
+```liquid
+<span class="eyebrow">{{ product.metafields.custom.fits_eyebrow | default: "Holds What Matters" | escape }}</span>
+```
+
+Defaulted, so all 31 wallets render byte-identical to before. `| escape` was
+added because the value is now author-supplied.
+
+`custom.fits_eyebrow` = **"Fit & Finish"** on all six hats.
+
+**For the jackets:** set `custom.fits_eyebrow` when their `fits` data goes in,
+or all 30 will say "Holds What Matters". Suggested value: `Cut & Construction`.
