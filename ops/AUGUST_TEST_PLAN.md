@@ -111,11 +111,12 @@ they delivered, add them for November.
 
 ## 6. Open items carried into the tests
 
-- **DPA is missing Karachi** and Multan carries a 40 km radius (flagged Aug 3,
-  unconfirmed as fixed). Karachi is the second-biggest market — this is
-  suppressing DPA performance and distorting any DPA reading.
-- **Retarget is still `countries: ["PK"]`** — the likely source of the
-  Akhtrabad and Karak village cancellations.
+- ~~**DPA is missing Karachi** and Multan carries a 40 km radius~~ ✅ **FIXED
+  Aug 11**, verified by read-back. Both faults were real and had persisted for
+  eight days after being reported fixed. Any DPA reading before Aug 11 is from
+  an ad set that was not running in Karachi at all.
+- ~~**Retarget is still `countries: ["PK"]`**~~ ✅ **FIXED Aug 11** — now the
+  9 cities, no radius, audiences and exclusions preserved, reactivated.
 - `location_types` is still `home, recent` on all ad sets. The `recent` half
   serves people passing through.
 

@@ -191,3 +191,39 @@ between July and August. The agent guards the floor. It does not raise
 the ceiling.
 
 That is worth building. It is just worth building for the right reason.
+
+---
+
+## ✅ All three faults fixed — Aug 11, verified by read-back
+
+**DPA `120254220299340428`** — ACTIVE, PKR 1,000/day
+- Karachi (`1800796`) **added** — 9 cities now
+- Multan `radius: 40` **removed** — no city carries a radius
+- Preserved: all 3 custom audiences (ATC 180D, IC 180D, ViewContent 90D), both
+  exclusions (Purchasers 180D, COD Refusers), FB+IG placements with all 7 FB and
+  6 IG positions, `advantage_audience: 0`, `individual_setting: {geo: 1}`
+
+**Retarget `120228534676860428`** — ACTIVE
+- `countries: ["PK"]` **replaced** with the 9 cities, no radius
+- Preserved: all 6 custom audiences, the COD Refusers exclusion, brand-safety
+  levels, and its automatic placements (Audience Network, Threads, right-hand
+  column, notifications all still present in `page_types`) — placements were
+  deliberately not touched, only geography
+
+Both were force-paused by the edit (`status_forced_to_paused: true`, as on every
+edit this month) and **both were reactivated and confirmed `status: ACTIVE`**.
+
+### What this changes
+- The account's best ad set is now running in its second-biggest market for the
+  first time. Expect DPA volume to rise; watch that CPM does not spike, since
+  Karachi is the most competitive inventory in the list.
+- Retarget's village leakage is closed. It was the last country-wide ad set and
+  the likely source of the Akhtrabad / Karak cancellations.
+- **Every active ad set in the account now passes the 9-city rule.** That is the
+  first time that has been true.
+
+### The lesson for the agent's rule set
+Two of these three had been reported as fixed and were not. The check that
+matters is not "did someone say it was done" but "does the stored object match
+the rule". That is rule #1 in Tier 1, and it is the reason Tier 1 is worth
+building before anything clever.
