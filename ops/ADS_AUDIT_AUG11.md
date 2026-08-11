@@ -251,3 +251,63 @@ the September prospecting engine.
 It also part-answers Test 1 in `AUGUST_TEST_PLAN.md`: holding the audience
 constant against TOF-A and changing only the creative format is a cleaner test
 than broad-vs-LLA, and it uses budget that is now idle.
+
+## Built Aug 11 — TOF-C catalogue, PAUSED
+
+User chose the whole catalogue: *"it targets people and shows them exactly
+what theyre looking for."* Worth noting the nuance — on **cold** traffic DPA
+does not replay what someone browsed (they have never been to the site); Meta
+picks from its own interest signals. The per-person-browsing behaviour is a
+retargeting property and belongs to the BOF DPA set. Whole catalogue is still
+the right call: a wider set gives the algorithm more to match against.
+
+| Entity | ID | State |
+|---|---|---|
+| Campaign `KV \| TOF \| Catalogue All Products \| Aug26` | `120254472798420428` | PAUSED, OUTCOME_SALES, ABO |
+| Ad set `TOF-C \| Catalogue All Products \| LLA 1%+3% Value` | `120254472805020428` | PAUSED, PKR 1,000/day |
+| Creative `CR_TOF_Catalogue_AllProducts_Cold_v1` | `1021882213813646` | built |
+| **Ad** | — | ❌ **not created — see blocker** |
+
+Ad set verified by read-back: 9 cities **with no radius**, 18–65,
+LLA 1% `120254216730060428` + LLA 3% `120254216735280428`, excluding
+Purchasers 180D + **COD Refusers** + the seed audience, `advantage_audience: 0`,
+OFFSITE_CONVERSIONS, product set `608788148654460` (All Products),
+pixel `1865080707652548`, attribution 1d view / 7d click. Mirrors TOF-A exactly
+so the only variable is creative format.
+
+### 🔴 Blocker: the ad cannot be created from here
+`ads_create_ad` fails with *"Instagram Account Is Missing"* because the ad set
+includes Instagram placements and the creative carries no Instagram identity.
+`ads_get_ig_accounts` returns `[]` for this account — the connector appears to
+lack `instagram_basic`, so the IG account ID cannot be read. Passing the Page ID
+as `instagram_user_id` is rejected ("must be a valid Instagram account id").
+
+**Two ways to finish**, both outside this session:
+1. Grant the Meta connector Instagram permission, then the ad can be created here.
+2. In Ads Manager: duplicate the existing `AD_BOF_DPA_AllProducts_v1` ad into
+   ad set `120254472805020428` — it already carries a valid IG identity — then
+   replace its primary text with the cold copy below.
+
+### Copy for the ad (the BOF text is wrong for cold traffic)
+The BOF creative opens *"Still thinking about it? It is still here."* — that
+addresses someone who already visited. Cold copy:
+
+> Handcrafted in Pakistan from genuine full-grain leather — wallets, bags,
+> jackets, belts and shoes made to be carried for years, not seasons.
+>
+> Lifetime craftsmanship warranty. 7-day returns. Free delivery on orders over
+> Rs 5,500.
+
+Headline `{{product.name}}`, description `{{product.price strip_zeros}}`,
+CTA Shop Now.
+
+### ⚠️ Two things to fix on the existing BOF DPA ad too
+1. **It promises cash on delivery across All Products** — *"cash on delivery
+   anywhere in the country — you pay when it reaches your door"* — but the same
+   product set contains **30 prepaid-only jackets**. That is a false promise on
+   those cards, and it is live right now. The new TOF copy above deliberately
+   omits any blanket COD claim.
+2. **UTMs.** `ads_create_creative` exposes no `url_tags`, and for catalogue ads
+   UTMs must go there, not in `link_url` (product URLs override it). Paste into
+   the ad's **URL parameters** field:
+   `utm_source=facebook&utm_medium=paid&utm_campaign=tof_catalogue_all_aug26&utm_content={{ad.name}}&utm_term={{adset.name}}`
