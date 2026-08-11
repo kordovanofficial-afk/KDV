@@ -169,7 +169,13 @@
       -%}
       <div class="img"><img src="{{ fits_img | image_url: width: 1000 }}" srcset="{{ fits_img | image_url: width: 600 }} 600w, {{ fits_img | image_url: width: 1000 }} 1000w, {{ fits_img | image_url: width: 1400 }} 1400w" sizes="(max-width:900px) 94vw, 50vw" alt="{{ fits_img.alt | escape | default: product.title | escape }}" loading="lazy" decoding="async" width="1000" height="750"></div>
       <div>
-        <span class="eyebrow">Holds What Matters</span>
+        {%- comment -%}
+          Eyebrow is per-product because this band is no longer wallets-only.
+          "Holds What Matters" is wallet language and reads wrong above a hat,
+          a jacket or a belt. Defaults to the original string, so every product
+          that does not set custom.fits_eyebrow renders exactly as before.
+        {%- endcomment -%}
+        <span class="eyebrow">{{ product.metafields.custom.fits_eyebrow | default: "Holds What Matters" | escape }}</span>
         <h2>{{ product.metafields.custom.fits_title | default: "Everything you need. Nothing you don't." }}</h2>
         {%- if product.metafields.custom.fits_text != blank -%}<p>{{ product.metafields.custom.fits_text }}</p>{%- endif -%}
         <div class="kv-pdp__fitsg">
