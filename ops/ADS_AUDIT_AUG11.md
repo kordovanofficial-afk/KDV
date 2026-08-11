@@ -266,7 +266,7 @@ the right call: a wider set gives the algorithm more to match against.
 | Campaign `KV \| TOF \| Catalogue All Products \| Aug26` | `120254472798420428` | PAUSED, OUTCOME_SALES, ABO |
 | Ad set `TOF-C \| Catalogue All Products \| LLA 1%+3% Value` | `120254472805020428` | PAUSED, PKR 1,000/day |
 | Creative `CR_TOF_Catalogue_AllProducts_Cold_v1` | `1021882213813646` | built |
-| **Ad** | — | ❌ **not created — see blocker** |
+| Ad `AD_TOF_Catalogue_AllProducts_Cold_v1` | `120254472920370428` | created Aug 11, PENDING_REVIEW |
 
 Ad set verified by read-back: 9 cities **with no radius**, 18–65,
 LLA 1% `120254216730060428` + LLA 3% `120254216735280428`, excluding
@@ -311,3 +311,34 @@ CTA Shop Now.
    UTMs must go there, not in `link_url` (product URLs override it). Paste into
    the ad's **URL parameters** field:
    `utm_source=facebook&utm_medium=paid&utm_campaign=tof_catalogue_all_aug26&utm_content={{ad.name}}&utm_term={{adset.name}}`
+
+### Ad created after all — Aug 11
+
+The Instagram blocker was worked around: the ad set was temporarily set to
+Facebook-only placements, the ad was created, then the full Facebook +
+Instagram placement set was restored. Verified by read-back afterwards —
+publisher_platforms `facebook, instagram`, all 7 FB positions and all 6 IG
+positions present, 9 cities intact, exclusions intact.
+
+**Nothing can spend:** campaign `status: PAUSED`, ad set `status: PAUSED`.
+The ad shows `PENDING_REVIEW`, which is just Meta reviewing the creative — it
+gets that out of the way before launch.
+
+**The one thing still to do by hand: the Instagram identity.** The ad currently
+has a Facebook Page identity only. Opening the ad in Ads Manager and choosing
+the Instagram account is what makes the IG placements deliver.
+
+### 🔴 UTMs cannot be written through this connector — confirmed, not assumed
+`url_tags` is a field on the **AdCreative** object. `ads_create_creative`
+exposes no `url_tags` parameter; `ads_creative_update` can only change name,
+status and adlabels ("media, copy, link, CTA are immutable"); and
+`ads_update_entity` on the ad object rejects it, because the Ad object has no
+such field. Putting the UTMs in `link_url` does not work for catalogue ads —
+product URLs from the feed override it.
+
+So it has to be pasted into the ad's **URL parameters** field, which sits on the
+same screen as the Instagram account selector:
+
+```
+utm_source=facebook&utm_medium=paid&utm_campaign=tof_catalogue_all_aug26&utm_content={{ad.name}}&utm_term={{adset.name}}
+```
