@@ -342,3 +342,32 @@ same screen as the Instagram account selector:
 ```
 utm_source=facebook&utm_medium=paid&utm_campaign=tof_catalogue_all_aug26&utm_content={{ad.name}}&utm_term={{adset.name}}
 ```
+
+
+---
+
+# 🔴 Statistical correction — Aug 11, after the quantitative review
+
+Two claims in this document do not survive a proper noise analysis.
+
+**1. "DPA is the best rupee in the account" — not supportable.**
+True-ROAS 95% intervals (compound Poisson, CV of order value 0.60):
+TOF-A 2.46–7.22 · Retarget 2.20–7.82 · DPA 2.72–11.5 · TOF-B 0.16–2.21.
+The first three overlap almost entirely — TOF-A vs Retarget p = 0.37,
+TOF-A vs DPA p = 0.136. **Only TOF-B separates (p = 0.004).**
+Correct statement: TOF-B was measurably bad; the other three are
+indistinguishable. Separating them needs ~41 days for a 2x gap.
+
+**2. The Aug 9–10 two-day read was noise.**
+Minimum detectable ROAS ratio at 2 days is 21.5x; the observed spread was 5.6x.
+Section 4's numbers were labelled "two days is not a result" but were still used
+to argue the saturation call was working. They cannot carry that. The frequency
+hypothesis may be correct — this is not evidence for it.
+
+**3. Every ROAS in this document should be multiplied by 0.403** to reach true
+delivered ROAS ((1 − 0.235 cancellation) / 1.9 attribution). TOF-A 4.21 → 1.70,
+Retarget 4.15 → 1.67, DPA 5.60 → 2.26, TOF-B 0.59 → 0.24. Two independent
+reviews put reported break-even between 3.5x and 4.52x, which places TOF-A and
+Retarget at or below it. Unverified until real COGS is supplied.
+
+Full working in `ADS_AGENT_SPEC.md` §A–H.

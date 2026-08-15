@@ -335,3 +335,175 @@ sits entirely outside the agent's field of view.
 **The agent guards the floor. It does not raise the ceiling, and it will quietly
 convince you that it does.** Build it for the floor and it is clearly worth
 having.
+
+---
+
+# Addendum — the quantitative review, and two corrections it forces
+
+The fourth review (quantitative) landed after the above was written. It changes
+the decision framework and overturns two claims made earlier in this project.
+
+## A. 🔴 CORRECTION — "DPA is the best rupee in the account" is not supportable
+
+True-ROAS 95% intervals, Aug 1–10, computed as compound Poisson
+(`SE(log ROAS) = √((1+CV²)/k)`, CV of order value ≈ 0.60 — AOV ranges 2.85x
+across these ad sets, so ROAS is noisier than a pure conversion count):
+
+| Ad set | k | Reported | **95% CI (reported scale)** |
+|---|---|---|---|
+| TOF-A Mocha Mate | 18 | 4.21x | **2.46 – 7.22** |
+| Retarget | 13 | 4.15x | **2.20 – 7.82** |
+| DPA Catalogue | 10 | 5.60x | **2.72 – 11.5** |
+| TOF-B Razor | 3 | 0.59x | **0.16 – 2.21** |
+
+**The first three intervals overlap almost completely.** Formally:
+TOF-A vs Retarget p = 0.37; TOF-A vs DPA p = 0.136. Neither is significant.
+Only TOF-B separates: p = **0.004**.
+
+So the honest statement is: **TOF-B was measurably bad, and the other three are
+indistinguishable from each other.** Every ranking of those three in
+`ADS_AUDIT_AUG11.md` — including "DPA is the best rupee in the account" — is
+reading noise. Detecting a genuine 2x gap between two of them needs ~49
+conversions in the better arm ≈ **41 days**; a 20% gap needs ~14 months.
+
+## B. 🔴 CORRECTION — the Aug 9–10 two-day read was noise
+
+Minimum detectable ROAS ratio at 2 days is **21.5x**. The observed spread
+across ad sets (1.69x to 9.42x) is 5.6x — comfortably inside noise. The
+two-day numbers were labelled "not a result" at the time, but they were still
+leaned on to argue the frequency/saturation call was working. They cannot
+support that. The frequency hypothesis may well be right; that evidence does
+not establish it.
+
+**Rule adopted: any window shorter than 7 days is categorically forbidden for a
+comparative claim. Delete all two-day-slice logic.**
+
+## C. The correction factor, and a convergent finding on break-even
+
+$$\text{ROAS}_{\text{true}} = \text{ROAS}_{\text{meta}} \times \frac{1-c_\infty}{A} = \text{ROAS}_{\text{meta}} \times \frac{0.765}{1.9} = \text{ROAS}_{\text{meta}} \times 0.403$$
+
+| Ad set | Reported | **True** |
+|---|---|---|
+| TOF-A | 4.21x | **1.70x** |
+| Retarget | 4.15x | **1.67x** |
+| DPA | 5.60x | **2.26x** |
+| TOF-B | 0.59x | **0.24x** |
+
+Two reviews reached the same conclusion from different assumptions: the media
+buyer put reported break-even at **3.5x** (assuming 73% gross margin); the quant
+put it at **4.52x** (assuming 55% contribution margin). **Either way TOF-A at
+4.21x and Retarget at 4.15x sit at or below break-even.** That two independent
+analyses converge on it makes it the most important unresolved number in the
+account — and it still rests on an unverified margin. **Get real COGS.**
+
+Note also: the correction itself carries ±15% uncertainty, while Poisson noise
+at k=10 is ±72%. **Fixing the attribution lag never rescues a decision made on
+too few conversions.** Do the correction, but do not mistake it for precision.
+
+## D. Framework change — Bayesian Gamma–Poisson, evaluated daily
+
+This **replaces** the "25 conversions / 14 days / credible bound" gate in §2.
+Same intent, properly formalised, and it permits daily evaluation legitimately.
+
+Prior `λ ~ Gamma(a₀=2.0, b₀=1.82)` — the account pool, worth 2 conversions.
+Posterior after k conversions in T days: `Gamma(a₀+k, b₀+T)`.
+
+| Decision | Condition |
+|---|---|
+| **Kill** | `P(CPA > 1.5 × target) ≥ 0.95` |
+| **Kill, fast path** | zero conversions after 4 days / 3x target CPA spend (`e⁻³ = 5%`) |
+| **Cut −25%** | `P(CPA > 1.25 × target) ≥ 0.85`, ≥7 days since last change |
+| **Raise +20%** | `P(CPA ≤ target) ≥ 0.90`, T ≥ 14, k ≥ 15, ≥7 days since last change |
+
+**Why daily evaluation is legitimate and not p-hacking:** threshold on the
+posterior odds ratio (an e-value). By Ville's inequality
+`P(∃t : LR_t ≥ 1/α) ≤ α`, so a month of daily checks spends α **once**, not
+thirty times. This is the single technical detail that makes a daily agent
+defensible.
+
+SPRT and the Bayesian posterior agree on every ad set in the current data —
+a good sign the answer is robust to the framework.
+
+### Derived kill timings
+
+| True CPA | Expected time to convict |
+|---|---|
+| zero conversions | **4 days** |
+| 3x target | **11.7 days** |
+| 2x target | **17.7 days** |
+| 1.5x target | **36.7 days** |
+
+A merely-mediocre ad set takes five weeks to convict. That is the honest answer
+and the agent must not pretend otherwise.
+
+### Budget-change floor, derived
+Each change costs ~3 days at ~20% degraded delivery ≈ 750 PKR.
+Change every 3 days = **20%** of spend lost to re-learning; every 7 days =
+**8.6%**; every 14 days = 4.3%. **7 days is the knee of the curve** — adopted
+as the hard floor.
+
+## E. Multiple comparisons — a 100x improvement over §4's approach
+
+Naive: 10 rules × 5 ad sets × 30 days = 1,500 tests → **75 false alarms/month**,
+and a 92% chance of at least one every single day. Against maybe 2–4 genuine
+events a month, that is 20 wrong signals per real one.
+
+Bonferroni is the wrong fix — it pushes the 2x CPA test from 49 to 107
+conversions (89 days). You buy silence by never detecting anything.
+
+**The right fix:**
+1. Collapse 10 rules to **3 decision types** (kill / budget / creative). The
+   other seven become descriptive fields in the digest, not tests.
+2. One **sequential e-value process per (ad set × decision type)** — 15
+   families, not 1,500 tests. → **0.75 false alarms/month.**
+3. Do **not** Bonferroni the 15 — it would push a 3x-over-target kill from 11.7
+   to 23.9 days. Doubling the burn window to save 0.7 alarms/month is a bad
+   trade at 1,250/day.
+4. BH-FDR at q = 0.10 on the advisory layer only. Asymmetric α on actions:
+   0.05 for kill/cut, **0.025 for increases** — scaling a loser compounds,
+   killing a winner is recoverable.
+5. Mechanical limiter: max 1 action per ad set per 7 days caps alarms at ~21/mo
+   by construction.
+6. "Must fire 2 consecutive days" reduces errors ~2–3x, **not** 20x —
+   consecutive posteriors share ~90% of their data. Include it; don't overclaim.
+
+## F. Upper-funnel decisions are fast. Purchase decisions are not. Never blur them.
+
+Detecting a 20% CTR difference at CTR ≈ 1.5% needs ~**25,800 impressions/arm**
+≈ 3–5 days at this spend. So **creative rotation is a legitimate 5–7 day
+decision.** Purchase-based decisions are 10–40 day decisions.
+
+Plus a mechanical fatigue trigger that needs no statistics: rotate when 7-day
+frequency > 2.5 on a warm audience, or 3-day CTR falls below 70% of its first
+72 hours on ≥15,000 cumulative impressions. Fatigue is a physical process, not
+a hypothesis test.
+
+## G. 🔴 Consolidation does not fix the learning phase at this spend
+
+The red team suggested consolidating to two ad sets at 2,500/day. The quant
+shows that is not enough:
+
+- Meta exits Learning Limited at **50 optimisation events / 7 days**.
+- At 1.2 conv/day an ad set produces **8.4/week** — 17% of the threshold.
+- Consolidating **all four into one** gives 4.4 × 7 = **30.8/week**. Still short.
+- Exiting requires **~7,430 PKR/day in a single ad set**, against 5,000 total
+  across the account today.
+
+**Every ad set in this account is permanently Learning Limited, and no
+restructuring at current spend changes that.** Consolidation still improves
+decision quality and is worth doing — but it should be sold as that, not as a
+learning-phase fix.
+
+## H. A tension in the quant's own recommendations, flagged not resolved
+
+It recommends **+20% on TOF-A** (`P(CPA ≤ target) = 92%`) while simultaneously
+computing TOF-A's true ROAS at **1.70x against a possible break-even of 1.82x**.
+
+Those conflict. The scale rule is defined relative to *target CPA*; the
+break-even calculation is relative to *margin*. If the margin assumption is
+right, TOF-A is below break-even and must not be scaled at all — target CPA is
+set too loose.
+
+**Do not scale anything until real COGS resolves this.** This is the second
+independent route to the same conclusion: the missing margin number is worth
+more than the agent.
