@@ -10,7 +10,7 @@
 # Both are set on all 30 jackets. Add either one to any new made-to-order
 # product and it is covered automatically — no code change, no redeploy.
 #
-query RunInput {
+query CartPaymentMethodsTransformRunInput {
   cart {
     lines {
       merchandise {
