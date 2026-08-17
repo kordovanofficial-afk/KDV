@@ -134,7 +134,26 @@
         <div><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9 9 0 0 0-6.4 2.6L3 8"/><path d="M3 3v5h5"/></svg><span>7-day easy<br>returns</span></div>
       </div>
 
-      <div class="kv-pdp__ship"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div><b>Order today, dispatched in 1–2 days.</b> Cash on delivery available nationwide. Delivered in 2–6 business days.</div></div>
+      {%- comment -%}
+        Made-to-order pieces are prepaid only. Advertising COD on them is what
+        produced the ~60% cancellation rate on jackets — the order is placed on
+        COD, the customer hears "prepaid, two weeks" on the call, and refuses.
+        Set custom.made_to_order on any product built after ordering; every
+        jacket also matches on product type as a safety net.
+      {%- endcomment -%}
+      {%- liquid
+        assign mto = false
+        if product.metafields.custom.made_to_order.value == true
+          assign mto = true
+        elsif product.type contains 'Jacket'
+          assign mto = true
+        endif
+      -%}
+      {%- if mto -%}
+        <div class="kv-pdp__ship kv-pdp__ship--mto"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div><b>Made to order — prepaid only.</b> Cut and stitched for you in 4–7 working days, then delivered in 3–4. Pay by bank transfer or card. Cash on delivery is not available on made-to-order pieces.</div></div>
+      {%- else -%}
+        <div class="kv-pdp__ship"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div><b>Order today, dispatched in 1–2 days.</b> Cash on delivery available nationwide. Delivered in 2–6 business days.</div></div>
+      {%- endif -%}
       <a class="kv-pdp__wa" href="https://wa.me/{{ wa }}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2z"/></svg>Questions? Chat with us on WhatsApp</a>
     </div>
 
@@ -192,7 +211,11 @@
     <div class="rte">{{ product.description }}</div>
     <div class="kv-pdp__acc">
       <details open><summary>Leather Care</summary><div class="b">Wipe with a soft, dry cloth, condition every 4–6 weeks, and keep out of prolonged sun and water. See our full <a href="/pages/leather-care-guide">Leather Care Guide</a>.</div></details>
-      <details><summary>Shipping &amp; Returns</summary><div class="b">Dispatched in 1–2 business days; delivered in 2–6 days. Free delivery over PKR 5,500. Cash on delivery nationwide. 7-day returns on unused items — see <a href="/pages/returns">Returns &amp; Exchanges</a>.</div></details>
+      {%- if mto -%}
+        <details><summary>Shipping &amp; Payment</summary><div class="b">This piece is made to order: 4–7 working days in the workshop, then 3–4 days to your door. Free delivery over PKR 5,500. <b>Prepaid only</b> — bank transfer or card at checkout. Cash on delivery is not offered on made-to-order pieces, because each one is cut for a single customer. Returns are handled case by case — see <a href="/pages/returns">Returns &amp; Exchanges</a>.</div></details>
+      {%- else -%}
+        <details><summary>Shipping &amp; Returns</summary><div class="b">Dispatched in 1–2 business days; delivered in 2–6 days. Free delivery over PKR 5,500. Cash on delivery nationwide. 7-day returns on unused items — see <a href="/pages/returns">Returns &amp; Exchanges</a>.</div></details>
+      {%- endif -%}
       <details><summary>Our Warranty</summary><div class="b">Every Kordovan piece carries a lifetime craftsmanship warranty. If it fails because of how it was made, we repair or replace it. <a href="/pages/about-kordovan">More about us</a>.</div></details>
     </div>
   </div></div></section>

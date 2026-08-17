@@ -50,15 +50,34 @@
   <div class="cart-drawer__foot">
     <span class="cart-drawer__note">+ Add order note / gift message</span>
     <div class="cd__sub"><span class="l">Subtotal</span><span class="v cart-drawer__total"></span></div>
-    <div class="cd__fine">Shipping &amp; taxes calculated at checkout · Cash on delivery available</div>
+    {%- comment -%}
+      If anything in the cart is made to order, the whole cart is prepaid —
+      Shopify cannot split payment terms across one order. Saying "COD
+      available" here and then refusing it on the call is the exact sequence
+      that loses the sale.
+    {%- endcomment -%}
+    {%- liquid
+      assign cart_mto = false
+      for it in cart.items
+        if it.product.metafields.custom.made_to_order.value == true or it.product.type contains 'Jacket'
+          assign cart_mto = true
+          break
+        endif
+      endfor
+    -%}
+    {%- if cart_mto -%}
+      <div class="cd__fine">Shipping &amp; taxes calculated at checkout · <b>Prepaid only</b> — your cart contains a made-to-order piece</div>
+    {%- else -%}
+      <div class="cd__fine">Shipping &amp; taxes calculated at checkout · Cash on delivery available</div>
+    {%- endif -%}
     <a class="cd__co" href="/checkout">Checkout →</a>
     <a class="cd__view" href="{{ routes.cart_url }}">View full cart</a>
     <div class="cd__trust">
       <span><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Secure checkout</span>
       <span><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>7-day returns</span>
-      <span><svg viewBox="0 0 24 24"><rect x="1" y="4" width="15" height="12"/><path d="M16 8h4l3 3v5h-7z"/></svg>COD available</span>
+      {%- unless cart_mto -%}<span><svg viewBox="0 0 24 24"><rect x="1" y="4" width="15" height="12"/><path d="M16 8h4l3 3v5h-7z"/></svg>COD available</span>{%- endunless -%}
     </div>
-    <div class="cd__pay"><span>COD</span><span>Visa</span><span>Mastercard</span><span>Easypaisa</span><span>JazzCash</span></div>
+    <div class="cd__pay">{%- unless cart_mto -%}<span>COD</span>{%- endunless -%}<span>Visa</span><span>Mastercard</span><span>Easypaisa</span><span>JazzCash</span></div>
   </div>
 
 </aside>

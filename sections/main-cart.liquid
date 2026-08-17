@@ -114,7 +114,16 @@
               </div>
               <div style="display:flex; align-items:center; gap:var(--space-3); font-size:var(--text-sm); color:var(--color-text-muted);">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-                COD available at checkout
+                {%- liquid
+                  assign cart_mto = false
+                  for it in cart.items
+                    if it.product.metafields.custom.made_to_order.value == true or it.product.type contains 'Jacket'
+                      assign cart_mto = true
+                      break
+                    endif
+                  endfor
+                -%}
+                {%- if cart_mto -%}Prepaid only — made-to-order piece in cart{%- else -%}COD available at checkout{%- endif -%}
               </div>
             </div>
           </div>

@@ -29,7 +29,12 @@
       echo product.title
       echo ' — genuine leather '
       echo jl_type
-      echo ' handcrafted in Pakistan by Kordovan. Cash on delivery nationwide, lifetime craftsmanship warranty.'
+      echo ' handcrafted in Pakistan by Kordovan. '
+      if product.metafields.custom.made_to_order.value == true or product.type contains 'Jacket'
+        echo 'Made to order in 4–7 working days, prepaid. Lifetime craftsmanship warranty.'
+      else
+        echo 'Cash on delivery nationwide, lifetime craftsmanship warranty.'
+      endif
     endcapture
   endif
 

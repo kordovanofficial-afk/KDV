@@ -5,8 +5,22 @@
   endif
 -%}
 
+{%- comment -%}
+  On a made-to-order product page the site-wide "Cash on delivery nationwide"
+  strapline sits directly above copy saying prepaid only. Swap the middle claim
+  on those pages so the top of the page and the buy box agree. Everywhere else
+  is untouched — COD remains true for the rest of the catalogue.
+{%- endcomment -%}
+{%- liquid
+  assign announce_mto = false
+  if template.name == 'product'
+    if product.metafields.custom.made_to_order.value == true or product.type contains 'Jacket'
+      assign announce_mto = true
+    endif
+  endif
+-%}
 <div class="kv-announce" id="kv-announce">
-  Free delivery over <b>PKR 5,500</b> &nbsp;·&nbsp; Cash on delivery nationwide &nbsp;·&nbsp; 100% genuine leather
+  Free delivery over <b>PKR 5,500</b> &nbsp;·&nbsp; {% if announce_mto %}Made to order, prepaid{% else %}Cash on delivery nationwide{% endif %} &nbsp;·&nbsp; 100% genuine leather
 </div>
 
 <header class="kv-hdr{% unless is_home %} kv-hdr--page{% endunless %}" id="kv-hdr">
