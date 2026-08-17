@@ -71,6 +71,8 @@ export default {
     ctx.waitUntil((async () => {
       await runPollSync(env);              // payment sync FIRST — never blocked by WhatsApp
       await runAbandonedCheckouts(env);    // no-op unless WA_ABANDONED === 'on'
+      await runReviewRequests(env);        // ask buyers whose delay has elapsed
+      await rvReleaseStale(env);           // held reviews you never got to
       await waDrain(env);                  // send anything queued, plus earlier retries
     })());
   },
@@ -87,6 +89,26 @@ export default {
 
     if (url.pathname === '/health')
       return Response.json({ status: 'ok', ts: new Date().toISOString() }, { headers: cors });
+
+    // ── Reviews ──
+    // /r/<token> is public by design: the token IS the authorisation, and it
+    // only exists because that person took delivery of that order.
+    if (url.pathname.startsWith('/r/')) {
+      const token = url.pathname.slice(3).replace(/[^a-z0-9]/gi, '');
+      if (!token) return rvPage('Not found', 'That link is not valid.');
+      if (request.method === 'POST') return rvSubmit(env, token, await request.formData());
+      return rvForm(env, token);
+    }
+    if (url.pathname === '/reviews') {
+      if (!waAdminOk(url, env)) return new Response('nope', { status: 401 });
+      return Response.json(await rvPending(env), { headers: cors });
+    }
+    if (url.pathname === '/review-approve') {
+      if (!waAdminOk(url, env)) return new Response('nope', { status: 401 });
+      const key = url.searchParams.get('key') || '';
+      if (!key.startsWith('rvhold:')) return Response.json({ ok: false, error: 'bad_key' }, { headers: cors });
+      return Response.json(await rvApprove(env, key, url.searchParams.get('drop') === '1'), { headers: cors });
+    }
 
     // ─── PUBLIC: storefront tracking lookup ───────────────────────────────────
     if (url.pathname === '/track') {
@@ -560,6 +582,298 @@ async function waStatus(env) {
 }
 
 // ─── Shopify GraphQL (the REST helper above stays for the payment path) ──────
+
+// ─── REVIEWS  —  request, collect, moderate, publish ─────────────────────────
+//
+// Delivered order → wait RV_DELAY_DAYS → one WhatsApp asking for a review.
+// The link carries a single-use token so nobody can review a product they did
+// not buy. Ratings at or above RV_MIN_PUBLISH publish straight to the product's
+// custom.reviews metafield, which the PDP already renders. Anything below is
+// HELD for you, not discarded — and it still counts toward the average.
+//
+// That last point matters: if low scores were dropped from the average as well
+// as the page, the star rating would be a lie. Held reviews are counted and
+// unpublished, which is honest and still protects the page.
+
+const RV_DELAY_DAYS  = 3;      // after delivery — long enough to have worn it
+const RV_MIN_PUBLISH = 3.5;    // below this → held for you to resolve first
+const RV_HOLD_DAYS   = 7;      // unresolved holds auto-publish after this
+const RV_BATCH       = 15;     // requests sent per cron tick
+const RV_TOKEN_DAYS  = 45;
+
+const rvToken = () => Math.random().toString(36).slice(2, 8) + Math.random().toString(36).slice(2, 8);
+
+function msgReviewRequest(order, link) {
+  return `${waFirstName(order)}, hope you are enjoying your Kordovan 🙂
+
+Would you take 30 seconds to tell us how it is? It genuinely helps the next customer decide.
+
+${link}
+
+If anything is not right instead, just reply here and we will fix it.
+_Reply STOP to stop updates._`;
+}
+
+/**
+ * Called at the moment PostEx reports Delivered. Stores the intent only —
+ * the message itself goes out RV_DELAY_DAYS later from the cron, so the
+ * customer has actually worn the thing before we ask.
+ */
+async function rvSchedule(env, order) {
+  if (!env.SYNC_KV) return;
+  const phone = normalisePK(order.phone || order.shipping_address?.phone || order.customer?.phone);
+  if (!phone) return;
+  if (await env.SYNC_KV.get(`rvdone:${order.id}`)) return;
+
+  const items = (order.line_items || [])
+    .filter(li => li.product_id)
+    .map(li => ({ pid: String(li.product_id), title: li.title }));
+  if (!items.length) return;
+
+  const token = rvToken();
+  await env.SYNC_KV.put(`rvtok:${token}`, JSON.stringify({
+    orderId: String(order.id),
+    orderName: order.name,
+    name: waFirstName(order),
+    city: order.shipping_address?.city || '',
+    items,
+  }), { expirationTtl: 60 * 60 * 24 * RV_TOKEN_DAYS });
+
+  await env.SYNC_KV.put(`rvdue:${order.id}`, JSON.stringify({
+    dueAt: Date.now() + RV_DELAY_DAYS * 86400_000,
+    phone, token, orderId: String(order.id),
+    orderName: order.name,
+    first: waFirstName(order),
+  }), { expirationTtl: 60 * 60 * 24 * RV_TOKEN_DAYS });
+}
+
+/** Cron pass: send any review request whose delay has elapsed. */
+async function runReviewRequests(env) {
+  if (!env.SYNC_KV) return { sent: 0 };
+  const list = await env.SYNC_KV.list({ prefix: 'rvdue:', limit: 200 });
+  let sent = 0;
+
+  for (const k of list.keys) {
+    if (sent >= RV_BATCH) break;
+    const raw = await env.SYNC_KV.get(k.name);
+    if (!raw) continue;
+    const job = JSON.parse(raw);
+    if (Date.now() < job.dueAt) continue;
+
+    const link = `${workerBase(env)}/r/${job.token}`;
+    const fake = { name: job.orderName, customer: { first_name: job.first } };
+    const r = await waEnqueue(env, {
+      to: job.phone, text: msgReviewRequest(fake, link),
+      ref: `${job.orderId}:review`, kind: 'mktg',
+    });
+    // Queued or refused for a permanent reason — either way stop retrying it.
+    if (r.ok || ['opted_out', 'already_sent', 'already_queued'].includes(r.error)) {
+      await env.SYNC_KV.delete(k.name);
+      await env.SYNC_KV.put(`rvdone:${job.orderId}`, '1',
+        { expirationTtl: 60 * 60 * 24 * 365 });
+      if (r.ok) sent++;
+    }
+  }
+  return { sent };
+}
+
+function workerBase(env) {
+  return (env.WORKER_URL || 'https://kordovan-postex-sync.kordovan-official.workers.dev')
+    .replace(/\/+$/, '');
+}
+
+const rvEsc = s => String(s || '').replace(/[<>&"']/g, c =>
+  ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;', "'": '&#39;' }[c]));
+
+/** GET /r/:token — the form. Self-contained, no external assets. */
+async function rvForm(env, token) {
+  const raw = env.SYNC_KV ? await env.SYNC_KV.get(`rvtok:${token}`) : null;
+  if (!raw) return rvPage('This review link has expired', 'Links stay valid for 45 days after delivery. Message us on WhatsApp and we will send a fresh one.');
+  const t = JSON.parse(raw);
+  if (t.used) return rvPage('Thank you — already received', 'You have already reviewed this order. We appreciate it.');
+
+  const opts = t.items.map((it, i) =>
+    `<option value="${i}">${rvEsc(it.title)}</option>`).join('');
+
+  return rvPage('How was it?', '', `
+  <form method="POST" class="f">
+    ${t.items.length > 1
+      ? `<label>Which item?<select name="item" required>${opts}</select></label>`
+      : `<input type="hidden" name="item" value="0"><p class="prod">${rvEsc(t.items[0].title)}</p>`}
+    <label>Your rating
+      <div class="stars" id="st">
+        ${[1,2,3,4,5].map(n => `<button type="button" data-n="${n}" aria-label="${n} star${n>1?'s':''}">&#9733;</button>`).join('')}
+      </div>
+      <input type="hidden" name="rating" id="rt" required>
+    </label>
+    <label>Your review<textarea name="text" rows="4" maxlength="400" required
+      placeholder="What did you think of the leather, the fit, the finish?"></textarea></label>
+    <label>Your name<input name="name" maxlength="40" value="${rvEsc(t.name)}" required></label>
+    <label>Your city<input name="city" maxlength="30" value="${rvEsc(t.city)}" required></label>
+    <button class="go" type="submit">Send review</button>
+    <p class="fine">We publish your first name, city and review. Never your phone number or address.</p>
+  </form>
+  <script>
+    var cur=0,box=document.getElementById('st'),rt=document.getElementById('rt');
+    box.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
+      cur=+b.dataset.n;rt.value=cur;
+      [].forEach.call(box.children,function(c,i){c.className=i<cur?'on':'';});});
+    document.querySelector('form').addEventListener('submit',function(e){
+      if(!rt.value){e.preventDefault();alert('Please pick a star rating.');}});
+  </script>`);
+}
+
+/** POST /r/:token — store it. Publishes or holds depending on the score. */
+async function rvSubmit(env, token, form) {
+  const raw = env.SYNC_KV ? await env.SYNC_KV.get(`rvtok:${token}`) : null;
+  if (!raw) return rvPage('This link has expired', 'Message us on WhatsApp and we will send a fresh one.');
+  const t = JSON.parse(raw);
+  if (t.used) return rvPage('Already received', 'Thank you — we have your review.');
+
+  const rating = Math.max(1, Math.min(5, Number(form.get('rating') || 0)));
+  const text   = String(form.get('text') || '').trim().slice(0, 400);
+  const name   = String(form.get('name') || '').trim().slice(0, 40);
+  const city   = String(form.get('city') || '').trim().slice(0, 30);
+  const item   = t.items[Number(form.get('item') || 0)] || t.items[0];
+  if (!rating || !text || !name || !item) return rvPage('Something was missing', 'Please go back and fill in the rating and review.');
+
+  // Pipes and newlines would break the name|city|text format the PDP parses.
+  const clean = s => s.replace(/[|\r\n]+/g, ' ').replace(/\s+/g, ' ').trim();
+  const rec = {
+    pid: item.pid, product: item.title, rating,
+    name: clean(name), city: clean(city), text: clean(text),
+    orderId: t.orderId, orderName: t.orderName, at: new Date().toISOString(),
+  };
+
+  // Burn the token first — a double submit must never double-count.
+  await env.SYNC_KV.put(`rvtok:${token}`, JSON.stringify({ ...t, used: true }),
+    { expirationTtl: 60 * 60 * 24 * RV_TOKEN_DAYS });
+
+  // Every rating counts toward the average, published or not.
+  await rvBumpAverage(env, rec);
+
+  if (rating >= RV_MIN_PUBLISH) {
+    await rvPublish(env, rec);
+    return rvPage('Thank you', 'Your review is live on the product page. We genuinely appreciate it.');
+  }
+
+  await env.SYNC_KV.put(`rvhold:${Date.now()}:${rec.pid}`, JSON.stringify(rec),
+    { expirationTtl: 60 * 60 * 24 * 120 });
+  await tagOrderSafe(env, rec.orderId, ['⭐ LOW REVIEW — RESOLVE']);
+  return rvPage('Thank you — and sorry',
+    'That is not the standard we aim for. Someone will message you on WhatsApp shortly to put it right.');
+}
+
+/** Running total per product. Held reviews are included — that is the point. */
+async function rvBumpAverage(env, rec) {
+  const key = `rvagg:${rec.pid}`;
+  const raw = await env.SYNC_KV.get(key);
+  const agg = raw ? JSON.parse(raw) : { sum: 0, count: 0 };
+  agg.sum += rec.rating; agg.count += 1;
+  await env.SYNC_KV.put(key, JSON.stringify(agg));
+
+  const avg = Math.round((agg.sum / agg.count) * 10) / 10;
+  await shopifyGQL(`mutation($m:[MetafieldsSetInput!]!){metafieldsSet(metafields:$m){userErrors{message}}}`, {
+    m: [
+      { ownerId: `gid://shopify/Product/${rec.pid}`, namespace: 'reviews', key: 'rating',
+        type: 'rating', value: JSON.stringify({ scale_min: '1.0', scale_max: '5.0', value: String(avg) }) },
+      { ownerId: `gid://shopify/Product/${rec.pid}`, namespace: 'reviews', key: 'rating_count',
+        type: 'number_integer', value: String(agg.count) },
+    ],
+  }, env.SHOPIFY_TOKEN, env);
+  return agg;
+}
+
+/** Append one line to custom.reviews, newest first. */
+async function rvPublish(env, rec) {
+  const gid = `gid://shopify/Product/${rec.pid}`;
+  const cur = await shopifyGQL(
+    `query($id:ID!){product(id:$id){metafield(namespace:"custom",key:"reviews"){value}}}`,
+    { id: gid }, env.SHOPIFY_TOKEN, env);
+  const existing = cur?.data?.product?.metafield?.value || '';
+  const line = `${rec.name}|${rec.city}|${rec.text}`;
+  const next = (line + (existing ? '\n' + existing : '')).split('\n').slice(0, 40).join('\n');
+
+  await shopifyGQL(`mutation($m:[MetafieldsSetInput!]!){metafieldsSet(metafields:$m){userErrors{message}}}`, {
+    m: [{ ownerId: gid, namespace: 'custom', key: 'reviews',
+          type: 'multi_line_text_field', value: next }],
+  }, env.SHOPIFY_TOKEN, env);
+}
+
+/** GET /reviews?s=SECRET — everything held, plus how to act on it. */
+async function rvPending(env) {
+  const list = await env.SYNC_KV.list({ prefix: 'rvhold:', limit: 100 });
+  const out = [];
+  for (const k of list.keys) {
+    const raw = await env.SYNC_KV.get(k.name);
+    if (raw) out.push({ key: k.name, ...JSON.parse(raw) });
+  }
+  return {
+    held: out.length,
+    note: `Ratings under ${RV_MIN_PUBLISH} are held here, not deleted. They already count toward the product average. Publish one with /review-approve?s=SECRET&key=<key>, drop it with &drop=1. Anything left ${RV_HOLD_DAYS} days publishes itself.`,
+    reviews: out,
+  };
+}
+
+/** Publish or discard one held review. Discard is for abuse and spam only. */
+async function rvApprove(env, key, drop) {
+  const raw = await env.SYNC_KV.get(key);
+  if (!raw) return { ok: false, error: 'not_found' };
+  const rec = JSON.parse(raw);
+  if (!drop) await rvPublish(env, rec);
+  await env.SYNC_KV.delete(key);
+  return { ok: true, action: drop ? 'dropped' : 'published', product: rec.product };
+}
+
+/** Held longer than RV_HOLD_DAYS with no decision → it publishes. */
+async function rvReleaseStale(env) {
+  if (!env.SYNC_KV) return { released: 0 };
+  const list = await env.SYNC_KV.list({ prefix: 'rvhold:', limit: 100 });
+  let released = 0;
+  for (const k of list.keys) {
+    const ts = Number(k.name.split(':')[1] || 0);
+    if (!ts || Date.now() - ts < RV_HOLD_DAYS * 86400_000) continue;
+    const raw = await env.SYNC_KV.get(k.name);
+    if (!raw) continue;
+    await rvPublish(env, JSON.parse(raw));
+    await env.SYNC_KV.delete(k.name);
+    released++;
+  }
+  return { released };
+}
+
+function rvPage(title, sub, body = '') {
+  return new Response(`<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex"><title>${rvEsc(title)} · Kordovan</title><style>
+:root{--bg:#F7F2EA;--sf:#fff;--ink:#241C16;--mut:#8B8174;--ln:#DDD2C0;--ac:#A0623A}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);
+font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+display:flex;justify-content:center;padding:32px 18px 64px}
+.w{width:100%;max-width:460px}
+h1{font-family:Georgia,serif;font-size:27px;margin:0 0 6px}
+.sub{color:var(--mut);margin:0 0 24px}
+.prod{background:var(--sf);border:1px solid var(--ln);border-radius:9px;padding:11px 14px;margin:0 0 4px;font-weight:600}
+.f{display:flex;flex-direction:column;gap:17px}
+label{display:flex;flex-direction:column;gap:7px;font-size:14px;font-weight:600}
+input,textarea,select{font:inherit;padding:11px 13px;border:1px solid var(--ln);
+border-radius:9px;background:var(--sf);color:var(--ink);width:100%;font-weight:400}
+input:focus,textarea:focus,select:focus{outline:2px solid var(--ac);outline-offset:1px;border-color:var(--ac)}
+.stars{display:flex;gap:5px}
+.stars button{font-size:34px;line-height:1;background:none;border:none;cursor:pointer;
+padding:0 2px;color:var(--ln)}
+.stars button.on{color:var(--ac)}
+.stars button:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+.go{background:var(--ac);color:#fff;border:none;border-radius:9px;padding:15px;
+font:600 16px/1 inherit;cursor:pointer}
+.go:hover{background:#C08B5C}
+.fine{font-size:12.5px;color:var(--mut);margin:0;font-weight:400}
+@media(prefers-color-scheme:dark){:root{--bg:#1A1410;--sf:#241C16;--ink:#F2EADD;
+--mut:#9C9082;--ln:#3D3228;--ac:#C08B5C}}
+</style></head><body><div class="w">
+<h1>${rvEsc(title)}</h1>${sub ? `<p class="sub">${rvEsc(sub)}</p>` : ''}${body}
+</div></body></html>`, { headers: { 'content-type': 'text/html; charset=utf-8' } });
+}
 
 async function shopifyGQL(query, variables, token, env) {
   const res = await fetch(`https://${env.SHOPIFY_STORE}/admin/api/${SHOPIFY_API}/graphql.json`, {
@@ -1213,6 +1527,8 @@ async function runPollSync(env) {
             // Delivered → thank-you. ref keeps it to exactly one per order.
             const phD = normalisePK(o.phone || o.shipping_address?.phone || o.customer?.phone);
             if (phD) await waEnqueue(env, { to: phD, text: msgDelivered(o), ref: `${o.id}:delivered` });
+            // Same moment schedules the review ask — it fires RV_DELAY_DAYS later.
+            await rvSchedule(env, o);
           } catch (e) {
             log(`Order #${o.order_number} mark paid ERROR: ${e.message}`);
             result.errors++;
