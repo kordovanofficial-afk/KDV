@@ -1,0 +1,33 @@
+#
+# Input for the payment customization function.
+#
+# Two independent signals mark a product as made to order, so the rule keeps
+# working if either one is missed on a future product:
+#
+#   1. custom.made_to_order  — boolean metafield, the canonical flag
+#   2. the "made-to-order" product tag — a human-visible backstop
+#
+# Both are set on all 30 jackets. Add either one to any new made-to-order
+# product and it is covered automatically — no code change, no redeploy.
+#
+query RunInput {
+  cart {
+    lines {
+      merchandise {
+        __typename
+        ... on ProductVariant {
+          product {
+            madeToOrder: metafield(namespace: "custom", key: "made_to_order") {
+              value
+            }
+            taggedMadeToOrder: hasAnyTag(tags: ["made-to-order"])
+          }
+        }
+      }
+    }
+  }
+  paymentMethods {
+    id
+    name
+  }
+}
