@@ -108,11 +108,88 @@
   </div>
   <a href="{{ routes.search_url }}" class="kv-search">Search</a>
   <a href="{{ routes.collections_url }}/all?sort_by=created-descending">New Arrivals</a>
-  <a href="{{ routes.collections_url }}/kdv-wallets">Wallets</a>
-  <a href="{{ routes.collections_url }}/kdv-bags">Bags</a>
-  <a href="{{ routes.collections_url }}/kdv-jackets">Jackets</a>
-  <a href="{{ routes.collections_url }}/kdv-shoes">Shoes</a>
-  <a href="{{ routes.collections_url }}/kdv-accessories">Accessories</a>
+  {%- comment -%}
+    Mobile carries ~79% of search clicks, so it mirrors the desktop mega menus
+    rather than being a flat category list. <details> = no JS, and the caret
+    rotates via CSS. Every accordion ends with a "view all" link because the
+    summary itself is a toggle, not a link to the category.
+  {%- endcomment -%}
+  <details class="kv-macc">
+    <summary>Wallets <svg viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg></summary>
+    <div class="kv-macc__in">
+      <span class="kv-mah">Men's Wallets</span>
+      <a href="{{ routes.collections_url }}/mens-leather-wallets/bifold-wallet">Bifold Wallets</a>
+      <a href="{{ routes.collections_url }}/mens-leather-wallets/card-holder">Cardholders</a>
+      <a href="{{ routes.collections_url }}/mens-leather-wallets/money-clip">Money Clips</a>
+      <a href="{{ routes.collections_url }}/mens-leather-wallets/long-wallet">Long Wallets</a>
+      <a href="{{ routes.collections_url }}/mens-leather-wallets">View all Men's Wallets</a>
+      <span class="kv-mah">Women's Wallets</span>
+      <a href="{{ routes.collections_url }}/womens-leather-wallets">Ladies Wallets</a>
+      <a href="{{ routes.collections_url }}/womens-leather-wallets/clutch">Clutches</a>
+      <span class="kv-mah">Smart &amp; RFID</span>
+      <a href="{{ routes.collections_url }}/rfid-wallets">RFID Wallets</a>
+      <a href="{{ routes.collections_url }}/smart-wallets">Smart Wallets</a>
+      <a href="{{ routes.collections_url }}/kodo-by-kordovan">The KODO</a>
+      <a href="{{ routes.collections_url }}/kdv-wallets">View all Wallets</a>
+    </div>
+  </details>
+
+  <details class="kv-macc">
+    <summary>Bags <svg viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg></summary>
+    <div class="kv-macc__in">
+      <span class="kv-mah">Work &amp; Travel</span>
+      <a href="{{ routes.collections_url }}/laptop-bags">Laptop Bags</a>
+      <a href="{{ routes.collections_url }}/office-bags">Office Bags</a>
+      <a href="{{ routes.collections_url }}/travel-bags">Travel &amp; Duffle Bags</a>
+      <a href="{{ routes.collections_url }}/leather-backpacks">Backpacks</a>
+      <span class="kv-mah">Everyday</span>
+      <a href="{{ routes.collections_url }}/crossbody-messenger-bags">Crossbody &amp; Messenger</a>
+      <a href="{{ routes.collections_url }}/womens-leather-handbags">Women's Handbags</a>
+      <a href="{{ routes.collections_url }}/kdv-bags">View all Bags</a>
+    </div>
+  </details>
+
+  <details class="kv-macc">
+    <summary>Jackets <svg viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg></summary>
+    <div class="kv-macc__in">
+      <span class="kv-mah">Shop Jackets</span>
+      <a href="{{ routes.collections_url }}/mens-leather-jackets">Men's Jackets</a>
+      <a href="{{ routes.collections_url }}/womens-leather-jackets">Women's Jackets</a>
+      <span class="kv-mah">By Style</span>
+      <a href="{{ routes.collections_url }}/mens-biker-leather-jackets">Biker Jackets</a>
+      <a href="{{ routes.collections_url }}/mens-bomber-leather-jackets">Bomber Jackets</a>
+      <span class="kv-mah">By Colour</span>
+      <a href="{{ routes.collections_url }}/mens-black-leather-jackets">Black Jackets</a>
+      <a href="{{ routes.collections_url }}/kdv-jackets">View all Jackets</a>
+    </div>
+  </details>
+
+  <details class="kv-macc">
+    <summary>Shoes <svg viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg></summary>
+    <div class="kv-macc__in">
+      <span class="kv-mah">By Style</span>
+      <a href="{{ routes.collections_url }}/kdv-shoes/oxford">Oxfords</a>
+      <a href="{{ routes.collections_url }}/kdv-shoes/loafer">Loafers</a>
+      <a href="{{ routes.collections_url }}/kdv-shoes/moccasin">Moccasins</a>
+      <a href="{{ routes.collections_url }}/kdv-shoes">All Shoes</a>
+    </div>
+  </details>
+
+  <details class="kv-macc">
+    <summary>Accessories <svg viewBox="0 0 10 6"><path d="M1 1l4 4 4-4"/></svg></summary>
+    <div class="kv-macc__in">
+      <span class="kv-mah">Wear</span>
+      <a href="{{ routes.collections_url }}/kdv-belts">Belts</a>
+      <a href="{{ routes.collections_url }}/leather-gloves">Gloves</a>
+      <a href="{{ routes.collections_url }}/leather-caps">Caps</a>
+      <a href="{{ routes.collections_url }}/cowboy-hats">Cowboy Hats</a>
+      <span class="kv-mah">Small Goods</span>
+      <a href="{{ routes.collections_url }}/cigarette-cases">Cigarette Cases</a>
+      <a href="{{ routes.collections_url }}/leather-notepad-folios">Folios &amp; Notepads</a>
+      <a href="{{ routes.collections_url }}/leather-keychains">Keychains</a>
+      <a href="{{ routes.collections_url }}/kdv-accessories">View all Accessories</a>
+    </div>
+  </details>
   <a href="{{ routes.collections_url }}/sale" style="color:var(--brass-light)">Sale</a>
   <a href="/pages/track-order" class="kv-mmenu__trk">
     <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><path d="M16 8h4l3 3v5h-7z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>

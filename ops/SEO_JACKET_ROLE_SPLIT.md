@@ -133,9 +133,23 @@ Edge cases, so they are not "corrected" later by mistake:
 - **Hawkeye** (double-breasted coat) has a colour tag, no style tag — it is not a
   biker, bomber or cafe racer.
 
-### Open
-- New collections are **not in the header navigation**. Nav menus are admin-side,
-  not theme files, so this was left to the user.
+### Navigation (theme change — needs merge to `kordovan` to go live)
+The nav is **hardcoded Liquid** in `sections/site-header.liquid`, not a Shopify
+admin menu, so every new collection needs a theme edit to appear there. Argues for
+building brown/cafe racer in one batch rather than one at a time.
+
+- **Desktop:** added "By Style" (Biker, Bomber) and "By Colour" (Black) columns to
+  the Jackets mega menu. `.kv-mega__in` is a 4-column grid and Jackets only had two
+  children, so two columns were rendering empty — this also fixes that dead space.
+- **Mobile:** rebuilt from a flat category list into `<details>` accordions
+  mirroring each desktop mega menu (Wallets, Bags, Jackets, Shoes, Accessories).
+  **Mobile is 79% of search clicks** (22,992 of 29,071 peak season, CTR 4.71% vs
+  desktop 3.04%) — it was the wrong surface to leave thin. No JS; CSS in
+  `assets/home.css` under "Mobile menu accordions", and those rules **must stay
+  after `.kv-mmenu a`** — equal specificity, so source order is what keeps
+  sub-links from inheriting the 26px top-level styling.
+- Each accordion ends in a "view all" link, because the summary is a toggle rather
+  than a link to the category root.
 - **Women's collection is the biggest untouched bleed:** 35,470 peak-season
   impressions, 183 clicks (0.52%), position 10.8 — with **2 products and an empty
   description**. Copy cannot fix a two-product category; this is a range decision.
