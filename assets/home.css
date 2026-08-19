@@ -629,7 +629,17 @@
 .kv-size__help ol li{margin-bottom:10px;}
 .kv-size__help ol li::marker{color:var(--cognac);font-weight:600;}
 .kv-size__help p{color:var(--walnut);font-size:14.5px;line-height:1.75;margin:0 0 18px;}
-@media(max-width:900px){.kv-size__grid{grid-template-columns:1fr;gap:36px;}}
+/* Women's chart carries six columns (chest/waist/bust/shoulder/sleeve), so the
+   table needs more of the row than the men's two-column one. */
+.kv-size--wide .kv-size__grid{grid-template-columns:1.6fr 1fr;gap:44px;}
+.kv-size--wide .kv-size__table th,.kv-size--wide .kv-size__table td{padding:12px 14px;font-size:14px;}
+.kv-size--wide .kv-size__table tbody th{width:auto;white-space:nowrap;}
+.kv-size--wide .kv-size__table tbody td{white-space:nowrap;}
+.kv-size--wide .kv-size__table tr > :nth-child(4){border-left:1px solid var(--border);}
+.kv-size__grp th{text-align:center !important;font-size:10.5px;color:var(--cognac);}
+.kv-size__grp td{background:var(--parchment);}
+.kv-size__grp th + th{border-left:1px solid var(--border);}
+@media(max-width:900px){.kv-size__grid,.kv-size--wide .kv-size__grid{grid-template-columns:1fr;gap:36px;}}
 
 .kv-pdp__acc{border-top:1px solid var(--border);}
 .kv-pdp__acc details{border-bottom:1px solid var(--border);}

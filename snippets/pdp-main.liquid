@@ -224,37 +224,101 @@
           assign size_opt = opt
         endif
       endfor
+
+      # Women's jackets have their own chart. Only Alison and Sinclair carry the
+      # 'womens' tag; every men's jacket carries 'mens' instead, so this cannot
+      # cross over. Men's stay chest-only until the men's chart is transcribed.
+      assign womens = false
+      if product.tags contains 'womens'
+        assign womens = true
+      endif
+
+      if womens
+        assign sz_codes = '2XS,XS,S,M,L,XL,2XL,3XL,4XL' | split: ','
+        assign sz_waist = '29" - 30",30" - 31",32" - 33",34" - 35",36" - 37",38" - 39",40" - 41",42" - 43",44" - 45"' | split: ','
+        assign sz_bust = '34,36,38,40,42,44,46,48,52' | split: ','
+        assign sz_shoulder = '14,14.5,15,15.5,16,16.5,17,17.5,18' | split: ','
+        assign sz_sleeve = '23.5,24,24.5,24.5,25,25,25.5,26,26.5' | split: ','
+      endif
     -%}
     {%- if size_opt != blank and size_opt.values.size > 0 -%}
-      <section class="kv-pdp__sec kv-size"><div class="kv-wrap">
+      <section class="kv-pdp__sec kv-size{% if womens %} kv-size--wide{% endif %}"><div class="kv-wrap">
         <div class="kv-size__grid">
           <div class="kv-size__main">
             <span class="eyebrow">Size Guide</span>
             <h2>Find your size</h2>
             <div class="kv-size__tablewrap">
               <table class="kv-size__table">
-                <thead><tr><th scope="col">Size</th><th scope="col">Chest</th></tr></thead>
+                <thead>
+                  {%- if womens -%}
+                    <tr class="kv-size__grp">
+                      <td></td>
+                      <th scope="colgroup" colspan="2">Measure yourself</th>
+                      <th scope="colgroup" colspan="3">The finished jacket</th>
+                    </tr>
+                  {%- endif -%}
+                  <tr>
+                    <th scope="col">Size</th>
+                    <th scope="col">Chest</th>
+                    {%- if womens -%}
+                      <th scope="col">Waist</th>
+                      <th scope="col">Bust</th>
+                      <th scope="col">Shoulder</th>
+                      <th scope="col">Sleeve</th>
+                    {%- endif -%}
+                  </tr>
+                </thead>
                 <tbody>
                   {%- for v in size_opt.values -%}
-                    {%- assign bits = v | split: '(' -%}
-                    {%- assign sz = bits[0] | strip -%}
-                    {%- assign ch = bits[1] | default: '' | replace: ')', '' | replace: 'Chest', '' | strip -%}
-                    <tr><th scope="row">{{ sz }}</th><td>{% if ch != blank %}{{ ch }}{% else %}&mdash;{% endif %}</td></tr>
+                    {%- liquid
+                      assign bits = v | split: '('
+                      assign sz = bits[0] | strip
+                      assign ch = bits[1] | default: '' | replace: ')', '' | replace: 'Chest', '' | strip
+                      assign idx = -1
+                      if womens
+                        for c in sz_codes
+                          if c == sz
+                            assign idx = forloop.index0
+                          endif
+                        endfor
+                      endif
+                    -%}
+                    <tr>
+                      <th scope="row">{{ sz }}</th>
+                      <td>{% if ch != blank %}{{ ch }}{% else %}&mdash;{% endif %}</td>
+                      {%- if womens -%}
+                        {%- if idx >= 0 -%}
+                          <td>{{ sz_waist[idx] }}</td>
+                          <td>{{ sz_bust[idx] }}&quot;</td>
+                          <td>{{ sz_shoulder[idx] }}&quot;</td>
+                          <td>{{ sz_sleeve[idx] }}&quot;</td>
+                        {%- else -%}
+                          <td>&mdash;</td><td>&mdash;</td><td>&mdash;</td><td>&mdash;</td>
+                        {%- endif -%}
+                      {%- endif -%}
+                    </tr>
                   {%- endfor -%}
                 </tbody>
               </table>
             </div>
-            <p class="kv-size__note">Chest is a <strong>body</strong> measurement, not the jacket&rsquo;s &mdash; we add the room the cut needs. If you are between two sizes, take the larger one, or send us your measurements and we will build it to them.</p>
+            {%- if womens -%}
+              <p class="kv-size__note">Chest and waist are <strong>your</strong> measurements &mdash; measure yourself, not a jacket you own. Bust, shoulder and sleeve are the finished garment, already cut with the room it needs. All figures in inches (1&Prime; = 2.54&nbsp;cm). Between two sizes, take the larger one, or send us your measurements and we will build it to them.</p>
+            {%- else -%}
+              <p class="kv-size__note">Chest is a <strong>body</strong> measurement, not the jacket&rsquo;s &mdash; we add the room the cut needs. All figures in inches (1&Prime; = 2.54&nbsp;cm). If you are between two sizes, take the larger one, or send us your measurements and we will build it to them.</p>
+            {%- endif -%}
           </div>
 
           <div class="kv-size__help">
             <h3>How to measure</h3>
             <ol>
               <li><strong>Chest.</strong> Around the fullest part, under the arms and across the shoulder blades. Wear a shirt, keep the tape level, and don&rsquo;t pull it tight.</li>
+              {%- if womens -%}
+                <li><strong>Waist.</strong> Around the narrowest part of your waist, roughly at the navel, tape level and comfortably snug.</li>
+              {%- endif -%}
               <li><strong>Shoulder.</strong> Seam to seam across the back, from the point of one shoulder to the other.</li>
               <li><strong>Sleeve.</strong> From the shoulder point down the outside of a slightly bent arm to the wrist bone.</li>
             </ol>
-            <p>Every jacket is cut after you order, so these three numbers are all we need to make it to you rather than to a chart.</p>
+            <p>Every jacket is cut after you order, so these numbers are all we need to make it to you rather than to a chart.</p>
             <a class="wa" href="https://wa.me/923332601161?text=Hi%20Kordovan%20%E2%80%94%20I%27d%20like%20help%20with%20sizing%20for%20the%20{{ product.title | url_encode }}" target="_blank" rel="noopener">Send us your measurements</a>
           </div>
         </div>
