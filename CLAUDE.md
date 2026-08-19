@@ -87,7 +87,14 @@ kordovan  (trunk)
   during paid-ads spend. Review carefully; prefer a mockup or a duplicate theme
   for anything structural.
 - Shopify GitHub integration deploys from the **`kordovan`** branch.
-- **Work on `kordovan`** (the source of truth). User authorized per-step deploys.
+- **Work on `kordovan`** (the source of truth).
+- 🛑 **ASK BEFORE EVERY PUSH TO `kordovan` (user, Aug 19 2026 — supersedes the old
+  "user authorized per-step deploys" rule).** Each push is a live release while ads
+  are running, so confirm every time; a yes on one deploy is NOT standing permission
+  for the next. Build on the session's `claude/*` branch, then ask to merge.
+- ⚠️ **Sessions are often scoped to a `claude/*` branch while Shopify deploys only
+  from `kordovan`** — so work is INVISIBLE on the store until that merge. Say so
+  when handing off, or the user checks the site and sees the old version.
 - Do not create PRs unless explicitly asked.
 
 ## 🔌 Available integrations (MCP)
