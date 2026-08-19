@@ -164,3 +164,35 @@ own bench beats anything generated — **prefer a real one if you can take it.**
 Tell me they are in Files and I will pull the CDN URLs and place all five in
 the article with the alt text above, plus add the header image to the
 `BlogPosting` schema `image` property (currently omitted because none existed).
+
+---
+
+# Price article — `leather-jacket-price-in-pakistan`
+
+Three slots. The article reads fine without them; these earn their place because
+a page about money is more persuasive when you can see what the money buys.
+
+### 1 · Hero — the price ladder made visible
+**File:** `blog-price-ladder.jpg` · **1600 × 900** (16:9)
+**Placement:** top of article, above the first paragraph
+**Alt text:** `Three genuine leather jackets at different price points laid flat on linen`
+
+> Overhead photograph of three leather jackets laid flat side by side on natural linen, evenly spaced: a plain black cafe racer on the left, a mid-brown panelled biker in the centre, a long dark brown double-breasted coat on the right. Increasing complexity and size from left to right so the progression reads at a glance. Soft diffused daylight from the top left, gentle shadows. Matte leather with visible natural grain, no gloss. Alabaster and parchment tones in the background. Nothing else in frame. No text, no price tags, no logos. Straight overhead, 50mm, f/5.6.
+
+### 2 · Where the money goes
+**File:** `blog-price-cutting.jpg` · **1400 × 900** (14:9)
+**Placement:** inside "Where the money actually goes"
+**Alt text:** `A full sheepskin hide on a cutting table with jacket panels chalked around its flaws`
+
+> Documentary photograph, high angle, of a full sheepskin hide spread on a worn wooden cutting table. Paper jacket patterns laid across it and chalk outlines drawn around the usable areas, visibly working around thin patches and neck creases near the edges. Offcuts of unusable leather to one side. A steel rule and a round cutting knife resting on the hide. Warm side window light, dust in the air, muted and unstyled. Brown and cream tones. No hands, no face, no text, no logos. 35mm, f/4, natural light, slight grain.
+
+### 3 · Sheep against cow
+**File:** `blog-price-sheep-vs-cow.jpg` · **1400 × 900** (14:9)
+**Placement:** inside "Sheep or cow, and why it changes the price"
+**Alt text:** `Sheep leather and cow leather side by side showing the difference in thickness and grain`
+
+> Extreme close-up, macro, of two leather swatches meeting edge to edge down the centre of the frame — soft thin brown sheep leather on the left, thicker heavier brown cow leather on the right, both cut so their edges are visible and the difference in thickness is obvious. Natural raking light across the surface to bring out the grain of each: fine and close on the sheep, coarser and more open on the cow. Matte, undyed-looking, no gloss. Neutral parchment background. No text, no labels, no logos. 100mm macro, f/8.
+
+### After upload
+Same as above — tell me they are in Files and I will place all three with the
+alt text here and add the hero to the article's `BlogPosting` schema `image`.
