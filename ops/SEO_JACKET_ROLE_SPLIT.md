@@ -82,6 +82,64 @@ collection to the article with transactional anchor text.**
   tag-filtered duplicate. Add to the redirect list when the catalogue-trim
   redirects are built.
 
+## Collection lattice (added same day)
+
+**Rejected: a sheepskin collection.** All jackets are sheepskin, so it would have
+held 28 of 28 — a clone of the parent, i.e. the exact cannibalisation fixed above.
+
+> **Rule: a child collection earns a URL only if it holds a materially different
+> product set from its parent.** Sheepskin 28/28 = no. Biker 17/28, Black 15/28 = yes.
+> Different *axis* (style vs colour) is not the test; different *set* is.
+
+Peak-season demand (1 Nov 2025 – 28 Feb 2026) that decided the shape:
+
+| Cluster | Impressions | Clicks |
+|---|---|---|
+| Black | 9,577 | 238 |
+| Biker | 3,754 | 55 |
+| Bomber | 1,406 | 68 |
+| Brown | 1,215 | 32 |
+
+Black is larger than biker and bomber combined — "black leather jacket" alone is
+4,555 impressions at position 4.5 / 0.83% CTR. Too big to leave to a filter.
+
+### Built (smart collections, BEST_SELLING, Online Store publication only)
+| URL | Products | Rule |
+|---|---|---|
+| `/collections/mens-biker-leather-jackets` | 17 | tag `Biker` AND `mens leather jackets` |
+| `/collections/mens-bomber-leather-jackets` | 6 | tag `Bomber` AND `mens leather jackets` |
+| `/collections/mens-black-leather-jackets` | 15 | tag `Black` AND `mens leather jackets` |
+
+Each has an SEO title carrying a **verified** min price (biker/black Rs 22,000,
+bomber Rs 26,100 — computed from `priceRangeV2`, not guessed), a meta description,
+and a `custom.editorial` block with a deliberately distinct angle so the three do
+not duplicate each other. All cross-link to siblings and up to the parent; the
+parent's editorial now links down to all three.
+
+### Tagging
+No style or colour tags existed — the catalogue only had generic tags
+(`mens leather jackets`, `sheepskin`, …), so tag-based smart collections needed a
+tagging pass first. Added across all 28 men's jackets, additive, existing tags
+untouched: **Biker 17 · Bomber 6 · Cafe Racer 4 · Black 15 · Brown 11**.
+
+`Cafe Racer` and `Brown` are tagged but have **no collection**: cafe racer is only
+4 products (too thin to rank), brown was held for a second wave. Both are one
+`collectionCreate` away. The tags also feed storefront filters once Search &
+Discovery filters are enabled.
+
+Edge cases, so they are not "corrected" later by mistake:
+- **Durham Waxed** is black with brown accents → tagged `Black` only.
+- **Rodriguez** (claret) and **Cobalt** (blue) have a style tag, no colour tag.
+- **Hawkeye** (double-breasted coat) has a colour tag, no style tag — it is not a
+  biker, bomber or cafe racer.
+
+### Open
+- New collections are **not in the header navigation**. Nav menus are admin-side,
+  not theme files, so this was left to the user.
+- **Women's collection is the biggest untouched bleed:** 35,470 peak-season
+  impressions, 183 clicks (0.52%), position 10.8 — with **2 products and an empty
+  description**. Copy cannot fix a two-product category; this is a range decision.
+
 ## Measuring it
 
 Re-check in Search Console ~3–4 weeks (mid Sept, before the season). Success =
