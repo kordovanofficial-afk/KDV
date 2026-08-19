@@ -629,13 +629,17 @@
 .kv-size__help ol li{margin-bottom:10px;}
 .kv-size__help ol li::marker{color:var(--cognac);font-weight:600;}
 .kv-size__help p{color:var(--walnut);font-size:14.5px;line-height:1.75;margin:0 0 18px;}
-/* Women's chart carries six columns (chest/waist/bust/shoulder/sleeve), so the
-   table needs more of the row than the men's two-column one. */
+/* Full charts run six columns (women's) or seven (men's), so the table needs
+   more of the row than the chest-only fallback does. */
 .kv-size--wide .kv-size__grid{grid-template-columns:1.6fr 1fr;gap:44px;}
-.kv-size--wide .kv-size__table th,.kv-size--wide .kv-size__table td{padding:12px 14px;font-size:14px;}
+.kv-size--wide .kv-size__table th,.kv-size--wide .kv-size__table td{padding:12px 13px;font-size:14px;}
+.kv-size--m .kv-size__table th,.kv-size--m .kv-size__table td{padding:12px 10px;font-size:13.5px;}
 .kv-size--wide .kv-size__table tbody th{width:auto;white-space:nowrap;}
 .kv-size--wide .kv-size__table tbody td{white-space:nowrap;}
-.kv-size--wide .kv-size__table tr > :nth-child(4){border-left:1px solid var(--border);}
+/* Rule between "measure yourself" and "the finished jacket". The boundary sits
+   after two body columns on the women's chart, after one on the men's. */
+.kv-size--w .kv-size__table tr > :nth-child(4){border-left:1px solid var(--border);}
+.kv-size--m .kv-size__table tr > :nth-child(3){border-left:1px solid var(--border);}
 .kv-size__grp th{text-align:center !important;font-size:10.5px;color:var(--cognac);}
 .kv-size__grp td{background:var(--parchment);}
 .kv-size__grp th + th{border-left:1px solid var(--border);}
