@@ -206,6 +206,62 @@
     </div></div></section>
   {%- endif -%}
 
+  <!-- SIZE GUIDE (jackets only; built from the product's own size options) -->
+  {%- comment -%}
+    Sizing used to live only in a JPEG in the gallery — unreadable on a phone,
+    invisible to search, and the single biggest hesitation on a prepaid
+    made-to-order jacket. This reads the chest range straight out of the
+    variant names ("L ( Chest 40" - 42" )"), so it can never drift from what
+    is actually being sold, and it only lists the sizes this jacket offers.
+    Gated on product type, not on made_to_order — shoes are made to order too
+    and a chest measurement would be nonsense on a loafer.
+  {%- endcomment -%}
+  {%- if product.type contains 'Jacket' -%}
+    {%- liquid
+      assign size_opt = blank
+      for opt in product.options_with_values
+        if opt.name == 'Size'
+          assign size_opt = opt
+        endif
+      endfor
+    -%}
+    {%- if size_opt != blank and size_opt.values.size > 0 -%}
+      <section class="kv-pdp__sec kv-size"><div class="kv-wrap">
+        <div class="kv-size__grid">
+          <div class="kv-size__main">
+            <span class="eyebrow">Size Guide</span>
+            <h2>Find your size</h2>
+            <div class="kv-size__tablewrap">
+              <table class="kv-size__table">
+                <thead><tr><th scope="col">Size</th><th scope="col">Chest</th></tr></thead>
+                <tbody>
+                  {%- for v in size_opt.values -%}
+                    {%- assign bits = v | split: '(' -%}
+                    {%- assign sz = bits[0] | strip -%}
+                    {%- assign ch = bits[1] | default: '' | replace: ')', '' | replace: 'Chest', '' | strip -%}
+                    <tr><th scope="row">{{ sz }}</th><td>{% if ch != blank %}{{ ch }}{% else %}&mdash;{% endif %}</td></tr>
+                  {%- endfor -%}
+                </tbody>
+              </table>
+            </div>
+            <p class="kv-size__note">Chest is a <strong>body</strong> measurement, not the jacket&rsquo;s &mdash; we add the room the cut needs. If you are between two sizes, take the larger one, or send us your measurements and we will build it to them.</p>
+          </div>
+
+          <div class="kv-size__help">
+            <h3>How to measure</h3>
+            <ol>
+              <li><strong>Chest.</strong> Around the fullest part, under the arms and across the shoulder blades. Wear a shirt, keep the tape level, and don&rsquo;t pull it tight.</li>
+              <li><strong>Shoulder.</strong> Seam to seam across the back, from the point of one shoulder to the other.</li>
+              <li><strong>Sleeve.</strong> From the shoulder point down the outside of a slightly bent arm to the wrist bone.</li>
+            </ol>
+            <p>Every jacket is cut after you order, so these three numbers are all we need to make it to you rather than to a chart.</p>
+            <a class="wa" href="https://wa.me/923332601161?text=Hi%20Kordovan%20%E2%80%94%20I%27d%20like%20help%20with%20sizing%20for%20the%20{{ product.title | url_encode }}" target="_blank" rel="noopener">Send us your measurements</a>
+          </div>
+        </div>
+      </div></section>
+    {%- endif -%}
+  {%- endif -%}
+
   <!-- DESCRIPTION + tabs -->
   <section class="kv-pdp__sec"><div class="kv-wrap"><div class="kv-pdp__desc">
     <div class="rte">{{ product.description }}</div>
