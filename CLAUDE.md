@@ -345,11 +345,27 @@ Aug 2026 pass covered them; a fresh session wasted effort re-checking. Measured 
 | SEO description | **30/30** |
 | Image alt text | **179/179 (100%)** — jackets are the one clean category vs 47.9% missing store-wide |
 | `custom.fits` | **30/30** |
-| `custom.subtitle` | **0/30** |
-| `custom.benefits` | **0/30** |
-| `custom.material` | **0/30** |
-| `reviews.rating` | **3/30** (mens-spy, shadow-rider, stryker only) |
+| `custom.subtitle` | **30/30** ✅ filled Aug 20 2026 |
+| `custom.benefits` | **30/30** ✅ filled Aug 20 2026 |
+| `custom.material` | **30/30** ✅ filled Aug 20 2026 |
+| `reviews.rating` | **3/30** (mens-spy 3.0, shadow-rider 5.0, stryker 1.0 — each count 1) |
 | `custom.reviews` | **0/30** |
+
+- subtitle/benefits/material were written per product from each one's own spec list
+  (`material` renders inline in the PDP eyebrow so it must stay short — e.g.
+  `Top-grain sheep leather`, `Top-grain sheep suede` for Apex, `Semi-aniline sheep
+  leather` for the two women's).
+- 🚫 **Reviews are NOT to be invented.** The 3 existing ratings are real customer ones
+  (nobody self-authors a 1-star). Fabricating customer names/cities/testimonials next to
+  genuine ratings is deceptive and undercuts the whole "we're the honest ones" position.
+  **Collect real ones instead:** 56 delivered jacket buyers exist, 54 contactable,
+  covering 29 of the 30 jackets. Outreach list built Aug 20 2026
+  (`jacket_review_outreach.csv`, session-local — rebuild from a bulk export of
+  `financial_status:paid` orders with jacket line items). Start with Durham Waxed and
+  Desert Voyager, 5 owners each.
+- ⚠️ **Stryker shows 1.0 stars from a single text-less review, live.** An unexplained
+  one-star is worse than no rating — it is the only social proof on that page. Three of
+  its owners are on the outreach list.
 
 - Titles are correctly front-loaded (`Men's Black Biker Leather Jacket Pakistan — Iconic
   | Kordovan`). 22 of 30 exceed 60 chars but what truncates is `| Kordovan` — **leave
