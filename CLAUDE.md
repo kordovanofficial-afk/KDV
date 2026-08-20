@@ -335,6 +335,31 @@ lacks `write_customer_merge` scope, no workaround; direct API egress blocked).
   first images have alts, extra variant/angle shots don't. Detail file
   `alt_audit.jsonl` in scratchpad (session-local; re-export post-trim).
 
+## 🧾 Jacket SEO audit (measured Aug 20 2026, all 30 `Leather Jacket` products)
+⚠️ **Do NOT assume product SEO is incomplete — titles/descriptions/alt are DONE.** The
+Aug 2026 pass covered them; a fresh session wasted effort re-checking. Measured state:
+
+| Field | Coverage |
+|---|---|
+| SEO title | **30/30** |
+| SEO description | **30/30** |
+| Image alt text | **179/179 (100%)** — jackets are the one clean category vs 47.9% missing store-wide |
+| `custom.fits` | **30/30** |
+| `custom.subtitle` | **0/30** |
+| `custom.benefits` | **0/30** |
+| `custom.material` | **0/30** |
+| `reviews.rating` | **3/30** (mens-spy, shadow-rider, stryker only) |
+| `custom.reviews` | **0/30** |
+
+- Titles are correctly front-loaded (`Men's Black Biker Leather Jacket Pakistan — Iconic
+  | Kordovan`). 22 of 30 exceed 60 chars but what truncates is `| Kordovan` — **leave
+  them alone**, this is not a defect.
+- 🔴 **The live gap is PDP depth, not metadata.** `snippets/pdp-main.liquid` renders the
+  review block + star rating ONLY when `reviews.rating` is set, so **27 of 30 jacket PDPs
+  currently show no rating and no social proof**. That sits directly on the conversion
+  bottleneck (jacket site CR ~0.115%, cheap clicks at PKR 9.75) heading into the season.
+  Filling subtitle/benefits/material/reviews is worth more than any targeting change.
+
 ## 🏬 PARKED — Catalog trim before SEO (user doing manually)
 User moved to own POS software (synced w/ Shopify). Is removing store-only / bogus /
 irrelevant products from the ONLINE store so the online catalog = only what's sold
