@@ -108,12 +108,26 @@ kordovan  (trunk)
   **Break-even CPA ≈ PKR 15,300.** Cold CPA of ~1,979 returns ~7.7x here — jackets
   are the ONE product that makes cold prospecting viable in this account.
 - **No production ceiling** (user, Aug 20 2026) — budget is the only constraint.
-- 🔴 **Jackets are refused MORE than wallets, not less.** 24-month data: 131 placed,
-  56 delivered, **75 voided = 57% failure** vs ~38% all-products. This INVERTS the
-  playbook's price/refusal pattern (which holds only inside the wallet range) — at
-  Rs 28,000 the doorstep bill is the problem. The 50% deposit is doing real work;
-  do not relax it to chase conversion. Historical jacket order counts overstate
-  demand ~2x, so forecast on DELIVERED only.
+- ✅ **Jackets have ZERO doorstep refusals. 0 of 134 orders in 24 months were
+  dispatched and then cancelled** (checked via fulfillments + trackingInfo, Aug 20
+  2026). Once a jacket ships it is delivered, every time — the 50% deposit filters
+  before anything leaves the workshop, so jackets carry **no RTO cost at all**.
+  ⚠️ **Never count VOIDED/cancelled as a refusal.** A cancelled order with no
+  tracking number was never dispatched. Test = `fulfillments.trackingInfo.number`
+  present, or `displayFulfillmentStatus` FULFILLED/RESTOCKED.
+- **The real jacket problem is BOOKING conversion, not delivery.** 75 of 134 jacket
+  orders were cancelled pre-dispatch: 25 CUSTOMER · 24 OTHER · 22 FRAUD · 2
+  INVENTORY · 2 DECLINED — i.e. the deposit was never paid. Only **56 became paid
+  (42%)**. Costs nothing in shipping, but it means **Meta's Purchase event (fires at
+  order placement) is ~58% noise on jackets** — the same structural trap as the COD
+  refuser problem. Feed the PAID/confirmed event back, not order-placed.
+- **Break-even CPA ≈ PKR 7,100 per PLACED order** (17,066 × 42%), or ~8,500 ignoring
+  the 22 fraud orders; the full **17,066 per PAID jacket**, since nothing ships unpaid.
+  Still 3.6–4.3x the PKR 1,979 cold CPA.
+- 📌 **Store-wide RTO is 9.9%, not ~40%.** Of 6,482 orders (24m): 4,699 not cancelled,
+  1,144 cancelled BEFORE dispatch, **639 cancelled AFTER dispatch = 9.9% real RTO**
+  (555 of those tagged FRAUD). The playbook's "~40% never deliver" conflates
+  pre-dispatch cancellations with genuine refusals — re-measure before quoting it.
 - **Cities (delivered orders, 12m all-products, n=2,512):** Lahore 331 · Karachi 232
   · Islamabad 169 · Rawalpindi 101 — **those four = 84% of 9-city delivered volume**.
   Outside the 9 cities delivery is 49.9% vs 67.9% inside (28.1% for jackets) —
