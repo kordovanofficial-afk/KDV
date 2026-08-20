@@ -97,6 +97,39 @@ kordovan  (trunk)
   when handing off, or the user checks the site and sees the old version.
 - Do not create PRs unless explicitly asked.
 
+## 🧥 Jackets — payment, margin, refusal (user-confirmed Aug 20 2026)
+- **Payment = 50% of retail to BOOK, balance paid to the rider on delivery.**
+  ⚠️ NOT "prepaid only" — the old rule was wrong and was live on the site. Corrected
+  across the 4 jacket collections + the brands article. Never write "no cash on
+  delivery" for jackets again; half of it *is* paid at the door.
+- **COGS PKR 10,000–12,000** (use 11,000). Mean selling price across the 28 men's
+  jackets = **PKR 28,066** → gross profit ~**PKR 17,066/jacket (61%)**. That is
+  ~5.7x the best wallet (Aristocrat, 3,005) and ~24x the Bastion (720).
+  **Break-even CPA ≈ PKR 15,300.** Cold CPA of ~1,979 returns ~7.7x here — jackets
+  are the ONE product that makes cold prospecting viable in this account.
+- **No production ceiling** (user, Aug 20 2026) — budget is the only constraint.
+- 🔴 **Jackets are refused MORE than wallets, not less.** 24-month data: 131 placed,
+  56 delivered, **75 voided = 57% failure** vs ~38% all-products. This INVERTS the
+  playbook's price/refusal pattern (which holds only inside the wallet range) — at
+  Rs 28,000 the doorstep bill is the problem. The 50% deposit is doing real work;
+  do not relax it to chase conversion. Historical jacket order counts overstate
+  demand ~2x, so forecast on DELIVERED only.
+- **Cities (delivered orders, 12m all-products, n=2,512):** Lahore 331 · Karachi 232
+  · Islamabad 169 · Rawalpindi 101 — **those four = 84% of 9-city delivered volume**.
+  Outside the 9 cities delivery is 49.9% vs 67.9% inside (28.1% for jackets) —
+  independent re-validation of the 9-city rule. Karachi has the highest jacket AOV
+  (39,316) despite the mildest winter → sell Karachi *style*, sell the north *layering*.
+  ⚠️ Jacket-level city data is thin (2–26 orders/city) — direction only, never ranking.
+- **Season curve (PK jacket impressions):** Aug 13.6k · Sep 13.6k (FLAT — do not
+  spend) · Oct 35k · Nov 78.6k · Dec 78.5k · Jan 46.8k · Feb 11.4k. Ramp in OCTOBER.
+- ⚠️ **Aug 2026 is running 64% BELOW Aug 2025** (2,823 vs ~7,890 pro-rata), position
+  10.9 → 14.3. Cause NOT established — candidates: catalogue trim removing indexed
+  URLs, ranking loss, or a core update. Diagnose before the season.
+- **Learning phase:** at ~PKR 8,450 jacket CPA, 50 conversions/week = PKR 400k+/wk,
+  so a jacket campaign optimising for Purchase will NEVER exit learning. Optimise on
+  View Content at small budgets; keep ONE broad consolidated ad set (Advantage+ did
+  6.43% CTR / PKR 9.75 per click last season — best in the account).
+
 ## 🔌 Available integrations (MCP)
 Shopify, GitHub, Canva, Figma, Facebook Ads, Higgsfield, Cloudflare.
 (Playwright is NOT available in this remote env — design is done in code, then
