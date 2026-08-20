@@ -135,9 +135,14 @@
       </div>
 
       {%- comment -%}
-        Made-to-order pieces are prepaid only. Advertising COD on them is what
-        produced the ~60% cancellation rate on jackets — the order is placed on
-        COD, the customer hears "prepaid, two weeks" on the call, and refuses.
+        Made-to-order pieces take a 50% deposit to book; the balance is paid to
+        the rider on delivery (user-confirmed Aug 20 2026). This is NOT "prepaid
+        only" — half of it IS collected at the door, and saying otherwise turns
+        away COD-market buyers at the decision point.
+        Advertising plain COD is equally wrong: it is what produced the high
+        pre-dispatch cancellation rate on jackets, because the order is placed
+        expecting COD and the customer hears "deposit, two weeks" on the call.
+        State the deposit plainly instead — it is a far smaller ask than silence.
         Set custom.made_to_order on any product built after ordering; every
         jacket also matches on product type as a safety net.
       {%- endcomment -%}
@@ -150,7 +155,7 @@
         endif
       -%}
       {%- if mto -%}
-        <div class="kv-pdp__ship kv-pdp__ship--mto"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div><b>Made to order — prepaid only.</b> Cut and stitched for you in 4–7 working days, then delivered in 3–4. Pay by bank transfer or card. Cash on delivery is not available on made-to-order pieces.</div></div>
+        <div class="kv-pdp__ship kv-pdp__ship--mto"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div><b>Made to order — book with 50%.</b> Cut and stitched for you in 4–7 working days, then delivered in 3–4. Pay half to book by bank transfer or card, and the balance to the rider when it arrives.</div></div>
       {%- else -%}
         <div class="kv-pdp__ship"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div><b>Order today, dispatched in 1–2 days.</b> Cash on delivery available nationwide. Delivered in 2–6 business days.</div></div>
       {%- endif -%}
@@ -209,8 +214,8 @@
   <!-- SIZE GUIDE (jackets only; built from the product's own size options) -->
   {%- comment -%}
     Sizing used to live only in a JPEG in the gallery — unreadable on a phone,
-    invisible to search, and the single biggest hesitation on a prepaid
-    made-to-order jacket. This reads the chest range straight out of the
+    invisible to search, and the single biggest hesitation on a made-to-order
+    jacket taking a deposit. This reads the chest range straight out of the
     variant names ("L ( Chest 40" - 42" )"), so it can never drift from what
     is actually being sold, and it only lists the sizes this jacket offers.
     Gated on product type, not on made_to_order — shoes are made to order too
@@ -367,7 +372,7 @@
     <div class="kv-pdp__acc">
       <details open><summary>Leather Care</summary><div class="b">Wipe with a soft, dry cloth, condition every 4–6 weeks, and keep out of prolonged sun and water. See our full <a href="/pages/leather-care-guide">Leather Care Guide</a>.</div></details>
       {%- if mto -%}
-        <details><summary>Shipping &amp; Payment</summary><div class="b">This piece is made to order: 4–7 working days in the workshop, then 3–4 days to your door. Free delivery over PKR 5,500. <b>Prepaid only</b> — bank transfer or card at checkout. Cash on delivery is not offered on made-to-order pieces, because each one is cut for a single customer. Returns are handled case by case — see <a href="/pages/returns">Returns &amp; Exchanges</a>.</div></details>
+        <details><summary>Shipping &amp; Payment</summary><div class="b">This piece is made to order: 4–7 working days in the workshop, then 3–4 days to your door. Free delivery over PKR 5,500. <b>Book with 50%</b> — bank transfer or card at checkout — and pay the balance to the rider on delivery. The deposit is what lets us start cutting, because each piece is made for a single customer. Returns are handled case by case — see <a href="/pages/returns">Returns &amp; Exchanges</a>.</div></details>
       {%- else -%}
         <details><summary>Shipping &amp; Returns</summary><div class="b">Dispatched in 1–2 business days; delivered in 2–6 days. Free delivery over PKR 5,500. Cash on delivery nationwide. 7-day returns on unused items — see <a href="/pages/returns">Returns &amp; Exchanges</a>.</div></details>
       {%- endif -%}

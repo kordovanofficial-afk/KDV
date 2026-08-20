@@ -51,10 +51,10 @@
     <span class="cart-drawer__note">+ Add order note / gift message</span>
     <div class="cd__sub"><span class="l">Subtotal</span><span class="v cart-drawer__total"></span></div>
     {%- comment -%}
-      If anything in the cart is made to order, the whole cart is prepaid —
-      Shopify cannot split payment terms across one order. Saying "COD
-      available" here and then refusing it on the call is the exact sequence
-      that loses the sale.
+      If anything in the cart is made to order, the whole cart takes the 50%
+      deposit — Shopify cannot split payment terms across one order. Saying
+      "COD available" here and then asking for a deposit on the call is the
+      exact sequence that loses the sale, so state the deposit up front.
     {%- endcomment -%}
     {%- liquid
       assign cart_mto = false
@@ -66,7 +66,7 @@
       endfor
     -%}
     {%- if cart_mto -%}
-      <div class="cd__fine">Shipping &amp; taxes calculated at checkout · <b>Prepaid only</b> — your cart contains a made-to-order piece</div>
+      <div class="cd__fine">Shipping &amp; taxes calculated at checkout · <b>Book with 50%</b>, balance to the rider — your cart contains a made-to-order piece</div>
     {%- else -%}
       <div class="cd__fine">Shipping &amp; taxes calculated at checkout · Cash on delivery available</div>
     {%- endif -%}
