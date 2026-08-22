@@ -136,9 +136,26 @@ kordovan  (trunk)
   ⚠️ Jacket-level city data is thin (2–26 orders/city) — direction only, never ranking.
 - **Season curve (PK jacket impressions):** Aug 13.6k · Sep 13.6k (FLAT — do not
   spend) · Oct 35k · Nov 78.6k · Dec 78.5k · Jan 46.8k · Feb 11.4k. Ramp in OCTOBER.
-- ⚠️ **Aug 2026 is running 64% BELOW Aug 2025** (2,823 vs ~7,890 pro-rata), position
-  10.9 → 14.3. Cause NOT established — candidates: catalogue trim removing indexed
-  URLs, ranking loss, or a core update. Diagnose before the season.
+- ✅ **The "Aug 2026 is 64% below Aug 2025" alarm was a MEASUREMENT ARTEFACT — diagnosed
+  and closed Aug 20 2026. Do not re-raise it.** Daily series (PK jacket impressions):
+  June ~430/day @ pos 14.8 · 1–26 Jul ~390/day · **27 Jul–10 Aug ~215/day @ pos 19.0**
+  · **11–18 Aug ~300/day @ pos 12.2**. The break is 27 Jul, two days after the new
+  theme went live 25 Jul — a recrawl-cycle lag. It is a **theme-migration dip already
+  recovering**; last-8-day position (12.2) is BETTER than June (14.8).
+  **June 2026 (~430/day) ≈ Aug 2025 (~438/day), so there is no underlying YoY decline.**
+  The original alarm came from measuring 1–18 Aug, which straddled the trough.
+- 🔬 Two hypotheses were tested and **falsified** — record so they are not retried:
+  (1) *Catalogue trim removed indexed URLs* — checked all 47 product URLs with pre-trim
+  traffic against surviving handles: only 5 are dead (~219 clicks total). Not the cause.
+  (2) *Core update / permanent ranking loss* — positions fell site-wide but recovered
+  within ~2 weeks, which a core update does not do.
+  ⚠️ Small real finds worth fixing anyway: dead URLs `durable-mens-leather-gloves-light-
+  brown-kordovan-1` (125 clicks/5,394 impr), `copy-of-the-access-minimal-wallet`,
+  `four-in-one-leather-gift-set`, `the-seamless-stitch-less-wallet`, `the-hunter-crazy-
+  horse-belt`; plus **`the-braded-belt` is DRAFT** (429 impr) so it 404s on the storefront.
+- 📌 **Catalogue is now 172 products (170 active, 2 draft, 0 archived)** vs 357 in Jul —
+  ~185 hard-deleted. 84 URL redirects exist, mostly legacy. Deletion did NOT hurt
+  rankings measurably, but build redirects for the 5 URLs above.
 - **Learning phase:** at ~PKR 8,450 jacket CPA, 50 conversions/week = PKR 400k+/wk,
   so a jacket campaign optimising for Purchase will NEVER exit learning. Optimise on
   View Content at small budgets; keep ONE broad consolidated ad set (Advantage+ did
