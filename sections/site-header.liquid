@@ -7,10 +7,10 @@
 
 {%- comment -%}
   On a made-to-order product page the site-wide "Cash on delivery nationwide"
-  strapline sits directly above the buy box, which asks for a 50% deposit.
-  Swap the middle claim on those pages so the top of the page and the buy box
-  agree. Everywhere else is untouched — plain COD remains true for the rest of
-  the catalogue.
+  strapline would sit directly above a buy box that says payment is taken online
+  — COD is not selectable on those carts at all. Swap the middle claim on those
+  pages so the top of the page and the buy box agree. Everywhere else is
+  untouched: plain COD remains true for the rest of the catalogue.
 {%- endcomment -%}
 {%- liquid
   assign announce_mto = false
@@ -21,7 +21,7 @@
   endif
 -%}
 <div class="kv-announce" id="kv-announce">
-  Free delivery over <b>PKR 5,500</b> &nbsp;·&nbsp; {% if announce_mto %}Made to order · book with 50%{% else %}Cash on delivery nationwide{% endif %} &nbsp;·&nbsp; 100% genuine leather
+  Free delivery over <b>PKR 5,500</b> &nbsp;·&nbsp; {% if announce_mto %}Made to order · paid online{% else %}Cash on delivery nationwide{% endif %} &nbsp;·&nbsp; 100% genuine leather
 </div>
 
 <header class="kv-hdr{% unless is_home %} kv-hdr--page{% endunless %}" id="kv-hdr">

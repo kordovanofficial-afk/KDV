@@ -97,11 +97,42 @@ kordovan  (trunk)
   when handing off, or the user checks the site and sees the old version.
 - Do not create PRs unless explicitly asked.
 
-## 🧥 Jackets — payment, margin, refusal (user-confirmed Aug 20 2026)
-- **Payment = 50% of retail to BOOK, balance paid to the rider on delivery.**
-  ⚠️ NOT "prepaid only" — the old rule was wrong and was live on the site. Corrected
-  across the 4 jacket collections + the brands article. Never write "no cash on
-  delivery" for jackets again; half of it *is* paid at the door.
+## 🧥 Jackets — payment, margin, refusal (payment rule updated Sep 4 2026)
+- 🔴 **PAYMENT = 100% ONLINE AT CHECKOUT, by credit card / debit card / JazzCash
+  (user-confirmed Sep 4 2026). THIS SUPERSEDES the Aug 20 "50% to book, balance to
+  the rider" rule, which is DEAD** — bank transfer was the deposit rail and it is now
+  hidden on these carts too. Do not reintroduce "book with 50%" anywhere.
+- **Made to order = ALL 30 JACKETS *AND* ALL 24 FOOTWEAR products** (54 total).
+  Shoes are now MTO too — that is new as of Sep 2026.
+- A **Shopify Function** (`tools/shopify-cod-function/`) hides COD when a made-to-order
+  line is in the cart; bank transfer is hidden as well. One MTO line makes the WHOLE
+  cart prepaid — Shopify cannot split payment terms across an order.
+- ✅ **Flagging verified clean Sep 4 2026:** all 54 MTO products carry BOTH
+  `custom.made_to_order == true` AND a "made to order" tag, so the theme rule
+  (metafield OR type contains 'Jacket') and the Function rule (metafield OR tag) agree
+  on **0 of 169 products**. No detection gap. ⚠️ The theme's `type contains 'Jacket'`
+  fallback does NOT catch footwear — footwear relies entirely on the metafield, so
+  **any new shoe MUST get `custom.made_to_order` set** or the PDP will promise COD.
+- ✍️ **Copy rule: never state the terms without the reason.** "Paid online" alone reads
+  as distrust in a COD market; "each piece is cut for one customer and cannot be resold"
+  is the same fact and reads as craft. Every surface now pairs them.
+- ✅ **Updated Sep 4 2026 across:** 30 jacket descriptions (all shared one identical
+  paragraph — clean replace, verified 0 stale of 169 active products) · 4 collections
+  (`mens-leather-jackets`, `mens-biker-`, `mens-bomber-`, `mens-black-leather-jackets`)
+  · pages `faqs` + `cod-policy-note-fake-orders` (added an explicit "why can't I choose
+  COD for a jacket" answer) · theme: `pdp-main`, `pdp-jsonld`, `cart-drawer`, `main-cart`,
+  `site-header` announcement, `site-footer`, `trust-bar`, `main-collection` editorial,
+  `shipping`, `returns`. **Easypaisa removed everywhere** (user: JazzCash only).
+- ⚠️ Footwear product descriptions carry NO payment wording (checked) — terms come only
+  from the PDP template, so they were correct automatically.
+- 📌 **`snippets/returns.liquid` says MTO is non-returnable once production begins**, so the
+  cart drawer no longer shows a "7-day returns" badge on an MTO cart (shows lifetime
+  warranty instead). Keep those two consistent.
+- 🎯 **Expected effect on the ads problem:** jackets died at 25% survival in Aug because the
+  deposit was never paid (6 of 8 orders). Requiring payment at checkout should collapse that
+  pre-dispatch death rate AND make Meta's Purchase event genuinely accurate for jackets for
+  the first time — it now fires on money received, not on an intention. Re-measure jacket
+  survival after ~3 weeks before trusting the new baseline.
 - **COGS PKR 10,000–12,000** (use 11,000). Mean selling price across the 28 men's
   jackets = **PKR 28,066** → gross profit ~**PKR 17,066/jacket (61%)**. That is
   ~5.7x the best wallet (Aristocrat, 3,005) and ~24x the Bastion (720).
@@ -136,13 +167,120 @@ kordovan  (trunk)
   ⚠️ Jacket-level city data is thin (2–26 orders/city) — direction only, never ranking.
 - **Season curve (PK jacket impressions):** Aug 13.6k · Sep 13.6k (FLAT — do not
   spend) · Oct 35k · Nov 78.6k · Dec 78.5k · Jan 46.8k · Feb 11.4k. Ramp in OCTOBER.
-- ⚠️ **Aug 2026 is running 64% BELOW Aug 2025** (2,823 vs ~7,890 pro-rata), position
-  10.9 → 14.3. Cause NOT established — candidates: catalogue trim removing indexed
-  URLs, ranking loss, or a core update. Diagnose before the season.
+- ✅ **The "Aug 2026 is 64% below Aug 2025" alarm was a MEASUREMENT ARTEFACT — diagnosed
+  and closed Aug 20 2026. Do not re-raise it.** Daily series (PK jacket impressions):
+  June ~430/day @ pos 14.8 · 1–26 Jul ~390/day · **27 Jul–10 Aug ~215/day @ pos 19.0**
+  · **11–18 Aug ~300/day @ pos 12.2**. The break is 27 Jul, two days after the new
+  theme went live 25 Jul — a recrawl-cycle lag. It is a **theme-migration dip already
+  recovering**; last-8-day position (12.2) is BETTER than June (14.8).
+  **June 2026 (~430/day) ≈ Aug 2025 (~438/day), so there is no underlying YoY decline.**
+  The original alarm came from measuring 1–18 Aug, which straddled the trough.
+- 🔬 Two hypotheses were tested and **falsified** — record so they are not retried:
+  (1) *Catalogue trim removed indexed URLs* — checked all 47 product URLs with pre-trim
+  traffic against surviving handles: only 5 are dead (~219 clicks total). Not the cause.
+  (2) *Core update / permanent ranking loss* — positions fell site-wide but recovered
+  within ~2 weeks, which a core update does not do.
+  ⚠️ Small real finds worth fixing anyway: dead URLs `durable-mens-leather-gloves-light-
+  brown-kordovan-1` (125 clicks/5,394 impr), `copy-of-the-access-minimal-wallet`,
+  `four-in-one-leather-gift-set`, `the-seamless-stitch-less-wallet`, `the-hunter-crazy-
+  horse-belt`; plus **`the-braded-belt` is DRAFT** (429 impr) so it 404s on the storefront.
+- 📌 **Catalogue is now 172 products (170 active, 2 draft, 0 archived)** vs 357 in Jul —
+  ~185 hard-deleted. 84 URL redirects exist, mostly legacy. Deletion did NOT hurt
+  rankings measurably, but build redirects for the 5 URLs above.
 - **Learning phase:** at ~PKR 8,450 jacket CPA, 50 conversions/week = PKR 400k+/wk,
   so a jacket campaign optimising for Purchase will NEVER exit learning. Optimise on
   View Content at small budgets; keep ONE broad consolidated ad set (Advantage+ did
   6.43% CTR / PKR 9.75 per click last season — best in the account).
+
+## 📊 AUGUST 2026 AD AUDIT (measured Sep 4 2026 — full month, Shopify-reconciled)
+✅ **Ad-level insights + `publisher_platform`/`platform_position` breakdowns WORK via the MCP.**
+The Aug 20 session concluded they were blocked; they are not — retry before ever telling the
+user placement data is unavailable.
+- **Spend PKR 148,310. Meta reported 5.40x. Real (surviving Shopify revenue) = 2.63x.**
+  Ladder: Meta 800,401 → matched to real orders 709,469 (130) → **surviving 390,328 (85)**
+  → cash collected 292,679 (71). **Standing correction factor for this account ≈ 2.0–2.1x**
+  (matches the playbook's ~2x note; now measured twice).
+- Contribution at 45% GM = **+PKR 19,712 only.** Break-even = 2.22x (1.82x at 55% GM).
+  August was *marginally* profitable. Do not scale a thin margin.
+- Per ad set (spend / Meta ROAS / REAL ROAS / contribution @45%):
+  | Retarget Warm+Buyers | 35,064 | 6.92x | **4.32x** | +33,056 ✅ best in account |
+  | TOF-C Catalogue Cold | 20,177 | 8.31x | **2.81x** | +5,338 ✅ only 20 days live |
+  | TOF-A Mocha Mate | 46,489 | 3.89x | **2.42x** | +4,135 ⚠️ paused Sep 1 |
+  | Bastion Cold | 1,173 | — | **7.54x** | +2,809 ✅ tiny n, retest |
+  | BOF DPA Product Intent | 30,913 | 6.50x | **1.33x** | −12,396 ❌ freq **8.10** on 11,739 reach |
+  | TOF-B Razor (killed Aug 11) | 14,469 | 0.56x | **0.19x** | −13,231 ❌ |
+- 🔴 **TOF-C Catalogue Cold is the big discovery: CPC PKR 6.96 / CTR 4.17% on COLD traffic**,
+  vs the playbook's cold benchmark of PKR 32–52. Catalogue/DPA-format cold creative beats
+  static+video cold creative by ~5x on click cost. Under-tested — only 20 days live.
+- **Kill discipline is the process gap.** TOF-B was correctly killed but 7 days late
+  (PKR 9,207 wasted). Signal was clear by day 3. Rule to apply: write the kill threshold in
+  rupees BEFORE launch (≈2x break-even CPA, ~PKR 5,500 for a wallet), check day 3 and day 5.
+- ⚠️ **7 learning-phase resets in 11 days** (status flips, re-reviews, a 6-minute pause/unpause,
+  TOF-C flipped 5x in 21 min). Batch edits; leave ad sets alone 72h.
+- **Placement quality (Shopify-verified survival, NOT Meta's ROAS):** IG Stories 100% (n=3) ·
+  IG Feed 89% · IG Reels 72% (biggest surviving revenue, 48,700) · FB Feed 62% · **FB Reels 52%**.
+  🚫 **Do NOT exclude FB Reels** — Breakdown Effect; it is also the cheapest CPM (255–314 vs 473).
+  It is a *signal* problem: fix by feeding paid/delivered back to Meta, not by cutting placement.
+- 🔴 **UTM blind spot: 57 of 127 paid-Meta orders (45%) carry no usable placement tag** because
+  `Retarget` and `TOF-C` hardcode `utm_content=Facebook_UA` / adset-ID. 3 more carry literal
+  unresolved `{{site_source_name}}` / `{{placement}}` macros on TOF-A. Fix with dynamic macros.
+- **Store-wide Aug:** 223 orders / 1,259,046 placed → 139 surviving / 726,660 (62%).
+  Real RTO 20 = **9.0%** (matches the 9.9% baseline). Pre-dispatch kills 64 = 28.7%.
+  Channel: Meta 402,078 surviving (cost 148,310) · **Organic search 193,224 at ZERO cost**
+  · Direct 118,808. Organic = 51% of Meta's output for 0% of the spend → keep funding SEO.
+- 🔴 **JACKETS AUG: 8 orders placed (334,700) → only 2 survived (128,150) = 25% survival**,
+  vs 62% store-wide. Zero doorstep refusals — all 6 died pre-dispatch on the unpaid 50% deposit.
+  Worse than the 42% historical baseline. **Fix the deposit flow before October spend lands.**
+- 9-city rule re-validated again: inside 70% survival vs outside 47%.
+- Full report artifact: `https://claude.ai/code/artifact/0c0cee26-25af-4c81-adc2-677245832118`
+  Working data + scripts: scratchpad `aug-audit/` (session-local; rebuild via bulk export).
+
+## 🎯 THE THREE LIVE CATALOGUE ADS (analysed Sep 4 2026, daily series Aug 1–Sep 3)
+All three currently-running ads ARE catalogue/DPA ads, all at **PKR 1,000/day**, and all point at
+the **SAME product set `608788148654460` "All Products" (164 items)** in catalogue
+`1015378560682303`. No segmentation between cold / intent / warm.
+- ✅ **Catalogue format confirmed ~4x cheaper than static+video:** catalogue CTR 4.07–4.30% /
+  CPC 6.96–8.14 / cost-per-LPV 9.30–10.94, vs Mocha Mate + Razor at CTR 1.64–1.74% /
+  CPC 29.69–31.66 / LPV 49.28. Keeping only catalogue ads live was correct.
+- 🔴 **THE BLANK DAYS ARE POISSON NOISE, NOT A PERFORMANCE PROBLEM. Do not "diagnose" them.**
+  Each ad buys ~1 order/day (spend ≈ CPA ≈ 1,000), so e^−λ predicts the blanks almost exactly:
+  Retarget λ=1.47 → 23% predicted vs **21% observed** · DPA λ=1.00 → 37% vs **32%** ·
+  TOF-C λ=0.96 → 38% vs **42%**. Sale-days vs blank-days differ by <6% on CTR/CPC/impr/freq.
+  **Fix = raise λ, not "optimise".** Pooling the SAME PKR 3,000/day into ONE campaign turns three
+  1/day lotteries into one 3/day process → blank days fall ~11/month to <2. Costs nothing.
+  ⚠️ Judge these ads on **14-day windows**; a 3-day read is one order.
+- **Revenue concentration is extreme:** TOF-C top-3 days = 58% of its revenue (a single
+  PKR 51,450 order on Aug 12 = 25%); DPA top-3 = 55%; Retarget top-3 = 34% (healthiest).
+- **Per-ad state:**
+  | Retarget Warm+Buyers | 4.32x real | freq **4.86** | blank 21% | IMPROVING (5.73x→10.20x H1→H2) |
+  | BOF DPA Product Intent | 1.33x real | freq **8.10** | blank 32% | DEGRADING (blank 4/17→7/17, pur 21→13) |
+  | TOF-C Catalogue Cold | 2.81x real | freq **1.14** | blank 42% | COOLING (11.95x→5.98x, blank 3/12→7/12) |
+  ⚠️ DPA Sept burn is WORSE: freq 2.63 in Sep 1–4 alone on reach 4,165 (~3x August's daily rate).
+- 🔴 **CREATIVE DEFECT (live, fix first): the DPA body says "cash on delivery anywhere in the
+  country — you pay when it reaches your door."** Violates the 9-city rule AND misstates jacket
+  terms (50% to book, balance to rider). The set includes all 30 jackets → likely a direct
+  contributor to jackets dying at the deposit stage.
+- ⚠️ **The Retarget creative dates from 2025-05-21 — 16 months old, never refreshed**, names
+  "KODO 2.0", and is off-brand (emoji bullets, "Built tough. Priced right." = discount voice vs
+  Quiet Heritage). It is winning on audience quality DESPITE the creative. **Never edit it in
+  place** (resets 16 months of learning) — run a new on-brand ad alongside it.
+- 📌 **Catalogue coverage: 107 of 590 variants (18%) cannot be served.** Meta's 107
+  PRODUCT_OUT_OF_STOCK items map EXACTLY onto Shopify's 107 variants that are
+  `inventoryQuantity<=0 AND inventoryPolicy=DENY` (= `availableForSale:false`).
+  ✅ **The feed is ACCURATE — this is not a sync fault.** Shopify→Meta sync `connected`,
+  last success 2026-09-03. Jackets are NOT suppressed (all 33 zero-stock jacket variants are
+  CONTINUE, so they reach Meta as in stock). 131 CONTINUE-at-zero variants sync fine.
+  ⚠️ `has_webhooks_registered: false` → catalogue updates are a once-daily batch, not realtime.
+- 🔴 **23 products are 100% invisible to every catalogue ad** (no sellable variant), incl.
+  **The Mocha Mate Wallet** (the hero of the paused TOF-A cinematic ad!), both cowboy hats
+  (a category ranking pos 4.8 / CTR 13.8% in GSC), The Casual Belt, ILLUSION Magic Wallet,
+  The Truckkr, Crazy Horse Long Wallet, 4 laptop bags. A further 38 lose part of their range
+  (Documate 4 of 6 hidden, Diana Pebbled 4 of 5). **Restocking widens the shelf at zero media cost.**
+- 🔴 **The real ceiling is click→ATC of 2.4–3.4%** (Retarget 3.4 · DPA 3.1 · TOF-C 2.4).
+  ATC→order is HEALTHY at 26–32%. ~11,600 of ~12,000 paid clicks left without adding anything.
+  Lifting click→ATC 3%→4.5% = +50% orders on all three ads at once = same as +PKR 1,500/day free.
+  **That is a PDP problem (27 of 30 jacket PDPs still show no rating/review), not an ads problem.**
+- Full diagnosis artifact: `https://claude.ai/code/artifact/4b45ff0c-623f-4acb-bda8-1ccffa5ca7f1`
 
 ## 🔌 Available integrations (MCP)
 Shopify, GitHub, Canva, Figma, Facebook Ads, Higgsfield, Cloudflare.
