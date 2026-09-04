@@ -324,6 +324,26 @@ pushed to the draft theme to preview in a browser.)
   amount, and tracking numbers are guessable. See `ops/TRACKING_INTEGRATION.md`.
 - ⚠️ The Worker ROOT url returns `{"error":"Not found"}` by design. The
   dashboard "Visit" button opens root, so it always looks broken. Use `/health`.
+- 💬 **WhatsApp copy is PAYMENT-AWARE as of Sep 4 2026** (`isPrepaid(o)` =
+  `financial_status` set and !== `'pending'`). Before this, the order-placed hook
+  **silently dropped every prepaid order** (`skipped_not_cod`), so card/JazzCash
+  buyers — i.e. ALL jackets and ALL footwear since the MTO change — got no
+  WhatsApp at all. They now get their own message: "Paid in full … nothing to pay
+  on delivery" + the 4–7 day workshop expectation, and **no CONFIRM ask** (there
+  is nothing to confirm, and prompting invites a cancellation on money in hand).
+  Prepaid orders also skip the `wapend:` KV write, so they can never be chased for
+  a CONFIRM they were never asked for. COD copy is unchanged.
+- 🔴 **STILL OPEN — prepaid orders get NO delivered message and NO review ask.**
+  The cron sweep `getOpenCODOrders()` filters `financial_status=pending` AND
+  excludes card/jazzcash/easypaisa gateways, and `msgDelivered` + `rvSchedule`
+  both fire only from inside that sweep. So the review engine will never ask a
+  single jacket buyer — the exact product with 27 of 30 PDPs showing no rating.
+  Fix = a SECOND pass over prepaid+fulfilled orders that only notifies and
+  schedules the review, and **never calls `markOrderPaid`** (already paid).
+  `msgOutForDelivery` is already payment-aware and ready for it, but that branch
+  is currently unreachable dead code until the second pass exists.
+- ⚠️ Deploying the Worker is MANUAL: paste `tools/postex-worker/worker.js` whole
+  into the Cloudflare editor, then **Deploy**. A git push does NOT ship it.
 - Full source of truth for the Worker: `tools/postex-worker/worker.js` (paste
   whole file into the Cloudflare editor, then **Deploy** — saving ≠ deploying).
 

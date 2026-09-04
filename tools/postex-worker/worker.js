@@ -911,16 +911,46 @@ const waFirstName = o =>
 
 const waMoney = v => `PKR ${Math.round(Number(v || 0)).toLocaleString('en-PK')}`;
 
+/**
+ * An order is COD only while Shopify still shows money outstanding. Anything
+ * already settled — card, debit card, JazzCash — is prepaid, and since Sep 2026
+ * that includes EVERY jacket and every pair of shoes, because a made-to-order
+ * line hides COD and bank transfer at checkout.
+ *
+ * Never send a prepaid customer COD wording. They have already paid, so "keep
+ * the cash ready" reads as though the payment failed, and "reply CONFIRM to lock
+ * your order" invites a cancellation on an order that is already money in hand.
+ */
+const isPrepaid = o => Boolean(o?.financial_status) && o.financial_status !== 'pending';
+
 function msgOrderPlaced(order) {
   const items = (order.line_items || [])
     .map(li => `• ${li.title}${li.quantity > 1 ? ` ×${li.quantity}` : ''}`).join('\n');
   const city = order.shipping_address?.city || '';
+  const where = city ? `\nDelivery to: ${city}` : '';
+
+  // Prepaid: confirm the money landed and set the wait expectation. No CONFIRM
+  // ask — there is nothing left to confirm, and prompting invites second thoughts.
+  if (isPrepaid(order)) {
+    return `Assalam o Alaikum ${waFirstName(order)} 👋
+
+Thank you for your Kordovan order *${order.name}*:
+${items}
+
+Paid in full: *${waMoney(order.total_price)}* — nothing to pay on delivery.${where}
+
+Made-to-order pieces (jackets and shoes) take 4–7 working days in our workshop, then 3–4 days to reach you. Everything else is dispatched in 1–2 days. We will message you the moment it ships.
+
+— Kordovan
+_Reply STOP to stop updates._`;
+  }
+
   return `Assalam o Alaikum ${waFirstName(order)} 👋
 
 Thank you for your Kordovan order *${order.name}*:
 ${items}
 
-Total: *${waMoney(order.total_price)}* (Cash on Delivery)${city ? `\nDelivery to: ${city}` : ''}
+Total: *${waMoney(order.total_price)}* (Cash on Delivery)${where}
 
 Please reply *CONFIRM* to lock your order, or *CANCEL* if you have changed your mind.
 
@@ -929,9 +959,13 @@ _Reply STOP to stop updates._`;
 }
 
 function msgOutForDelivery(order) {
+  const payLine = isPrepaid(order)
+    ? `Already paid in full — nothing to hand over. Please stay reachable; the rider will call before arriving.`
+    : `Please keep *${waMoney(order.total_price)}* ready and stay reachable — the rider will call before arriving.`;
+
   return `${waFirstName(order)}, your Kordovan order *${order.name}* is out for delivery today 🛵
 
-Please keep *${waMoney(order.total_price)}* ready and stay reachable — the rider will call before arriving.
+${payLine}
 
 Track it: ${STORE_URL}/pages/track-order
 _Reply STOP to stop updates._`;
@@ -1172,14 +1206,17 @@ async function handleNewOrder(order, env) {
       return;
     }
 
-    // Prepaid orders do not need a COD confirmation.
-    if (order.financial_status && order.financial_status !== 'pending') {
-      trace.stage = 'skipped_not_cod';
-      return;
-    }
+    // Prepaid orders used to be dropped here entirely, which left every jacket
+    // and shoe buyer — the highest-value orders in the store, waiting 4–7 days
+    // for production — with total silence. They now get their own message; only
+    // the COD confirmation flow below is skipped, because there is nothing to
+    // confirm once the money has landed.
+    const prepaid = isPrepaid(order);
+    trace.prepaid = prepaid;
 
     // Remember who this phone belongs to so a bare "CONFIRM" can be matched back.
-    if (env.SYNC_KV) {
+    // Prepaid orders never ask for CONFIRM, so they need no pending record.
+    if (env.SYNC_KV && !prepaid) {
       await env.SYNC_KV.put(`wapend:${phone}`, JSON.stringify({
         orderId: order.id, name: order.name, total: order.total_price, at: Date.now(),
       }), { expirationTtl: 60 * 60 * 48 });
