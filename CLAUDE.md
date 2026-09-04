@@ -161,6 +161,49 @@ kordovan  (trunk)
   View Content at small budgets; keep ONE broad consolidated ad set (Advantage+ did
   6.43% CTR / PKR 9.75 per click last season — best in the account).
 
+## 📊 AUGUST 2026 AD AUDIT (measured Sep 4 2026 — full month, Shopify-reconciled)
+✅ **Ad-level insights + `publisher_platform`/`platform_position` breakdowns WORK via the MCP.**
+The Aug 20 session concluded they were blocked; they are not — retry before ever telling the
+user placement data is unavailable.
+- **Spend PKR 148,310. Meta reported 5.40x. Real (surviving Shopify revenue) = 2.63x.**
+  Ladder: Meta 800,401 → matched to real orders 709,469 (130) → **surviving 390,328 (85)**
+  → cash collected 292,679 (71). **Standing correction factor for this account ≈ 2.0–2.1x**
+  (matches the playbook's ~2x note; now measured twice).
+- Contribution at 45% GM = **+PKR 19,712 only.** Break-even = 2.22x (1.82x at 55% GM).
+  August was *marginally* profitable. Do not scale a thin margin.
+- Per ad set (spend / Meta ROAS / REAL ROAS / contribution @45%):
+  | Retarget Warm+Buyers | 35,064 | 6.92x | **4.32x** | +33,056 ✅ best in account |
+  | TOF-C Catalogue Cold | 20,177 | 8.31x | **2.81x** | +5,338 ✅ only 20 days live |
+  | TOF-A Mocha Mate | 46,489 | 3.89x | **2.42x** | +4,135 ⚠️ paused Sep 1 |
+  | Bastion Cold | 1,173 | — | **7.54x** | +2,809 ✅ tiny n, retest |
+  | BOF DPA Product Intent | 30,913 | 6.50x | **1.33x** | −12,396 ❌ freq **8.10** on 11,739 reach |
+  | TOF-B Razor (killed Aug 11) | 14,469 | 0.56x | **0.19x** | −13,231 ❌ |
+- 🔴 **TOF-C Catalogue Cold is the big discovery: CPC PKR 6.96 / CTR 4.17% on COLD traffic**,
+  vs the playbook's cold benchmark of PKR 32–52. Catalogue/DPA-format cold creative beats
+  static+video cold creative by ~5x on click cost. Under-tested — only 20 days live.
+- **Kill discipline is the process gap.** TOF-B was correctly killed but 7 days late
+  (PKR 9,207 wasted). Signal was clear by day 3. Rule to apply: write the kill threshold in
+  rupees BEFORE launch (≈2x break-even CPA, ~PKR 5,500 for a wallet), check day 3 and day 5.
+- ⚠️ **7 learning-phase resets in 11 days** (status flips, re-reviews, a 6-minute pause/unpause,
+  TOF-C flipped 5x in 21 min). Batch edits; leave ad sets alone 72h.
+- **Placement quality (Shopify-verified survival, NOT Meta's ROAS):** IG Stories 100% (n=3) ·
+  IG Feed 89% · IG Reels 72% (biggest surviving revenue, 48,700) · FB Feed 62% · **FB Reels 52%**.
+  🚫 **Do NOT exclude FB Reels** — Breakdown Effect; it is also the cheapest CPM (255–314 vs 473).
+  It is a *signal* problem: fix by feeding paid/delivered back to Meta, not by cutting placement.
+- 🔴 **UTM blind spot: 57 of 127 paid-Meta orders (45%) carry no usable placement tag** because
+  `Retarget` and `TOF-C` hardcode `utm_content=Facebook_UA` / adset-ID. 3 more carry literal
+  unresolved `{{site_source_name}}` / `{{placement}}` macros on TOF-A. Fix with dynamic macros.
+- **Store-wide Aug:** 223 orders / 1,259,046 placed → 139 surviving / 726,660 (62%).
+  Real RTO 20 = **9.0%** (matches the 9.9% baseline). Pre-dispatch kills 64 = 28.7%.
+  Channel: Meta 402,078 surviving (cost 148,310) · **Organic search 193,224 at ZERO cost**
+  · Direct 118,808. Organic = 51% of Meta's output for 0% of the spend → keep funding SEO.
+- 🔴 **JACKETS AUG: 8 orders placed (334,700) → only 2 survived (128,150) = 25% survival**,
+  vs 62% store-wide. Zero doorstep refusals — all 6 died pre-dispatch on the unpaid 50% deposit.
+  Worse than the 42% historical baseline. **Fix the deposit flow before October spend lands.**
+- 9-city rule re-validated again: inside 70% survival vs outside 47%.
+- Full report artifact: `https://claude.ai/code/artifact/0c0cee26-25af-4c81-adc2-677245832118`
+  Working data + scripts: scratchpad `aug-audit/` (session-local; rebuild via bulk export).
+
 ## 🔌 Available integrations (MCP)
 Shopify, GitHub, Canva, Figma, Facebook Ads, Higgsfield, Cloudflare.
 (Playwright is NOT available in this remote env — design is done in code, then
