@@ -204,6 +204,53 @@ user placement data is unavailable.
 - Full report artifact: `https://claude.ai/code/artifact/0c0cee26-25af-4c81-adc2-677245832118`
   Working data + scripts: scratchpad `aug-audit/` (session-local; rebuild via bulk export).
 
+## 🎯 THE THREE LIVE CATALOGUE ADS (analysed Sep 4 2026, daily series Aug 1–Sep 3)
+All three currently-running ads ARE catalogue/DPA ads, all at **PKR 1,000/day**, and all point at
+the **SAME product set `608788148654460` "All Products" (164 items)** in catalogue
+`1015378560682303`. No segmentation between cold / intent / warm.
+- ✅ **Catalogue format confirmed ~4x cheaper than static+video:** catalogue CTR 4.07–4.30% /
+  CPC 6.96–8.14 / cost-per-LPV 9.30–10.94, vs Mocha Mate + Razor at CTR 1.64–1.74% /
+  CPC 29.69–31.66 / LPV 49.28. Keeping only catalogue ads live was correct.
+- 🔴 **THE BLANK DAYS ARE POISSON NOISE, NOT A PERFORMANCE PROBLEM. Do not "diagnose" them.**
+  Each ad buys ~1 order/day (spend ≈ CPA ≈ 1,000), so e^−λ predicts the blanks almost exactly:
+  Retarget λ=1.47 → 23% predicted vs **21% observed** · DPA λ=1.00 → 37% vs **32%** ·
+  TOF-C λ=0.96 → 38% vs **42%**. Sale-days vs blank-days differ by <6% on CTR/CPC/impr/freq.
+  **Fix = raise λ, not "optimise".** Pooling the SAME PKR 3,000/day into ONE campaign turns three
+  1/day lotteries into one 3/day process → blank days fall ~11/month to <2. Costs nothing.
+  ⚠️ Judge these ads on **14-day windows**; a 3-day read is one order.
+- **Revenue concentration is extreme:** TOF-C top-3 days = 58% of its revenue (a single
+  PKR 51,450 order on Aug 12 = 25%); DPA top-3 = 55%; Retarget top-3 = 34% (healthiest).
+- **Per-ad state:**
+  | Retarget Warm+Buyers | 4.32x real | freq **4.86** | blank 21% | IMPROVING (5.73x→10.20x H1→H2) |
+  | BOF DPA Product Intent | 1.33x real | freq **8.10** | blank 32% | DEGRADING (blank 4/17→7/17, pur 21→13) |
+  | TOF-C Catalogue Cold | 2.81x real | freq **1.14** | blank 42% | COOLING (11.95x→5.98x, blank 3/12→7/12) |
+  ⚠️ DPA Sept burn is WORSE: freq 2.63 in Sep 1–4 alone on reach 4,165 (~3x August's daily rate).
+- 🔴 **CREATIVE DEFECT (live, fix first): the DPA body says "cash on delivery anywhere in the
+  country — you pay when it reaches your door."** Violates the 9-city rule AND misstates jacket
+  terms (50% to book, balance to rider). The set includes all 30 jackets → likely a direct
+  contributor to jackets dying at the deposit stage.
+- ⚠️ **The Retarget creative dates from 2025-05-21 — 16 months old, never refreshed**, names
+  "KODO 2.0", and is off-brand (emoji bullets, "Built tough. Priced right." = discount voice vs
+  Quiet Heritage). It is winning on audience quality DESPITE the creative. **Never edit it in
+  place** (resets 16 months of learning) — run a new on-brand ad alongside it.
+- 📌 **Catalogue coverage: 107 of 590 variants (18%) cannot be served.** Meta's 107
+  PRODUCT_OUT_OF_STOCK items map EXACTLY onto Shopify's 107 variants that are
+  `inventoryQuantity<=0 AND inventoryPolicy=DENY` (= `availableForSale:false`).
+  ✅ **The feed is ACCURATE — this is not a sync fault.** Shopify→Meta sync `connected`,
+  last success 2026-09-03. Jackets are NOT suppressed (all 33 zero-stock jacket variants are
+  CONTINUE, so they reach Meta as in stock). 131 CONTINUE-at-zero variants sync fine.
+  ⚠️ `has_webhooks_registered: false` → catalogue updates are a once-daily batch, not realtime.
+- 🔴 **23 products are 100% invisible to every catalogue ad** (no sellable variant), incl.
+  **The Mocha Mate Wallet** (the hero of the paused TOF-A cinematic ad!), both cowboy hats
+  (a category ranking pos 4.8 / CTR 13.8% in GSC), The Casual Belt, ILLUSION Magic Wallet,
+  The Truckkr, Crazy Horse Long Wallet, 4 laptop bags. A further 38 lose part of their range
+  (Documate 4 of 6 hidden, Diana Pebbled 4 of 5). **Restocking widens the shelf at zero media cost.**
+- 🔴 **The real ceiling is click→ATC of 2.4–3.4%** (Retarget 3.4 · DPA 3.1 · TOF-C 2.4).
+  ATC→order is HEALTHY at 26–32%. ~11,600 of ~12,000 paid clicks left without adding anything.
+  Lifting click→ATC 3%→4.5% = +50% orders on all three ads at once = same as +PKR 1,500/day free.
+  **That is a PDP problem (27 of 30 jacket PDPs still show no rating/review), not an ads problem.**
+- Full diagnosis artifact: `https://claude.ai/code/artifact/4b45ff0c-623f-4acb-bda8-1ccffa5ca7f1`
+
 ## 🔌 Available integrations (MCP)
 Shopify, GitHub, Canva, Figma, Facebook Ads, Higgsfield, Cloudflare.
 (Playwright is NOT available in this remote env — design is done in code, then
