@@ -97,11 +97,42 @@ kordovan  (trunk)
   when handing off, or the user checks the site and sees the old version.
 - Do not create PRs unless explicitly asked.
 
-## 🧥 Jackets — payment, margin, refusal (user-confirmed Aug 20 2026)
-- **Payment = 50% of retail to BOOK, balance paid to the rider on delivery.**
-  ⚠️ NOT "prepaid only" — the old rule was wrong and was live on the site. Corrected
-  across the 4 jacket collections + the brands article. Never write "no cash on
-  delivery" for jackets again; half of it *is* paid at the door.
+## 🧥 Jackets — payment, margin, refusal (payment rule updated Sep 4 2026)
+- 🔴 **PAYMENT = 100% ONLINE AT CHECKOUT, by credit card / debit card / JazzCash
+  (user-confirmed Sep 4 2026). THIS SUPERSEDES the Aug 20 "50% to book, balance to
+  the rider" rule, which is DEAD** — bank transfer was the deposit rail and it is now
+  hidden on these carts too. Do not reintroduce "book with 50%" anywhere.
+- **Made to order = ALL 30 JACKETS *AND* ALL 24 FOOTWEAR products** (54 total).
+  Shoes are now MTO too — that is new as of Sep 2026.
+- A **Shopify Function** (`tools/shopify-cod-function/`) hides COD when a made-to-order
+  line is in the cart; bank transfer is hidden as well. One MTO line makes the WHOLE
+  cart prepaid — Shopify cannot split payment terms across an order.
+- ✅ **Flagging verified clean Sep 4 2026:** all 54 MTO products carry BOTH
+  `custom.made_to_order == true` AND a "made to order" tag, so the theme rule
+  (metafield OR type contains 'Jacket') and the Function rule (metafield OR tag) agree
+  on **0 of 169 products**. No detection gap. ⚠️ The theme's `type contains 'Jacket'`
+  fallback does NOT catch footwear — footwear relies entirely on the metafield, so
+  **any new shoe MUST get `custom.made_to_order` set** or the PDP will promise COD.
+- ✍️ **Copy rule: never state the terms without the reason.** "Paid online" alone reads
+  as distrust in a COD market; "each piece is cut for one customer and cannot be resold"
+  is the same fact and reads as craft. Every surface now pairs them.
+- ✅ **Updated Sep 4 2026 across:** 30 jacket descriptions (all shared one identical
+  paragraph — clean replace, verified 0 stale of 169 active products) · 4 collections
+  (`mens-leather-jackets`, `mens-biker-`, `mens-bomber-`, `mens-black-leather-jackets`)
+  · pages `faqs` + `cod-policy-note-fake-orders` (added an explicit "why can't I choose
+  COD for a jacket" answer) · theme: `pdp-main`, `pdp-jsonld`, `cart-drawer`, `main-cart`,
+  `site-header` announcement, `site-footer`, `trust-bar`, `main-collection` editorial,
+  `shipping`, `returns`. **Easypaisa removed everywhere** (user: JazzCash only).
+- ⚠️ Footwear product descriptions carry NO payment wording (checked) — terms come only
+  from the PDP template, so they were correct automatically.
+- 📌 **`snippets/returns.liquid` says MTO is non-returnable once production begins**, so the
+  cart drawer no longer shows a "7-day returns" badge on an MTO cart (shows lifetime
+  warranty instead). Keep those two consistent.
+- 🎯 **Expected effect on the ads problem:** jackets died at 25% survival in Aug because the
+  deposit was never paid (6 of 8 orders). Requiring payment at checkout should collapse that
+  pre-dispatch death rate AND make Meta's Purchase event genuinely accurate for jackets for
+  the first time — it now fires on money received, not on an intention. Re-measure jacket
+  survival after ~3 weeks before trusting the new baseline.
 - **COGS PKR 10,000–12,000** (use 11,000). Mean selling price across the 28 men's
   jackets = **PKR 28,066** → gross profit ~**PKR 17,066/jacket (61%)**. That is
   ~5.7x the best wallet (Aristocrat, 3,005) and ~24x the Bastion (720).

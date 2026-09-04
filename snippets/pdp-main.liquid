@@ -135,16 +135,23 @@
       </div>
 
       {%- comment -%}
-        Made-to-order pieces take a 50% deposit to book; the balance is paid to
-        the rider on delivery (user-confirmed Aug 20 2026). This is NOT "prepaid
-        only" — half of it IS collected at the door, and saying otherwise turns
-        away COD-market buyers at the decision point.
-        Advertising plain COD is equally wrong: it is what produced the high
-        pre-dispatch cancellation rate on jackets, because the order is placed
-        expecting COD and the customer hears "deposit, two weeks" on the call.
-        State the deposit plainly instead — it is a far smaller ask than silence.
+        Made-to-order pieces are paid IN FULL online at checkout, by card or
+        JazzCash (user-confirmed Sep 4 2026 — supersedes the old "book with 50%,
+        balance to the rider" rule, which is dead: bank transfer was the deposit
+        rail and it is now hidden on these carts too).
+        A Shopify Function hides COD and bank transfer whenever a made-to-order
+        line is in the cart, so those methods genuinely are not selectable. The
+        copy must match that, and must say so HERE rather than letting the buyer
+        discover it at checkout — a payment surprise at the final step is what
+        loses the order.
+        Always give the reason alongside the ask. "Paid online" on its own reads
+        as distrust in a COD market; "each piece is cut for one customer and
+        cannot be resold" is the same fact and reads as craft. Never state the
+        terms without it.
         Set custom.made_to_order on any product built after ordering; every
-        jacket also matches on product type as a safety net.
+        jacket also matches on product type as a safety net. All 30 jackets and
+        all 24 footwear products carry both the metafield and the tag, so the
+        theme and the Function agree on every product (verified Sep 4 2026).
       {%- endcomment -%}
       {%- liquid
         assign mto = false
@@ -155,7 +162,7 @@
         endif
       -%}
       {%- if mto -%}
-        <div class="kv-pdp__ship kv-pdp__ship--mto"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div><b>Made to order — book with 50%.</b> Cut and stitched for you in 4–7 working days, then delivered in 3–4. Pay half to book by bank transfer or card, and the balance to the rider when it arrives.</div></div>
+        <div class="kv-pdp__ship kv-pdp__ship--mto"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div><b>Made to order — paid online at checkout.</b> Cut and stitched for you in 4–7 working days, then delivered in 3–4. Pay by card or JazzCash. Cash on delivery isn’t offered on made-to-order pieces, because each one is cut for a single customer.</div></div>
       {%- else -%}
         <div class="kv-pdp__ship"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div><b>Order today, dispatched in 1–2 days.</b> Cash on delivery available nationwide. Delivered in 2–6 business days.</div></div>
       {%- endif -%}
@@ -372,7 +379,7 @@
     <div class="kv-pdp__acc">
       <details open><summary>Leather Care</summary><div class="b">Wipe with a soft, dry cloth, condition every 4–6 weeks, and keep out of prolonged sun and water. See our full <a href="/pages/leather-care-guide">Leather Care Guide</a>.</div></details>
       {%- if mto -%}
-        <details><summary>Shipping &amp; Payment</summary><div class="b">This piece is made to order: 4–7 working days in the workshop, then 3–4 days to your door. Free delivery over PKR 5,500. <b>Book with 50%</b> — bank transfer or card at checkout — and pay the balance to the rider on delivery. The deposit is what lets us start cutting, because each piece is made for a single customer. Returns are handled case by case — see <a href="/pages/returns">Returns &amp; Exchanges</a>.</div></details>
+        <details><summary>Shipping &amp; Payment</summary><div class="b">This piece is made to order: 4–7 working days in the workshop, then 3–4 days to your door. Free delivery over PKR 5,500. <b>Payment is taken in full online at checkout</b> — credit card, debit card or JazzCash. Cash on delivery and bank transfer aren’t available on made-to-order pieces: each one is cut and stitched for a single customer to their measurements, so it cannot be put back on a shelf. Payment is what starts the cutting. Returns are handled case by case — see <a href="/pages/returns">Returns &amp; Exchanges</a>.</div></details>
       {%- else -%}
         <details><summary>Shipping &amp; Returns</summary><div class="b">Dispatched in 1–2 business days; delivered in 2–6 days. Free delivery over PKR 5,500. Cash on delivery nationwide. 7-day returns on unused items — see <a href="/pages/returns">Returns &amp; Exchanges</a>.</div></details>
       {%- endif -%}

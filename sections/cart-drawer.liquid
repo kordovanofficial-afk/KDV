@@ -51,10 +51,12 @@
     <span class="cart-drawer__note">+ Add order note / gift message</span>
     <div class="cd__sub"><span class="l">Subtotal</span><span class="v cart-drawer__total"></span></div>
     {%- comment -%}
-      If anything in the cart is made to order, the whole cart takes the 50%
-      deposit — Shopify cannot split payment terms across one order. Saying
-      "COD available" here and then asking for a deposit on the call is the
-      exact sequence that loses the sale, so state the deposit up front.
+      If anything in the cart is made to order, the WHOLE cart is paid online —
+      a Shopify Function hides COD and bank transfer, and Shopify cannot split
+      payment terms across one order. Say it here, before checkout: a buyer who
+      reaches the payment step expecting COD and finds it missing abandons.
+      Note the mixed-cart case is deliberate — one made-to-order line makes the
+      whole order prepaid, so the wording says "contains", not "is".
     {%- endcomment -%}
     {%- liquid
       assign cart_mto = false
@@ -66,7 +68,7 @@
       endfor
     -%}
     {%- if cart_mto -%}
-      <div class="cd__fine">Shipping &amp; taxes calculated at checkout · <b>Book with 50%</b>, balance to the rider — your cart contains a made-to-order piece</div>
+      <div class="cd__fine">Shipping &amp; taxes calculated at checkout · <b>Paid online at checkout</b> — your cart contains a made-to-order piece, so card or JazzCash only</div>
     {%- else -%}
       <div class="cd__fine">Shipping &amp; taxes calculated at checkout · Cash on delivery available</div>
     {%- endif -%}
@@ -74,10 +76,20 @@
     <a class="cd__view" href="{{ routes.cart_url }}">View full cart</a>
     <div class="cd__trust">
       <span><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>Secure checkout</span>
-      <span><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>7-day returns</span>
-      {%- unless cart_mto -%}<span><svg viewBox="0 0 24 24"><rect x="1" y="4" width="15" height="12"/><path d="M16 8h4l3 3v5h-7z"/></svg>COD available</span>{%- endunless -%}
+      {%- comment -%}
+        "7-day returns" is NOT true of made-to-order pieces — Returns &
+        Exchanges says they are non-returnable once production has begun. Do not
+        show that badge on an MTO cart; promise the lifetime warranty instead,
+        which IS true of every piece.
+      {%- endcomment -%}
+      {%- if cart_mto -%}
+        <span><svg viewBox="0 0 24 24"><path d="M12 2 4 6v6c0 5 8 8 8 8s8-3 8-8V6z"/><path d="m9 12 2 2 4-4"/></svg>Lifetime warranty</span>
+      {%- else -%}
+        <span><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>7-day returns</span>
+        <span><svg viewBox="0 0 24 24"><rect x="1" y="4" width="15" height="12"/><path d="M16 8h4l3 3v5h-7z"/></svg>COD available</span>
+      {%- endif -%}
     </div>
-    <div class="cd__pay">{%- unless cart_mto -%}<span>COD</span>{%- endunless -%}<span>Visa</span><span>Mastercard</span><span>Easypaisa</span><span>JazzCash</span></div>
+    <div class="cd__pay">{%- unless cart_mto -%}<span>COD</span>{%- endunless -%}<span>Visa</span><span>Mastercard</span><span>JazzCash</span></div>
   </div>
 
 </aside>

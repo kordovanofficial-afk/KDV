@@ -131,7 +131,13 @@
     {%- else -%}
       <h2>Genuine Leather {{ collection.title }}, Made in Pakistan</h2>
       <p>Every Kordovan piece is cut and hand-stitched from genuine leather chosen for how it wears — leathers that resist daily use, breathe, and develop a rich personal patina the longer you carry them.</p>
-      <p>Hand-finished seams, burnished edges and reinforced stress points come standard, not as premium add-ons. Free delivery over PKR 5,500, cash on delivery nationwide, and a lifetime craftsmanship warranty on everything we make.</p>
+      {%- comment -%}
+        This fallback renders on EVERY collection, including jackets and
+        footwear where cash on delivery is not offered. Keep the payment
+        sentence true of the whole catalogue rather than making it conditional —
+        a mixed collection would otherwise pick the wrong branch.
+      {%- endcomment -%}
+      <p>Hand-finished seams, burnished edges and reinforced stress points come standard, not as premium add-ons. Free delivery over PKR 5,500 and a lifetime craftsmanship warranty on everything we make. Cash on delivery is available on ready-made pieces; made-to-order jackets and footwear are paid online at checkout.</p>
     {%- endif -%}
   </div></section>
 </div>
