@@ -342,8 +342,15 @@ pushed to the draft theme to preview in a browser.)
   schedules the review, and **never calls `markOrderPaid`** (already paid).
   `msgOutForDelivery` is already payment-aware and ready for it, but that branch
   is currently unreachable dead code until the second pass exists.
+- ✅ **DEPLOYED Sep 5 2026.** Verified by diffing `workers_get_worker_code` against the
+  repo file: identical apart from Cloudflare's multipart envelope, `isPrepaid` present
+  at line 927, and `skipped_not_cod` gone from the live script.
+  💡 `workers_get_worker_code` is the way to confirm ANY Worker deploy — it exceeds the
+  token cap so it auto-saves to a file, which you then `diff` against the repo copy.
 - ⚠️ Deploying the Worker is MANUAL: paste `tools/postex-worker/worker.js` whole
   into the Cloudflare editor, then **Deploy**. A git push does NOT ship it.
+  ⚠️ `/health` returns only `{status, ts}` — no version marker, so it CANNOT confirm a
+  deploy. Consider adding one if this gets deployed often.
 - Full source of truth for the Worker: `tools/postex-worker/worker.js` (paste
   whole file into the Cloudflare editor, then **Deploy** — saving ≠ deploying).
 
