@@ -282,6 +282,45 @@ the **SAME product set `608788148654460` "All Products" (164 items)** in catalog
   **That is a PDP problem (27 of 30 jacket PDPs still show no rating/review), not an ads problem.**
 - Full diagnosis artifact: `https://claude.ai/code/artifact/4b45ff0c-623f-4acb-bda8-1ccffa5ca7f1`
 
+## 🧥 TOF-J — the jacket view-builder (BUILT PAUSED Sep 5 2026, awaiting user go-live)
+Purpose: jackets are structurally starved inside the shared "All Products" set (70 wallets vs
+8 jackets served in August). This is the first ad set that can only ever show a jacket. It is a
+**pool-builder for October**, not a September revenue play — the season curve is flat until Oct.
+- Campaign **`120254923437380428`** "TOF-J | Jackets Catalogue | Sep 2026" · OUTCOME_SALES · ABO.
+- Ad set **`120254923438760428`** "TOF-J | Jackets Cold | View Content" · PKR 1,000/day ·
+  `OFFSITE_CONVERSIONS` + `custom_event_type: CONTENT_VIEW` (**View Content, NOT Purchase**) ·
+  billing IMPRESSIONS · destination WEBSITE · Highest volume.
+  🔴 **Why View Content:** at ~PKR 8,450 jacket CPA, Purchase optimisation needs PKR 400k+/week
+  to hit 50 conversions and can NEVER exit learning. VC costs ~PKR 30–60, so 1,000/day clears
+  the 50/week bar comfortably. **Flip to Purchase in October, not before.**
+- Ad **`120254923440130428`** · creative **`1753964692388815`** · Advantage+ catalog carousel.
+- Product set **`1801176350880581`** "KV — All Leather Jackets (Men's + Women's)" = 30 products
+  (186 variant items), OR of Shopify collections `438804021488` + `438804250864`. Dynamic, so
+  new jackets join automatically. This is the FIRST jacket-only set — do not point it at
+  "All Products" `608788148654460`.
+- Targeting mirrors TOF-C exactly: 9 city keys, **no radius**, `location_types [home, recent]`,
+  LLA 1% `120254216730060428` + LLA 3% `120254216735280428`, excludes Purchasers 180D
+  `120252468019140428` + COD Refusers `120253660257910428` + Delivered Buyers SEED
+  `120254215371460428`, `publisher_platforms [facebook, instagram]`, `advantage_audience: 0`.
+  ⚠️ **The live LLA IDs above are the [Jul31] versions — they DIFFER from the Jul 8 IDs recorded
+  in the Meta Ads section. Always read the live ad set, never copy IDs from memory.**
+- ✍️ Copy deliberately **fixes the DPA creative defect**: no "cash on delivery anywhere in the
+  country". It states made-to-order + paid online WITH the reason ("cut for one customer and can
+  never be resold"), and names the 4–7 + 3–4 day timeline instead of a delivery-area claim.
+  No `PAYONLINE10`. Advantage+ Creative left OFF so Meta cannot rewrite the brand voice.
+- 🔗 `link_url` carries real UTMs incl. `utm_content={{placement}}` — the first ad in the account
+  that does. ⚠️ **Verify on the first real click** that `{{placement}}` resolved and did not land
+  as a literal string (TOF-A had that failure). If it comes through literal, the fallback is a
+  static `utm_content` naming the ad set.
+- 💰 **Funded by pausing BOF DPA `120254220299340428`** (PKR 1,000/day): real ROAS 1.33x against
+  a 2.22x break-even, −PKR 12,396 August contribution, frequency 8.10 on 11,739 reach, and
+  September burning ~3x faster (2.63 freq in 4 days). Retarget (4.32x) and TOF-C (2.81x) are
+  untouchable. The fit is exact: **DPA is starving because nothing fresh feeds its pool** — TOF-J
+  refills that pool, so October's DPA restart has an audience to retarget.
+- 📌 Kill threshold written BEFORE launch (the Aug process gap): if cost-per-ViewContent is above
+  **PKR 90** on day 3, or above PKR 70 on day 7, kill it. Judge on 14-day windows otherwise.
+- ⚠️ Both moves (activating TOF-J, pausing BOF DPA) are LIVE money changes → confirm each time.
+
 ## 🔌 Available integrations (MCP)
 Shopify, GitHub, Canva, Figma, Facebook Ads, Higgsfield, Cloudflare.
 (Playwright is NOT available in this remote env — design is done in code, then
