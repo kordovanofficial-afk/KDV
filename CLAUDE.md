@@ -282,7 +282,13 @@ the **SAME product set `608788148654460` "All Products" (164 items)** in catalog
   **That is a PDP problem (27 of 30 jacket PDPs still show no rating/review), not an ads problem.**
 - Full diagnosis artifact: `https://claude.ai/code/artifact/4b45ff0c-623f-4acb-bda8-1ccffa5ca7f1`
 
-## 🧥 TOF-J — the jacket view-builder (BUILT PAUSED Sep 5 2026, awaiting user go-live)
+## 🧥 TOF-J — the jacket view-builder (🟢 LIVE Sep 5 2026, user-approved)
+> ✅ **ACTIVATED Sep 5 2026** (campaign + ad set + ad all ACTIVE) and **BOF DPA
+> `120254220299340428` PAUSED the same minute** to fund it — verified live: DPA
+> `effective_status: PAUSED`. Account now runs THREE ad sets at PKR 1,000/day each
+> (Retarget · TOF-C · TOF-J) = **unchanged PKR 3,000/day total**. Nothing else moved.
+> ⏳ The ad enters Meta review on activation; first delivery is usually within a few hours.
+
 Purpose: jackets are structurally starved inside the shared "All Products" set (70 wallets vs
 8 jackets served in August). This is the first ad set that can only ever show a jacket. It is a
 **pool-builder for October**, not a September revenue play — the season curve is flat until Oct.
