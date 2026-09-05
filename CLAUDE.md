@@ -333,15 +333,31 @@ pushed to the draft theme to preview in a browser.)
   is nothing to confirm, and prompting invites a cancellation on money in hand).
   Prepaid orders also skip the `wapend:` KV write, so they can never be chased for
   a CONFIRM they were never asked for. COD copy is unchanged.
-- 🔴 **STILL OPEN — prepaid orders get NO delivered message and NO review ask.**
-  The cron sweep `getOpenCODOrders()` filters `financial_status=pending` AND
-  excludes card/jazzcash/easypaisa gateways, and `msgDelivered` + `rvSchedule`
-  both fire only from inside that sweep. So the review engine will never ask a
-  single jacket buyer — the exact product with 27 of 30 PDPs showing no rating.
-  Fix = a SECOND pass over prepaid+fulfilled orders that only notifies and
-  schedules the review, and **never calls `markOrderPaid`** (already paid).
-  `msgOutForDelivery` is already payment-aware and ready for it, but that branch
-  is currently unreachable dead code until the second pass exists.
+- ✅ **FIXED Sep 5 2026 — `runPrepaidDeliveryPass()`, the notify-only twin of the COD
+  sweep.** Prepaid orders used to get no delivered message and no review ask, because
+  `msgDelivered` + `rvSchedule` live inside `runPollSync`, which only sees
+  `financial_status=pending` non-card orders. The review engine therefore could not
+  ask a single jacket buyer. Runs hourly right after `runPollSync`; also on demand at
+  **`/prepaid-sync`** (needs `X-Sync-Secret`). Last result → KV `last_prepaid_sync`.
+  Design rules, do not break them:
+  - **NEVER calls `markOrderPaid`** — the money is already in.
+  - **NEVER writes RTO notes** — `runPollSync` owns returns, so an RTO is recorded once.
+  - 🔴 **First-run baseline via KV `ppass:init`.** On the very first execution it burns
+    `wasent:` + `rvdone:` on everything ALREADY delivered and sends NOTHING. Without
+    this, switching it on cold would blast a month of customers who got their order
+    weeks ago — the failure mode that gets a WhatsApp number blocked. **If you ever
+    need to re-seed, delete `ppass:init`; never delete it casually.**
+  - `PP_WINDOW_DAYS = 30`, deliberately ≤ the 30-day `wasent:` TTL so an order ages out
+    of the window before its dedup marker expires (otherwise it gets thanked twice).
+  - Skips `rvSchedule` when `rvdue:` already exists — `rvSchedule` OVERWRITES `rvdue:`,
+    so calling it on an order the COD sweep just scheduled would push the 3-day review
+    timer back an hour every hour and the ask would never fire.
+  - No gateway filter on purpose: a COD order already marked paid matches too, but its
+    refs are burned so it is a no-op — and it acts as a safety net if the COD sweep
+    missed one. `msgDelivered` is payment-neutral, so it is correct either way.
+  - Verified by running the real function against mocked Shopify/PostEx/KV: cold run
+    seeds 2 and sends 0 · next run messages ONLY the new orders and schedules 1 review
+    · third run is a full no-op · `markOrderPaid` called 0 times.
 - ✅ **DEPLOYED Sep 5 2026.** Verified by diffing `workers_get_worker_code` against the
   repo file: identical apart from Cloudflare's multipart envelope, `isPrepaid` present
   at line 927, and `skipped_not_cod` gone from the live script.

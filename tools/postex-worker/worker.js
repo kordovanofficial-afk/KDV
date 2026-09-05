@@ -70,6 +70,7 @@ export default {
   async scheduled(event, env, ctx) {
     ctx.waitUntil((async () => {
       await runPollSync(env);              // payment sync FIRST — never blocked by WhatsApp
+      await runPrepaidDeliveryPass(env);   // notify-only twin for prepaid orders; never marks paid
       await runAbandonedCheckouts(env);    // no-op unless WA_ABANDONED === 'on'
       await runReviewRequests(env);        // ask buyers whose delay has elapsed
       await rvReleaseStale(env);           // held reviews you never got to
@@ -148,6 +149,15 @@ export default {
         return Response.json({ error: 'Unauthorized' }, { status: 401, headers: cors });
       const result = await runPollSync(env);
       return Response.json(result, { headers: cors });
+    }
+
+    // Same job the cron runs, on demand. Handy for the first deploy: the very
+    // first call only seeds the baseline and sends nothing, so run it once by
+    // hand and read `seeded` before letting the hourly cron message anyone.
+    if (url.pathname === '/prepaid-sync') {
+      if (request.headers.get('X-Sync-Secret') !== env.SYNC_SECRET)
+        return Response.json({ error: 'Unauthorized' }, { status: 401, headers: cors });
+      return Response.json(await runPrepaidDeliveryPass(env), { headers: cors });
     }
 
     if (url.pathname === '/stats') {
@@ -1674,6 +1684,148 @@ async function getOpenCODOrders(token, env) {
     const gw = (o.payment_gateway || '').toLowerCase();
     return !['stripe','paypal','jazzcash','easypaisa','credit_card','debit_card','shopify_payments'].some(g => gw.includes(g));
   });
+}
+
+// ─── Prepaid delivery pass ───────────────────────────────────────────────────
+/**
+ * Why this exists separately from runPollSync().
+ *
+ * runPollSync is a MONEY job: it finds orders Shopify still shows as pending,
+ * confirms delivery with PostEx, and marks them paid. Prepaid orders are
+ * invisible to it on purpose — getOpenCODOrders() asks for
+ * financial_status=pending and drops the card/JazzCash gateways — because there
+ * is nothing left to collect.
+ *
+ * The side effect was that the delivered thank-you and the review request live
+ * INSIDE that sweep, so prepaid buyers got neither. Since made-to-order went
+ * fully prepaid in Sep 2026 that covers every jacket and every pair of shoes,
+ * which meant the review engine could not ask a single made-to-order buyer —
+ * precisely the products whose pages carry almost no ratings.
+ *
+ * This pass closes ONLY the notification gap:
+ *   • never calls markOrderPaid — the money is already in
+ *   • never writes RTO notes — that stays runPollSync's job, so a return is
+ *     recorded in exactly one place rather than twice
+ *   • every message is ref-deduped, so an order the COD sweep already thanked
+ *     is a silent no-op here
+ */
+
+// Only look at recent orders. A "delivered" ping on a two-month-old parcel is
+// noise, and messaging someone long after they got their jacket reads as spam.
+// Kept at/below the 30-day `wasent:` TTL so an order ages out of this window
+// before its dedup marker expires — otherwise it could be thanked twice.
+const PP_WINDOW_DAYS = 30;
+
+async function getPrepaidFulfilledOrders(token, env) {
+  const since = new Date(Date.now() - PP_WINDOW_DAYS * 86400_000).toISOString();
+  const data = await shopifyFetch(
+    `/orders.json?status=any&financial_status=paid&fulfillment_status=fulfilled` +
+    `&created_at_min=${encodeURIComponent(since)}&limit=250` +
+    `&fields=id,order_number,name,financial_status,total_price,payment_gateway,` +
+    `fulfillments,note_attributes,phone,customer,shipping_address,line_items`,
+    token, env
+  );
+  // Deliberately NO gateway filter. A COD order this Worker already marked paid
+  // matches too, and that is fine: its refs are already burned so it is a no-op,
+  // and if the COD sweep ever misses one, this catches it. msgDelivered says
+  // nothing payment-specific, so it is correct either way.
+  return data.orders || [];
+}
+
+async function runPrepaidDeliveryPass(env) {
+  const start = Date.now();
+  const result = {
+    trigger: 'prepaid', startedAt: new Date().toISOString(),
+    ordersChecked: 0, thanked: 0, outForDelivery: 0, reviewsScheduled: 0,
+    seeded: 0, errors: 0, skipped: 0, log: [],
+  };
+  const log = msg => { console.log(msg); result.log.push({ ts: new Date().toISOString(), msg }); };
+
+  if (!env.SYNC_KV) { log('No KV — this pass needs it for dedup, refusing to run'); return result; }
+
+  try {
+    let token;
+    try {
+      token = await getShopifyToken(env);
+    } catch (e) {
+      log(`FATAL: Token failed — ${e.message}`); result.errors++; return result;
+    }
+
+    const orders = await getPrepaidFulfilledOrders(token, env);
+    result.ordersChecked = orders.length;
+    log(`${orders.length} paid+fulfilled orders in the last ${PP_WINDOW_DAYS} days`);
+    if (!orders.length) return result;
+
+    // 🔴 First run ever: burn the markers on everything ALREADY delivered without
+    // sending a thing. Switching this on cold would otherwise blast a month of
+    // customers who got their order weeks ago — the worst failure mode here, and
+    // the kind that gets a WhatsApp number blocked.
+    const seeding = !(await env.SYNC_KV.get('ppass:init'));
+    if (seeding) log('FIRST RUN — seeding a baseline, no messages will be sent this pass');
+
+    for (const o of orders) {
+      const tn = getTrackingNumber(o);
+      if (!tn) { result.skipped++; continue; }
+
+      try {
+        const status = (await trackSinglePostEx(tn, env.POSTEX_TOKEN)).transactionStatus || '';
+        const phone  = normalisePK(o.phone || o.shipping_address?.phone || o.customer?.phone);
+
+        if (status === DELIVERED_STATUS) {
+          if (seeding) {
+            await env.SYNC_KV.put(`wasent:${o.id}:delivered`, 'seeded', { expirationTtl: 60 * 60 * 24 * 30 });
+            await env.SYNC_KV.put(`rvdone:${o.id}`,           'seeded', { expirationTtl: 60 * 60 * 24 * 365 });
+            result.seeded++;
+          } else {
+            if (phone) {
+              const r = await waEnqueue(env, { to: phone, text: msgDelivered(o), ref: `${o.id}:delivered` });
+              if (r.ok) { result.thanked++; log(`${o.name} — delivered thank-you queued`); }
+              else result.skipped++;
+            }
+            // Only schedule if nothing is pending or done already. rvSchedule
+            // overwrites rvdue:, so calling it on an order the COD sweep just
+            // scheduled would silently push the 3-day review timer back an hour
+            // every hour, and the ask would never fire.
+            const pending = await env.SYNC_KV.get(`rvdue:${o.id}`);
+            const done    = await env.SYNC_KV.get(`rvdone:${o.id}`);
+            if (!pending && !done) { await rvSchedule(env, o); result.reviewsScheduled++; }
+          }
+        } else if (String(status).toLowerCase() === OUT_FOR_DELIVERY) {
+          if (seeding) {
+            await env.SYNC_KV.put(`wasent:${o.id}:ofd`, 'seeded', { expirationTtl: 60 * 60 * 24 * 30 });
+            result.seeded++;
+          } else if (phone) {
+            const r = await waEnqueue(env, { to: phone, text: msgOutForDelivery(o), ref: `${o.id}:ofd` });
+            if (r.ok) { result.outForDelivery++; log(`${o.name} — out-for-delivery queued`); }
+            else result.skipped++;
+          }
+        } else {
+          result.skipped++;   // in transit, returned, unknown — runPollSync owns RTO
+        }
+
+        await sleep(150);     // same PostEx rate limit the COD sweep respects
+      } catch (e) {
+        if (e.message.includes('RECORD NOT FOUND')) result.skipped++;
+        else { log(`${o.name} PostEx error: ${e.message}`); result.errors++; }
+      }
+    }
+
+    if (seeding) {
+      await env.SYNC_KV.put('ppass:init', new Date().toISOString());
+      log(`Baseline set on ${result.seeded} orders — real messages begin next run`);
+    }
+  } catch (e) {
+    log(`FATAL: ${e.message}`);
+    result.errors++;
+  }
+
+  result.durationMs  = Date.now() - start;
+  result.completedAt = new Date().toISOString();
+  await env.SYNC_KV.put('last_prepaid_sync', JSON.stringify(result), { expirationTtl: 86400 * 7 })
+    .catch(() => {});
+  console.log(`[PREPAID DONE] thanked=${result.thanked} ofd=${result.outForDelivery} ` +
+              `rv=${result.reviewsScheduled} seeded=${result.seeded} err=${result.errors}`);
+  return result;
 }
 
 function getTrackingNumber(order) {
