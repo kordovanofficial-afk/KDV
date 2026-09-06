@@ -9,10 +9,13 @@ comparison article could run it. **Made-to-order is the one thing only we do**, 
 it answers all three of the measured problems in a single idea:
 
 - **Why Rs 22,000** — you watch where the money goes; no claim needed.
-- **Why 4–7 days** — you watch why, so the wait stops being an annoyance.
-- **Why 50% up front** — the important one. 58% of jacket orders die at the deposit.
-  After watching a jacket cut from nothing, "half to start" reads as reasonable
-  rather than suspicious.
+- **Why about 3 weeks** — you watch why, so the wait stops being an annoyance. This got harder in Sep 2026: peak season pushed the workshop to ~15 days of making alone, so the film is now carrying a longer wait than it was written for.
+- **Why paid online** — the important one, and it got *more* important on 4 Sep 2026
+  when the 50% deposit was replaced by 100% online at checkout. Asking a Pakistani
+  buyer to pay everything up front, in a COD market, is the single hardest thing this
+  brand asks for. After watching a jacket cut from nothing for one person, "paid
+  online" reads as obvious rather than suspicious. No other format can make that
+  argument — a catalogue card certainly can't.
 
 Transformation is also the most reliably watchable shape in short-form: people stay
 to see the thing finished. It works muted, needs no actor and no lighting kit, and

@@ -165,7 +165,7 @@ Wide, still, cold, quiet. He walks away into the mist and the jacket is the only
 thing in the frame. The price and payment terms sit over the road in the lower third.
 
 **Captions:**
-- `11.4 → 13.2` — `From Rs 22,000.` / `Book with 50%, pay the rest to the rider.`
+- `11.4 → 13.2` — `From Rs 22,000.` / `Paid online — each one is cut for one customer.`
 - `13.2 → 15.0` — `Free delivery nationwide.` / `Lifetime craftsmanship warranty.`
 
 ### Prompt — paste verbatim

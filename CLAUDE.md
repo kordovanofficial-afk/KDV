@@ -98,6 +98,24 @@ kordovan  (trunk)
 - Do not create PRs unless explicitly asked.
 
 ## 🧥 Jackets — payment, margin, refusal (payment rule updated Sep 4 2026)
+- ⏱ **LEAD TIME = "about 3 weeks to your door" (user-confirmed Sep 6 2026). THIS
+  SUPERSEDES "4–7 working days + 3–4 to deliver", which is DEAD — do not reintroduce it.**
+  The workshop told the user a jacket now needs **at least 15 days to make alone** because
+  winter is peak season and the bench is full. 15 + 3–4 delivery ≈ 19 days with zero slack,
+  so the published promise is a single deliberately-slack "**about 3 weeks**" covering
+  making AND delivery. Under-promise, then beat it.
+  - ✍️ **Pair it with the reason, same as the payment rule.** "Winter is our busiest season
+    and every piece is cut for one customer" turns a long wait into evidence of craft. A
+    bare "3 weeks" on a PKR 28,000 prepaid order reads as disorganisation.
+  - ✅ **Updated Sep 6 2026 across:** `pdp-main` (buy-box line + Shipping & Payment
+    accordion), `pdp-jsonld`, `shipping`, the PostEx Worker prepaid WhatsApp message, the
+    COD Function comment, and all video packages. **Meta ad swapped** — see TOF-J below.
+  - 🔴 **STILL PENDING (live Shopify content, not in the repo):** the 30 jacket product
+    descriptions, the 4 jacket collections, and pages `faqs` + `cod-policy-note-fake-orders`
+    were written in the Sep 4 pass and may still carry 4–7 days. Re-check and rewrite.
+  - ⚠️ **Re-measure in ~3 weeks.** A longer quoted wait is a real conversion risk on cold
+    traffic. If jacket click→ATC drops materially after this change, that is the cause —
+    the answer is better reason-copy, not a shorter promise the workshop cannot meet.
 - 🔴 **PAYMENT = 100% ONLINE AT CHECKOUT, by credit card / debit card / JazzCash
   (user-confirmed Sep 4 2026). THIS SUPERSEDES the Aug 20 "50% to book, balance to
   the rider" rule, which is DEAD** — bank transfer was the deposit rail and it is now
@@ -282,6 +300,57 @@ the **SAME product set `608788148654460` "All Products" (164 items)** in catalog
   **That is a PDP problem (27 of 30 jacket PDPs still show no rating/review), not an ads problem.**
 - Full diagnosis artifact: `https://claude.ai/code/artifact/4b45ff0c-623f-4acb-bda8-1ccffa5ca7f1`
 
+## 🧥 TOF-J — the jacket view-builder (🟢 LIVE Sep 5 2026, user-approved)
+> ✅ **ACTIVATED Sep 5 2026** (campaign + ad set + ad all ACTIVE) and **BOF DPA
+> `120254220299340428` PAUSED the same minute** to fund it — verified live: DPA
+> `effective_status: PAUSED`. Account now runs THREE ad sets at PKR 1,000/day each
+> (Retarget · TOF-C · TOF-J) = **unchanged PKR 3,000/day total**. Nothing else moved.
+> ⏳ The ad enters Meta review on activation; first delivery is usually within a few hours.
+
+Purpose: jackets are structurally starved inside the shared "All Products" set (70 wallets vs
+8 jackets served in August). This is the first ad set that can only ever show a jacket. It is a
+**pool-builder for October**, not a September revenue play — the season curve is flat until Oct.
+- Campaign **`120254923437380428`** "TOF-J | Jackets Catalogue | Sep 2026" · OUTCOME_SALES · ABO.
+- Ad set **`120254923438760428`** "TOF-J | Jackets Cold | View Content" · PKR 1,000/day ·
+  `OFFSITE_CONVERSIONS` + `custom_event_type: CONTENT_VIEW` (**View Content, NOT Purchase**) ·
+  billing IMPRESSIONS · destination WEBSITE · Highest volume.
+  🔴 **Why View Content:** at ~PKR 8,450 jacket CPA, Purchase optimisation needs PKR 400k+/week
+  to hit 50 conversions and can NEVER exit learning. VC costs ~PKR 30–60, so 1,000/day clears
+  the 50/week bar comfortably. **Flip to Purchase in October, not before.**
+- Ad **`120254934279270428`** · creative **`1565804588611384`** · Advantage+ catalog carousel.
+  🔁 **Swapped Sep 6 2026.** The original ad `120254923440130428` / creative
+  `1753964692388815` promised "4–7 working days on the bench, 3–4 to your door" — false
+  once the workshop moved to ~15 days of making. **Ad creatives are IMMUTABLE in Meta**, so
+  the fix is always: new creative → new ad in the same ad set → pause the old ad. Never try
+  to edit copy in place. v2 says "around three weeks to your door" and names peak season as
+  the reason. Old ad + creative kept, paused, for the record.
+- Product set **`1801176350880581`** "KV — All Leather Jackets (Men's + Women's)" = 30 products
+  (186 variant items), OR of Shopify collections `438804021488` + `438804250864`. Dynamic, so
+  new jackets join automatically. This is the FIRST jacket-only set — do not point it at
+  "All Products" `608788148654460`.
+- Targeting mirrors TOF-C exactly: 9 city keys, **no radius**, `location_types [home, recent]`,
+  LLA 1% `120254216730060428` + LLA 3% `120254216735280428`, excludes Purchasers 180D
+  `120252468019140428` + COD Refusers `120253660257910428` + Delivered Buyers SEED
+  `120254215371460428`, `publisher_platforms [facebook, instagram]`, `advantage_audience: 0`.
+  ⚠️ **The live LLA IDs above are the [Jul31] versions — they DIFFER from the Jul 8 IDs recorded
+  in the Meta Ads section. Always read the live ad set, never copy IDs from memory.**
+- ✍️ Copy deliberately **fixes the DPA creative defect**: no "cash on delivery anywhere in the
+  country". It states made-to-order + paid online WITH the reason ("cut for one customer and can
+  never be resold"), and names the ~3 week timeline instead of a delivery-area claim.
+  No `PAYONLINE10`. Advantage+ Creative left OFF so Meta cannot rewrite the brand voice.
+- 🔗 `link_url` carries real UTMs incl. `utm_content={{placement}}` — the first ad in the account
+  that does. ⚠️ **Verify on the first real click** that `{{placement}}` resolved and did not land
+  as a literal string (TOF-A had that failure). If it comes through literal, the fallback is a
+  static `utm_content` naming the ad set.
+- 💰 **Funded by pausing BOF DPA `120254220299340428`** (PKR 1,000/day): real ROAS 1.33x against
+  a 2.22x break-even, −PKR 12,396 August contribution, frequency 8.10 on 11,739 reach, and
+  September burning ~3x faster (2.63 freq in 4 days). Retarget (4.32x) and TOF-C (2.81x) are
+  untouchable. The fit is exact: **DPA is starving because nothing fresh feeds its pool** — TOF-J
+  refills that pool, so October's DPA restart has an audience to retarget.
+- 📌 Kill threshold written BEFORE launch (the Aug process gap): if cost-per-ViewContent is above
+  **PKR 90** on day 3, or above PKR 70 on day 7, kill it. Judge on 14-day windows otherwise.
+- ⚠️ Both moves (activating TOF-J, pausing BOF DPA) are LIVE money changes → confirm each time.
+
 ## 🔌 Available integrations (MCP)
 Shopify, GitHub, Canva, Figma, Facebook Ads, Higgsfield, Cloudflare.
 (Playwright is NOT available in this remote env — design is done in code, then
@@ -324,6 +393,49 @@ pushed to the draft theme to preview in a browser.)
   amount, and tracking numbers are guessable. See `ops/TRACKING_INTEGRATION.md`.
 - ⚠️ The Worker ROOT url returns `{"error":"Not found"}` by design. The
   dashboard "Visit" button opens root, so it always looks broken. Use `/health`.
+- 💬 **WhatsApp copy is PAYMENT-AWARE as of Sep 4 2026** (`isPrepaid(o)` =
+  `financial_status` set and !== `'pending'`). Before this, the order-placed hook
+  **silently dropped every prepaid order** (`skipped_not_cod`), so card/JazzCash
+  buyers — i.e. ALL jackets and ALL footwear since the MTO change — got no
+  WhatsApp at all. They now get their own message: "Paid in full … nothing to pay
+  on delivery" + the ~3 week workshop expectation, and **no CONFIRM ask** (there
+  is nothing to confirm, and prompting invites a cancellation on money in hand).
+  Prepaid orders also skip the `wapend:` KV write, so they can never be chased for
+  a CONFIRM they were never asked for. COD copy is unchanged.
+- ✅ **FIXED Sep 5 2026 — `runPrepaidDeliveryPass()`, the notify-only twin of the COD
+  sweep.** Prepaid orders used to get no delivered message and no review ask, because
+  `msgDelivered` + `rvSchedule` live inside `runPollSync`, which only sees
+  `financial_status=pending` non-card orders. The review engine therefore could not
+  ask a single jacket buyer. Runs hourly right after `runPollSync`; also on demand at
+  **`/prepaid-sync`** (needs `X-Sync-Secret`). Last result → KV `last_prepaid_sync`.
+  Design rules, do not break them:
+  - **NEVER calls `markOrderPaid`** — the money is already in.
+  - **NEVER writes RTO notes** — `runPollSync` owns returns, so an RTO is recorded once.
+  - 🔴 **First-run baseline via KV `ppass:init`.** On the very first execution it burns
+    `wasent:` + `rvdone:` on everything ALREADY delivered and sends NOTHING. Without
+    this, switching it on cold would blast a month of customers who got their order
+    weeks ago — the failure mode that gets a WhatsApp number blocked. **If you ever
+    need to re-seed, delete `ppass:init`; never delete it casually.**
+  - `PP_WINDOW_DAYS = 30`, deliberately ≤ the 30-day `wasent:` TTL so an order ages out
+    of the window before its dedup marker expires (otherwise it gets thanked twice).
+  - Skips `rvSchedule` when `rvdue:` already exists — `rvSchedule` OVERWRITES `rvdue:`,
+    so calling it on an order the COD sweep just scheduled would push the 3-day review
+    timer back an hour every hour and the ask would never fire.
+  - No gateway filter on purpose: a COD order already marked paid matches too, but its
+    refs are burned so it is a no-op — and it acts as a safety net if the COD sweep
+    missed one. `msgDelivered` is payment-neutral, so it is correct either way.
+  - Verified by running the real function against mocked Shopify/PostEx/KV: cold run
+    seeds 2 and sends 0 · next run messages ONLY the new orders and schedules 1 review
+    · third run is a full no-op · `markOrderPaid` called 0 times.
+- ✅ **DEPLOYED Sep 5 2026.** Verified by diffing `workers_get_worker_code` against the
+  repo file: identical apart from Cloudflare's multipart envelope, `isPrepaid` present
+  at line 927, and `skipped_not_cod` gone from the live script.
+  💡 `workers_get_worker_code` is the way to confirm ANY Worker deploy — it exceeds the
+  token cap so it auto-saves to a file, which you then `diff` against the repo copy.
+- ⚠️ Deploying the Worker is MANUAL: paste `tools/postex-worker/worker.js` whole
+  into the Cloudflare editor, then **Deploy**. A git push does NOT ship it.
+  ⚠️ `/health` returns only `{status, ts}` — no version marker, so it CANNOT confirm a
+  deploy. Consider adding one if this gets deployed often.
 - Full source of truth for the Worker: `tools/postex-worker/worker.js` (paste
   whole file into the Cloudflare editor, then **Deploy** — saving ≠ deploying).
 

@@ -58,8 +58,8 @@ after editing any locked block.
 - **Happens.** The machine starts. The needle punches rhythmically, leather feeds steadily through, a line of even stitching grows and runs back toward camera. His hands guide; they do not push.
 - **Camera.** Locked off, shallow focus on the needle. Let the leather move through frame rather than moving the camera.
 - **Ends.** Machine slows and stops. Needle at rest. A finished seam runs the length of frame.
-- **Voiceover.** "Seven days. One man — start to finish. Haath ka kaam." Under it: the real machine.
-- **Caption.** "Seven days. One maker."
+- **Voiceover.** "One man — start to finish. Haath ka kaam." Under it: the real machine.
+- **Caption.** "One maker, start to finish."
 
 > **NO MUSIC OF ANY KIND. Voiceover and natural machine sound only.**
 
@@ -97,8 +97,8 @@ after editing any locked block.
 - **Happens.** Two unhurried steps toward the doorway. The daylight grows and begins to blow out, rim-lighting his shoulders through the dust.
 - **Camera.** Locked off. He walks away from the frame rather than the camera following — the workshop stays, he leaves.
 - **Ends.** Smaller in frame, edge-lit against the doorway, light almost white. Hold one beat on the workshop as he clears frame.
-- **Voiceover.** "Made in Karachi. Half to begin, half at your door."
-- **Caption.** "Made to order in Karachi" → "From Rs 22,000 · Book with 50%, balance to the rider"
+- **Voiceover.** "Made in Karachi. Made only for you."
+- **Caption.** "Made to order in Karachi" → "From Rs 22,000 · Paid online, cut for one customer"
 
 > **NO MUSIC OF ANY KIND. Voiceover and natural room sound only.**
 >

@@ -14,7 +14,7 @@
 >
 > Run all three on ours. The Iconic is full-grain sheepskin, made to order in Karachi, from Rs 22,000.
 >
-> Book with 50% and pay the balance to the rider. Free delivery nationwide. Lifetime craftsmanship warranty.
+> Paid online at checkout — each one is cut for one customer. Free delivery nationwide. Lifetime craftsmanship warranty.
 
 The first sentence is 92 characters — it survives the mobile truncation point intact, so
 the test lands before anyone taps "See more".
@@ -22,7 +22,7 @@ the test lands before anyone taps "See more".
 ### Alternates for testing
 
 **B — the objection first**
-> Everyone in this market says "genuine leather". So here are three tests you can run on any jacket before you pay for it, including ours. Thumb press: real leather springs back, plastic keeps the crease. Pores: real hide never repeats, print always does. Pocket lining: suede underneath, not mesh. The Iconic, full-grain sheepskin, made to order in Karachi, from Rs 22,000. Book with 50%, pay the balance to the rider.
+> Everyone in this market says "genuine leather". So here are three tests you can run on any jacket before you pay for it, including ours. Thumb press: real leather springs back, plastic keeps the crease. Pores: real hide never repeats, print always does. Pocket lining: suede underneath, not mesh. The Iconic, full-grain sheepskin, made to order in Karachi, from Rs 22,000. Paid online at checkout — each one is cut for one customer, so it can never be resold.
 
 **C — the price frame**
 > A Rs 22,000 jacket should survive being inspected. Press it with your thumb — real leather springs back, coated plastic keeps the crease. Check the pores for a repeat. Turn the pocket out and look for suede, not mesh. Full-grain sheepskin, made to order in Karachi. Free delivery nationwide, lifetime craftsmanship warranty.
@@ -75,12 +75,14 @@ you check"*, being able to set `OPT_OUT` is worth a trip to the workshop.
 
 - [ ] **No discount code in the creative.** `PAYONLINE10` goes out only in the WhatsApp
       order confirmation. It appears nowhere in the video, the primary text or the headline.
-- [ ] **No cash-on-delivery badge.** Jackets are not COD. The line is *"Book with 50%,
-      pay the balance to the rider"* — and note that half of it genuinely is paid at the
-      door, so never write "no cash on delivery" either.
-- [ ] **Landing page agrees with the ad.** Product descriptions and
-      `snippets/pdp-jsonld.liquid` still say **"prepaid"**. Fix before this runs or the
-      click lands on a contradiction. Flagged in BRIEF.md.
+- [ ] **No cash-on-delivery badge, and never the bare word "prepaid".** Jackets are 100%
+      online at checkout (card / JazzCash) as of 4 Sep 2026 — no deposit, no rider
+      payment. **Always pair the term with the reason:** *"paid online, because each one
+      is cut for one customer."* "Prepaid" alone reads as distrust in a COD market; the
+      reason reads as craft.
+- [x] **Landing page agrees with the ad.** Resolved 4 Sep 2026 — all 30 jacket
+      descriptions, the PDP, cart, JSON-LD and the FAQ page now state the online-payment
+      rule with its reason. The click no longer lands on a contradiction.
 - [ ] **The jacket on screen is the Rs 22,000 jacket** (The Iconic, black sheepskin).
       The closing card names that price; label must match subject.
 - [ ] **Claims limited to the jacket range** — full-grain sheepskin, made to order in

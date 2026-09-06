@@ -16,7 +16,7 @@ Not a size run.
 
 5
 00:00:12,200 --> 00:00:16,800
-Seven days. One maker.
+One maker, start to finish.
 
 6
 00:00:20,200 --> 00:00:22,800
@@ -28,4 +28,4 @@ Made to order in Karachi
 
 8
 00:00:25,100 --> 00:00:27,000
-From Rs 22,000 · Book with 50%, balance to the rider
+From Rs 22,000 · Paid online, cut for one customer

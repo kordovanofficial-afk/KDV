@@ -181,7 +181,7 @@ is the bed the price and payment terms sit on — the only 4 seconds of the film
 either appears.
 
 **Captions:**
-- `18.0 → 20.0` — `From Rs 22,000.` / `Book with 50%, pay the rest to the rider.`
+- `18.0 → 20.0` — `From Rs 22,000.` / `Paid online — each one is cut for one customer.`
 - `20.0 → 22.0` — `Free delivery nationwide.` / `Lifetime craftsmanship warranty.`
 
 **Phone note:** Same jacket on a wooden hanger against a plain warm wall, phone locked

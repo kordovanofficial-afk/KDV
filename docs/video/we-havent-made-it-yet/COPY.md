@@ -11,19 +11,19 @@ frame was filmed.
 We don't keep this jacket in stock. We haven't made it yet.
 
 Every Kordovan jacket is cut and stitched after you order, in our own workshop in
-Karachi — to your measurements, not to a size run. Seven days of work, one maker,
+Karachi — to your measurements, not to a size run. One maker, start to finish,
 start to finish.
 
 Genuine full-grain sheepskin. Lifetime craftsmanship warranty. Free delivery anywhere
 in Pakistan.
 
-Book with 50% today, pay the rest to the rider when it arrives.
+Paid online at checkout — each one is cut for one customer, so it can never be resold.
 
 ## Headline
 Made to your size, not a size run
 
 ## Description
-From Rs 22,000 · Book with 50% · Free delivery
+From Rs 22,000 · Paid online · Free delivery
 
 ## CTA
 Shop Now

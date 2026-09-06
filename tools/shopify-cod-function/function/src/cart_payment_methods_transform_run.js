@@ -3,7 +3,7 @@
 /**
  * Hide Cash on Delivery when the cart contains a made-to-order product.
  *
- * Why this exists: jackets are cut for one customer over 4–7 working days and
+ * Why this exists: jackets are cut for one customer over ~3 weeks and
  * are prepaid. When COD stayed selectable, roughly 60% of jacket orders were
  * placed on COD and then refused on the confirmation call, after the leather
  * had already been cut. Every one of those was a total loss.
