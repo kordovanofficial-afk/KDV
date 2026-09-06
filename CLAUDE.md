@@ -778,7 +778,19 @@ clicks** in the same quarter. Nothing had been published since 24 Sep 2024.
 - 📌 Second-highest: the winner sits at **pos 10.1 / 10.7** on "leather jackets in pakistan"
   (1,068 impr) and "leather jacket pakistan" (1,025). Pushing those to page 1 is likely worth
   more than another new article. **Refresh the winner before writing more.**
-- Blog was 9.1% of site impressions / 6.4% of clicks before this pass — the baseline to measure against.
+- ✅ **Internal links DONE Sep 6 2026.** The jacket article now links to all four new guides
+  (a box near the top + a footer line, each URL x2), and `dateModified` bumped to 2026-09-06.
+  🛡️ **Technique worth reusing for any large body edit — Shopify has no partial body update:**
+  query the live body so it auto-saves to a tool-result file → apply insertions in Python with
+  exact-match assertions → assert **0 lines removed** → publish → re-query and diff the live
+  result against the intended file. Live differed by 6 lines, all Shopify's sanitiser adding a
+  newline after `<li>`; all 18 structural markers matched. Backup kept at
+  scratchpad `blog/jacket_ORIGINAL.html`.
+- 📅 **Indexing requested in GSC for all 5 URLs on Sep 6 2026** (4 new + the updated jacket
+  article). **That is the clock start.** Expect a first crawl within days, a first read on
+  rankings in 2–4 weeks, meaningful movement in 6–12.
+- Blog was **9.1% of site impressions / 6.4% of clicks** before this pass — the baseline to
+  measure against. Re-pull `["page"]` and `["page","query"]` in early October and compare.
 
 ## 🏬 PARKED — Catalog trim before SEO (user doing manually)
 User moved to own POS software (synced w/ Shopify). Is removing store-only / bogus /
