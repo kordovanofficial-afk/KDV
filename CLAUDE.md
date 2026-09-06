@@ -403,7 +403,7 @@ pushed to the draft theme to preview in a browser.)
   **silently dropped every prepaid order** (`skipped_not_cod`), so card/JazzCash
   buyers — i.e. ALL jackets and ALL footwear since the MTO change — got no
   WhatsApp at all. They now get their own message: "Paid in full … nothing to pay
-  on delivery" + the ~3 week workshop expectation, and **no CONFIRM ask** (there
+  on delivery" + the workshop expectation, and **no CONFIRM ask** (there
   is nothing to confirm, and prompting invites a cancellation on money in hand).
   Prepaid orders also skip the `wapend:` KV write, so they can never be chased for
   a CONFIRM they were never asked for. COD copy is unchanged.
@@ -432,6 +432,17 @@ pushed to the draft theme to preview in a browser.)
   - Verified by running the real function against mocked Shopify/PostEx/KV: cold run
     seeds 2 and sends 0 · next run messages ONLY the new orders and schedules 1 review
     · third run is a full no-op · `markOrderPaid` called 0 times.
+- 🟡 **KNOWN DRIFT (user decision Sep 6 2026) — the LIVE Worker still says "4–7 working
+  days". The repo copy says "about 3 weeks". Do NOT treat this as a bug to fix on sight.**
+  The user declined the redeploy: *"no need for the whatsapp edit as its purely for the
+  high season... so it wont be an issue... as only 1 in 10 will be effected by it."*
+  Volume-wise that is right — MTO is roughly 10% of orders. ⚠️ But note the exposure is
+  **concentrated, not diluted**: the prepaid message fires on 100% of jacket and footwear
+  buyers, i.e. the people who paid PKR 22,000–35,000 in full with nothing in hand. They
+  are the likeliest to dispute if week two passes in silence. Raised once, user decided,
+  do not re-litigate.
+  ➡️ **The repo is already correct**, so the drift closes automatically the next time the
+  Worker is deployed for any reason. Mention it then; do not deploy just for this.
 - ✅ **DEPLOYED Sep 5 2026.** Verified by diffing `workers_get_worker_code` against the
   repo file: identical apart from Cloudflare's multipart envelope, `isPrepaid` present
   at line 927, and `skipped_not_cod` gone from the live script.
@@ -630,6 +641,71 @@ Aug 2026 pass covered them; a fresh session wasted effort re-checking. Measured 
   currently show no rating and no social proof**. That sits directly on the conversion
   bottleneck (jacket site CR ~0.115%, cheap clicks at PKR 9.75) heading into the season.
   Filling subtitle/benefits/material/reviews is worth more than any targeting change.
+
+## 🔗 GSC coverage audit + redirect repair (Sep 6 2026 — DONE, do not redo)
+Source: user's GSC "All known pages" coverage export (Jun 8 – Sep 4 2026), cross-referenced
+against the live catalogue and the live `urlRedirects` list.
+- **Indexing is HEALTHY and FLAT — stop worrying about it.** 261 indexed, range 254–277 all
+  quarter, no trend. Impressions 2,623/day (Jun) → 2,245 (Aug) → 2,335 (Sep): that is the
+  already-closed theme-migration dip recovering. ⚠️ Do NOT re-raise it as a new alarm.
+- **1,355 "not indexed" is almost entirely correct behaviour**, not a defect:
+  Crawled-not-indexed 341 (tag-filter URLs) · robots.txt 319 (**Shopify defaults — cart,
+  checkout, account, sort params; correct, never "fix"**) · 404 256 · alternate-canonical 199
+  (**working as designed**) · noindex 124 · has-redirect 99 (**success, not a problem**) ·
+  soft-404 1 · dup-no-canonical 1 · discovered 15.
+- 🔴 **THE JULY CATALOGUE TRIM DID NOT COST TRAFFIC — measured, settled.** Of 332 URLs with
+  impressions in the window, only **25 were dead, totalling 402 impressions and 18 clicks**
+  against 251,000 site-wide. Do not re-litigate the trim.
+- 🔴 **THE REAL DEFECT, invisible in the coverage report: 22 of the 84 redirects pointed at
+  products deleted in the trim** — a redirect into a 404, which is worse than a plain 404
+  (crawler takes a hop and dies, link equity lost, customer sees a broken shop).
+  ✅ All 22 retargeted, ✅ 25 new redirects added for the dead URLs that still earn
+  impressions, ✅ 2 two-hop chains collapsed
+  (`kordovan-combo-…-brown` and `natural-milled-premium-laptop-bag-brown`).
+  **111 redirects now live, 0 pointing at a dead page, 0 chains** — re-verified after writing.
+- ✍️ **Rule for future trims: deleting a product is not finished until you check what
+  redirects at it.** Shopify will happily keep a redirect aimed at a deleted handle and the
+  coverage report will never tell you.
+- ✍️ Redirect to the nearest **equivalent product**; fall back to the category collection only
+  when none exists. **Never mass-redirect to the homepage** — Google treats that as a soft 404
+  and drops the signal entirely.
+- 📌 `/collections/all/<tag>` URLs are LIVE Shopify tag pages, not 404s. 20 of them carry
+  traffic (1,614 impressions / 29 clicks). **Do not "tidy" or noindex them without reading
+  the next bullet first.**
+
+### 🔎 The tag pages are BRAND SITELINKS, not category rankings (measured Sep 6 2026)
+⚠️ **Correction to an earlier read in this same session.** `/collections/all/genuine-leather-products`
+(1,157 impr) looked like an untapped category page worth optimising. It is not. Pulling the
+`["page","query"]` breakdown shows **100% of its impressions are brand searches** — "kordovan
+leather" 898, "kordovan" 215, "kordovan leather pakistan" 41 — **all at position 1.0**.
+Across all 20 tag URLs, **86% of traffic is brand**. Lesson: never judge a page from
+impressions alone; pull the query breakdown before calling something an opportunity.
+- **What is really happening:** Google shows the homepage plus ~6 SITELINKS for "kordovan
+  leather" (7,804 impr / 977 clicks a quarter). Each sitelink logs its own impression at
+  position 1. Current slots: `/` (68% CTR, 822 clicks) · `/collections/women` ·
+  `mens-leather-jackets` · `leather-bags` · `mens-leather-wallets` ·
+  **`/collections/all/genuine-leather-products`** · `womens-leather-handbags` · `/collections/men`.
+- 🚫 **Low sitelink CTR is NORMAL — it is not lost traffic.** The main result takes the clicks
+  (homepage 68%); sitelinks run 0.3–5.9%. Do not "fix" a sitelink's CTR.
+- **The actual cost is a wasted shelf slot**: one of six sitelinks pointed at a tag dump whose
+  title rendered as `Products – tagged "genuine-leather-products"` — a raw slug in the brand SERP.
+- ⚠️ **Sitelinks cannot be set or demoted.** Google retired the demotion tool in 2016. You only
+  influence them through site structure, internal linking and how the page presents.
+- ✅ **FIXED Sep 6 2026 in the theme, not by building a new collection.** `layout/theme.liquid`
+  and `sections/main-collection.liquid` now derive a human `tag_label` from `current_tags`
+  (`genuine-leather-products` → `Genuine Leather Products`) and use it for `<title>`, meta
+  description, og:title/description, breadcrumb, H1, the editorial H2 and the JSON-LD `name`.
+  JSON-LD `url` switched from `collection.url` (which drops the tag) to `request.path`.
+  **One change fixes all 20 tag URLs at once, adds no new pages and cannot break a working one.**
+  ⚠️ `tag_label` is captured separately in each file on purpose — Shopify sections have
+  isolated scope, so a layout variable is not visible inside a section.
+- 📌 The tag is real: `genuine-leather-products` covers **54 of 175 active products**, and it is
+  **not linked from any nav menu or from the theme** — an orphan URL Google latched onto.
+- 🔮 If the slot is ever wanted for something better, the lever is internal linking (give the
+  target collection more prominent links), not a redirect — a 301 off a sitelink usually makes
+  Google drop the slot rather than move it.
+- Working data: scratchpad `gsc/` (session-local — rebuild from a fresh coverage export plus
+  `gsc_query` on `["page"]`, diffed against live product/collection/page/article handles).
 
 ## 🏬 PARKED — Catalog trim before SEO (user doing manually)
 User moved to own POS software (synced w/ Shopify). Is removing store-only / bogus /
