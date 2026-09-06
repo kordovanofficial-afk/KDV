@@ -58,8 +58,8 @@ after editing any locked block.
 - **Happens.** The machine starts. The needle punches rhythmically, leather feeds steadily through, a line of even stitching grows and runs back toward camera. His hands guide; they do not push.
 - **Camera.** Locked off, shallow focus on the needle. Let the leather move through frame rather than moving the camera.
 - **Ends.** Machine slows and stops. Needle at rest. A finished seam runs the length of frame.
-- **Voiceover.** "Seven days. One man — start to finish. Haath ka kaam." Under it: the real machine.
-- **Caption.** "Seven days. One maker."
+- **Voiceover.** "One man — start to finish. Haath ka kaam." Under it: the real machine.
+- **Caption.** "One maker, start to finish."
 
 > **NO MUSIC OF ANY KIND. Voiceover and natural machine sound only.**
 

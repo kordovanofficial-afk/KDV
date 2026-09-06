@@ -949,7 +949,7 @@ ${items}
 
 Paid in full: *${waMoney(order.total_price)}* — nothing to pay on delivery.${where}
 
-Made-to-order pieces (jackets and shoes) take 4–7 working days in our workshop, then 3–4 days to reach you. Everything else is dispatched in 1–2 days. We will message you the moment it ships.
+Made-to-order pieces (jackets and shoes) take *about 3 weeks* to reach you — winter is our busiest season and every piece is cut for one customer. Everything else is dispatched in 1–2 days. We will message you the moment it ships.
 
 — Kordovan
 _Reply STOP to stop updates._`;
@@ -1217,7 +1217,7 @@ async function handleNewOrder(order, env) {
     }
 
     // Prepaid orders used to be dropped here entirely, which left every jacket
-    // and shoe buyer — the highest-value orders in the store, waiting 4–7 days
+    // and shoe buyer — the highest-value orders in the store, waiting ~3 weeks
     // for production — with total silence. They now get their own message; only
     // the COD confirmation flow below is skipped, because there is nothing to
     // confirm once the money has landed.

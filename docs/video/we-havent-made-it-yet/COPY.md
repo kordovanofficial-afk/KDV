@@ -11,7 +11,7 @@ frame was filmed.
 We don't keep this jacket in stock. We haven't made it yet.
 
 Every Kordovan jacket is cut and stitched after you order, in our own workshop in
-Karachi — to your measurements, not to a size run. Seven days of work, one maker,
+Karachi — to your measurements, not to a size run. One maker, start to finish,
 start to finish.
 
 Genuine full-grain sheepskin. Lifetime craftsmanship warranty. Free delivery anywhere

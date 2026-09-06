@@ -29,7 +29,7 @@ takes per line.
 | 1 | 0:00–0:04 | "This? This is your jacket." *(beat)* "No, no. We have not made it yet." |
 | 2 | 0:04–0:08 | "One hide. Cut to your measurement — not small, medium, large." |
 | 3 | 0:08–0:12 | *silence — room tone only* |
-| 4 | 0:12–0:17 | "Seven days. One man — start to finish. Haath ka kaam." |
+| 4 | 0:12–0:17 | "One man — start to finish. Haath ka kaam." |
 | 5 | 0:17–0:20 | *silence — leather and zip only* |
 | 6 | 0:20–0:23 | "Bas. Now it is yours." |
 | 7 | 0:23–0:27 | "Made in Karachi. Made only for you." |

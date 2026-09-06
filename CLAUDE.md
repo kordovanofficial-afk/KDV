@@ -98,6 +98,24 @@ kordovan  (trunk)
 - Do not create PRs unless explicitly asked.
 
 ## 🧥 Jackets — payment, margin, refusal (payment rule updated Sep 4 2026)
+- ⏱ **LEAD TIME = "about 3 weeks to your door" (user-confirmed Sep 6 2026). THIS
+  SUPERSEDES "4–7 working days + 3–4 to deliver", which is DEAD — do not reintroduce it.**
+  The workshop told the user a jacket now needs **at least 15 days to make alone** because
+  winter is peak season and the bench is full. 15 + 3–4 delivery ≈ 19 days with zero slack,
+  so the published promise is a single deliberately-slack "**about 3 weeks**" covering
+  making AND delivery. Under-promise, then beat it.
+  - ✍️ **Pair it with the reason, same as the payment rule.** "Winter is our busiest season
+    and every piece is cut for one customer" turns a long wait into evidence of craft. A
+    bare "3 weeks" on a PKR 28,000 prepaid order reads as disorganisation.
+  - ✅ **Updated Sep 6 2026 across:** `pdp-main` (buy-box line + Shipping & Payment
+    accordion), `pdp-jsonld`, `shipping`, the PostEx Worker prepaid WhatsApp message, the
+    COD Function comment, and all video packages. **Meta ad swapped** — see TOF-J below.
+  - 🔴 **STILL PENDING (live Shopify content, not in the repo):** the 30 jacket product
+    descriptions, the 4 jacket collections, and pages `faqs` + `cod-policy-note-fake-orders`
+    were written in the Sep 4 pass and may still carry 4–7 days. Re-check and rewrite.
+  - ⚠️ **Re-measure in ~3 weeks.** A longer quoted wait is a real conversion risk on cold
+    traffic. If jacket click→ATC drops materially after this change, that is the cause —
+    the answer is better reason-copy, not a shorter promise the workshop cannot meet.
 - 🔴 **PAYMENT = 100% ONLINE AT CHECKOUT, by credit card / debit card / JazzCash
   (user-confirmed Sep 4 2026). THIS SUPERSEDES the Aug 20 "50% to book, balance to
   the rider" rule, which is DEAD** — bank transfer was the deposit rail and it is now
@@ -299,7 +317,13 @@ Purpose: jackets are structurally starved inside the shared "All Products" set (
   🔴 **Why View Content:** at ~PKR 8,450 jacket CPA, Purchase optimisation needs PKR 400k+/week
   to hit 50 conversions and can NEVER exit learning. VC costs ~PKR 30–60, so 1,000/day clears
   the 50/week bar comfortably. **Flip to Purchase in October, not before.**
-- Ad **`120254923440130428`** · creative **`1753964692388815`** · Advantage+ catalog carousel.
+- Ad **`120254934279270428`** · creative **`1565804588611384`** · Advantage+ catalog carousel.
+  🔁 **Swapped Sep 6 2026.** The original ad `120254923440130428` / creative
+  `1753964692388815` promised "4–7 working days on the bench, 3–4 to your door" — false
+  once the workshop moved to ~15 days of making. **Ad creatives are IMMUTABLE in Meta**, so
+  the fix is always: new creative → new ad in the same ad set → pause the old ad. Never try
+  to edit copy in place. v2 says "around three weeks to your door" and names peak season as
+  the reason. Old ad + creative kept, paused, for the record.
 - Product set **`1801176350880581`** "KV — All Leather Jackets (Men's + Women's)" = 30 products
   (186 variant items), OR of Shopify collections `438804021488` + `438804250864`. Dynamic, so
   new jackets join automatically. This is the FIRST jacket-only set — do not point it at
@@ -312,7 +336,7 @@ Purpose: jackets are structurally starved inside the shared "All Products" set (
   in the Meta Ads section. Always read the live ad set, never copy IDs from memory.**
 - ✍️ Copy deliberately **fixes the DPA creative defect**: no "cash on delivery anywhere in the
   country". It states made-to-order + paid online WITH the reason ("cut for one customer and can
-  never be resold"), and names the 4–7 + 3–4 day timeline instead of a delivery-area claim.
+  never be resold"), and names the ~3 week timeline instead of a delivery-area claim.
   No `PAYONLINE10`. Advantage+ Creative left OFF so Meta cannot rewrite the brand voice.
 - 🔗 `link_url` carries real UTMs incl. `utm_content={{placement}}` — the first ad in the account
   that does. ⚠️ **Verify on the first real click** that `{{placement}}` resolved and did not land
@@ -374,7 +398,7 @@ pushed to the draft theme to preview in a browser.)
   **silently dropped every prepaid order** (`skipped_not_cod`), so card/JazzCash
   buyers — i.e. ALL jackets and ALL footwear since the MTO change — got no
   WhatsApp at all. They now get their own message: "Paid in full … nothing to pay
-  on delivery" + the 4–7 day workshop expectation, and **no CONFIRM ask** (there
+  on delivery" + the ~3 week workshop expectation, and **no CONFIRM ask** (there
   is nothing to confirm, and prompting invites a cancellation on money in hand).
   Prepaid orders also skip the `wapend:` KV write, so they can never be chased for
   a CONFIRM they were never asked for. COD copy is unchanged.

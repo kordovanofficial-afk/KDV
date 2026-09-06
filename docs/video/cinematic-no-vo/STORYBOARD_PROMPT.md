@@ -27,7 +27,7 @@ A men's full-grain sheepskin leather jacket, cognac brown, biker cut. From Rs 22
 FACTS YOU MAY USE — these are true and verified. Use nothing else.
 - Made to order. Every jacket is cut for one named customer, to that person's
   measurements. There is no size run and no stock.
-- 4 to 7 working days to make, then 3 to 4 days to deliver.
+- About 3 weeks from checkout to the customer's door. Winter is peak season and the bench is full.
 - One maker takes a jacket from cutting to finishing. It does not pass down a line.
 - Paid online at checkout — card, debit card or JazzCash.
 - Lifetime craftsmanship warranty.
