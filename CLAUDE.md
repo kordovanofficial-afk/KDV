@@ -403,7 +403,7 @@ pushed to the draft theme to preview in a browser.)
   **silently dropped every prepaid order** (`skipped_not_cod`), so card/JazzCash
   buyers — i.e. ALL jackets and ALL footwear since the MTO change — got no
   WhatsApp at all. They now get their own message: "Paid in full … nothing to pay
-  on delivery" + the ~3 week workshop expectation, and **no CONFIRM ask** (there
+  on delivery" + the workshop expectation, and **no CONFIRM ask** (there
   is nothing to confirm, and prompting invites a cancellation on money in hand).
   Prepaid orders also skip the `wapend:` KV write, so they can never be chased for
   a CONFIRM they were never asked for. COD copy is unchanged.
@@ -432,6 +432,17 @@ pushed to the draft theme to preview in a browser.)
   - Verified by running the real function against mocked Shopify/PostEx/KV: cold run
     seeds 2 and sends 0 · next run messages ONLY the new orders and schedules 1 review
     · third run is a full no-op · `markOrderPaid` called 0 times.
+- 🟡 **KNOWN DRIFT (user decision Sep 6 2026) — the LIVE Worker still says "4–7 working
+  days". The repo copy says "about 3 weeks". Do NOT treat this as a bug to fix on sight.**
+  The user declined the redeploy: *"no need for the whatsapp edit as its purely for the
+  high season... so it wont be an issue... as only 1 in 10 will be effected by it."*
+  Volume-wise that is right — MTO is roughly 10% of orders. ⚠️ But note the exposure is
+  **concentrated, not diluted**: the prepaid message fires on 100% of jacket and footwear
+  buyers, i.e. the people who paid PKR 22,000–35,000 in full with nothing in hand. They
+  are the likeliest to dispute if week two passes in silence. Raised once, user decided,
+  do not re-litigate.
+  ➡️ **The repo is already correct**, so the drift closes automatically the next time the
+  Worker is deployed for any reason. Mention it then; do not deploy just for this.
 - ✅ **DEPLOYED Sep 5 2026.** Verified by diffing `workers_get_worker_code` against the
   repo file: identical apart from Cloudflare's multipart envelope, `isPrepaid` present
   at line 927, and `skipped_not_cod` gone from the live script.
