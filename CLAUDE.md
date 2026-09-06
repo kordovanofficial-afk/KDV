@@ -110,9 +110,14 @@ kordovan  (trunk)
   - ✅ **Updated Sep 6 2026 across:** `pdp-main` (buy-box line + Shipping & Payment
     accordion), `pdp-jsonld`, `shipping`, the PostEx Worker prepaid WhatsApp message, the
     COD Function comment, and all video packages. **Meta ad swapped** — see TOF-J below.
-  - 🔴 **STILL PENDING (live Shopify content, not in the repo):** the 30 jacket product
-    descriptions, the 4 jacket collections, and pages `faqs` + `cod-policy-note-fake-orders`
-    were written in the Sep 4 pass and may still carry 4–7 days. Re-check and rewrite.
+  - ✅ **Live Shopify content DONE Sep 6 2026 and verified 0 stale of 30:** all 30 jacket
+    descriptions (one shared paragraph, 3 aliased batches of 10 `productUpdate`), page
+    `faqs` (2 answers) and page `cod-policy-note-fake-orders`.
+    📌 The **4 jacket collections carry no timeline at all** — nothing to change there.
+    📌 **Footwear descriptions carry no timeline either** (re-checked); the 24 shoes take
+    their terms from the PDP template, so they were corrected automatically by the theme.
+  - ✅ **Theme merged to `kordovan` and live Sep 6 2026** (user: "deploy all... so theres no
+    contradiction or confusion"). Three text-only edits, no liquid tags touched.
   - ⚠️ **Re-measure in ~3 weeks.** A longer quoted wait is a real conversion risk on cold
     traffic. If jacket click→ATC drops materially after this change, that is the cause —
     the answer is better reason-copy, not a shorter promise the workshop cannot meet.
