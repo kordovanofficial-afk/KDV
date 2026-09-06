@@ -733,6 +733,53 @@ impressions alone; pull the query breakdown before calling something an opportun
 - Working data: scratchpad `gsc/` (session-local — rebuild from a fresh coverage export plus
   `gsc_query` on `["page"]`, diffed against live product/collection/page/article handles).
 
+## ✍️ BLOG / CONTENT SEO (audited + 4 articles published Sep 6 2026)
+🔴 **ONE ARTICLE WAS 98.6% OF ALL BLOG TRAFFIC.** `top-10-leather-jacket-brands-in-pakistan`
+= 10,235 impr / 463 clicks in Jun 8–Sep 4. **Eight of the other nine articles earned ZERO
+clicks** in the same quarter. Nothing had been published since 24 Sep 2024.
+- **THE PATTERN THAT WORKS — copy it, do not invent a new one:** *"Top 10 / Best [category]
+  Brands in Pakistan"*, with prices, **kept updated** (the winner is dated 2024 but titled
+  "(2026)" because it was refreshed). It pulls **458 distinct queries** and ranks #1.9–2.2 for
+  its exact title while sitting page-2 on the head terms.
+- 🚫 **"How to choose…" guides DO NOT rank for this site.** Two exist; 3 impressions combined.
+  Stop writing them. Seasonal sale posts (Azadi/Defence Day 2024) are dead weight — unpublish.
+- 🔴 **The killer signal:** Google was serving the *jacket* article at **pos 1.0–2.0 for WALLET
+  queries** ("best leather wallets in pakistan" 303 impr pos 2.0) because nothing better existed
+  on the site. Wallets are the biggest non-brand category at **30,036 impressions**.
+- ✅ **PUBLISHED Sep 6 2026 — 4 new articles, all live, all following the proven structure**
+  (JSON-LD `@graph` BlogPosting + FAQPage · "we are on this list" disclosure box · comparison
+  table · **price-floor section** · how-to-check-it-yourself · ranked brands each with a
+  "Watch out for" · own brand last with an honest "where we are the wrong choice" · FAQ
+  matching the schema · bottom line · CTA):
+  | `/blogs/wallets/top-10-leather-wallet-brands-in-pakistan` | 598914957552 |
+  | `/blogs/jackets/best-winter-jackets-in-pakistan` | 598914990320 |
+  | `/blogs/news/top-leather-brands-in-pakistan` | 598915023088 (the HUB — links to all) |
+  | `/blogs/bags/best-leather-laptop-and-office-bags-in-pakistan` | 598915055856 |
+  - New blog created: **`bags`** `gid://shopify/Blog/108932333808`.
+  - Blog IDs: news `50629607613` · sale `94658658544` · wallets `94807032048` ·
+    jackets `95231803632` · handbags `95392792816` · shoes `95393775856` · bags `108932333808`.
+- ✍️ **RULES FOLLOWED — keep them on any future article:**
+  - 🚫 **NEVER publish exact competitor prices.** Use bands (Entry / Mid / Premium) and say why:
+    "they change weekly and a stale number is worse than none." Protects accuracy and ages well.
+  - 🚫 **No invented reviews, ratings or testimonials** (standing rule).
+  - Competitor notes stay to **verifiable, neutral observations** (range breadth, retail
+    footprint, price positioning) — never quality accusations we cannot support.
+  - Brands were **verified by web search first**, not recalled: Jafferjees, Hub, Jild Craft,
+    House of Leather, Blackbird Leathers, Uniworth, Karar, Eligo, Outfitters, Breakout, Cougar,
+    Bonanza Satrangi, Diners, Charcoal, English Boot House, Servis/ECS.
+  - Real catalogue prices used, not guesses: wallets **Rs 1,499–6,500** (23 products), laptop
+    bags **Rs 8,500–42,000** (19), jackets Rs 22,000–35,000.
+  - Images are **real Shopify CDN product photos** + the existing `blog-jackets-*` set.
+- 📌 **HIGHEST-VALUE REMAINING ACTION (not yet done):** add internal links **from** the jacket
+  article **to** the four new ones. It holds all the blog's authority and currently links to
+  none of them. ⚠️ Requires re-sending its full ~23KB body via `articleUpdate` — Shopify has no
+  partial body update — so do it carefully and verify afterwards; it is the page that earns
+  98.6% of blog clicks.
+- 📌 Second-highest: the winner sits at **pos 10.1 / 10.7** on "leather jackets in pakistan"
+  (1,068 impr) and "leather jacket pakistan" (1,025). Pushing those to page 1 is likely worth
+  more than another new article. **Refresh the winner before writing more.**
+- Blog was 9.1% of site impressions / 6.4% of clicks before this pass — the baseline to measure against.
+
 ## 🏬 PARKED — Catalog trim before SEO (user doing manually)
 User moved to own POS software (synced w/ Shopify). Is removing store-only / bogus /
 irrelevant products from the ONLINE store so the online catalog = only what's sold
