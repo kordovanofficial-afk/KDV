@@ -669,9 +669,41 @@ against the live catalogue and the live `urlRedirects` list.
 - ✍️ Redirect to the nearest **equivalent product**; fall back to the category collection only
   when none exists. **Never mass-redirect to the homepage** — Google treats that as a soft 404
   and drops the signal entirely.
-- 📌 `/collections/all/<tag>` URLs are LIVE Shopify tag pages, not 404s.
-  `/collections/all/genuine-leather-products` alone earned **1,522 impressions / 14 clicks** —
-  the biggest non-homepage entry point in the export. Worth knowing before anyone "tidies" them.
+- 📌 `/collections/all/<tag>` URLs are LIVE Shopify tag pages, not 404s. 20 of them carry
+  traffic (1,614 impressions / 29 clicks). **Do not "tidy" or noindex them without reading
+  the next bullet first.**
+
+### 🔎 The tag pages are BRAND SITELINKS, not category rankings (measured Sep 6 2026)
+⚠️ **Correction to an earlier read in this same session.** `/collections/all/genuine-leather-products`
+(1,157 impr) looked like an untapped category page worth optimising. It is not. Pulling the
+`["page","query"]` breakdown shows **100% of its impressions are brand searches** — "kordovan
+leather" 898, "kordovan" 215, "kordovan leather pakistan" 41 — **all at position 1.0**.
+Across all 20 tag URLs, **86% of traffic is brand**. Lesson: never judge a page from
+impressions alone; pull the query breakdown before calling something an opportunity.
+- **What is really happening:** Google shows the homepage plus ~6 SITELINKS for "kordovan
+  leather" (7,804 impr / 977 clicks a quarter). Each sitelink logs its own impression at
+  position 1. Current slots: `/` (68% CTR, 822 clicks) · `/collections/women` ·
+  `mens-leather-jackets` · `leather-bags` · `mens-leather-wallets` ·
+  **`/collections/all/genuine-leather-products`** · `womens-leather-handbags` · `/collections/men`.
+- 🚫 **Low sitelink CTR is NORMAL — it is not lost traffic.** The main result takes the clicks
+  (homepage 68%); sitelinks run 0.3–5.9%. Do not "fix" a sitelink's CTR.
+- **The actual cost is a wasted shelf slot**: one of six sitelinks pointed at a tag dump whose
+  title rendered as `Products – tagged "genuine-leather-products"` — a raw slug in the brand SERP.
+- ⚠️ **Sitelinks cannot be set or demoted.** Google retired the demotion tool in 2016. You only
+  influence them through site structure, internal linking and how the page presents.
+- ✅ **FIXED Sep 6 2026 in the theme, not by building a new collection.** `layout/theme.liquid`
+  and `sections/main-collection.liquid` now derive a human `tag_label` from `current_tags`
+  (`genuine-leather-products` → `Genuine Leather Products`) and use it for `<title>`, meta
+  description, og:title/description, breadcrumb, H1, the editorial H2 and the JSON-LD `name`.
+  JSON-LD `url` switched from `collection.url` (which drops the tag) to `request.path`.
+  **One change fixes all 20 tag URLs at once, adds no new pages and cannot break a working one.**
+  ⚠️ `tag_label` is captured separately in each file on purpose — Shopify sections have
+  isolated scope, so a layout variable is not visible inside a section.
+- 📌 The tag is real: `genuine-leather-products` covers **54 of 175 active products**, and it is
+  **not linked from any nav menu or from the theme** — an orphan URL Google latched onto.
+- 🔮 If the slot is ever wanted for something better, the lever is internal linking (give the
+  target collection more prominent links), not a redirect — a 301 off a sitelink usually makes
+  Google drop the slot rather than move it.
 - Working data: scratchpad `gsc/` (session-local — rebuild from a fresh coverage export plus
   `gsc_query` on `["page"]`, diffed against live product/collection/page/article handles).
 

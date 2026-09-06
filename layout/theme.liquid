@@ -5,7 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  {%- if page_description -%}
+  {%- comment -%}
+    Tag-filtered collection URLs (/collections/<coll>/<tag>) are real indexable pages,
+    and Google has picked one of them — /collections/all/genuine-leather-products — as a
+    SITELINK under the brand query "kordovan leather". Shopify's default title for those
+    pages is `Products – tagged "genuine-leather-products"`, so the raw hyphenated slug is
+    what people see in the brand search result. Build a human label from the tag instead
+    and reuse it for the title, meta description and og tags.
+    Measured Sep 6 2026: 20 tag URLs carry traffic, 86% of it brand searches.
+  {%- endcomment -%}
+  {%- if current_tags -%}
+    {%- capture tag_label -%}
+      {%- assign tag_words = current_tags | join: ' ' | replace: '-', ' ' | split: ' ' -%}
+      {%- for w in tag_words -%}{{ w | capitalize }}{%- unless forloop.last %} {% endunless -%}{%- endfor -%}
+    {%- endcapture -%}
+    {%- assign tag_label = tag_label | strip -%}
+    {%- capture tag_description -%}{{ tag_label }} by Kordovan — genuine full-grain leather, cut and hand-stitched in our Karachi workshop. Free delivery over PKR 5,500 and a lifetime craftsmanship warranty.{%- endcapture -%}
+  {%- endif -%}
+
+  {%- if current_tags -%}
+    <meta name="description" content="{{ tag_description | escape }}">
+  {%- elsif page_description -%}
     <meta name="description" content="{{ page_description | escape }}">
   {%- endif -%}
 
@@ -14,9 +34,11 @@
   {%- endif -%}
   <meta property="og:site_name" content="{{ shop.name }}">
   <meta property="og:url" content="{{ canonical_url }}">
-  <meta property="og:title" content="{{ page_title | escape }}">
+  <meta property="og:title" content="{% if current_tags %}{{ tag_label | escape }}{% else %}{{ page_title | escape }}{% endif %}">
   <meta property="og:type" content="website">
-  {%- if page_description -%}
+  {%- if current_tags -%}
+    <meta property="og:description" content="{{ tag_description | escape }}">
+  {%- elsif page_description -%}
     <meta property="og:description" content="{{ page_description | escape }}">
   {%- endif -%}
 
@@ -65,8 +87,14 @@
   {%- endif -%}
 
   <title>
-    {{ page_title }}
-    {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+    {%- if current_tags -%}
+      {{ tag_label }}
+      {%- comment -%} On /collections/all/<tag> the parent title is just "Products",
+      which adds nothing — skip it there and keep the label clean. {%- endcomment -%}
+      {%- unless collection.handle == 'all' or collection.title == blank %} &ndash; {{ collection.title }}{% endunless -%}
+    {%- else -%}
+      {{ page_title }}
+    {%- endif -%}
     {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
     {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
   </title>
