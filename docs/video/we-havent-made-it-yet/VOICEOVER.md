@@ -32,7 +32,7 @@ takes per line.
 | 4 | 0:12–0:17 | "Seven days. One man — start to finish. Haath ka kaam." |
 | 5 | 0:17–0:20 | *silence — leather and zip only* |
 | 6 | 0:20–0:23 | "Bas. Now it is yours." |
-| 7 | 0:23–0:27 | "Made in Karachi. Half to begin, half at your door." |
+| 7 | 0:23–0:27 | "Made in Karachi. Made only for you." |
 
 **The commercial facts live in the captions, not the voice.** He never reads a price.
 That is what keeps him sounding like a man talking rather than an advertisement.

@@ -40,7 +40,7 @@ macro shots of grain. Nothing competes with the surface.
 | Full-grain sheepskin | Product handle + description, `The Iconic` |
 | Made to order in Karachi | CLAUDE.md jacket facts; catalogue "made to order" |
 | From Rs 22,000 | Verified floor price, men's jacket range (`ops/SEO_JACKET_ROLE_SPLIT.md`) |
-| Book with 50%, pay the rest to the rider | CLAUDE.md, user-confirmed 20 Aug 2026 |
+| Paid online at checkout, each one cut for one customer | CLAUDE.md, user-confirmed 4 Sep 2026 |
 | Free delivery nationwide | Every jacket is Rs 22,000+, far over the Rs 5,500 threshold |
 | Lifetime craftsmanship warranty | Site-wide, on every Kordovan piece |
 
@@ -48,12 +48,18 @@ macro shots of grain. Nothing competes with the surface.
 no cash-on-delivery badge, no "hand-stitched" or "saddle-stitched" — those belong to
 specific wallets, not to the jacket range.
 
-> ⚠️ **Payment-line flag for the account owner.** CLAUDE.md (20 Aug 2026) sets the jacket
-> term as *50% to book, balance to the rider*. But the product-level catalogue copy and
-> `snippets/pdp-jsonld.liquid` still say **"prepaid"** — that correction landed on the 4
-> jacket collections and the brands article, not on the 30 product descriptions or the
-> JSON-LD fallback. This ad uses the corrected term. **The landing page must agree with
-> the ad before this runs**, or the click lands on a page that contradicts the creative.
+> ✅ **Payment line updated 5 Sep 2026 — the deposit is dead.** The 20 Aug term (*50% to
+> book, balance to the rider*) was replaced on 4 Sep 2026 by **100% online at checkout,
+> card / debit / JazzCash**; a Shopify Function now hides COD and bank transfer on any
+> cart holding a made-to-order line. Every caption and copy line in this package has been
+> rewritten to the new term. Do not reintroduce "book with 50%" anywhere.
+>
+> The landing page contradiction is also resolved: the 4 Sep pass fixed all 30 jacket
+> descriptions, the PDP, cart, JSON-LD and the FAQ page.
+>
+> ✍️ **Never state the term without the reason.** "Paid online" alone reads as distrust
+> in a COD market; "each one is cut for one customer and can never be resold" is the same
+> fact and reads as craft.
 
 ---
 
@@ -150,7 +156,8 @@ with a single generation.
   season-independent, which matters in a city with no winter. `sizing-regret` is the
   northern companion.
 - Jackets refuse at **57%** vs ~38% all-products, and jacket order counts overstate
-  demand ~2x. **Forecast on delivered only.** The 50% deposit is load-bearing — do not
-  relax it to lift conversion.
+  demand ~2x. **Forecast on delivered only.** Paying in full at checkout is load-bearing
+  — do not relax it to lift conversion. It is also the reason Meta's Purchase event is
+  finally honest on jackets: since 4 Sep 2026 it fires on money received, not intention.
 - At ~PKR 8,450 jacket CPA, a Purchase-optimised ad set at PKR 1,000/day will never exit
   learning. **Optimise on View Content** at this budget, one broad consolidated ad set.

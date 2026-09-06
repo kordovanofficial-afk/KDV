@@ -14,7 +14,7 @@
 >
 > Ours are made to order in Karachi. Tell us you'll be wearing something under it and the chest is cut with that in mind, without the jacket losing its line.
 >
-> From Rs 22,000. Book with 50% and pay the balance to the rider. Free delivery nationwide, lifetime craftsmanship warranty.
+> From Rs 22,000. Paid online at checkout — each one is cut for one customer. Free delivery nationwide, lifetime craftsmanship warranty.
 
 The first sentence is 81 characters — it clears the mobile truncation point whole, so the
 premise lands before anyone taps "See more".
@@ -22,7 +22,7 @@ premise lands before anyone taps "See more".
 ### Alternates for testing
 
 **B — the direct question**
-> Try this before you buy a leather jacket this month: put a sweater on, then try the jacket over it. If it will not close, it is an autumn jacket and you are about to pay winter money for it. Kordovan jackets are made to order in Karachi — tell us there's a layer going underneath and it is cut for one. From Rs 22,000, book with 50% and pay the balance to the rider.
+> Try this before you buy a leather jacket this month: put a sweater on, then try the jacket over it. If it will not close, it is an autumn jacket and you are about to pay winter money for it. Kordovan jackets are made to order in Karachi — tell us there's a layer going underneath and it is cut for one. From Rs 22,000, paid online at checkout, because each one is cut for one customer.
 
 **C — the northern frame**
 > Islamabad in January is not Karachi in January. A slim leather jacket that sits perfectly over a t-shirt will not close over a wool sweater, and by the time you find out, the season is half over. Ours are made to order — the chest can allow for the layer without ruining the line. From Rs 22,000. Free delivery nationwide.
@@ -82,11 +82,14 @@ would apply here too.
       still works.
 - [ ] **No discount code in the creative.** `PAYONLINE10` goes out only in the WhatsApp
       order confirmation.
-- [ ] **No cash-on-delivery badge.** Jackets are not COD. The line is *"Book with 50%,
-      pay the balance to the rider"* — and half of it genuinely is paid at the door, so
-      never write "no cash on delivery" either.
-- [ ] **Landing page agrees with the ad.** Product descriptions and
-      `snippets/pdp-jsonld.liquid` still say **"prepaid"**. Fix before this runs.
+- [ ] **No cash-on-delivery badge, and never the bare word "prepaid".** Jackets are 100%
+      online at checkout (card / JazzCash) as of 4 Sep 2026 — no deposit, no rider
+      payment. **Always pair the term with the reason:** *"paid online, because each one
+      is cut for one customer."* "Prepaid" alone reads as distrust in a COD market; the
+      reason reads as craft.
+- [x] **Landing page agrees with the ad.** Resolved 4 Sep 2026 — all 30 jacket
+      descriptions, the PDP, cart, JSON-LD and the FAQ page now state the online-payment
+      rule with its reason.
 - [ ] **No caption names a cut, a colour or a model.** Deliberate — the jacket on screen
       is generated, so the copy stays at range level and never makes a claim about a
       specific SKU it does not show.

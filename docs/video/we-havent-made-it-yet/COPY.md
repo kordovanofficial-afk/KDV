@@ -17,13 +17,13 @@ start to finish.
 Genuine full-grain sheepskin. Lifetime craftsmanship warranty. Free delivery anywhere
 in Pakistan.
 
-Book with 50% today, pay the rest to the rider when it arrives.
+Paid online at checkout — each one is cut for one customer, so it can never be resold.
 
 ## Headline
 Made to your size, not a size run
 
 ## Description
-From Rs 22,000 · Book with 50% · Free delivery
+From Rs 22,000 · Paid online · Free delivery
 
 ## CTA
 Shop Now
