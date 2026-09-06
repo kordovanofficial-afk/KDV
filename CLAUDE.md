@@ -642,6 +642,39 @@ Aug 2026 pass covered them; a fresh session wasted effort re-checking. Measured 
   bottleneck (jacket site CR ~0.115%, cheap clicks at PKR 9.75) heading into the season.
   Filling subtitle/benefits/material/reviews is worth more than any targeting change.
 
+## 🔗 GSC coverage audit + redirect repair (Sep 6 2026 — DONE, do not redo)
+Source: user's GSC "All known pages" coverage export (Jun 8 – Sep 4 2026), cross-referenced
+against the live catalogue and the live `urlRedirects` list.
+- **Indexing is HEALTHY and FLAT — stop worrying about it.** 261 indexed, range 254–277 all
+  quarter, no trend. Impressions 2,623/day (Jun) → 2,245 (Aug) → 2,335 (Sep): that is the
+  already-closed theme-migration dip recovering. ⚠️ Do NOT re-raise it as a new alarm.
+- **1,355 "not indexed" is almost entirely correct behaviour**, not a defect:
+  Crawled-not-indexed 341 (tag-filter URLs) · robots.txt 319 (**Shopify defaults — cart,
+  checkout, account, sort params; correct, never "fix"**) · 404 256 · alternate-canonical 199
+  (**working as designed**) · noindex 124 · has-redirect 99 (**success, not a problem**) ·
+  soft-404 1 · dup-no-canonical 1 · discovered 15.
+- 🔴 **THE JULY CATALOGUE TRIM DID NOT COST TRAFFIC — measured, settled.** Of 332 URLs with
+  impressions in the window, only **25 were dead, totalling 402 impressions and 18 clicks**
+  against 251,000 site-wide. Do not re-litigate the trim.
+- 🔴 **THE REAL DEFECT, invisible in the coverage report: 22 of the 84 redirects pointed at
+  products deleted in the trim** — a redirect into a 404, which is worse than a plain 404
+  (crawler takes a hop and dies, link equity lost, customer sees a broken shop).
+  ✅ All 22 retargeted, ✅ 25 new redirects added for the dead URLs that still earn
+  impressions, ✅ 2 two-hop chains collapsed
+  (`kordovan-combo-…-brown` and `natural-milled-premium-laptop-bag-brown`).
+  **111 redirects now live, 0 pointing at a dead page, 0 chains** — re-verified after writing.
+- ✍️ **Rule for future trims: deleting a product is not finished until you check what
+  redirects at it.** Shopify will happily keep a redirect aimed at a deleted handle and the
+  coverage report will never tell you.
+- ✍️ Redirect to the nearest **equivalent product**; fall back to the category collection only
+  when none exists. **Never mass-redirect to the homepage** — Google treats that as a soft 404
+  and drops the signal entirely.
+- 📌 `/collections/all/<tag>` URLs are LIVE Shopify tag pages, not 404s.
+  `/collections/all/genuine-leather-products` alone earned **1,522 impressions / 14 clicks** —
+  the biggest non-homepage entry point in the export. Worth knowing before anyone "tidies" them.
+- Working data: scratchpad `gsc/` (session-local — rebuild from a fresh coverage export plus
+  `gsc_query` on `["page"]`, diffed against live product/collection/page/article handles).
+
 ## 🏬 PARKED — Catalog trim before SEO (user doing manually)
 User moved to own POS software (synced w/ Shopify). Is removing store-only / bogus /
 irrelevant products from the ONLINE store so the online catalog = only what's sold
