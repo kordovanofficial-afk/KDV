@@ -354,6 +354,32 @@ Purpose: jackets are structurally starved inside the shared "All Products" set (
   refills that pool, so October's DPA restart has an audience to retarget.
 - 📌 Kill threshold written BEFORE launch (the Aug process gap): if cost-per-ViewContent is above
   **PKR 90** on day 3, or above PKR 70 on day 7, kill it. Judge on 14-day windows otherwise.
+
+### 📈 TOF-J day-2 read (Sep 5–6 2026) — PASSES the kill test by 58x, one flag
+Spend 1,858.69 · impr 16,404 · reach 13,067 · freq 1.26 · **CTR 7.80%** · **CPC PKR 1.45** ·
+**CPM PKR 113** · 1,177 link clicks → 1,015 landing-page views → **1,200 ViewContent** → 1 ATC → 0 purchases.
+- ✅ **Cost per ViewContent = PKR 1.55 against a PKR 90 kill line.** Not remotely close to killing.
+  CTR 7.80% and CPC PKR 1.45 both beat last season's best in the account (Advantage+, 6.43% / 9.75).
+- 🔴 **MY PRE-LAUNCH ESTIMATE WAS WRONG BY ~30x AND THE PLAN CHANGES BECAUSE OF IT.** I forecast
+  "PKR 30–60 per ViewContent, 500–900 viewers over all of September, right on the 1,000 minimum".
+  Actual: PKR 1.55, **1,200 viewers in two days**. The retargeting pool is already big enough.
+  ➡️ Consequence: TOF-J does **not** need to run all through October to sustain the pool, and the
+  October DPA restart can happen much sooner than planned. Re-plan off measured cost, not the estimate.
+- ⚠️ **THE ONE FLAG: click→ATC is 0.078% (1 of 1,280).** TOF-C is 4.98% and Retarget 3.28% on the
+  same days. Cheap traffic that does not add to cart is a pool of scrollers, not buyers.
+  🚫 **Do NOT conclude from this yet — n=1 add-to-cart.** Jackets are a PKR 28,000 considered
+  purchase against TOF-C's mostly PKR 3,000 wallets, so a large gap is expected; the question is
+  whether it is *this* large. **Re-read at day 7 (Sep 12) with ~4,000 clicks behind it.**
+  ➡️ If click→ATC is still under ~0.5% at day 7, switch the optimisation event from ViewContent
+  to **Add to Cart**: cost per event rises a lot, the pool shrinks, but it becomes people who
+  actually considered buying. That is the trade the October retarget needs.
+- 🚫 **DO NOT TOUCH THE AD SET BEFORE SEP 12.** August lost money to 7 learning resets in 11 days.
+- Placements (spend share): FB Feed 50% (CTR 8.56%, CPC 1.20, the only ATC) · FB Reels 25%
+  (7.17%, 1.43) · IG Feed 9% · IG Reels 7% · IG Stories 6% (**CTR 14.77%**, highest, small volume) ·
+  FB Reels Overlay 3% (1.18% CTR, the weakest). 🚫 Do not exclude Reels Overlay on PKR 47 of
+  spend — Breakdown Effect, and the standing rule against cutting placements on average cost.
+- ⏳ `utm_content={{placement}}` still UNVERIFIED — needs a real order from TOF-J and there are
+  none yet. Check on the first one.
 - ⚠️ Both moves (activating TOF-J, pausing BOF DPA) are LIVE money changes → confirm each time.
 
 ## 🔌 Available integrations (MCP)
