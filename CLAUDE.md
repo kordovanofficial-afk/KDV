@@ -792,6 +792,70 @@ clicks** in the same quarter. Nothing had been published since 24 Sep 2024.
 - Blog was **9.1% of site impressions / 6.4% of clicks** before this pass — the baseline to
   measure against. Re-pull `["page"]` and `["page","query"]` in early October and compare.
 
+## 🛒 PAGE-2 COLLECTION PASS (Sep 8 2026 — 13 collections rewritten LIVE, done)
+User: *"yes lets do the page 2 collections"*. Target = the collection pages sitting at
+position 6–20 on non-brand queries, i.e. **33,721 trapped impressions** across the top 12 pages.
+All changes are **live Shopify content, NOT theme** — no push was needed and none was made.
+- **Trapped demand (non-brand, pos 6–20, Jun 8–Sep 4):** `mens-leather-wallets` 15,460 impr ·
+  `/` 4,890 (ranks for "leather bags" 3,023 @ 7.1) · `mens-leather-jackets` 4,394 ·
+  `smart-wallets` 1,874 · `leather-bags` 1,416 · `travel-bags` 1,404 ·
+  `womens-leather-handbags` 940 · `leather-caps` 690 · `laptop-bags` 447 · `office-bags` 358.
+- 🔴 **FIVE COLLECTIONS HAD COMPLETELY EMPTY `descriptionHtml` AND NO EDITORIAL** — they were
+  rendering the theme's generic fallback and had no unique content at all: `travel-bags`,
+  `womens-leather-handbags`, `leather-caps`, `laptop-bags`, `office-bags`. All five now have
+  a unique description, a query-led SEO title and a full `custom.editorial` block.
+  **`womens-leather-jackets` was empty too** and got the same treatment.
+- 🔴 **LIVE CONTRADICTION FOUND AND FIXED: all 4 jacket collections' `custom.editorial`
+  metafields still said "book with 50%, and pay the balance to the rider"** — the DEAD Aug 20
+  rule — while the `descriptionHtml` on the same page said "paid in full online at checkout".
+  ⚠️ **Why the Sep 4 pass missed it: it updated `descriptionHtml` only.** The editorial block
+  is a SEPARATE metafield that renders below the product grid, so the page argued with itself.
+  ✍️ **Rule: a collection has TWO content surfaces — `descriptionHtml` (hero) and
+  `custom.editorial` (below the grid). Changing terms means changing BOTH.** Both now also
+  carry the "about three weeks" lead time, which they previously lacked entirely.
+- 📌 `custom.editorial` on Collection is **`multi_line_text_field`** (HTML stored as a string).
+  Other COLLECTION `custom` defs: `banner_image`/`mobile_banner_image` (file_reference),
+  `description` (rich_text_field).
+- 🎯 **THE BIG UNSERVED INTENT: "price in pakistan" queries, ~2,500 impressions, answered by
+  nothing on the site.** "leather wallet price in pakistan" 561 @ 5.7 · "briefcase price in
+  pakistan" 491 @ 8.5 · "leather jacket price in pakistan" 534 @ 6.3 · "original leather jacket
+  price…" 303 @ 3.7 · "genuine leather wallet price…" 333 · plus long tail. **Added an honest
+  price-band section** (PU / split / full-grain / imported) to wallets, jackets, office bags,
+  laptop bags and smart wallets, using REAL catalogue floors and ceilings:
+  | wallets **1,499–6,500** (23) · smart wallets **1,800–3,200** (6) · caps **1,950–2,550** (4) |
+  | jackets **22,000–35,000** (28) · handbags **6,000–19,500** (7) · laptop **12,000–42,000** (19) |
+  | office **17,600–42,000** (6) · travel **29,000–45,000** (6) |
+  🚫 Still no exact competitor prices — bands only, per the standing blog rule.
+- ✅ **`leather-bags` had NO SEO title at all** (fell back to "All Bags") while ranking 6.8 for
+  "leather laptop bags" (871 impr) and 6.5 for "office bag" (584). Now titled and rebuilt as a
+  **hub** linking down to laptop / office / travel / women's with price ranges — leather-bags
+  outranks the specific collections for their own queries, so the fix is structure, not a fight.
+- ✅ `smart-wallets` title now leads with the actual query ("Smart Wallet for Men in Pakistan")
+  — it ranks 15.5 for that term (974 impr) and the old title buried it behind "RFID Leather".
+- ✅ **Fixed a factual error live:** `leather-bags` SEO description said "Free delivery over
+  PKR 3,000". Real threshold is **PKR 5,500**. Every page written in this pass states 5,500.
+- ⚠️ **GOTCHA — GraphQL block strings (`"""`) take backslashes LITERALLY.** Writing `15.6\"`
+  inside one stored a literal backslash and it rendered on the page. Use plain `"` (fine unless
+  three in a row) or reword ("15.6-inch"). Caught on `laptop-bags` and rewritten; **always
+  re-query a block-string write and read the value back.**
+- ⚠️ **`gsc_query`'s `dimensionFilterGroups` is IGNORED by our Worker** — a page-filtered query
+  returns site-wide rows. Pull `["page","query"]` unfiltered and filter locally instead.
+- 📌 Collections are THIN and that caps the ceiling: caps 4 products · office 6 · travel 6 ·
+  smart 6 · handbags 7. Content is now good; **breadth is the next lever there**, not more words.
+- 📅 Written Sep 8 2026. Google needs 2–6 weeks. Re-pull `["page","query"]` in mid-October and
+  compare position on: "leather wallet for men" (6.74), "smart wallet for men" (15.5),
+  "briefcase price in pakistan" (8.54), "leather bags for women" (16.4), "travel bag" (11.1).
+
+## 🚨 OPEN — free-shipping threshold contradicts itself in the THEME (needs a push, not yet raised)
+The store says **PKR 5,500** everywhere in content, but the theme says 3,000 in three places:
+- `sections/main-cart.liquid:75,77,79` — `cart.total_price < 300000` (= PKR 3,000) drives the
+  cart page's free-delivery progress bar and its "add X more" message.
+- `sections/announcement-bar.liquid:39,48` — schema defaults "Free delivery on orders over PKR 3,000".
+- 📌 Separately, `assets/theme.js` `renderShip()` uses **250000 (PKR 2,500)** for the cart DRAWER
+  bar (recorded in the cart-drawer notes) — so the drawer, the cart page and the copy disagree
+  three ways. A customer can be told 2,500, 3,000 and 5,500 in one session.
+- 🛑 Fixing it is a **live theme release**, so it needs explicit permission. Not done.
+
 ## 🏬 PARKED — Catalog trim before SEO (user doing manually)
 User moved to own POS software (synced w/ Shopify). Is removing store-only / bogus /
 irrelevant products from the ONLINE store so the online catalog = only what's sold
