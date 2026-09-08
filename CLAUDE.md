@@ -936,6 +936,34 @@ and write down reviews they already gave verbally. **Reviews are still never to 
 - Best-covered jackets to start with: Desert Voyager (7), Rebel (7), Hawkeye (6), Durham Waxed (5),
   Shadow Rider (5).
 
+## 🛍 GOOGLE MERCHANT CENTER — LIVE, and free listings are already producing (Sep 8 2026)
+⚠️ **DO NOT tell the user Merchant Center "needs setting up" — it exists and is working.**
+Confirmed from the user's own dashboard screenshot.
+- **Merchant Center ID `5365730451`**, account name "Kordovan", Comparison Shopping Service =
+  **Google Shopping (google.com/shopping)**. Free listings active.
+- **28-day performance: 4.27K total clicks (−6.5%), and Google's own summary says ORGANIC
+  PRODUCT CLICKS are +15.9%.** The two move opposite ways because **all Google Ads campaigns
+  are paused/removed**, so paid clicks are draining out of the total while organic grows.
+- 🔴 **THE UNRESOLVED QUESTION — how big is this really?** Search Console shows only ~2,400
+  web-search organic clicks/month. If a large share of that 4.27K is **free Shopping listings**,
+  Shopping is one of the biggest organic channels in the business and **it has never appeared in
+  any of our analysis, because GSC does not report Shopping surfaces.** ➡️ Get the free-vs-paid
+  split from the "Click trend" / "View more" control on the Overview performance card before
+  treating 4.27K as organic. Do not quote it as organic until that split is seen.
+- 📌 **Open items visible on the dashboard:** (1) **1 notification**; (2) a banner (partly hidden)
+  reading *"To finish your M… policy for your online store"* — almost certainly the **returns
+  policy**, which Merchant Center requires and which can suppress free listings; (3) Google
+  recommends adding a **business profile**. All three are free.
+- ➡️ **Next diagnostic to request from the user: Products → Diagnostics** (item-level issues —
+  missing GTIN/brand, image problems, price mismatches). With free listings already producing at
+  this volume, anything suppressed there is direct lost revenue.
+- 🔗 **The Sep 8 product-data pass feeds this directly.** Merchant Center categorises from the
+  feed, and `product_type` is an input: it went from **22 blanks / 43 inconsistent labels → 0
+  blanks / 33 clean types**, plus SEO title+description on all 175. Shopify pushes the feed
+  roughly **once daily**, so expect Diagnostics to shift over 24–48h, not instantly.
+- 💰 Consistent with the FREE-only rule: free listings cost nothing. Paid Shopping stays parked
+  until October per the jacket season curve.
+
 ## 🏬 PARKED — Catalog trim before SEO (user doing manually)
 User moved to own POS software (synced w/ Shopify). Is removing store-only / bogus /
 irrelevant products from the ONLINE store so the online catalog = only what's sold
