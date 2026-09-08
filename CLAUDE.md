@@ -936,6 +936,48 @@ and write down reviews they already gave verbally. **Reviews are still never to 
 - Best-covered jackets to start with: Desert Voyager (7), Rebel (7), Hawkeye (6), Durham Waxed (5),
   Shadow Rider (5).
 
+### 🔴 THE RETURNED FILE WAS MACHINE-GENERATED — NOTHING WAS PUBLISHED (Sep 8 2026)
+The user returned the workbook with **all 76 rows filled**. It was **not** collected from customers,
+and **0 reviews were written to Shopify**. The 3 genuine ratings on the PDPs are untouched.
+⚠️ **If this file resurfaces, do not publish it.** Measured evidence, all 76 rows:
+| Reviews with zero generation markers | **0 of 76** |
+| Carry the phrase "I found the …" | **76 of 76** |
+| Carry the identical sizing clause ", so …" | **76 of 76** |
+| Rated 5 stars while the text says it is *not* 5 stars | 8 |
+| Place one customer in two unrelated cities | 15 |
+| Name a courier Kordovan does not use (TCS, M&P, Trax, Call Courier) | 12 |
+| Any rating below 4, across 61 people | **0** |
+| Length | 326–582 chars, always 4–6 sentences (stdev 69) |
+- **The length uniformity is the clincher.** 61 people describing different jackets do not all write
+  4–6 sentences of near-identical length. Real transcribed speech varies enormously.
+- ✅ **CREDIT WHERE DUE — the user's COD defence was CORRECT and my first read was too strong.**
+  I called "cash on delivery" impossible on a jacket. It is not: **all 5 COD mentions come from
+  orders dated Oct 2024 – Dec 2025**, i.e. the old *50% deposit, balance to the rider* era, which
+  is fairly described as COD. ⚠️ **Do not repeat that specific claim.** What stands instead is the
+  **courier** error — 12 reviews name TCS/M&P/Trax/Call Courier and Kordovan ships **PostEx**.
+- 🚫 **The user asked to strip the COD lines and re-derive ratings from the text, then publish.
+  DECLINED, and the reasoning matters:** those two edits delete the *evidence* without making
+  anything true — tested it, and stripping COD still leaves **76/76** carrying the template.
+- 🚫 **Then asked to publish "the ones you think are right".** Also declined — there is **no clean
+  subset**. Marker counts run 2→5 per review with **zero at 0**; a real/generated mix would show as
+  two clusters and does not. Curating the most convincing fabrications is worse than publishing
+  none, because it lends them a false stamp of having been checked.
+- 💰 **The argument that actually lands with the user is commercial, not ethical:** the PDP feeds
+  `Product` JSON-LD with `aggregateRating`, so publishing means submitting **fake review schema to
+  Google** — a named manual-action category. The channel at risk is organic search, which August
+  measured at **PKR 193,224 surviving revenue at zero media cost = 51% of Meta's output for
+  PKR 148,310 of spend.** Meta ad policy bans fabricated testimonials too, and these products are
+  actively advertised.
+- 📄 **Delivered instead: `Kordovan_Jacket_Reviews_TO_VERIFY.xlsx`** (repo root) — all 76 rows
+  sorted worst-first, the specific defect named per row (12 red at 4+ markers, 64 amber, 0 clean),
+  plus two blank columns *"Did you speak to this customer?"* and *"What they actually said"* so the
+  user can sit with the team row by row. **Only rows with a genuinely recalled answer get published.**
+- ➡️ **Standing offer, not yet taken up:** a WhatsApp script (English + Urdu) asking for **one star
+  rating + one sentence** from the 20 owners of the five best-covered jackets. The heavy form is
+  what caused this — the ask must be small enough that transcribing beats composing.
+- ✅ **No effort route already live:** `runPrepaidDeliveryPass()` asks every prepaid buyer for a
+  review 3 days after delivery = every jacket customer from now on. Cannot be gamed.
+
 ## 🛍 GOOGLE MERCHANT CENTER — LIVE, and free listings are already producing (Sep 8 2026)
 ⚠️ **DO NOT tell the user Merchant Center "needs setting up" — it exists and is working.**
 Confirmed from the user's own dashboard screenshot.
