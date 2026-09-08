@@ -846,15 +846,24 @@ All changes are **live Shopify content, NOT theme** — no push was needed and n
   compare position on: "leather wallet for men" (6.74), "smart wallet for men" (15.5),
   "briefcase price in pakistan" (8.54), "leather bags for women" (16.4), "travel bag" (11.1).
 
-## 🚨 OPEN — free-shipping threshold contradicts itself in the THEME (needs a push, not yet raised)
-The store says **PKR 5,500** everywhere in content, but the theme says 3,000 in three places:
-- `sections/main-cart.liquid:75,77,79` — `cart.total_price < 300000` (= PKR 3,000) drives the
-  cart page's free-delivery progress bar and its "add X more" message.
-- `sections/announcement-bar.liquid:39,48` — schema defaults "Free delivery on orders over PKR 3,000".
-- 📌 Separately, `assets/theme.js` `renderShip()` uses **250000 (PKR 2,500)** for the cart DRAWER
-  bar (recorded in the cart-drawer notes) — so the drawer, the cart page and the copy disagree
-  three ways. A customer can be told 2,500, 3,000 and 5,500 in one session.
-- 🛑 Fixing it is a **live theme release**, so it needs explicit permission. Not done.
+## ✅ FREE-SHIPPING THRESHOLD UNIFIED AT PKR 5,500 (Sep 8 2026 — deployed live, done)
+The cart PAGE contradicted every other surface: it promised free delivery at PKR 3,000 while
+the drawer, header, trust bar, PDP, shipping page and JSON-LD all said 5,500. A customer could
+be told two different numbers in one session, and the cart page is the last thing they read.
+- ✅ `sections/main-cart.liquid:75,77,79` — `300000` → **`550000`** (threshold test, the
+  "add X more" figure, and the progress-bar width divisor; all three must move together).
+- ✅ `sections/announcement-bar.liquid:39,48` — schema default + preset text → **PKR 5,500**.
+- 📌 **`assets/theme.js` `renderShip()` was ALREADY correct at `550000`.** An older note in this
+  file claimed 250000 (PKR 2,500) for the cart drawer — that was **stale and is now corrected**.
+  Do not "fix" the drawer; it is right. ⚠️ Lesson: re-grep before trusting a threshold recorded here.
+- ✍️ **The threshold now lives in exactly 2 code places**: `theme.js:550` (drawer) and
+  `main-cart.liquid` (cart page), plus `pdp-jsonld.liquid:19` (`jl_free_ship_min = 550000`) for
+  structured data. **Change all three together** or the site disagrees with itself again.
+- 🔎 Verified after the edit: **0 occurrences** of `300000`/`250000`/"PKR 3,000"/"PKR 2,500"
+  remain anywhere in `assets/ sections/ snippets/ layout/ templates/ config/`.
+- ⚠️ The announcement bar values are **schema defaults/presets**, so a bar already configured in
+  the theme editor keeps its saved text — the editor's stored setting wins over the default.
+  **Check Theme editor → Announcement Bar and retype it if it still shows 3,000.**
 
 ## 🏬 PARKED — Catalog trim before SEO (user doing manually)
 User moved to own POS software (synced w/ Shopify). Is removing store-only / bogus /

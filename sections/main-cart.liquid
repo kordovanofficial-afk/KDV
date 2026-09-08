@@ -72,11 +72,11 @@
             <span>Calculated at checkout</span>
           </div>
 
-          {%- if cart.total_price < 300000 -%}
+          {%- if cart.total_price < 550000 -%}
             <div style="background:var(--color-bg-muted); border-radius:var(--radius-sm); padding:var(--space-3); margin-bottom:var(--space-4); font-size:var(--text-sm);">
-              Add <strong>{{ 300000 | minus: cart.total_price | money_without_trailing_zeros }}</strong> more for free delivery
+              Add <strong>{{ 550000 | minus: cart.total_price | money_without_trailing_zeros }}</strong> more for free delivery
               <div style="background:var(--color-border); border-radius:100px; height:4px; margin-top:var(--space-2);">
-                <div style="background:var(--color-primary); height:4px; border-radius:100px; width:{{ cart.total_price | times: 100 | divided_by: 300000 }}%;"></div>
+                <div style="background:var(--color-primary); height:4px; border-radius:100px; width:{{ cart.total_price | times: 100 | divided_by: 550000 }}%;"></div>
               </div>
             </div>
           {%- else -%}
