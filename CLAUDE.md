@@ -354,6 +354,32 @@ Purpose: jackets are structurally starved inside the shared "All Products" set (
   refills that pool, so October's DPA restart has an audience to retarget.
 - 📌 Kill threshold written BEFORE launch (the Aug process gap): if cost-per-ViewContent is above
   **PKR 90** on day 3, or above PKR 70 on day 7, kill it. Judge on 14-day windows otherwise.
+
+### 📈 TOF-J day-2 read (Sep 5–6 2026) — PASSES the kill test by 58x, one flag
+Spend 1,858.69 · impr 16,404 · reach 13,067 · freq 1.26 · **CTR 7.80%** · **CPC PKR 1.45** ·
+**CPM PKR 113** · 1,177 link clicks → 1,015 landing-page views → **1,200 ViewContent** → 1 ATC → 0 purchases.
+- ✅ **Cost per ViewContent = PKR 1.55 against a PKR 90 kill line.** Not remotely close to killing.
+  CTR 7.80% and CPC PKR 1.45 both beat last season's best in the account (Advantage+, 6.43% / 9.75).
+- 🔴 **MY PRE-LAUNCH ESTIMATE WAS WRONG BY ~30x AND THE PLAN CHANGES BECAUSE OF IT.** I forecast
+  "PKR 30–60 per ViewContent, 500–900 viewers over all of September, right on the 1,000 minimum".
+  Actual: PKR 1.55, **1,200 viewers in two days**. The retargeting pool is already big enough.
+  ➡️ Consequence: TOF-J does **not** need to run all through October to sustain the pool, and the
+  October DPA restart can happen much sooner than planned. Re-plan off measured cost, not the estimate.
+- ⚠️ **THE ONE FLAG: click→ATC is 0.078% (1 of 1,280).** TOF-C is 4.98% and Retarget 3.28% on the
+  same days. Cheap traffic that does not add to cart is a pool of scrollers, not buyers.
+  🚫 **Do NOT conclude from this yet — n=1 add-to-cart.** Jackets are a PKR 28,000 considered
+  purchase against TOF-C's mostly PKR 3,000 wallets, so a large gap is expected; the question is
+  whether it is *this* large. **Re-read at day 7 (Sep 12) with ~4,000 clicks behind it.**
+  ➡️ If click→ATC is still under ~0.5% at day 7, switch the optimisation event from ViewContent
+  to **Add to Cart**: cost per event rises a lot, the pool shrinks, but it becomes people who
+  actually considered buying. That is the trade the October retarget needs.
+- 🚫 **DO NOT TOUCH THE AD SET BEFORE SEP 12.** August lost money to 7 learning resets in 11 days.
+- Placements (spend share): FB Feed 50% (CTR 8.56%, CPC 1.20, the only ATC) · FB Reels 25%
+  (7.17%, 1.43) · IG Feed 9% · IG Reels 7% · IG Stories 6% (**CTR 14.77%**, highest, small volume) ·
+  FB Reels Overlay 3% (1.18% CTR, the weakest). 🚫 Do not exclude Reels Overlay on PKR 47 of
+  spend — Breakdown Effect, and the standing rule against cutting placements on average cost.
+- ⏳ `utm_content={{placement}}` still UNVERIFIED — needs a real order from TOF-J and there are
+  none yet. Check on the first one.
 - ⚠️ Both moves (activating TOF-J, pausing BOF DPA) are LIVE money changes → confirm each time.
 
 ## 🔌 Available integrations (MCP)
@@ -706,6 +732,138 @@ impressions alone; pull the query breakdown before calling something an opportun
   Google drop the slot rather than move it.
 - Working data: scratchpad `gsc/` (session-local — rebuild from a fresh coverage export plus
   `gsc_query` on `["page"]`, diffed against live product/collection/page/article handles).
+
+## ✍️ BLOG / CONTENT SEO (audited + 4 articles published Sep 6 2026)
+🔴 **ONE ARTICLE WAS 98.6% OF ALL BLOG TRAFFIC.** `top-10-leather-jacket-brands-in-pakistan`
+= 10,235 impr / 463 clicks in Jun 8–Sep 4. **Eight of the other nine articles earned ZERO
+clicks** in the same quarter. Nothing had been published since 24 Sep 2024.
+- **THE PATTERN THAT WORKS — copy it, do not invent a new one:** *"Top 10 / Best [category]
+  Brands in Pakistan"*, with prices, **kept updated** (the winner is dated 2024 but titled
+  "(2026)" because it was refreshed). It pulls **458 distinct queries** and ranks #1.9–2.2 for
+  its exact title while sitting page-2 on the head terms.
+- 🚫 **"How to choose…" guides DO NOT rank for this site.** Two exist; 3 impressions combined.
+  Stop writing them. Seasonal sale posts (Azadi/Defence Day 2024) are dead weight — unpublish.
+- 🔴 **The killer signal:** Google was serving the *jacket* article at **pos 1.0–2.0 for WALLET
+  queries** ("best leather wallets in pakistan" 303 impr pos 2.0) because nothing better existed
+  on the site. Wallets are the biggest non-brand category at **30,036 impressions**.
+- ✅ **PUBLISHED Sep 6 2026 — 4 new articles, all live, all following the proven structure**
+  (JSON-LD `@graph` BlogPosting + FAQPage · "we are on this list" disclosure box · comparison
+  table · **price-floor section** · how-to-check-it-yourself · ranked brands each with a
+  "Watch out for" · own brand last with an honest "where we are the wrong choice" · FAQ
+  matching the schema · bottom line · CTA):
+  | `/blogs/wallets/top-10-leather-wallet-brands-in-pakistan` | 598914957552 |
+  | `/blogs/jackets/best-winter-jackets-in-pakistan` | 598914990320 |
+  | `/blogs/news/top-leather-brands-in-pakistan` | 598915023088 (the HUB — links to all) |
+  | `/blogs/bags/best-leather-laptop-and-office-bags-in-pakistan` | 598915055856 |
+  - New blog created: **`bags`** `gid://shopify/Blog/108932333808`.
+  - Blog IDs: news `50629607613` · sale `94658658544` · wallets `94807032048` ·
+    jackets `95231803632` · handbags `95392792816` · shoes `95393775856` · bags `108932333808`.
+- ✍️ **RULES FOLLOWED — keep them on any future article:**
+  - 🚫 **NEVER publish exact competitor prices.** Use bands (Entry / Mid / Premium) and say why:
+    "they change weekly and a stale number is worse than none." Protects accuracy and ages well.
+  - 🚫 **No invented reviews, ratings or testimonials** (standing rule).
+  - Competitor notes stay to **verifiable, neutral observations** (range breadth, retail
+    footprint, price positioning) — never quality accusations we cannot support.
+  - Brands were **verified by web search first**, not recalled: Jafferjees, Hub, Jild Craft,
+    House of Leather, Blackbird Leathers, Uniworth, Karar, Eligo, Outfitters, Breakout, Cougar,
+    Bonanza Satrangi, Diners, Charcoal, English Boot House, Servis/ECS.
+  - Real catalogue prices used, not guesses: wallets **Rs 1,499–6,500** (23 products), laptop
+    bags **Rs 8,500–42,000** (19), jackets Rs 22,000–35,000.
+  - Images are **real Shopify CDN product photos** + the existing `blog-jackets-*` set.
+- 📌 **HIGHEST-VALUE REMAINING ACTION (not yet done):** add internal links **from** the jacket
+  article **to** the four new ones. It holds all the blog's authority and currently links to
+  none of them. ⚠️ Requires re-sending its full ~23KB body via `articleUpdate` — Shopify has no
+  partial body update — so do it carefully and verify afterwards; it is the page that earns
+  98.6% of blog clicks.
+- 📌 Second-highest: the winner sits at **pos 10.1 / 10.7** on "leather jackets in pakistan"
+  (1,068 impr) and "leather jacket pakistan" (1,025). Pushing those to page 1 is likely worth
+  more than another new article. **Refresh the winner before writing more.**
+- ✅ **Internal links DONE Sep 6 2026.** The jacket article now links to all four new guides
+  (a box near the top + a footer line, each URL x2), and `dateModified` bumped to 2026-09-06.
+  🛡️ **Technique worth reusing for any large body edit — Shopify has no partial body update:**
+  query the live body so it auto-saves to a tool-result file → apply insertions in Python with
+  exact-match assertions → assert **0 lines removed** → publish → re-query and diff the live
+  result against the intended file. Live differed by 6 lines, all Shopify's sanitiser adding a
+  newline after `<li>`; all 18 structural markers matched. Backup kept at
+  scratchpad `blog/jacket_ORIGINAL.html`.
+- 📅 **Indexing requested in GSC for all 5 URLs on Sep 6 2026** (4 new + the updated jacket
+  article). **That is the clock start.** Expect a first crawl within days, a first read on
+  rankings in 2–4 weeks, meaningful movement in 6–12.
+- Blog was **9.1% of site impressions / 6.4% of clicks** before this pass — the baseline to
+  measure against. Re-pull `["page"]` and `["page","query"]` in early October and compare.
+
+## 🛒 PAGE-2 COLLECTION PASS (Sep 8 2026 — 13 collections rewritten LIVE, done)
+User: *"yes lets do the page 2 collections"*. Target = the collection pages sitting at
+position 6–20 on non-brand queries, i.e. **33,721 trapped impressions** across the top 12 pages.
+All changes are **live Shopify content, NOT theme** — no push was needed and none was made.
+- **Trapped demand (non-brand, pos 6–20, Jun 8–Sep 4):** `mens-leather-wallets` 15,460 impr ·
+  `/` 4,890 (ranks for "leather bags" 3,023 @ 7.1) · `mens-leather-jackets` 4,394 ·
+  `smart-wallets` 1,874 · `leather-bags` 1,416 · `travel-bags` 1,404 ·
+  `womens-leather-handbags` 940 · `leather-caps` 690 · `laptop-bags` 447 · `office-bags` 358.
+- 🔴 **FIVE COLLECTIONS HAD COMPLETELY EMPTY `descriptionHtml` AND NO EDITORIAL** — they were
+  rendering the theme's generic fallback and had no unique content at all: `travel-bags`,
+  `womens-leather-handbags`, `leather-caps`, `laptop-bags`, `office-bags`. All five now have
+  a unique description, a query-led SEO title and a full `custom.editorial` block.
+  **`womens-leather-jackets` was empty too** and got the same treatment.
+- 🔴 **LIVE CONTRADICTION FOUND AND FIXED: all 4 jacket collections' `custom.editorial`
+  metafields still said "book with 50%, and pay the balance to the rider"** — the DEAD Aug 20
+  rule — while the `descriptionHtml` on the same page said "paid in full online at checkout".
+  ⚠️ **Why the Sep 4 pass missed it: it updated `descriptionHtml` only.** The editorial block
+  is a SEPARATE metafield that renders below the product grid, so the page argued with itself.
+  ✍️ **Rule: a collection has TWO content surfaces — `descriptionHtml` (hero) and
+  `custom.editorial` (below the grid). Changing terms means changing BOTH.** Both now also
+  carry the "about three weeks" lead time, which they previously lacked entirely.
+- 📌 `custom.editorial` on Collection is **`multi_line_text_field`** (HTML stored as a string).
+  Other COLLECTION `custom` defs: `banner_image`/`mobile_banner_image` (file_reference),
+  `description` (rich_text_field).
+- 🎯 **THE BIG UNSERVED INTENT: "price in pakistan" queries, ~2,500 impressions, answered by
+  nothing on the site.** "leather wallet price in pakistan" 561 @ 5.7 · "briefcase price in
+  pakistan" 491 @ 8.5 · "leather jacket price in pakistan" 534 @ 6.3 · "original leather jacket
+  price…" 303 @ 3.7 · "genuine leather wallet price…" 333 · plus long tail. **Added an honest
+  price-band section** (PU / split / full-grain / imported) to wallets, jackets, office bags,
+  laptop bags and smart wallets, using REAL catalogue floors and ceilings:
+  | wallets **1,499–6,500** (23) · smart wallets **1,800–3,200** (6) · caps **1,950–2,550** (4) |
+  | jackets **22,000–35,000** (28) · handbags **6,000–19,500** (7) · laptop **12,000–42,000** (19) |
+  | office **17,600–42,000** (6) · travel **29,000–45,000** (6) |
+  🚫 Still no exact competitor prices — bands only, per the standing blog rule.
+- ✅ **`leather-bags` had NO SEO title at all** (fell back to "All Bags") while ranking 6.8 for
+  "leather laptop bags" (871 impr) and 6.5 for "office bag" (584). Now titled and rebuilt as a
+  **hub** linking down to laptop / office / travel / women's with price ranges — leather-bags
+  outranks the specific collections for their own queries, so the fix is structure, not a fight.
+- ✅ `smart-wallets` title now leads with the actual query ("Smart Wallet for Men in Pakistan")
+  — it ranks 15.5 for that term (974 impr) and the old title buried it behind "RFID Leather".
+- ✅ **Fixed a factual error live:** `leather-bags` SEO description said "Free delivery over
+  PKR 3,000". Real threshold is **PKR 5,500**. Every page written in this pass states 5,500.
+- ⚠️ **GOTCHA — GraphQL block strings (`"""`) take backslashes LITERALLY.** Writing `15.6\"`
+  inside one stored a literal backslash and it rendered on the page. Use plain `"` (fine unless
+  three in a row) or reword ("15.6-inch"). Caught on `laptop-bags` and rewritten; **always
+  re-query a block-string write and read the value back.**
+- ⚠️ **`gsc_query`'s `dimensionFilterGroups` is IGNORED by our Worker** — a page-filtered query
+  returns site-wide rows. Pull `["page","query"]` unfiltered and filter locally instead.
+- 📌 Collections are THIN and that caps the ceiling: caps 4 products · office 6 · travel 6 ·
+  smart 6 · handbags 7. Content is now good; **breadth is the next lever there**, not more words.
+- 📅 Written Sep 8 2026. Google needs 2–6 weeks. Re-pull `["page","query"]` in mid-October and
+  compare position on: "leather wallet for men" (6.74), "smart wallet for men" (15.5),
+  "briefcase price in pakistan" (8.54), "leather bags for women" (16.4), "travel bag" (11.1).
+
+## ✅ FREE-SHIPPING THRESHOLD UNIFIED AT PKR 5,500 (Sep 8 2026 — deployed live, done)
+The cart PAGE contradicted every other surface: it promised free delivery at PKR 3,000 while
+the drawer, header, trust bar, PDP, shipping page and JSON-LD all said 5,500. A customer could
+be told two different numbers in one session, and the cart page is the last thing they read.
+- ✅ `sections/main-cart.liquid:75,77,79` — `300000` → **`550000`** (threshold test, the
+  "add X more" figure, and the progress-bar width divisor; all three must move together).
+- ✅ `sections/announcement-bar.liquid:39,48` — schema default + preset text → **PKR 5,500**.
+- 📌 **`assets/theme.js` `renderShip()` was ALREADY correct at `550000`.** An older note in this
+  file claimed 250000 (PKR 2,500) for the cart drawer — that was **stale and is now corrected**.
+  Do not "fix" the drawer; it is right. ⚠️ Lesson: re-grep before trusting a threshold recorded here.
+- ✍️ **The threshold now lives in exactly 2 code places**: `theme.js:550` (drawer) and
+  `main-cart.liquid` (cart page), plus `pdp-jsonld.liquid:19` (`jl_free_ship_min = 550000`) for
+  structured data. **Change all three together** or the site disagrees with itself again.
+- 🔎 Verified after the edit: **0 occurrences** of `300000`/`250000`/"PKR 3,000"/"PKR 2,500"
+  remain anywhere in `assets/ sections/ snippets/ layout/ templates/ config/`.
+- ⚠️ The announcement bar values are **schema defaults/presets**, so a bar already configured in
+  the theme editor keeps its saved text — the editor's stored setting wins over the default.
+  **Check Theme editor → Announcement Bar and retype it if it still shows 3,000.**
 
 ## 🏬 PARKED — Catalog trim before SEO (user doing manually)
 User moved to own POS software (synced w/ Shopify). Is removing store-only / bogus /
