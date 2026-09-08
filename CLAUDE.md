@@ -865,6 +865,77 @@ be told two different numbers in one session, and the cart page is the last thin
   the theme editor keeps its saved text — the editor's stored setting wins over the default.
   **Check Theme editor → Announcement Bar and retype it if it still shows 3,000.**
 
+## 🧱 PRODUCT-DATA COMPLETION PASS (Sep 8 2026 — catalogue-wide, DONE, do not redo)
+User instruction: *"do the alt text backfill first, then the SEO Desctiption then the subtitile/
+benefits and material thing, fix the product taxonomy."* All done and verified on 175 active products.
+| Field | Before | After |
+|---|---|---|
+| Image alt text | **545 of 1,282 missing (42.5%)** | **0 missing (100%)** |
+| SEO title | 47 missing | **0** |
+| SEO description | 48 missing | **0** |
+| `custom.subtitle` | 115 missing | **0** |
+| `custom.benefits` | 115 missing | **0** |
+| `custom.material` | 115 missing | **0** |
+| Blank `productType` | 22 | **0** (43 distinct → 33) |
+- **ALT TEXT — the method that worked, reuse it.** Shopify image **filenames carry real signal**
+  (`Baseball_cap_by_kordovan_white_front.jpg` → colour *white* + angle *front*). Parse the filename
+  (strip UUIDs/hex first), match colour and angle word-lists, and fall back to
+  `"{title} — genuine {category} by Kordovan, view N"` so **every alt is unique** (545/545 unique).
+  Write with **`fileUpdate(files:[{id, alt}])`** — up to ~110 per call, 6 calls did the lot.
+  ⚠️ Anchor every regex with `\b` — an unanchored `croc` matched inside other words.
+- 🔴 **ACCURACY RULES LEARNED HERE — apply to any future bulk copy job:**
+  - ⚠️ **`The Diva Tote // Vegan` and `The Vibe // LITE // Vegan` are VEGAN, not leather.** Never let
+    a template call them "genuine leather". Check `vegan|faux|synthetic` in the title first.
+  - ⚠️ **Never assert a feature you cannot verify** (a mirror, a lining, a buckle metal, a locking
+    handle). Benefits are now **brand-universal facts + one category-entailed line only**.
+  - ⚠️ **`The Stallion // Premium Leather Boot`'s own description says "1 YEAR WARRANTY"**, so its
+    benefits deliberately carry **no warranty line** — everything else says lifetime. Do not "fix".
+  - Material was **extracted from each product's own description**, never invented; 49 distinct
+    values. Where the description gave no signal, the honest fallback is plain `Genuine leather`.
+- 🔴 **GOTCHA — `seo:` is a FULL REPLACE, not a merge.** Passing `seo:{description:...}` with no
+  `title` **wiped that product's existing SEO title** (caught on `mini-crossbody-bag-small-messenger-bag`
+  and repaired). **Always send title AND description together.**
+- 🔴 **TAXONOMY — two collections filter on `productType`, so normalising it is NOT free:**
+  `leather-backpacks` (TYPE = **`backpack`**, lowercase) and `crossbody-messenger-bags`
+  (TYPE = **`Crossbody Bag`**). Both were left EXACTLY as-is. **`Leather Jacket` is also protected** —
+  the theme's MTO rule is `type contains 'Jacket'`. Verified after the change: backpacks 6→**8**
+  (two blanks correctly joined it), crossbody 6→6, jackets 28→28, shoes 24→24. **Nothing dropped.**
+  ✍️ Before touching `productType` again, re-read `collections{ruleSet{rules{column}}}` for `TYPE` rules.
+- ⚠️ **~29 aliased `productUpdate` calls per request is the safe ceiling** — 72 aliases returned a
+  transient `upstream_error`; 36 and 29 both succeeded. Split and retry rather than assuming failure.
+- 📌 **12 active products have NO IMAGES AT ALL** (invisible in search, ads and catalogue):
+  `tp-the-city-backpack`, `zimmer-leather-keychain`, `tp-executive-a4-folder`,
+  `tp-voyager-suitcase-trolley-bag-1`, `leather-lanyard`, `the-masters-leather-laptop-bag`,
+  `the-braided-belt`, `four-in-one-leather-gift-set`, `tp-branson-briefcase-business-attache`,
+  `gift-box-4-pieces-set`, `mini-card-cash-carry`, `luxe-card-lite`. **Photography is the fix.**
+
+### 🔴 ALL 30 JACKETS CARRIED THE DEAD "4–7 DAYS" LEAD TIME (found + fixed Sep 8 2026)
+`custom.fits` on every one of the 30 jackets still read
+`S–3XL|Every size, made to order / 4–7 days|Cut and stitched for you / 3–4 days|Delivered to your door`
+— and that block **renders on the PDP**, contradicting the "about 3 weeks" promise the Sep 6 pass put
+everywhere else. Now reads `S–3XL|… / About 3 weeks|From checkout to your door / Paid online|Card,
+debit card or JazzCash`. Verified **0 of 30 stale**.
+- ✍️ **This is the SECOND surface the Sep 6 lead-time pass missed** (the first was the four jacket
+  collections' `custom.editorial`, fixed Sep 8 too). **A product has many content surfaces:
+  `descriptionHtml`, `seo`, and EACH metafield. Changing a fact means sweeping all of them** —
+  grep the live values, do not trust a previous "done" note.
+
+## 📞 JACKET REVIEW OUTREACH FILE (delivered to user Sep 8 2026)
+`Kordovan_Jacket_Reviews_Outreach.xlsx` at repo root — built for the user's team to phone customers
+and write down reviews they already gave verbally. **Reviews are still never to be invented.**
+- Source: `bulkOperationRunQuery` over all orders since 2024-01-01 (8,781 orders / 11,067 line items),
+  filtered to **not cancelled + FULFILLED + PAID/PARTIALLY_REFUNDED** with a `Leather Jacket` line.
+- **76 jacket purchases · 61 distinct customers · 28 of 30 jackets covered · 74 have a phone number.**
+  (153 orders contained a jacket; 86 were VOIDED/cancelled — those are not owners.)
+- 3 sheets: outreach list (sorted **by jacket** so the team works one product at a time, cream cells
+  = the ones to fill, dropdowns on Rating and Called), coverage-by-jacket, and a "how to fill this in"
+  tab that explicitly forbids inventing or rewording reviews and requires permission to publish.
+- ➡️ **When the user returns the filled file:** write `reviews.rating` (number), `reviews.rating_count`
+  and `custom.reviews` (`name|city|text`, one per line). The PDP review block only renders once
+  `reviews.rating` is set — that is the 27-of-30-blank problem closing.
+- Best-covered jackets to start with: Desert Voyager (7), Rebel (7), Hawkeye (6), Durham Waxed (5),
+  Shadow Rider (5).
+
 ## 🏬 PARKED — Catalog trim before SEO (user doing manually)
 User moved to own POS software (synced w/ Shopify). Is removing store-only / bogus /
 irrelevant products from the ONLINE store so the online catalog = only what's sold
