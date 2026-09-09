@@ -903,6 +903,21 @@ benefits and material thing, fix the product taxonomy."* All done and verified o
   ✍️ Before touching `productType` again, re-read `collections{ruleSet{rules{column}}}` for `TYPE` rules.
 - ⚠️ **~29 aliased `productUpdate` calls per request is the safe ceiling** — 72 aliases returned a
   transient `upstream_error`; 36 and 29 both succeeded. Split and retry rather than assuming failure.
+- ✅ **BODY DESCRIPTIONS CLOSED Sep 9 2026 — 0 of 175 active products now have an empty or stub
+  description** (verified: no product with images has a description under 50 chars). The last 5
+  were `croc-textured-shaded-belt`, `snake-leather-belt`, `tp-the-gentlemans-duffle`,
+  `the-city-backpack-by-kordovan-rustic-red`, `bull-rider-calf-leather-belt`.
+  - ⚠️ **The croc and snake belts are TEXTURED, not exotic skin.** The pattern is embossed into
+    genuine hide. The copy says so explicitly — never let a future pass imply real crocodile or
+    snake, which would be a false material claim on a product page and in the Google feed.
+  - ✍️ **Only verifiable facts were used:** the material already in `custom.material`, the real
+    colour options (duffle Tan/Brown, Bull Rider Black/Brown), real prices, and the two
+    brand-universal facts already rendered site-wide in `layout/theme.liquid:23` — **"Karachi
+    workshop"** and **"lifetime craftsmanship warranty"**. Check that line before asserting either.
+  - 📌 **These 5 are NOT made-to-order** (only the 30 jackets + 24 footwear are), so the copy
+    correctly says **cash on delivery is available**. Do not blanket-apply the jacket payment rule.
+  - 📌 The three belts (2,800 / 3,500) sit BELOW the Rs 5,500 free-delivery threshold, so they
+    state the threshold as policy rather than promising free delivery. Do not "simplify" that.
 - 📌 **12 active products have NO IMAGES AT ALL** (invisible in search, ads and catalogue):
   `tp-the-city-backpack`, `zimmer-leather-keychain`, `tp-executive-a4-folder`,
   `tp-voyager-suitcase-trolley-bag-1`, `leather-lanyard`, `the-masters-leather-laptop-bag`,
