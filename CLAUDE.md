@@ -978,6 +978,43 @@ and **0 reviews were written to Shopify**. The 3 genuine ratings on the PDPs are
 - ✅ **No effort route already live:** `runPrepaidDeliveryPass()` asks every prepaid buyer for a
   review 3 days after delivery = every jacket customer from now on. Cannot be gamed.
 
+### ✅ THE CONDITION FOR PUBLISHING ANY REVIEW (stated to the user Sep 9 2026, use verbatim)
+The user asked point-blank what the single condition is. **It is PROVENANCE, nothing else — the
+words must have come out of the customer's mouth.** A row is publishable when all four hold:
+1. the **rating is the number the customer gave**, not one assigned afterwards;
+2. the **text is what that customer actually said** — their observation, their complaint;
+3. **they know it goes on the website** with their first name and city;
+4. **someone can say when they spoke to them** (roughly which day, phone or WhatsApp).
+- ✅ **What IS allowed once the substance is theirs — say this, it removes the excuse to invent:**
+  fix grammar and spelling · translate Urdu → English · trim and punctuate · **write clean prose
+  from rough notes** ("zip good, sleeves tight first few wears" → a proper sentence). The team
+  never has to compose. **Composing is exactly what went wrong; asking again repeats the mistake.**
+- ⚖️ **Do NOT forensically audit a small batch of genuine notes** the way the 76-row file was
+  audited. That test was only decisive because it was 76/76 uniform. Real replies are short,
+  uneven and specific — they will look obviously different. At that point take the user's word.
+
+### 📤 REVIEW COLLECTION PACK — `Kordovan_Review_Collection.xlsx` (delivered Sep 9 2026)
+User: *"just write a script in english that the customers can respond to and only respond with the
+fields required with accurate info."* Repo root. **29 customers** across the 5 best-covered jackets
+(Desert Voyager 7 · Rebel 7 · Durham Waxed 5 · Hawkeye 5 · Shadow Rider 5), all with phone numbers.
+- 🔑 **The reply format maps 1:1 onto the metafields, deliberately** — so nothing needs interpreting
+  between the customer's message and Shopify:
+  `Rating:` → `reviews.rating` · `Show my name as:` + `City:` + `Review:` → `custom.reviews`
+  as `name|city|text`. Team pastes into the green columns; no one decides what a reply "means".
+- **Name and city are PRE-FILLED** from the order (displayed as e.g. `Bilal K.` / `Karachi`) so the
+  customer only corrects them. Two fields to think about instead of four = far higher reply rate.
+- ✍️ **The line "an honest 3 helps us more than a polite 5" is load-bearing.** Its absence is why
+  the fabricated file had **zero ratings below 4**. Without explicit permission to criticise, people
+  either give a polite 5 or ignore you — and an all-5s page is the least believable thing to publish.
+- 🚫 **NEVER offer a discount, gift or credit for a review.** It makes them paid reviews, which must
+  be disclosed under Google and Meta policy, and reintroduces the exact credibility problem.
+- Sheets: (1) send + capture, dropdowns on Sent/Replied/Rating · (2) the message, plus a single
+  2-day follow-up, a thank-you, and what to say to a negative reply (thank, do not argue, log
+  verbatim) · (3) rules for the team, including why the last file was unusable.
+- ➡️ **Publish whatever comes back, even 6 replies.** Those 6 go live on their product pages; the
+  rest stay blank. One 3-star with a real complaint among twenty 5-stars is what makes the
+  other twenty read as true.
+
 ## 🛍 GOOGLE MERCHANT CENTER — LIVE, and free listings are already producing (Sep 8 2026)
 ⚠️ **DO NOT tell the user Merchant Center "needs setting up" — it exists and is working.**
 Confirmed from the user's own dashboard screenshot.
