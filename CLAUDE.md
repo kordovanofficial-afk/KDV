@@ -382,6 +382,62 @@ Spend 1,858.69 · impr 16,404 · reach 13,067 · freq 1.26 · **CTR 7.80%** · *
   none yet. Check on the first one.
 - ⚠️ Both moves (activating TOF-J, pausing BOF DPA) are LIVE money changes → confirm each time.
 
+## 📊 SEP 1–8 vs AUG 1–8 LIKE-FOR-LIKE (measured Sep 9 2026 — the account turned profitable)
+User: *"hows our ad perfromance going for all ads running this month against the performance within
+same dates last month"*. Both windows reconcile EXACTLY to account totals (25,772.96 / 45,176.22),
+so the ad-set splits below are complete — no missing spend.
+| | Aug 1–8 | Sep 1–8 | |
+|---|---|---|---|
+| Spend | 45,176 | **25,773** | −43% |
+| Meta-reported revenue | 149,179 | **143,099** | **−4%** |
+| Meta ROAS | 3.30x | **5.55x** | +68% |
+| Purchases | 37 | 20 | −46% |
+| Cost per purchase | 1,221 | 1,289 | +6% |
+| Link clicks | 3,211 | 5,202 | +62% |
+| CPM | 404 | 240 | −41% |
+| Adds to cart | 118 | 88 | −25% |
+- 🎯 **THE HEADLINE: spend fell 43% and Meta revenue fell only 4%.** Every other number is a
+  consequence of that. Do not read the purchase drop as decay — see the next bullet.
+- 🔴 **THE PURCHASE DROP IS ONE DECISION, NOT DECAY. It is TOF-A Mocha Mate being paused Sep 1.**
+  In **Aug 1–8 TOF-A did 17 purchases at 4.86x, cost per purchase 706** — it was that week's volume
+  engine. TOF-B Razor's 3 (at **0.68x**) also went, correctly. The 20 remaining purchases all come
+  from ad sets running 3.49–9.22x. Volume was traded for quality and the money says that was right.
+- Per ad set (spend / purchases / Meta ROAS):
+  | **Sep 1–8** | Retarget 8,207 / 9 / **9.22x** · TOF-C 8,084 / 7 / 6.38x · DPA 4,536 / 4 / 3.49x |
+  | | TOF-J 3,763 / 0 / — · TOF-A 1,182 / 0 (residual, paused Sep 1) |
+  | **Aug 1–8** | TOF-B 12,007 / 3 / **0.68x** · TOF-A 12,000 / 17 / 4.86x · Retarget 11,997 / 11 / 3.85x |
+  | | DPA 7,975 / 6 / 4.58x · Cold LLA 1,197 / 0 |
+- 🔴 **TWO ACCOUNT-LEVEL NUMBERS ARE MIX ARTEFACTS — do not act on either.** TOF-J is 57% of all
+  link clicks at a CPM of 83, so it drags every account average:
+  - **click→ATC "collapsed" 3.67% → 1.69%.** Ex-TOF-J it is **3.68% — identical to August.**
+    **Nothing regressed on the PDPs.** Never quote the account-level ATC rate while TOF-J runs.
+  - **CTR/CPC "improved" hugely.** The REAL, ex-TOF-J improvement is link CTR 2.87% → **3.58%**
+    and cost per link click 14.07 → **9.89 (−30%)** — genuine, and it comes from killing the
+    expensive static/video sets (TOF-B CPC 30.95, TOF-A 28.57). Consistent with catalogue ≈4x cheaper.
+- 💰 **ESTIMATED REAL PROFITABILITY — the account crossed break-even between these two windows.**
+  Applying the standing ~2.05x Meta overstatement: **Aug 1–8 ≈ 1.61x real (BELOW the 2.22x
+  break-even at 45% GM) → est. −PKR 12,400. Sep 1–8 ≈ 2.71x → est. +PKR 5,600.** An ~18,000 swing
+  in eight days. ⚠️ **Directional only** — the 2.05x factor was measured on MATURE August cohorts
+  and the September orders are days old. Re-derive it from Shopify before quoting as fact.
+- 🔴 **SEPTEMBER'S SURVIVAL WILL FALL — the cohort is too young to judge, and this trap is easy to
+  fall into.** Store-wide Sep 1–8 = 41 orders / 374,369 placed / 8 cancelled so far → 226,819
+  surviving. Aug 1–8 = 48 orders / 187,872 placed / **15 cancelled** → 113,993 surviving.
+  ✍️ **But at EQUAL AGE (day 8) August had only 7 cancellations** — the other 8 landed as late as
+  Aug 22. So the honest read is **8 vs 7 = cancellation behaviour UNCHANGED**, and September's
+  apparent 80.5% count-survival will settle nearer August's 68.8%. **Only ~47% of a window's
+  eventual cancellations have landed by day 8 — never compare survival across cohorts of
+  different ages.**
+- ⏳ **TOF-J day-4 (Sep 5–8):** spend 3,763 · CTR **7.31%** · CPC **1.14** · CPM **83** ·
+  2,976 clicks · 3,111 ViewContent → **cost per VC PKR 1.21 against the 90 kill line**.
+  **click→ATC 0.20% (6 of 2,976)**, up from 0.078% at day 2 but still far under the 0.5% line set
+  for the day-7 decision. ➡️ On this trajectory the **switch from ViewContent to Add to Cart
+  optimisation is the likely call at the Sep 12 read**. Do not touch it before then.
+- 🔮 **TOF-A deserves a retest but NOT yet.** It was the best ad set in this exact window last month
+  and decayed later in August (which is why pausing on full-month data was right). ⚠️ **Its hero
+  product The Mocha Mate Wallet still has no sellable variant**, so restarting it sends paid traffic
+  to something nobody can buy. **Restock first, then retest** — this is the same "23 products
+  invisible to catalogue ads" problem, and it is now blocking a proven ad set.
+
 ## 🔌 Available integrations (MCP)
 Shopify, GitHub, Canva, Figma, Facebook Ads, Higgsfield, Cloudflare.
 (Playwright is NOT available in this remote env — design is done in code, then
