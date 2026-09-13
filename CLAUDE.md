@@ -382,6 +382,37 @@ Spend 1,858.69 · impr 16,404 · reach 13,067 · freq 1.26 · **CTR 7.80%** · *
   none yet. Check on the first one.
 - ⚠️ Both moves (activating TOF-J, pausing BOF DPA) are LIVE money changes → confirm each time.
 
+### 📈 TOF-J day-7/8 read (Sep 5–12 2026, run Sep 13) — HOLD. Do not switch the event yet.
+Spend 7,600.32 · impr 108,374 · reach 63,646 · freq 1.70 · **CTR 6.55%** · **CPC PKR 1.07** ·
+**CPM PKR 70** · 6,390 link clicks · **6,578 ViewContent** · 20 ATC · **2 purchases** (Sep 9, Sep 11) ·
+Meta ROAS 2.22x · cost per purchase 3,800.
+- ✅ **Cost per ViewContent = PKR 1.16 against the PKR 70 day-7 kill line — passes by ~60x.**
+  The pool-building job is DONE many times over: 6,578 jacket viewers banked for October against a
+  ~1,000/week target. First 2 purchases also landed (there were 0 at day 2).
+- 🔴 **THE DAY-7 RULE SAID "SWITCH TO ADD TO CART IF click→ATC < 0.5%". IT IS 0.313%, SO THE RULE
+  FIRES — AND THE RULE IS WRONG. DO NOT SWITCH. The rule did not do the learning-phase arithmetic.**
+  Cost per ATC is **PKR 380**, so at PKR 1,000/day that is **~18 ATC/week against the ~50 Meta needs
+  to exit learning**. Switching parks TOF-J permanently in learning — **the exact trap that ruled out
+  Purchase optimisation when this ad set was designed**. Sensitivity-checked: even if ATC optimisation
+  halved cost-per-event it only reaches ~37/week. Still short.
+- 📈 **The rate is also climbing on its own as Meta learns** — 0.078% at day 2 → **0.41% over the last
+  four days**, approaching the 0.5% line without any intervention:
+  | Sep 6 | Sep 7 | Sep 8 | Sep 9 | Sep 10 | Sep 11 | Sep 12 |
+  | 0.09% | 0.36% | 0.14% | 0.59% | 0.22% | 0.35% | 0.49% |
+- ➡️ **THE DECISION: hold ViewContent at PKR 1,000/day. Make the event change at the OCTOBER RAMP**,
+  when the budget rises enough to sustain ATC or Purchase optimisation properly. That also puts the
+  unavoidable learning reset BEFORE the season instead of during it. ⚠️ To run ATC at 50 events/week
+  at today's PKR 380/ATC would need roughly **PKR 2,700/day** — do not do that in flat season.
+- ✍️ **Lesson for any future pre-written threshold: pair the trigger with the arithmetic of what
+  happens when it fires.** A kill/switch rule that cannot be executed without breaking learning is
+  not a rule, it is a trap. Check events-per-week at the target budget BEFORE writing the threshold.
+- Same window, other ad sets: **Retarget** 7,931 / 10 purchases / 5.73x / cost 793 ·
+  **TOF-C** 7,854 / 11 purchases / **16.84x** / cost 714 (up from 6.38x the week before).
+  ⚠️ **Do NOT get excited about TOF-C's 16.84x on 11 orders** — this ad set has form for one large
+  order carrying a whole window (a single PKR 51,450 order was 25% of its August revenue). 14-day
+  windows only.
+- ⏳ `utm_content={{placement}}` is now CHECKABLE — TOF-J has its first 2 orders. Still unverified.
+
 ## 📊 SEP 1–8 vs AUG 1–8 LIKE-FOR-LIKE (measured Sep 9 2026 — the account turned profitable)
 User: *"hows our ad perfromance going for all ads running this month against the performance within
 same dates last month"*. Both windows reconcile EXACTLY to account totals (25,772.96 / 45,176.22),
