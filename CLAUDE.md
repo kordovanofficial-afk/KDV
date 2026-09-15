@@ -1113,16 +1113,34 @@ User sent the "Update product descriptions to include details customers are look
   both say so in their titles: `rodriguez-…-quilted-…` (claret) and `nightfall-…-diamond-quilted-…`.
   A naive keyword match would have mislabelled 28 products.
 
-### 🟠 OPEN — 50 PRODUCTS PROMISE "FREE SHIPPING NATIONWIDE" IN THEIR SEO DESCRIPTION
-Found in the same Sep 15 sweep, **not fixed, user not yet asked.** 50 active products say "Free
-shipping nationwide" (59 mention free shipping at all) in `seo.description` — i.e. published to
-Google. **That is now wrong twice over:** free delivery only applies over **Rs 5,500**, and as of
-Sep 15 **COD costs Rs 250 more** (see the prepaid-incentive section). Raise it before the October push.
-- 📌 Related: **20 of the 24 footwear SEO descriptions are old-style** ("Buy the Tuxedo handcrafted
-  leather shoe… Free shipping nationwide, lifetime warranty") and **disclose neither made-to-order
-  nor the ~3 week lead time**, even though all 24 shoes ARE made-to-order. Only 4 are current
-  (`omega-ruboff-loafers`, `linker-moccassin`, `lionel-loafer-mocassin`, `lionel-loafer-moccasin-tan`).
-  Same exposure as the jackets had — Google is publishing a silent promise the workshop cannot meet.
+### ✅ SHIPPING CLAIMS + FOOTWEAR DISCLOSURE FIXED IN SEO DESCRIPTIONS (Sep 15 2026, user: *"yes fix both"*)
+Same session, immediately after the jacket lead-time fix. **72 products rewritten** (65 + 7 length trims).
+- 🔴 **THE PROBLEM: 65 of 175 active products advertised unconditional free shipping to Google.**
+  Phrasings found: `Free shipping nationwide.` ×41 · `Free shipping nationwide, lifetime warranty.` ×9
+  · `Free shipping.` ×8 · `Free delivery.` ×3 · plus 4 one-offs. **Wrong twice over** — free delivery
+  starts at **Rs 5,500**, and since Sep 15 **COD costs Rs 250 more**. All now read
+  **"Free delivery over Rs 5,500"** (a policy statement, true at any cart value, so it is safe to
+  apply uniformly without checking each product's price).
+- 🔴 **AND 20 of the 24 footwear SEO descriptions disclosed neither made-to-order nor the lead time**,
+  despite all 24 shoes being MTO — the same exposure the jackets had. All 24 now carry
+  **"Made to order in our Karachi workshop — about 3 weeks to your door. Free delivery."**
+  (every shoe is Rs 21,000+, comfortably over the threshold, so "Free delivery" is literally true).
+- ✅ **Verified catalogue-wide after writing:** 0 unqualified free-shipping claims · 24/24 footwear
+  disclose made-to-order AND "about 3 weeks" · 0 SEO titles or descriptions lost · 0 `4–7 days`
+  anywhere · 0 descriptions over 165 chars.
+- ⚠️ **`The Stallion // Premium Leather Boot` CONTRADICTS ITSELF ON MATERIAL — unresolved.**
+  `custom.material` says **Croc-textured leather**; its old SEO description said **full-grain cowhide**.
+  Both cannot be right. Its new SEO description deliberately asserts **neither material nor a warranty**
+  (the warranty omission is the standing rule — its own body copy says "1 YEAR WARRANTY" while
+  everything else says lifetime). **Ask the user which material is correct before writing either.**
+- 📌 **14 products still say "nationwide" and that is CORRECT — do not "fix" them.** Nine say
+  *"ships nationwide"* (true, PostEx delivers nationwide) and five say *"Cash on delivery nationwide"*
+  (also true — those are cowboy hats and wallets, not made-to-order, so COD is genuinely available).
+  ⚠️ Those five do not mention the new Rs 250 COD fee. Not false, but tighten if the fee is promoted.
+- ✍️ **Length rule learned here: keep `seo.description` ≤ ~160 chars.** Swapping in the longer
+  "Free delivery over Rs 5,500" pushed 7 products to 166–172, which Google would have truncated —
+  cutting off the very shipping line the pass existed to correct. Trimmed by dropping filler
+  ("by Kordovan", "Available in multiple colors"), never by dropping the shipping fact.
 
 ## 📞 JACKET REVIEW OUTREACH FILE (delivered to user Sep 8 2026)
 `Kordovan_Jacket_Reviews_Outreach.xlsx` at repo root — built for the user's team to phone customers
