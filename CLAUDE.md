@@ -1072,6 +1072,58 @@ debit card or JazzCash`. Verified **0 of 30 stale**.
   `descriptionHtml`, `seo`, and EACH metafield. Changing a fact means sweeping all of them** —
   grep the live values, do not trust a previous "done" note.
 
+### 🔴 THIRD SURFACE — ALL 30 JACKET **SEO DESCRIPTIONS** STILL SAID "4–7 DAYS" (fixed Sep 15 2026)
+Found while acting on a Google Merchant Center recommendation. **`seo.description` was never touched
+by the Sep 6 lead-time pass or the Sep 8 sweeps** — both looked at `descriptionHtml` and metafields.
+All **30 of 30** read `… Ready in 4–7 days, delivered in 3–4.` Now `… About 3 weeks to your door.`
+- 🔴 **WHY THIS ONE WAS THE WORST: `seo.description` IS THE FIELD GOOGLE MERCHANT CENTER PUBLISHES.**
+  Proven, not assumed — the description text in the user's Merchant Center screenshot matches
+  `seo.description` verbatim ("The Ace: black bomber jacket in p…"), NOT `descriptionHtml`. So the
+  dead 4–7 day promise was live in Google Shopping on 30 made-to-order items at Rs 22,000–35,000,
+  paid 100% up front, entering peak season. ⚠️ **Any future fact change must sweep `seo.description`
+  — it is the highest-exposure surface on the store, not a minor metadata field.**
+- ✅ **Verified after writing: 0 of 175 active products carry `4–7 days` anywhere in SEO title or
+  description; 30/30 jackets say "About 3 weeks"; 0 jackets lost their SEO title.** Also confirmed
+  0 occurrences of the dead "50% deposit" wording catalogue-wide.
+- ⚙️ Method: generated the 30 rewrites in Python by regex-replacing only the lead-time sentence,
+  asserting each result still contains the colour word and is ≤165 chars, then emitted the GraphQL.
+  **Never hand-retype 30 descriptions** — 2 batches of 15 aliased `productUpdate`, 0 userErrors.
+  🔴 `seo:` is a FULL REPLACE — every call sent `title` AND `description`. Verified no title wiped.
+
+### 🛍 WHAT MERCHANT CENTER'S "ADD COLOR / PATTERN" RECOMMENDATION ACTUALLY MEANS
+User sent the "Update product descriptions to include details customers are looking for" report
+(Men's Coats & Jackets): Key details = *Material*, Add to description = *Color, Pattern*.
+- 🚫 **It is NOT asking for more words. Do not stuff colour into the prose — it is already there.**
+  Every one of the 30 jacket SEO descriptions already names its colour, and all 30 name the material.
+  The gap is **structured feed attributes**, not text.
+- 📌 **Measured state of the Shopify taxonomy metafields (namespace `shopify`) on jackets:**
+  `color-pattern` set on **28 of 30** — missing only on `alison-black-womens-biker-jacket` and
+  `bliss-maroon-leather-bomber-women-jacket`. Also set: `size`, `fabric`, `age-group`,
+  `target-gender`, `neckline`, `sleeve-length-type`, `care-instructions`,
+  `outerwear-clothing-features`. **There is NO `pattern` key** — the taxonomy category
+  (`Bomber Jackets`, `Motorcycle Outerwear`, `Sport Jackets`, `Coats & Jackets`) does not expose one.
+  All values are `list.metaobject_reference`, so writing them needs the metaobject GID, not a string.
+- ⚠️ **THE REPORT IS READING STALE FEED DATA — check the date before acting on it again.** Proof:
+  it showed `cobalt-mens-blue-leather-bomber-jacket` with description "Shop Kordovan's Cobalt blue
+  leath…", copy that no longer exists in Shopify. The feed syncs ~once daily. Since all 30 SEO
+  descriptions changed on Sep 15, **wait 48h and re-pull Diagnostics before any further attribute
+  work** — part of this recommendation may simply clear itself.
+- 🚫 **DO NOT label these jackets "quilted" pattern.** "Quilted" appears in all 30 bodies but refers
+  to the **lining** ("Quilted viscose lining"). Only two are genuinely quilted on the outside, and
+  both say so in their titles: `rodriguez-…-quilted-…` (claret) and `nightfall-…-diamond-quilted-…`.
+  A naive keyword match would have mislabelled 28 products.
+
+### 🟠 OPEN — 50 PRODUCTS PROMISE "FREE SHIPPING NATIONWIDE" IN THEIR SEO DESCRIPTION
+Found in the same Sep 15 sweep, **not fixed, user not yet asked.** 50 active products say "Free
+shipping nationwide" (59 mention free shipping at all) in `seo.description` — i.e. published to
+Google. **That is now wrong twice over:** free delivery only applies over **Rs 5,500**, and as of
+Sep 15 **COD costs Rs 250 more** (see the prepaid-incentive section). Raise it before the October push.
+- 📌 Related: **20 of the 24 footwear SEO descriptions are old-style** ("Buy the Tuxedo handcrafted
+  leather shoe… Free shipping nationwide, lifetime warranty") and **disclose neither made-to-order
+  nor the ~3 week lead time**, even though all 24 shoes ARE made-to-order. Only 4 are current
+  (`omega-ruboff-loafers`, `linker-moccassin`, `lionel-loafer-mocassin`, `lionel-loafer-moccasin-tan`).
+  Same exposure as the jackets had — Google is publishing a silent promise the workshop cannot meet.
+
 ## 📞 JACKET REVIEW OUTREACH FILE (delivered to user Sep 8 2026)
 `Kordovan_Jacket_Reviews_Outreach.xlsx` at repo root — built for the user's team to phone customers
 and write down reviews they already gave verbally. **Reviews are still never to be invented.**
