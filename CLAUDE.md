@@ -952,6 +952,56 @@ be told two different numbers in one session, and the cart page is the last thin
   the theme editor keeps its saved text — the editor's stored setting wins over the default.
   **Check Theme editor → Announcement Bar and retype it if it still shows 3,000.**
 
+## 💳 PREPAID INCENTIVE = A COD FEE AT THE SHIPPING STEP (LIVE Sep 15 2026, user-approved)
+User wanted *"auto discount when someone used online payment"*. 🔴 **THAT IS IMPOSSIBLE IN SHOPIFY
+ON ANY PLAN — do not go looking for a way.** The order total must be final before the payment is
+authorised, and payment method is chosen last, so no discount (code, automatic, or Function) can
+react to it. Every "COD fee" app on the app store works around this the same way we now do: at the
+**shipping step**, which the customer chooses BEFORE payment.
+- ✅ **LIVE on the default delivery profile, Domestic zone. COD costs exactly PKR 250 more in both
+  price bands** (user set the fee: *"yes the fee is 250"*):
+  | Cart | Pay online | Cash on delivery |
+  | Under 5,500 | `Standard Delivery — Pay Online` **250** | `Cash on Delivery` **500** |
+  | 5,500+ | `Free Delivery — Pay Online` **0** | `Cash on Delivery` **250** |
+  `EXPRESS NEXT DAY DELIVERY (KARACHI ONLY)` 1,000 — untouched, no conditions.
+  ⚠️ **COD orders over 5,500 therefore LOSE free delivery.** Deliberate — otherwise the incentive
+  vanishes exactly on the highest-value carts. Reverse by setting that rate to 0 if the user objects.
+- 🔑 **IDs for any future edit** (re-read them, do not trust this list blindly):
+  profile `48076685501` · locationGroup `48194551997` · zone `103282671805` (Domestic).
+  Mutation shape: `deliveryProfileUpdate(id, profile:{locationGroupsToUpdate:[{id, zonesToUpdate:
+  [{id, methodDefinitionsToCreate | methodDefinitionsToUpdate}]}]})`. Conditions go in
+  **`priceConditionsToCreate`** (`{operator, criteria:{amount,currencyCode}}`), NOT `conditionsToCreate`.
+- ✍️ **Why a FLAT FEE beats a percentage, and why 10% was wrong.** COD's real cost is roughly fixed
+  in rupees (return shipping + the courier's COD handling), so a flat 250 tracks it almost exactly.
+  A percentage overpays wildly at the top: 10% of a 28,000 jacket is 2,800 to change a behaviour
+  that costs the same 250 as a wallet does. Measured cost of COD ≈ **2.5–3.5% of cart**; the old
+  `PAYONLINE10` at 10% was ~3x that.
+- ✅ **It costs NOTHING on the 54 made-to-order products** — they already cannot be paid COD, so
+  those buyers only ever see the prepaid rate. The "don't waste the discount on MTO" problem solves
+  itself; no collection scoping needed.
+- ✅ **No code means nothing to leak.** This is the whole `ASAD90` class of problem designed out.
+- 🔴 **TWO GAPS STILL OPEN — neither is fixed, do not assume they are:**
+  1. **A customer can pick a prepaid rate and still choose COD at payment.** Nothing enforces the
+     pairing. Cheapest fix uses infrastructure that already exists: the PostEx Worker sees every
+     order's `financial_status` and shipping line, so a mismatch is trivially detectable and its
+     WhatsApp message can carry a payment link instead of a COD confirmation. The clean fix is a
+     payment-customization Function change, but **it is UNVERIFIED whether that Function's input
+     can read the SELECTED delivery option** — test before promising it.
+  2. **An MTO cart still SHOWS the COD shipping rate**, then COD is absent at payment — a potential
+     dead end on the highest-value products right before jacket season. Mitigated only by the rate
+     description ("Not available on made-to-order pieces, which are prepaid only"). **The real fix
+     is a delivery-customization Function hiding the COD rate when the cart has an MTO line.**
+- 📌 `PAYONLINE10` (10%, all products, uncapped, no expiry) is **still ACTIVE with 0 redemptions in
+  2 months**. It is now redundant and should be retired — not yet done, user has not been asked.
+- 🔴 **DISCOUNT-CODE SPRAWL — audited Sep 9, mostly NOT cleaned up.** 16 active codes, only ONE with
+  an expiry date. Four had no per-customer limit. **`ASAD90` — 90% off everything, uncapped, no
+  expiry, already used once — the user REMOVED it Sep 15 (verified: `codeDiscountNodeByCode` returns
+  null).** Still live and uncapped-ish: `BDAY25` 25% · `USM25` 25% · `KORDOVAN20` 20% ·
+  `UMAIR109` 20% (no per-customer cap) · `WCM10` 10% (185 uses) · `WELCOME10` 10% — and WELCOME10 is
+  **the only code that combines with order + product + shipping discounts**, a landmine under any
+  future sale. User chose "audit and report first"; the report was delivered, the cleanup was not
+  actioned. ⚠️ Raise it before running any promotion.
+
 ## 🧱 PRODUCT-DATA COMPLETION PASS (Sep 8 2026 — catalogue-wide, DONE, do not redo)
 User instruction: *"do the alt text backfill first, then the SEO Desctiption then the subtitile/
 benefits and material thing, fix the product taxonomy."* All done and verified on 175 active products.
