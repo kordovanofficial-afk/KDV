@@ -1009,16 +1009,19 @@ react to it. Every "COD fee" app on the app store works around this the same way
      dead end on the highest-value products right before jacket season. Mitigated only by the rate
      description ("Not available on made-to-order pieces, which are prepaid only"). **The real fix
      is a delivery-customization Function hiding the COD rate when the cart has an MTO line.**
-- 📌 `PAYONLINE10` (10%, all products, uncapped, no expiry) is **still ACTIVE with 0 redemptions in
-  2 months**. It is now redundant and should be retired — not yet done, user has not been asked.
-- 🔴 **DISCOUNT-CODE SPRAWL — audited Sep 9, mostly NOT cleaned up.** 16 active codes, only ONE with
-  an expiry date. Four had no per-customer limit. **`ASAD90` — 90% off everything, uncapped, no
-  expiry, already used once — the user REMOVED it Sep 15 (verified: `codeDiscountNodeByCode` returns
-  null).** Still live and uncapped-ish: `BDAY25` 25% · `USM25` 25% · `KORDOVAN20` 20% ·
-  `UMAIR109` 20% (no per-customer cap) · `WCM10` 10% (185 uses) · `WELCOME10` 10% — and WELCOME10 is
-  **the only code that combines with order + product + shipping discounts**, a landmine under any
-  future sale. User chose "audit and report first"; the report was delivered, the cleanup was not
-  actioned. ⚠️ Raise it before running any promotion.
+- ✅ **`PAYONLINE10` IS GONE (verified Sep 20 2026** — no match on a `PAYONLINE` search and absent
+  from the active list). The user removed it themselves; it had 0 redemptions in 2 months and the
+  COD fee replaced it. **Do not recreate it** — a percentage prepaid discount is the wrong
+  instrument here, see the flat-fee reasoning above.
+- 🟢 **DISCOUNT-CODE SPRAWL — LARGELY CLEANED UP BY THE USER. Re-count before quoting the old
+  audit.** Sep 9 measured 16 active codes; **Sep 20 measures 8**. Gone since: `ASAD90` (90%),
+  `PAYONLINE10`, `BDAY25` (25%), `USM25` (25%) and the 4 single-use hex codes.
+  **Still active:** `KORDOVAN20` 20% (to 31 Dec) · `UMAIR109` 20% (**no per-customer cap**) ·
+  `WCM10` 10% (185 uses) · `WELCOME10` 10% · `SEC10` 10% · `ZAHRA10` 10% · `COMEBACK10` 10%
+  (abandoned-checkout tool, keep) · `LAUT AAO` 5%.
+  ⚠️ **The two worth raising before any promotion:** `UMAIR109` has no per-customer limit, and
+  **`WELCOME10` is still the only code that combines with order + product + shipping discounts** —
+  it will stack on top of a sale unless that is changed first.
 
 ## 🧱 PRODUCT-DATA COMPLETION PASS (Sep 8 2026 — catalogue-wide, DONE, do not redo)
 User instruction: *"do the alt text backfill first, then the SEO Desctiption then the subtitile/
@@ -1146,11 +1149,20 @@ Same session, immediately after the jacket lead-time fix. **72 products rewritte
 - ✅ **Verified catalogue-wide after writing:** 0 unqualified free-shipping claims · 24/24 footwear
   disclose made-to-order AND "about 3 weeks" · 0 SEO titles or descriptions lost · 0 `4–7 days`
   anywhere · 0 descriptions over 165 chars.
-- ⚠️ **`The Stallion // Premium Leather Boot` CONTRADICTS ITSELF ON MATERIAL — unresolved.**
-  `custom.material` says **Croc-textured leather**; its old SEO description said **full-grain cowhide**.
-  Both cannot be right. Its new SEO description deliberately asserts **neither material nor a warranty**
-  (the warranty omission is the standing rule — its own body copy says "1 YEAR WARRANTY" while
-  everything else says lifetime). **Ask the user which material is correct before writing either.**
+- ✅ **`The Stallion // Premium Leather Boot` MATERIAL RESOLVED (user-confirmed Sep 20 2026):
+  it is GENUINE COW LEATHER with a croc texture STAMPED into it — not croc, and not
+  "full-grain".** The product's own body copy says so outright: *"Made from premium cow
+  leather… The cow leather is textured with croc plate."* The old SEO line claiming
+  **full-grain cowhide** was the overclaim and is gone.
+  `custom.material` = **`Croc-textured cow leather`**; SEO description now names it.
+  ⚠️ Its SEO copy still carries **no warranty claim** — that stays. Its own description says the
+  sole has a **1 YEAR WARRANTY** while the rest of the site says lifetime. Do not "fix" that.
+- ⚠️ **`croc-textured-shaded-belt` and `snake-leather-belt` have the SAME shape of ambiguity —
+  base hide UNCONFIRMED.** Their `custom.material` reads `Croc-textured leather` /
+  `Snake-textured leather` and the SEO says "genuine leather", so **nothing false is published**
+  (neither implies exotic skin, which is the rule that matters). But neither names the animal.
+  **Ask before adding one** — the Stallion answer does not transfer; it was confirmed from that
+  product's own copy, and these two have no such statement.
 - 📌 **14 products still say "nationwide" and that is CORRECT — do not "fix" them.** Nine say
   *"ships nationwide"* (true, PostEx delivers nationwide) and five say *"Cash on delivery nationwide"*
   (also true — those are cowboy hats and wallets, not made-to-order, so COD is genuinely available).
