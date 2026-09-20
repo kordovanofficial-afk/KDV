@@ -101,6 +101,24 @@
           </button>
           <a href="/collections/all" class="footer__link" style="display:block; text-align:center; font-size:var(--text-sm);">← Continue Shopping</a>
 
+          {%- comment -%}
+            Made-to-order pieces are NOT returnable once production begins (see
+            snippets/returns.liquid), so the "7-day returns" line must never show
+            on a cart that contains one — promise the lifetime warranty instead,
+            which IS true of every piece. snippets/pdp-main.liquid and
+            sections/cart-drawer.liquid follow the same rule. Keep all three
+            consistent. `cart_mto` is assigned HERE because this block is the
+            first place it is needed.
+          {%- endcomment -%}
+          {%- liquid
+            assign cart_mto = false
+            for it in cart.items
+              if it.product.metafields.custom.made_to_order.value == true or it.product.type contains 'Jacket'
+                assign cart_mto = true
+                break
+              endif
+            endfor
+          -%}
           <!-- Trust -->
           <div style="margin-top:var(--space-6); padding-top:var(--space-6); border-top:1px solid var(--color-border);">
             <div style="display:flex; flex-direction:column; gap:var(--space-3);">
@@ -109,20 +127,16 @@
                 100% secure checkout
               </div>
               <div style="display:flex; align-items:center; gap:var(--space-3); font-size:var(--text-sm); color:var(--color-text-muted);">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/></svg>
-                7-day hassle-free returns
+                {%- if cart_mto -%}
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="6"/><path d="M8.2 13.9 7 22l5-3 5 3-1.2-8.1"/></svg>
+                  Lifetime craftsmanship warranty
+                {%- else -%}
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/></svg>
+                  7-day hassle-free returns
+                {%- endif -%}
               </div>
               <div style="display:flex; align-items:center; gap:var(--space-3); font-size:var(--text-sm); color:var(--color-text-muted);">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-                {%- liquid
-                  assign cart_mto = false
-                  for it in cart.items
-                    if it.product.metafields.custom.made_to_order.value == true or it.product.type contains 'Jacket'
-                      assign cart_mto = true
-                      break
-                    endif
-                  endfor
-                -%}
                 {%- if cart_mto -%}Paid online at checkout — made-to-order piece in cart, so card or JazzCash only{%- else -%}COD available at checkout{%- endif -%}
               </div>
             </div>

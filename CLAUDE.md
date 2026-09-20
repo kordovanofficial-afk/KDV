@@ -148,9 +148,27 @@ kordovan  (trunk)
   `shipping`, `returns`. **Easypaisa removed everywhere** (user: JazzCash only).
 - ⚠️ Footwear product descriptions carry NO payment wording (checked) — terms come only
   from the PDP template, so they were correct automatically.
-- 📌 **`snippets/returns.liquid` says MTO is non-returnable once production begins**, so the
-  cart drawer no longer shows a "7-day returns" badge on an MTO cart (shows lifetime
-  warranty instead). Keep those two consistent.
+- 🔴 **`snippets/returns.liquid` says MTO is non-returnable once production begins, so the
+  "7-day returns" badge must NEVER render on a made-to-order piece. THREE surfaces carry
+  that badge — all three are now gated, keep them consistent:**
+  | `snippets/pdp-main.liquid` | the `.kv-pdp__trust3` badge row beside the gallery | fixed Sep 20 2026 |
+  | `sections/main-cart.liquid` | the cart PAGE trust list | fixed Sep 20 2026 |
+  | `sections/cart-drawer.liquid` | the drawer trust row | was already correct |
+  MTO shows **"Lifetime warranty"** instead — true of every piece, and the wording the
+  cart drawer already used.
+  - ⚠️ **THE BUG IN BOTH FIXES WAS THE SAME AND IT IS EASY TO REPEAT: `mto` / `cart_mto`
+    was assigned BELOW the badge row.** Liquid evaluates top-down, so the flag was empty
+    (falsy) where the badge rendered and the 7-day promise showed on every product. Both
+    assignments are now hoisted above the first use and there is **exactly one `assign
+    mto = false` / `assign cart_mto = false` per file** — do not re-introduce a second
+    copy further down, or the two can drift apart.
+  - ✍️ Found because the user spotted it live on a jacket PDP. **The PDP was the one they
+    saw; the cart page had the identical defect and nobody had noticed.** When a badge is
+    wrong on one surface, grep every surface that renders it before calling it fixed.
+  - 📌 Not changed, deliberately: `sections/trust-bar.liquid` and `sections/hero-banner.liquid`
+    also say "7-day returns", but both render **only on the homepage** (`templates/index.json`)
+    as a general brand promise, not a product-level one. The exception is disclosed on the PDP
+    and the Returns page. Raise it if the user wants the homepage qualified too.
 - 🎯 **Expected effect on the ads problem:** jackets died at 25% survival in Aug because the
   deposit was never paid (6 of 8 orders). Requiring payment at checkout should collapse that
   pre-dispatch death rate AND make Meta's Purchase event genuinely accurate for jackets for
@@ -381,6 +399,93 @@ Spend 1,858.69 · impr 16,404 · reach 13,067 · freq 1.26 · **CTR 7.80%** · *
 - ⏳ `utm_content={{placement}}` still UNVERIFIED — needs a real order from TOF-J and there are
   none yet. Check on the first one.
 - ⚠️ Both moves (activating TOF-J, pausing BOF DPA) are LIVE money changes → confirm each time.
+
+### 📈 TOF-J day-7/8 read (Sep 5–12 2026, run Sep 13) — HOLD. Do not switch the event yet.
+Spend 7,600.32 · impr 108,374 · reach 63,646 · freq 1.70 · **CTR 6.55%** · **CPC PKR 1.07** ·
+**CPM PKR 70** · 6,390 link clicks · **6,578 ViewContent** · 20 ATC · **2 purchases** (Sep 9, Sep 11) ·
+Meta ROAS 2.22x · cost per purchase 3,800.
+- ✅ **Cost per ViewContent = PKR 1.16 against the PKR 70 day-7 kill line — passes by ~60x.**
+  The pool-building job is DONE many times over: 6,578 jacket viewers banked for October against a
+  ~1,000/week target. First 2 purchases also landed (there were 0 at day 2).
+- 🔴 **THE DAY-7 RULE SAID "SWITCH TO ADD TO CART IF click→ATC < 0.5%". IT IS 0.313%, SO THE RULE
+  FIRES — AND THE RULE IS WRONG. DO NOT SWITCH. The rule did not do the learning-phase arithmetic.**
+  Cost per ATC is **PKR 380**, so at PKR 1,000/day that is **~18 ATC/week against the ~50 Meta needs
+  to exit learning**. Switching parks TOF-J permanently in learning — **the exact trap that ruled out
+  Purchase optimisation when this ad set was designed**. Sensitivity-checked: even if ATC optimisation
+  halved cost-per-event it only reaches ~37/week. Still short.
+- 📈 **The rate is also climbing on its own as Meta learns** — 0.078% at day 2 → **0.41% over the last
+  four days**, approaching the 0.5% line without any intervention:
+  | Sep 6 | Sep 7 | Sep 8 | Sep 9 | Sep 10 | Sep 11 | Sep 12 |
+  | 0.09% | 0.36% | 0.14% | 0.59% | 0.22% | 0.35% | 0.49% |
+- ➡️ **THE DECISION: hold ViewContent at PKR 1,000/day. Make the event change at the OCTOBER RAMP**,
+  when the budget rises enough to sustain ATC or Purchase optimisation properly. That also puts the
+  unavoidable learning reset BEFORE the season instead of during it. ⚠️ To run ATC at 50 events/week
+  at today's PKR 380/ATC would need roughly **PKR 2,700/day** — do not do that in flat season.
+- ✍️ **Lesson for any future pre-written threshold: pair the trigger with the arithmetic of what
+  happens when it fires.** A kill/switch rule that cannot be executed without breaking learning is
+  not a rule, it is a trap. Check events-per-week at the target budget BEFORE writing the threshold.
+- Same window, other ad sets: **Retarget** 7,931 / 10 purchases / 5.73x / cost 793 ·
+  **TOF-C** 7,854 / 11 purchases / **16.84x** / cost 714 (up from 6.38x the week before).
+  ⚠️ **Do NOT get excited about TOF-C's 16.84x on 11 orders** — this ad set has form for one large
+  order carrying a whole window (a single PKR 51,450 order was 25% of its August revenue). 14-day
+  windows only.
+- ⏳ `utm_content={{placement}}` is now CHECKABLE — TOF-J has its first 2 orders. Still unverified.
+
+## 📊 SEP 1–8 vs AUG 1–8 LIKE-FOR-LIKE (measured Sep 9 2026 — the account turned profitable)
+User: *"hows our ad perfromance going for all ads running this month against the performance within
+same dates last month"*. Both windows reconcile EXACTLY to account totals (25,772.96 / 45,176.22),
+so the ad-set splits below are complete — no missing spend.
+| | Aug 1–8 | Sep 1–8 | |
+|---|---|---|---|
+| Spend | 45,176 | **25,773** | −43% |
+| Meta-reported revenue | 149,179 | **143,099** | **−4%** |
+| Meta ROAS | 3.30x | **5.55x** | +68% |
+| Purchases | 37 | 20 | −46% |
+| Cost per purchase | 1,221 | 1,289 | +6% |
+| Link clicks | 3,211 | 5,202 | +62% |
+| CPM | 404 | 240 | −41% |
+| Adds to cart | 118 | 88 | −25% |
+- 🎯 **THE HEADLINE: spend fell 43% and Meta revenue fell only 4%.** Every other number is a
+  consequence of that. Do not read the purchase drop as decay — see the next bullet.
+- 🔴 **THE PURCHASE DROP IS ONE DECISION, NOT DECAY. It is TOF-A Mocha Mate being paused Sep 1.**
+  In **Aug 1–8 TOF-A did 17 purchases at 4.86x, cost per purchase 706** — it was that week's volume
+  engine. TOF-B Razor's 3 (at **0.68x**) also went, correctly. The 20 remaining purchases all come
+  from ad sets running 3.49–9.22x. Volume was traded for quality and the money says that was right.
+- Per ad set (spend / purchases / Meta ROAS):
+  | **Sep 1–8** | Retarget 8,207 / 9 / **9.22x** · TOF-C 8,084 / 7 / 6.38x · DPA 4,536 / 4 / 3.49x |
+  | | TOF-J 3,763 / 0 / — · TOF-A 1,182 / 0 (residual, paused Sep 1) |
+  | **Aug 1–8** | TOF-B 12,007 / 3 / **0.68x** · TOF-A 12,000 / 17 / 4.86x · Retarget 11,997 / 11 / 3.85x |
+  | | DPA 7,975 / 6 / 4.58x · Cold LLA 1,197 / 0 |
+- 🔴 **TWO ACCOUNT-LEVEL NUMBERS ARE MIX ARTEFACTS — do not act on either.** TOF-J is 57% of all
+  link clicks at a CPM of 83, so it drags every account average:
+  - **click→ATC "collapsed" 3.67% → 1.69%.** Ex-TOF-J it is **3.68% — identical to August.**
+    **Nothing regressed on the PDPs.** Never quote the account-level ATC rate while TOF-J runs.
+  - **CTR/CPC "improved" hugely.** The REAL, ex-TOF-J improvement is link CTR 2.87% → **3.58%**
+    and cost per link click 14.07 → **9.89 (−30%)** — genuine, and it comes from killing the
+    expensive static/video sets (TOF-B CPC 30.95, TOF-A 28.57). Consistent with catalogue ≈4x cheaper.
+- 💰 **ESTIMATED REAL PROFITABILITY — the account crossed break-even between these two windows.**
+  Applying the standing ~2.05x Meta overstatement: **Aug 1–8 ≈ 1.61x real (BELOW the 2.22x
+  break-even at 45% GM) → est. −PKR 12,400. Sep 1–8 ≈ 2.71x → est. +PKR 5,600.** An ~18,000 swing
+  in eight days. ⚠️ **Directional only** — the 2.05x factor was measured on MATURE August cohorts
+  and the September orders are days old. Re-derive it from Shopify before quoting as fact.
+- 🔴 **SEPTEMBER'S SURVIVAL WILL FALL — the cohort is too young to judge, and this trap is easy to
+  fall into.** Store-wide Sep 1–8 = 41 orders / 374,369 placed / 8 cancelled so far → 226,819
+  surviving. Aug 1–8 = 48 orders / 187,872 placed / **15 cancelled** → 113,993 surviving.
+  ✍️ **But at EQUAL AGE (day 8) August had only 7 cancellations** — the other 8 landed as late as
+  Aug 22. So the honest read is **8 vs 7 = cancellation behaviour UNCHANGED**, and September's
+  apparent 80.5% count-survival will settle nearer August's 68.8%. **Only ~47% of a window's
+  eventual cancellations have landed by day 8 — never compare survival across cohorts of
+  different ages.**
+- ⏳ **TOF-J day-4 (Sep 5–8):** spend 3,763 · CTR **7.31%** · CPC **1.14** · CPM **83** ·
+  2,976 clicks · 3,111 ViewContent → **cost per VC PKR 1.21 against the 90 kill line**.
+  **click→ATC 0.20% (6 of 2,976)**, up from 0.078% at day 2 but still far under the 0.5% line set
+  for the day-7 decision. ➡️ On this trajectory the **switch from ViewContent to Add to Cart
+  optimisation is the likely call at the Sep 12 read**. Do not touch it before then.
+- 🔮 **TOF-A deserves a retest but NOT yet.** It was the best ad set in this exact window last month
+  and decayed later in August (which is why pausing on full-month data was right). ⚠️ **Its hero
+  product The Mocha Mate Wallet still has no sellable variant**, so restarting it sends paid traffic
+  to something nobody can buy. **Restock first, then retest** — this is the same "23 products
+  invisible to catalogue ads" problem, and it is now blocking a proven ad set.
 
 ## 🔌 Available integrations (MCP)
 Shopify, GitHub, Canva, Figma, Facebook Ads, Higgsfield, Cloudflare.
@@ -864,6 +969,319 @@ be told two different numbers in one session, and the cart page is the last thin
 - ⚠️ The announcement bar values are **schema defaults/presets**, so a bar already configured in
   the theme editor keeps its saved text — the editor's stored setting wins over the default.
   **Check Theme editor → Announcement Bar and retype it if it still shows 3,000.**
+
+## 💳 PREPAID INCENTIVE = A COD FEE AT THE SHIPPING STEP (LIVE Sep 15 2026, user-approved)
+User wanted *"auto discount when someone used online payment"*. 🔴 **THAT IS IMPOSSIBLE IN SHOPIFY
+ON ANY PLAN — do not go looking for a way.** The order total must be final before the payment is
+authorised, and payment method is chosen last, so no discount (code, automatic, or Function) can
+react to it. Every "COD fee" app on the app store works around this the same way we now do: at the
+**shipping step**, which the customer chooses BEFORE payment.
+- ✅ **LIVE on the default delivery profile, Domestic zone. COD costs exactly PKR 250 more in both
+  price bands** (user set the fee: *"yes the fee is 250"*):
+  | Cart | Pay online | Cash on delivery |
+  | Under 5,500 | `Standard Delivery — Pay Online` **250** | `Cash on Delivery` **500** |
+  | 5,500+ | `Free Delivery — Pay Online` **0** | `Cash on Delivery` **250** |
+  `EXPRESS NEXT DAY DELIVERY (KARACHI ONLY)` 1,000 — untouched, no conditions.
+  ⚠️ **COD orders over 5,500 therefore LOSE free delivery.** Deliberate — otherwise the incentive
+  vanishes exactly on the highest-value carts. Reverse by setting that rate to 0 if the user objects.
+- 🔑 **IDs for any future edit** (re-read them, do not trust this list blindly):
+  profile `48076685501` · locationGroup `48194551997` · zone `103282671805` (Domestic).
+  Mutation shape: `deliveryProfileUpdate(id, profile:{locationGroupsToUpdate:[{id, zonesToUpdate:
+  [{id, methodDefinitionsToCreate | methodDefinitionsToUpdate}]}]})`. Conditions go in
+  **`priceConditionsToCreate`** (`{operator, criteria:{amount,currencyCode}}`), NOT `conditionsToCreate`.
+- ✍️ **Why a FLAT FEE beats a percentage, and why 10% was wrong.** COD's real cost is roughly fixed
+  in rupees (return shipping + the courier's COD handling), so a flat 250 tracks it almost exactly.
+  A percentage overpays wildly at the top: 10% of a 28,000 jacket is 2,800 to change a behaviour
+  that costs the same 250 as a wallet does. Measured cost of COD ≈ **2.5–3.5% of cart**; the old
+  `PAYONLINE10` at 10% was ~3x that.
+- ✅ **It costs NOTHING on the 54 made-to-order products** — they already cannot be paid COD, so
+  those buyers only ever see the prepaid rate. The "don't waste the discount on MTO" problem solves
+  itself; no collection scoping needed.
+- ✅ **No code means nothing to leak.** This is the whole `ASAD90` class of problem designed out.
+- 🔴 **TWO GAPS STILL OPEN — neither is fixed, do not assume they are:**
+  1. **A customer can pick a prepaid rate and still choose COD at payment.** Nothing enforces the
+     pairing. Cheapest fix uses infrastructure that already exists: the PostEx Worker sees every
+     order's `financial_status` and shipping line, so a mismatch is trivially detectable and its
+     WhatsApp message can carry a payment link instead of a COD confirmation. The clean fix is a
+     payment-customization Function change, but **it is UNVERIFIED whether that Function's input
+     can read the SELECTED delivery option** — test before promising it.
+  2. **An MTO cart still SHOWS the COD shipping rate**, then COD is absent at payment — a potential
+     dead end on the highest-value products right before jacket season. Mitigated only by the rate
+     description ("Not available on made-to-order pieces, which are prepaid only"). **The real fix
+     is a delivery-customization Function hiding the COD rate when the cart has an MTO line.**
+- 📌 `PAYONLINE10` (10%, all products, uncapped, no expiry) is **still ACTIVE with 0 redemptions in
+  2 months**. It is now redundant and should be retired — not yet done, user has not been asked.
+- 🔴 **DISCOUNT-CODE SPRAWL — audited Sep 9, mostly NOT cleaned up.** 16 active codes, only ONE with
+  an expiry date. Four had no per-customer limit. **`ASAD90` — 90% off everything, uncapped, no
+  expiry, already used once — the user REMOVED it Sep 15 (verified: `codeDiscountNodeByCode` returns
+  null).** Still live and uncapped-ish: `BDAY25` 25% · `USM25` 25% · `KORDOVAN20` 20% ·
+  `UMAIR109` 20% (no per-customer cap) · `WCM10` 10% (185 uses) · `WELCOME10` 10% — and WELCOME10 is
+  **the only code that combines with order + product + shipping discounts**, a landmine under any
+  future sale. User chose "audit and report first"; the report was delivered, the cleanup was not
+  actioned. ⚠️ Raise it before running any promotion.
+
+## 🧱 PRODUCT-DATA COMPLETION PASS (Sep 8 2026 — catalogue-wide, DONE, do not redo)
+User instruction: *"do the alt text backfill first, then the SEO Desctiption then the subtitile/
+benefits and material thing, fix the product taxonomy."* All done and verified on 175 active products.
+| Field | Before | After |
+|---|---|---|
+| Image alt text | **545 of 1,282 missing (42.5%)** | **0 missing (100%)** |
+| SEO title | 47 missing | **0** |
+| SEO description | 48 missing | **0** |
+| `custom.subtitle` | 115 missing | **0** |
+| `custom.benefits` | 115 missing | **0** |
+| `custom.material` | 115 missing | **0** |
+| Blank `productType` | 22 | **0** (43 distinct → 33) |
+- **ALT TEXT — the method that worked, reuse it.** Shopify image **filenames carry real signal**
+  (`Baseball_cap_by_kordovan_white_front.jpg` → colour *white* + angle *front*). Parse the filename
+  (strip UUIDs/hex first), match colour and angle word-lists, and fall back to
+  `"{title} — genuine {category} by Kordovan, view N"` so **every alt is unique** (545/545 unique).
+  Write with **`fileUpdate(files:[{id, alt}])`** — up to ~110 per call, 6 calls did the lot.
+  ⚠️ Anchor every regex with `\b` — an unanchored `croc` matched inside other words.
+- 🔴 **ACCURACY RULES LEARNED HERE — apply to any future bulk copy job:**
+  - ⚠️ **`The Diva Tote // Vegan` and `The Vibe // LITE // Vegan` are VEGAN, not leather.** Never let
+    a template call them "genuine leather". Check `vegan|faux|synthetic` in the title first.
+  - ⚠️ **Never assert a feature you cannot verify** (a mirror, a lining, a buckle metal, a locking
+    handle). Benefits are now **brand-universal facts + one category-entailed line only**.
+  - ⚠️ **`The Stallion // Premium Leather Boot`'s own description says "1 YEAR WARRANTY"**, so its
+    benefits deliberately carry **no warranty line** — everything else says lifetime. Do not "fix".
+  - Material was **extracted from each product's own description**, never invented; 49 distinct
+    values. Where the description gave no signal, the honest fallback is plain `Genuine leather`.
+- 🔴 **GOTCHA — `seo:` is a FULL REPLACE, not a merge.** Passing `seo:{description:...}` with no
+  `title` **wiped that product's existing SEO title** (caught on `mini-crossbody-bag-small-messenger-bag`
+  and repaired). **Always send title AND description together.**
+- 🔴 **TAXONOMY — two collections filter on `productType`, so normalising it is NOT free:**
+  `leather-backpacks` (TYPE = **`backpack`**, lowercase) and `crossbody-messenger-bags`
+  (TYPE = **`Crossbody Bag`**). Both were left EXACTLY as-is. **`Leather Jacket` is also protected** —
+  the theme's MTO rule is `type contains 'Jacket'`. Verified after the change: backpacks 6→**8**
+  (two blanks correctly joined it), crossbody 6→6, jackets 28→28, shoes 24→24. **Nothing dropped.**
+  ✍️ Before touching `productType` again, re-read `collections{ruleSet{rules{column}}}` for `TYPE` rules.
+- ⚠️ **~29 aliased `productUpdate` calls per request is the safe ceiling** — 72 aliases returned a
+  transient `upstream_error`; 36 and 29 both succeeded. Split and retry rather than assuming failure.
+- ✅ **BODY DESCRIPTIONS CLOSED Sep 9 2026 — 0 of 175 active products now have an empty or stub
+  description** (verified: no product with images has a description under 50 chars). The last 5
+  were `croc-textured-shaded-belt`, `snake-leather-belt`, `tp-the-gentlemans-duffle`,
+  `the-city-backpack-by-kordovan-rustic-red`, `bull-rider-calf-leather-belt`.
+  - ⚠️ **The croc and snake belts are TEXTURED, not exotic skin.** The pattern is embossed into
+    genuine hide. The copy says so explicitly — never let a future pass imply real crocodile or
+    snake, which would be a false material claim on a product page and in the Google feed.
+  - ✍️ **Only verifiable facts were used:** the material already in `custom.material`, the real
+    colour options (duffle Tan/Brown, Bull Rider Black/Brown), real prices, and the two
+    brand-universal facts already rendered site-wide in `layout/theme.liquid:23` — **"Karachi
+    workshop"** and **"lifetime craftsmanship warranty"**. Check that line before asserting either.
+  - 📌 **These 5 are NOT made-to-order** (only the 30 jackets + 24 footwear are), so the copy
+    correctly says **cash on delivery is available**. Do not blanket-apply the jacket payment rule.
+  - 📌 The three belts (2,800 / 3,500) sit BELOW the Rs 5,500 free-delivery threshold, so they
+    state the threshold as policy rather than promising free delivery. Do not "simplify" that.
+- 📌 **12 active products have NO IMAGES AT ALL** (invisible in search, ads and catalogue):
+  `tp-the-city-backpack`, `zimmer-leather-keychain`, `tp-executive-a4-folder`,
+  `tp-voyager-suitcase-trolley-bag-1`, `leather-lanyard`, `the-masters-leather-laptop-bag`,
+  `the-braided-belt`, `four-in-one-leather-gift-set`, `tp-branson-briefcase-business-attache`,
+  `gift-box-4-pieces-set`, `mini-card-cash-carry`, `luxe-card-lite`. **Photography is the fix.**
+
+### 🔴 ALL 30 JACKETS CARRIED THE DEAD "4–7 DAYS" LEAD TIME (found + fixed Sep 8 2026)
+`custom.fits` on every one of the 30 jackets still read
+`S–3XL|Every size, made to order / 4–7 days|Cut and stitched for you / 3–4 days|Delivered to your door`
+— and that block **renders on the PDP**, contradicting the "about 3 weeks" promise the Sep 6 pass put
+everywhere else. Now reads `S–3XL|… / About 3 weeks|From checkout to your door / Paid online|Card,
+debit card or JazzCash`. Verified **0 of 30 stale**.
+- ✍️ **This is the SECOND surface the Sep 6 lead-time pass missed** (the first was the four jacket
+  collections' `custom.editorial`, fixed Sep 8 too). **A product has many content surfaces:
+  `descriptionHtml`, `seo`, and EACH metafield. Changing a fact means sweeping all of them** —
+  grep the live values, do not trust a previous "done" note.
+
+### 🔴 THIRD SURFACE — ALL 30 JACKET **SEO DESCRIPTIONS** STILL SAID "4–7 DAYS" (fixed Sep 15 2026)
+Found while acting on a Google Merchant Center recommendation. **`seo.description` was never touched
+by the Sep 6 lead-time pass or the Sep 8 sweeps** — both looked at `descriptionHtml` and metafields.
+All **30 of 30** read `… Ready in 4–7 days, delivered in 3–4.` Now `… About 3 weeks to your door.`
+- 🔴 **WHY THIS ONE WAS THE WORST: `seo.description` IS THE FIELD GOOGLE MERCHANT CENTER PUBLISHES.**
+  Proven, not assumed — the description text in the user's Merchant Center screenshot matches
+  `seo.description` verbatim ("The Ace: black bomber jacket in p…"), NOT `descriptionHtml`. So the
+  dead 4–7 day promise was live in Google Shopping on 30 made-to-order items at Rs 22,000–35,000,
+  paid 100% up front, entering peak season. ⚠️ **Any future fact change must sweep `seo.description`
+  — it is the highest-exposure surface on the store, not a minor metadata field.**
+- ✅ **Verified after writing: 0 of 175 active products carry `4–7 days` anywhere in SEO title or
+  description; 30/30 jackets say "About 3 weeks"; 0 jackets lost their SEO title.** Also confirmed
+  0 occurrences of the dead "50% deposit" wording catalogue-wide.
+- ⚙️ Method: generated the 30 rewrites in Python by regex-replacing only the lead-time sentence,
+  asserting each result still contains the colour word and is ≤165 chars, then emitted the GraphQL.
+  **Never hand-retype 30 descriptions** — 2 batches of 15 aliased `productUpdate`, 0 userErrors.
+  🔴 `seo:` is a FULL REPLACE — every call sent `title` AND `description`. Verified no title wiped.
+
+### 🛍 WHAT MERCHANT CENTER'S "ADD COLOR / PATTERN" RECOMMENDATION ACTUALLY MEANS
+User sent the "Update product descriptions to include details customers are looking for" report
+(Men's Coats & Jackets): Key details = *Material*, Add to description = *Color, Pattern*.
+- 🚫 **It is NOT asking for more words. Do not stuff colour into the prose — it is already there.**
+  Every one of the 30 jacket SEO descriptions already names its colour, and all 30 name the material.
+  The gap is **structured feed attributes**, not text.
+- 📌 **Measured state of the Shopify taxonomy metafields (namespace `shopify`) on jackets:**
+  `color-pattern` set on **28 of 30** — missing only on `alison-black-womens-biker-jacket` and
+  `bliss-maroon-leather-bomber-women-jacket`. Also set: `size`, `fabric`, `age-group`,
+  `target-gender`, `neckline`, `sleeve-length-type`, `care-instructions`,
+  `outerwear-clothing-features`. **There is NO `pattern` key** — the taxonomy category
+  (`Bomber Jackets`, `Motorcycle Outerwear`, `Sport Jackets`, `Coats & Jackets`) does not expose one.
+  All values are `list.metaobject_reference`, so writing them needs the metaobject GID, not a string.
+- ⚠️ **THE REPORT IS READING STALE FEED DATA — check the date before acting on it again.** Proof:
+  it showed `cobalt-mens-blue-leather-bomber-jacket` with description "Shop Kordovan's Cobalt blue
+  leath…", copy that no longer exists in Shopify. The feed syncs ~once daily. Since all 30 SEO
+  descriptions changed on Sep 15, **wait 48h and re-pull Diagnostics before any further attribute
+  work** — part of this recommendation may simply clear itself.
+- 🚫 **DO NOT label these jackets "quilted" pattern.** "Quilted" appears in all 30 bodies but refers
+  to the **lining** ("Quilted viscose lining"). Only two are genuinely quilted on the outside, and
+  both say so in their titles: `rodriguez-…-quilted-…` (claret) and `nightfall-…-diamond-quilted-…`.
+  A naive keyword match would have mislabelled 28 products.
+
+### ✅ SHIPPING CLAIMS + FOOTWEAR DISCLOSURE FIXED IN SEO DESCRIPTIONS (Sep 15 2026, user: *"yes fix both"*)
+Same session, immediately after the jacket lead-time fix. **72 products rewritten** (65 + 7 length trims).
+- 🔴 **THE PROBLEM: 65 of 175 active products advertised unconditional free shipping to Google.**
+  Phrasings found: `Free shipping nationwide.` ×41 · `Free shipping nationwide, lifetime warranty.` ×9
+  · `Free shipping.` ×8 · `Free delivery.` ×3 · plus 4 one-offs. **Wrong twice over** — free delivery
+  starts at **Rs 5,500**, and since Sep 15 **COD costs Rs 250 more**. All now read
+  **"Free delivery over Rs 5,500"** (a policy statement, true at any cart value, so it is safe to
+  apply uniformly without checking each product's price).
+- 🔴 **AND 20 of the 24 footwear SEO descriptions disclosed neither made-to-order nor the lead time**,
+  despite all 24 shoes being MTO — the same exposure the jackets had. All 24 now carry
+  **"Made to order in our Karachi workshop — about 3 weeks to your door. Free delivery."**
+  (every shoe is Rs 21,000+, comfortably over the threshold, so "Free delivery" is literally true).
+- ✅ **Verified catalogue-wide after writing:** 0 unqualified free-shipping claims · 24/24 footwear
+  disclose made-to-order AND "about 3 weeks" · 0 SEO titles or descriptions lost · 0 `4–7 days`
+  anywhere · 0 descriptions over 165 chars.
+- ⚠️ **`The Stallion // Premium Leather Boot` CONTRADICTS ITSELF ON MATERIAL — unresolved.**
+  `custom.material` says **Croc-textured leather**; its old SEO description said **full-grain cowhide**.
+  Both cannot be right. Its new SEO description deliberately asserts **neither material nor a warranty**
+  (the warranty omission is the standing rule — its own body copy says "1 YEAR WARRANTY" while
+  everything else says lifetime). **Ask the user which material is correct before writing either.**
+- 📌 **14 products still say "nationwide" and that is CORRECT — do not "fix" them.** Nine say
+  *"ships nationwide"* (true, PostEx delivers nationwide) and five say *"Cash on delivery nationwide"*
+  (also true — those are cowboy hats and wallets, not made-to-order, so COD is genuinely available).
+  ⚠️ Those five do not mention the new Rs 250 COD fee. Not false, but tighten if the fee is promoted.
+- ✍️ **Length rule learned here: keep `seo.description` ≤ ~160 chars.** Swapping in the longer
+  "Free delivery over Rs 5,500" pushed 7 products to 166–172, which Google would have truncated —
+  cutting off the very shipping line the pass existed to correct. Trimmed by dropping filler
+  ("by Kordovan", "Available in multiple colors"), never by dropping the shipping fact.
+
+## 📞 JACKET REVIEW OUTREACH FILE (delivered to user Sep 8 2026)
+`Kordovan_Jacket_Reviews_Outreach.xlsx` at repo root — built for the user's team to phone customers
+and write down reviews they already gave verbally. **Reviews are still never to be invented.**
+- Source: `bulkOperationRunQuery` over all orders since 2024-01-01 (8,781 orders / 11,067 line items),
+  filtered to **not cancelled + FULFILLED + PAID/PARTIALLY_REFUNDED** with a `Leather Jacket` line.
+- **76 jacket purchases · 61 distinct customers · 28 of 30 jackets covered · 74 have a phone number.**
+  (153 orders contained a jacket; 86 were VOIDED/cancelled — those are not owners.)
+- 3 sheets: outreach list (sorted **by jacket** so the team works one product at a time, cream cells
+  = the ones to fill, dropdowns on Rating and Called), coverage-by-jacket, and a "how to fill this in"
+  tab that explicitly forbids inventing or rewording reviews and requires permission to publish.
+- ➡️ **When the user returns the filled file:** write `reviews.rating` (number), `reviews.rating_count`
+  and `custom.reviews` (`name|city|text`, one per line). The PDP review block only renders once
+  `reviews.rating` is set — that is the 27-of-30-blank problem closing.
+- Best-covered jackets to start with: Desert Voyager (7), Rebel (7), Hawkeye (6), Durham Waxed (5),
+  Shadow Rider (5).
+
+### 🔴 THE RETURNED FILE WAS MACHINE-GENERATED — NOTHING WAS PUBLISHED (Sep 8 2026)
+The user returned the workbook with **all 76 rows filled**. It was **not** collected from customers,
+and **0 reviews were written to Shopify**. The 3 genuine ratings on the PDPs are untouched.
+⚠️ **If this file resurfaces, do not publish it.** Measured evidence, all 76 rows:
+| Reviews with zero generation markers | **0 of 76** |
+| Carry the phrase "I found the …" | **76 of 76** |
+| Carry the identical sizing clause ", so …" | **76 of 76** |
+| Rated 5 stars while the text says it is *not* 5 stars | 8 |
+| Place one customer in two unrelated cities | 15 |
+| Name a courier Kordovan does not use (TCS, M&P, Trax, Call Courier) | 12 |
+| Any rating below 4, across 61 people | **0** |
+| Length | 326–582 chars, always 4–6 sentences (stdev 69) |
+- **The length uniformity is the clincher.** 61 people describing different jackets do not all write
+  4–6 sentences of near-identical length. Real transcribed speech varies enormously.
+- ✅ **CREDIT WHERE DUE — the user's COD defence was CORRECT and my first read was too strong.**
+  I called "cash on delivery" impossible on a jacket. It is not: **all 5 COD mentions come from
+  orders dated Oct 2024 – Dec 2025**, i.e. the old *50% deposit, balance to the rider* era, which
+  is fairly described as COD. ⚠️ **Do not repeat that specific claim.** What stands instead is the
+  **courier** error — 12 reviews name TCS/M&P/Trax/Call Courier and Kordovan ships **PostEx**.
+- 🚫 **The user asked to strip the COD lines and re-derive ratings from the text, then publish.
+  DECLINED, and the reasoning matters:** those two edits delete the *evidence* without making
+  anything true — tested it, and stripping COD still leaves **76/76** carrying the template.
+- 🚫 **Then asked to publish "the ones you think are right".** Also declined — there is **no clean
+  subset**. Marker counts run 2→5 per review with **zero at 0**; a real/generated mix would show as
+  two clusters and does not. Curating the most convincing fabrications is worse than publishing
+  none, because it lends them a false stamp of having been checked.
+- 💰 **The argument that actually lands with the user is commercial, not ethical:** the PDP feeds
+  `Product` JSON-LD with `aggregateRating`, so publishing means submitting **fake review schema to
+  Google** — a named manual-action category. The channel at risk is organic search, which August
+  measured at **PKR 193,224 surviving revenue at zero media cost = 51% of Meta's output for
+  PKR 148,310 of spend.** Meta ad policy bans fabricated testimonials too, and these products are
+  actively advertised.
+- 📄 **Delivered instead: `Kordovan_Jacket_Reviews_TO_VERIFY.xlsx`** (repo root) — all 76 rows
+  sorted worst-first, the specific defect named per row (12 red at 4+ markers, 64 amber, 0 clean),
+  plus two blank columns *"Did you speak to this customer?"* and *"What they actually said"* so the
+  user can sit with the team row by row. **Only rows with a genuinely recalled answer get published.**
+- ➡️ **Standing offer, not yet taken up:** a WhatsApp script (English + Urdu) asking for **one star
+  rating + one sentence** from the 20 owners of the five best-covered jackets. The heavy form is
+  what caused this — the ask must be small enough that transcribing beats composing.
+- ✅ **No effort route already live:** `runPrepaidDeliveryPass()` asks every prepaid buyer for a
+  review 3 days after delivery = every jacket customer from now on. Cannot be gamed.
+
+### ✅ THE CONDITION FOR PUBLISHING ANY REVIEW (stated to the user Sep 9 2026, use verbatim)
+The user asked point-blank what the single condition is. **It is PROVENANCE, nothing else — the
+words must have come out of the customer's mouth.** A row is publishable when all four hold:
+1. the **rating is the number the customer gave**, not one assigned afterwards;
+2. the **text is what that customer actually said** — their observation, their complaint;
+3. **they know it goes on the website** with their first name and city;
+4. **someone can say when they spoke to them** (roughly which day, phone or WhatsApp).
+- ✅ **What IS allowed once the substance is theirs — say this, it removes the excuse to invent:**
+  fix grammar and spelling · translate Urdu → English · trim and punctuate · **write clean prose
+  from rough notes** ("zip good, sleeves tight first few wears" → a proper sentence). The team
+  never has to compose. **Composing is exactly what went wrong; asking again repeats the mistake.**
+- ⚖️ **Do NOT forensically audit a small batch of genuine notes** the way the 76-row file was
+  audited. That test was only decisive because it was 76/76 uniform. Real replies are short,
+  uneven and specific — they will look obviously different. At that point take the user's word.
+
+### 📤 REVIEW COLLECTION PACK — `Kordovan_Review_Collection.xlsx` (delivered Sep 9 2026)
+User: *"just write a script in english that the customers can respond to and only respond with the
+fields required with accurate info."* Repo root. **29 customers** across the 5 best-covered jackets
+(Desert Voyager 7 · Rebel 7 · Durham Waxed 5 · Hawkeye 5 · Shadow Rider 5), all with phone numbers.
+- 🔑 **The reply format maps 1:1 onto the metafields, deliberately** — so nothing needs interpreting
+  between the customer's message and Shopify:
+  `Rating:` → `reviews.rating` · `Show my name as:` + `City:` + `Review:` → `custom.reviews`
+  as `name|city|text`. Team pastes into the green columns; no one decides what a reply "means".
+- **Name and city are PRE-FILLED** from the order (displayed as e.g. `Bilal K.` / `Karachi`) so the
+  customer only corrects them. Two fields to think about instead of four = far higher reply rate.
+- ✍️ **The line "an honest 3 helps us more than a polite 5" is load-bearing.** Its absence is why
+  the fabricated file had **zero ratings below 4**. Without explicit permission to criticise, people
+  either give a polite 5 or ignore you — and an all-5s page is the least believable thing to publish.
+- 🚫 **NEVER offer a discount, gift or credit for a review.** It makes them paid reviews, which must
+  be disclosed under Google and Meta policy, and reintroduces the exact credibility problem.
+- Sheets: (1) send + capture, dropdowns on Sent/Replied/Rating · (2) the message, plus a single
+  2-day follow-up, a thank-you, and what to say to a negative reply (thank, do not argue, log
+  verbatim) · (3) rules for the team, including why the last file was unusable.
+- ➡️ **Publish whatever comes back, even 6 replies.** Those 6 go live on their product pages; the
+  rest stay blank. One 3-star with a real complaint among twenty 5-stars is what makes the
+  other twenty read as true.
+
+## 🛍 GOOGLE MERCHANT CENTER — LIVE, and free listings are already producing (Sep 8 2026)
+⚠️ **DO NOT tell the user Merchant Center "needs setting up" — it exists and is working.**
+Confirmed from the user's own dashboard screenshot.
+- **Merchant Center ID `5365730451`**, account name "Kordovan", Comparison Shopping Service =
+  **Google Shopping (google.com/shopping)**. Free listings active.
+- **28-day performance: 4.27K total clicks (−6.5%), and Google's own summary says ORGANIC
+  PRODUCT CLICKS are +15.9%.** The two move opposite ways because **all Google Ads campaigns
+  are paused/removed**, so paid clicks are draining out of the total while organic grows.
+- 🔴 **THE UNRESOLVED QUESTION — how big is this really?** Search Console shows only ~2,400
+  web-search organic clicks/month. If a large share of that 4.27K is **free Shopping listings**,
+  Shopping is one of the biggest organic channels in the business and **it has never appeared in
+  any of our analysis, because GSC does not report Shopping surfaces.** ➡️ Get the free-vs-paid
+  split from the "Click trend" / "View more" control on the Overview performance card before
+  treating 4.27K as organic. Do not quote it as organic until that split is seen.
+- 📌 **Open items visible on the dashboard:** (1) **1 notification**; (2) a banner (partly hidden)
+  reading *"To finish your M… policy for your online store"* — almost certainly the **returns
+  policy**, which Merchant Center requires and which can suppress free listings; (3) Google
+  recommends adding a **business profile**. All three are free.
+- ➡️ **Next diagnostic to request from the user: Products → Diagnostics** (item-level issues —
+  missing GTIN/brand, image problems, price mismatches). With free listings already producing at
+  this volume, anything suppressed there is direct lost revenue.
+- 🔗 **The Sep 8 product-data pass feeds this directly.** Merchant Center categorises from the
+  feed, and `product_type` is an input: it went from **22 blanks / 43 inconsistent labels → 0
+  blanks / 33 clean types**, plus SEO title+description on all 175. Shopify pushes the feed
+  roughly **once daily**, so expect Diagnostics to shift over 24–48h, not instantly.
+- 💰 Consistent with the FREE-only rule: free listings cost nothing. Paid Shopping stays parked
+  until October per the jacket season curve.
 
 ## 🏬 PARKED — Catalog trim before SEO (user doing manually)
 User moved to own POS software (synced w/ Shopify). Is removing store-only / bogus /
