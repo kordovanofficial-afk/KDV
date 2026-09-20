@@ -148,9 +148,27 @@ kordovan  (trunk)
   `shipping`, `returns`. **Easypaisa removed everywhere** (user: JazzCash only).
 - ⚠️ Footwear product descriptions carry NO payment wording (checked) — terms come only
   from the PDP template, so they were correct automatically.
-- 📌 **`snippets/returns.liquid` says MTO is non-returnable once production begins**, so the
-  cart drawer no longer shows a "7-day returns" badge on an MTO cart (shows lifetime
-  warranty instead). Keep those two consistent.
+- 🔴 **`snippets/returns.liquid` says MTO is non-returnable once production begins, so the
+  "7-day returns" badge must NEVER render on a made-to-order piece. THREE surfaces carry
+  that badge — all three are now gated, keep them consistent:**
+  | `snippets/pdp-main.liquid` | the `.kv-pdp__trust3` badge row beside the gallery | fixed Sep 20 2026 |
+  | `sections/main-cart.liquid` | the cart PAGE trust list | fixed Sep 20 2026 |
+  | `sections/cart-drawer.liquid` | the drawer trust row | was already correct |
+  MTO shows **"Lifetime warranty"** instead — true of every piece, and the wording the
+  cart drawer already used.
+  - ⚠️ **THE BUG IN BOTH FIXES WAS THE SAME AND IT IS EASY TO REPEAT: `mto` / `cart_mto`
+    was assigned BELOW the badge row.** Liquid evaluates top-down, so the flag was empty
+    (falsy) where the badge rendered and the 7-day promise showed on every product. Both
+    assignments are now hoisted above the first use and there is **exactly one `assign
+    mto = false` / `assign cart_mto = false` per file** — do not re-introduce a second
+    copy further down, or the two can drift apart.
+  - ✍️ Found because the user spotted it live on a jacket PDP. **The PDP was the one they
+    saw; the cart page had the identical defect and nobody had noticed.** When a badge is
+    wrong on one surface, grep every surface that renders it before calling it fixed.
+  - 📌 Not changed, deliberately: `sections/trust-bar.liquid` and `sections/hero-banner.liquid`
+    also say "7-day returns", but both render **only on the homepage** (`templates/index.json`)
+    as a general brand promise, not a product-level one. The exception is disclosed on the PDP
+    and the Returns page. Raise it if the user wants the homepage qualified too.
 - 🎯 **Expected effect on the ads problem:** jackets died at 25% survival in Aug because the
   deposit was never paid (6 of 8 orders). Requiring payment at checkout should collapse that
   pre-dispatch death rate AND make Meta's Purchase event genuinely accurate for jackets for
