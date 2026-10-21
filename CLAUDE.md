@@ -487,6 +487,25 @@ so the ad-set splits below are complete — no missing spend.
   to something nobody can buy. **Restock first, then retest** — this is the same "23 products
   invisible to catalogue ads" problem, and it is now blocking a proven ad set.
 
+## 🚨 OCT 2026 — JACKET CHECKOUTS ARE DYING AT PAYMENT (measured Oct 21 2026)
+The planned October ramp was NEVER executed: all 3 ad sets are still PKR 1,000/day, TOF-J is still on
+ViewContent, BOF DPA still paused. Before ramping, the measurement below says DO NOT scale jacket spend yet.
+- **Jacket demand is UP:** GSC "jacket" queries ~20 clicks/day (early Sep) → ~50/day (mid-Oct),
+  impressions ~700 → ~1,600/day, position ~10 → ~7. TOF-J sent 14,535 jacket clicks Oct 1–20 at PKR 1.39.
+- **Jacket sales COLLAPSED:** Oct 1–20 = 1 jacket order (KDV#22857, Rs 29,000, card) and it was
+  REFUNDED next day — staff event log: *"waiting for customer's reply regarding jacket size and processing
+  time"*. **Net jacket sales in October = 0.** (Late Sep: 5 orders / ~159k — so it worked before.)
+- 🔴 **~19 jacket checkouts ABANDONED Oct 1–20, ≈ PKR 748,000** (address entered, then left). Many are
+  9-city (Rawalpindi ×5, Lahore ×4, Islamabad ×2, Karachi, Hyderabad).
+- ✅ **The card gateway is NOT broken** — XPay card/online orders complete daily on wallets, hats,
+  laptop bags (incl. a 56,800 laptop-bag order Oct 21). The failure is jacket-specific.
+- **Diagnosis (most → least likely):** (1) prepaid 100% + "about 3 weeks" on a Rs 25–35k cold purchase —
+  the one paying buyer left over processing time; and every week further into the season the promised
+  date slides later; (2) the known dead end — MTO cart still SHOWS the COD shipping rate, then COD is
+  absent at payment; (3) TOF-J's cheap cold traffic (click→ATC 0.37% in Oct).
+- ➡️ **Do not raise TOF-J / jacket budget until checkout completion recovers.** More traffic into a
+  ~0% checkout is pure waste. TOF-J ViewContent pool (≈22k viewers Sep 21–Oct 20) is already huge.
+
 ## 🔌 Available integrations (MCP)
 Shopify, GitHub, Canva, Figma, Facebook Ads, Higgsfield, Cloudflare.
 (Playwright is NOT available in this remote env — design is done in code, then
