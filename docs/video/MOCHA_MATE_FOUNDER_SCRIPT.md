@@ -1,48 +1,62 @@
-# Mocha Mate — Founder Video Script (shoot Oct 22 2026)
+# Mocha Mate — Founder Video Script v2 (shoot Oct 22 2026)
 
-Facts verified live in Shopify on Oct 21 2026: Rs 3,200 · 44 in stock · genuine cow leather ·
-outer button coin pocket · ID window · 5–6 card slots + cash pocket · lifetime craftsmanship
-warranty · **153 sold (net) in the last 12 months**. Not made to order, so COD is available.
-Delivery is not free at this price (the threshold is Rs 5,500), so the script doesn't promise it.
+v1 (the coin angle) is DEAD. User: coins are barely used in Pakistan any more. The founder has
+carried a Mocha Mate daily for ~6 months and uses the back button pocket for keys and the
+small things worth keeping safe. v2 is built on that real use.
 
-Format: vertical 9:16 · master cut ~55s · cutdowns 30s and 15s from the same footage.
-Spoken in natural Urdu/English, with English captions burned in (most people watch muted).
+Verified live Oct 21 2026: Rs 3,200 · 44 in stock · genuine cow leather · outer button pocket ·
+ID window (a CNIC is standard card size) · 5–6 card slots + cash pocket · lifetime craftsmanship
+warranty · 153 sold (net) in 12 months · COD available (not made to order). Delivery is not free
+at this price (the threshold is Rs 5,500), so nothing promises it.
 
-| # | Time | Shot | Say | Caption |
-|---|---|---|---|---|
-| 1 | 0–3s | **HOOK.** Close-up: coins spill out onto a wooden table | "Yeh sikke… har roz meri jeb mein bikhre rehte thay." | Where do your coins go? |
-| 2 | 3–9s | Founder to camera, mid shot | "Market mein jitne slim wallets dekhe — cards ki jagah, cash ki jagah. Sikkon ki koi jagah nahi." | Slim wallets forget the coins. |
-| 3 | 9–14s | Founder to camera | "Main [naam] hoon, Kordovan ka founder. Hum Karachi mein apni workshop mein leather ka kaam khud karte hain — aur yeh wallet isi masle ka jawab hai." | [Name] · Founder, Kordovan |
-| 4 | 14–24s | **REVEAL.** Flip the wallet, show the back pocket, press the button close to the mic so the snap is heard | "Yeh hai Mocha Mate. Peeche dekhiye — button wala coin pocket. Sikke andar, button band. Bas." | A coin pocket — with a button |
-| 5 | 24–36s | Open it: slide in cards one by one, show the ID window, fold in notes | "Andar paanch se chhe cards, ID ke liye window, aur notes ke liye poori jagah. Phir bhi jeb mein bhaari nahi lagta." | 5–6 cards · ID window · cash pocket |
-| 6 | 36–44s | Macro: thumb across the grain, bend it, the stitching | "Asli cow leather hai — haath lagayein, farq mehsoos hoga. Aur har silai par hamari lifetime craftsmanship warranty hai." | Genuine cow leather · Lifetime warranty |
-| 7 | 44–50s | Founder to camera, wallet in hand | "Pichle ek saal mein ek sau pachaas se zyada logon ne yeh wallet liya hai." | 150+ sold this year |
-| 8 | 50–58s | Slide it into a back jeans pocket, then look into the lens | "Teen hazaar do sau rupay. Online pay karein ya cash on delivery — link neeche hai." | Rs 3,200 · kordovanleather.com |
+**Concept: "6 months in my pocket."** An honest founder review of their own wallet. Three ideas
+carry it: the hidden pocket, the CNIC window, and the 6-month patina next to a new wallet.
+Lines avoid gendered Urdu verbs so they work for any speaker.
 
-Cutdowns (no extra filming):
-- **30s:** 1 → 2 → 4 → 5 → 8
-- **15s:** 1 → 4 → 8
+## 3 hooks (film all three; the body is the same; Meta tests which one holds attention)
+- **A · Patina:** worn wallet in hand → "Chhe mahine se yeh wallet roz meri jeb mein hai. Dekhiye ab kya haal hai." | Caption: 6 months. Every single day.
+- **B · Hidden pocket:** open the back button → "Har wallet mein ek chupi jeb honi chahiye. Meri wali mein yeh rehta hai." (pull out the spare key) | Caption: Every wallet needs a secret pocket.
+- **C · Founder honesty:** to camera → "Apne hi brand ka wallet chhe mahine istemal kiya. Ab imaandari se batata/batati hoon kaisa nikla." | Caption: I tested my own wallet for 6 months.
+  (C is the one line that can't avoid a gendered verb. Pick the form that fits you.)
 
-## B-roll to film (5–10s each, no talking)
-1. Coins spilling onto the table, 3 takes
-2. Button pocket opening and snapping shut, macro
-3. Cards sliding in one at a time
-4. Thumb across the leather grain, then bending the wallet
-5. Wallet going into a back jeans pocket, and coming out
-6. Wallet flat on the table, slow push-in (the end card)
-7. Optional: the workshop or hands stitching, if you can film there
+## Body (~45s, after any hook)
+| # | Shot | Say | Caption |
+|---|---|---|---|
+| 1 | Founder to camera | "Main [naam], Kordovan ka founder. Yeh hai Mocha Mate — aur yeh meri apni hai, display wali nahi." | [Name] · Founder, Kordovan |
+| 2 | Flip it; snap the button close to the mic; take out what's REALLY in there | "Peeche button wali jeb. Meri mein ghar ki spare chaabi rehti hai, aur ek emergency note — jo tab yaad aata hai jab sach mein zaroorat ho." | The pocket for things you can't lose |
+| 3 | Slide the CNIC out of the window, then back | "CNIC is window mein. Naaka ho, bank ho — bas dikhao, nikalne ki zaroorat nahi." | CNIC window — show, don't dig |
+| 4 | Cards in, notes in, close it, into a back pocket | "Andar chhe cards tak, notes ki poori jagah — aur phir bhi jeb mein bhaari nahi lagta." | Up to 6 cards · cash pocket |
+| 5 | **The money shot:** new wallet beside the 6-month one, then a slow tilt of the worn one in window light | "Yeh naya hai. Yeh chhe mahine purana. Asli leather ghis-ta nahi — rang pakadta hai." | New vs 6 months. Real leather ages. |
+| 6 | Thumb along the stitching | "Silai abhi tak waisi hai. Aur waise bhi — har silai par lifetime warranty hai." | Lifetime craftsmanship warranty |
+| 7 | To camera | "Pichle saal ek sau pachaas se zyada logon ne yeh wallet liya." | 150+ sold this year |
+| 8 | To camera, holding it | "Teen hazaar do sau. Online pay karein ya cash on delivery — link neeche." | Rs 3,200 · kordovanleather.com |
+| 9 | (organic version only) | "Aur batayein — aap ke wallet ki chupi jeb mein kya hai? Comment mein likhein." | What's in YOUR secret pocket? 👇 |
 
-## Filming rules
-- Phone **vertical**, 4K or 1080p, **30fps**. Tap and hold to lock focus and exposure.
-- Light: a window **beside** you, never behind you. No overhead tube lights.
-- Background: plain wall or a wooden desk. Plain dark shirt, no logos.
-- Phone at eye level, about an arm's length away. **Look into the lens**, not at the screen.
-- Sound: a quiet room. Phone close, or a wired-earphone mic clipped to your collar. Fans off.
-- **Don't memorise.** Read one line, look up, say it. 2–3 takes per line. Pause 2 seconds before and after each one.
-- Record **10 seconds of silence** in the same room (used to clean the audio).
-- Don't edit, filter or trim anything. Send the raw files.
+Cuts from the same footage: **master ~50s** (hook + 1–8) · **30s** (hook + 2, 3, 5, 8) ·
+**15s** (hook + 5 + 8) · **organic Reel** = master + line 9 (the comment question drives reach).
+Each length gets all 3 hooks → 9 ad variants from one shoot.
 
-## Hand-off
-Send every raw clip. The edit: cut to the best takes, clean the audio, burn in captions,
-colour-grade to the Quiet Heritage palette, export the 55s / 30s / 15s versions in 9:16.
-Music is optional; it needs to be a track you have the rights to use.
+## B-roll (no talking, 5–10s each)
+1. Button pocket snapping open and shut, macro — the signature shot
+2. Spare key / note coming out of the back pocket
+3. CNIC sliding out of the window and back
+4. **New and 6-month wallets side by side**, top-down, then a slow push-in
+5. The worn wallet tilted in window light (the patina catching the light)
+6. Into and out of a back jeans pocket
+7. Everyday moments: on the car dashboard, on a café table next to chai, into a pocket at the door
+8. Optional: workshop / hands stitching
+
+## Honesty rules for the shoot
+- Only pull out what you **actually** keep in there. Real items read as real; staged ones don't.
+- The worn wallet must be **your real 6-month wallet**. Don't age a new one to fake it.
+- Don't say "best-seller" or quote numbers beyond the 150+ above.
+
+## Filming
+- Vertical, 30fps; tap and hold to lock focus and exposure. Window light from the side, never behind you.
+- Plain wall or wooden desk, plain dark shirt. Look into the lens. Phone at eye level.
+- Quiet room, fan off, phone close or a wired-earphone mic. Record 10s of silence at the end.
+- Read a line, look up, say it. 2–3 takes per line with a 2s pause before and after. Send raw files.
+
+## When it runs as an ad
+New ad set (TOF-A retest, 9 cities, refusers excluded), 3 hooks as separate ads. Write the kill
+threshold in rupees BEFORE launch. Read on day 3 and day 5; scale the winning hook, drop the others.
