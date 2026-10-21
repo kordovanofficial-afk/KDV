@@ -506,6 +506,27 @@ ViewContent, BOF DPA still paused. Before ramping, the measurement below says DO
 - ➡️ **Do not raise TOF-J / jacket budget until checkout completion recovers.** More traffic into a
   ~0% checkout is pure waste. TOF-J ViewContent pool (≈22k viewers Sep 21–Oct 20) is already huge.
 
+## 🎯 RT-J — jacket retarget (🟢 LIVE Oct 21 2026, user-approved) · TOF-J PAUSED same minute
+User: *"pause the TOF J and then retarget them as a purchase intent... follow a proper funnel"*.
+TOF-J had banked ~27k jacket ViewContent events (Sep 5–Oct 20) and nothing was harvesting them.
+- Ad set **`120255674363190428`** "RT-J | Jacket Viewers + ATC 30D | Purchase", inside the TOF-J campaign
+  `120254923437380428`. PKR 1,000/day (TOF-J's budget moved over → account total unchanged at 3,000/day).
+  `OFFSITE_CONVERSIONS` + **PURCHASE**, product set `1801176350880581` (30 jackets).
+- **Audience = `product_audience_specs`** (dynamic retargeting, no custom audience needed): ViewContent OR
+  AddToCart on a jacket in the last 30 days, minus jacket Purchase 30d; also excludes COD Refusers
+  `120253660257910428` + Purchasers 180D `120252468019140428`. 9 cities, no radius, FB+IG, A+A off.
+- Ad **`120255674366650428`**, creative **`948984301258821`** (catalog carousel, Advantage+ creative OFF).
+  ✍️ Copy targets the two objections the one refunded October buyer actually raised — **size** ("WhatsApp us
+  on 0333 2601161 before you pay") and **processing time** ("about three weeks… winter is our busiest
+  season"). Headline "Made for you. At your door in about 3 weeks." UTMs `utm_campaign=rtj_jackets_oct26`,
+  `utm_content={{placement}}`. No COD claim, no discount, no guarantee (not approved yet).
+- **TOF-J `120254923438760428` PAUSED** (verified `effective_status: PAUSED`). Restart cold only when RT-J
+  frequency climbs above ~4 (pool exhausted) or once jacket checkouts are completing again.
+- ⚠️ Purchase optimisation at 1,000/day will stay in learning — acceptable for a fixed retarget pool.
+  **Do not touch it for 72h. Read day 3 (Oct 24) and day 7 (Oct 28).** The win condition is a COMPLETED
+  jacket order, not CTR; the 19 October abandons say the bottleneck is checkout, so also watch
+  abandoned jacket checkouts in Shopify alongside Meta's numbers.
+
 ## 🔌 Available integrations (MCP)
 Shopify, GitHub, Canva, Figma, Facebook Ads, Higgsfield, Cloudflare.
 (Playwright is NOT available in this remote env — design is done in code, then
