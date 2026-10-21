@@ -60,3 +60,17 @@ Each length gets all 3 hooks → 9 ad variants from one shoot.
 ## When it runs as an ad
 New ad set (TOF-A retest, 9 cities, refusers excluded), 3 hooks as separate ads. Write the kill
 threshold in rupees BEFORE launch. Read on day 3 and day 5; scale the winning hook, drop the others.
+
+## Edit pipeline: what this environment can and can't do (checked Oct 21 2026)
+- ✅ ffmpeg 6.1 installed (cuts, `loudnorm`, `afftdn`/`arnndn` denoise, `ass` animated captions,
+  `lut3d` grading, `zoompan` punch-ins). npm and PyPI are reachable (Remotion for motion graphics,
+  `faster-whisper` installable). Google Fonts reachable (Fraunces + Inter for captions).
+- 🔴 **huggingface.co is BLOCKED**, so Whisper models can't download and there's no automatic transcription.
+  Fix: add `huggingface.co` to the environment's allowed domains. Fallback: align the script
+  text to the speech gaps (works when the founder sticks to the scripted lines).
+- 🔴 Claude can't HEAR audio. It works from waveforms, silence detection and sampled frames,
+  so the founder should review the draft and correct any take choice.
+- 🔴 Google Drive (the MCP auth fails; the hosts get a 403), Dropbox and WeTransfer are all blocked.
+  Transfer route = attach the files in the Claude chat; fallback = GitHub web upload (25MB per
+  file) to the session branch, NEVER to `kordovan`.
+- Film **1080p 30fps, one clip per line** → ~10–20MB per clip, small enough for either route.
