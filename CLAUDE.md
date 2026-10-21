@@ -431,6 +431,39 @@ Meta ROAS 2.22x · cost per purchase 3,800.
   windows only.
 - ⏳ `utm_content={{placement}}` is now CHECKABLE — TOF-J has its first 2 orders. Still unverified.
 
+## 🔴 OCTOBER READ (measured Oct 21 2026) — orders falling in peak season, TOF-J to be PAUSED
+Nothing in the ad account changed between Sep 5 and Oct 21: same 3 ad sets × PKR 1,000/day.
+- **Ad sets, Sep 13–Oct 20 (38 days):** Retarget 38,216 / 34 pur / 3.69x Meta (≈1.8x real, freq 6.4,
+  decaying from 9.22x early Sep) · TOF-C 38,153 / 30 / 4.31x (≈2.1x real) · **TOF-J 38,112 / 0 purchases**
+  (28,130 clicks, 27,477 ViewContent, 110 ATC, reach 215k). Account 114,480 → 2.67x Meta ≈ **1.3x real,
+  below the 2.22x break-even**. Real figures use the 2.05x factor — directional.
+- **Shopify orders/week:** Aug 10–Sep 6 ~48 · Sep 14–Oct 3 ~31 · Oct 5–17 ~25. Checkouts REACHED flat
+  (~90/wk); checkouts COMPLETED halved. Most likely main cause: **selling spend fell ~4,800/day (Aug) →
+  ~2,000/day** — TOF-A + DPA paused, a third of the budget moved to TOF-J which sells nothing.
+- **Jackets (Shopify, all channels): 8 orders Sep 13–Oct 20, ZERO since the week of Oct 5** (that one
+  cancelled). Peak season. Confirms TOF-J is not producing sales by any route.
+- **COD fee audit (144 web orders Sep 15–Oct 20):** prepaid 40 (28%, was <10% before) cancel **2.5%** ·
+  COD-on-COD-rate 44 cancel 30% · **COD-on-"Pay Online"-rate 60** cancel 30%. ➡️ **58% of COD buyers dodge
+  the Rs 250 fee** by picking the Pay Online rate (gap #1 in the COD-fee section, now the majority path).
+  User: *"lets leave the 3rd point alone for now"* — do NOT fix it unprompted; raise again later.
+- ✅ **USER APPROVED Oct 21: PAUSE TOF-J ad set `120254923438760428`.** ⏳ NOT YET EXECUTED — the Meta
+  connector dropped mid-session. Check its live status first; the user may have paused it manually.
+- ⏳ **NEXT (user asked "what should be done"): jacket-only RETARGETING ad set**, plan agreed in principle,
+  copy NOT yet approved, nothing built:
+  - New ad set in TOF-J campaign `120254923437380428`, PKR 1,000/day (the freed TOF-J money; total stays 3,000).
+  - Audience = Meta product-set retargeting on jacket set `1801176350880581`: ViewContent or AddToCart in
+    last 30 days, excluding Purchase. ~18k people. Exclude COD Refusers + Purchasers 180D; 9 cities, no
+    radius; `advantage_audience: 0`. Optimise PURCHASE. Advantage+ Creative OFF. No discount code.
+  - Copy must answer the checkout blockers (prepaid + 3 weeks), not re-pitch. Draft offered to user:
+    *"Still thinking it over? Every Kordovan jacket is cut for one customer in our Karachi workshop — which
+    is why it's paid in full at checkout, and why it can never be resold. Winter is our busiest season, so
+    allow about three weeks to your door. Every piece carries a lifetime craftsmanship warranty. Not sure
+    of your size? Message us before you order and we'll help."* — asked user for a WhatsApp number to use.
+  - **Kill rule: 0 jackets after 14 days / PKR 14,000 → stop.** Early check: 0 ATC by day 5 = setup fault.
+    (7 days was rejected: ~37% chance a working ad shows 0 sales in a week by chance; 14 days ≈ 13%.)
+    One paid jacket ≈ 17,000 gross profit, so a single sale in 14 days pays for the test.
+  - Build it PAUSED, show the preview, activate only on the user's go.
+
 ## 📊 SEP 1–8 vs AUG 1–8 LIKE-FOR-LIKE (measured Sep 9 2026 — the account turned profitable)
 User: *"hows our ad perfromance going for all ads running this month against the performance within
 same dates last month"*. Both windows reconcile EXACTLY to account totals (25,772.96 / 45,176.22),
