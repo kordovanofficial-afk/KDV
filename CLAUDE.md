@@ -512,7 +512,7 @@ TOF-J had banked ~27k jacket ViewContent events (Sep 5–Oct 20) and nothing was
 - Ad set **`120255674363190428`** "RT-J | Jacket Viewers + ATC 30D | Purchase", inside the TOF-J campaign
   `120254923437380428`. PKR 1,000/day (TOF-J's budget moved over → account total unchanged at 3,000/day).
   `OFFSITE_CONVERSIONS` + **PURCHASE**, product set `1801176350880581` (30 jackets).
-- **Audience = `product_audience_specs`** (dynamic retargeting, no custom audience needed): ViewContent OR
+- ~~**Audience = `product_audience_specs`**~~ (REPLACED Oct 22, see below — it never delivered): ViewContent OR
   AddToCart on a jacket in the last 30 days, minus jacket Purchase 30d; also excludes COD Refusers
   `120253660257910428` + Purchasers 180D `120252468019140428`. 9 cities, no radius, FB+IG, A+A off.
 - Ad **`120255674366650428`**, creative **`948984301258821`** (catalog carousel, Advantage+ creative OFF).
@@ -522,6 +522,16 @@ TOF-J had banked ~27k jacket ViewContent events (Sep 5–Oct 20) and nothing was
   `utm_content={{placement}}`. No COD claim, no discount, no guarantee (not approved yet).
 - **TOF-J `120254923438760428` PAUSED** (verified `effective_status: PAUSED`). Restart cold only when RT-J
   frequency climbs above ~4 (pool exhausted) or once jacket checkouts are completing again.
+- 🔴 **DAY-1 FAILURE + FIX (Oct 22 2026): RT-J had 0 impressions for ~20h** although campaign, ad set and ad
+  were all ACTIVE with no errors and the pixel matched 99.99% (~1,000 jacket ViewContent/day).
+  **The `product_audience_specs` (catalogue dynamic retarget) audience never started delivering.**
+  ➡️ Replaced with a plain website custom audience, the same pattern the working Retarget ad set uses:
+  **`120255689014190428` "KV — Jacket Page Visitors 30D (RT-J)"** = pixel URL i_contains `jacket` OR
+  `hawkeye` (29 of 30 jacket handles contain "jacket"; Hawkeye's is `hawkeye-…-vintage-coat-s012`).
+  Also catches the jacket collection pages. Prefill on. Ad set re-entered review (IN_PROCESS) Oct 22
+  19:46 PKT. ✍️ **Lesson: for retargeting in this account, use a website custom audience,
+  not `product_audience_specs`.** The catalogue ad still picks which jackets to show.
+  ⚠️ If a jacket is ever added WITHOUT "jacket" in its handle, add it to this audience's rule.
 - ⚠️ Purchase optimisation at 1,000/day will stay in learning — acceptable for a fixed retarget pool.
   **Do not touch it for 72h. Read day 3 (Oct 24) and day 7 (Oct 28).** The win condition is a COMPLETED
   jacket order, not CTR; the 19 October abandons say the bottleneck is checkout, so also watch
