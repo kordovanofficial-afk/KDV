@@ -74,3 +74,9 @@ threshold in rupees BEFORE launch. Read on day 3 and day 5; scale the winning ho
   Transfer route = attach the files in the Claude chat; fallback = GitHub web upload (25MB per
   file) to the session branch, NEVER to `kordovan`.
 - Film **1080p 30fps, one clip per line** → ~10–20MB per clip, small enough for either route.
+
+## Raw clip retention rule (user, Oct 23 2026)
+Raw clips live in `mocha-mate/` on the session branch. **Do NOT delete any raw clip until the user
+has signed off on the FINAL versions of every cut** (all edits, enhancements and re-cuts done).
+Deletion happens only on their explicit go-ahead. Until then, never merge this branch into `kordovan`
+with the clips in it.
