@@ -80,3 +80,31 @@ Raw clips live in `mocha-mate/` on the session branch. **Do NOT delete any raw c
 has signed off on the FINAL versions of every cut** (all edits, enhancements and re-cuts done).
 Deletion happens only on their explicit go-ahead. Until then, never merge this branch into `kordovan`
 with the clips in it.
+
+## Scene map (built Oct 24 2026 from Whisper transcripts of the 34 clips in `mocha-mate/`)
+⚠️ The clips in `mocha-mate/` are HandBrake copies (encoder tag `HandBrake 1.11.2`, 1080×1080 with SAR 9:16 =
+vertical, but only ~608px of real width, ~0.75 Mbps). The user's true iPhone originals are being pushed in
+batches to `mocha-mate/originals/`. **Sort on the copies, render from the originals.**
+⚠️ ffprobe reports these as 1080×1080. ALWAYS read `sample_aspect_ratio` before calling a clip square
+(that mistake was made once). Strip metadata on export (`-map_metadata -1`): the clips carry the GPS location.
+
+| Scene | Clips (take) | Pick | Why |
+|---|---|---|---|
+| H1 New vs 6 months | 1479 (false start) · 1480 (cut short) · 1481 t1 · 1482 t2 · 1483 t3 | **1483** (alt 1481) | complete line; t2 has a slip ("meri jebna") |
+| H2 Secret pocket | 1484 t1 · 1485 t2 · 1486 t3 · 1487 t4 · 1488 t5 | **1485** (alt 1487) | cleanest complete line, keys named |
+| H3 Honest review | 1489 t1 (slate misheard as S3) · 1490 t2 | **1490** (alt 1489) | complete honest-review line |
+| S1 Who I am | 1491 t1 · 1492 t2 | **1492** | name + "co-founder of Kordovan Leather" clearly said |
+| S2 Pocket demo | 1493 t1 · 1494 t2 | **1494** | tighter: "spare keys aur change" |
+| S3 CNIC | 1495 t1 · 1496 t2 · 1497 t3 · 1500 t4 | **1497** (alt 1495) | short; 1495 is longer, names checkposts + banks |
+| S4 Inside | 1501 t1 · 1502 t2 (cut) · 1503 t3 | **1503** | cards + cash + "never feels bulky" |
+| S5 Patina | 1504 only | **1504** | |
+| S6 Stitching | 1505 only | **1505** | |
+| S7 Proof | 1506 (false start) · 1507 t2 · 1508 t3 · 1509 (slate only) · 1510 t4 | **1508** + caption "4,000+ wallets sold since 2021" | see claim check |
+| S8 Offer | 1511 t1 · 1512 t2/3 | **1512** | complete, ends on "link neeche" |
+| S9 Comment ask | not shot | on-screen text instead | organic version only |
+| B-roll | 1498, 1499 (short, near-silent) + macro shots inside H2/S2 takes | cutaways | dedicated B-roll mostly not shot |
+
+**Claim checks (Shopify, Oct 24 2026):** wallets sold online since 2021 = **4,134** (150 · 271 · 608 · 785 ·
+1,421 · 899) → "thousands of wallets in 5 years" is TRUE. Mocha Mate alone = **523** since launch in 2023
+→ "thousands of THESE wallets" (take 1510) is FALSE. Do not use 1510.
+S4 says "6 to 12 cards"; the PDP says 5–6 card slots → user to confirm before captioning a number.
