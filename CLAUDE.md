@@ -532,6 +532,9 @@ TOF-J had banked ~27k jacket ViewContent events (Sep 5–Oct 20) and nothing was
   19:46 PKT. ✍️ **Lesson: for retargeting in this account, use a website custom audience,
   not `product_audience_specs`.** The catalogue ad still picks which jackets to show.
   ⚠️ If a jacket is ever added WITHOUT "jacket" in its handle, add it to this audience's rule.
+- ✅ **FIX CONFIRMED Oct 23 2026: RT-J is delivering.** First ~day after the audience swap: spend 1,750 ·
+  impr 4,991 · reach 3,018 · freq 1.65 · 297 link clicks (CTR ~6%, CPC ~5.9) · CPM 351 · 265 VC · 2 ATC ·
+  2 IC · 0 purchases. Audience `120255689014190428` operation status 200 (Normal). Too early to judge.
 - ⚠️ Purchase optimisation at 1,000/day will stay in learning — acceptable for a fixed retarget pool.
   **Do not touch it for 72h. Read day 3 (Oct 24) and day 7 (Oct 28).** The win condition is a COMPLETED
   jacket order, not CTR; the 19 October abandons say the bottleneck is checkout, so also watch
