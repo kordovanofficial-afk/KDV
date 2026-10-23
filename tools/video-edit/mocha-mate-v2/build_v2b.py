@@ -4,7 +4,8 @@ import numpy as np
 
 S = os.path.abspath("..")
 FONTS = f"{S}/fonts"
-OUT = "v2"
+OUT = os.environ.get("CUT_OUT", "v2")
+OUTFILE = os.environ.get("CUT_FILE", "Mocha_Mate_Master_v2.mp4")
 ORIG = "/home/user/KDV/mocha-mate/originals/IMG_{}.MOV"
 GRADE = "eq=contrast=1.06:saturation=1.08:gamma=0.98,colorbalance=rs=0.03:bs=-0.03:rm=0.02:bm=-0.02"
 TL = json.load(open(f"{OUT}/timeline.json"))
@@ -35,6 +36,12 @@ HEAD = {
 KEYWORDS = {"naya", "chhe", "pocket", "keys", "cnic", "12", "cards", "patina", "lifetime", "thousands", "3,200", "neeche"}
 # B-roll inserts: (clip, src_in, src_out, anchor) — anchor = (segment, roman word that starts the insert)
 INSERTS = [(1485, 6.0, 8.3, ("S2", "special")), (1485, 9.9, 11.6, ("S2", "spare")), (1481, 3.9, 6.9, ("S5", "Ye"))]
+END_OVERRIDE = None
+if os.path.exists(f"{OUT}/cut.json"):
+    _c = json.load(open(f"{OUT}/cut.json"))
+    TEXT = {**TEXT, **_c["text"]}
+    INSERTS = [(i[0], i[1], i[2], (i[3], i[4])) for i in _c["inserts"]]
+    END_OVERRIDE = _c["end"]
 
 def t(s):
     h, s = divmod(max(s, 0), 3600); m, s = divmod(s, 60)
@@ -149,7 +156,7 @@ def whoosh():
 def pop():
     n = int(0.09 * SR); tt = np.arange(n) / SR
     return np.sin(2 * np.pi * (520 + 900 * tt) * tt) * np.exp(-55 * tt) * 0.22
-END = 3.4
+END = END_OVERRIDE or 3.4
 total = BODY + END
 sfx = np.zeros(int((total + 1) * SR))
 def place(sig, at):
@@ -201,5 +208,5 @@ run(["ffmpeg", "-nostdin", "-y", "-loglevel", "error", "-i", f"{OUT}/voice_eq.wa
      f"[0:a]apad=pad_dur={END}[vo];[vo][1:a]amix=inputs=2:duration=first:normalize=0,loudnorm=I=-14:TP=-1.5:LRA=11,aresample=48000",
      "-ac", "2", "-c:a", "aac", "-b:a", "192k", f"{OUT}/audio.m4a"])
 run(["ffmpeg", "-nostdin", "-y", "-loglevel", "error", "-i", f"{OUT}/video.mov", "-i", f"{OUT}/audio.m4a", "-map", "0:v", "-map", "1:a",
-     "-c:v", "copy", "-c:a", "copy", "-shortest", "-map_metadata", "-1", "-movflags", "+faststart", "Mocha_Mate_Master_v2.mp4"])
+     "-c:v", "copy", "-c:a", "copy", "-shortest", "-map_metadata", "-1", "-movflags", "+faststart", OUTFILE])
 print("done", round(BODY + END, 2), "s")
