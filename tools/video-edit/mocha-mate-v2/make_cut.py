@@ -4,10 +4,14 @@ mid-segment cut points snap to the nearest real pause in the de-echoed voice."""
 import json, os, re, subprocess, sys
 
 NAME = sys.argv[1]
-SRC = "v2"
+SRC = os.environ.get("CUT_SRC", "v2")
 CUTS = {
  "30s": {"ranges": [("H1", 0, 14), ("S2", 0, 25), ("S5", 0, 24), ("S8", 7, 24)], "end": 2.8,
          "inserts": [[1485, 6.0, 8.3, "S2", "special"], [1485, 9.9, 11.6, "S2", "spare"], [1481, 3.9, 6.9, "S5", "Ye"]]},
+ "30s_h3": {"ranges": [("H3", 0, 37), ("S2", 0, 10), ("S2~2", 16, 25), ("S5", 14, 24), ("S8", 7, 24)], "end": 2.8,
+            "inserts": [[1485, 6.0, 8.3, "S2", "special"], [1485, 9.9, 11.6, "S2~2", "spare"], [1481, 4.2, 6.6, "S5", "Real"]]},
+ "15s_h3": {"ranges": [("H3", 0, 14), ("S5", 14, 24), ("S8", 7, 12)], "end": 2.6,
+            "inserts": [[1481, 4.2, 6.6, "S5", "Real"]]},
  "15s": {"ranges": [("H1", 0, 14), ("S5", 14, 24), ("S8", 7, 12)], "end": 2.6,
          "inserts": [[1481, 4.2, 6.6, "S5", "Real"]]},
 }
@@ -41,9 +45,10 @@ def snap(t, side):
 
 ranges, text, newsegs, acc = [], {}, [], 0.0
 for sid, i0, i1 in cfg["ranges"]:
-    tw = timed(sid); roman = TEXT[sid].split()
-    a = SEGS[sid]["t0"] if i0 == 0 else snap(tw[i0][0], "start")
-    b = SEGS[sid]["t1"] if i1 == len(roman) - 1 else snap(tw[i1][1], "end")
+    bid = sid.split("~")[0]
+    tw = timed(bid); roman = TEXT[bid].split()
+    a = SEGS[bid]["t0"] if i0 == 0 else snap(tw[i0][0], "start")
+    b = SEGS[bid]["t1"] if i1 == len(roman) - 1 else snap(tw[i1][1], "end")
     a, b = round(a * 30) / 30, round(b * 30) / 30
     ranges.append((sid, a, b)); text[sid] = " ".join(roman[i0:i1 + 1])
     newsegs.append({"id": sid, "t0": acc, "t1": acc + (b - a)}); acc += b - a
@@ -59,9 +64,10 @@ with open(f"{OUT}/list.txt", "w") as lst:
         lst.write(f"file '{p}'\n")
 subprocess.run(["ffmpeg", "-nostdin", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", f"{OUT}/list.txt",
                 "-c", "copy", f"{OUT}/body_raw.mov"], check=True)
-sel = "+".join(f"between(t,{a:.4f},{b:.4f})" for _, a, b in ranges)
+_fc = ";".join(f"[0:a]atrim=start={a:.5f}:end={b:.5f},asetpts=PTS-STARTPTS[a{i}]" for i, (_, a, b) in enumerate(ranges))
+_fc += ";" + "".join(f"[a{i}]" for i in range(len(ranges))) + f"concat=n={len(ranges)}:v=0:a=1[out]"
 subprocess.run(["ffmpeg", "-nostdin", "-y", "-loglevel", "error", "-i", f"{SRC}/voice_eq.wav",
-                "-af", f"aselect='{sel}',asetpts=N/SR/TB", f"{OUT}/voice_eq.wav"], check=True)
+                "-filter_complex", _fc, "-map", "[out]", f"{OUT}/voice_eq.wav"], check=True)
 def remap(t):
     acc2 = 0.0
     for _, a, b in ranges:

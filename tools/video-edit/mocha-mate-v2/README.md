@@ -14,3 +14,13 @@ Run from a scratchpad `edit/` dir with ../vid-env, ../models, ../fonts, ../bin/d
 - 15s = H1 → S5 "Real leather kabhi flake nahi karta…" (desk insert) → S8 "sirf aur sirf 3,200 rupay ka." → end card 2.6s = 14.1s
 - Mid-scene cuts snap to real pauses (silencedetect −40dB on the de-echoed voice, ±0.45s).
 - Loudness ~−16 LUFS integrated (Meta/IG normalise; fine).
+
+## H3 variant + sync fix (Oct 24 2026)
+- H3 ("honest review", clip 1490) replaces H1: `V_OUT=v2h3 V_SEGS=segments_h3.json python3 build_v2.py && ./fixaudio.sh v2h3 && V_OUT=v2h3 python3 tighten.py`
+  then `CUT_OUT=v2h3 CUT_FILE=Mocha_Mate_Master_H3.mp4 python3 build_v2b.py`, cuts `30s_h3` / `15s_h3` with `CUT_SRC=v2h3`.
+- Multi-range scenes use continuation ids (`S2~2`): no flash, headline held, inserts can anchor to them.
+- ⚠️ NEVER cut audio with `aselect between(t,…)` — it works per ~21ms audio frame and drifts up to ~80ms over
+  20 cuts. Use per-interval `atrim` + `concat` (sample-exact). After the fix: video == voice on all six outputs
+  (H1 30s within 1 frame).
+- ⚠️ Long hook titles overflow at 124px Fraunces — split onto two lines (`\N`) at ~104px.
+- Final set delivered: Master/30s/15s × H1 (v2) and × H3.

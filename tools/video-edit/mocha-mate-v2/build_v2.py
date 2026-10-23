@@ -6,7 +6,7 @@ import numpy as np
 S = os.path.abspath("..")
 ORIG = "/home/user/KDV/mocha-mate/originals/IMG_{}.MOV"
 FONTS = f"{S}/fonts"
-OUT = "v2"
+OUT = os.environ.get("V_OUT", "v2")
 os.makedirs(f"{OUT}/pieces", exist_ok=True)
 GRADE = "eq=contrast=1.06:saturation=1.08:gamma=0.98,colorbalance=rs=0.03:bs=-0.03:rm=0.02:bm=-0.02"
 FPS = 30
@@ -18,7 +18,7 @@ def probe_dur(p):
     return float(subprocess.run(["ffprobe", "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", p],
                                 capture_output=True, text=True).stdout)
 
-SEGS = json.load(open("segments.json"))
+SEGS = json.load(open(os.environ.get("V_SEGS", "segments.json")))
 
 # ---------- A. speech pieces (jump cuts) ----------
 def speech_pieces(clip, a, b, noise="-35dB", minsil=0.30, pad=0.09):

@@ -18,6 +18,7 @@ def run(cmd):
     subprocess.run(cmd, check=True)
 
 TEXT = {
+ "H3": "Pichle 6 mahine se main apne brand ka Mocha Mate wallet use kar raha hoon, aur ab time aa gaya hai ke main ek honest review de sakoon aap sab logon ko ke mujhe ye wallet kaisa hai?",
  "H1": "Ek naya hai. Ek chhe mahine se mere istemaal mein. Aap bata sakte hain kaun sa?",
  "S1": "Mera naam Asad Janjua hai. I am the co-founder of Kordovan Leather.",
  "S2": "Is wallet ki ek special pocket iski back side par hai, jo safe aur secure hai, aur main ismein apni spare keys aur change rakhta hoon.",
@@ -29,11 +30,12 @@ TEXT = {
  "S8": "Genuine leather wallet, jiski lifetime guarantee hai, sirf aur sirf 3,200 rupay ka. Order ke liye COD ya online pay karein, link neeche diya hai.",
 }
 HEAD = {
+ "H3": "Founder's honest review",
  "H1": "NEW vs. 6 MONTHS", "S1": "Founder · Kordovan", "S2": "The secret back pocket",
  "S3": "CNIC window", "S4": "6–12 cards + cash", "S5": "Real leather ages",
  "S6": "Lifetime craftsmanship warranty", "S7": "4,000+ wallets sold since 2021", "S8": "Rs 3,200",
 }
-KEYWORDS = {"naya", "chhe", "pocket", "keys", "cnic", "12", "cards", "patina", "lifetime", "thousands", "3,200", "neeche"}
+KEYWORDS = {"naya", "chhe", "pocket", "keys", "cnic", "12", "cards", "patina", "lifetime", "thousands", "3,200", "neeche", "honest", "review"}
 # B-roll inserts: (clip, src_in, src_out, anchor) — anchor = (segment, roman word that starts the insert)
 INSERTS = [(1485, 6.0, 8.3, ("S2", "special")), (1485, 9.9, 11.6, ("S2", "spare")), (1481, 3.9, 6.9, ("S5", "Ye"))]
 END_OVERRIDE = None
@@ -86,17 +88,26 @@ FLASH = r"{\an7\pos(0,0)\p1\c&HEAF2F7&\alpha&HFF&\t(0,50,\alpha&H70&)\t(50,200,\
 
 for i, sid in enumerate(ORDER):
     a, b = SEGS[sid]["t0"], SEGS[sid]["t1"]
-    if i > 0:
+    if i > 0 and "~" not in sid:
         ev.append(f"Dialogue: 5,{t(a)},{t(a + 0.22)},Fx,,0,0,0,,{FLASH}")
         whooshes.append(a - 0.12)
-    if sid == "H1":
+    base = sid.split("~")[0]
+    HOOKS = {"H1": ("NEW vs. 6 MONTHS", "Can you tell?"), "H3": (r"{\fs104}6 MONTHS WITH\N{\fs104}MY OWN WALLET", "Honest review")}
+    if "~" in sid:
+        continue_seg = True
+    else:
+        continue_seg = False
+    if base in HOOKS and i == 0:
+        h1, h2 = HOOKS[base]
         ev.append(f"Dialogue: 3,{t(a)},{t(min(b, a + 2.6))},Hook,,0,0,0,,"
-                  r"{\fscx60\fscy60\t(0,180,\fscx100\fscy100)\fad(0,200)}NEW vs. 6 MONTHS" r"\N{\fs84\c&H5C8BC0&}Can you tell?")
+                  r"{\fscx60\fscy60\t(0,180,\fscx100\fscy100)\fad(0,200)}" + h1 + r"\N{\fs84\c&H5C8BC0&}" + h2)
         ev.append(f"Dialogue: 2,{t(a + 2.6)},{t(b)},Head,,0,0,0,,"
-                  rf"{{\move(-700,250,70,250,0,260)\fad(0,150)}}{HEAD[sid]}")
+                  rf"{{\move(-700,250,70,250,0,260)\fad(0,150)}}{HEAD[base]}")
+    elif continue_seg:
+        ev.append(f"Dialogue: 2,{t(a)},{t(b)},Head,,0,0,0,,{{\\pos(70,250)}}{HEAD[base]}")
     else:
         ev.append(f"Dialogue: 2,{t(a + 0.05)},{t(b)},Head,,0,0,0,,"
-                  rf"{{\move(-700,250,70,250,0,260)\fad(0,150)}}{HEAD[sid]}")
+                  rf"{{\move(-700,250,70,250,0,260)\fad(0,150)}}{HEAD[base]}")
     # captions: 2-word chunks, pop-in, active word cognac, keyword emphasis
     words = timed_by_seg[sid]
     chunks, cur = [], []

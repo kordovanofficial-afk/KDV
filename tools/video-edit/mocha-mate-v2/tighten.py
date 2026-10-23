@@ -2,7 +2,7 @@
 Each kept interval alternates a 1.0 / 1.09 punch-in. Rewrites v2/body_raw.mov, voice_eq.wav, words.json, timeline.json."""
 import json, os, shutil, subprocess
 
-OUT = "v2"; MAXGAP = 0.28; KEEP = 0.12
+OUT = os.environ.get("V_OUT", "v2"); MAXGAP = 0.28; KEEP = 0.12
 for f in ["body_raw.mov", "voice_eq.wav", "words.json", "timeline.json"]:
     if not os.path.exists(f"{OUT}/untight_{f}"):
         shutil.copy(f"{OUT}/{f}", f"{OUT}/untight_{f}")
@@ -44,9 +44,10 @@ with open(f"{OUT}/tight/list.txt", "w") as lst:
         lst.write(f"file '{i:03d}.mov'\n")
 subprocess.run(["ffmpeg", "-nostdin", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", f"{OUT}/tight/list.txt",
                 "-c", "copy", f"{OUT}/body_raw.mov"], check=True)
-sel = "+".join(f"between(t,{a:.3f},{b:.3f})" for a, b in keep)
+_fc = ";".join(f"[0:a]atrim=start={a:.5f}:end={b:.5f},asetpts=PTS-STARTPTS[a{i}]" for i, (a, b) in enumerate(keep))
+_fc += ";" + "".join(f"[a{i}]" for i in range(len(keep))) + f"concat=n={len(keep)}:v=0:a=1[out]"
 subprocess.run(["ffmpeg", "-nostdin", "-y", "-loglevel", "error", "-i", f"{OUT}/untight_voice_eq.wav",
-                "-af", f"aselect='{sel}',asetpts=N/SR/TB", f"{OUT}/voice_eq.wav"], check=True)
+                "-filter_complex", _fc, "-map", "[out]", f"{OUT}/voice_eq.wav"], check=True)
 words["words"] = [[remap(w[0]), remap(w[1]), w[2], w[3]] for w in W]
 json.dump(words, open(f"{OUT}/words.json", "w"), ensure_ascii=False)
 for s in TL["segs"]:
