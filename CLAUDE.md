@@ -1503,6 +1503,9 @@ ad set… put in any dummy video for now as draft"*.
   Campaign **`120255717719930428`** (catalogue link cleared, `promoted_object: []`) · ad sets **`120255717721520428`** H1
   Comparison + **`120255717721900428`** H3 Founder Voice — same settings as below, verified VALIDATED with 0 errors.
   **User builds both ads in Ads Manager.** All older IDs below are dead.
+  🟢 **PUBLISHED Oct 24 2026 by the user.** Ad sets ACTIVE at PKR 1,000/day each. User-built ads: `120255717749990428`
+  "Comparison" (creative `1789159075513560`, VIDEO, ACTIVE) · `120255717819950428` "Foudner ad" (creative `1754735512261830`,
+  VIDEO, IN_PROCESS = in Meta review at check). **Day-3 read Oct 27, day-5 Oct 29** against the kill rule below.
 - Campaign **`120255717556140428`** "TOF-M | Mocha Mate Founder Videos | Oct 2026" · OUTCOME_SALES · ABO · no catalogue.
 - Ad sets (each `daily_budget` 100000 minor units = **PKR 1,000/day**, OFFSITE_CONVERSIONS PURCHASE, pixel 1865080707652548,
   9 cities no radius, home+recent, LLA 1% `120254216730060428` + 3% `120254216735280428`, excl Purchasers 180D
