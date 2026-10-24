@@ -1486,25 +1486,28 @@ template settings — Shopify's editor strips collection/handle settings from
 Edit theme → push to draft theme `165057069296` (via Shopify) → review in browser
 → iterate. Keep to the BRAND_MOODBOARD spec at every step.
 
-## 🎬 TOF-M — Mocha Mate founder-video test (STAGED Oct 24 2026, DRAFT — user publishes)
-User: *"create the whole campaign and adset and ads for the comparison one and the founder voice one,
-ill put in the relevant videos in them myself… ill only put the videos in each and then publish"*.
-- **Economics (user, Oct 24):** price 3,200 · COGS 950 · delivery 150–200 → GP ≈ **2,050 (64%)**.
-  Break-even ≈ **PKR 2,050 per surviving order ≈ ~1,300 per Meta-reported purchase** (~65% survival).
-  ✅ Stock checked first: Mocha Mate `mocha-mate` ACTIVE, **43 units, availableForSale** (the Sep blocker is gone).
-- Campaign **`120255717326670428`** "TOF-M | Mocha Mate Founder Video | Oct 2026" · OUTCOME_SALES · ABO.
-- **Two ad sets (one video each, so each creative gets guaranteed spend; one ad set would let Meta starve one
-  within a day):** `120255717327420428` "H1 Comparison" · `120255717329470428` "H3 Founder Voice".
-  Each PKR 1,000/day (budget not stated by user — staged at the account standard, **adds 2,000/day → 5,000 total**),
-  OFFSITE_CONVERSIONS PURCHASE, pixel 1865080707652548, 9 cities no radius, home+recent, LLA 1% `120254216730060428`
-  + 3% `120254216735280428`, excl Purchasers 180D + COD Refusers + Delivered SEED, FB+IG, A+A off.
-- Ads (copy final; media is a product-photo PLACEHOLDER the user swaps for the video in Ads Manager):
-  `120255717333410428` H1 (creative `4484313618489411`, `utm_content=h1_comparison`) ·
-  `120255717333850428` H3 (creative `1116898687861976`, `utm_content=h3_founder`).
-  UTMs: `utm_source=facebook&utm_medium=paid_social&utm_campaign=tofm_mochamate_oct26&utm_term={{placement}}`.
-  CTA SHOP_NOW, Advantage+ creative OFF. Videos: `Mocha_Mate_30s_v2.mp4` (H1) / `Mocha_Mate_30s_H3.mp4` (H3).
-- ⚠️ Two broken first-attempt draft ads (`120255717330620428`, `120255717331040428`, "XX DISCARD…", picture+image_hash
-  conflict) are marked DELETED — discard them in Ads Manager if they still show.
-  ✍️ Lesson: `ads_create_creative` with `image_url` stores BOTH picture and hash → publish error 1443051. Use `image_hash`.
-- 📌 Kill rule written before launch: **per ad set, ≥ PKR 2,600 spent with 0 purchases by day 3 → kill**; day 5 check
-  on CPA vs ~1,300. Do not touch either for 72h after publish. Judge real ROAS on Shopify `utm_content`.
+## 🎬 TOF-M — Mocha Mate founder-video test (REBUILT Oct 24 2026, DRAFT — user attaches videos + publishes)
+User: *"remove this campagin completely and create a new one step by step… budget should be 1000 per day for each
+ad set… put in any dummy video for now as draft"*.
+- 🔴 **WHY v1 BROKE (do not repeat):** `ads_create_campaign` silently injects `promoted_object.product_catalog_id`
+  (catalogue `1015378560682303`) on OUTCOME_SALES. Ads Manager then applied *"value_defaulting_for_product_catalog_sales"*:
+  added product set `608788148654460` to the ad sets, turned the ads into catalogue carousels (only "carousel" offered),
+  **dropped the LLA inclusions and the COD-Refusers exclusion**. ➡️ **Fix: right after creating any non-catalogue sales
+  campaign, `ads_update_entity` campaign `{"promoted_object":{}}`, then read the draft back** — it shows `promoted_object: []`.
+- ✍️ Video ads: build with `ads_create_ad` inline `video_data` (video_id + image_hash thumbnail + title + link_description +
+  `call_to_action{type,value{link}}`) and put UTMs in creative `url_tags`. `ads_create_creative` adds `link_title`/
+  `link_description` inside the CTA value → Ads Manager error #1815589 (deprecated). Image ads: `image_url` → error 1443051.
+- **Economics:** price 3,200 · COGS 950 · delivery 150–200 → GP ≈ 2,050 (64%) · break-even ≈ ~1,300 per Meta purchase.
+  Stock checked: `mocha-mate` 43 units, sellable.
+- Campaign **`120255717556140428`** "TOF-M | Mocha Mate Founder Videos | Oct 2026" · OUTCOME_SALES · ABO · no catalogue.
+- Ad sets (each `daily_budget` 100000 minor units = **PKR 1,000/day**, OFFSITE_CONVERSIONS PURCHASE, pixel 1865080707652548,
+  9 cities no radius, home+recent, LLA 1% `120254216730060428` + 3% `120254216735280428`, excl Purchasers 180D
+  `120252468019140428` + COD Refusers `120253660257910428` + Delivered SEED `120254215371460428`, FB+IG all positions, A+A off):
+  `120255717561830428` H1 Comparison · `120255717561920428` H3 Founder Voice.
+- Ads: `120255717562610428` H1 (`utm_content=h1_comparison`) · `120255717564000428` H3 (`utm_content=h3_founder`).
+  url_tags `utm_source=facebook&utm_medium=paid_social&utm_campaign=tofm_mochamate_oct26&utm_term={{placement}}`.
+  Placeholder video on BOTH = account video `1134847245954824` "mocha mate new vs use dperpesctive.mp4" (the 64s master).
+  User swaps in `Mocha_Mate_30s_v2.mp4` (H1) / `Mocha_Mate_30s_H3.mp4` (H3). Advantage+ creative features opted out.
+- Leftover drafts to DISCARD in Ads Manager: `120255717326670428` "XX DISCARD — TOF-M broken (catalogue)" and
+  `120255717554640428` "XX DISCARD — unused v2" (new drafts cannot be API-deleted, only discarded in the UI).
+- 📌 Kill rule: per ad set ≥ PKR 2,600 spent with 0 purchases by day 3 → kill; day-5 CPA check vs ~1,300; no edits for 72h.
