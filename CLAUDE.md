@@ -1504,7 +1504,10 @@ ad set… put in any dummy video for now as draft"*.
   9 cities no radius, home+recent, LLA 1% `120254216730060428` + 3% `120254216735280428`, excl Purchasers 180D
   `120252468019140428` + COD Refusers `120253660257910428` + Delivered SEED `120254215371460428`, FB+IG all positions, A+A off):
   `120255717561830428` H1 Comparison · `120255717561920428` H3 Founder Voice.
-- Ads: `120255717562610428` H1 (`utm_content=h1_comparison`) · `120255717564000428` H3 (`utm_content=h3_founder`).
+- 🔁 **Oct 24 (later): user asked to build the ADS themselves.** Both API ads below set to DELETED in the draft;
+  campaign + 2 ad sets kept and re-verified unchanged. User builds the ad level in Ads Manager.
+  ✍️ Lesson: when the user is editing in Ads Manager, stop at the ad-set level — UI media swaps blanked the Website URL.
+- (deleted) Ads: `120255717562610428` H1 (`utm_content=h1_comparison`) · `120255717564000428` H3 (`utm_content=h3_founder`).
   url_tags `utm_source=facebook&utm_medium=paid_social&utm_campaign=tofm_mochamate_oct26&utm_term={{placement}}`.
   Placeholder video on BOTH = account video `1134847245954824` "mocha mate new vs use dperpesctive.mp4" (the 64s master).
   User swaps in `Mocha_Mate_30s_v2.mp4` (H1) / `Mocha_Mate_30s_H3.mp4` (H3). Advantage+ creative features opted out.
