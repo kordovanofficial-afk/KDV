@@ -1485,3 +1485,26 @@ template settings — Shopify's editor strips collection/handle settings from
 ## ✅ Working loop
 Edit theme → push to draft theme `165057069296` (via Shopify) → review in browser
 → iterate. Keep to the BRAND_MOODBOARD spec at every step.
+
+## 🎬 TOF-M — Mocha Mate founder-video test (STAGED Oct 24 2026, DRAFT — user publishes)
+User: *"create the whole campaign and adset and ads for the comparison one and the founder voice one,
+ill put in the relevant videos in them myself… ill only put the videos in each and then publish"*.
+- **Economics (user, Oct 24):** price 3,200 · COGS 950 · delivery 150–200 → GP ≈ **2,050 (64%)**.
+  Break-even ≈ **PKR 2,050 per surviving order ≈ ~1,300 per Meta-reported purchase** (~65% survival).
+  ✅ Stock checked first: Mocha Mate `mocha-mate` ACTIVE, **43 units, availableForSale** (the Sep blocker is gone).
+- Campaign **`120255717326670428`** "TOF-M | Mocha Mate Founder Video | Oct 2026" · OUTCOME_SALES · ABO.
+- **Two ad sets (one video each, so each creative gets guaranteed spend; one ad set would let Meta starve one
+  within a day):** `120255717327420428` "H1 Comparison" · `120255717329470428` "H3 Founder Voice".
+  Each PKR 1,000/day (budget not stated by user — staged at the account standard, **adds 2,000/day → 5,000 total**),
+  OFFSITE_CONVERSIONS PURCHASE, pixel 1865080707652548, 9 cities no radius, home+recent, LLA 1% `120254216730060428`
+  + 3% `120254216735280428`, excl Purchasers 180D + COD Refusers + Delivered SEED, FB+IG, A+A off.
+- Ads (copy final; media is a product-photo PLACEHOLDER the user swaps for the video in Ads Manager):
+  `120255717333410428` H1 (creative `4484313618489411`, `utm_content=h1_comparison`) ·
+  `120255717333850428` H3 (creative `1116898687861976`, `utm_content=h3_founder`).
+  UTMs: `utm_source=facebook&utm_medium=paid_social&utm_campaign=tofm_mochamate_oct26&utm_term={{placement}}`.
+  CTA SHOP_NOW, Advantage+ creative OFF. Videos: `Mocha_Mate_30s_v2.mp4` (H1) / `Mocha_Mate_30s_H3.mp4` (H3).
+- ⚠️ Two broken first-attempt draft ads (`120255717330620428`, `120255717331040428`, "XX DISCARD…", picture+image_hash
+  conflict) are marked DELETED — discard them in Ads Manager if they still show.
+  ✍️ Lesson: `ads_create_creative` with `image_url` stores BOTH picture and hash → publish error 1443051. Use `image_hash`.
+- 📌 Kill rule written before launch: **per ad set, ≥ PKR 2,600 spent with 0 purchases by day 3 → kill**; day 5 check
+  on CPA vs ~1,300. Do not touch either for 72h after publish. Judge real ROAS on Shopify `utm_content`.
