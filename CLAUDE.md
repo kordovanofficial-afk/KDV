@@ -487,6 +487,59 @@ so the ad-set splits below are complete — no missing spend.
   to something nobody can buy. **Restock first, then retest** — this is the same "23 products
   invisible to catalogue ads" problem, and it is now blocking a proven ad set.
 
+## 🚨 OCT 2026 — JACKET CHECKOUTS ARE DYING AT PAYMENT (measured Oct 21 2026)
+The planned October ramp was NEVER executed: all 3 ad sets are still PKR 1,000/day, TOF-J is still on
+ViewContent, BOF DPA still paused. Before ramping, the measurement below says DO NOT scale jacket spend yet.
+- **Jacket demand is UP:** GSC "jacket" queries ~20 clicks/day (early Sep) → ~50/day (mid-Oct),
+  impressions ~700 → ~1,600/day, position ~10 → ~7. TOF-J sent 14,535 jacket clicks Oct 1–20 at PKR 1.39.
+- **Jacket sales COLLAPSED:** Oct 1–20 = 1 jacket order (KDV#22857, Rs 29,000, card) and it was
+  REFUNDED next day — staff event log: *"waiting for customer's reply regarding jacket size and processing
+  time"*. **Net jacket sales in October = 0.** (Late Sep: 5 orders / ~159k — so it worked before.)
+- 🔴 **~19 jacket checkouts ABANDONED Oct 1–20, ≈ PKR 748,000** (address entered, then left). Many are
+  9-city (Rawalpindi ×5, Lahore ×4, Islamabad ×2, Karachi, Hyderabad).
+- ✅ **The card gateway is NOT broken** — XPay card/online orders complete daily on wallets, hats,
+  laptop bags (incl. a 56,800 laptop-bag order Oct 21). The failure is jacket-specific.
+- **Diagnosis (most → least likely):** (1) prepaid 100% + "about 3 weeks" on a Rs 25–35k cold purchase —
+  the one paying buyer left over processing time; and every week further into the season the promised
+  date slides later; (2) the known dead end — MTO cart still SHOWS the COD shipping rate, then COD is
+  absent at payment; (3) TOF-J's cheap cold traffic (click→ATC 0.37% in Oct).
+- ➡️ **Do not raise TOF-J / jacket budget until checkout completion recovers.** More traffic into a
+  ~0% checkout is pure waste. TOF-J ViewContent pool (≈22k viewers Sep 21–Oct 20) is already huge.
+
+## 🎯 RT-J — jacket retarget (🟢 LIVE Oct 21 2026, user-approved) · TOF-J PAUSED same minute
+User: *"pause the TOF J and then retarget them as a purchase intent... follow a proper funnel"*.
+TOF-J had banked ~27k jacket ViewContent events (Sep 5–Oct 20) and nothing was harvesting them.
+- Ad set **`120255674363190428`** "RT-J | Jacket Viewers + ATC 30D | Purchase", inside the TOF-J campaign
+  `120254923437380428`. PKR 1,000/day (TOF-J's budget moved over → account total unchanged at 3,000/day).
+  `OFFSITE_CONVERSIONS` + **PURCHASE**, product set `1801176350880581` (30 jackets).
+- ~~**Audience = `product_audience_specs`**~~ (REPLACED Oct 22, see below — it never delivered): ViewContent OR
+  AddToCart on a jacket in the last 30 days, minus jacket Purchase 30d; also excludes COD Refusers
+  `120253660257910428` + Purchasers 180D `120252468019140428`. 9 cities, no radius, FB+IG, A+A off.
+- Ad **`120255674366650428`**, creative **`948984301258821`** (catalog carousel, Advantage+ creative OFF).
+  ✍️ Copy targets the two objections the one refunded October buyer actually raised — **size** ("WhatsApp us
+  on 0333 2601161 before you pay") and **processing time** ("about three weeks… winter is our busiest
+  season"). Headline "Made for you. At your door in about 3 weeks." UTMs `utm_campaign=rtj_jackets_oct26`,
+  `utm_content={{placement}}`. No COD claim, no discount, no guarantee (not approved yet).
+- **TOF-J `120254923438760428` PAUSED** (verified `effective_status: PAUSED`). Restart cold only when RT-J
+  frequency climbs above ~4 (pool exhausted) or once jacket checkouts are completing again.
+- 🔴 **DAY-1 FAILURE + FIX (Oct 22 2026): RT-J had 0 impressions for ~20h** although campaign, ad set and ad
+  were all ACTIVE with no errors and the pixel matched 99.99% (~1,000 jacket ViewContent/day).
+  **The `product_audience_specs` (catalogue dynamic retarget) audience never started delivering.**
+  ➡️ Replaced with a plain website custom audience, the same pattern the working Retarget ad set uses:
+  **`120255689014190428` "KV — Jacket Page Visitors 30D (RT-J)"** = pixel URL i_contains `jacket` OR
+  `hawkeye` (29 of 30 jacket handles contain "jacket"; Hawkeye's is `hawkeye-…-vintage-coat-s012`).
+  Also catches the jacket collection pages. Prefill on. Ad set re-entered review (IN_PROCESS) Oct 22
+  19:46 PKT. ✍️ **Lesson: for retargeting in this account, use a website custom audience,
+  not `product_audience_specs`.** The catalogue ad still picks which jackets to show.
+  ⚠️ If a jacket is ever added WITHOUT "jacket" in its handle, add it to this audience's rule.
+- ✅ **FIX CONFIRMED Oct 23 2026: RT-J is delivering.** First ~day after the audience swap: spend 1,750 ·
+  impr 4,991 · reach 3,018 · freq 1.65 · 297 link clicks (CTR ~6%, CPC ~5.9) · CPM 351 · 265 VC · 2 ATC ·
+  2 IC · 0 purchases. Audience `120255689014190428` operation status 200 (Normal). Too early to judge.
+- ⚠️ Purchase optimisation at 1,000/day will stay in learning — acceptable for a fixed retarget pool.
+  **Do not touch it for 72h. Read day 3 (Oct 24) and day 7 (Oct 28).** The win condition is a COMPLETED
+  jacket order, not CTR; the 19 October abandons say the bottleneck is checkout, so also watch
+  abandoned jacket checkouts in Shopify alongside Meta's numbers.
+
 ## 🔌 Available integrations (MCP)
 Shopify, GitHub, Canva, Figma, Facebook Ads, Higgsfield, Cloudflare.
 (Playwright is NOT available in this remote env — design is done in code, then
@@ -1432,3 +1485,46 @@ template settings — Shopify's editor strips collection/handle settings from
 ## ✅ Working loop
 Edit theme → push to draft theme `165057069296` (via Shopify) → review in browser
 → iterate. Keep to the BRAND_MOODBOARD spec at every step.
+
+## 🎬 TOF-M — Mocha Mate founder-video test (REBUILT Oct 24 2026, DRAFT — user attaches videos + publishes)
+User: *"remove this campagin completely and create a new one step by step… budget should be 1000 per day for each
+ad set… put in any dummy video for now as draft"*.
+- 🔴 **WHY v1 BROKE (do not repeat):** `ads_create_campaign` silently injects `promoted_object.product_catalog_id`
+  (catalogue `1015378560682303`) on OUTCOME_SALES. Ads Manager then applied *"value_defaulting_for_product_catalog_sales"*:
+  added product set `608788148654460` to the ad sets, turned the ads into catalogue carousels (only "carousel" offered),
+  **dropped the LLA inclusions and the COD-Refusers exclusion**. ➡️ **Fix: right after creating any non-catalogue sales
+  campaign, `ads_update_entity` campaign `{"promoted_object":{}}`, then read the draft back** — it shows `promoted_object: []`.
+- ✍️ Video ads: build with `ads_create_ad` inline `video_data` (video_id + image_hash thumbnail + title + link_description +
+  `call_to_action{type,value{link}}`) and put UTMs in creative `url_tags`. `ads_create_creative` adds `link_title`/
+  `link_description` inside the CTA value → Ads Manager error #1815589 (deprecated). Image ads: `image_url` → error 1443051.
+- **Economics:** price 3,200 · COGS 950 · delivery 150–200 → GP ≈ 2,050 (64%) · break-even ≈ ~1,300 per Meta purchase.
+  Stock checked: `mocha-mate` 43 units, sellable.
+- 🔁 **FINAL (Oct 24, 3rd build): user deleted every earlier TOF-M draft and asked for campaign + ad sets ONLY, no ads.**
+  Campaign **`120255717719930428`** (catalogue link cleared, `promoted_object: []`) · ad sets **`120255717721520428`** H1
+  Comparison + **`120255717721900428`** H3 Founder Voice — same settings as below, verified VALIDATED with 0 errors.
+  **User builds both ads in Ads Manager.** All older IDs below are dead.
+  🟢 **PUBLISHED Oct 24 2026 by the user.** Ad sets ACTIVE at PKR 1,000/day each. User-built ads: `120255717749990428`
+  "Comparison" (creative `1789159075513560`, VIDEO, ACTIVE) · `120255717819950428` "Foudner ad" (creative `1754735512261830`,
+  VIDEO, IN_PROCESS = in Meta review at check). **Day-3 read Oct 27, day-5 Oct 29** against the kill rule below.
+- Campaign **`120255717556140428`** "TOF-M | Mocha Mate Founder Videos | Oct 2026" · OUTCOME_SALES · ABO · no catalogue.
+- Ad sets (each `daily_budget` 100000 minor units = **PKR 1,000/day**, OFFSITE_CONVERSIONS PURCHASE, pixel 1865080707652548,
+  9 cities no radius, home+recent, LLA 1% `120254216730060428` + 3% `120254216735280428`, excl Purchasers 180D
+  `120252468019140428` + COD Refusers `120253660257910428` + Delivered SEED `120254215371460428`, FB+IG all positions, A+A off):
+  `120255717561830428` H1 Comparison · `120255717561920428` H3 Founder Voice.
+- 🔁 **Oct 24 (later): user asked to build the ADS themselves.** Both API ads below set to DELETED in the draft;
+  campaign + 2 ad sets kept and re-verified unchanged. User builds the ad level in Ads Manager.
+  ✍️ Lesson: when the user is editing in Ads Manager, stop at the ad-set level — UI media swaps blanked the Website URL.
+- (deleted) Ads: `120255717562610428` H1 (`utm_content=h1_comparison`) · `120255717564000428` H3 (`utm_content=h3_founder`).
+  url_tags `utm_source=facebook&utm_medium=paid_social&utm_campaign=tofm_mochamate_oct26&utm_term={{placement}}`.
+  Placeholder video on BOTH = account video `1134847245954824` "mocha mate new vs use dperpesctive.mp4" (the 64s master).
+  User swaps in `Mocha_Mate_30s_v2.mp4` (H1) / `Mocha_Mate_30s_H3.mp4` (H3). Advantage+ creative features opted out.
+- Leftover drafts to DISCARD in Ads Manager: `120255717326670428` "XX DISCARD — TOF-M broken (catalogue)" and
+  `120255717554640428` "XX DISCARD — unused v2" (new drafts cannot be API-deleted, only discarded in the UI).
+- 📌 Kill rule: per ad set ≥ PKR 2,600 spent with 0 purchases by day 3 → kill; day-5 CPA check vs ~1,300; no edits for 72h.
+
+## ⏸ TOF-C PAUSED (Oct 24 2026, user-approved: *"ok pause the TOF-C"*) — verified `effective_status: PAUSED`
+Ad set `120254472805020428`. Oct 11–24: spend 13,650 · 5 Meta purchases · CPA 2,730 · Meta 2.42x (≈1.2x real vs 2.22x
+break-even) · only 3 UTM-tagged Shopify orders (7,400). Cold prospecting now = TOF-M H1/H3 (2,000/day).
+**Account now 4,000/day:** Retarget 1,000 · RT-J 1,000 · TOF-M H1 1,000 · TOF-M H3 1,000.
+Same review: Retarget 13,567 / 14 purch / CPA 969 / 3.71x / freq 3.85 (keep) · RT-J 0 jacket orders, read Oct 28 ·
+**0 jacket orders store-wide Oct 11–24** · chatgpt.com sent 3 orders (2,200 / 4,700 / 6,600) at zero cost.
