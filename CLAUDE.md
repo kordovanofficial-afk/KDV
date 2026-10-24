@@ -1499,6 +1499,10 @@ ad set… put in any dummy video for now as draft"*.
   `link_description` inside the CTA value → Ads Manager error #1815589 (deprecated). Image ads: `image_url` → error 1443051.
 - **Economics:** price 3,200 · COGS 950 · delivery 150–200 → GP ≈ 2,050 (64%) · break-even ≈ ~1,300 per Meta purchase.
   Stock checked: `mocha-mate` 43 units, sellable.
+- 🔁 **FINAL (Oct 24, 3rd build): user deleted every earlier TOF-M draft and asked for campaign + ad sets ONLY, no ads.**
+  Campaign **`120255717719930428`** (catalogue link cleared, `promoted_object: []`) · ad sets **`120255717721520428`** H1
+  Comparison + **`120255717721900428`** H3 Founder Voice — same settings as below, verified VALIDATED with 0 errors.
+  **User builds both ads in Ads Manager.** All older IDs below are dead.
 - Campaign **`120255717556140428`** "TOF-M | Mocha Mate Founder Videos | Oct 2026" · OUTCOME_SALES · ABO · no catalogue.
 - Ad sets (each `daily_budget` 100000 minor units = **PKR 1,000/day**, OFFSITE_CONVERSIONS PURCHASE, pixel 1865080707652548,
   9 cities no radius, home+recent, LLA 1% `120254216730060428` + 3% `120254216735280428`, excl Purchasers 180D
