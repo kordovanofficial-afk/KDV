@@ -1521,3 +1521,10 @@ ad set… put in any dummy video for now as draft"*.
 - Leftover drafts to DISCARD in Ads Manager: `120255717326670428` "XX DISCARD — TOF-M broken (catalogue)" and
   `120255717554640428` "XX DISCARD — unused v2" (new drafts cannot be API-deleted, only discarded in the UI).
 - 📌 Kill rule: per ad set ≥ PKR 2,600 spent with 0 purchases by day 3 → kill; day-5 CPA check vs ~1,300; no edits for 72h.
+
+## ⏸ TOF-C PAUSED (Oct 24 2026, user-approved: *"ok pause the TOF-C"*) — verified `effective_status: PAUSED`
+Ad set `120254472805020428`. Oct 11–24: spend 13,650 · 5 Meta purchases · CPA 2,730 · Meta 2.42x (≈1.2x real vs 2.22x
+break-even) · only 3 UTM-tagged Shopify orders (7,400). Cold prospecting now = TOF-M H1/H3 (2,000/day).
+**Account now 4,000/day:** Retarget 1,000 · RT-J 1,000 · TOF-M H1 1,000 · TOF-M H3 1,000.
+Same review: Retarget 13,567 / 14 purch / CPA 969 / 3.71x / freq 3.85 (keep) · RT-J 0 jacket orders, read Oct 28 ·
+**0 jacket orders store-wide Oct 11–24** · chatgpt.com sent 3 orders (2,200 / 4,700 / 6,600) at zero cost.
