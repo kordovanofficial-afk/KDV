@@ -11,12 +11,11 @@
 > Karachi → "Pakistan", never swapped for another city), 11 collections + 8 collection metafields,
 > 6 blog articles (live bodies diffed byte-identical to intended), 5 pages + FAQs.
 > 🚫 **NOT changed, by design:** Meta ads (user excluded them — H3 founder ad still says it) ·
-> Shipping + Privacy POLICIES (connector lacks `write_legal_policies` — user edits in Settings →
-> Policies) · checkout rate "EXPRESS NEXT DAY DELIVERY (KARACHI ONLY)" (operational, removing it
+> Shipping + Privacy POLICIES (connector lacks `write_legal_policies` — ✅ user edited them Oct 25) · checkout rate "EXPRESS NEXT DAY DELIVERY (KARACHI ONLY)" (operational, removing it
 > would let other cities buy a service they cannot get). Replacement vocabulary: "our own
 > workshop", "made in Pakistan", "the south / the coast" for climate copy, "Malir Cantt" alone.
-> ⚠️ The 31 `custom.reviews` lists (185 lines, uniform style, 6 per product) have NO recorded
-> provenance — they were not written in any logged session. Raised with the user Oct 25.
+> ✅ The 31 `custom.reviews` lists (185 lines) — user confirmed Oct 25 2026: **collected by the team by
+> contacting customers**. Provenance settled; do not re-raise. Shipping + Privacy policies: user edited them.
 
 Custom Shopify theme for **Kordovan**, a Pakistani full-grain leather brand
 (wallets, bags, small leather goods). This file is the persistent context for
