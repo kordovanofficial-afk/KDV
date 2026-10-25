@@ -20,7 +20,7 @@
       {%- for w in tag_words -%}{{ w | capitalize }}{%- unless forloop.last %} {% endunless -%}{%- endfor -%}
     {%- endcapture -%}
     {%- assign tag_label = tag_label | strip -%}
-    {%- capture tag_description -%}{{ tag_label }} by Kordovan — genuine full-grain leather, cut and hand-stitched in our Karachi workshop. Free delivery over PKR 5,500 and a lifetime craftsmanship warranty.{%- endcapture -%}
+    {%- capture tag_description -%}{{ tag_label }} by Kordovan — genuine full-grain leather, cut and hand-stitched in our own workshop. Free delivery over PKR 5,500 and a lifetime craftsmanship warranty.{%- endcapture -%}
   {%- endif -%}
 
   {%- if current_tags -%}

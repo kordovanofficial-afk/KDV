@@ -55,7 +55,7 @@
         <h4>Get in Touch</h4>
         <a class="kv-fwa" href="https://wa.me/{{ wa }}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.5 15.3L2 22l4.8-1.5A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2s-1.2.2-3.8-.9-4.1-3.7-4.2-3.9-1-1.3-1-2.5.6-1.7.9-1.9.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 1.9c.1.2.1.4 0 .5l-.4.6c-.2.2-.3.4-.1.7s.7 1.2 1.5 1.9c1 .9 1.8 1.1 2.1 1.3s.4.1.6-.1l.7-.8c.2-.3.4-.2.6-.1l1.8.9c.2.1.4.2.4.3z"/></svg>Chat on WhatsApp</a>
         <p><a href="tel:{{ phone | replace: ' ', '' }}">{{ phone }}</a> · call or WhatsApp<br><a href="mailto:{{ email }}">{{ email }}</a></p>
-        <p class="addr"><svg viewBox="0 0 24 24"><path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>{{ section.settings.address | default: 'G4, Falcon Street Mall,<br>Malir Cantt, Karachi' }}</p>
+        <p class="addr"><svg viewBox="0 0 24 24"><path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>{{ section.settings.address | default: 'G4, Falcon Street Mall,<br>Malir Cantt' }}</p>
         <p class="hours">{{ section.settings.hours | default: 'Support · 11am – 8pm PKT' }}</p>
       </div>
     </div>
@@ -102,7 +102,7 @@
     { "type": "text", "id": "whatsapp_number", "label": "WhatsApp number (digits only)", "default": "923332601161" },
     { "type": "text", "id": "phone", "label": "Phone", "default": "+92 333 2601161" },
     { "type": "text", "id": "email", "label": "Email", "default": "contact@kordovanleather.com" },
-    { "type": "html", "id": "address", "label": "Address (supports <br>)", "default": "G4, Falcon Street Mall,<br>Malir Cantt, Karachi" },
+    { "type": "html", "id": "address", "label": "Address (supports <br>)", "default": "G4, Falcon Street Mall,<br>Malir Cantt" },
     { "type": "text", "id": "hours", "label": "Support hours", "default": "Support · 11am – 8pm PKT" }
   ]
 }

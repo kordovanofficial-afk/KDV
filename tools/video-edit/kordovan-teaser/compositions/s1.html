@@ -1,0 +1,35 @@
+<template>
+  <style>
+    @font-face { font-family: "Fraunces"; src: url("assets/fonts/Fraunces.ttf") format("truetype"); font-weight: 100 900; }
+    @font-face { font-family: "InterKV"; src: url("assets/fonts/Inter.ttf") format("truetype"); font-weight: 100 900; }
+    #root { position: absolute; inset: 0; overflow: hidden; background: #241c16; }
+    .wrap { position: absolute; inset: 0; } .wrap video { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; object-fit: cover; }
+    .scrim-top { position: absolute; left: -200px; top: -260px; width: 1480px; height: 1000px; background: radial-gradient(ellipse at 50% 40%, rgba(36,28,22,0.86) 0%, rgba(36,28,22,0.55) 45%, rgba(36,28,22,0) 72%); }
+    .scrim-bot { position: absolute; left: -200px; top: 1180px; width: 1480px; height: 1000px; background: radial-gradient(ellipse at 50% 60%, rgba(36,28,22,0.86) 0%, rgba(36,28,22,0.55) 45%, rgba(36,28,22,0) 72%); }
+    .eye { position: absolute; left: 0; right: 0; text-align: center; font-family: "InterKV", sans-serif; font-weight: 600; font-size: 30px; letter-spacing: 0.32em; color: #b0894f; }
+    .ttl { position: absolute; left: 80px; right: 80px; text-align: center; font-family: "Fraunces", serif; font-weight: 500; color: #f7f2ea; font-size: 108px; line-height: 1.04; letter-spacing: -0.01em; }
+    .ttl span, .eye span { display: inline-block; }
+  </style>
+  <div id="root" data-composition-id="s1" data-width="1080" data-height="1920">
+    <div id="s1-a" class="wrap" data-layout-allow-overflow><video id="s1-va" class="clip" data-start="0" data-duration="1.5" src="assets/pair.mp4" muted playsinline></video></div>
+    <div id="s1-b" class="wrap" data-layout-allow-overflow><video id="s1-vb" class="clip" data-start="1.5" data-duration="1.5" src="assets/hold.mp4" muted playsinline></video></div>
+    <div id="s1-st" class="scrim-top clip" data-start="0" data-duration="1.5" data-layout-ignore></div>
+    <div id="s1-sb" class="scrim-bot clip" data-start="1.5" data-duration="1.5" data-layout-ignore></div>
+    <div id="s1-eye" class="eye clip" style="top:230px" data-start="0" data-duration="1.5"><span id="s1-eye-t">THE MOCHA MATE</span></div>
+    <div id="s1-l1" class="ttl clip" style="top:300px" data-start="0" data-duration="1.5"><span id="s1-w1">Same</span> <span id="s1-w2">wallet.</span></div>
+    <div id="s1-l2" class="ttl clip" style="top:1500px" data-start="1.5" data-duration="1.5"><span id="s1-w3">Six</span> <span id="s1-w4">months</span> <span id="s1-w5">apart.</span></div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    // shot A: hook on screen at frame 0, slow push
+    tl.fromTo("#s1-a", { scale: 1.0 }, { scale: 1.08, duration: 1.5, ease: "none" }, 0);
+    // shot B: hard cut on the beat, lands punched-in and eases out, then pushes toward the aged wallet
+    tl.fromTo("#s1-b", { scale: 1.18 }, { scale: 1.04, duration: 0.45, ease: "expo.out" }, 1.5);
+    tl.to("#s1-b", { scale: 1.12, duration: 0.65, ease: "power2.in" }, 2.15);
+    tl.to("#s1-b", { y: -1920, duration: 0.2, ease: "power3.in" }, 2.8);
+    tl.fromTo(["#s1-w3", "#s1-w4", "#s1-w5"], { opacity: 0, filter: "blur(6px)" },
+      { opacity: 1, filter: "blur(0px)", duration: 0.14, stagger: 0.08, ease: "power4.out" }, 1.6);
+    tl.to(["#s1-w3", "#s1-w4", "#s1-w5"], { y: -320, opacity: 0, duration: 0.2, ease: "power3.in" }, 2.8);
+    window.__timelines["s1"] = tl;
+  </script>
+</template>
