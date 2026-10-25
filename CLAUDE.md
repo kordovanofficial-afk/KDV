@@ -6,11 +6,17 @@
 
 > 🚫 **HARD RULE (user, Oct 25 2026): NEVER MENTION KARACHI in any new content** — ads, videos,
 > captions, product/SEO copy, blog, emails, WhatsApp. Say "our workshop" instead.
-> ⚠️ Older surfaces still say it and were NOT changed (needs the user's OK — some are live theme):
-> `layout/theme.liquid`, `sections/site-footer.liquid`, `sections/testimonials.liquid`,
-> `sections/main-search.liquid`, `snippets/our-craft|our-story|shipping.liquid`,
-> `config/settings_data.json`, footwear SEO descriptions ("Made to order in our Karachi workshop"),
-> and the live TOF-M H3 ad copy. Express delivery's "KARACHI ONLY" rate name is operational, not copy.
+> ✅ **CLEANED Oct 25 2026 (user: "clean up from everywhere except the ads"), verified 0 hits:**
+> theme (8 files), 144 products (benefits/SEO/body/subtitle), 31 review lists (reviewer city
+> Karachi → "Pakistan", never swapped for another city), 11 collections + 8 collection metafields,
+> 6 blog articles (live bodies diffed byte-identical to intended), 5 pages + FAQs.
+> 🚫 **NOT changed, by design:** Meta ads (user excluded them — H3 founder ad still says it) ·
+> Shipping + Privacy POLICIES (connector lacks `write_legal_policies` — user edits in Settings →
+> Policies) · checkout rate "EXPRESS NEXT DAY DELIVERY (KARACHI ONLY)" (operational, removing it
+> would let other cities buy a service they cannot get). Replacement vocabulary: "our own
+> workshop", "made in Pakistan", "the south / the coast" for climate copy, "Malir Cantt" alone.
+> ⚠️ The 31 `custom.reviews` lists (185 lines, uniform style, 6 per product) have NO recorded
+> provenance — they were not written in any logged session. Raised with the user Oct 25.
 
 Custom Shopify theme for **Kordovan**, a Pakistani full-grain leather brand
 (wallets, bags, small leather goods). This file is the persistent context for
