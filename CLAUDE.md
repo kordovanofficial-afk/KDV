@@ -4,6 +4,14 @@
 > anything paid — no paid apps, connectors, tools, or subscriptions. Always find the
 > zero-cost path (free tiers, native Shopify, export-CSV-and-share, self-hosted/open-source).
 
+> 🚫 **HARD RULE (user, Oct 25 2026): NEVER MENTION KARACHI in any new content** — ads, videos,
+> captions, product/SEO copy, blog, emails, WhatsApp. Say "our workshop" instead.
+> ⚠️ Older surfaces still say it and were NOT changed (needs the user's OK — some are live theme):
+> `layout/theme.liquid`, `sections/site-footer.liquid`, `sections/testimonials.liquid`,
+> `sections/main-search.liquid`, `snippets/our-craft|our-story|shipping.liquid`,
+> `config/settings_data.json`, footwear SEO descriptions ("Made to order in our Karachi workshop"),
+> and the live TOF-M H3 ad copy. Express delivery's "KARACHI ONLY" rate name is operational, not copy.
+
 Custom Shopify theme for **Kordovan**, a Pakistani full-grain leather brand
 (wallets, bags, small leather goods). This file is the persistent context for
 every session — read it first.
