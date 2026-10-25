@@ -1,0 +1,58 @@
+<template>
+  <style>
+    @font-face { font-family: "Fraunces"; src: url("assets/fonts/Fraunces.ttf") format("truetype"); font-weight: 100 900; }
+    @font-face { font-family: "InterKV"; src: url("assets/fonts/Inter.ttf") format("truetype"); font-weight: 100 900; }
+    #root { position: absolute; inset: 0; overflow: hidden; }
+    #s5-flood { position: absolute; inset: 0; background: #241c16; }
+    #s5-glow {
+      position: absolute; left: 90px; top: 420px; width: 900px; height: 900px;
+      background: radial-gradient(circle, rgba(160,98,58,0.22) 0%, rgba(160,98,58,0) 65%);
+    }
+    #s5-mark {
+      position: absolute; left: 0; right: 0; top: 700px; text-align: center;
+      font-family: "Fraunces", serif; font-weight: 500; color: #f7f2ea;
+      font-size: 112px; letter-spacing: 0.16em; line-height: 1;
+    }
+    #s5-mark span { display: inline-block; }
+    #s5-rule { position: absolute; left: 400px; top: 860px; width: 280px; height: 3px; background: #b0894f; }
+    #s5-tag {
+      position: absolute; left: 0; right: 0; top: 920px; text-align: center;
+      font-family: "Fraunces", serif; font-weight: 400; font-style: italic; color: #ece3d4;
+      font-size: 54px; line-height: 1.2;
+    }
+    #s5-proof {
+      position: absolute; left: 0; right: 0; top: 1030px; text-align: center;
+      font-family: "InterKV", sans-serif; font-weight: 500; color: #8b8174;
+      font-size: 30px; letter-spacing: 0.08em;
+    }
+    #s5-url {
+      position: absolute; left: 0; right: 0; top: 1190px; text-align: center;
+      font-family: "InterKV", sans-serif; font-weight: 600; color: #b0894f;
+      font-size: 40px; letter-spacing: 0.06em;
+    }
+    #s5-tag span, #s5-proof span, #s5-url span { display: inline-block; }
+  </style>
+  <div id="root" data-composition-id="s5" data-width="1080" data-height="1920">
+    <div id="s5-flood"></div>
+    <div id="s5-glow"></div>
+    <div id="s5-mark" class="clip" data-start="0" data-duration="4.2"><span id="s5-c1">K</span><span id="s5-c2">O</span><span id="s5-c3">R</span><span id="s5-c4">D</span><span id="s5-c5">O</span><span id="s5-c6">V</span><span id="s5-c7">A</span><span id="s5-c8">N</span></div>
+    <div id="s5-rule-c" class="clip" data-start="0" data-duration="4.2"><div id="s5-rule"></div></div>
+    <div id="s5-tag" class="clip" data-start="0" data-duration="4.2"><span id="s5-tag-t">Leather that gets better with you.</span></div>
+    <div id="s5-proof" class="clip" data-start="0" data-duration="4.2"><span id="s5-proof-t">Karachi workshop · Lifetime craftsmanship warranty</span></div>
+    <div id="s5-url" class="clip" data-start="0" data-duration="4.2"><span id="s5-url-t">kordovanleather.com</span></div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    // espresso drops in from the top over the parchment
+    tl.fromTo("#s5-flood", { clipPath: "inset(0% 0% 100% 0%)" }, { clipPath: "inset(0% 0% 0% 0%)", duration: 0.4, ease: "power2.inOut" }, 0);
+    tl.fromTo("#s5-glow", { opacity: 0 }, { opacity: 1, duration: 1.2, ease: "power2.out" }, 0.3);
+    // name, letter by letter
+    tl.fromTo(["#s5-c1","#s5-c2","#s5-c3","#s5-c4","#s5-c5","#s5-c6","#s5-c7","#s5-c8"],
+      { opacity: 0.0, filter: "blur(4px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.22, stagger: 0.07, ease: "power2.out" }, 0.45);
+    tl.fromTo("#s5-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: "expo.out" }, 1.0);
+    tl.fromTo("#s5-tag-t", { opacity: 0, filter: "blur(8px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power4.out" }, 1.25);
+    tl.fromTo("#s5-proof-t", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.out" }, 1.6);
+    tl.fromTo("#s5-url-t", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.4, ease: "expo.out" }, 1.85);
+    window.__timelines["s5"] = tl;
+  </script>
+</template>

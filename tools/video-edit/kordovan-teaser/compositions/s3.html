@@ -1,0 +1,44 @@
+<template>
+  <style>
+    @font-face { font-family: "Fraunces"; src: url("assets/fonts/Fraunces.ttf") format("truetype"); font-weight: 100 900; }
+    @font-face { font-family: "InterKV"; src: url("assets/fonts/Inter.ttf") format("truetype"); font-weight: 100 900; }
+    #root { position: absolute; inset: 0; overflow: hidden; background: #241c16; }
+    #s3-wrap { position: absolute; inset: 0; }
+    #s3-vid { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; object-fit: cover; }
+    #s3-scrim {
+      position: absolute; left: -200px; top: -260px; width: 1480px; height: 1000px;
+      background: radial-gradient(ellipse at 50% 40%, rgba(36,28,22,0.86) 0%, rgba(36,28,22,0.55) 45%, rgba(36,28,22,0) 72%);
+    }
+    #s3-eye {
+      position: absolute; left: 0; right: 0; top: 230px; text-align: center;
+      font-family: "InterKV", sans-serif; font-weight: 600; font-size: 30px;
+      letter-spacing: 0.32em; color: #b0894f;
+    }
+    #s3-title {
+      position: absolute; left: 80px; right: 80px; top: 300px; text-align: center;
+      font-family: "Fraunces", serif; font-weight: 500; color: #f7f2ea;
+      font-size: 108px; line-height: 1.04; letter-spacing: -0.01em;
+    }
+    #s3-title span, #s3-eye span { display: inline-block; }
+  </style>
+  <div id="root" data-composition-id="s3" data-width="1080" data-height="1920">
+    <div id="s3-wrap" data-layout-allow-overflow>
+      <video id="s3-vid" class="clip" data-start="0" data-duration="2.9" src="assets/keys.mp4" muted playsinline></video>
+    </div>
+    <div id="s3-scrim" data-layout-ignore></div>
+    <div id="s3-eye" class="clip" data-start="0" data-duration="2.9"><span id="s3-eye-t">A HIDDEN BACK POCKET</span></div>
+    <div id="s3-title" class="clip" data-start="0" data-duration="2.9"><span id="s3-w1">Made</span> <span id="s3-w2">to</span> <span id="s3-w3">be</span> <span id="s3-w4">carried.</span></div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    // hard cut in, slightly large, then settle; punch in on the pocket at 1.2s
+    tl.fromTo("#s3-wrap", { scale: 1.06 }, { scale: 1.0, duration: 0.5, ease: "expo.out" }, 0);
+    tl.to("#s3-wrap", { scale: 1.14, y: -60, duration: 0.45, ease: "power3.inOut" }, 1.2);
+    tl.fromTo("#s3-eye-t", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.out" }, 0.15);
+    // per word from grey to ink, no position change
+    tl.fromTo(["#s3-w1", "#s3-w2", "#s3-w3", "#s3-w4"], { opacity: 0.2, color: "#8b8174" },
+      { opacity: 1, color: "#f7f2ea", duration: 0.12, stagger: 0.09, ease: "power2.out" }, 0.25);
+    tl.to(["#s3-w1", "#s3-w2", "#s3-w3", "#s3-w4", "#s3-eye-t"], { opacity: 0, filter: "blur(8px)", duration: 0.15, stagger: 0.04, ease: "power2.in" }, 2.1);
+    window.__timelines["s3"] = tl;
+  </script>
+</template>

@@ -1,0 +1,84 @@
+<!doctype html>
+<html
+  lang="en"
+  data-composition-variables='[
+    {"id":"color-ground","type":"color","label":"Espresso ground","default":"#241C16"},
+    {"id":"color-paper","type":"color","label":"Parchment","default":"#ECE3D4"},
+    {"id":"color-ink","type":"color","label":"Alabaster text","default":"#F7F2EA"},
+    {"id":"color-accent","type":"color","label":"Cognac accent","default":"#A0623A"},
+    {"id":"color-brass","type":"color","label":"Antique brass","default":"#B0894F"},
+    {"id":"font-display","type":"string","label":"Display font","default":"Fraunces"}
+  ]'
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      :root {
+        --color-ground: #241c16;
+        --color-paper: #ece3d4;
+        --color-ink: #f7f2ea;
+        --color-accent: #a0623a;
+        --color-brass: #b0894f;
+        --font-display: "Fraunces";
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: #241c16;
+      }
+      #root {
+        width: 100%;
+        height: 100%;
+        position: relative;
+      }
+      #ground {
+        position: absolute;
+        inset: 0;
+        background: #241c16;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="15"
+      data-width="1080"
+      data-height="1920"
+      data-motion-blur="on"
+    >
+      <div id="ground"></div>
+      <div id="s1" data-composition-id="s1" data-composition-src="compositions/s1.html"
+        data-start="0" data-duration="3" data-track-index="1" data-track-kind="graphics"
+        data-width="1080" data-height="1920" style="z-index:1"></div>
+      <div id="s2" data-composition-id="s2" data-composition-src="compositions/s2.html"
+        data-start="3" data-duration="2.6" data-track-index="2" data-track-kind="graphics"
+        data-width="1080" data-height="1920" style="z-index:2"></div>
+      <div id="s3" data-composition-id="s3" data-composition-src="compositions/s3.html"
+        data-start="5.6" data-duration="2.9" data-track-index="3" data-track-kind="graphics"
+        data-width="1080" data-height="1920" style="z-index:3"></div>
+      <div id="s4" data-composition-id="s4" data-composition-src="compositions/s4.html"
+        data-start="8" data-duration="3.2" data-track-index="4" data-track-kind="graphics"
+        data-width="1080" data-height="1920" style="z-index:4"></div>
+      <div id="s5" data-composition-id="s5" data-composition-src="compositions/s5.html"
+        data-start="10.8" data-duration="4.2" data-track-index="5" data-track-kind="graphics"
+        data-width="1080" data-height="1920" style="z-index:5"></div>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

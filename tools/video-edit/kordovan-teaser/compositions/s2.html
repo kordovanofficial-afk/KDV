@@ -1,0 +1,43 @@
+<template>
+  <style>
+    @font-face { font-family: "Fraunces"; src: url("assets/fonts/Fraunces.ttf") format("truetype"); font-weight: 100 900; }
+    @font-face { font-family: "InterKV"; src: url("assets/fonts/Inter.ttf") format("truetype"); font-weight: 100 900; }
+    #root { position: absolute; inset: 0; overflow: hidden; background: #241c16; }
+    #s2-wrap { position: absolute; inset: 0; }
+    #s2-vid { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; object-fit: cover; }
+    #s2-scrim {
+      position: absolute; left: -200px; top: -260px; width: 1480px; height: 1000px;
+      background: radial-gradient(ellipse at 50% 40%, rgba(36,28,22,0.86) 0%, rgba(36,28,22,0.55) 45%, rgba(36,28,22,0) 72%);
+    }
+    #s2-eye {
+      position: absolute; left: 0; right: 0; top: 230px; text-align: center;
+      font-family: "InterKV", sans-serif; font-weight: 600; font-size: 30px;
+      letter-spacing: 0.32em; color: #b0894f;
+    }
+    #s2-title {
+      position: absolute; left: 80px; right: 80px; top: 300px; text-align: center;
+      font-family: "Fraunces", serif; font-weight: 500; color: #f7f2ea;
+      font-size: 112px; line-height: 1.04; letter-spacing: -0.01em;
+    }
+    #s2-title span, #s2-eye span { display: inline-block; }
+  </style>
+  <div id="root" data-composition-id="s2" data-width="1080" data-height="1920">
+    <div id="s2-wrap" data-layout-allow-overflow>
+      <video id="s2-vid" class="clip" data-start="0" data-duration="2.6" src="assets/open.mp4" muted playsinline></video>
+    </div>
+    <div id="s2-scrim" data-layout-ignore></div>
+    <div id="s2-eye" class="clip" data-start="0" data-duration="2.6"><span id="s2-eye-t">FROM OUR KARACHI WORKSHOP</span></div>
+    <div id="s2-title" class="clip" data-start="0" data-duration="2.6"><span id="s2-w1">Genuine</span> <span id="s2-w2">leather.</span></div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    // whip in from below: lands slightly large and settles
+    tl.fromTo("#s2-wrap", { y: 1920, scale: 1.08 }, { y: 0, duration: 0.3, ease: "expo.out" }, 0);
+    tl.to("#s2-wrap", { scale: 1.0, duration: 2.3, ease: "power2.out" }, 0.3);
+    tl.fromTo("#s2-eye-t", { opacity: 0, filter: "blur(6px)" }, { opacity: 1, filter: "blur(0px)", duration: 0.2, ease: "power4.out" }, 0.25);
+    tl.fromTo(["#s2-w1", "#s2-w2"], { opacity: 0, filter: "blur(8px)" },
+      { opacity: 1, filter: "blur(0px)", duration: 0.18, stagger: 0.09, ease: "power4.out" }, 0.4);
+    tl.to(["#s2-w1", "#s2-w2", "#s2-eye-t"], { opacity: 0, filter: "blur(8px)", duration: 0.15, stagger: 0.05, ease: "power2.in" }, 2.3);
+    window.__timelines["s2"] = tl;
+  </script>
+</template>
