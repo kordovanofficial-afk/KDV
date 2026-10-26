@@ -594,6 +594,13 @@ CPM rising 350 → 570 and daily reach falling 3,026 → ~1,300 = the 30-day poo
 - Same window: **TOF-M (Mocha Mate founder videos) is converting** — ~8 tagged orders Oct 24–25 incl. a 20,500 basket
   (h3_founder). Day-3 read due Oct 27.
 
+### ⏹ JACKET ADS DROPPED (Oct 26 2026, user: *"just drop the jacket ads altogether, since people who want to buy with
+intent will eventaully search for us on google"*). Campaign **`120254923437380428`** (TOF-J + RT-J) **PAUSED**, verified:
+only TOF-M, Retarget and the TOF-C campaign (its ad set already paused) remain active. **Account now ~3,000/day**
+(Retarget 1,000 · TOF-M H1 1,000 · TOF-M H3 1,000). Jackets still appear inside the Retarget catalogue ad (All Products set).
+⚠️ Google search does NOT bypass the problem: ~50 organic jacket clicks/day also produced 0 orders in October — the
+checkout/payment step is the blocker for every channel. Freed 1,000/day NOT reallocated (needs user OK).
+
 ## 🔌 Available integrations (MCP)
 Shopify, GitHub, Canva, Figma, Facebook Ads, Higgsfield, Cloudflare.
 (Playwright is NOT available in this remote env — design is done in code, then
