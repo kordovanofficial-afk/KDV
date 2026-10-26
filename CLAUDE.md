@@ -1040,6 +1040,25 @@ clicks** in the same quarter. Nothing had been published since 24 Sep 2024.
 - Jacket blog article out-ranks the jacket collection on "leather jacket pakistan" (4,215 impr) → add shop CTA in article,
   but only after jacket checkout is fixed.
 
+## 👛 WALLETS → 15/DAY FROM SEO (started Oct 26 2026, user goal)
+- **Baseline (30d):** wallets sell ~2.2/day ALL channels (≈67 units); **Google search = 20 wallet orders/30d ≈ 0.7/day.**
+  Wallet collection funnel (search+all, ~220 sessions/wk → ~12 ATC → ~9 checkout → ~3.5 orders); checkout completion
+  ~38%, unchanged before/after the Sep 15 COD fee (store-wide completion drop 60%→32% is mostly jackets, not wallets).
+- **Demand ceiling (GSC, 4 wks):** all non-brand wallet queries = **21,906 impr / 667 clicks** across 1,229 queries.
+  Even #1 everywhere (~25% CTR) ≈ 5,500 clicks → 75 orders/mo at 1.36% CR (2.5/day), ~165/mo at 3% CR (5.5/day).
+  ➡️ **15/day is NOT reachable from wallet web search alone** — needs Google Shopping free listings + AI Overviews +
+  gift intent on top. Said so to the user; do not promise 15/day from rankings.
+- **Live SERP (mobile, PK, Oct 26 via Apify):** HUB #1 on all 4 head terms (title just "Men Leather Wallet"); Jafferjees,
+  Daraz, Metro, Waldor, Borjan, Zellbury, Sage, Uniworth fill the rest. Kordovan #4 "leather wallet", #6 "leather wallet
+  for men", not top-8 for "wallet for men"/"wallets for men". **Google showed our HERO `descriptionHtml` as the snippet,
+  not the SEO description.** Kordovan is ABSENT from both AI Overviews (they cite HUB, Jafferjees, Karar, Uniworth, Sage,
+  Zellbury, Outfitters, Logo).
+- ✅ **APPLIED LIVE Oct 26:** `mens-leather-wallets` SEO title "Wallets for Men in Pakistan: Genuine Leather from Rs 1,499 |
+  Kordovan", new SEO description, new hero `descriptionHtml` (price + COD + warranty, query-led), **sortOrder
+  CREATED_DESC → BEST_SELLING**. Wallet blog article already links to the collection 3x (no change needed).
+- 🔴 **Stock gaps on the page:** SOLD OUT = Elite Card Holder (5.0★, 38 reviews), Armour, Kingsman, Truckkr, Crazy Horse
+  Long; Midtown Lite 3 units + Sheppard 2 (the Rs 1,499 entry wallets). Gator is DRAFT.
+
 ## 🛒 PAGE-2 COLLECTION PASS (Sep 8 2026 — 13 collections rewritten LIVE, done)
 User: *"yes lets do the page 2 collections"*. Target = the collection pages sitting at
 position 6–20 on non-brand queries, i.e. **33,721 trapped impressions** across the top 12 pages.
