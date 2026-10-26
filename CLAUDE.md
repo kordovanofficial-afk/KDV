@@ -1056,6 +1056,16 @@ clicks** in the same quarter. Nothing had been published since 24 Sep 2024.
 - ✅ **APPLIED LIVE Oct 26:** `mens-leather-wallets` SEO title "Wallets for Men in Pakistan: Genuine Leather from Rs 1,499 |
   Kordovan", new SEO description, new hero `descriptionHtml` (price + COD + warranty, query-led), **sortOrder
   CREATED_DESC → BEST_SELLING**. Wallet blog article already links to the collection 3x (no change needed).
+- ✅ **26 WALLET PRODUCT TITLES RENAMED LIVE Oct 26 (user-approved)** to the jacket pattern `Name | Men's <material>
+  <type> Wallet` (22 in mens-leather-wallets + Razor, Kodo Vertical 2.0, KODO, Illusion). 0 userErrors. Handles and SEO
+  titles unchanged → no URL breaks. Facts only from `custom.material` / existing SEO titles. Feeds Google Shopping + Meta
+  catalogue on their next daily sync. Theme has no title-dependent logic (only a testimonial label "Mocha Mate Wallet").
+  User declined adding fit details (notes/CNIC/card counts) — do not re-ask.
+- 🤖 **AI Overviews (Oct 26 SERP check):** Kordovan IS cited on brand-list queries — #1 in "top 10 wallet brands in
+  pakistan", #2 "best wallet brands…", #3 "best leather wallet brands…", #4 "original leather wallet in pakistan" (links
+  the collection). The AIO even cites our wallet blog article as its source for other brands. ABSENT on purchase queries
+  ("leather wallet for men", "wallets for men"), where AIO lists named models + prices (HUB, Jafferjees, Karar).
+  AIO still says "workshop in Karachi" from cached old text — will age out.
 - 🔴 **Stock gaps on the page:** SOLD OUT = Elite Card Holder (5.0★, 38 reviews), Armour, Kingsman, Truckkr, Crazy Horse
   Long; Midtown Lite 3 units + Sheppard 2 (the Rs 1,499 entry wallets). Gator is DRAFT.
 
