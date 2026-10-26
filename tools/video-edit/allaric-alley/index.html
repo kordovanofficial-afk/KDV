@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      /* Kordovan Video Book §15: Fraunces + Inter only, one accent word, one ease family, safe band y 270–1250 */
+      @font-face { font-family: "Fraunces"; src: url("assets/fonts/Fraunces.ttf") format("truetype"); font-weight: 100 900; }
+      @font-face { font-family: "Fraunces"; src: url("assets/fonts/fraunces-latin-600-italic.woff2") format("woff2"); font-weight: 600; font-style: italic; }
+      @font-face { font-family: "InterKV"; src: url("assets/fonts/Inter.ttf") format("truetype"); font-weight: 100 900; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0d0b0a; }
+      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden;
+        background: radial-gradient(120% 70% at 30% 35%, #1b1714 0%, #0d0b0a 60%, #080706 100%); }
+      #cam { position: absolute; left: 0; top: 0; width: 3000px; height: 3501px; transform-origin: 0 0; will-change: transform;
+        -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 7%, #000 93%, transparent 100%), linear-gradient(to bottom, transparent 0%, #000 4%, #000 90%, transparent 100%);
+        -webkit-mask-composite: source-in; mask-composite: intersect; }
+      #sweep { position: absolute; left: -500px; top: -300px; width: 360px; height: 2600px; transform: rotate(18deg);
+        background: linear-gradient(to right, rgba(255,226,190,0) 0%, rgba(255,226,190,0.55) 50%, rgba(255,226,190,0) 100%);
+        mix-blend-mode: soft-light; pointer-events: none; }
+      #vig { position: absolute; inset: 0; pointer-events: none;
+        background: radial-gradient(85% 60% at 50% 45%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.55) 100%),
+                    linear-gradient(to bottom, rgba(13,11,10,0.75) 0%, rgba(13,11,10,0) 22%, rgba(13,11,10,0) 70%, rgba(13,11,10,0.6) 100%); }
+      .head { position: absolute; left: 70px; right: 70px; text-align: center; font-family: "Fraunces", serif; font-weight: 600;
+        color: #f7f2ea; letter-spacing: -0.01em; line-height: 1.02; text-shadow: 0 4px 24px rgba(0,0,0,0.55); }
+      .head em { font-style: italic; color: #c08b5c; }
+      .head .w { display: inline-block; }
+      .label { position: absolute; left: 0; right: 0; text-align: center; font-family: "InterKV", sans-serif; font-weight: 700;
+        font-size: 34px; letter-spacing: 0.24em; color: #b0894f; text-shadow: 0 2px 12px rgba(0,0,0,0.6); }
+      .call { position: absolute; left: 0; top: 0; width: 1080px; height: 1920px; }
+      .call .ring { position: absolute; left: 517px; top: 797px; width: 46px; height: 46px; border-radius: 50%;
+        border: 4px solid #e7c58e; box-shadow: 0 0 0 6px rgba(176,137,79,0.25), 0 0 24px rgba(0,0,0,0.6); }
+      .call .core { position: absolute; left: 532px; top: 812px; width: 16px; height: 16px; border-radius: 50%; background: #e7c58e; }
+      .call .stem { position: absolute; left: 538px; top: 600px; width: 4px; height: 192px; background: #e7c58e; transform-origin: 50% 100%; }
+      .call .tag { position: absolute; left: 0; right: 0; top: 452px; text-align: center; }
+      .call .tag span { display: inline-block; padding: 18px 30px 16px; background: rgba(20,16,13,0.78); border: 2px solid rgba(231,197,142,0.55);
+        font-family: "InterKV", sans-serif; font-weight: 700; font-size: 40px; letter-spacing: 0.16em; color: #f7f2ea; }
+      .call .sub { position: absolute; left: 0; right: 0; top: 548px; text-align: center; font-family: "Fraunces", serif;
+        font-style: italic; font-weight: 600; font-size: 44px; color: #e2c9a4; text-shadow: 0 2px 14px rgba(0,0,0,0.8); }
+      #mto-sub { position: absolute; left: 0; right: 0; top: 520px; text-align: center; }
+      #mto-sub span { display: inline-block; padding: 14px 26px; background: rgba(20,16,13,0.78); border: 2px solid rgba(231,197,142,0.45);
+        font-family: "InterKV", sans-serif; font-weight: 600; font-size: 34px; letter-spacing: 0.06em; color: #ece3d4; }
+      #end { position: absolute; inset: 0; background: #241c16; }
+      #end-logo { position: absolute; left: 495px; top: 280px; width: 90px; height: 90px; }
+      #end-logo svg { width: 100%; height: 100%; }
+      #end-name { position: absolute; left: 0; right: 0; top: 390px; text-align: center; font-family: "Fraunces", serif;
+        font-weight: 600; font-size: 92px; color: #f7f2ea; letter-spacing: -0.01em; }
+      #end-name em { font-style: italic; color: #c08b5c; }
+      #end-price { position: absolute; left: 0; right: 0; top: 508px; text-align: center; font-family: "InterKV", sans-serif;
+        font-weight: 700; font-size: 52px; color: #b0894f; font-variant-numeric: tabular-nums; letter-spacing: 0.04em; }
+      #end-pic { position: absolute; left: 230px; top: 600px; width: 620px; height: 520px; overflow: hidden;
+        -webkit-mask-image: radial-gradient(75% 75% at 50% 45%, #000 60%, transparent 100%); mask-image: radial-gradient(75% 75% at 50% 45%, #000 60%, transparent 100%); }
+      #end-pic img { position: absolute; left: -241px; top: -172px; width: 1000px; height: 1167px; }
+      #end-trust { position: absolute; left: 0; right: 0; top: 1132px; text-align: center; font-family: "InterKV", sans-serif;
+        font-weight: 500; font-size: 36px; color: #ece3d4; letter-spacing: 0.02em; }
+      #end-url { position: absolute; left: 0; right: 0; top: 1192px; text-align: center; font-family: "InterKV", sans-serif;
+        font-weight: 700; font-size: 34px; color: #b0894f; letter-spacing: 0.14em; }
+      #wash { position: absolute; inset: 0; background: #241c16; opacity: 0; pointer-events: none; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="15" data-width="1080" data-height="1920">
+      <audio id="sfx" class="clip" data-start="0" data-duration="15" data-track-index="0" src="assets/sfx.wav"></audio>
+
+      <div id="stage" class="clip" data-start="0" data-duration="12.7" data-track-index="1" data-layout-allow-overflow>
+        <img id="cam" src="assets/jacket.jpg" alt="" />
+        <div id="sweep"></div>
+        <div id="vig"></div>
+      </div>
+
+      <!-- hook + reveal -->
+      <div id="h1" class="head clip" data-start="0" data-duration="3.0" data-track-index="10" style="top:300px;font-size:116px">
+        <span class="w" id="h1a">Worn in.</span><br /><span class="w" id="h1b">On <em>day one.</em></span>
+      </div>
+      <div id="l1" class="label clip" data-start="1.9" data-duration="1.1" data-track-index="11" style="top:1190px"><span id="l1t" style="display:inline-block">THE ALLARIC ALLEY</span></div>
+
+      <!-- detail callouts -->
+      <div id="c1" class="call clip" data-start="3.0" data-duration="1.4" data-track-index="20" data-layout-allow-overflow>
+        <div class="stem" id="c1s"></div><div class="ring" id="c1r"></div><div class="core"></div>
+        <div class="tag" id="c1t"><span>NOTCH LAPEL COLLAR</span></div>
+      </div>
+      <div id="c2" class="call clip" data-start="4.4" data-duration="1.5" data-track-index="21" data-layout-allow-overflow>
+        <div class="stem" id="c2s"></div><div class="ring" id="c2r"></div><div class="core"></div>
+        <div class="tag" id="c2t"><span>WAIST BELT</span></div>
+        <div class="sub" id="c2u">Cinch it, or leave it loose.</div>
+      </div>
+      <div id="c3" class="call clip" data-start="5.9" data-duration="1.2" data-track-index="22" data-layout-allow-overflow>
+        <div class="stem" id="c3s"></div><div class="ring" id="c3r"></div><div class="core"></div>
+        <div class="tag" id="c3t"><span>ZIP POCKETS</span></div>
+      </div>
+      <div id="c4" class="call clip" data-start="7.1" data-duration="1.2" data-track-index="23" data-layout-allow-overflow>
+        <div class="stem" id="c4s"></div><div class="ring" id="c4r"></div><div class="core"></div>
+        <div class="tag" id="c4t"><span>ZIP CUFFS</span></div>
+      </div>
+      <div id="c5" class="clip" data-start="8.3" data-duration="1.5" data-track-index="24">
+        <div class="label" id="c5l" style="top:330px">TOP-GRAIN SHEEP LEATHER</div>
+        <div class="head" id="c5h" style="top:392px;font-size:84px">Vintage distressed.</div>
+      </div>
+
+      <!-- made to order, terms paired with the reason (book §8) -->
+      <div id="h2" class="head clip" data-start="9.8" data-duration="2.9" data-track-index="12" style="top:310px;font-size:104px">
+        <span class="w" id="h2a">Cut for</span> <span class="w" id="h2b">one person.</span>
+      </div>
+      <div id="mto-sub" class="clip" data-start="10.5" data-duration="2.2" data-track-index="13"><span id="mto-t">Made to order · about 3 weeks to your door</span></div>
+
+      <!-- end card -->
+      <div id="end" class="clip" data-start="12.5" data-duration="2.5" data-track-index="40" data-layout-allow-overflow>
+        <div id="end-logo"><svg viewBox="0 0 1500 1500"><path fill="#b0894f" fill-rule="evenodd" d="M1054.1,1434.0C1066.0,1401.5 1071.2,1375.2 1071.2,1347.5C1071.1,1332.7 1069.7,1320.9 1066.6,1310.5C1065.8,1307.7 1063.9,1299.9 1062.5,1293.0C1052.0,1243.2 1024.9,1200.3 984.9,1170.3C954.5,1147.5 916.7,1130.9 876.0,1122.4C864.1,1119.9 861.7,1119.7 826.5,1117.9C728.1,1113.1 638.6,1091.8 564.5,1055.6C517.4,1032.6 489.4,1012.8 456.2,979.1C424.6,947.0 410.9,930.3 394.9,903.9C361.7,849.2 346.5,788.3 348.3,718.0C349.5,674.0 356.6,631.9 370.9,585.5C390.6,521.4 425.7,451.6 459.5,409.7C525.7,327.4 635.8,273.8 775.0,256.1C808.5,251.8 860.4,249.1 882.3,250.5L894.0,251.2L894.2,276.1L894.5,301.0L913.8,282.4L933.1,263.7L939.5,266.5C961.6,275.8 1005.6,311.3 1054.3,359.0L1072.2,376.5L1034.4,377.0L996.6,377.5L1034.7,402.7L1072.9,427.9L1092.0,421.5L1111.0,415.1L1114.3,417.8C1152.6,449.1 1228.4,540.0 1318.9,663.4C1330.5,679.3 1339.8,692.5 1339.5,692.9C1339.1,693.2 1330.7,696.2 1320.8,699.6L1302.7,705.6L1310.5,710.4C1329.0,722.0 1345.2,742.8 1351.5,763.1L1353.3,768.7L1346.9,787.7L1340.6,806.7L1297.1,812.9C1273.1,816.3 1252.9,819.1 1252.2,819.0C1251.3,819.0 1251.0,816.5 1251.0,810.1C1251.0,793.3 1246.2,774.9 1237.7,758.7C1221.7,728.4 1185.7,699.2 1145.2,683.5L1136.9,680.3L1143.7,677.2C1165.8,667.1 1194.4,667.0 1218.3,677.0C1222.2,678.6 1225.5,679.8 1225.7,679.6C1225.9,679.4 1225.2,675.1 1224.0,670.1C1215.5,633.8 1183.8,606.7 1136.1,594.6L1125.7,592.0L1029.1,592.0L932.4,592.0L922.6,586.0C881.3,560.8 856.1,526.0 848.9,484.2C845.4,463.4 846.6,435.8 852.1,412.3C856.6,392.9 866.1,367.9 876.1,349.1C878.8,344.0 880.9,339.6 880.6,339.3C879.7,338.3 831.0,338.9 819.0,340.0C758.1,345.5 702.9,363.5 651.5,394.7C593.2,430.0 539.3,484.9 504.7,544.1C493.3,563.5 477.6,618.9 471.6,661.0C467.2,691.6 466.9,733.9 470.9,760.0C483.0,838.4 523.7,902.1 593.8,951.9C659.5,998.6 755.8,1032.9 856.5,1045.5C930.0,1054.7 989.2,1074.4 1036.5,1105.4C1097.9,1145.7 1133.5,1202.6 1144.2,1277.5C1145.9,1289.4 1145.9,1332.7 1144.2,1344.5C1143.5,1349.5 1142.7,1355.1 1142.4,1357.0C1141.0,1366.9 1156.4,1322.9 1162.4,1300.0C1170.8,1267.8 1174.0,1245.9 1174.7,1214.5C1175.5,1178.2 1172.1,1153.5 1161.9,1122.5C1146.4,1075.4 1116.2,1033.4 1073.0,998.8C1032.3,966.3 979.6,940.6 933.0,930.5C805.4,903.0 722.0,837.5 689.6,739.6C683.1,719.7 678.0,692.9 678.0,678.0L678.1,670.5L682.0,680.9C694.7,714.3 719.5,744.4 752.2,766.3C760.7,771.9 776.8,781.0 778.4,781.0C778.8,781.0 775.9,776.3 772.1,770.6C746.3,732.3 732.9,694.0 730.0,650.4C728.5,627.9 730.8,603.3 736.4,582.5C740.4,567.9 740.7,567.4 741.3,575.0C741.6,578.6 742.4,587.4 743.0,594.5C746.2,631.3 757.2,664.7 775.1,691.6C783.2,703.7 800.8,722.1 812.4,730.7C843.0,753.3 881.7,766.2 930.0,770.1C952.4,771.9 969.6,770.7 1031.0,763.1C1092.9,755.5 1090.8,755.5 1115.8,760.6C1138.8,765.2 1157.3,772.3 1172.4,782.4C1181.2,788.3 1193.2,799.8 1198.1,807.0C1206.0,818.8 1211.5,833.1 1212.6,845.0L1213.3,851.7L1232.1,857.8L1251.0,863.9L1259.2,860.1C1284.7,848.3 1317.6,839.3 1354.0,834.1L1366.5,832.4L1369.7,819.4C1378.3,785.5 1382.6,740.9 1380.2,711.8L1379.1,699.2L1367.9,680.3C1309.2,581.8 1239.2,489.0 1149.6,391.0C1127.7,367.1 1052.9,292.3 1029.0,270.4C997.6,241.7 967.2,215.4 943.1,196.0L932.7,187.7L933.3,180.6C934.8,162.6 947.4,137.7 967.3,113.1C976.4,101.7 1007.8,70.7 1021.8,59.1C1028.5,53.6 1033.5,49.0 1032.8,49.0C1032.1,49.0 1027.7,49.7 1023.0,50.5C963.3,61.0 896.9,99.5 831.2,161.7L816.9,175.2L804.7,176.6C545.2,206.2 344.0,317.6 224.5,498.0C184.5,558.5 153.7,627.3 136.9,694.1C128.6,727.1 122.0,779.7 119.0,836.5C110.3,1001.3 150.7,1139.8 229.2,1214.5C237.8,1222.7 254.5,1236.0 256.3,1236.0C256.7,1236.0 255.9,1233.8 254.5,1231.0C249.4,1220.9 234.0,1183.9 226.2,1163.0C201.2,1095.8 186.4,1033.9 178.9,964.6C176.2,940.0 175.2,880.9 176.9,855.6C180.9,798.8 192.7,743.5 210.0,700.0C213.8,690.5 218.1,681.6 216.5,686.5C210.6,704.8 204.1,734.6 201.0,758.0C198.3,777.9 197.2,822.6 198.9,845.0C201.2,874.5 205.8,902.3 213.7,933.5C224.3,975.7 243.8,1025.5 259.4,1050.8C289.0,1098.5 334.7,1148.0 379.0,1180.1C443.3,1226.8 515.6,1253.8 599.0,1262.2C613.6,1263.6 659.3,1263.9 669.5,1262.6L676.5,1261.7L660.0,1258.9C598.5,1248.7 545.5,1226.0 503.0,1191.7C492.7,1183.4 470.7,1161.6 466.2,1155.2C464.1,1152.4 464.7,1152.6 471.2,1157.6C494.7,1175.4 537.0,1188.0 597.0,1195.1C619.6,1197.7 640.4,1198.0 676.6,1196.1C734.7,1193.0 806.0,1199.4 878.0,1214.1C903.9,1219.4 919.5,1223.4 931.0,1227.7C1002.9,1254.5 1043.8,1307.8 1051.1,1384.0C1052.8,1401.6 1051.6,1427.8 1048.5,1445.5C1047.6,1450.4 1049.5,1446.4 1054.1,1434.0Z"/></svg></div>
+        <div id="end-name">The Allaric Alley</div>
+        <div id="end-price">Rs 29,500</div>
+        <div id="end-pic"><img src="assets/jacket.jpg" alt="" /></div>
+        <div id="end-trust">S–3XL · or made to your measurements</div>
+        <div id="end-url">KORDOVANLEATHER.COM</div>
+      </div>
+      <div id="wash" class="clip" data-start="12.2" data-duration="0.6" data-track-index="41"></div>
+    </div>
+    <script>
+      // Camera on one still: (cx, cy) in source-photo pixels lands at frame point (540, fy); z = frame px per source px.
+      const K = 3000 / 1161;
+      const cam = (cx, cy, z, fy = 820) => ({ x: 540 - cx * z, y: fy - cy * z, scale: z / K });
+      const E_IN = "power2.out", E_MOVE = "power3.inOut";
+      const tl = gsap.timeline({ paused: true });
+
+      // S1 hook: macro on the distressed grain, slow pull (Z1)
+      tl.fromTo("#cam", cam(585, 455, 3.2), { ...cam(585, 455, 2.9), duration: 1.5, ease: "none" }, 0);
+      // S2 reveal pull to the whole jacket (Z3)
+      tl.fromTo("#cam", cam(585, 455, 2.9), { ...cam(640, 690, 1.08, 930), duration: 1.4, ease: E_MOVE, immediateRender: false }, 1.5);
+      tl.fromTo("#cam", cam(640, 690, 1.08, 930), { ...cam(640, 690, 1.11, 930), duration: 0.1, ease: "none", immediateRender: false }, 2.9);
+      // S3–S6 detail punch-ins: hard cut onto each anchor, slow push about it so the hotspot never drifts
+      const shots = [[3.0, 1.4, 420, 268, 2.3], [4.4, 1.5, 470, 790, 2.6], [5.9, 1.2, 692, 625, 2.7], [7.1, 1.2, 857, 1052, 2.7]];
+      for (const [t, d, cx, cy, z] of shots) {
+        tl.fromTo("#cam", cam(cx, cy, z), { ...cam(cx, cy, z * 1.07), duration: d, ease: "none", immediateRender: false }, t);
+      }
+      // S7 leather macro again
+      tl.fromTo("#cam", cam(610, 430, 3.1), { ...cam(610, 430, 2.8), duration: 1.5, ease: "none", immediateRender: false }, 8.3);
+      // S8 whole jacket, slow push while the made-to-order line reads
+      tl.fromTo("#cam", cam(640, 700, 1.06, 960), { ...cam(640, 700, 1.16, 960), duration: 2.9, ease: "none", immediateRender: false }, 9.8);
+
+      // light catching the leather
+      tl.fromTo("#sweep", { x: 0 }, { x: 1900, duration: 1.3, ease: "power1.inOut" }, 0.1);
+      tl.fromTo("#sweep", { x: 0 }, { x: 1900, duration: 1.3, ease: "power1.inOut", immediateRender: false }, 8.4);
+      tl.fromTo("#sweep", { x: 0 }, { x: 1900, duration: 1.6, ease: "power1.inOut", immediateRender: false }, 10.2);
+
+      // type
+      tl.fromTo("#h1a", { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: E_IN }, 0.05);
+      tl.fromTo("#h1b", { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: E_IN }, 0.55);
+      tl.fromTo("#l1t", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.6, ease: E_IN }, 1.9);
+      const calls = [["c1", 3.0], ["c2", 4.4], ["c3", 5.9], ["c4", 7.1]];
+      for (const [id, t] of calls) {
+        tl.fromTo(`#${id}r`, { scale: 2.2, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: E_IN }, t + 0.05);
+        tl.fromTo(`#${id}s`, { scaleY: 0 }, { scaleY: 1, duration: 0.3, ease: E_IN }, t + 0.18);
+        tl.fromTo(`#${id}t`, { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: E_IN }, t + 0.32);
+      }
+      tl.fromTo("#c2u", { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: E_IN }, 4.85);
+      tl.fromTo("#c5l", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: E_IN }, 8.4);
+      tl.fromTo("#c5h", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: E_IN }, 8.55);
+      tl.fromTo("#h2a", { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: E_IN }, 9.9);
+      tl.fromTo("#h2b", { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: E_IN }, 10.15);
+      tl.fromTo("#mto-t", { y: 14, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: E_IN }, 10.55);
+
+      // warm fade-through into the end card (book §15.2)
+      tl.fromTo("#wash", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power1.in" }, 12.2);
+      tl.fromTo("#wash", { opacity: 1 }, { opacity: 0, duration: 0.3, ease: "power1.out", immediateRender: false }, 12.5);
+      tl.fromTo("#end-logo", { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.5, ease: E_IN }, 12.6);
+      tl.fromTo("#end-name", { y: 22, opacity: 0 }, { y: 0, opacity: 1, duration: 0.45, ease: E_IN }, 12.75);
+      tl.fromTo("#end-price", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: E_IN }, 12.95);
+      tl.fromTo("#end-pic", { opacity: 0, scale: 1.04 }, { opacity: 1, scale: 1, duration: 0.6, ease: E_IN }, 12.75);
+      tl.fromTo("#end-trust", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: E_IN }, 13.15);
+      tl.fromTo("#end-url", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: E_IN }, 13.3);
+
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
