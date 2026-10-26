@@ -34,7 +34,9 @@ every session — read it first.
   blocks + `kv-brand.css` (maps registry tokens → Quiet Heritage). Shareable page:
   `https://claude.ai/artifact/CcrQwqjptbK5YQJKDu9XiH` (copy at `docs/video/video-book.html`).
 - 🔊 **Sound sources:** Openverse is built into `media-use resolve --type sfx` (CC0/CC BY only) — **ads
-  use CC0 only** — but `api.openverse.org` is BLOCKED by this env's network (403) until the user allows it.
+  use CC0 only** — ✅ user allowed `api.openverse.org` Oct 26 2026 — search works (slow, ~8 s/query). ⚠️ the audio files
+  live on `cdn.freesound.org` + `upload.wikimedia.org`, STILL BLOCKED → downloads fail until those are allowed too.
+  CC0 foley shortlist (12 cues, blocklisted junk) + downloader: `tools/video-edit/sound-kit/openverse/`.
   🔴 **Earshot is NOT cleared for ads**: only unofficial re-uploads exist, one marked CC BY-NC-ND.
   "Real SFX" not identified — need the URL. Owned foley kit list: `tools/video-edit/sound-kit/README.md`
   (`snap_brass_01` = the sonic logo on every end card).
