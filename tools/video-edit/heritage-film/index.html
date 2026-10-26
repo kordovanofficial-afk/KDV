@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <script src="assets/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "Fraunces"; src: url("assets/fonts/Fraunces.ttf") format("truetype"); font-weight: 100 900; }
+      @font-face { font-family: "InterKV"; src: url("assets/fonts/Inter.ttf") format("truetype"); font-weight: 100 900; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #0d0a08; }
+      #root { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: #0d0a08; }
+      #stage { position: absolute; left: 0; top: 380px; width: 1080px; height: 1080px; overflow: hidden; }
+      #stage .vid { position: absolute; left: 0; top: 0; width: 1080px; height: 1080px; object-fit: cover; }
+      .cap { position: absolute; left: 0; right: 0; top: 1580px; text-align: center; }
+      .cap span { display: inline-block; font-family: "Fraunces", serif; font-weight: 400; font-size: 40px;
+        letter-spacing: 0.42em; color: #ece3d4; padding-left: 0.42em; }
+      #mark-top { position: absolute; left: 0; right: 0; top: 230px; text-align: center; font-family: "InterKV", sans-serif;
+        font-weight: 500; font-size: 28px; letter-spacing: 0.6em; color: #8b8174; padding-left: 0.6em; }
+      #end { position: absolute; inset: 0; background: #0d0a08; }
+      #logo { position: absolute; left: 380px; top: 560px; width: 320px; height: 320px; }
+      #logo svg { width: 100%; height: 100%; overflow: visible; }
+      #word { position: absolute; left: 0; right: 0; top: 980px; text-align: center; font-family: "Fraunces", serif;
+        font-weight: 500; font-size: 92px; letter-spacing: 0.28em; padding-left: 0.28em; color: #f7f2ea; }
+      #word span, #tag span, #url span { display: inline-block; }
+      #rule { position: absolute; left: 470px; top: 1120px; width: 140px; height: 2px; background: #b0894f; }
+      #tag { position: absolute; left: 0; right: 0; top: 1170px; text-align: center; font-family: "Fraunces", serif;
+        font-style: italic; font-weight: 300; font-size: 44px; color: #ece3d4; }
+      #url { position: absolute; left: 0; right: 0; top: 1640px; text-align: center; font-family: "InterKV", sans-serif;
+        font-weight: 500; font-size: 26px; letter-spacing: 0.3em; padding-left: 0.3em; color: #b0894f; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="15" data-width="1080" data-height="1920">
+      <audio id="sound" class="clip" data-start="0" data-duration="15" data-track-index="0" src="assets/sound.wav"></audio>
+      <div id="mark-top" class="clip" data-start="0" data-duration="12" data-track-index="9"><span id="mt">KORDOVAN</span></div>
+      <div id="stage" data-layout-allow-overflow>
+        <video id="v-patina" class="clip vid" data-start="0" data-duration="3.2" data-track-index="1" src="assets/patina.mp4" muted playsinline></video>
+        <video id="v-snap" class="clip vid" data-start="3.2" data-duration="2.4" data-track-index="2" src="assets/snap.mp4" muted playsinline></video>
+        <video id="v-open" class="clip vid" data-start="5.6" data-duration="2.0" data-track-index="3" src="assets/open.mp4" muted playsinline></video>
+        <video id="v-pair" class="clip vid" data-start="7.6" data-duration="2.6" data-track-index="4" src="assets/pair.mp4" muted playsinline></video>
+        <video id="v-hero" class="clip vid" data-start="10.2" data-duration="1.8" data-track-index="5" src="assets/hero.mp4" muted playsinline></video>
+      </div>
+      <div id="c1" class="clip cap" data-start="0.8" data-duration="2.6" data-track-index="10"><span id="c1-t">LEATHER REMEMBERS</span></div>
+      <div id="c2" class="clip cap" data-start="3.4" data-duration="2.2" data-track-index="11"><span id="c2-t">EVERY ROAD &middot; EVERY YEAR</span></div>
+      <div id="c3" class="clip cap" data-start="7.8" data-duration="1.6" data-track-index="12"><span id="c3-t">CUT BY HAND</span></div>
+      <div id="c4" class="clip cap" data-start="9.4" data-duration="1.7" data-track-index="13"><span id="c4-t">MADE TO BE KEPT</span></div>
+      <div id="end" class="clip" data-start="12" data-duration="3" data-track-index="20" data-layout-allow-overflow>
+        <div id="logo"><svg viewBox="0 0 1500 1500"><path id="horse" pathLength="1" fill="#b0894f" fill-opacity="0" stroke="#b0894f" stroke-width="5" stroke-dasharray="1 1" stroke-dashoffset="1" fill-rule="evenodd" d="M1054.1,1434.0C1066.0,1401.5 1071.2,1375.2 1071.2,1347.5C1071.1,1332.7 1069.7,1320.9 1066.6,1310.5C1065.8,1307.7 1063.9,1299.9 1062.5,1293.0C1052.0,1243.2 1024.9,1200.3 984.9,1170.3C954.5,1147.5 916.7,1130.9 876.0,1122.4C864.1,1119.9 861.7,1119.7 826.5,1117.9C728.1,1113.1 638.6,1091.8 564.5,1055.6C517.4,1032.6 489.4,1012.8 456.2,979.1C424.6,947.0 410.9,930.3 394.9,903.9C361.7,849.2 346.5,788.3 348.3,718.0C349.5,674.0 356.6,631.9 370.9,585.5C390.6,521.4 425.7,451.6 459.5,409.7C525.7,327.4 635.8,273.8 775.0,256.1C808.5,251.8 860.4,249.1 882.3,250.5L894.0,251.2L894.2,276.1L894.5,301.0L913.8,282.4L933.1,263.7L939.5,266.5C961.6,275.8 1005.6,311.3 1054.3,359.0L1072.2,376.5L1034.4,377.0L996.6,377.5L1034.7,402.7L1072.9,427.9L1092.0,421.5L1111.0,415.1L1114.3,417.8C1152.6,449.1 1228.4,540.0 1318.9,663.4C1330.5,679.3 1339.8,692.5 1339.5,692.9C1339.1,693.2 1330.7,696.2 1320.8,699.6L1302.7,705.6L1310.5,710.4C1329.0,722.0 1345.2,742.8 1351.5,763.1L1353.3,768.7L1346.9,787.7L1340.6,806.7L1297.1,812.9C1273.1,816.3 1252.9,819.1 1252.2,819.0C1251.3,819.0 1251.0,816.5 1251.0,810.1C1251.0,793.3 1246.2,774.9 1237.7,758.7C1221.7,728.4 1185.7,699.2 1145.2,683.5L1136.9,680.3L1143.7,677.2C1165.8,667.1 1194.4,667.0 1218.3,677.0C1222.2,678.6 1225.5,679.8 1225.7,679.6C1225.9,679.4 1225.2,675.1 1224.0,670.1C1215.5,633.8 1183.8,606.7 1136.1,594.6L1125.7,592.0L1029.1,592.0L932.4,592.0L922.6,586.0C881.3,560.8 856.1,526.0 848.9,484.2C845.4,463.4 846.6,435.8 852.1,412.3C856.6,392.9 866.1,367.9 876.1,349.1C878.8,344.0 880.9,339.6 880.6,339.3C879.7,338.3 831.0,338.9 819.0,340.0C758.1,345.5 702.9,363.5 651.5,394.7C593.2,430.0 539.3,484.9 504.7,544.1C493.3,563.5 477.6,618.9 471.6,661.0C467.2,691.6 466.9,733.9 470.9,760.0C483.0,838.4 523.7,902.1 593.8,951.9C659.5,998.6 755.8,1032.9 856.5,1045.5C930.0,1054.7 989.2,1074.4 1036.5,1105.4C1097.9,1145.7 1133.5,1202.6 1144.2,1277.5C1145.9,1289.4 1145.9,1332.7 1144.2,1344.5C1143.5,1349.5 1142.7,1355.1 1142.4,1357.0C1141.0,1366.9 1156.4,1322.9 1162.4,1300.0C1170.8,1267.8 1174.0,1245.9 1174.7,1214.5C1175.5,1178.2 1172.1,1153.5 1161.9,1122.5C1146.4,1075.4 1116.2,1033.4 1073.0,998.8C1032.3,966.3 979.6,940.6 933.0,930.5C805.4,903.0 722.0,837.5 689.6,739.6C683.1,719.7 678.0,692.9 678.0,678.0L678.1,670.5L682.0,680.9C694.7,714.3 719.5,744.4 752.2,766.3C760.7,771.9 776.8,781.0 778.4,781.0C778.8,781.0 775.9,776.3 772.1,770.6C746.3,732.3 732.9,694.0 730.0,650.4C728.5,627.9 730.8,603.3 736.4,582.5C740.4,567.9 740.7,567.4 741.3,575.0C741.6,578.6 742.4,587.4 743.0,594.5C746.2,631.3 757.2,664.7 775.1,691.6C783.2,703.7 800.8,722.1 812.4,730.7C843.0,753.3 881.7,766.2 930.0,770.1C952.4,771.9 969.6,770.7 1031.0,763.1C1092.9,755.5 1090.8,755.5 1115.8,760.6C1138.8,765.2 1157.3,772.3 1172.4,782.4C1181.2,788.3 1193.2,799.8 1198.1,807.0C1206.0,818.8 1211.5,833.1 1212.6,845.0L1213.3,851.7L1232.1,857.8L1251.0,863.9L1259.2,860.1C1284.7,848.3 1317.6,839.3 1354.0,834.1L1366.5,832.4L1369.7,819.4C1378.3,785.5 1382.6,740.9 1380.2,711.8L1379.1,699.2L1367.9,680.3C1309.2,581.8 1239.2,489.0 1149.6,391.0C1127.7,367.1 1052.9,292.3 1029.0,270.4C997.6,241.7 967.2,215.4 943.1,196.0L932.7,187.7L933.3,180.6C934.8,162.6 947.4,137.7 967.3,113.1C976.4,101.7 1007.8,70.7 1021.8,59.1C1028.5,53.6 1033.5,49.0 1032.8,49.0C1032.1,49.0 1027.7,49.7 1023.0,50.5C963.3,61.0 896.9,99.5 831.2,161.7L816.9,175.2L804.7,176.6C545.2,206.2 344.0,317.6 224.5,498.0C184.5,558.5 153.7,627.3 136.9,694.1C128.6,727.1 122.0,779.7 119.0,836.5C110.3,1001.3 150.7,1139.8 229.2,1214.5C237.8,1222.7 254.5,1236.0 256.3,1236.0C256.7,1236.0 255.9,1233.8 254.5,1231.0C249.4,1220.9 234.0,1183.9 226.2,1163.0C201.2,1095.8 186.4,1033.9 178.9,964.6C176.2,940.0 175.2,880.9 176.9,855.6C180.9,798.8 192.7,743.5 210.0,700.0C213.8,690.5 218.1,681.6 216.5,686.5C210.6,704.8 204.1,734.6 201.0,758.0C198.3,777.9 197.2,822.6 198.9,845.0C201.2,874.5 205.8,902.3 213.7,933.5C224.3,975.7 243.8,1025.5 259.4,1050.8C289.0,1098.5 334.7,1148.0 379.0,1180.1C443.3,1226.8 515.6,1253.8 599.0,1262.2C613.6,1263.6 659.3,1263.9 669.5,1262.6L676.5,1261.7L660.0,1258.9C598.5,1248.7 545.5,1226.0 503.0,1191.7C492.7,1183.4 470.7,1161.6 466.2,1155.2C464.1,1152.4 464.7,1152.6 471.2,1157.6C494.7,1175.4 537.0,1188.0 597.0,1195.1C619.6,1197.7 640.4,1198.0 676.6,1196.1C734.7,1193.0 806.0,1199.4 878.0,1214.1C903.9,1219.4 919.5,1223.4 931.0,1227.7C1002.9,1254.5 1043.8,1307.8 1051.1,1384.0C1052.8,1401.6 1051.6,1427.8 1048.5,1445.5C1047.6,1450.4 1049.5,1446.4 1054.1,1434.0Z"/></svg></div>
+        <div id="word"><span id="word-t">KORDOVAN</span></div>
+        <div id="rule"></div>
+        <div id="tag"><span id="tag-t">Leather that gets better with you.</span></div>
+        <div id="url"><span id="url-t">KORDOVANLEATHER.COM</span></div>
+      </div>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#mt", { opacity: 0.5 }, { opacity: 1, duration: 1.0, ease: "power1.out" }, 0);
+      tl.fromTo("#v-patina", { scale: 1.0 }, { scale: 1.08, duration: 3.2, ease: "none" }, 0);
+      tl.fromTo("#v-patina", { opacity: 0.55 }, { opacity: 1, duration: 0.6, ease: "power1.out" }, 0);
+      tl.to("#v-patina", { opacity: 0, duration: 0.3, ease: "power1.in" }, 2.9);
+      tl.fromTo("#v-snap", { scale: 1.12 }, { scale: 1.0, duration: 2.4, ease: "none" }, 3.2);
+      tl.fromTo("#v-snap", { opacity: 0 }, { opacity: 1, duration: 0.35, ease: "power1.out" }, 3.2);
+      tl.to("#v-snap", { opacity: 0, duration: 0.3, ease: "power1.in" }, 5.3);
+      tl.fromTo("#v-open", { scale: 1.0 }, { scale: 1.06, duration: 2.0, ease: "none" }, 5.6);
+      tl.fromTo("#v-open", { opacity: 0 }, { opacity: 1, duration: 0.35, ease: "power1.out" }, 5.6);
+      tl.to("#v-open", { opacity: 0, duration: 0.3, ease: "power1.in" }, 7.3);
+      tl.fromTo("#v-pair", { scale: 1.06 }, { scale: 1.0, duration: 2.6, ease: "none" }, 7.6);
+      tl.fromTo("#v-pair", { opacity: 0 }, { opacity: 1, duration: 0.35, ease: "power1.out" }, 7.6);
+      tl.to("#v-pair", { opacity: 0, duration: 0.3, ease: "power1.in" }, 9.9);
+      tl.fromTo("#v-hero", { scale: 1.0 }, { scale: 1.08, duration: 1.8, ease: "none" }, 10.2);
+      tl.fromTo("#v-hero", { opacity: 0 }, { opacity: 1, duration: 0.35, ease: "power1.out" }, 10.2);
+      tl.to("#v-hero", { opacity: 0, duration: 0.3, ease: "power1.in" }, 11.7);
+      tl.fromTo("#c1-t", { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power1.out" }, 0.8);
+      tl.to("#c1-t", { opacity: 0, duration: 0.4, ease: "power1.in" }, 3.0);
+      tl.fromTo("#c2-t", { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power1.out" }, 3.4);
+      tl.to("#c2-t", { opacity: 0, duration: 0.4, ease: "power1.in" }, 5.2);
+      tl.fromTo("#c3-t", { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power1.out" }, 7.8);
+      tl.to("#c3-t", { opacity: 0, duration: 0.4, ease: "power1.in" }, 9.0);
+      tl.fromTo("#c4-t", { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power1.out" }, 9.4);
+      tl.to("#c4-t", { opacity: 0, duration: 0.4, ease: "power1.in" }, 10.7);
+      tl.fromTo("#end", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power1.out" }, 12.0);
+      tl.fromTo("#horse", { strokeDashoffset: 1 }, { strokeDashoffset: 0, duration: 1.0, ease: "power2.inOut" }, 12.05);
+      tl.fromTo("#horse", { fillOpacity: 0 }, { fillOpacity: 1, immediateRender: false, duration: 0.6, ease: "power1.out" }, 12.8);
+      tl.fromTo("#word-t", { opacity: 0 }, { opacity: 1, duration: 0.8, ease: "power2.out" }, 12.5);
+      tl.fromTo("#rule", { scaleX: 0 }, { scaleX: 1, duration: 0.7, ease: "power2.out" }, 12.9);
+      tl.fromTo("#tag-t", { opacity: 0 }, { opacity: 1, duration: 0.7, ease: "power1.out" }, 12.85);
+      tl.fromTo("#url-t", { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power1.out" }, 12.95);
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
