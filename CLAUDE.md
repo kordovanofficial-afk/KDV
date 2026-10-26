@@ -17,6 +17,14 @@
 > ✅ The 31 `custom.reviews` lists (185 lines) — user confirmed Oct 25 2026: **collected by the team by
 > contacting customers**. Provenance settled; do not re-raise. Shipping + Privacy policies: user edited them.
 
+> ✍️ **HARD RULE (user, Oct 26 2026): EVERY piece of customer-facing text goes through the HUMANIZER skill
+> (plugin "Humanizer" by blader) before it ships** — ad copy, captions, on-screen video text, product/collection/SEO
+> copy, blog articles, emails, WhatsApp messages, review-request scripts. Load the skill (`Skill` tool, name contains
+> `humanizer`) and run the draft through it; facts, prices, terms and claims must survive unchanged. If the skill is not
+> loaded in a session, say so and apply its rules manually (no AI tells: no "elevate/seamless/crafted for those who…",
+> no rule-of-three padding, no em-dash chains, no stated takeaways, plain specific words, Pakistani English/Roman Urdu
+> where natural). Evidence it matters: our real-voice Roman Urdu Razor post got 295 likes vs 9–14 for polished brand posts.
+
 Custom Shopify theme for **Kordovan**, a Pakistani full-grain leather brand
 (wallets, bags, small leather goods). This file is the persistent context for
 every session — read it first.
