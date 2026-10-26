@@ -1030,6 +1030,16 @@ clicks** in the same quarter. Nothing had been published since 24 Sep 2024.
 - Blog was **9.1% of site impressions / 6.4% of clicks** before this pass — the baseline to
   measure against. Re-pull `["page"]` and `["page","query"]` in early October and compare.
 
+## 🔍 ORGANIC CHECK (Oct 26 2026, GSC Sep 27–Oct 24 vs prior 4 wks) — report `https://claude.ai/artifact/9rPzA2tK9PpB1MjvzfVg8i`
+- Google search = **34 orders / Rs 158,794 in 30d** (beats FB+IG's 42 / 122,446, at zero cost). Non-brand clicks **+49%**
+  (2,139→3,187), impressions +59%. Brand flat (~840 clicks).
+- Search-landing conversion: wallets **1.36%**, caps **1.79%** (earners) · jackets collection 1,047 visits / **0 orders** ·
+  4 bag collections ~600 visits / **0 orders** (on-page trust problem, not ranking).
+- **#1 prize: "wallet for men" 7,028 impr @ pos 7.1, CTR 0.36%** → mens-leather-wallets. Proposed (humanized, NOT yet
+  applied, needs user OK) new SEO title/desc for wallets, leather-bags (desc is NULL), mens-leather-shoes, homepage meta.
+- Jacket blog article out-ranks the jacket collection on "leather jacket pakistan" (4,215 impr) → add shop CTA in article,
+  but only after jacket checkout is fixed.
+
 ## 🛒 PAGE-2 COLLECTION PASS (Sep 8 2026 — 13 collections rewritten LIVE, done)
 User: *"yes lets do the page 2 collections"*. Target = the collection pages sitting at
 position 6–20 on non-brand queries, i.e. **33,721 trapped impressions** across the top 12 pages.
