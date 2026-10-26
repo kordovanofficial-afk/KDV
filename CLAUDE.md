@@ -583,6 +583,17 @@ TOF-J had banked ~27k jacket ViewContent events (Sep 5–Oct 20) and nothing was
   jacket order, not CTR; the 19 October abandons say the bottleneck is checkout, so also watch
   abandoned jacket checkouts in Shopify alongside Meta's numbers.
 
+### 📈 RT-J day-4 read (Oct 23–26 2026, run Oct 26) — ads deliver, checkout still kills jackets
+Spend 5,388 · impr 12,788 · 752 link clicks (CTR ~7.5%) · 768 VC · **15 ATC · 9 initiated checkouts · 0 purchases**.
+CPM rising 350 → 570 and daily reach falling 3,026 → ~1,300 = the 30-day pool is small and saturating.
+- Shopify: **0 jacket orders Oct 11–26.** Abandoned since Oct 21: Rockafella + hat 40,300 (Islamabad) · The Ace
+  27,750 (Quetta) · Ralph 24,500 (Sargodha) · Saachi shoe 21,000 (Lahore, also MTO) ≈ **PKR 113k at the payment step**.
+- ➡️ Verdict unchanged from Oct 21: **it is a checkout/payment problem, not an ad problem.** Do NOT raise RT-J or restart
+  TOF-J. Highest-ROI free fixes: (1) team phones the abandoners same day (size + timing objections); (2) build the
+  delivery-customization Function that hides the COD rate on MTO carts (the dead end). Read RT-J again Oct 28.
+- Same window: **TOF-M (Mocha Mate founder videos) is converting** — ~8 tagged orders Oct 24–25 incl. a 20,500 basket
+  (h3_founder). Day-3 read due Oct 27.
+
 ## 🔌 Available integrations (MCP)
 Shopify, GitHub, Canva, Figma, Facebook Ads, Higgsfield, Cloudflare.
 (Playwright is NOT available in this remote env — design is done in code, then
