@@ -12,7 +12,9 @@ This 15s vertical video is built from a single product photo. It follows the boo
    - leather macro;
    - "Cut for one person." with the made-to-order terms;
    - warm fade-through to the end card.
-4. **Sound.** `assets/sfx.wav` uses only the bundled Pixabay effects (whoosh-short, impact-bass-1, click-soft ×5, whoosh, plus a pitched click on the logo), normalised to −18 LUFS. Music is picked from Meta's Sound Collection at upload.
+4. **Sound.** `assets/mix.wav` combines "Night Driving" (HoliznaCC0, CC0) with the bundled Pixabay effects, normalised to −14 LUFS.
+   The track starts at 7.37 s so its groove kicks in on the reveal. Every cut is snapped to its ~95.7 BPM beat grid
+   (1.50 / 2.78 / 4.08 / 5.98 / 7.21 / 8.47 / 9.77 / 12.27). Credits are in `assets/CREDITS.md`.
 
 Every claim on screen comes from the product's live Shopify data.
 

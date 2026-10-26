@@ -401,7 +401,7 @@ The video's job is to **remove the risk of buying something you can't try on.**
 > 🎙 **Division of labour (owner, Oct 26 2026):** the **only** audio the team supplies is the **voiceover, recorded in the
 > footage they shoot** (plus the footage itself). **Everything else is Claude's job:** every transition, zoom, text and
 > caption animation, title, end card, logo motion, colour grade, sound effect and mix, built to §15–§17.
-> Music is still owner-supplied or picked from Meta's Sound Collection, because generated music is never final (§5).
+> Music comes from real recorded CC0 tracks (the Hugging Face library in §17.2), a track the owner sends, or Meta's Sound Collection. Generated music is never final (§5).
 
 - **Claude can:**
   - write briefs, shot lists, hooks and scripts (English and Urdu);
@@ -526,6 +526,7 @@ Record once, reuse everywhere. Store in `tools/video-edit/sound-kit/` (WAV, 48 k
 | **Bundled HyperFrames SFX** (21 files) | Pixabay Content License: commercial, no attribution | yes | ✅ Usable now, offline. Mostly UI whooshes and clicks, so only `click-soft`, `whoosh-short` and `riser` are on-brand (never glitch or notification sounds) |
 | **Pixabay sound effects** | Pixabay Content License | yes | ✅ Good for room tones and nature beds. Download by hand and drop into the repo |
 | **Sonniss GDC bundles** | royalty-free, commercial, no attribution | yes | ✅ Pro-grade foley. Large downloads, grab the leather and cloth folders |
+| **SoundSafari/Public-Domain-Music** (Hugging Face) | CC0 1.0, about 5,180 human-made instrumentals (FreePD, HoliznaCC0, John Bartmann, Musopen and others) | **yes** | ✅ **Our working music library.** It downloads from the cloud session (unlike Freesound and Wikimedia). Claude shortlists by mood and measures tempo and energy, then cuts to the beat. First use: "Night Driving" (HoliznaCC0) on the Allaric Alley film |
 | **Meta Sound Collection** | licensed by Meta for ads on its platforms | yes, inside Meta only | ✅ Pick music at upload, so we never ship it in the file |
 | **Earshot** (Paul Urmson / G17 library, re-released 2023) | **unclear**: re-uploads on itch.io and the Internet Archive; one copy is marked **CC BY-NC-ND (non-commercial)** | **no**, until proven | 🔴 **Do not use in ads.** Only if the owner has the download's own `License.txt` and it clearly allows commercial use. Then save that file next to the sounds |
 | **"Real SFX"** | not identified | — | ⏳ Need the exact URL before it can be checked |

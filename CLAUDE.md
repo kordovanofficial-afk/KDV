@@ -40,6 +40,11 @@ every session — read it first.
   🔴 **Oct 26: user allowed cdn.freesound.org + upload.wikimedia.org — downloads STILL fail.** Freesound's CDN returns
   its OWN HTTP 403 to this cloud server's IP (the tunnel opens; referer/UA don't help); Wikimedia returns 429. Not
   fixable from network settings → the team downloads picks from SHORTLIST.md links and uploads them.
+- 🎵 **MUSIC SOURCE THAT WORKS (Oct 26 2026): Hugging Face dataset `SoundSafari/Public-Domain-Music` (cc0-1.0,
+  ~5,180 human-made instrumentals).** Download via `huggingface.co/datasets/SoundSafari/Public-Domain-Music/resolve/main/<file>`.
+  Wikimedia (429, IP rate-limit), Freesound (403) and Jamendo (proxy-blocked, and CC BY anyway) do NOT work.
+  I can't listen, so I pick by measured tempo, beat strength, brightness and spectrogram, then snap cuts to the beat grid.
+  User expects music on every video ("dude, wheres the music") — never ship a brand video without it again.
 - 🎙 **DIVISION OF LABOUR (user, Oct 26 2026):** user supplies ONLY footage + the voiceover recorded in that footage.
   **Claude does ALL transitions, zooms, text/captions, animations, titles, end cards, logo motion, grade, SFX, mix.**
   🔴 **Earshot is NOT cleared for ads**: only unofficial re-uploads exist, one marked CC BY-NC-ND.
