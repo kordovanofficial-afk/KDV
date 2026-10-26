@@ -1,0 +1,45 @@
+/* Kordovan motion kit: one token file that brands every registry block.
+   Link it in any HyperFrames composition AFTER the block's own styles.
+   Colours are Quiet Heritage (docs/brand/BRAND_MOODBOARD.md); fonts are the only two we use. */
+:root{
+  /* palette */
+  --kv-alabaster:#F7F2EA; --kv-parchment:#ECE3D4; --kv-espresso:#241C16; --kv-walnut:#4A3528;
+  --kv-cognac:#A0623A; --kv-tan:#C08B5C; --kv-brass:#B0894F; --kv-stone:#8B8174; --kv-border:#DDD2C0;
+
+  /* registry token names -> brand. Dark stage is the default for video. */
+  --bg:var(--kv-espresso); --fg:var(--kv-alabaster); --surface:var(--kv-walnut); --border:var(--kv-walnut);
+  --muted:var(--kv-stone); --brand:var(--kv-cognac); --accent:var(--kv-cognac); --accent-color:var(--kv-cognac);
+  --accent-2:var(--kv-brass); --transparent:transparent; --radius:0px;
+  --font-display:"Fraunces", Georgia, serif; --font-body:"Inter", system-ui, sans-serif;
+
+  /* block-specific washes: warm, never white */
+  --hf-fade-through-wash:var(--kv-espresso);
+  --hf-editorial-flash-wash:#F3E2C8; --hf-editorial-flash-warm:#E7B98A;
+
+  /* motion signature: one family of eases, no bounce, no elastic */
+  --kv-ease-in:cubic-bezier(.33,0,.15,1);   /* entrances: power2.out-ish */
+  --kv-ease-move:cubic-bezier(.65,0,.35,1); /* camera moves: power3.inOut */
+  --kv-enter:.6s; --kv-push:1.06; --kv-punch:1.12;
+}
+
+/* Fonts: copy Fraunces + Inter woff2 into assets/fonts (see ../fonts). Never load remote fonts at render time. */
+@font-face{font-family:"Fraunces";src:url("assets/fonts/Fraunces.woff2") format("woff2");font-weight:100 900;font-display:block}
+@font-face{font-family:"Inter";src:url("assets/fonts/Inter.woff2") format("woff2");font-weight:100 900;font-display:block}
+/* Urdu script only (Nastaliq, SIL OFL). Roman Urdu stays in Inter. */
+@font-face{font-family:"Noto Nastaliq Urdu";src:url("assets/fonts/NotoNastaliqUrdu.woff2") format("woff2");font-display:block}
+
+/* type roles, sized for a 1080-wide frame (book ch. 04) */
+.kv-head{font-family:var(--font-display);font-weight:600;font-size:96px;line-height:1.02;color:var(--fg);letter-spacing:-.01em}
+.kv-head em{font-style:italic;color:var(--kv-tan)}          /* the one accent word; tan reads better than cognac on espresso */
+.kv-label{font-family:var(--font-body);font-weight:700;font-size:34px;letter-spacing:.24em;text-transform:uppercase;color:var(--kv-brass)}
+.kv-cap{font-family:var(--font-body);font-weight:600;font-size:46px;line-height:1.2;color:var(--kv-alabaster);
+  background:rgba(36,28,22,.62);padding:10px 18px;display:inline-block}
+.kv-cap .on{color:var(--kv-alabaster)} .kv-cap .off{color:rgba(247,242,234,.55)}   /* phrase-by-phrase weight-shift captions */
+.kv-urdu{font-family:"Noto Nastaliq Urdu",serif;font-size:52px;line-height:2;direction:rtl}
+.kv-price{font-family:var(--font-body);font-weight:700;font-variant-numeric:tabular-nums}
+
+/* safe band for 1080x1920: keep text and product between y 270 and 1250 */
+.kv-safe{position:absolute;left:64px;right:64px;top:270px;height:980px}
+
+/* end card scrim */
+.kv-endcard{background:var(--kv-espresso);color:var(--kv-alabaster)}

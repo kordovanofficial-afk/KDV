@@ -1,0 +1,17 @@
+{
+  "compositions/beat-freeze-cut.html": "54fbdaa2690b60395827073a8763cf70579886850fe99f547939c209373717d9",
+  "compositions/camera-dolly-zoom.html": "61f972b958c208292d111ba79ced8d5e0cb50ca034b144be4d0d43fa48d1dd7d",
+  "compositions/components/caption-editorial-emphasis.html": "6144571b6c73dbdec282284fe2277d3c958e15cddaf362295ba9cca02e705d1c",
+  "compositions/components/caption-weight-shift.html": "8a5294debec3eadeb7ca0a8688c31a6e8c517ebb1c55ff410aa81df3807daa55",
+  "compositions/components/cut-the-curve.html": "e027fabc13bd758da04bf636a6519f8a7b1abd0b62ea1ced887316b129c125b1",
+  "compositions/components/fade-through.html": "f3355c517ee2eb808036cc8978ca7489f9569eaceef83f87eeb639b23b66147f",
+  "compositions/components/grain-overlay.html": "97a0da8f26feca9574abcf08b8186cef10ea4819b2aeabc30547ae16ed9ae80d",
+  "compositions/components/inline-highlight.html": "5063977e75ef2c36ed9ce71e0f95b244504a7c489dd540b47defabbe39c09100",
+  "compositions/components/iris-reveal.html": "977a7e068ebe7f547006794ee36ef4d30cd36d68edbd05acf60719e294de989e",
+  "compositions/components/kinetic-center-build.html": "774f75b80d82fbc0c6226b85743804fb7a2229fb038eb0d38fa2e9503072c2e0",
+  "compositions/components/logo-brand-close.html": "afd249a6bf34702f71a9bf4464adbe8f2dd3a768f9729701ee4a57f205991089",
+  "compositions/components/match-cut.html": "34ffaa62e703ccd331889f44ae09aef650844b8c1f77d5ae417bf65cddf5ec5d",
+  "compositions/components/text-match-cut.html": "9bc1cc08bf75b56aa20b911d706e88755b1a6b39220f5ed5f7e70318ae184186",
+  "compositions/editorial-flash-overlay.html": "4d8a3edc42b63aa99de52e5e1bbc932a7f6ba1e83d52e003aba27cd5a20fc432",
+  "compositions/organic-light-leak-overlay.html": "a7cf27b41d5fc99dea3748e94fe93ab04b94ad744aa5eefe030e756b54e495f0"
+}

@@ -1,0 +1,89 @@
+{
+  "$schema": "https://hyperframes.heygen.com/schema/hyperframes.json",
+  "registry": "https://raw.githubusercontent.com/heygen-com/hyperframes/main/registry",
+  "paths": {
+    "blocks": "compositions",
+    "components": "compositions/components",
+    "assets": "assets"
+  },
+  "media": {
+    "autoProxy": true
+  },
+  "registryItems": [
+    {
+      "name": "grain-overlay",
+      "type": "hyperframes:component",
+      "target": "compositions/components/grain-overlay.html"
+    },
+    {
+      "name": "organic-light-leak-overlay",
+      "type": "hyperframes:block",
+      "target": "compositions/organic-light-leak-overlay.html"
+    },
+    {
+      "name": "editorial-flash-overlay",
+      "type": "hyperframes:block",
+      "target": "compositions/editorial-flash-overlay.html"
+    },
+    {
+      "name": "match-cut",
+      "type": "hyperframes:component",
+      "target": "compositions/components/match-cut.html"
+    },
+    {
+      "name": "cut-the-curve",
+      "type": "hyperframes:component",
+      "target": "compositions/components/cut-the-curve.html"
+    },
+    {
+      "name": "beat-freeze-cut",
+      "type": "hyperframes:block",
+      "target": "compositions/beat-freeze-cut.html"
+    },
+    {
+      "name": "camera-dolly-zoom",
+      "type": "hyperframes:block",
+      "target": "compositions/camera-dolly-zoom.html"
+    },
+    {
+      "name": "fade-through",
+      "type": "hyperframes:component",
+      "target": "compositions/components/fade-through.html"
+    },
+    {
+      "name": "kinetic-center-build",
+      "type": "hyperframes:component",
+      "target": "compositions/components/kinetic-center-build.html"
+    },
+    {
+      "name": "caption-weight-shift",
+      "type": "hyperframes:component",
+      "target": "compositions/components/caption-weight-shift.html"
+    },
+    {
+      "name": "caption-editorial-emphasis",
+      "type": "hyperframes:component",
+      "target": "compositions/components/caption-editorial-emphasis.html"
+    },
+    {
+      "name": "inline-highlight",
+      "type": "hyperframes:component",
+      "target": "compositions/components/inline-highlight.html"
+    },
+    {
+      "name": "logo-brand-close",
+      "type": "hyperframes:component",
+      "target": "compositions/components/logo-brand-close.html"
+    },
+    {
+      "name": "iris-reveal",
+      "type": "hyperframes:component",
+      "target": "compositions/components/iris-reveal.html"
+    },
+    {
+      "name": "text-match-cut",
+      "type": "hyperframes:component",
+      "target": "compositions/components/text-match-cut.html"
+    }
+  ]
+}

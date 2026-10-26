@@ -129,7 +129,7 @@ Every patina shot is a rebuttal: **"It doesn't wear out. It wears in."**
 - If footage needs heavy grading to look good, it was lit wrong. Reshoot.
 - ffmpeg reference grade (use it as a ceiling, not a starting point):
   `eq=contrast=1.05:saturation=1.0:gamma=1.0,colorbalance=rs=0.03:bs=-0.03`
-- 🚫 No crushed blacks, no teal-orange, no oval vignettes, no fake film grain over a phone image.
+- 🚫 No crushed blacks, no teal-orange, no oval vignettes, no fake film grain over a phone image (the one exception, on type cards only, is §15.5).
 
 ---
 
@@ -164,7 +164,7 @@ Most Reels are watched with sound on, but every video must still make sense on m
 2. **Voice.** A real human voice, the founder or team, in natural Urdu/English as people actually speak.
    AI voices (Kokoro etc.) are **for drafts and timing only, never final.**
 3. **Music.**
-   - Use only tracks the owner supplies as copyright-free, or Meta's Sound Collection chosen at upload.
+   - Use only tracks the owner supplies as copyright-free, or Meta's Sound Collection chosen at upload. Every source and its licence verdict: §17.
    - Music sits under the voice and foley (about −18 to −22 dB under the voice).
    - Cut on the beat, but never let music drive a product demo.
    - 🚫 Synthesised placeholder music is never final.
@@ -335,7 +335,7 @@ The video's job is to **remove the risk of buying something you can't try on.**
   - PAT and MAC can breathe 3–4 s;
   - the whole video should feel calm by 0:05.
 - **Cuts:** hard cuts and match cuts (snap to snap, hand to hand). A dip to black only into the end card.
-  🚫 No wipes, spins, zoom-blur or glitch transitions.
+  🚫 No wipes, spins, zoom-blur or glitch transitions. The approved transitions and zooms are named in §15.1–15.2.
 - **Speed:** real time by default. Slow motion only on footage shot at 60–120 fps. Time-lapse only for FILL.
 - **End card (2–3 s):** product FLAT or HAND, name, price, one trust line (warranty, or COD where true), and the CTA.
   Horse mark small in Brass or Espresso. The logo never opens a video.
@@ -420,3 +420,130 @@ The video's job is to **remove the risk of buying something you can't try on.**
   - **Oct 25 2026 · Teaser v2:** footage was fine, but synthetic music made it feel cheap. Use real tracks.
   - **Oct 25 2026 · Stop-motion Mocha Mate:** the honest demo plus fun format works for F5. Never use the founder clips of the black wallet as Mocha Mate.
   - **Oct 26 2026 · "Prada" heritage film:** failed. The desk footage was not shot for it, and heavy grading plus an AI voice cannot fake luxury. Led to §0.
+  - **Oct 26 2026 · Motion kit + sound sources:** added §15–§18. Earshot cleared for nothing yet (provenance unclear, one copy is non-commercial). Openverse is wired in but blocked by this environment's network.
+
+---
+
+## 15. The Kordovan signature: what makes a video ours at any size
+
+A viewer should know it is Kordovan with the sound off and the logo covered.
+These **eight constants never change**, whether it is a Rs 1,499 keychain or a Rs 35,000 jacket:
+
+| # | Constant | The rule |
+|---|---|---|
+| 1 | **Frame 1** | Product or problem in the safe band, lit from the side. It is also the thumbnail. |
+| 2 | **Light** | One warm side source, true leather colour (§3.4, §3.7). |
+| 3 | **Type** | Fraunces headline, at most 5 words, plus Inter labels and captions. Nothing else. |
+| 4 | **Accent** | Exactly one italic accent word per video (Tan `#C08B5C` on dark, Cognac `#A0623A` on light). |
+| 5 | **Caption style** | Phrase-by-phrase weight-shift captions (§15.4). Never TikTok box highlights. |
+| 6 | **Motion curve** | One ease family: entrances 0.6 s ease-out, camera moves ease-in-out. No bounce, no elastic, no shake. |
+| 7 | **Sonic logo** | Our real brass snap lands on the horse mark in every end card (§17.1). |
+| 8 | **End card** | Espresso ground, product, name, price, one trust line, CTA, small horse mark. 2–3 s. |
+
+The kit that enforces 3–8 automatically is **`tools/video-edit/kv-kit/`**: `kv-brand.css` maps every installed HyperFrames block onto Quiet Heritage colours, our two fonts and our eases.
+
+### 15.1 Zoom and camera-move vocabulary (named, so briefs can call them)
+| Code | Move | Use | Limit |
+|---|---|---|---|
+| **Z1 Slow push** | 100 → 106% over the whole shot | default on MAC, PAT and stills (Ken Burns) | any shot over 2 s |
+| **Z2 Punch-in** | cut-on-action jump 100 → 112% (or a 4-frame ease) | the moment of the claim: the snap, the price, the "6 months" | max 1 per 5 s, always on a sound hit |
+| **Z3 Reveal pull** | 115 → 100% | show scale: wallet in hand → back pocket → whole outfit | once per video |
+| **Z4 Dolly zoom** | `camera-dolly-zoom` block | jackets only, the hero on-body shot | once per film |
+| **Z5 Speed ramp** | `beat-freeze-cut`: 100% → 40% on the payoff, 150–200% through repetition | snap closing, zip, card going in; speed through FILL | 60 fps+ footage only |
+| **Z6 Hold** | nothing moves | founder line, patina tilt, end card | stillness is a move too |
+
+🚫 **Banned moves:** zoom blur, whip pans, 3D spins, camera shake, rotating orbits, "drift" on every shot.
+Digital zoom never goes above 115% on 4K footage (or 108% on 1080p), or the grain falls apart.
+
+### 15.2 Transition library (installed in `kv-kit`)
+| Transition | Block | When | Share of cuts |
+|---|---|---|---|
+| **Hard cut** | — | default | ~80% |
+| **Match cut** | `match-cut`, `text-match-cut` | snap → snap, hand → hand, new wallet → aged wallet, one word becoming the next | the "wow" cut, 1–2 per video |
+| **Velocity cut** | `cut-the-curve` | a hand moving out of frame continues into the next shot | hooks |
+| **Warm fade-through** | `fade-through` (espresso wash) | a time jump (new → 6 months) or into the end card | max 1 |
+| **Light leak** | `organic-light-leak-overlay` (warm amber only) | golden-hour jackets, patina "years passing" | max 1, Tier L only |
+| **Editorial flash** | `editorial-flash-overlay` (warm, never white) | a launch reveal | max 1, launches only |
+| **Iris reveal** | `iris-reveal` | the secret pocket or inside reveal only | F5 only |
+
+🚫 **Never:** glitch, chromatic/RGB split, pixelate, vortex, ripple, VHS, 3D flip, slide/push wipes, gooey morphs.
+These are installed by other brands to look busy. Ours earn attention with the leather, not the edit.
+
+### 15.3 Kinetic type
+- **Headline build:** `kinetic-center-build`. Words arrive one by one and lock centre. Use it for the 3–5-word headline only.
+- **Key-word mark:** `inline-highlight` as a thin cognac underline sweeping under the accent word. Never a filled box.
+- **Editorial emphasis:** `caption-editorial-emphasis`, with Inter for the line and the accent word switching to Fraunces italic.
+- 🚫 No typewriter, scramble/decode, neon, gradient-fill, emoji-pop or particle-burst text.
+
+### 15.4 Captions: our style
+- **Phrase-by-phrase, 2–4 words**, with the spoken word brightening from 55% to 100% Alabaster (`caption-weight-shift`). It reads as premium, and still gives the word-by-word movement that agencies credit with lifting 3-second views (directional, unproven claims: test it, don't trust it).
+- Inter 600 ≥ 44 px on a 62% espresso box, inside the safe band, centred, never above the product.
+- **Roman Urdu** stays in Inter. **Urdu script** uses **Noto Nastaliq Urdu** (free, SIL Open Font License), the only third font allowed and only for Urdu script.
+
+### 15.5 Grain and texture
+- Never over footage (§3.7).
+- Allowed **only** on solid espresso type cards and end cards, via `grain-overlay` at ≤ 3% opacity. It stops flat dark fields banding after Meta re-compresses them. Invisible on purpose.
+
+---
+
+## 16. Scale tiers: small product vs big product
+
+Same eight constants, different tempo. Pick the tier from the price and the purchase weight.
+
+| | **Tier S, small** | **Tier M, medium** | **Tier L, large** |
+|---|---|---|---|
+| **Products** | wallets, cardholders, belts, keychains, caps (≤ Rs 6,500) | bags, laptop/office/travel (Rs 6,000–45,000) | jackets, footwear, launches, collections (made to order) |
+| **Formats** | F1, F2, F5, F8, F9 | F1, F3, F4, F7 | F6, F4, F3, F2, F7 |
+| **Length** | 6–15 s (master 30 s) | 15–30 s | 20–45 s (6 s teasers for retarget) |
+| **Cut rhythm** | 1–1.5 s, punchier | 2–2.5 s | 2.5–4 s, let it breathe |
+| **Hero shot** | MAC + MECH | HAND → WEAR (Z3 reveal pull for scale) | WEAR at golden hour, Z4 once |
+| **Zooms allowed** | Z1, Z2, Z5 | Z1, Z2, Z3 | Z1, Z3, Z4, Z6 |
+| **Transitions extra** | match cut, iris (F5) | match cut, fade-through | light leak, fade-through, editorial flash (launch) |
+| **Sound** | foley-forward, music optional | foley + voice | voice + music bed + foley details |
+| **Must say** | price; COD where true; free delivery over Rs 5,500 | capacity (what fits, e.g. 15.6-inch laptop) | made to order + the reason + about 3 weeks + WhatsApp sizing |
+| **Pace of the viewer** | impulse: buy in one video | considered: two touches | considered: retarget sequence (F6 → F7 → F3) |
+
+A **collection or brand film** is Tier L tempo with a Tier S shot inside it (one macro that snaps). That keeps a big film tactile.
+
+---
+
+## 17. Sound library and licences (all free)
+
+### 17.1 Our own sound kit (priority 1, owned forever)
+Record once, reuse everywhere. Store in `tools/video-edit/sound-kit/` (WAV, 48 kHz):
+`snap_brass_01–03` · `creak_flex` · `card_slide_in` · `cash_fold` · `zip_jacket_up/down` · `stitch_pull` · `burnish_rub` · `buckle_belt` · `leather_drop_on_wood` · `room_tone_workshop` (30 s).
+🔊 **The sonic logo = `snap_brass_01`, cleaned, placed exactly on the horse mark in every end card.** After 20 videos people hear it as Kordovan.
+
+### 17.2 External sources: verdicts
+| Source | Licence | Paid ads? | Verdict |
+|---|---|---|---|
+| **Openverse** (api.openverse.org) | per sound: CC0 or CC BY (also hosts NC/ND, which are filtered out) | **CC0 only** for ads. CC BY needs a credit, which an ad can't carry properly → organic posts only, credited in the caption | ✅ **Wired in**: `npx hyperframes media-use resolve --type sfx --intent "leather creak"` searches CC0/CC BY only, prefers CC0 and writes `assets/sfx/CREDITS.md`. ⚠️ Blocked by this cloud environment's network until `api.openverse.org` is allowed |
+| **Bundled HyperFrames SFX** (21 files) | Pixabay Content License: commercial, no attribution | yes | ✅ Usable now, offline. Mostly UI whooshes and clicks, so only `click-soft`, `whoosh-short` and `riser` are on-brand (never glitch or notification sounds) |
+| **Pixabay sound effects** | Pixabay Content License | yes | ✅ Good for room tones and nature beds. Download by hand and drop into the repo |
+| **Sonniss GDC bundles** | royalty-free, commercial, no attribution | yes | ✅ Pro-grade foley. Large downloads, grab the leather and cloth folders |
+| **Meta Sound Collection** | licensed by Meta for ads on its platforms | yes, inside Meta only | ✅ Pick music at upload, so we never ship it in the file |
+| **Earshot** (Paul Urmson / G17 library, re-released 2023) | **unclear**: re-uploads on itch.io and the Internet Archive; one copy is marked **CC BY-NC-ND (non-commercial)** | **no**, until proven | 🔴 **Do not use in ads.** Only if the owner has the download's own `License.txt` and it clearly allows commercial use. Then save that file next to the sounds |
+| **"Real SFX"** | not identified | — | ⏳ Need the exact URL before it can be checked |
+| **Trending Reels audio** | owned by labels | **never** in ads | Organic Reels only, added inside Instagram |
+
+**Rules:** every external sound gets a line in that project's `CREDITS.md` (file, source URL, licence, date). No licence file = it doesn't go in. **Never NC, ND or "personal use" sounds** — every Kordovan video is commercial.
+
+---
+
+## 18. What makes it spread (and our version of each)
+
+Short-form research is mostly agency blogs, so treat the numbers as **directional, then prove them with our own hook and hold rates (§11).**
+
+| Mechanic | Generic version | **Kordovan version** |
+|---|---|---|
+| **Pattern interrupt** every 1.5–2.5 s | random zooms, emojis | a cut, a Z2 punch-in on a foley hit, or a new 3-word line. Something changes, nothing jitters |
+| **Open loop** | "wait till the end" | "Same wallet. 6 months apart." The aged one is withheld until 0:06 |
+| **Loop ending** | — | F5 micro-clips end on the frame they started with, so they replay seamlessly (rewatches lift reach) |
+| **Satisfying payoff** | slime, ASMR | the snap, the zip, cards dropping in, burnishing. Real foley, slowed via Z5 |
+| **Share trigger** | shock | myth-busters (F8): "how to tell real leather" is the video people forward to a friend before Eid |
+| **Comment trigger** | "comment YES" | an honest question in Roman Urdu: "Kaunsa colour? Mocha ya black?" |
+| **Native first second** | — | looks like a person filming, not an ad: hands, real room, no logo, no title card |
+| **Save trigger** | — | care tips (conditioning, rain) as 15 s F4 variants. Saves tell the algorithm it is worth keeping |
+| **Series** | — | numbered episodes ("Workshop Diaries 03") so returning viewers recognise the format before the brand |
+
+🚫 We don't use: fake countdowns, fake "only 2 left", stitched competitor bashing, flame tests, clickbait thumbnails that the video doesn't pay off.

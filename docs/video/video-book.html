@@ -1,0 +1,749 @@
+<title>Kordovan Video Book</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: a field manual — sticky chapter rail on wide screens, chapters as stacked bands, diagrams drawn in brand tokens */
+:root{
+  --bg:#F7F2EA; --surface:#ECE3D4; --ink:#241C16; --walnut:#4A3528; --muted:#8B8174; --line:#DDD2C0;
+  --cognac:#A0623A; --brass:#B0894F; --olive:#5A5A3C; --good:#4E6B3A; --bad:#9A3B2E; --card:#FBF8F2;
+  --display:"Fraunces", Georgia, "Times New Roman", serif;
+  --body:"Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#1A1411; --surface:#241C16; --ink:#F1E9DC; --walnut:#D9C9B3; --muted:#A39684; --line:#3A2E25;
+  --cognac:#D08A5A; --brass:#C9A46A; --olive:#9EA27A; --good:#8FB27A; --bad:#E08A78; --card:#211915; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1A1411; --surface:#241C16; --ink:#F1E9DC; --walnut:#D9C9B3; --muted:#A39684; --line:#3A2E25;
+  --cognac:#D08A5A; --brass:#C9A46A; --olive:#9EA27A; --good:#8FB27A; --bad:#E08A78; --card:#211915; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;margin:0}
+a{color:var(--cognac)}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);font-weight:600;text-wrap:balance;margin:0;line-height:1.15}
+.eyebrow{font-family:var(--body);font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--brass)}
+p{margin:0}
+/* hero */
+.hero{background:var(--ink);color:#F1E9DC}
+.hero .wrap{padding-block:56px 48px;display:grid;gap:28px;grid-template-columns:1.4fr 1fr;align-items:end}
+.hero h1{font-size:clamp(40px,6vw,76px);font-weight:700;letter-spacing:-.01em}
+.hero h1 em{font-style:italic;color:#D08A5A;font-weight:600}
+.hero .lede{font-size:18px;color:#D9C9B3;max-width:58ch;margin-top:16px}
+.rule0{border:1px solid #4A3528;padding:22px 22px 20px;background:#2E241D}
+.rule0 .eyebrow{color:#C9A46A}
+.rule0 blockquote{margin:10px 0 12px;font-family:var(--display);font-size:28px;line-height:1.15;color:#F7F2EA}
+.rule0 ol{margin:0;padding-left:20px;color:#D9C9B3;font-size:14.5px;display:grid;gap:6px}
+/* layout */
+.layout{display:grid;grid-template-columns:200px minmax(0,1fr);gap:48px;padding-block:40px 80px}
+nav.rail{position:sticky;top:calc(env(safe-area-inset-top,0px) + 20px);align-self:start;font-size:14px}
+nav.rail ol{list-style:none;margin:0;padding:0;display:grid;gap:2px;counter-reset:ch}
+nav.rail a{display:block;padding:6px 10px;color:var(--walnut);text-decoration:none;border-left:2px solid var(--line)}
+nav.rail a:hover,nav.rail a:focus-visible{border-left-color:var(--cognac);color:var(--ink);outline:none}
+nav.rail .k{font-variant-numeric:tabular-nums;color:var(--muted);margin-right:6px}
+main{min-width:0;display:grid;gap:72px}
+section{display:grid;gap:22px;scroll-margin-top:24px}
+section>header{display:grid;gap:8px;border-top:1px solid var(--line);padding-top:22px}
+section h2{font-size:clamp(28px,3.4vw,40px)}
+section .intro{color:var(--walnut);max-width:68ch}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);padding:18px 18px 16px;display:grid;gap:8px;align-content:start}
+.card h3{font-size:20px}
+.card p,.card li{font-size:15px;color:var(--walnut)}
+.tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:3px 8px;border:1px solid var(--line);color:var(--muted)}
+.tag.flag{border-color:var(--cognac);color:var(--cognac)}
+/* tables */
+.tbl{overflow-x:auto;border:1px solid var(--line);background:var(--card)}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:640px}
+th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700;background:var(--surface)}
+td strong{color:var(--ink)}
+tr:last-child td{border-bottom:0}
+td.take{color:var(--good)} td.refuse{color:var(--bad)}
+/* callout */
+.callout{background:var(--surface);border-left:4px solid var(--cognac);padding:18px 20px;display:grid;gap:6px}
+.callout .big{font-family:var(--display);font-size:clamp(24px,3vw,34px);line-height:1.15}
+.callout .big em{color:var(--cognac)}
+/* pillars */
+.pillars{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.pillars.p4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.pillar{border-top:3px solid var(--brass);padding-top:12px;display:grid;gap:6px}
+.pillar b{font-family:var(--display);font-size:22px;font-weight:600}
+.pillar span{font-size:14px;color:var(--walnut)}
+/* shots */
+.shots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.shot{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;background:var(--card);border:1px solid var(--line);padding:14px}
+.code{font-family:var(--body);font-weight:700;font-size:14px;letter-spacing:.08em;color:var(--bg);background:var(--ink);padding:6px 8px;min-width:58px;text-align:center}
+.shot b{display:block;font-size:15px}
+.shot span{font-size:13.5px;color:var(--walnut)}
+/* safe zone */
+.safe{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:28px;align-items:center}
+.safe svg{width:100%;height:auto;max-width:260px}
+.list{margin:0;padding-left:18px;display:grid;gap:8px}
+.list li{color:var(--walnut)}
+.list li strong{color:var(--ink)}
+.dos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.do,.dont{padding:16px 18px;border:1px solid var(--line);background:var(--card)}
+.do h3{color:var(--good);font-size:18px}.dont h3{color:var(--bad);font-size:18px}
+.do ul,.dont ul{margin:8px 0 0;padding-left:18px;display:grid;gap:4px;font-size:15px;color:var(--walnut)}
+/* type specimen */
+.spec{background:var(--ink);color:#F1E9DC;padding:26px;display:grid;gap:18px}
+.spec .h{font-family:var(--display);font-weight:700;font-size:clamp(34px,5vw,54px);line-height:1.05}
+.spec .h em{color:#D08A5A}
+.spec .lab{font-weight:700;letter-spacing:.24em;font-size:14px;color:#C9A46A}
+.spec .capdemo{display:inline-block;background:rgba(36,28,22,.6);border:1px solid #4A3528;padding:8px 12px;font-weight:600;font-size:16px}
+.swatches{display:flex;flex-wrap:wrap;gap:10px}
+.sw{display:grid;gap:4px;font-size:12px;color:#D9C9B3}
+.sw i{display:block;width:64px;height:40px;border:1px solid #4A3528}
+/* formats */
+.formats{display:grid;gap:16px}
+.fmt{background:var(--card);border:1px solid var(--line);padding:20px;display:grid;gap:12px}
+.fmt.flag{border-color:var(--cognac);box-shadow:inset 4px 0 0 var(--cognac)}
+.fmt .top{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px 14px}
+.fmt .id{font-family:var(--display);font-size:30px;font-weight:700;color:var(--cognac);line-height:1}
+.fmt h3{font-size:22px}
+.fmt .meta{font-size:13px;color:var(--muted);font-weight:600;letter-spacing:.06em}
+.fmt p{color:var(--walnut);font-size:15px;max-width:72ch}
+.beats{display:flex;width:100%;min-height:58px;border:1px solid var(--line);overflow:hidden}
+.beat{padding:8px 10px;font-size:12.5px;line-height:1.3;border-right:1px solid var(--line);background:var(--surface);color:var(--ink);min-width:0}
+.beat:last-child{border-right:0}
+.beat em{display:block;font-style:normal;font-weight:700;color:var(--cognac);font-variant-numeric:tabular-nums;font-size:11.5px;margin-bottom:2px}
+.beat.hk{background:var(--ink);color:#F1E9DC}.beat.hk em{color:#D08A5A}
+.beat.end{background:color-mix(in srgb,var(--brass) 22%,var(--surface))}
+/* hooks */
+.hooks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.hook{background:var(--card);border:1px solid var(--line);padding:14px 16px;display:grid;gap:8px}
+.hook .n{font-weight:700;font-size:12px;color:var(--muted);letter-spacing:.1em}
+.hook q{font-family:var(--display);font-size:20px;line-height:1.2;quotes:"“" "”"}
+.hook .v{font-size:13.5px;color:var(--walnut)}
+.hook .fit{font-size:12px;color:var(--brass);font-weight:700;letter-spacing:.08em}
+/* shoot lists */
+.steps{counter-reset:s;list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.steps li{counter-increment:s;display:grid;grid-template-columns:30px 1fr;gap:8px;font-size:15px;color:var(--walnut)}
+.steps li::before{content:counter(s);font-weight:700;color:var(--cognac);font-variant-numeric:tabular-nums}
+/* metrics */
+.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.metric{border:1px solid var(--line);background:var(--card);padding:16px;display:grid;gap:4px}
+.metric .val{font-family:var(--display);font-size:34px;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
+.metric .nm{font-weight:700;font-size:14px}
+.metric .df{font-size:13px;color:var(--muted)}
+.diag{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.diag div{border-top:3px solid var(--olive);padding-top:10px;font-size:14.5px;color:var(--walnut)}
+.diag b{color:var(--ink);display:block}
+/* claims */
+.claims{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.claim{display:grid;grid-template-columns:auto 1fr;gap:10px;padding:12px 14px;background:var(--card);border:1px solid var(--line);font-size:14.5px;color:var(--walnut)}
+.claim .x{width:22px;height:22px;border-radius:50%;background:var(--bad);color:var(--bg);display:grid;place-items:center;font-weight:700;font-size:13px}
+.claim strong{color:var(--ink)}
+/* qc */
+.qc{display:grid;gap:8px;background:var(--card);border:1px solid var(--line);padding:18px}
+.qc label{display:grid;grid-template-columns:22px 1fr;gap:10px;align-items:start;font-size:15px;cursor:pointer}
+.qc input{width:18px;height:18px;margin-top:3px;accent-color:var(--cognac)}
+.qc input:checked+span{color:var(--muted);text-decoration:line-through}
+.qcbar{display:flex;flex-wrap:wrap;align-items:center;gap:12px;justify-content:space-between}
+.qcbar button{font:inherit;font-size:14px;font-weight:600;padding:8px 14px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.qcbar button:focus-visible{outline:2px solid var(--cognac);outline-offset:2px}
+.prog{font-weight:700;font-variant-numeric:tabular-nums;color:var(--cognac)}
+/* log */
+.log{display:grid;gap:10px}
+.log div{display:grid;grid-template-columns:120px 1fr;gap:14px;font-size:15px;color:var(--walnut);border-bottom:1px solid var(--line);padding-bottom:10px}
+.log b{color:var(--ink)}
+.log .d{font-variant-numeric:tabular-nums;color:var(--muted);font-size:13px;font-weight:600}
+footer{border-top:1px solid var(--line);padding-block:28px 40px;font-size:13px;color:var(--muted)}
+footer .src{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:8px}
+@media (max-width:980px){
+  .layout{grid-template-columns:minmax(0,1fr)}
+  nav.rail{position:static}
+  nav.rail ol{display:flex;flex-wrap:wrap;gap:6px}
+  nav.rail a{border-left:0;border:1px solid var(--line);padding:4px 10px}
+  .hero .wrap{grid-template-columns:minmax(0,1fr)}
+  .pillars,.pillars.p4{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .shots,.hooks,.grid3{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:620px){
+  .grid2,.grid3,.shots,.hooks,.dos,.claims,.diag,.pillars,.pillars.p4{grid-template-columns:minmax(0,1fr)}
+  .safe{grid-template-columns:minmax(0,1fr)}
+  .beats{flex-direction:column}
+  .beat{border-right:0;border-bottom:1px solid var(--line);width:100%!important}
+  .log div{grid-template-columns:minmax(0,1fr);gap:2px}
+}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+html{scroll-behavior:smooth}
+</style>
+
+<div class="hero">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Kordovan · Video Book · v1 · Oct 2026</div>
+      <h1>Leather doesn't wear out. <em>It wears in.</em></h1>
+      <p class="lede">How every Kordovan video looks, sounds and gets made: ads, Reels, product films and founder content. Shoot it, edit it and check it against this book before it goes live.</p>
+    </div>
+    <div class="rule0">
+      <div class="eyebrow">Rule zero</div>
+      <blockquote>Editing cannot rescue footage. The shoot is the video.</blockquote>
+      <ol>
+        <li>Never edit a video from footage that wasn't shot for it. Reshoot (20 min) instead.</li>
+        <li>AI voice and generated music are for drafts only. Final cuts use real voices, supplied tracks and recorded foley.</li>
+        <li>We don't imitate fashion houses. Our style comes from honest leather in real hands.</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<div class="wrap layout">
+  <nav class="rail" aria-label="Chapters">
+    <ol>
+      <li><a href="#lane"><span class="k">01</span>Our lane</a></li>
+      <li><a href="#pillars"><span class="k">02</span>Five pillars</a></li>
+      <li><a href="#look"><span class="k">03</span>The look</a></li>
+      <li><a href="#type"><span class="k">04</span>Type on screen</a></li>
+      <li><a href="#sound"><span class="k">05</span>Sound</a></li>
+      <li><a href="#formats"><span class="k">06</span>Formats</a></li>
+      <li><a href="#hooks"><span class="k">07</span>Hook bank</a></li>
+      <li><a href="#jackets"><span class="k">08</span>Jackets</a></li>
+      <li><a href="#shoot"><span class="k">09</span>The shoot</a></li>
+      <li><a href="#edit"><span class="k">10</span>Edit rules</a></li>
+      <li><a href="#test"><span class="k">11</span>Testing</a></li>
+      <li><a href="#claims"><span class="k">12</span>Claims</a></li>
+      <li><a href="#qc"><span class="k">13</span>QC checklist</a></li>
+      <li><a href="#log"><span class="k">14</span>Lessons</a></li>
+      <li><a href="#signature"><span class="k">15</span>Signature &amp; motion</a></li>
+      <li><a href="#tiers"><span class="k">16</span>Small vs big</a></li>
+      <li><a href="#soundlib"><span class="k">17</span>Sound library</a></li>
+      <li><a href="#spread"><span class="k">18</span>What spreads</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <!-- 01 -->
+    <section id="lane">
+      <header>
+        <div class="eyebrow">01 · Where we stand</div>
+        <h2>Bellroy's clarity, Saddleback's warmth, shot honestly in our own workshop.</h2>
+        <p class="intro">We compete with the best wallet brands in the world. Here is what each one does on video, what we take from it, and what we refuse.</p>
+      </header>
+      <div class="tbl">
+        <table>
+          <thead><tr><th>Brand</th><th>What their video does</th><th>We take</th><th>We refuse</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Bellroy</strong></td><td>Calm, bright, functional demos. Hands fill a wallet in time-lapse or stop-motion to prove "slim". Natural light on warm surfaces. Short ads list about five features fast.</td><td class="take">Clarity. One benefit per shot, shown rather than said. The fill-it demo.</td><td class="refuse">Animated graphics that hide the product.</td></tr>
+            <tr><td><strong>Ridge</strong></td><td>A testing machine: roughly 80+ new creatives a week, mostly UGC plus branded graphics. Hooks cut about 3 times a second. Stunts, "old way vs new way". Their key comparison shows a worn leather wallet beside a clean metal one.</td><td class="take">Volume and testing discipline. Three hooks per shoot. Fast first two seconds. Real people.</td><td class="refuse">Stunts that aren't true of our product. Discount banners as the idea.</td></tr>
+            <tr><td><strong>Ekster / Secrid</strong></td><td>Mechanism demos: a lever, cards fan out, a satisfying click.</td><td class="take">The mechanism micro-clip: our snap, the hidden pocket, pull tabs.</td><td class="refuse">—</td></tr>
+            <tr><td><strong>Saddleback</strong></td><td>Founder myth, 100-year warranty, "they'll fight over it when you're dead".</td><td class="take">Heirloom framing, with the warranty as the spine.</td><td class="refuse">Folksy cowboy pastiche.</td></tr>
+            <tr><td><strong>WP Standard / Carl Friedrik</strong></td><td>Warm, textural, editorial stills and slow product film.</td><td class="take">Feel-the-grain texture, restraint, negative space.</td><td class="refuse">—</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout">
+        <div class="eyebrow">Our answer to Ridge</div>
+        <div class="big">Their best ad says leather wears out. We show that <em>it wears in.</em></div>
+        <p>Every patina shot answers them. Put a 6-month and a 2-year Kordovan beside a new one, in good light, and let the leather argue. Never name a competitor on screen.</p>
+      </div>
+    </section>
+
+    <!-- 02 -->
+    <section id="pillars">
+      <header>
+        <div class="eyebrow">02 · Non-negotiable</div>
+        <h2>The five pillars</h2>
+        <p class="intro">If a video has none of these, it isn't a Kordovan video.</p>
+      </header>
+      <div class="pillars">
+        <div class="pillar"><b>Real hands</b><span>Leather is a touch product. Most shots hold, open, flex or stitch something.</span></div>
+        <div class="pillar"><b>Side light</b><span>One soft source from the side so the grain throws tiny shadows. Never overhead office light.</span></div>
+        <div class="pillar"><b>Texture</b><span>At least one macro per video: grain, burnished edge, stitch line, brass.</span></div>
+        <div class="pillar"><b>Honest demo</b><span>The product does its job on camera. It fills, snaps, closes, fits, layers.</span></div>
+        <div class="pillar"><b>Time</b><span>Patina and years of wear. The one thing plastic and metal can't show.</span></div>
+      </div>
+    </section>
+
+    <!-- 03 -->
+    <section id="look">
+      <header>
+        <div class="eyebrow">03 · The visual grammar</div>
+        <h2>Frame, shots, light and surface</h2>
+        <p class="intro">Master everything in 9:16 at 1080×1920, then reframe 4:5 and 1:1 cuts from it. Keep text and product inside the band the Reels interface never covers.</p>
+      </header>
+      <div class="safe">
+        <svg viewBox="0 0 270 480" role="img" aria-label="Reels safe zone: top 14 percent and bottom 35 percent are covered by the app; keep content between 270 and 1250 pixels">
+          <rect x="1" y="1" width="268" height="478" rx="18" fill="var(--surface)" stroke="var(--line)" stroke-width="2"/>
+          <rect x="1" y="1" width="268" height="67" rx="18" fill="var(--ink)" opacity=".18"/>
+          <rect x="1" y="312" width="268" height="167" rx="18" fill="var(--ink)" opacity=".18"/>
+          <rect x="17" y="68" width="236" height="244" fill="none" stroke="var(--cognac)" stroke-width="2" stroke-dasharray="6 5"/>
+          <text x="135" y="40" text-anchor="middle" font-size="12" font-family="Inter, sans-serif" fill="var(--walnut)">App UI · top ~14%</text>
+          <text x="135" y="190" text-anchor="middle" font-size="14" font-weight="700" font-family="Inter, sans-serif" fill="var(--cognac)">SAFE BAND</text>
+          <text x="135" y="208" text-anchor="middle" font-size="11" font-family="Inter, sans-serif" fill="var(--walnut)">y 270 → 1250 px</text>
+          <text x="135" y="400" text-anchor="middle" font-size="12" font-family="Inter, sans-serif" fill="var(--walnut)">Caption + CTA · bottom ~35%</text>
+          <text x="135" y="418" text-anchor="middle" font-size="11" font-family="Inter, sans-serif" fill="var(--walnut)">no text, logo or product here</text>
+        </svg>
+        <ul class="list">
+          <li><strong>Product in the middle third.</strong> Never low in frame, where the CTA bar covers it.</li>
+          <li><strong>Camera locked off by default</strong> (a tripod or a stack of books). Stillness reads as quality.</li>
+          <li><strong>Allowed moves:</strong> a slow push-in or pull-back, a slow rotation by hand. Handheld only for founder and on-body shots.</li>
+          <li><strong>Never:</strong> whip pans, drones, "cinematic" orbits round a wallet.</li>
+        </ul>
+      </div>
+
+      <h3 style="font-size:22px">Shot vocabulary <span class="tag">use these codes in every shot list</span></h3>
+      <div class="shots">
+        <div class="shot"><div class="code">MAC</div><div><b>Macro</b><span>Grain, stitch, edge, snap, zip pull. Phone 2–5 cm away. Proves quality.</span></div></div>
+        <div class="shot"><div class="code">HAND</div><div><b>In hand</b><span>Waist height, plain surface behind. Scale and the default demo.</span></div></div>
+        <div class="shot"><div class="code">FILL</div><div><b>Fill it</b><span>Top-down, cards and cash going in. Real time or time-lapse. Bellroy's proof.</span></div></div>
+        <div class="shot"><div class="code">MECH</div><div><b>Mechanism</b><span>One snap, pocket, pull tab or zip, locked off. Hooks and micro-clips.</span></div></div>
+        <div class="shot"><div class="code">PAT</div><div><b>Patina</b><span>New beside aged, a slow tilt in window light. Our answer to Ridge.</span></div></div>
+        <div class="shot"><div class="code">WEAR</div><div><b>On body</b><span>Back pocket; a jacket on a person walking, sitting, turning.</span></div></div>
+        <div class="shot"><div class="code">MAKE</div><div><b>Workshop</b><span>Cutting, skiving, stitching, burnishing, stamping. Craft and made-to-order.</span></div></div>
+        <div class="shot"><div class="code">FACE</div><div><b>To camera</b><span>Founder or team, chest-up. Trust.</span></div></div>
+        <div class="shot"><div class="code">FLAT</div><div><b>Flat lay</b><span>On a styled surface. Catalogue stills and end frames.</span></div></div>
+      </div>
+
+      <div class="grid3">
+        <div class="card"><span class="tag">Light recipe 1 · default</span><h3>Window</h3><p>Product 1 m from a window, light from the side. Hang a sheet over it if the sun is direct. A white card opposite fills the shadows. Switch off every ceiling light: mixed colour makes leather grey.</p></div>
+        <div class="card"><span class="tag">Light recipe 2 · night / mood</span><h3>One lamp</h3><p>A warm desk lamp from the side and slightly behind, the room otherwise dark, black card opposite. This is how to get the "luxury" look, in camera rather than in the edit.</p></div>
+        <div class="card"><span class="tag">Light recipe 3 · jackets</span><h3>Golden hour</h3><p>The hour before sunset, the subject turned three-quarters to the sun. Never midday.</p></div>
+      </div>
+
+      <div class="dos">
+        <div class="do"><h3>Surfaces we use</h3><ul><li>Walnut or dark wood, raw linen</li><li>Slate, stone, concrete, kraft paper</li><li>A leather offcut, the workshop bench</li><li>One prop that belongs: keys, a CNIC sample, notes, a logo-free watch</li></ul></div>
+        <div class="dont"><h3>Never in frame</h3><ul><li>Laptops, keyboards, monitors</li><li>White office desks, clutter</li><li>Branded mugs, phones or watches</li><li>Mixed lighting, ceiling tubes</li></ul></div>
+      </div>
+      <div class="grid2">
+        <div class="card"><span class="tag">Hands and wardrobe</span><p>Clean, trimmed nails. Neutral long sleeves (navy, olive, charcoal, cream). No logos. For jackets: dark denim or chinos, a plain tee or knit, clean boots. The jacket is the only statement.</p></div>
+        <div class="card"><span class="tag">Colour and grade</span><p>Grade lightly: true leather colour, slightly warm, shadows that keep detail, cognac that stays cognac. If footage needs heavy grading to look good, it was lit wrong. Reshoot. <strong>No</strong> crushed blacks, teal-orange, oval vignettes or fake grain.</p></div>
+      </div>
+    </section>
+
+    <!-- 04 -->
+    <section id="type">
+      <header>
+        <div class="eyebrow">04 · Words on screen</div>
+        <h2>Type on screen</h2>
+        <p class="intro">At most five words on screen at once. Every spoken word is captioned. Text stays at least 0.5 s plus 0.3 s per word; the closing line holds 2 s.</p>
+      </header>
+      <div class="spec">
+        <div class="lab">THE MOCHA MATE</div>
+        <div class="h">Same wallet. It <em>ages.</em></div>
+        <div><span class="capdemo">Asli leather ghis-ta nahi, rang pakadta hai.</span></div>
+        <div class="swatches">
+          <div class="sw"><i style="background:#F7F2EA"></i>Alabaster · text</div>
+          <div class="sw"><i style="background:#241C16"></i>Espresso · ground</div>
+          <div class="sw"><i style="background:#A0623A"></i>Cognac · 1 word max</div>
+          <div class="sw"><i style="background:#B0894F"></i>Brass · labels</div>
+          <div class="sw"><i style="background:#8B8174"></i>Stone · muted</div>
+        </div>
+      </div>
+      <div class="tbl">
+        <table>
+          <thead><tr><th>Role</th><th>Face</th><th>Size (1080 wide)</th><th>Colour</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Headline</strong></td><td>Fraunces 600–800</td><td>at least 72 px</td><td>Alabaster on a soft dark scrim, or Espresso on light</td></tr>
+            <tr><td><strong>Label / eyebrow</strong></td><td>Inter 600–700, uppercase, spaced 0.1–0.3em</td><td>at least 32 px</td><td>Brass or Stone</td></tr>
+            <tr><td><strong>Caption</strong></td><td>Inter 600, sentence case</td><td>at least 44 px</td><td>White on a 60% espresso box</td></tr>
+            <tr><td><strong>Accent</strong></td><td>Fraunces italic</td><td>—</td><td>Cognac, one word per video</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="intro">Text fades in or rises 6–10 px. No bouncing, spinning, glitch or typewriter effects. Sticker-style type belongs only to the F5 fun cut. Prices are written <strong>Rs 3,200</strong>.</p>
+    </section>
+
+    <!-- 05 -->
+    <section id="sound">
+      <header>
+        <div class="eyebrow">05 · What it sounds like</div>
+        <h2>Sound</h2>
+        <p class="intro">Most Reels are watched with sound on, but every video must still work muted: captions plus a hook you can see.</p>
+      </header>
+      <div class="grid2">
+        <div class="card"><span class="tag flag">Our signature</span><h3>Foley, recorded on set</h3><p>Record on a phone voice memo, 5–10 cm away, room silent: the brass snap, leather creak, a card sliding into a slot, a zip, thread pulled tight, an edge being burnished. Mix it louder than you think.</p></div>
+        <div class="card"><span class="tag">Voice</span><h3>Real humans only</h3><p>The founder or the team, in the Urdu/English mix people actually speak. AI voices are for drafts and timing only. Never final.</p></div>
+        <div class="card"><span class="tag">Music</span><h3>Supplied, under the voice</h3><p>Copyright-free tracks the owner supplies, or Meta's Sound Collection at upload. Sit it about −18 to −22 dB under the voice. Generated placeholder music is never final.</p></div>
+        <div class="card"><span class="tag">Silence</span><h3>Let it land</h3><p>One quiet second before a snap makes the snap land. Silence is allowed.</p></div>
+      </div>
+    </section>
+
+    <!-- 06 -->
+    <section id="formats">
+      <header>
+        <div class="eyebrow">06 · The playbook</div>
+        <h2>Nine formats</h2>
+        <p class="intro">Every shoot makes one master plus cut-downs (45 → 30 → 15 → 6 s), and every length gets three hooks. One shoot gives about 9–12 ad variants: our version of Ridge's volume.</p>
+      </header>
+      <div class="formats">
+        <article class="fmt flag">
+          <div class="top"><span class="id">F2</span><h3>"It wears in": patina proof</h3><span class="meta">15–30 s · TOF + retarget · FLAGSHIP</span></div>
+          <div class="beats">
+            <div class="beat hk" style="width:20%"><em>0–3 s</em>PAT: new vs aged, slow tilt. "Same wallet. 6 months apart."</div>
+            <div class="beat" style="width:25%"><em>3–9 s</em>MAC on the aged grain; a thumb runs along stitching that is still tight</div>
+            <div class="beat" style="width:25%"><em>9–15 s</em>FACE: "Asli leather ghis-ta nahi, rang pakadta hai."</div>
+            <div class="beat end" style="width:30%"><em>end</em>"It doesn't wear out. It wears in." Warranty + product</div>
+          </div>
+          <p>Needs real aged pieces. Borrow 1–3-year-old Kordovan items from the team and loyal customers for a day. That collection is a brand asset.</p>
+        </article>
+        <article class="fmt">
+          <div class="top"><span class="id">F1</span><h3>"Everything fits": capacity demo</h3><span class="meta">15–30 s · TOF · Bellroy lane</span></div>
+          <div class="beats">
+            <div class="beat hk" style="width:15%"><em>0–2 s</em>Pile of cards, cash, CNIC, keys. "All of this. One wallet?"</div>
+            <div class="beat" style="width:40%"><em>2–12 s</em>FILL top-down, each item in with its foley</div>
+            <div class="beat" style="width:25%"><em>12–20 s</em>Close it, MAC on the slim edge, WEAR into a back pocket</div>
+            <div class="beat end" style="width:20%"><em>end</em>Name, price, COD (non-made-to-order), warranty</div>
+          </div>
+        </article>
+        <article class="fmt">
+          <div class="top"><span class="id">F3</span><h3>Founder / team honesty</h3><span class="meta">30–50 s · TOF · UGC lane</span></div>
+          <div class="beats">
+            <div class="beat hk" style="width:15%"><em>0–3 s</em>One of 3 filmed hooks</div>
+            <div class="beat" style="width:40%"><em>body</em>Three real uses, shown, not listed</div>
+            <div class="beat" style="width:25%"><em>proof</em>PAT plus warranty</div>
+            <div class="beat end" style="width:20%"><em>end</em>Price + CTA</div>
+          </div>
+          <p>Real setting (the workshop is ideal), handheld is fine, one product. Worked example: <code>docs/video/MOCHA_MATE_FOUNDER_SCRIPT.md</code>.</p>
+        </article>
+        <article class="fmt">
+          <div class="top"><span class="id">F4</span><h3>The making: craft macro</h3><span class="meta">15–30 s · TOF + brand</span></div>
+          <div class="beats">
+            <div class="beat" style="width:14%"><em>MAKE</em>Hide</div><div class="beat" style="width:14%"><em>MAKE</em>Cut</div><div class="beat" style="width:14%"><em>MAKE</em>Skive</div><div class="beat" style="width:14%"><em>MAKE</em>Stitch</div><div class="beat" style="width:14%"><em>MAKE</em>Burnish</div><div class="beat" style="width:14%"><em>MAKE</em>Stamp</div><div class="beat end" style="width:16%"><em>end</em>In hand</div>
+          </div>
+          <p>1.5–2.5 s per shot, locked off, each with its foley. Three words per shot at most ("Cut by hand."). Only claim what is true of that product: if it is machine-stitched, show the machine or don't show stitching.</p>
+        </article>
+        <div class="grid2">
+          <article class="fmt"><div class="top"><span class="id">F5</span><h3>Mechanism micro-clip</h3><span class="meta">6–10 s · hooks, Stories</span></div><p>One MECH shot, perfect foley, a looping feel: snap, hidden pocket, pull tab, jacket zip. One line of text. The fun stop-motion sticker cut lives here only.</p></article>
+          <article class="fmt"><div class="top"><span class="id">F6</span><h3>Jacket fit and movement</h3><span class="meta">15–30 s · jacket TOF + RT-J</span></div><p>Real bodies, the shoulder seam, layering, movement, close details, and the made-to-order reason. See chapter 08.</p></article>
+          <article class="fmt"><div class="top"><span class="id">F7</span><h3>Customer voice</h3><span class="meta">15–30 s · retarget</span></div><p>Real buyers only, with permission, on their own phone. A screen-recorded WhatsApp voice note over product shots works. Never script, compose or reward a review.</p></article>
+          <article class="fmt"><div class="top"><span class="id">F8</span><h3>Myth-buster: real vs fake</h3><span class="meta">20–30 s · TOF</span></div><p>Only tests that are true and safe: water beads, bend and crease recovery, cut-edge fibres vs PU mesh. No flame tests, no damage, no competitor names.</p></article>
+        </div>
+        <article class="fmt">
+          <div class="top"><span class="id">F9</span><h3>Catalogue stills set</h3><span class="meta">feeds catalogue ads, our cheapest clicks</span></div>
+          <p>Five stills per product, on the same surface and in the same light across the whole range: FLAT · HAND · open/inside · MAC · WEAR. In August 2026 catalogue ads cost roughly a quarter as much per click as static or video ads. Good stills aren't optional.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- 07 -->
+    <section id="hooks">
+      <header>
+        <div class="eyebrow">07 · First two seconds</div>
+        <h2>Hook bank</h2>
+        <p class="intro">Picture first, text second. Frame 1 shows the product or the problem; it is also the thumbnail. No logo intros, black frames or slow fades at the start.</p>
+      </header>
+      <div class="hooks">
+        <div class="hook"><span class="n">H1</span><q>Same wallet. 6 months apart.</q><span class="v">PAT tilt, new vs old</span><span class="fit">F2 · F3</span></div>
+        <div class="hook"><span class="n">H2</span><q>Every wallet needs a secret pocket.</q><span class="v">MECH: back pocket snaps open, a key comes out</span><span class="fit">F1 · F5</span></div>
+        <div class="hook"><span class="n">H3</span><q>All of this. One wallet?</q><span class="v">Pile of cards and keys, wallet beside it</span><span class="fit">F1</span></div>
+        <div class="hook"><span class="n">H4</span><q>This is what real leather sounds like.</q><span class="v">MAC: thumb drags across grain, creak foley</span><span class="fit">F4 · F8</span></div>
+        <div class="hook"><span class="n">H5</span><q>I tested my own wallet for 6 months.</q><span class="v">FACE: founder holds the worn wallet</span><span class="fit">F3</span></div>
+        <div class="hook"><span class="n">H6</span><q>Made for one person. You.</q><span class="v">Zip pulled to the collar, cut to wide</span><span class="fit">F6</span></div>
+        <div class="hook"><span class="n">H7</span><q>Real leather does this.</q><span class="v">Water drop beads on the leather</span><span class="fit">F8</span></div>
+        <div class="hook"><span class="n">H8</span><q>Your wallet starts here.</q><span class="v">Hands cutting leather on the bench</span><span class="fit">F4</span></div>
+        <div class="hook"><span class="n">H9</span><q>Pakistan mein asli leather pehchanne ka tareeqa.</q><span class="v">FACE, Urdu</span><span class="fit">F8</span></div>
+      </div>
+    </section>
+
+    <!-- 08 -->
+    <section id="jackets">
+      <header>
+        <div class="eyebrow">08 · Rs 22,000–35,000 · made to order</div>
+        <h2>Jackets: remove the risk of not trying it on</h2>
+        <p class="intro">Jackets are paid online and reach the door in about 3 weeks. A jacket video exists to answer "will it fit me, and is it worth the wait?"</p>
+      </header>
+      <div class="grid2">
+        <div class="card"><span class="tag">Must show</span>
+          <ul class="list">
+            <li><strong>Fit on two builds</strong> (slim and broad): front 3/4, side, back.</li>
+            <li><strong>The shoulder seam</strong> sitting on the shoulder edge. This is the fit tell.</li>
+            <li><strong>Layering:</strong> over a tee, then over a knit (September vs January).</li>
+            <li><strong>Movement:</strong> walk, sit, arms up, ride.</li>
+            <li><strong>Details:</strong> zip and pull, the lining (call it the lining), collar, cuffs, hardware.</li>
+          </ul>
+        </div>
+        <div class="card"><span class="tag">Must say</span>
+          <ul class="list">
+            <li><strong>Terms with the reason:</strong> "Each jacket is cut for one person, so it's paid online and ready in about 3 weeks."</li>
+            <li><strong>Sizing:</strong> "Not sure of your size? WhatsApp us before you pay." This is the exact objection that cost October's jacket sales.</li>
+            <li><strong>Never:</strong> a COD claim, "4–7 days", or "quilted" unless the outside really is.</li>
+            <li><strong>Never name our base city.</strong> Show locations, never caption them as where we're from.</li>
+          </ul>
+        </div>
+      </div>
+      <p class="intro">Setting: golden hour outdoors (rooftops, old streets, highway lay-bys, northern hills) or the workshop cutting table. Wear framing: layering and wind in the north, style in the mild south.</p>
+    </section>
+
+    <!-- 09 -->
+    <section id="shoot">
+      <header>
+        <div class="eyebrow">09 · Free kit, phone only</div>
+        <h2>The shoot</h2>
+        <p class="intro">Any recent phone, a tripod (or books), white card, black card, a warm desk lamp, a walnut or linen board, a lens cloth, and a second phone for foley.</p>
+      </header>
+      <div class="grid2">
+        <div class="card"><span class="tag">Phone settings</span>
+          <ul class="list">
+            <li>4K 30 fps normally; 4K 60 fps (or 1080p 120) for anything you'll slow down.</li>
+            <li>Lock exposure and focus, then pull exposure down 0.3–0.7.</li>
+            <li>Shoot vertical, gridlines on, HDR off, no digital zoom (move closer).</li>
+          </ul>
+        </div>
+        <div class="card"><span class="tag">Discipline</span>
+          <ul class="list">
+            <li>Hold every shot 10 s before and after the action.</li>
+            <li>Shoot every shot 3 times.</li>
+            <li>Clean the lens every setup; wipe prints off leather and hardware.</li>
+            <li>Condition the leather the day before.</li>
+            <li>End with a foley pass: every sound, 3 takes each.</li>
+          </ul>
+        </div>
+        <div class="card"><span class="tag flag">20 minutes · one wallet</span>
+          <ol class="steps">
+            <li>FLAT, 5 s</li><li>HAND, slow rotate</li><li>MECH snap ×3</li><li>Open and inside</li><li>FILL top-down</li><li>MAC grain</li><li>MAC edge and stitch</li><li>PAT with an aged piece</li><li>WEAR back pocket</li><li>FACE, 3 hooks</li><li>Foley pass</li>
+          </ol>
+        </div>
+        <div class="card"><span class="tag flag">45 minutes · one jacket</span>
+          <ol class="steps">
+            <li>On the hanger</li><li>Put it on: zip up, collar flick</li><li>Front, 3/4, back on two builds</li><li>Shoulder seam close-up</li><li>Walk to camera</li><li>Sit, stand, arms up</li><li>Over a tee, then a knit</li><li>MAC: zip, lining, cuff, hardware</li><li>MAKE: panel cutting, stitching</li><li>FACE, 3 hooks</li><li>Foley: zip, creak, snap</li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 -->
+    <section id="edit">
+      <header>
+        <div class="eyebrow">10 · Cutting it</div>
+        <h2>Edit rules</h2>
+      </header>
+      <div class="tbl">
+        <table>
+          <thead><tr><th>Part</th><th>Shot length</th><th>Rule</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Hook</strong></td><td>0.5–1 s cuts</td><td>Fast, then calm by 0:05.</td></tr>
+            <tr><td><strong>Demo</strong></td><td>1.5–3 s</td><td>Real time by default; time-lapse only for FILL.</td></tr>
+            <tr><td><strong>Craft (F4)</strong></td><td>1.5–2.5 s</td><td>Each shot paired with its own foley.</td></tr>
+            <tr><td><strong>Patina / macro</strong></td><td>3–4 s</td><td>Let it breathe.</td></tr>
+            <tr><td><strong>End card</strong></td><td>2–3 s</td><td>Product, name, price, one trust line, CTA. Small horse mark in Brass or Espresso. The logo never opens a video.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="grid3">
+        <div class="card"><span class="tag">Transitions</span><p>Hard cuts and match cuts (snap to snap, hand to hand). Dip to black only into the end card. No wipes, spins, zoom-blur or glitch.</p></div>
+        <div class="card"><span class="tag">Deliverables</span><p>9:16 master; 4:5 and 1:1 reframed (not letterboxed); a captioned and a no-text version.</p></div>
+        <div class="card"><span class="tag">Export</span><p>H.264 high, 1080×1920, 30 fps, 12–20 Mbps, AAC 48 kHz, about −14 LUFS. Strip GPS and metadata.</p></div>
+      </div>
+      <p class="intro">File names: <code>KV_[Format]_[Product]_[Hook]_[Length]_[Ratio]_v#.mp4</code>, for example <code>KV_F2_MochaMate_H1_15s_9x16_v1.mp4</code>.</p>
+    </section>
+
+    <!-- 11 -->
+    <section id="test">
+      <header>
+        <div class="eyebrow">11 · How we judge a video</div>
+        <h2>Testing</h2>
+        <p class="intro">Each shoot goes into one ad set as 3 hooks at the best length, so the hook is the only variable. Leave it alone for 72 h. Judge on 14-day windows; real ROAS is about half of what Meta reports. Kill rules and break-even CPAs live in the ads playbook.</p>
+      </header>
+      <div class="metrics">
+        <div class="metric"><span class="nm">Hook rate</span><span class="val">≥ 25%</span><span class="df">3-second views ÷ impressions</span></div>
+        <div class="metric"><span class="nm">Hold rate</span><span class="val">≥ 25%</span><span class="df">15 s ThruPlays ÷ 3-second views</span></div>
+        <div class="metric"><span class="nm">Link CTR</span><span class="val">≥ 1.5%</span><span class="df">video · ≥ 3% catalogue</span></div>
+        <div class="metric"><span class="nm">Click → add to cart</span><span class="val">≥ 3%</span><span class="df">the account's real ceiling</span></div>
+      </div>
+      <p class="intro" style="font-size:13.5px">Working targets. Re-baseline after the first ten videos.</p>
+      <div class="diag">
+        <div><b>Low hook rate</b>Write a new hook for the same body.</div>
+        <div><b>Good hook, weak hold</b>Fix the body: shorter shots, a clearer demo.</div>
+        <div><b>Good CTR, weak add-to-cart</b>It's the product page, not the video.</div>
+      </div>
+      <p class="intro">Refresh when frequency passes about 4, or when the hook rate drops 30% from week one. Swap the hook, not the whole video.</p>
+    </section>
+
+    <!-- 12 -->
+    <section id="claims">
+      <header>
+        <div class="eyebrow">12 · Non-negotiable</div>
+        <h2>Claims and compliance</h2>
+        <p class="intro">Only claims verified for that exact product in its live Shopify data.</p>
+      </header>
+      <div class="claims">
+        <div class="claim"><span class="x" aria-hidden="true">!</span><span><strong>Never mention Karachi.</strong> Say "our workshop" or "made in Pakistan".</span></div>
+        <div class="claim"><span class="x" aria-hidden="true">!</span><span><strong>COD only on ready-made pieces.</strong> Jackets and footwear are paid online, always with the reason.</span></div>
+        <div class="claim"><span class="x" aria-hidden="true">!</span><span><strong>Free delivery only "over Rs 5,500".</strong> Never unqualified.</span></div>
+        <div class="claim"><span class="x" aria-hidden="true">!</span><span><strong>Lead time:</strong> "about 3 weeks to your door" for jackets and footwear. Nothing else.</span></div>
+        <div class="claim"><span class="x" aria-hidden="true">!</span><span><strong>"Lifetime craftsmanship warranty".</strong> Never on The Stallion boot (its own terms say 1 year).</span></div>
+        <div class="claim"><span class="x" aria-hidden="true">!</span><span><strong>No fabricated reviews, testimonials or counts.</strong> Sales numbers re-checked in Shopify that week.</span></div>
+        <div class="claim"><span class="x" aria-hidden="true">!</span><span><strong>Croc and snake belts are textured cowhide.</strong> Never imply exotic skin.</span></div>
+        <div class="claim"><span class="x" aria-hidden="true">!</span><span><strong>Vegan products</strong> (Diva Tote, Vibe LITE) are never called leather.</span></div>
+        <div class="claim"><span class="x" aria-hidden="true">!</span><span><strong>No competitor names</strong> and no "better than X". Show it instead.</span></div>
+        <div class="claim"><span class="x" aria-hidden="true">!</span><span><strong>Craft claims per product.</strong> Not everything is hand-stitched; check before you say it.</span></div>
+      </div>
+    </section>
+
+    <!-- 13 -->
+    <section id="qc">
+      <header>
+        <div class="eyebrow">13 · Before anything goes live</div>
+        <h2>Pre-publish checklist</h2>
+        <p class="intro">Tick through it for each video. Ticks are saved only in your own browser.</p>
+      </header>
+      <div class="qc" id="qcList">
+        <div class="qcbar"><span class="prog" id="qcProg">0 / 10 checked</span><button type="button" id="qcReset">Clear ticks</button></div>
+        <label><input type="checkbox" id="qc1"><span>First frame shows product or problem and works as a thumbnail.</span></label>
+        <label><input type="checkbox" id="qc2"><span>Hook makes sense on mute within 2 seconds.</span></label>
+        <label><input type="checkbox" id="qc3"><span>No laptop, clutter, logos or mixed lighting anywhere in frame.</span></label>
+        <label><input type="checkbox" id="qc4"><span>All text inside the safe band (y 270–1250); nothing in the bottom 35%.</span></label>
+        <label><input type="checkbox" id="qc5"><span>Every spoken word captioned; text on screen at least 0.5 s plus 0.3 s per word.</span></label>
+        <label><input type="checkbox" id="qc6"><span>Foley audible, music under the voice, about −14 LUFS, no placeholder music or AI voice left in.</span></label>
+        <label><input type="checkbox" id="qc7"><span>Every claim checked against chapter 12 and the product's live Shopify data.</span></label>
+        <label><input type="checkbox" id="qc8"><span>End card has product, name, price, one trust line and the CTA.</span></label>
+        <label><input type="checkbox" id="qc9"><span>9:16, 4:5 and 1:1 exported, named correctly, metadata stripped.</span></label>
+        <label><input type="checkbox" id="qc10"><span>Three hooks exist for the length being launched.</span></label>
+      </div>
+    </section>
+
+    <!-- 14 -->
+    <section id="log">
+      <header>
+        <div class="eyebrow">14 · What we learned</div>
+        <h2>Lessons log</h2>
+        <p class="intro">Add a line after every video.</p>
+      </header>
+      <div class="log">
+        <div><span class="d">Oct 25 2026</span><span><b>Teaser v2.</b> The footage was fine; generated music made it feel cheap. Use real tracks.</span></div>
+        <div><span class="d">Oct 25 2026</span><span><b>Stop-motion Mocha Mate.</b> An honest demo in a fun format works for F5. The founder clips with a black wallet are not the Mocha Mate; never use them as it.</span></div>
+        <div><span class="d">Oct 26 2026</span><span><b>"Prada" heritage film.</b> Failed. The desk footage wasn't shot for it, and heavy grading plus an AI voice can't fake luxury. Led to rule zero.</span></div>
+        <div><span class="d">Oct 26 2026</span><span><b>Motion kit + sound sources.</b> Added chapters 15–18. Earshot isn't cleared for ads (unclear provenance; one copy is non-commercial). Openverse is wired in but blocked by the cloud network for now.</span></div>
+      </div>
+    </section>
+
+    <!-- 15 -->
+    <section id="signature">
+      <header>
+        <div class="eyebrow">15 · Ours at any size</div>
+        <h2>The eight constants</h2>
+        <p class="intro">You should be able to tell it's Kordovan with the sound off and the logo covered, whether it's a Rs 1,499 keychain or a Rs 35,000 jacket. The kit in <code>tools/video-edit/kv-kit/</code> applies 3–8 automatically.</p>
+      </header>
+      <div class="pillars p4">
+        <div class="pillar"><b>1 · Frame one</b><span>Product or problem, side-lit, in the safe band. It's the thumbnail.</span></div>
+        <div class="pillar"><b>2 · Light</b><span>One warm side source, true leather colour.</span></div>
+        <div class="pillar"><b>3 · Type</b><span>Fraunces headline, 5 words max. Inter labels and captions.</span></div>
+        <div class="pillar"><b>4 · One accent</b><span>A single italic word per video, in tan on dark or cognac on light.</span></div>
+        <div class="pillar"><b>5 · Captions</b><span>Phrase by phrase, the spoken word brightens. Never box highlights.</span></div>
+        <div class="pillar"><b>6 · One curve</b><span>Ease-out entrances (0.6 s), ease-in-out camera. No bounce, no shake.</span></div>
+        <div class="pillar"><b>7 · Sonic logo</b><span>Our real brass snap lands on the horse mark every time.</span></div>
+        <div class="pillar"><b>8 · End card</b><span>Espresso, product, name, price, one trust line, CTA. 2–3 s.</span></div>
+      </div>
+
+      <h3 style="font-size:22px">Zoom and camera moves <span class="tag">call them by code in briefs</span></h3>
+      <div class="tbl"><table>
+        <thead><tr><th>Code</th><th>Move</th><th>Use</th><th>Limit</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Z1 Slow push</strong></td><td>100 → 106% across the shot</td><td>Macro, patina, stills</td><td>Any shot over 2 s</td></tr>
+          <tr><td><strong>Z2 Punch-in</strong></td><td>Jump 100 → 112% on the action</td><td>The claim moment: snap, price, "6 months"</td><td>Max 1 per 5 s, always on a sound hit</td></tr>
+          <tr><td><strong>Z3 Reveal pull</strong></td><td>115 → 100%</td><td>Show scale: hand → pocket → outfit</td><td>Once per video</td></tr>
+          <tr><td><strong>Z4 Dolly zoom</strong></td><td>camera-dolly-zoom</td><td>Jacket hero on-body shot</td><td>Jackets, once per film</td></tr>
+          <tr><td><strong>Z5 Speed ramp</strong></td><td>100 → 40% on the payoff; 150–200% through repetition</td><td>Snap, zip, cards dropping in</td><td>60 fps+ footage only</td></tr>
+          <tr><td><strong>Z6 Hold</strong></td><td>Nothing moves</td><td>Founder line, patina tilt, end card</td><td>Stillness is a move too</td></tr>
+        </tbody></table></div>
+
+      <div class="dos">
+        <div class="do"><h3>Approved transitions</h3><ul><li><strong>Hard cut</strong>: about 80% of cuts</li><li><strong>Match cut</strong>: snap → snap, new → aged wallet (1–2 per video)</li><li><strong>Velocity cut</strong>: a hand leaves one shot and continues into the next</li><li><strong>Warm fade-through</strong>: a time jump or into the end card (max 1)</li><li><strong>Light leak</strong>: warm amber, Tier L only (max 1)</li><li><strong>Editorial flash</strong>: launches only (max 1)</li><li><strong>Iris</strong>: the secret-pocket reveal, F5 only</li></ul></div>
+        <div class="dont"><h3>Never</h3><ul><li>Glitch, RGB split, pixelate, VHS</li><li>Vortex, ripple, gooey morphs, 3D flips</li><li>Slide/push wipes, zoom blur, whip pans</li><li>Camera shake, orbits, drift on every shot</li><li>Typewriter, scramble, neon, emoji-pop or particle text</li><li>Digital zoom above 115% (4K) or 108% (1080p)</li></ul></div>
+      </div>
+      <div class="grid2">
+        <div class="card"><span class="tag">Kinetic type</span><p>Headlines build word by word and lock centre. The accent word gets a thin cognac underline sweep, never a filled box. Emphasis words switch to Fraunces italic.</p></div>
+        <div class="card"><span class="tag">Fonts</span><p>Fraunces and Inter only. Roman Urdu is set in Inter. Urdu script is the one exception: <strong>Noto Nastaliq Urdu</strong> (free, open licence). Grain only at 3% or less on solid espresso type cards, to stop banding after compression. Never on footage.</p></div>
+      </div>
+    </section>
+
+    <!-- 16 -->
+    <section id="tiers">
+      <header>
+        <div class="eyebrow">16 · Same constants, different tempo</div>
+        <h2>Small product vs big product</h2>
+      </header>
+      <div class="tbl"><table>
+        <thead><tr><th></th><th>Tier S · small</th><th>Tier M · medium</th><th>Tier L · large</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Products</strong></td><td>Wallets, cardholders, belts, keychains, caps (≤ Rs 6,500)</td><td>Laptop, office and travel bags (Rs 6,000–45,000)</td><td>Jackets, footwear, launches, collections</td></tr>
+          <tr><td><strong>Formats</strong></td><td>F1 F2 F5 F8 F9</td><td>F1 F3 F4 F7</td><td>F6 F4 F3 F2 F7</td></tr>
+          <tr><td><strong>Length</strong></td><td>6–15 s</td><td>15–30 s</td><td>20–45 s (+ 6 s retarget teasers)</td></tr>
+          <tr><td><strong>Cut rhythm</strong></td><td>1–1.5 s</td><td>2–2.5 s</td><td>2.5–4 s</td></tr>
+          <tr><td><strong>Hero shot</strong></td><td>Macro + mechanism</td><td>Hand → wear, reveal pull for scale</td><td>On body at golden hour, dolly zoom once</td></tr>
+          <tr><td><strong>Zooms</strong></td><td>Z1 Z2 Z5</td><td>Z1 Z2 Z3</td><td>Z1 Z3 Z4 Z6</td></tr>
+          <tr><td><strong>Sound</strong></td><td>Foley first, music optional</td><td>Foley + voice</td><td>Voice + music bed + foley details</td></tr>
+          <tr><td><strong>Must say</strong></td><td>Price; COD where true; free delivery over Rs 5,500</td><td>What fits (e.g. 15.6-inch laptop)</td><td>Made to order + reason + about 3 weeks + WhatsApp sizing</td></tr>
+          <tr><td><strong>Buyer</strong></td><td>Impulse: one video</td><td>Considered: two touches</td><td>Considered: retarget sequence F6 → F7 → F3</td></tr>
+        </tbody></table></div>
+      <p class="intro">A brand or collection film runs at Tier L tempo with one Tier S macro inside it (a single snap), so a big film still feels tactile.</p>
+    </section>
+
+    <!-- 17 -->
+    <section id="soundlib">
+      <header>
+        <div class="eyebrow">17 · All free</div>
+        <h2>Sound library and licences</h2>
+        <p class="intro">Every Kordovan video is commercial. No non-commercial, no-derivatives or "personal use" sounds, ever. Every external sound gets a line in that project's CREDITS.md. No licence file, no use.</p>
+      </header>
+      <div class="callout"><div class="eyebrow">Priority 1 · owned forever</div><div class="big">Record our own sound kit once. The brass snap becomes our <em>sonic logo.</em></div><p>Snap ×3, creak, card slide, cash fold, jacket zip, stitch pull, burnish, belt buckle, a wallet dropped on wood, 30 s of workshop room tone. Shot list in <code>tools/video-edit/sound-kit/README.md</code>.</p></div>
+      <div class="tbl"><table>
+        <thead><tr><th>Source</th><th>Licence</th><th>In paid ads?</th><th>Verdict</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Openverse</strong></td><td>Per sound: CC0 or CC BY (non-commercial ones filtered out)</td><td class="take">CC0 only (CC BY needs a credit an ad can't carry)</td><td>Wired into our video tools; auto-writes credits. Blocked by the cloud network until api.openverse.org is allowed.</td></tr>
+          <tr><td><strong>Bundled HyperFrames SFX</strong></td><td>Pixabay licence, no attribution</td><td class="take">Yes</td><td>Usable now. Only the soft click, short whoosh and riser are on-brand.</td></tr>
+          <tr><td><strong>Pixabay sound effects</strong></td><td>Pixabay licence</td><td class="take">Yes</td><td>Room tones, nature beds. Download by hand.</td></tr>
+          <tr><td><strong>Sonniss GDC bundles</strong></td><td>Royalty-free, commercial, no credit</td><td class="take">Yes</td><td>Pro foley; take the leather and cloth folders.</td></tr>
+          <tr><td><strong>Meta Sound Collection</strong></td><td>Licensed by Meta</td><td class="take">Yes, inside Meta</td><td>Pick music at upload.</td></tr>
+          <tr><td><strong>Earshot</strong></td><td>Unclear: unofficial re-uploads; one copy is CC BY-NC-ND</td><td class="refuse">No, until proven</td><td>Only with the download's own licence file allowing commercial use, saved next to the sounds.</td></tr>
+          <tr><td><strong>"Real SFX"</strong></td><td>Not identified</td><td>—</td><td>Need the exact URL to check it.</td></tr>
+          <tr><td><strong>Trending Reels audio</strong></td><td>Owned by labels</td><td class="refuse">Never</td><td>Organic Reels only, added inside Instagram.</td></tr>
+        </tbody></table></div>
+    </section>
+
+    <!-- 18 -->
+    <section id="spread">
+      <header>
+        <div class="eyebrow">18 · Directional, then proven by our own hook and hold rates</div>
+        <h2>What makes it spread, our way</h2>
+      </header>
+      <div class="grid3">
+        <div class="card"><span class="tag">Pattern interrupt · every 1.5–2.5 s</span><p>A cut, a punch-in on a foley hit, or a new 3-word line. Something changes; nothing jitters.</p></div>
+        <div class="card"><span class="tag">Open loop</span><p>"Same wallet. 6 months apart." Hold back the aged one until 0:06.</p></div>
+        <div class="card"><span class="tag">Loop ending</span><p>Micro-clips end on the frame they opened with, so they replay seamlessly.</p></div>
+        <div class="card"><span class="tag">Satisfying payoff</span><p>Snap, zip, cards dropping in, burnishing. Real foley, slowed with Z5.</p></div>
+        <div class="card"><span class="tag">Share trigger</span><p>Myth-busters: "how to tell real leather" is what people forward before Eid.</p></div>
+        <div class="card"><span class="tag">Comment trigger</span><p>An honest Roman Urdu question: "Kaunsa colour? Mocha ya black?"</p></div>
+        <div class="card"><span class="tag">Native first second</span><p>Looks like a person filming: hands, a real room, no logo, no title card.</p></div>
+        <div class="card"><span class="tag">Save trigger</span><p>15 s care tips (conditioning, rain). Saves tell the algorithm the video is worth keeping.</p></div>
+        <div class="card"><span class="tag">Series</span><p>"Workshop Diaries 03": viewers recognise the format before they see the brand.</p></div>
+      </div>
+      <div class="dont"><h3>We don't</h3><ul><li>Fake countdowns or "only 2 left"</li><li>Competitor bashing or stitches</li><li>Flame tests</li><li>Thumbnails the video doesn't pay off</li></ul></div>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div>Kordovan Video Book · source of truth in the repo at <code>docs/video/VIDEO_BOOK.md</code> · companions: Brand Mood Board, Ads Playbook (this book wins where they disagree).</div>
+    <div class="src">Research:
+      <a href="https://www.b2w.tv/blog/ecommerce-video-ads-examples">b2w.tv on Bellroy</a>
+      <a href="https://rohitbhargava.com/5-smart-ways-for-using-video-to-sell-products/">Bellroy product demos</a>
+      <a href="https://www.adsoftheworld.com/campaigns/designed-for-the-better">Bellroy "Designed for the Better"</a>
+      <a href="https://motionapp.com/library/talk/study-these-3-ugc-video-ad-examples-content-break-down-reviews/">Motion: Ridge breakdown</a>
+      <a href="https://www.foreplay.co/post/the-ridges-ad-auction-analysis">Foreplay: Ridge ads</a>
+      <a href="https://creativeos.beehiiv.com/p/029-ads-that-scale">Creative OS: Ridge comparison ad</a>
+      <a href="https://houseofmarketers.com/guide-to-safe-zones-tiktok-facebook-instagram-stories-reels/">Reels safe zones</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var KEY="kv-videobook-qc";
+  var boxes=[].slice.call(document.querySelectorAll('#qcList input[type=checkbox]'));
+  var prog=document.getElementById('qcProg');
+  function load(){try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){return {}}}
+  function save(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+  function update(){var n=boxes.filter(function(b){return b.checked}).length;prog.textContent=n+' / '+boxes.length+' checked'+(n===boxes.length?' · ready to publish':'');}
+  var st=load();
+  boxes.forEach(function(b){b.checked=!!st[b.id];b.addEventListener('change',function(){var s=load();s[b.id]=b.checked;save(s);update();});});
+  document.getElementById('qcReset').addEventListener('click',function(){boxes.forEach(function(b){b.checked=false});save({});update();});
+  update();
+})();
+</script>

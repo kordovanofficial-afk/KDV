@@ -28,6 +28,16 @@ every session — read it first.
   hook bank, jacket rules, shoot kit, edit rules, testing metrics, claims, QC. **Read it before any
   video work.** Rule #1 (Oct 26 2026, after a failed "Prada" film): editing cannot rescue footage —
   never edit from footage not shot for the video; AI voice / synthetic music are drafts only.
+- **§15–18 (Oct 26 2026): the signature system.** 8 constants that never change at any product size,
+  named zooms Z1–Z6, an approved/banned transition list, scale tiers S/M/L, sound licence verdicts, and
+  viral mechanics done our way. Enforced by **`tools/video-edit/kv-kit/`** — 15 HyperFrames registry
+  blocks + `kv-brand.css` (maps registry tokens → Quiet Heritage). Shareable page:
+  `https://claude.ai/artifact/CcrQwqjptbK5YQJKDu9XiH` (copy at `docs/video/video-book.html`).
+- 🔊 **Sound sources:** Openverse is built into `media-use resolve --type sfx` (CC0/CC BY only) — **ads
+  use CC0 only** — but `api.openverse.org` is BLOCKED by this env's network (403) until the user allows it.
+  🔴 **Earshot is NOT cleared for ads**: only unofficial re-uploads exist, one marked CC BY-NC-ND.
+  "Real SFX" not identified — need the URL. Owned foley kit list: `tools/video-edit/sound-kit/README.md`
+  (`snap_brass_01` = the sonic logo on every end card).
 
 ## 📐 Design source of truth
 - **`docs/brand/BRAND_MOODBOARD.md`** — competitor teardown (top 10 global leather
