@@ -21,6 +21,14 @@ Custom Shopify theme for **Kordovan**, a Pakistani full-grain leather brand
 (wallets, bags, small leather goods). This file is the persistent context for
 every session — read it first.
 
+## 🎬 Video source of truth
+- **`docs/video/VIDEO_BOOK.md`** — the core file for EVERY video (ads, Reels, films). Competitor map
+  (Bellroy / Ridge / Ekster / Saddleback), the 5 pillars, shot vocabulary, light/surface rules, type,
+  sound, 9 formats (F2 "It wears in" patina proof = flagship, our answer to Ridge's anti-leather ads),
+  hook bank, jacket rules, shoot kit, edit rules, testing metrics, claims, QC. **Read it before any
+  video work.** Rule #1 (Oct 26 2026, after a failed "Prada" film): editing cannot rescue footage —
+  never edit from footage not shot for the video; AI voice / synthetic music are drafts only.
+
 ## 📐 Design source of truth
 - **`docs/brand/BRAND_MOODBOARD.md`** — competitor teardown (top 10 global leather
   brands), refined "Quiet Heritage" palette, typography, full UX/SEO rulebook.
