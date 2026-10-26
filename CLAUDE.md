@@ -609,6 +609,17 @@ only TOF-M, Retarget and the TOF-C campaign (its ad set already paused) remain a
 ⚠️ Google search does NOT bypass the problem: ~50 organic jacket clicks/day also produced 0 orders in October — the
 checkout/payment step is the blocker for every channel. Freed 1,000/day NOT reallocated (needs user OK).
 
+## 🛡 Security + browser tooling (Oct 26 2026)
+- **Playwright CLI 1.56.1 + Chromium are pre-installed** — never `playwright install`. ⚠️ It can only reach
+  hosts in the environment's network allowlist; `kordovanleather.com` is NOT on it (Oct 26: CONNECT 403), so
+  live-site checks need the user to add `kordovanleather.com` (+ `kordovan-official.workers.dev` hosts) under
+  Network access → Allowed domains.
+- Install cards offered: **claude-security** (deep code scan + verified patches), **Security Guidance**
+  (edit/commit-time review hooks), **playwright** MCP. Use claude-security / the built-in `security-review`
+  skill on the theme, `tools/postex-worker/worker.js` and `tools/gsc-mcp-worker/` before any deploy.
+- 🚫 **OpenSEO (every-app/open-seo) NOT installed:** the software is free/MIT, but every data call runs on a
+  paid DataForSEO key — violates the FREE-only rule. Our free stack: GSC Worker + vendored SEO skills + Apify free tier.
+
 ## 🔌 Available integrations (MCP)
 Shopify, GitHub, Canva, Figma, Facebook Ads, Higgsfield, Cloudflare.
 (Playwright is NOT available in this remote env — design is done in code, then
