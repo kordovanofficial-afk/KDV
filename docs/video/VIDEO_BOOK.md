@@ -398,6 +398,11 @@ The video's job is to **remove the risk of buying something you can't try on.**
 
 ## 14. Working with Claude on video (what is and isn't possible here)
 
+> 🎙 **Division of labour (owner, Oct 26 2026):** the **only** audio the team supplies is the **voiceover, recorded in the
+> footage they shoot** (plus the footage itself). **Everything else is Claude's job:** every transition, zoom, text and
+> caption animation, title, end card, logo motion, colour grade, sound effect and mix, built to §15–§17.
+> Music is still owner-supplied or picked from Meta's Sound Collection, because generated music is never final (§5).
+
 - **Claude can:**
   - write briefs, shot lists, hooks and scripts (English and Urdu);
   - edit and assemble supplied footage (HyperFrames + ffmpeg, in `tools/video-edit/`);
@@ -517,7 +522,7 @@ Record once, reuse everywhere. Store in `tools/video-edit/sound-kit/` (WAV, 48 k
 ### 17.2 External sources: verdicts
 | Source | Licence | Paid ads? | Verdict |
 |---|---|---|---|
-| **Openverse** (api.openverse.org) | per sound: CC0 or CC BY (also hosts NC/ND, which are filtered out) | **CC0 only** for ads. CC BY needs a credit, which an ad can't carry properly → organic posts only, credited in the caption | ✅ **Wired in**: `npx hyperframes media-use resolve --type sfx --intent "leather creak"` searches CC0/CC BY only, prefers CC0 and writes `assets/sfx/CREDITS.md`. ✅ Search is live (Oct 26 2026). Ready-made CC0 foley shortlist: `tools/video-edit/sound-kit/openverse/SHORTLIST.md`. ⚠️ The audio FILES sit on `cdn.freesound.org` and `upload.wikimedia.org`, which must also be allowed before `shortlist.py --download` works |
+| **Openverse** (api.openverse.org) | per sound: CC0 or CC BY (also hosts NC/ND, which are filtered out) | **CC0 only** for ads. CC BY needs a credit, which an ad can't carry properly → organic posts only, credited in the caption | ✅ **Wired in**: `npx hyperframes media-use resolve --type sfx --intent "leather creak"` searches CC0/CC BY only, prefers CC0 and writes `assets/sfx/CREDITS.md`. ✅ Search is live. CC0 foley shortlist: `tools/video-edit/sound-kit/openverse/SHORTLIST.md`. ⚠️ **Freesound refuses downloads from our cloud server** (its own 403, not our network setting), so the team downloads the picked files from each link (free Freesound login) and uploads them; Claude renames, trims, loudness-matches and logs them |
 | **Bundled HyperFrames SFX** (21 files) | Pixabay Content License: commercial, no attribution | yes | ✅ Usable now, offline. Mostly UI whooshes and clicks, so only `click-soft`, `whoosh-short` and `riser` are on-brand (never glitch or notification sounds) |
 | **Pixabay sound effects** | Pixabay Content License | yes | ✅ Good for room tones and nature beds. Download by hand and drop into the repo |
 | **Sonniss GDC bundles** | royalty-free, commercial, no attribution | yes | ✅ Pro-grade foley. Large downloads, grab the leather and cloth folders |

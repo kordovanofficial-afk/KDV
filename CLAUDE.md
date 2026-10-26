@@ -37,6 +37,11 @@ every session — read it first.
   use CC0 only** — ✅ user allowed `api.openverse.org` Oct 26 2026 — search works (slow, ~8 s/query). ⚠️ the audio files
   live on `cdn.freesound.org` + `upload.wikimedia.org`, STILL BLOCKED → downloads fail until those are allowed too.
   CC0 foley shortlist (12 cues, blocklisted junk) + downloader: `tools/video-edit/sound-kit/openverse/`.
+  🔴 **Oct 26: user allowed cdn.freesound.org + upload.wikimedia.org — downloads STILL fail.** Freesound's CDN returns
+  its OWN HTTP 403 to this cloud server's IP (the tunnel opens; referer/UA don't help); Wikimedia returns 429. Not
+  fixable from network settings → the team downloads picks from SHORTLIST.md links and uploads them.
+- 🎙 **DIVISION OF LABOUR (user, Oct 26 2026):** user supplies ONLY footage + the voiceover recorded in that footage.
+  **Claude does ALL transitions, zooms, text/captions, animations, titles, end cards, logo motion, grade, SFX, mix.**
   🔴 **Earshot is NOT cleared for ads**: only unofficial re-uploads exist, one marked CC BY-NC-ND.
   "Real SFX" not identified — need the URL. Owned foley kit list: `tools/video-edit/sound-kit/README.md`
   (`snap_brass_01` = the sonic logo on every end card).

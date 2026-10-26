@@ -1,8 +1,9 @@
 """Build a CC0-only Openverse shortlist for the Kordovan foley cues (book §17).
 
   python3 shortlist.py            # search -> shortlist.json + SHORTLIST.md
-  python3 shortlist.py --download # fetch the picks into ./files/ (needs cdn.freesound.org
-                                  # and upload.wikimedia.org allowed in the network policy)
+  python3 shortlist.py --download # fetch the picks into ./files/. NOTE (Oct 26 2026): Freesound's CDN
+                                  # answers 403 to our cloud server even with the hosts allowed, so in practice
+                                  # the team downloads from the SHORTLIST.md links and uploads the files.
 
 CC0 only, so every file is safe for paid ads with no credit line. Creator and source are
 still recorded for our own audit trail.
