@@ -18,13 +18,13 @@ Every video says the same thing: **the fat wallet lives in your back pocket and 
 day. The Razor goes in the front pocket.** Same product, same offer, same end card, same length
 (20–25 s). Only the style changes, so the winner tells us which STYLE sells.
 
-| | A. Founder to camera | B. Hands only, no talking | C. A day in Pakistan (POV) |
+| | A. Founder to camera | B. Hands only, no talking | C. The doorbell skit |
 |---|---|---|---|
-| Feels like | a person you trust telling you | a satisfying product demo | real life, filmed on a phone |
-| Face | yes | no | no (your hands, your view) |
-| Voice | you talking, on camera | none, sound effects + music | you, voice-over |
-| Where | table at the office or home | wooden table, top-down | bike, car, dhaba, shop counter |
-| Gear | phone on a stack of books at eye level | phone directly above the table | phone in your hand |
+| Feels like | a person you trust telling you | a satisfying product demo | a short funny before/after story |
+| Face | yes | no | yes, acting, no talking to camera |
+| Voice | you talking, on camera | none, sound effects + music | two short lines, mostly sound |
+| Where | table at home | wooden table, top-down | sofa, front door, hallway mirror |
+| Gear | phone on a stack of books at eye level | phone directly above the table | phone on a shelf, one helper |
 
 ### Style A. Founder to camera (about 25 s)
 One take, you holding both wallets. Talk the way you'd talk to a friend. Don't read a script; hit
@@ -54,30 +54,36 @@ Camera straight down on a wooden table. No face, no voice. The sounds carry it.
 
 On-screen text (Claude): "Aap roz is pe baithte ho." → "Aadha kachra." → "Ek ungli." → (real mm) → "6 rang".
 
-### Style C. A day in Pakistan, POV (about 25 s)
-Filmed from your own view on the phone, in real places. Short clips, 2–3 s each.
+### Style C. The doorbell skit, all at home (about 25 s)
+A two-part mini story with a before and an after, filmed in your own house. Everyone in Pakistan
+knows this moment: the rider is at the door, cash on delivery, and you're digging through a fat wallet.
+You need one helper to play the rider. Film from INSIDE the door, so only the rider's hand and the
+parcel are seen (no face, no branded courier jacket).
 
-| Time | Picture | You say (voice-over) |
+| Time | Picture | Sound / line |
 |---|---|---|
-| 0–3 | Getting on the bike, fat wallet bulging in the back pocket | "Bike pe baitho, aur yeh chubhta hai." |
-| 3–7 | Car seat, same bulge | "Gaari mein bhi." |
-| 7–12 | At the table, you swap everything into the Razor | "Toh maine sab kuch is mein daal diya." |
-| 12–18 | At a dhaba or shop counter, Razor comes out of the FRONT pocket, card out with the thumb, pay | "Aage ki pocket se, ek ungli, payment." |
-| 18–25 | Back on the bike, back pocket empty | "Peeche ab kuch nahi." |
+| 0–3 | You on the sofa. You shift, reach under you and pull out the fat wallet | "Uff." (that's the only word) |
+| 3–5 | Doorbell. You get up | doorbell |
+| 5–11 | BEFORE: at the door, rider's hand holds out the parcel. You dig through the fat wallet, receipts fall on the floor, the rider's hand taps the door frame | rider (off camera): "Bhai jaan, jaldi." |
+| 11–12 | Hard cut, white flash. Caption: "Ab." | whoosh |
+| 12–18 | AFTER: same door, same parcel. Razor comes out of your FRONT pocket, cash slides out from under the strap, paid in 2 seconds | leather slide, then "Shukriya." |
+| 18–22 | Side view of you in the hallway mirror: front pocket flat, back pocket empty | quiet |
+| 22–25 | End card | brass snap |
 
-Claude adds: captions, quick cuts on the music beat, the end card.
+Claude adds: captions, the before/after flash, a "2 sec" timer on the after, the end card.
+Shoot both halves in the same light and the same clothes, so the only thing that changes is the wallet.
 
 ### Same in all three
 - End card: The Razor · Rs 2,450 · Cash on delivery · 6 colours, with the brass snap sound.
-- Roman Urdu speech with English captions in A and C. Language gets its own test later, on the winner.
+- Roman Urdu speech with English captions wherever anyone talks. Language gets its own test later, on the winner.
 - Never name Ridge on screen or in copy.
 
 ## Shoot notes (you shoot, Claude edits)
 - Face the window. Your test photos are backlit, which turns the leather muddy.
 - **Never show a real ID.** Your driving licence with its number was visible in the test photos.
   Use bank-style cards with the numbers turned away.
-- Props: a really stuffed old bifold (borrow one), a ruler, jeans with a front pocket, the bike,
-  all 6 Razor colours.
+- Props: a really stuffed old bifold (borrow one), a ruler, jeans with a front pocket, a parcel,
+  a few banknotes, all 6 Razor colours, one helper for the rider's hand in Style C.
 - Phone at 1080p 30fps, vertical. Shoot every beat 3 times.
 - Claude does the zooms, captions, music (CC0), sound effects, grade, end card.
 
