@@ -55,10 +55,10 @@ Primary text:
 > aur poora wallet aage ki pocket mein aa jata hai. Asli leather, chhe rang, Rs 2,450.
 > Cash on delivery available.
 
-Headline: Aage ki pocket ka wallet
-Description: The Razor by Kordovan · Rs 2,450
-CTA: Shop Now → /products/the-razor-rfid-smart-leather-wallet-kordovan
-UTMs: utm_source=facebook&utm_medium=paid_social&utm_campaign=razor_brick_oct26&utm_content={hook}
+- **Headline:** Aage ki pocket ka wallet
+- **Description:** The Razor by Kordovan · Rs 2,450
+- **CTA:** Shop Now → /products/the-razor-rfid-smart-leather-wallet-kordovan
+- **UTMs:** utm_source=facebook&utm_medium=paid_social&utm_campaign=razor_brick_oct26&utm_content={hook}
 
 ## Money: the honest part
 - Razor profit per PLACED order ≈ **Rs 1,029** (34% refusal, ADS_PLAYBOOK_PK.md).
