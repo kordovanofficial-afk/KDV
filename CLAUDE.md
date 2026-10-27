@@ -23,7 +23,8 @@
 > `humanizer`) and run the draft through it; facts, prices, terms and claims must survive unchanged. If the skill is not
 > loaded in a session, say so and apply its rules manually (no AI tells: no "elevate/seamless/crafted for those who…",
 > no rule-of-three padding, no em-dash chains, no stated takeaways, plain specific words, Pakistani English/Roman Urdu
-> where natural). Evidence it matters: our real-voice Roman Urdu Razor post got 295 likes vs 9–14 for polished brand posts.
+> where natural). ⚠️ Do NOT cite the "Razor UGC post 295 likes" as evidence: user confirmed Oct 27 2026 it was a paid
+> UGC ad with bogus likes and fake comments. Judge any voice/language choice on Shopify orders, never on likes.
 
 Custom Shopify theme for **Kordovan**, a Pakistani full-grain leather brand
 (wallets, bags, small leather goods). This file is the persistent context for

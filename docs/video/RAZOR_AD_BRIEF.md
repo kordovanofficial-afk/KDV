@@ -10,8 +10,11 @@ push through the notch. Cash sits under the strap on the back. Not made to order
 - They **explained** the wallet. Neither showed a problem the viewer feels in their own pocket.
 - Results: TOF-B Razor spent 28,060 lifetime at 2.44x Meta (about 1.2x real). The second video
   dropped CTR from 1.77% to 0.98%.
-- What has worked in this account: **real voice in Roman Urdu** (a Razor UGC post got 295 likes vs
-  9–14 for polished brand posts) and **founder voice** (TOF-M Mocha Mate founder videos converting).
+- What has worked in this account: **founder voice** (TOF-M Mocha Mate founder videos producing real,
+  UTM-tagged Shopify orders).
+- ⚠️ The "Razor UGC post, 295 likes" was a paid UGC ad padded with bogus likes and fake comments
+  (user, Oct 27 2026). It is NOT evidence that Roman Urdu wins. Language is therefore a test variable:
+  run the winning hook in a Roman Urdu cut and an English-caption cut and let orders decide.
 
 ## The idea
 Pakistani men carry a fat bifold in the back pocket and sit on it all day, on a bike or in a car.
