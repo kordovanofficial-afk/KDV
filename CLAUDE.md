@@ -1642,6 +1642,18 @@ ad set… put in any dummy video for now as draft"*.
   `120255717554640428` "XX DISCARD — unused v2" (new drafts cannot be API-deleted, only discarded in the UI).
 - 📌 Kill rule: per ad set ≥ PKR 2,600 spent with 0 purchases by day 3 → kill; day-5 CPA check vs ~1,300; no edits for 72h.
 
+### 📈 TOF-M day-5 read (Oct 21–28 window, run Oct 28) — PASSES, the first cold winner in months
+- Meta: **H1 Comparison** 4,480 spent · 8 purch · CPA **560** · 6.99x · CTR 3.30% · CPM 261 ·
+  **H3 Founder** 4,556 · 7 purch · CPA **651** · 8.89x · CTR 3.22% · CPM 438. Both far under the kill line.
+- Shopify (UTM tofm_mochamate_oct26 + one Facebook_UA order on the TOF-M campaign id): **~12 live orders,
+  1 cancelled (the 20,500 h3 basket)**. ≈ PKR 750 per PLACED order vs Mocha Mate profit/placed ≈ 988
+  (49% historical refusal) → profitable but not by much until deliveries confirm. Nearly all are COD (PENDING).
+- 🔴 **The prepaid-rate gap is real and visible:** 5 TOF-M orders total 3,450 (= 3,200 + the 250 "Pay Online"
+  rate) yet are PENDING COD. Customers pick the cheaper prepaid shipping and then pay cash anyway.
+- 🔴 **Mocha Mate stock 29 units (DENY policy) on Oct 28** — at ~3–5/day all channels, ~1 week left.
+  Restock BEFORE scaling TOF-M or the PDP sells out and the catalogue ads drop it.
+- Retarget (Oct 21–28): 7,996 · 8 purch · CPA 1,000 · 5.21x · freq 2.93. Healthy, keep.
+
 ## ⏸ TOF-C PAUSED (Oct 24 2026, user-approved: *"ok pause the TOF-C"*) — verified `effective_status: PAUSED`
 Ad set `120254472805020428`. Oct 11–24: spend 13,650 · 5 Meta purchases · CPA 2,730 · Meta 2.42x (≈1.2x real vs 2.22x
 break-even) · only 3 UTM-tagged Shopify orders (7,400). Cold prospecting now = TOF-M H1/H3 (2,000/day).
