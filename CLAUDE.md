@@ -1682,3 +1682,6 @@ Same review: Retarget 13,567 / 14 purch / CPA 969 / 3.71x / freq 3.85 (keep) · 
 - 5 Mocha Mate ad stills made from the REAL Shopify product photos (job ids): 4:5 front `c8c97d86…` · 9:16 story
   `5c956a69…` · 1:1 gift box `2d28aa5c…` · 1:1 back/coin pocket `43d78264…` · 4:5 open `878cf57f…`.
   User OK'd the first one. The model can redraw details: every still must be checked against the real wallet before use.
+- 🛑 **User (Oct 29): "dont add anything or create any ads with them."** Approved stills = 1, 2, 3, 5, but NO ads were
+  created and none should be without a new explicit request. Copies sit in Shopify Files only:
+  `mm-ad-still-1-front-4x5.png`, `-2-story-9x16`, `-3-gift-1x1`, `-5-open-4x5` (not attached to any product).
