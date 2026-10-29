@@ -1671,3 +1671,7 @@ Same review: Retarget 13,567 / 14 purch / CPA 969 / 3.71x / freq 3.85 (keep) · 
 - ✅ User confirmed Oct 29: Etsy "KordovanLeatherUS" (still LIVE), Amazon.ae and Daraz ("Kordvan") listings are OURS;
   Amazon + Daraz inactive. Not impersonation — do not re-raise.
 - Skip: hutch.pk (sells "mirror copy" designer wallets), competitor lists, Reddit self-promo.
+- ✅ **Oct 29: "Real vs Fake Leather: 8 Ways to Check" PUBLISHED** — `/blogs/news/real-vs-fake-leather-how-to-check`
+  (article `599524737264`, blog news). Header = user's AI image `Leather_vs._Worn_Faux-Leather_Wallets.png` (stand-in;
+  swap for a real shoot photo per `docs/images/IMAGE_BRIEF.md`). Source `docs/seo/blog/real-vs-fake-leather.html`.
+  Request indexing in GSC; read rankings for "how to check real leather" / "rexine vs leather" in 4–8 weeks.
