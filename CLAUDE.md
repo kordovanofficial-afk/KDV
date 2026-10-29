@@ -1675,3 +1675,10 @@ Same review: Retarget 13,567 / 14 purch / CPA 969 / 3.71x / freq 3.85 (keep) · 
   (article `599524737264`, blog news). Header = user's AI image `Leather_vs._Worn_Faux-Leather_Wallets.png` (stand-in;
   swap for a real shoot photo per `docs/images/IMAGE_BRIEF.md`). Source `docs/seo/blog/real-vs-fake-leather.html`.
   Request indexing in GSC; read rankings for "how to check real leather" / "rexine vs leather" in 4–8 weeks.
+
+## 🖼 HIGGSFIELD (connected Oct 29 2026) — free plan, 10 credits, ALL SPENT (0 left)
+- Free plan blocks GPT Image 2.5 + Seedream 5.0 Pro ("Requires basic plan or higher"); only `marketing_studio_image`
+  works (~2 credits per 1k image), and only 1 job at a time. Do not buy credits (FREE-only rule).
+- 5 Mocha Mate ad stills made from the REAL Shopify product photos (job ids): 4:5 front `c8c97d86…` · 9:16 story
+  `5c956a69…` · 1:1 gift box `2d28aa5c…` · 1:1 back/coin pocket `43d78264…` · 4:5 open `878cf57f…`.
+  User OK'd the first one. The model can redraw details: every still must be checked against the real wallet before use.
