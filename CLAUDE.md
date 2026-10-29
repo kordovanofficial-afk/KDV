@@ -1660,3 +1660,14 @@ break-even) · only 3 UTM-tagged Shopify orders (7,400). Cold prospecting now = 
 **Account now 4,000/day:** Retarget 1,000 · RT-J 1,000 · TOF-M H1 1,000 · TOF-M H3 1,000.
 Same review: Retarget 13,567 / 14 purch / CPA 969 / 3.71x / freq 3.85 (keep) · RT-J 0 jacket orders, read Oct 28 ·
 **0 jacket orders store-wide Oct 11–24** · chatgpt.com sent 3 orders (2,200 / 4,700 / 6,600) at zero cost.
+
+## 🔗 BACKLINK OUTREACH (Oct 29 2026) — `Kordovan_Backlink_Prospects.xlsx` (repo root)
+- 🚫 No automated/paid link schemes (Google link-spam policy; organic search = 34 orders/Rs 1.59 lakh in 30d at zero cost).
+- 🚫 OpenSEO (every-app/open-seo) declined: needs a paid DataForSEO key ($1 trial, $50 minimum top-up). User said leave it.
+- Finding: few neutral "best leather brands in Pakistan" lists exist; our own 3 guide articles rank #1–2 and feed the AI
+  Overview. Competitor lists (Karar, House of Leather, Trendevoker, Footlib) rank themselves #1.
+- Priority 1: Karar's wallet comparison names Kordovan with WRONG facts (1-yr warranty, Rs 3,000–8,000, COD "some"),
+  no link (draft D1) · ProPakistani 2022 jacket list (D2) · claim b2c.com.pk + peekaboo.guru listings (no website link).
+- ✅ User confirmed Oct 29: Etsy "KordovanLeatherUS" (still LIVE), Amazon.ae and Daraz ("Kordvan") listings are OURS;
+  Amazon + Daraz inactive. Not impersonation — do not re-raise.
+- Skip: hutch.pk (sells "mirror copy" designer wallets), competitor lists, Reddit self-promo.
