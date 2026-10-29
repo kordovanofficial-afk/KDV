@@ -196,3 +196,42 @@ a page about money is more persuasive when you can see what the money buys.
 ### After upload
 Same as above — tell me they are in Files and I will place all three with the
 alt text here and add the hero to the article's `BlogPosting` schema `image`.
+
+---
+
+## Blog — Real vs Fake Leather: 8 Ways to Check
+`/blogs/news/real-vs-fake-leather-how-to-check` · briefed Oct 29 2026
+
+🔴 **These must be REAL photos of real tests.** The article tells readers how to check leather;
+an AI-generated "proof" image would be a fake inside a guide about fakes. Only the header may use
+the AI fallback prompt, and only if it shows no test result. Same house style as above (daylight,
+matte, Quiet Heritage palette, no text/logos). JPG, sRGB, under 300 KB.
+Props: a Kordovan wallet (Mocha Mate is fine) + one cheap PU/rexine item from the market
+(a Rs 300–500 wallet or belt) that can be cut and burnt.
+
+### 1 · Header image
+**File:** `blog-real-vs-fake-hero.jpg` · **1600 × 1000** (16:10, matches the blog card crop)
+**Alt text:** `A genuine leather wallet beside a PU wallet, cut edges facing the camera`
+Shot: both wallets side by side on dark wood, cut edges toward the lens, light from the side.
+Leather on the left (fibrous edge), PU on the right (thin shiny layer over fabric, ideally starting to peel).
+> AI fallback (header only): Editorial still life, two bifold wallets side by side on a dark walnut table, edges facing the camera. Left: brown genuine leather wallet with a dense, fibrous, slightly burnished cut edge and natural irregular grain. Right: glossy black synthetic PU wallet with a thin plastic top layer visibly lifting from a woven fabric backing at the edge. Soft side daylight from the left, matte look, muted espresso, cognac and cream palette. No text, no logos, no people. 85mm, f/5.6.
+
+### 2 · Cut edge macro (goes under "1. Look at the cut edge")
+**File:** `blog-real-vs-fake-edge.jpg` · **1400 × 900**
+**Alt text:** `Close-up of a real leather edge showing packed fibres next to a PU edge showing fabric threads`
+Shot: phone macro mode, both edges in one frame, cut fresh with a blade on the PU piece.
+
+### 3 · Back side (goes under "2. Check the back side")
+**File:** `blog-real-vs-fake-back.jpg` · **1400 × 900**
+**Alt text:** `The suede-like underside of real leather beside the woven fabric backing of PU`
+Shot: flip a leather offcut and the cut PU piece over, top-down.
+
+### 4 · Lighter test (goes under "8. The lighter test")
+**File:** `blog-real-vs-fake-flame.jpg` · **1400 × 900**
+**Alt text:** `After a lighter test, real leather is lightly charred while PU has melted and bubbled`
+Shot: the AFTER result on both pieces side by side (offcuts only, never a product for sale).
+Can be a still taken from the "Asli hai ya nahi?" ad shoot.
+
+### After upload
+Upload to Shopify → Content → Files with these exact filenames and tell me. I will place them,
+set the header as the article image, and add it to the `BlogPosting` schema.
