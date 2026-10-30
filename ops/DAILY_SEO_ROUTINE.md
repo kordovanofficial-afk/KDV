@@ -7,8 +7,7 @@ Set up in claude.ai → Code → Routines (or Scheduled tasks) → New:
 - **Notifications:** push on
 - **Prompt:** paste the block below.
 
-A paused copy exists as scheduled task `trig_01JNYPqdea28G6dcXGgYiWFa`. It was created from a session
-that could not pass connectors or the repo, so it cannot do the job. Delete it once the UI version exists.
+✅ Set up by the owner in the Claude app (Oct 30 2026). The connector-less copy made from a session was deleted.
 
 ```
 Daily SEO routine for Kordovan (kordovanleather.com, Shopify store, Pakistani leather brand). Read CLAUDE.md in the repo first. Its hard rules override anything in this prompt (FREE options only, never mention the workshop city in new content, Humanizer rules on all customer-facing text, never invent reviews, ask before any push to the `kordovan` branch).
