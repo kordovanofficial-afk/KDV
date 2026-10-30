@@ -24,6 +24,18 @@ const firstNumber = (text: string, key: string): number | undefined => {
 
 const fmt = (n: number) => (Number.isInteger(n) ? String(n) : n.toFixed(2))
 
+// "model veo3_1, 8 s, ultra, 9:16" — the settings that drive the price.
+const describe = (p: Args | undefined): string => {
+  if (!p || typeof p !== 'object') return 'model not stated'
+  const bits: string[] = [typeof p.model === 'string' ? `model ${p.model}` : 'model not stated']
+  if (p.duration !== undefined) bits.push(`${p.duration} s`)
+  for (const k of ['variant', 'quality', 'mode', 'resolution', 'aspect_ratio']) {
+    if (typeof p[k] === 'string') bits.push(p[k] as string)
+  }
+  if (typeof p.count === 'number' && p.count > 1) bits.push(`${p.count} variants`)
+  return bits.join(', ')
+}
+
 const money = (credits: number) => {
   const usd = credits / CREDITS_PER_USD
   const pkr = Math.round(usd * PKR_PER_USD)
@@ -36,10 +48,24 @@ export const register: Register = on => {
     const args = e as unknown as Args
     let question: string | undefined
 
+    // A get_cost call is a free price check, not a generation.
+    const p0 = args.params as Args | undefined
+    if (HF_QUOTABLE.test(tool) && p0 && typeof p0 === 'object' && p0.get_cost === true) return next(e)
+
     if (HF_SPEND.test(tool)) {
       const short = tool.replace('mcp__Higgsfield__', '')
       let cost: number | undefined
       let quoteNote = ''
+      let what = ''
+      if (tool.endsWith('_batch')) {
+        const reqs = ((args.requests as { params?: Args }[] | undefined) ?? []).map(r => r.params)
+        what = reqs.map((r, i) => `#${i + 1} ${describe(r)}`).join('; ')
+      } else if (p0 && typeof p0 === 'object') {
+        what = describe(p0)
+      } else if (typeof args.model === 'string') {
+        what = `model ${args.model}`
+      }
+      const whatLine = what ? ` (${what})` : ''
 
       if (tool === 'mcp__Higgsfield__ads_studio_generate') {
         try {
@@ -85,7 +111,7 @@ export const register: Register = on => {
         cost !== undefined && balance !== undefined && cost > balance
           ? ` You are ${fmt(cost - balance)} credits (${money(cost - balance)}) short, so it will fail unless you top up.`
           : ''
-      question = `Higgsfield ${short}: ${costLine}${balLine}${shortfall} Go ahead?`
+      question = `Higgsfield ${short}${whatLine}: ${costLine}${balLine}${shortfall} Go ahead?`
     } else if (APIFY_RUN.test(tool)) {
       const opts = (args.callOptions ?? {}) as Args
       const cap = typeof opts.maxTotalChargeUsd === 'number' ? opts.maxTotalChargeUsd : undefined
