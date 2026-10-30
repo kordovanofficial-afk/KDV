@@ -1,0 +1,1 @@
+{ "name": "cost-check", "version": "0.1.0", "description": "Shows the exact cost of any paid app action (Higgsfield, Apify, Meta ad spend) and waits for a Yes/No before it runs." }
