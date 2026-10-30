@@ -1686,3 +1686,13 @@ Same review: Retarget 13,567 / 14 purch / CPA 969 / 3.71x / freq 3.85 (keep) · 
   created and none should be without a new explicit request. Copies sit in Shopify Files only:
   `mm-ad-still-1-front-4x5.png`, `-2-story-9x16`, `-3-gift-1x1`, `-5-open-4x5` (not attached to any product).
 - 📌 Oct 30: balance still 0 a day after spending, no reset offer → the free plan's 10 credits did NOT refill daily.
+
+## 🎞 GOOGLE FLOW (Veo, free tier, used by hand) — tested Oct 30 2026
+- No API/MCP for Flow; Google Cloud (Veo API trial) rejected every Pakistani card the user tried. Flow is manual only.
+- Free credits: a Veo clip costs 20; the user had ~50 and spent 40 on 2 clips. Check whether it refills daily before planning.
+- **Method that works:** upload the real product photo as the START frame, Agent OFF, Video 8 s 9:16 x1, and keep the
+  background the same as the photo (asking for a different background makes Veo morph the product).
+- Test 1 (Mocha Mate light sweep): shape, brass stud, stitching held, but colour drifted dark chocolate → copper
+  (centre RGB 42→102) and the horse mark got redrawn. Test 2 added "stays the same dark chocolate brown… no extra shine,
+  horse mark unchanged and no sharper": colour held (RGB 61→66), mark stable. ✅ PASS →
+  `docs/video/flow-tests/mocha-mate-lightsweep-v2-PASS.mp4` (720p, usable as a beauty shot). Hands test not run yet.
