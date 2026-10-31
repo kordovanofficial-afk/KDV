@@ -582,7 +582,12 @@ TOF-J had banked ~27k jacket ViewContent events (Sep 5–Oct 20) and nothing was
   ✅ **Costs written to Shopify Oct 31 2026** (Founder's figure **+150 PKR buffer**, user: *"add 150 to each cost as they
   keep increasing"*; 22 variants, 0 errors): Bastion 950 (62%) · Razor 650 (73%) · Plain Bifold 750 (69%) · Shelby &
   Thomas 1,000 (64%) · Saffiano 1,350 (69%) · Aristocrat 1,250 (70%) · Rigor Lite 450 (70%) · Cleopatra 2,550 (65%) ·
-  Armour 1,950 (57%). ⚠️ The OTHER wallet costs above do NOT yet carry the +150 buffer (asked the Founder). Dead stock (0 online sales in 90d) ≈ 194 units / PKR 2.0M retail; awaiting store check.
+  Armour 1,950 (57%). ⚠️ The OTHER wallet costs above do NOT yet carry the +150 buffer (asked the Founder). Dead stock (0 online sales in 90d) ≈ 194 units / PKR 2.0M retail.
+  ✅ **Store count Oct 31 (Founder) for the top 10:** Cabin Trolley 11 (Shopify said 8) · CEO bag 5 · Master's 16 ·
+  Branson 2 (Shopify 4) · Bella Duff 13 · Forester 3 · Gridle 6 · **HM The Lord's 0 (Shopify said 14 → corrected to 0
+  live Oct 31, both variants)** · Bellezza 12 · Venture 9. Confirmed dead stock (9 lines) ≈ **PKR 1.41M retail**.
+  ⚠️ Lord's proves "0 online sales" ≠ dead: it sold in the STORE, invisible to Shopify. Cabin (+3) and Branson (−2)
+  still need per-colour counts before correcting. Costs missing for Cabin, Master's, Branson, Venture.
 
 ## 🔌 Available integrations (MCP)
 Shopify, GitHub, Canva, Figma, Facebook Ads, Higgsfield, Cloudflare.
