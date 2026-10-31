@@ -461,3 +461,10 @@ Same review: Retarget 13,567 / 14 purch / CPA 969 / 3.71x / freq 3.85 (keep) · 
   (custom-audience only), incl All Visitors 180D + ATC 180D + IC 180D + ViewContent 90D, excl COD Refusers + Purchasers
   180D · ads W-RT1 `120255841975560428`, W-RT2 `120255841975580428`. Old copies in the live Retarget ad set discarded.
   All 9 objects across TOF-W + RT-W read back VALIDATED with 0 errors.
+- 🔁 Oct 31 (later): user DISCARDED ALL DRAFTS in Ads Manager (their browser showed a stale copy: old ad set name, no
+  ads). Rebuilt from scratch, NOT published (user reviews + publishes):
+  TOF-W campaign `120255846370500428` (CBO 1,500/day) · ad set `120255846373560428` · ads W01 `120255846376030428`,
+  W02 `…376280428`, W03 `…376700428`, W04 `…376820428`, W05 `…376970428`.
+  RT-W campaign `120255846370710428` · ad set `120255846373980428` (300/day) · W-RT1 `…377080428`, W-RT2 `…377130428`.
+  All 11 objects VALIDATED, 0 errors; catalogue cleared on both campaigns; links resolve (brown 45, black 56 in stock).
+  ⚠️ Lesson: API drafts and an already-open Ads Manager tab can disagree; tell the user to open Ads Manager fresh.
