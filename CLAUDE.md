@@ -597,7 +597,12 @@ TOF-J had banked ~27k jacket ViewContent events (Sep 5–Oct 20) and nothing was
   Branson 2 (Shopify 4) · Bella Duff 13 · Forester 3 · Gridle 6 · **HM The Lord's 0 (Shopify said 14 → corrected to 0
   live Oct 31, both variants)** · Bellezza 12 · Venture 9. Confirmed dead stock (9 lines) ≈ **PKR 1.41M retail**.
   ⚠️ Lord's proves "0 online sales" ≠ dead: it sold in the STORE, invisible to Shopify. Cabin (+3) and Branson (−2)
-  still need per-colour counts before correcting. Costs missing for Cabin, Master's, Branson, Venture.
+  still need per-colour counts before correcting.
+  ✅ **Bag costs written to Shopify Oct 31 2026 (Founder's figures, NO +150 buffer — that rule was given for wallets):**
+  Cabin Trolley 17,000 (60% GM) · CEO bag 20,000 (52%, was 16,000) · Master's 4,900 (55%) · Branson 11,500 (70%) ·
+  Venture 3,800 (56%) · Bella Duff 3,500 / Forester 11,500 / Gridle 5,000 already matched. Bellezza kept at 2,350
+  (Founder said 2,200 = the pre-buffer wallet cost). **The 9 dead lines tie up ≈ PKR 561k AT COST** (1.41M retail),
+  more than 2 months of fixed costs; even 40% off stays above cost on every line.
 
 ## 🔌 Available integrations (MCP)
 Shopify, GitHub, Canva, Figma, Facebook Ads, Higgsfield, Cloudflare.
