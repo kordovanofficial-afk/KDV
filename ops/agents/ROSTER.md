@@ -10,8 +10,8 @@ Owner: CHRO. Every agent, every stage, every decision. Never delete rows.
 | CHRO | `.claude/agents/chro.md` | PROBATION (to Nov 30 2026) | Oct 31 2026 | Custom build by CEO | "Noor Rehman". Hired by Founder Oct 31 2026. First task: wave 1 candidates |
 | Creative Director (under CMO) | `.claude/agents/ad-director.md` | ACTIVE (pre-existing) | — | Custom | Video ad production packages. Reports to CMO once CMO is hired |
 | CQRO | `.claude/agents/cqro.md` | PROBATION (to Nov 30 2026) | Oct 31 2026 | Custom build; structure from VoltAgent compliance-auditor.md (MIT) | "Hamna Qureshi". Hired by Founder Oct 31 2026: "monitor and give more authority that lies within her domain" → binding BLOCK (Founder-only override), direct fixes to L1 facts, standing audit rights, read-only Shopify/Meta/GSC. Register `approvals/REGISTER.md` |
-| CRO | — | RE-SOURCING (Farhan rejected Oct 31) | — | — | Founder: "lacks clarity and accuracy, which is highly needed for this role" |
-| CMO | — | RE-SOURCING (Mahnoor rejected Oct 31) | — | — | Founder: "shes the CMO and lacks commercial Judgement" |
+| CRO | `ops/agents/candidates/cro-sana.md` (draft) | INTERVIEW-READY, pending CEO review (Oct 31) | — | Custom build; structure from VoltAgent assumption-mapping.md (MIT) | "Sana Iqbal" `cro-sana`. Replaces Farhan (rejected: clarity, accuracy). Brief v2. Screening 7/7 PASS. Scores 4/5/4/5/4 = 4.4 (CHRO, CEO to re-score) |
+| CMO | `ops/agents/candidates/cmo-omar.md` (draft) | INTERVIEW-READY, pending CEO review (Oct 31) | — | Custom build; structure from VoltAgent landing-page-copywriter.md (MIT) | "Omar Shafiq" `cmo-omar`. Replaces Mahnoor (rejected: commercial judgment). Brief v2. Screening 7/7 PASS. Scores 4/4/5/4/4 = 4.2 (CHRO, CEO to re-score) |
 | COO | — | PLANNED, wave 2 | — | — | — |
 | CFO | — | PLANNED, wave 2 | — | — | — |
 | CTO | — | PLANNED, wave 3 | — | — | — |
@@ -36,3 +36,14 @@ Owner: CHRO. Every agent, every stage, every decision. Never delete rows.
 | wshobson/agents `plugins/content-marketing/agents/content-marketer.md` | MIT | PASS after stripping paid tools / "use PROACTIVELY" | CMO |
 | contains-studio/agents (growth-hacker, tiktok-strategist, instagram-curator, legal-compliance-checker) | none found | **FAIL**: no licence | — |
 Read via WebFetch (summarised pages, not byte-level). No text copied.
+
+## Sourcing log (wave 1 re-source after rejections, Oct 31 2026)
+Spec = the Founder's notes. CRO bar: clarity + accuracy. CMO bar: commercial judgment. Briefs updated to v2. Work samples use only `briefs/DATA_PACK_2026-10-31.md` and dated CLAUDE.md figures.
+| Repo / file | Licence | Screen | Used for |
+|---|---|---|---|
+| VoltAgent `categories/08-business-product/assumption-mapping.md` | MIT (LICENSE read: Copyright (c) 2025 VoltAgent) | PASS (structure only: graded assumption register) | CRO `cro-sana` |
+| VoltAgent `categories/08-business-product/landing-page-copywriter.md` | MIT | PASS after removing "query context manager" JSON protocol, competitor-page research and testimonial guidance | CMO `cmo-omar` |
+| VoltAgent `categories/08-business-product/telegram-ads-analyst.md` | MIT | PASS on safety, rejected on fit (Telegram ad buying; benchmarks cited to the contributing vendor's own product) | — |
+| wshobson/agents `plugins/customer-sales-automation/agents/sales-automator.md` | MIT | PASS on safety, rejected on fit (B2B cold email, "Use PROACTIVELY") | — |
+| 0xfurai/claude-code-subagents | MIT | No business/marketing agents found | — |
+Stage record: Requisition v2 (Oct 31) → Sourcing (Oct 31) → Screening 7/7 PASS both (Oct 31) → Work sample scored (Oct 31, CHRO; CEO re-score pending) → candidate JSON + draft agent file written → **awaiting CEO review and push to `candidates/cro-sana`, `candidates/cmo-omar`; `seats/cro` and `seats/cmo` → status "interviewing"**.
