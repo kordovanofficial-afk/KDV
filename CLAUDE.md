@@ -579,8 +579,10 @@ TOF-J had banked ~27k jacket ViewContent events (Sep 5–Oct 20) and nothing was
   rent/bills 80–85k. PostEx pays COD in 48–72h. User OK with building our own apps (Meta Graph API app etc.).
 - Wallet costs/margins (Shopify unitCost, Oct 31): KODO 400 (83%) · Kodo Vertical 2.0 450 (82%, **out of stock**) ·
   Luke 450 (81%) · Mocha Mate 800 (75%, 25 left, **in production**) · Lord's/Bronco 1,500 (76%) · Nova 1,800 (57%).
-  Missing cost in Shopify: Bastion, Razor, Plain Bifold, Shelby & Thomas, Saffiano, Aristocrat, Rigor Lite, Cleopatra,
-  Armour (Mr. Tahir sending). Dead stock (0 online sales in 90d) ≈ 194 units / PKR 2.0M retail; awaiting store check.
+  ✅ **Costs written to Shopify Oct 31 2026** (Founder's figure **+150 PKR buffer**, user: *"add 150 to each cost as they
+  keep increasing"*; 22 variants, 0 errors): Bastion 950 (62%) · Razor 650 (73%) · Plain Bifold 750 (69%) · Shelby &
+  Thomas 1,000 (64%) · Saffiano 1,350 (69%) · Aristocrat 1,250 (70%) · Rigor Lite 450 (70%) · Cleopatra 2,550 (65%) ·
+  Armour 1,950 (57%). ⚠️ The OTHER wallet costs above do NOT yet carry the +150 buffer (asked the Founder). Dead stock (0 online sales in 90d) ≈ 194 units / PKR 2.0M retail; awaiting store check.
 
 ## 🔌 Available integrations (MCP)
 Shopify, GitHub, Canva, Figma, Facebook Ads, Higgsfield, Cloudflare.
