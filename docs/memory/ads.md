@@ -454,3 +454,10 @@ Same review: Retarget 13,567 / 14 purch / CPA 969 / 3.71x / freq 3.85 (keep) · 
   COD Refusers or Purchasers 180D (excludes only Kodo customers, Lifetime Fulfilled, Delivered SEED). Breaks the
   standing rule. Not changed (live money edit, needs user OK).
 - Live Retarget ad set serves Audience Network + Threads too (all placements). Not changed.
+- ✅ Oct 31: broken TOF-W drafts discarded. TOF-M H1 fix PUBLISHED and verified live (LLA 1%+3%, excl COD Refusers +
+  Purchasers 180D added; re-review IN_PROCESS).
+- 🆕 RT-W (DRAFT, user publishes it): campaign `120255841966670428` "RT-W | Winter Retarget | Nov 2026" (ABO, catalogue
+  link cleared) · ad set `120255841974990428` PKR 300/day, Purchase, 9 cities home/recent, FB+IG, A+A off
+  (custom-audience only), incl All Visitors 180D + ATC 180D + IC 180D + ViewContent 90D, excl COD Refusers + Purchasers
+  180D · ads W-RT1 `120255841975560428`, W-RT2 `120255841975580428`. Old copies in the live Retarget ad set discarded.
+  All 9 objects across TOF-W + RT-W read back VALIDATED with 0 errors.
