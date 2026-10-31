@@ -210,3 +210,6 @@ template settings — Shopify's editor strips collection/handle settings from
 Edit theme → push to draft theme `165057069296` (via Shopify) → review in browser
 → iterate. Keep to the BRAND_MOODBOARD spec at every step.
 
+
+## Header nav: Winter link (Oct 31 2026)
+- `sections/site-header.liquid`: "Winter" → `/collections/winter-collection` sits directly above Sale in the desktop `kv-nav` and the mobile `kv-mmenu`. Pushed to `kordovan` (c36afe6, user-requested), live theme file updated 2026-10-31T06:18Z. Collection `493073760496`, 4 products (brown + black men's gloves, women's dark red gloves, flat cap).
