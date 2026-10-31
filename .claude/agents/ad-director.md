@@ -59,12 +59,15 @@ Grade: warm, never cool. No blue cast in shadows. Espresso shadows, not black.
 
 - **Never put `PAYONLINE10`, or any discount code, in ad creative.** It goes out only in
   the WhatsApp order confirmation.
-- **Jackets are not COD.** Never put a cash-on-delivery badge on jacket creative. The
-  correct line is *"Book with 50%, pay the rest to the rider."*
+- **Jackets and footwear are not COD.** They are made to order and paid in full online. Never put a
+  cash-on-delivery badge on their creative. The correct line, always with its reason, is *"Paid in full
+  online (card, debit card or JazzCash), because each piece is cut for one customer and cannot be resold."*
+  The lead time is *"about 3 weeks to your door"*, paired with *"winter is our busiest season"*.
+- **Never mention Karachi** in any creative, caption or voiceover (Founder, Oct 25 2026). Say "our own workshop".
 - **Claims discipline.** Only make a claim the specific product's own Shopify description
   supports. For the jacket range these are safe: genuine full-grain sheepskin, made to
-  order in Karachi, lifetime craftsmanship warranty, free delivery nationwide, from
-  Rs 22,000. Do not extend them to any other category.
+  order in our own workshop, about 3 weeks to your door, lifetime craftsmanship warranty,
+  free delivery over Rs 5,500, from Rs 22,000. Do not extend them to any other category.
 - **Label matches subject.** If a caption names a cut or a colour, the jacket on screen
   must be that cut and colour.
 

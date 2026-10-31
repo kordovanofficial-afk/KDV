@@ -13,7 +13,9 @@ Pakistan is a cash-on-delivery market. An "order" is not revenue — it is a
 
 - 5,203 cancelled orders in store history. 425 serial refusers identified,
   **323 tagged `FRAUD RISK`** and excluded from ads.
-- Historically **~40% of placed orders never deliver**.
+- ~~~40% never deliver~~ (wrong, it mixed pre-dispatch cancels with refusals). Measured Aug 20 2026: **real RTO 9.9%**
+  (639 of 6,482 orders cancelled after dispatch); 1,144 more were cancelled before dispatch. October 2026 reversals
+  were 31% of gross sales.
 - Recent window (Jul 19–25 2026): 5 of 28 orders voided = **18% cancellation** —
   better, likely because the refuser exclusion is now live. Track this monthly.
 
@@ -71,7 +73,7 @@ break-even is a guess. At an assumed 50% margin, break-even delivered CPA is
 
 **Levers, in order of leverage:**
 1. **Raise AOV** — bundles (wallet + belt/keychain), free-delivery threshold at
-   PKR 2,500 already nudges this. A 2-item order fixes the maths faster than any
+   PKR 5,500 (since Sep 8 2026) already nudges this. A 2-item order fixes the maths faster than any
    targeting change.
 2. **Raise site CR** — at 2.5% CR the cold placed CPA halves to ~PKR 2,200.
    Cheaper than buying better traffic.
@@ -85,7 +87,7 @@ Jul 19–22: Meta claimed **PKR 37,850** revenue on PKR 3,820 spend (**~9.9x ROA
 Shopify attributes **7 orders / ~PKR 18,500**, one later cancelled → **real ~4.3x**.
 
 The gap is view-through credit for orders that actually came from Google, direct
-and organic Instagram. **Budget against 4–5x, not the dashboard.**
+and organic Instagram. **Budget against the measured ~2.05x overstatement (real break-even 2.22x at 45% GM, Sep 4 2026), not the dashboard.**
 Cross-check monthly: Shopify `customerJourneySummary.firstVisit.utmParameters`
 vs Meta's reported purchases.
 
@@ -110,13 +112,14 @@ From the vendored `meta-ads-analyzer` references — the three that apply here:
 
 ## 6. Market specifics for creative
 
-- **Payment badges that matter:** COD first, then Easypaisa / JazzCash. Visa and
-  Mastercard are secondary here — do not lead with them.
-- **Free delivery ≥ PKR 2,500.** Bastion (2,500) qualifies; Razor (2,450) does NOT.
-  Never put a free-delivery badge on a Razor creative.
-- **Cities that carry volume:** Karachi, Lahore, Islamabad/Rawalpindi.
-- **Trust is the conversion lever, not novelty.** COD, lifetime warranty, 7-day
-  returns and real reviews do more than discount urgency in this market.
+- **Payment badges that matter:** non-made-to-order items: COD available (costs Rs 250 more than paying online,
+  Sep 15 2026), or pay online by card / JazzCash. Easypaisa was removed Sep 4 2026. **Jackets and footwear are
+  made to order and 100% prepaid**: never a COD badge on them.
+- **Free delivery over PKR 5,500** when paid online (Sep 8 2026). Almost every wallet sits below it (Bronco and the Stallion wallet
+  are the exceptions), so never put a free-delivery badge on a single-wallet creative unless the wallet is over 5,500.
+- **Cities that carry volume:** the 9 target cities; Lahore, Islamabad/Rawalpindi and the south lead delivered volume.
+- **Trust is the conversion lever, not novelty.** Lifetime warranty and real reviews do more than discount urgency.
+  COD and 7-day returns apply to in-stock items only; made-to-order pieces cannot be returned once production starts.
 - **WhatsApp is a primary channel**, not an afterthought — it is where the prepaid
   nudge and order confirmation happen.
 
@@ -124,7 +127,7 @@ From the vendored `meta-ads-analyzer` references — the three that apply here:
 
 ## 7. Claims discipline (brand rule, not a market rule)
 
-Not every product is hand-stitched, saddle-stitched, or made in Karachi. Never
+Not every product is hand-stitched or saddle-stitched, and no creative may name the workshop's city. Never
 write a universal craft claim into ad copy. Pull claims from the specific
 product's Shopify description only — see the Bronco incident in `CLAUDE.md`.
 

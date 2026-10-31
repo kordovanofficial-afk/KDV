@@ -1198,8 +1198,8 @@ benefits and material thing, fix the product taxonomy."* All done and verified o
     snake, which would be a false material claim on a product page and in the Google feed.
   - ✍️ **Only verifiable facts were used:** the material already in `custom.material`, the real
     colour options (duffle Tan/Brown, Bull Rider Black/Brown), real prices, and the two
-    brand-universal facts already rendered site-wide in `layout/theme.liquid:23` — **"Karachi
-    workshop"** and **"lifetime craftsmanship warranty"**. Check that line before asserting either.
+    brand-universal facts already rendered site-wide in `layout/theme.liquid:23` — **"our own
+    workshop"** (Karachi removed Oct 25) and **"lifetime craftsmanship warranty"**. Check that line before asserting either.
   - 📌 **These 5 are NOT made-to-order** (only the 30 jackets + 24 footwear are), so the copy
     correctly says **cash on delivery is available**. Do not blanket-apply the jacket payment rule.
   - 📌 The three belts (2,800 / 3,500) sit BELOW the Rs 5,500 free-delivery threshold, so they
@@ -1272,7 +1272,8 @@ Same session, immediately after the jacket lead-time fix. **72 products rewritte
   apply uniformly without checking each product's price).
 - 🔴 **AND 20 of the 24 footwear SEO descriptions disclosed neither made-to-order nor the lead time**,
   despite all 24 shoes being MTO — the same exposure the jackets had. All 24 now carry
-  **"Made to order in our Karachi workshop — about 3 weeks to your door. Free delivery."**
+  **"Made to order in our Karachi workshop — about 3 weeks to your door. Free delivery."** (Karachi removed
+  Oct 25 2026; CQRO verified Oct 31: 0 of 175 active products mention Karachi, footwear says "our own workshop".)
   (every shoe is Rs 21,000+, comfortably over the threshold, so "Free delivery" is literally true).
 - ✅ **Verified catalogue-wide after writing:** 0 unqualified free-shipping claims · 24/24 footwear
   disclose made-to-order AND "about 3 weeks" · 0 SEO titles or descriptions lost · 0 `4–7 days`
