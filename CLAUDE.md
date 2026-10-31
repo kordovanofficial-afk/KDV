@@ -554,6 +554,28 @@ TOF-J had banked ~27k jacket ViewContent events (Sep 5–Oct 20) and nothing was
   jacket order, not CTR; the 19 October abandons say the bottleneck is checkout, so also watch
   abandoned jacket checkouts in Shopify alongside Meta's numbers.
 
+## 🏛 AGENT ORGANISATION (started Oct 31 2026): read `ops/agents/ORG_DESIGN.md` + `ROSTER.md`
+- **Founder = the user (Chairman, approves every hire and every live change). CEO = Claude (the main session).**
+  User: *"youre the CEO i hired"*. Morning brief to the Founder daily.
+- Org built like a large company, NOT one agent per task: CEO → CHRO · CRO · CMO · CFO · COO · CTO, plus an independent
+  **CQRO** (fact-check + approval gate). Reports open under an exec only on evidence. Waves: 0 CHRO · 1 CQRO/CRO/CMO ·
+  2 COO/CFO · 3 CTO. User wants **no cap on agent count, but every agent fact-checks and passes an approval channel**
+  (L0 analyse · L1 draft → CQRO · L2 customer-facing → Founder · L3 money/irreversible → Founder every time).
+- **CHRO** = `.claude/agents/chro.md` (sources from public GitHub agent collections + one custom build per seat, screens
+  for licence/injection/tool scope, work-sample test). Hires happen on the **Hiring Floor** page
+  `https://claude.ai/artifact/UubufgPRvXCLYJFrQzP78s`: pixel-art interview room, candidates in db `candidates/<id>`,
+  Founder's verdicts in `decisions/<id>`, interview chats in `transcripts/<id>`. **Read `decisions` at the start of
+  each session** and act (hire → agent file + roster; reject → re-source using the note).
+- 🧾 **POS (user, Oct 31): in-store sales are NOT in Shopify.** Custom POS sync is unreliable; user plans to switch it
+  off and send a **daily store-sales report** for the COO/CEO to apply to Shopify stock (L2, Founder approves the batch).
+- Staff: **Mr. Tahir** (manager/business head, back-end finance) · **Ahsan** (store sales, WhatsApp, product photos).
+  Founder in Islamabad runs all online work, ~6h/day. Store sales PKR 250–350k/month. Fixed costs ≈ staff 135–150k +
+  rent/bills 80–85k. PostEx pays COD in 48–72h. User OK with building our own apps (Meta Graph API app etc.).
+- Wallet costs/margins (Shopify unitCost, Oct 31): KODO 400 (83%) · Kodo Vertical 2.0 450 (82%, **out of stock**) ·
+  Luke 450 (81%) · Mocha Mate 800 (75%, 25 left, **in production**) · Lord's/Bronco 1,500 (76%) · Nova 1,800 (57%).
+  Missing cost in Shopify: Bastion, Razor, Plain Bifold, Shelby & Thomas, Saffiano, Aristocrat, Rigor Lite, Cleopatra,
+  Armour (Mr. Tahir sending). Dead stock (0 online sales in 90d) ≈ 194 units / PKR 2.0M retail; awaiting store check.
+
 ## 🔌 Available integrations (MCP)
 Shopify, GitHub, Canva, Figma, Facebook Ads, Higgsfield, Cloudflare.
 (Playwright is NOT available in this remote env — design is done in code, then

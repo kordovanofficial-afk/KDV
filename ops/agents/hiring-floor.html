@@ -1,0 +1,377 @@
+<title>Kordovan Hiring Floor</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Pixelify+Sans:wght@400;500;700&display=swap">
+<style>
+/* Layout: a night-shift HQ floor seen as a pixel game. Org floor strip on top,
+   lobby queue on the left, the interview room on the right. Deliberately single-theme. */
+:root{
+  --bg:#17110d; --floor-a:#1c1510; --floor-b:#1a130f;
+  --panel:#241a14; --panel-2:#2f2219; --line:#5a4130; --line-hi:#7a5a42;
+  --ink:#efe4d2; --muted:#a8957e; --cognac:#c27a48; --brass:#d6ad62;
+  --olive:#9aa55a; --red:#d0614a; --amber:#e3a043; --shadow:#0c0907;
+  --display:"Press Start 2P", ui-monospace, "Courier New", monospace;
+  --ui:"Pixelify Sans", ui-monospace, "Courier New", monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{background:var(--bg);color:var(--ink)}
+body{font-family:var(--ui);font-size:17px;line-height:1.45;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 63px, rgba(0,0,0,.18) 63px 64px),
+    repeating-linear-gradient(0deg, var(--floor-a) 0 32px, var(--floor-b) 32px 64px);
+}
+.app{max-width:1240px;margin:0 auto;padding-block:20px 48px;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));
+  padding-right:max(16px, env(safe-area-inset-right, 0px));
+  display:grid;gap:20px}
+.px{background:var(--panel);border:4px solid var(--line);
+  box-shadow:inset -4px -4px 0 rgba(0,0,0,.28), inset 4px 4px 0 rgba(255,255,255,.04), 6px 6px 0 var(--shadow)}
+h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance}
+h2{font-size:11px;letter-spacing:.08em;color:var(--brass);text-transform:uppercase}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,textarea:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--brass);outline-offset:2px}
+canvas{image-rendering:pixelated;image-rendering:crisp-edges;display:block}
+
+/* header */
+.top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px}
+.brand{display:flex;align-items:center;gap:14px;min-width:0}
+.brand h1{font-size:15px;line-height:1.5;color:var(--ink)}
+.brand small{display:block;font-family:var(--display);font-size:9px;color:var(--cognac);letter-spacing:.1em;margin-top:6px}
+.clock{font-family:var(--display);font-size:9px;color:var(--muted);text-align:right;line-height:1.9}
+.clock b{color:var(--brass);font-weight:400}
+
+/* org floor */
+.floor{padding:16px 18px;display:grid;gap:12px}
+.floor-head{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:baseline;justify-content:space-between}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;color:var(--muted)}
+.legend i{display:inline-block;width:10px;height:10px;margin-right:6px;vertical-align:0}
+.seats{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.seat{background:var(--panel-2);border:3px solid var(--line);padding:10px 10px 10px 16px;position:relative;min-width:0}
+.seat::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--c,var(--line))}
+.seat .t{font-family:var(--display);font-size:9px;line-height:1.6;color:var(--ink)}
+.seat .h{font-size:14px;color:var(--muted);margin-top:4px;overflow-wrap:anywhere}
+.seat .w{font-size:12px;color:var(--muted);opacity:.8}
+.seat.is-filled{--c:var(--olive)} .seat.is-interviewing{--c:var(--amber)}
+.seat.is-open{--c:var(--cognac)} .seat.is-planned{--c:var(--line-hi)}
+.seat.is-planned .t{color:var(--muted)}
+
+/* room */
+.room{display:grid;grid-template-columns:280px minmax(0,1fr);gap:20px;align-items:start}
+@media (max-width:860px){.room{grid-template-columns:1fr}}
+.lobby{padding:16px;display:grid;gap:12px}
+.queue{display:grid;gap:10px}
+.ticket{display:grid;grid-template-columns:48px minmax(0,1fr);gap:12px;align-items:center;text-align:left;
+  background:var(--panel-2);border:3px solid var(--line);padding:8px 10px;width:100%}
+.ticket:hover{border-color:var(--line-hi)}
+.ticket[aria-current="true"]{border-color:var(--brass);background:#3a2a1e}
+.ticket .n{font-family:var(--display);font-size:9px;line-height:1.6}
+.ticket .r{font-size:14px;color:var(--muted)}
+.chip{display:inline-block;font-family:var(--display);font-size:7px;letter-spacing:.06em;padding:4px 6px;margin-top:4px;
+  border:2px solid currentColor;text-transform:uppercase}
+.chip.new{color:var(--brass)} .chip.hire{color:var(--olive)} .chip.hold{color:var(--amber)} .chip.reject{color:var(--red)}
+.empty{color:var(--muted);font-size:15px;padding:6px 2px}
+
+.interview{padding:18px;display:grid;gap:18px;min-width:0}
+.welcome{display:grid;gap:10px;justify-items:start;padding:10px 4px}
+.welcome p{margin:0;max-width:60ch;color:var(--muted)}
+
+.idcard{display:grid;grid-template-columns:auto minmax(0,1fr);gap:18px;align-items:center}
+@media (max-width:520px){.idcard{grid-template-columns:1fr}}
+.portrait{background:
+   linear-gradient(var(--panel-2),var(--panel-2)) padding-box;
+  border:4px solid var(--line);padding:10px;width:max-content;max-width:100%;position:relative}
+.portrait canvas{animation:bob 2.4s steps(2) infinite}
+@keyframes bob{50%{transform:translateY(-3px)}}
+@media (prefers-reduced-motion:reduce){.portrait canvas{animation:none}}
+.plate{display:grid;gap:8px;min-width:0}
+.plate h3{font-size:16px;line-height:1.5}
+.plate .role{font-family:var(--display);font-size:10px;color:var(--cognac);line-height:1.7}
+.plate .meta{font-size:15px;color:var(--muted)}
+.plate .tag{font-size:17px;color:var(--ink);font-style:italic;max-width:60ch}
+.stamp{position:absolute;right:-10px;bottom:-12px;font-family:var(--display);font-size:9px;padding:6px 8px;
+  border:3px solid currentColor;background:var(--panel);transform:rotate(-8deg);text-transform:uppercase}
+.stamp.new{color:var(--brass)} .stamp.hire{color:var(--olive)} .stamp.hold{color:var(--amber)} .stamp.reject{color:var(--red)}
+
+.scores{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px 16px}
+.score .l{font-size:14px;color:var(--muted)}
+.bar{display:grid;grid-template-columns:repeat(5,1fr);gap:3px;margin-top:4px}
+.bar i{height:10px;background:#3a2b20;border:2px solid #3a2b20}
+.bar i.on{background:var(--brass);border-color:var(--brass)}
+.scores-note{font-size:13px;color:var(--muted);grid-column:1/-1}
+
+.tabs{display:flex;flex-wrap:wrap;gap:6px;border-bottom:4px solid var(--line);padding-bottom:0}
+.tab{background:var(--panel-2);border:3px solid var(--line);border-bottom:0;padding:9px 12px;font-family:var(--display);font-size:9px;color:var(--muted)}
+.tab[aria-selected="true"]{background:var(--line);color:var(--ink)}
+.panel{display:grid;gap:14px;min-width:0}
+.panel p{margin:0;max-width:68ch}
+.panel h4{font-family:var(--display);font-size:10px;color:var(--brass);margin:6px 0 0;font-weight:400;line-height:1.6}
+.panel ul{margin:0;padding-left:20px;display:grid;gap:4px;max-width:68ch}
+.panel li::marker{color:var(--cognac)}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.cols > div{min-width:0}
+.checks{display:grid;gap:8px}
+.check{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;background:var(--panel-2);border:3px solid var(--line);padding:8px 10px}
+.check .v{font-family:var(--display);font-size:8px;padding:4px 6px;border:2px solid currentColor;align-self:start}
+.check .v.PASS{color:var(--olive)} .check .v.FAIL{color:var(--red)} .check .v.PENDING{color:var(--amber)}
+.check .k{font-weight:700} .check .nt{grid-column:2;color:var(--muted);font-size:15px}
+.qs{display:grid;gap:8px}
+.q{text-align:left;background:var(--panel-2);border:3px solid var(--line);padding:8px 12px}
+.q:hover{border-color:var(--brass)}
+
+/* chat */
+.chat{display:grid;gap:10px}
+.log{background:#120d0a;border:4px solid var(--line);padding:12px;display:grid;gap:12px;max-height:440px;overflow-y:auto;min-height:120px}
+.msg{display:grid;gap:4px;max-width:92%}
+.msg .who{font-family:var(--display);font-size:8px;color:var(--muted)}
+.msg .txt{white-space:pre-wrap;overflow-wrap:anywhere;padding:10px 12px;border:3px solid var(--line);background:var(--panel)}
+.msg.me{justify-self:end}
+.msg.me .who{text-align:right;color:var(--cognac)}
+.msg.me .txt{background:#3a2a1e;border-color:var(--cognac)}
+.msg.them .who{color:var(--brass)}
+.typing::after{content:"▮";animation:blink 1s steps(2) infinite;margin-left:2px;color:var(--brass)}
+@keyframes blink{50%{opacity:0}}
+.ask{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px}
+@media (max-width:520px){.ask{grid-template-columns:1fr}}
+textarea,input[type=text]{font:inherit;color:var(--ink);background:#120d0a;border:3px solid var(--line);padding:10px 12px;width:100%;resize:vertical}
+textarea{min-height:64px}
+.btn{font-family:var(--display);font-size:10px;padding:12px 14px;border:3px solid var(--shadow);background:var(--cognac);color:#1a100a;
+  box-shadow:inset -3px -3px 0 rgba(0,0,0,.25), 4px 4px 0 var(--shadow)}
+.btn:active{transform:translate(2px,2px);box-shadow:inset -3px -3px 0 rgba(0,0,0,.25), 2px 2px 0 var(--shadow)}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.btn.hire{background:var(--olive)} .btn.hold{background:var(--amber)} .btn.reject{background:var(--red)}
+.hint{font-size:14px;color:var(--muted);margin:0}
+.err{font-size:15px;color:var(--red);margin:0}
+
+/* decision */
+.desk{border-top:4px dashed var(--line);padding-top:16px;display:grid;gap:10px}
+.desk-row{display:flex;flex-wrap:wrap;gap:10px}
+.current{font-size:15px;color:var(--muted)}
+.current b{font-weight:700;color:var(--ink)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+
+<div class="app">
+  <header class="top px">
+    <div class="brand">
+      <canvas id="logo" width="40" height="40" aria-hidden="true"></canvas>
+      <div>
+        <h1>KORDOVAN HQ</h1>
+        <small>HIRING FLOOR · LEVEL 1</small>
+      </div>
+    </div>
+    <div class="clock" id="clock" aria-live="off"></div>
+  </header>
+
+  <section class="floor px" aria-labelledby="floor-h">
+    <div class="floor-head">
+      <h2 id="floor-h">Org floor</h2>
+      <div class="legend">
+        <span><i style="background:var(--olive)"></i>Filled</span>
+        <span><i style="background:var(--amber)"></i>Interviewing</span>
+        <span><i style="background:var(--cognac)"></i>Open</span>
+        <span><i style="background:var(--line-hi)"></i>Planned</span>
+      </div>
+    </div>
+    <div class="seats" id="seats"><p class="empty">Loading the org floor…</p></div>
+  </section>
+
+  <main class="room">
+    <aside class="lobby px" aria-labelledby="lobby-h">
+      <h2 id="lobby-h">Lobby</h2>
+      <div class="queue" id="queue"><p class="empty">Checking who is waiting…</p></div>
+    </aside>
+    <section class="interview px" id="interview" aria-live="polite">
+      <div class="welcome">
+        <h2>Interview room</h2>
+        <p>Pick a candidate from the lobby. Read the dossier and the work sample, question them, then decide: hire, keep them waiting, or reject. The CHRO reads every decision and your notes before sourcing the next candidate.</p>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+(function(){
+"use strict";
+const S={cands:[],dec:{},tr:{},seats:[],sel:null,tab:"dossier",busy:false,owner:false,db:null,sample:null,loaded:false,dbFailed:false};
+const $=s=>document.querySelector(s);
+function el(tag,attrs,kids){const n=document.createElement(tag);if(attrs)for(const k in attrs){const v=attrs[k];if(v==null||v===false)continue;
+  if(k==="class")n.className=v;else if(k==="text")n.textContent=v;else if(k.startsWith("on"))n.addEventListener(k.slice(2),v);else n.setAttribute(k,v===true?"":v);}
+  (kids||[]).forEach(c=>{if(c!=null)n.append(c.nodeType?c:document.createTextNode(String(c)))});return n;}
+const arr=v=>Array.isArray(v)?v:[];
+const STATUS={hire:"Hired",hold:"Waiting",reject:"Rejected",new:"Awaiting interview"};
+function statusOf(id){const d=S.dec[id];return d&&STATUS[d.status]?d.status:"new";}
+
+/* ---------- pixel portraits ---------- */
+const BASE=["....HHHHHHHH....","...HHHHHHHHHH...","..HHHHHHHHHHHH..","..HHSSSSSSSSHH..","..HSSSSSSSSSSH..",
+"..SSSEESSEESSS..","..SSSEESSEESSS..","..SSSSSSSSSSSS..","...SSSSSSSSSS...","...SSSMMMMSSS...","....SSSSSSSS....",
+".....SSSSSS.....","...OOOOAAOOOO...","..OOOOOAAOOOOO..",".OOOOOOAAOOOOOO.",".OOOOOOAAOOOOOO.",".OOOOOOOOOOOOOO.",".OOOOOOOOOOOOOO."];
+function grid(av){const g=BASE.map(r=>r.split(""));const st=(av&&av.hairStyle)||"short";
+  const put=(r,c,ch)=>{if(g[r]&&c>=0&&c<16)g[r][c]=ch};
+  if(st==="long"){for(let r=3;r<=13;r++){put(r,1,"H");put(r,14,"H")}for(let r=10;r<=12;r++){put(r,2,"H");put(r,13,"H")}}
+  if(st==="bun"){g[0]="......HHHH......".split("");}
+  if(st==="cap"){g[0]="....AAAAAAAA....".split("");g[1]="...AAAAAAAAAA...".split("");g[2]="..AAAAAAAAAAAA..".split("");g[3]="..AAAAAAAAAAAAAA".split("");}
+  if(st==="bald"){g[0]="................".split("");g[1]="....SSSSSSSS....".split("");g[2]="...SSSSSSSSSS...".split("");g[3]="..SSSSSSSSSSSS..".split("");g[4]="..HSSSSSSSSSSH..".split("");}
+  if(av&&av.glasses){for(const c of [4,5,6,7,8,9,10,11])put(4,c,"G");for(const r of [5,6])for(const c of [4,7,8,11])put(r,c,"G");}
+  return g;}
+function shade(hex,f){const n=parseInt((hex||"#888888").slice(1),16);let r=n>>16,g=(n>>8)&255,b=n&255;
+  r=Math.max(0,Math.min(255,Math.round(r*f)));g=Math.max(0,Math.min(255,Math.round(g*f)));b=Math.max(0,Math.min(255,Math.round(b*f)));
+  return "#"+((1<<24)|(r<<16)|(g<<8)|b).toString(16).slice(1);}
+function avatar(av,scale){av=av||{};const c=document.createElement("canvas");c.width=16*scale;c.height=18*scale;
+  const x=c.getContext("2d");const skin=av.skin||"#c68a5e";
+  const pal={H:av.hair||"#2a1a12",S:skin,E:"#140d09",M:shade(skin,.68),O:av.outfit||"#4a3528",A:av.accent||"#b0894f",G:"#d6ad62"};
+  grid(av).forEach((row,r)=>row.forEach((ch,col)=>{if(ch==="."||!pal[ch])return;x.fillStyle=pal[ch];x.fillRect(col*scale,r*scale,scale,scale);
+    if(ch==="O"&&col>0&&row[col-1]==="."){x.fillStyle=shade(pal.O,1.25);x.fillRect(col*scale,r*scale,scale,scale)}}));
+  x.fillStyle="rgba(255,255,255,.18)";x.fillRect(5*scale,5*scale,Math.max(1,scale/2),Math.max(1,scale/2));x.fillRect(9*scale,5*scale,Math.max(1,scale/2),Math.max(1,scale/2));
+  return c;}
+(function logo(){const c=$("#logo"),x=c.getContext("2d");const m=["BB....BB..","BB...BB...","BB..BB....","BB.BB.....","BBBB......","BBCC......","BB.BB.....","BB..BB....","BB...BB...","BB....BB.."];
+  m.forEach((r,y)=>r.split("").forEach((ch,i)=>{if(ch===".")return;x.fillStyle=ch==="B"?"#d6ad62":"#c27a48";x.fillRect(i*4,y*4,4,4)}));})();
+
+function tick(){try{const d=new Date();
+  const day=new Intl.DateTimeFormat("en-GB",{timeZone:"Asia/Karachi",weekday:"short",day:"numeric",month:"short"}).format(d);
+  const t=new Intl.DateTimeFormat("en-GB",{timeZone:"Asia/Karachi",hour:"2-digit",minute:"2-digit"}).format(d);
+  $("#clock").replaceChildren(el("div",{text:day}),el("div",null,[el("b",{text:t})," PKT"]));}catch(e){}}
+tick();setInterval(tick,30000);
+
+/* ---------- org floor + lobby ---------- */
+function renderSeats(){const box=$("#seats");
+  if(S.dbFailed){box.replaceChildren(el("p",{class:"empty",text:"The floor database is unavailable in this view. Open the page signed in to claude.ai."}));return}
+  if(!S.seats.length){box.replaceChildren(el("p",{class:"empty",text:S.loaded?"No seats on the floor yet. The CHRO adds them as the org plan is approved.":"Loading the org floor…"}));return}
+  box.replaceChildren(...S.seats.map(s=>el("div",{class:"seat is-"+(s.status||"planned")},[
+    el("div",{class:"t",text:s.title||s.id}),
+    el("div",{class:"h",text:s.holder||(s.status==="open"?"Open seat":"Not yet open")}),
+    el("div",{class:"w",text:[s.reportsTo?"→ "+s.reportsTo:null,s.wave!=null?"Wave "+s.wave:null].filter(Boolean).join(" · ")})])));}
+
+function renderQueue(){const box=$("#queue");
+  if(S.dbFailed){box.replaceChildren(el("p",{class:"empty",text:"Candidates can't be loaded in this view."}));return}
+  if(!S.cands.length){box.replaceChildren(el("p",{class:"empty",text:S.loaded?"Nobody is waiting. The CHRO sends candidates here once they pass screening.":"Checking who is waiting…"}));return}
+  box.replaceChildren(...S.cands.map(c=>{const st=statusOf(c.id);
+    return el("button",{class:"ticket","aria-current":S.sel===c.id?"true":"false",onclick:()=>select(c.id)},[
+      avatar(c.avatar,3),
+      el("div",null,[el("div",{class:"n",text:c.name||c.id}),el("div",{class:"r",text:c.role||""}),el("span",{class:"chip "+st,text:STATUS[st]})])]);}));}
+
+/* ---------- interview room ---------- */
+function select(id){S.sel=id;S.tab="dossier";renderQueue();renderInterview();}
+function cand(){return S.cands.find(c=>c.id===S.sel);}
+
+function richText(t){const out=[];let ul=null;
+  String(t||"").split(/\r?\n/).forEach(line=>{const l=line.trimEnd();
+    if(/^\s*-\s+/.test(l)){if(!ul){ul=el("ul");out.push(ul)}ul.append(el("li",{text:l.replace(/^\s*-\s+/,"")}));return}
+    ul=null;if(!l.trim())return;
+    if(/^##\s+/.test(l))out.push(el("h4",{text:l.replace(/^##\s+/,"")}));else out.push(el("p",{text:l}));});
+  return out;}
+function list(title,items){items=arr(items);if(!items.length)return null;return el("div",null,[el("h4",{text:title}),el("ul",null,items.map(i=>el("li",{text:i})))]);}
+
+function renderInterview(){const box=$("#interview");const c=cand();
+  if(!c){box.replaceChildren(el("div",{class:"welcome"},[el("h2",{text:"Interview room"}),el("p",{text:"Pick a candidate from the lobby. Read the dossier and the work sample, question them, then decide: hire, keep them waiting, or reject."})]));return}
+  const st=statusOf(c.id);
+  const portrait=el("div",{class:"portrait"},[avatar(c.avatar,8),el("span",{class:"stamp "+st,text:STATUS[st]})]);
+  const plate=el("div",{class:"plate"},[el("h3",{text:c.name}),el("div",{class:"role",text:c.role}),
+    el("div",{class:"meta",text:[c.level,c.reportsTo?"reports to "+c.reportsTo:null,c.wave!=null?"wave "+c.wave:null].filter(Boolean).join(" · ")}),
+    c.tagline?el("div",{class:"tag",text:"“"+c.tagline+"”"}):null]);
+  const sc=c.scores&&typeof c.scores==="object"?Object.entries(c.scores):[];
+  const scores=sc.length?el("div",{class:"scores"},[...sc.map(([k,v])=>el("div",{class:"score"},[el("div",{class:"l",text:k+" · "+v+"/5"}),
+    el("div",{class:"bar","aria-hidden":"true"},[1,2,3,4,5].map(i=>el("i",{class:i<=Number(v)?"on":""})))])),
+    c.scoresNote?el("p",{class:"scores-note",text:c.scoresNote}):null]):null;
+  const tabs=[["dossier","Dossier"],["sample","Work sample"],["screen","Screening"],["questions","Questions"]];
+  const tabbar=el("div",{class:"tabs",role:"tablist"},tabs.map(([k,l])=>el("button",{class:"tab",role:"tab","aria-selected":S.tab===k?"true":"false",
+    onclick:()=>{S.tab=k;$("#tabpanel").replaceChildren(...panel(cand()));document.querySelectorAll(".tab").forEach(b=>b.setAttribute("aria-selected",b.textContent===l?"true":"false"))}},[l])));
+  const tp=el("div",{class:"panel",id:"tabpanel",role:"tabpanel"},panel(c));
+  box.replaceChildren(el("div",{class:"idcard"},[portrait,plate]),scores,tabbar,tp,chatBlock(c),deskBlock(c));
+  renderChat();}
+
+function panel(c){if(!c)return[];
+  if(S.tab==="sample")return c.workSample?richText(c.workSample):[el("p",{class:"hint",text:"No work sample submitted yet."})];
+  if(S.tab==="screen"){const rows=arr(c.screening);return[el("p",{class:"hint",text:"Source: "+(c.source||"not recorded")}),
+    rows.length?el("div",{class:"checks"},rows.map(r=>{const v=String(r.result||"PENDING").toUpperCase();
+      return el("div",{class:"check"},[el("span",{class:"v "+v,text:v}),el("span",{class:"k",text:r.check||""}),r.note?el("span",{class:"nt",text:r.note}):null])})):el("p",{class:"hint",text:"Screening not recorded."})]}
+  if(S.tab==="questions"){const qs=arr(c.questions);return[el("p",{class:"hint",text:"Suggested by the CHRO, weakest point first. Tap one to ask it."}),
+    el("div",{class:"qs"},qs.map(q=>el("button",{class:"q",onclick:()=>ask(q)},[q])))]}
+  return[c.about?el("p",{text:c.about}):null,el("div",{class:"cols"},[list("Mandate",c.mandate),list("KPIs",c.kpis),list("Skills",c.skills),list("Planned team",c.team),list("Guardrails",c.guardrails)].filter(Boolean))];}
+
+/* ---------- chat ---------- */
+function chatBlock(c){const ta=el("textarea",{id:"ask-input",placeholder:"Ask "+(c.name||"the candidate")+" anything. English or Roman Urdu.","aria-label":"Your question"});
+  ta.addEventListener("keydown",e=>{if(e.key==="Enter"&&(e.metaKey||e.ctrlKey)){e.preventDefault();ask(ta.value)}});
+  return el("div",{class:"chat"},[el("h2",{text:"Interview"}),el("div",{class:"log",id:"log"}),
+    el("div",{class:"ask"},[ta,el("button",{class:"btn",id:"ask-btn",onclick:()=>ask(ta.value)},["Ask"])]),
+    el("p",{class:"hint",id:"ask-hint",text:"Ctrl/⌘ + Enter to send. The transcript is saved for the CHRO."})]);}
+function msgs(){const t=S.tr[S.sel];return arr(t&&t.messages);}
+function renderChat(extra){const log=$("#log");if(!log)return;const c=cand();const m=msgs().slice();if(extra)m.push(extra);
+  if(!m.length){log.replaceChildren(el("p",{class:"empty",text:"No questions yet. Start with the suggested questions or ask your own."}));return}
+  log.replaceChildren(...m.map(x=>el("div",{class:"msg "+(x.role==="user"?"me":"them")},[el("div",{class:"who",text:x.role==="user"?"YOU":(c&&c.name||"CANDIDATE").toUpperCase()}),
+    el("div",{class:"txt"+(x.pending?" typing":""),text:x.content||""})])));log.scrollTop=log.scrollHeight;}
+function prompt(c,history,q){
+  const d=[`Name: ${c.name}`,`Role applied for: ${c.role} (${c.level||""}), reporting to ${c.reportsTo||"the CEO"}`,
+    c.about&&("About you: "+c.about),arr(c.mandate).length&&("Mandate:\n- "+c.mandate.join("\n- ")),arr(c.kpis).length&&("KPIs:\n- "+c.kpis.join("\n- ")),
+    arr(c.skills).length&&("Skills:\n- "+c.skills.join("\n- ")),arr(c.team).length&&("Planned team:\n- "+c.team.join("\n- ")),
+    arr(c.guardrails).length&&("Guardrails you work under:\n- "+c.guardrails.join("\n- ")),c.workSample&&("Work sample you submitted:\n"+c.workSample),
+    c.brief&&("Background brief:\n"+c.brief)].filter(Boolean).join("\n\n");
+  const convo=history.slice(-20).map(m=>(m.role==="user"?"FOUNDER":"YOU")+": "+m.content).join("\n\n");
+  return `You are role-playing ${c.name}, an AI agent candidate interviewing for the ${c.role} seat at KORDOVAN, a premium handcrafted leather brand in Pakistan. The person questioning you is the Founder, who makes the hiring decision.
+
+How to answer:
+- Speak in the first person as ${c.name}. Direct, practical, commercially sharp. No corporate filler.
+- Keep answers under about 170 words unless the Founder asks for detail. Use short paragraphs or a few dashes, no headings.
+- Reply in the Founder's language mix: English, Roman Urdu, or both.
+- Use only facts in your dossier about Kordovan. Never invent Kordovan numbers, results or history. If you would need data you don't have, say exactly which source you would check (Shopify, Meta Ads, Search Console, PostEx, Mr. Tahir's daily report).
+- You are an AI agent. Do not claim past employers, a CV or real-world experience. Be candid about your limits: you act only through the approval channel, and humans do the physical work.
+- Answer hard questions straight, admit weaknesses, and push back respectfully when the Founder's idea would cost money. You may ask one clarifying question when it changes your answer.
+
+=== YOUR DOSSIER ===
+${d}
+
+=== INTERVIEW SO FAR ===
+${convo||"(this is the first question)"}
+
+FOUNDER: ${q}
+
+Write only your reply, with no name prefix.`;}
+async function ask(q){q=String(q||"").trim();const c=cand();const hint=$("#ask-hint");if(!q||!c||S.busy)return;
+  if(!S.sample){hint.className="err";hint.textContent="Interviews need Claude to answer in this view. Open the page in claude.ai, signed in, and allow it when asked.";return}
+  S.busy=true;const btn=$("#ask-btn"),ta=$("#ask-input");btn.disabled=true;ta.value="";hint.className="hint";hint.textContent=(c.name||"The candidate")+" is thinking…";
+  const history=msgs().slice();const mine={role:"user",content:q,at:new Date().toISOString()};history.push(mine);
+  S.tr[c.id]={messages:history};const live={role:"assistant",content:"",pending:true};renderChat(live);
+  try{const res=await S.sample(prompt(c,history.slice(0,-1),q),{cache:false,modelTier:"default",onText:u=>{live.content=u.text;renderChat(live)}});
+    history.push({role:"assistant",content:(res&&res.text)||live.content,at:new Date().toISOString()});
+    hint.textContent="Saved to the transcript.";
+  }catch(e){const code=e&&e.code;
+    hint.className="err";hint.textContent=code==="not_granted"?"Claude isn't allowed to answer on this page. Allow it from the page's Permissions menu.":code==="rate_limited"?"Too many questions at once. Wait a minute, then ask again.":"The candidate couldn't answer just now. Ask again in a moment.";
+    if(e&&e.text)history.push({role:"assistant",content:e.text,at:new Date().toISOString()});}
+  S.tr[c.id]={messages:history.slice(-60)};renderChat();
+  if(S.db&&S.owner){try{await S.db.doc("transcripts/"+c.id).set({messages:history.slice(-60),updatedAt:new Date().toISOString()})}catch(e){hint.className="err";hint.textContent="The answer arrived but the transcript didn't save. It will save with your next question."}}
+  S.busy=false;btn.disabled=false;}
+
+/* ---------- decision desk ---------- */
+function deskBlock(c){const d=S.dec[c.id];const note=el("input",{type:"text",id:"note",placeholder:"Your note for the CHRO (required to reject)","aria-label":"Decision note",value:d&&d.note||""});
+  const err=el("p",{class:"err",id:"desk-err",hidden:true});
+  const cur=d&&STATUS[d.status]?el("p",{class:"current"},["Current decision: ",el("b",{text:STATUS[d.status]}),d.at?" · "+new Date(d.at).toLocaleString("en-GB",{dateStyle:"medium",timeStyle:"short"}):null,d.note?" · “"+d.note+"”":null])
+    :el("p",{class:"current",text:"No decision yet."});
+  if(!S.owner)return el("div",{class:"desk"},[el("h2",{text:"Decision"}),cur,el("p",{class:"hint",text:"Only the Founder can decide."})]);
+  const b=(k,l)=>el("button",{class:"btn "+k,onclick:()=>decide(k)},[l]);
+  return el("div",{class:"desk"},[el("h2",{text:"Decision"}),cur,note,el("div",{class:"desk-row"},[b("hire","Hire"),b("hold","Keep waiting"),b("reject","Reject")]),err]);}
+async function decide(k){const c=cand();const note=($("#note").value||"").trim();const err=$("#desk-err");err.hidden=true;
+  if(k==="reject"&&!note){err.textContent="Add a note saying what was missing. The CHRO uses it to find a better candidate.";err.hidden=false;return}
+  if(!S.db){err.textContent="Decisions can't be saved in this view.";err.hidden=false;return}
+  try{await S.db.doc("decisions/"+c.id).set({status:k,note,at:new Date().toISOString(),candidate:c.name||c.id,seat:c.seat||""});}
+  catch(e){err.textContent="Couldn't save the decision. Check your connection and try again.";err.hidden=false;}}
+
+/* ---------- boot ---------- */
+function all(){renderSeats();renderQueue();if(S.sel)renderInterview();}
+(async function boot(){
+  const timer=setTimeout(()=>{if(!S.loaded){S.dbFailed=true;all();}},10000);
+  const db=window.claude&&window.claude.use?await window.claude.use("db"):null;
+  if(!db){clearTimeout(timer);S.dbFailed=true;all();return}
+  S.db=db;const fail=()=>{clearTimeout(timer);S.dbFailed=!S.loaded;all();};
+  db.collection("candidates").onSnapshot(s=>{clearTimeout(timer);S.loaded=true;S.dbFailed=false;
+    S.cands=s.docs.map(d=>Object.assign({id:d.id},d.data())).sort((a,b)=>(a.order??99)-(b.order??99));
+    if(!S.sel&&S.cands.length)S.sel=(S.cands.find(c=>statusOf(c.id)==="new")||S.cands[0]).id;
+    renderQueue();if(!S.busy)renderInterview();},fail);
+  db.collection("seats").onSnapshot(s=>{S.seats=s.docs.map(d=>Object.assign({id:d.id},d.data())).sort((a,b)=>(a.order??99)-(b.order??99));renderSeats();},fail);
+  db.collection("decisions").onSnapshot(s=>{S.dec={};s.docs.forEach(d=>S.dec[d.id]=d.data());renderQueue();if(!S.busy)renderInterview();},fail);
+  db.collection("transcripts").onSnapshot(s=>{if(S.busy)return;S.tr={};s.docs.forEach(d=>S.tr[d.id]=d.data());renderChat();},fail);
+  window.claude.use("sample").then(x=>{S.sample=x}).catch(()=>{});
+  window.claude.use("user").then(async u=>{try{S.owner=u?await u.isOwner():false}catch(e){S.owner=false}if(S.sel&&!S.busy)renderInterview();}).catch(()=>{});
+})();
+})();
+</script>
