@@ -438,3 +438,19 @@ break-even) · only 3 UTM-tagged Shopify orders (7,400). Cold prospecting now = 
 Same review: Retarget 13,567 / 14 purch / CPA 969 / 3.71x / freq 3.85 (keep) · RT-J 0 jacket orders, read Oct 28 ·
 **0 jacket orders store-wide Oct 11–24** · chatgpt.com sent 3 orders (2,200 / 4,700 / 6,600) at zero cost.
 
+
+## 🧤 TOF-W — Winter Gloves (DRAFT, fixed Oct 31 2026, NOT launched)
+- Campaign `120255841687880428` "TOF-W | Winter Gloves | Nov 2026" · CBO PKR 1,500/day · OUTCOME_SALES.
+- Ad set `120255841689160428` renamed "TOF-W | Gloves | Cold LLA 1%+3% | Purchase". Fixed to the standard: 9 cities
+  (no radius, home/recent/frequently_in), FB+IG only, A+A OFF, 18–65 all genders, LLA 1% `120254216730060428` + 3%
+  `120254216735280428`, excl Purchasers 180D + COD Refusers + Delivered SEED, attribution 7-day click only.
+- 🔴 The original 5 draft ads (…702210/702250/702280/702320/702390) had LOST their creatives (blank copy, no link,
+  "See Details", W04 erroring "link required"), most likely from an Ads Manager UI edit. Creatives are immutable, so
+  5 NEW ads were created from the intact creatives: W01 `120255841876800428` · W02 `120255841876850428` ·
+  W03 `120255841877210428` · W04 `120255841877280428` · W05 `120255841877340428` (all 0 errors). Broken ones await
+  discard (user confirmation required).
+- Retarget drafts W-RT1 `120255841702480428` / W-RT2 `120255841702970428` in live Retarget ad set: VALIDATED, intact.
+- ⚠️ Found on the LIVE TOF-M H1 ad set `120255717721520428` (Oct 31 read): NO lookalike inclusion and NOT excluding
+  COD Refusers or Purchasers 180D (excludes only Kodo customers, Lifetime Fulfilled, Delivered SEED). Breaks the
+  standing rule. Not changed (live money edit, needs user OK).
+- Live Retarget ad set serves Audience Network + Threads too (all placements). Not changed.
