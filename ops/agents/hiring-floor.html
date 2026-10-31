@@ -466,13 +466,9 @@ function deskBlock(c){const d=S.dec[c.id];const note=el("input",{type:"text",id:
     dm?el("p",{class:dm.ok?"hint ok":"hint",text:dm.text}):null]);}
 async function notifyCEO(c,k,note){
   const set=(text,ok)=>{S.deskMsg[c.id]={text,ok};if(S.sel===c.id&&!S.busy)renderInterview();};
-  const sid=S.cfg&&S.cfg.sessionId;
-  if(!sid||!S.mcp){set("Decision saved. The CEO reads it at the start of the next session.",false);return}
   set("Decision saved. Notifying the CEO…",false);
-  try{await S.mcp.callTool("Claude Code Remote","send_message",{session_id:sid,message:"[Hiring Floor] The Founder decided "+STATUS[k].toUpperCase()+" for "+(c.name||c.id)+" ("+(c.role||"")+", seat "+(c.seat||c.id)+")."+(note?" Note: "+note:"")+" Read decisions/"+c.id+" and transcripts/"+c.id+" on the Hiring Floor and act on it."});
-    set("Decision saved. The CEO has been notified and is acting on it.",true);}
-  catch(e){const code=e&&e.code;
-    set(code==="consent_required"||code==="not_granted"||code==="approval_required"?"Decision saved. To notify the CEO instantly, allow Claude Code Remote for this page (Permissions menu). Until then the CEO reads it next session.":"Decision saved. The CEO's session couldn't be reached right now, so it will be read at the start of the next session.",false);}}
+  const r=await notify("[Hiring Floor] The Founder decided "+STATUS[k].toUpperCase()+" for "+(c.name||c.id)+" ("+(c.role||"")+", seat "+(c.seat||c.id)+")."+(note?" Note: "+note:"")+" Read decisions/"+c.id+" and transcripts/"+c.id+" on the Hiring Floor and act on it.",$("#note"));
+  set(r.ok?"Decision saved. The CEO has been notified and is acting on it.":"Decision saved. "+r.why,r.ok);}
 async function decide(k){const c=cand();const note=($("#note").value||"").trim();const err=$("#desk-err");err.hidden=true;
   if(k==="reject"&&!note){err.textContent="Add a note saying what was missing. The CHRO uses it to find a better candidate.";err.hidden=false;return}
   if(!S.db){err.textContent="Decisions can't be saved in this view.";err.hidden=false;return}
@@ -519,7 +515,10 @@ function renderDeskDetail(force){const box=$("#desk-detail");const d=S.desks.fin
       el("div",{class:"assign"},[el("h4",{text:"Give a task"}),S.owner?ta:null,
         S.owner?el("div",{class:"desk-row"},[el("button",{class:"btn",type:"button",onclick:()=>assign(d)},["Assign"])]):null,msg,
         ...asg.slice(0,6).map(a=>el("div",{class:"asg"},[el("span",{text:a.text||""}),el("small",{text:stLabel(a)+(a.at?" · "+ago(a.at):"")+(a.reply?" · "+a.reply:"")})]))])])]));}
-async function notify(message){const sid=S.cfg&&S.cfg.sessionId;
+async function notify(message,anchorEl){
+  if(S.comments&&anchorEl){try{const can=await S.comments.canSendToClaude();
+    if(can==="available"){const anchor=await S.comments.anchorFor(anchorEl);await S.comments.sendToClaude({anchor,text:message});return{ok:true}}}catch(e){}}
+  const sid=S.cfg&&S.cfg.sessionId;
   if(!sid||!S.mcp)return{ok:false,why:"The CEO reads it at the start of the next session."};
   try{await S.mcp.callTool("Claude Code Remote","send_message",{session_id:sid,message});return{ok:true}}
   catch(e){const code=e&&e.code;return{ok:false,why:(code==="consent_required"||code==="not_granted"||code==="approval_required")?"To notify the CEO instantly, allow Claude Code Remote for this page (Permissions menu). Until then the CEO reads it next session.":"The CEO's session couldn't be reached right now, so it will be read at the start of the next session."}}}
@@ -531,7 +530,7 @@ async function assign(d){const text=(S.draft[d.id]||"").trim();
   catch(e){setMsg("Couldn't save the task. Check your connection and try again.",false);return}
   S.draft[d.id]="";const ta=$("#assign-input");if(ta)ta.value="";
   setMsg("Task saved. Notifying the CEO…",false);
-  const r=await notify("[Office] The Founder assigned a task to "+(d.name||d.id)+" ("+(d.role||d.id)+"): \""+text+"\". Read assignments/"+ref.id+" on the Hiring Floor page and route it.");
+  const r=await notify("[Office] The Founder assigned a task to "+(d.name||d.id)+" ("+(d.role||d.id)+"): \""+text+"\". Read assignments/"+ref.id+" on the Hiring Floor page and route it.",$("#assign-msg"));
   setMsg(r.ok?"Task saved. The CEO has been notified.":"Task saved. "+r.why,r.ok);}
 async function openDesk(c){if(!S.db)return;const seat=c.seat||c.id;if(S.desks.some(d=>d.id===seat))return;
   const now=new Date().toISOString();
@@ -564,6 +563,7 @@ function all(){renderSeats();renderQueue();renderDesks();updateNav();if(S.sel)re
   db.collection("assignments").onSnapshot(s=>{S.asg=s.docs.map(d=>Object.assign({id:d.id},d.data()));renderDesks();renderDeskDetail();},()=>{});
   window.claude.use("sample").then(x=>{S.sample=x}).catch(()=>{});
   window.claude.use("mcp").then(x=>{S.mcp=x}).catch(()=>{});
+  window.claude.use("comments").then(x=>{S.comments=x}).catch(()=>{});
   db.doc("config/notify").onSnapshot(s=>{S.cfg=s.exists?s.data():null;},()=>{});
   window.claude.use("user").then(async u=>{try{S.owner=u?await u.isOwner():false}catch(e){S.owner=false}if(S.sel&&!S.busy)renderInterview();renderDeskDetail(true);}).catch(()=>{});
 })();

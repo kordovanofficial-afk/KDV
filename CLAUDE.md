@@ -578,6 +578,12 @@ TOF-J had banked ~27k jacket ViewContent events (Sep 5–Oct 20) and nothing was
   Avatars are generated pixel art showing gender + role (Founder asked): schema in `chro.md`. CEO + Creative
   Director use the non-human "orb" avatar. Personas: Noor (CHRO, bun/glasses/clipboard) · Hamna (CQRO, hijab/
   magnifier) · Farhan (CRO, beard/suit/chart) · Mahnoor (CMO, long hair/kurta/dupatta/camera).
+- ✅ **CQRO HIRED Oct 31 2026** (Hamna Qureshi, `.claude/agents/cqro.md`, probation to Nov 30). Founder: *"monitor and give
+  more authority that lies within her domain"* → binding BLOCK (Founder-only override), may fix sourced facts in L1 drafts
+  directly, standing audit rights, read-only Shopify/Meta/GSC tools. Register `ops/agents/approvals/REGISTER.md`.
+- ⚡ **Notifications v2:** the page now sends decisions/tasks via the native **comments → "Send to Claude"** (declared
+  `comments:{}`), which wakes this session through the artifact watch; the `Claude Code Remote` connector is only a
+  fallback — it showed "Couldn't load this connector" in the Founder's browser on Oct 31.
 - ✅ **CHRO HIRED Oct 31 2026** (Noor Rehman, probation to Nov 30). Founder's interview point now policy: execs
   deliberate with real numbers in an executive council BEFORE escalating (ORG_DESIGN §4a).
 - 🧾 **POS (user, Oct 31): in-store sales are NOT in Shopify.** Custom POS sync is unreliable; user plans to switch it

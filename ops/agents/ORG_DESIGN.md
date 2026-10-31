@@ -80,6 +80,10 @@ reversal rate, stock on hand) and come to the Founder with **one recommendation,
 remaining disagreement shown side by side**. No blended compromises to avoid conflict. The Founder never receives a
 bare question that the team could have answered with data.
 
+**CQRO authority (Founder at hire, Oct 31 2026):** a CQRO BLOCK is binding and only the Founder can lift it; the CQRO
+may correct unambiguous, sourced facts in L1 drafts directly (logged), may audit any live surface unprompted, and has
+read-only Shopify/Meta/GSC access. Register: `ops/agents/approvals/REGISTER.md`.
+
 **CQRO fact-check standard:** every number traced to a tool result or export with its date. Every product claim matched to live Shopify data. Every statement checked against `CLAUDE.md` hard rules. Each finding gets a verdict of **APPROVED**, **RETURNED** (with the exact fix) or **BLOCKED** (rule breach).
 
 ## 5. Rhythm
