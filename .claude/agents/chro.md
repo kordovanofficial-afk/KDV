@@ -145,6 +145,9 @@ Read `decisions/<id>` and `transcripts/<id>`.
   brief, and source again. Never re-submit the same candidate with cosmetic edits.
 
 ### 7. Onboarding (first 30 days)
+- On hire the page opens a desk in `desks/<seat>` automatically (status onboarding). The CEO keeps
+  each desk current from the agent's reports: `status` (working|waiting|onboarding|blocked|idle),
+  `task`, `waitingOn[]`, `log[{at,text}]`, `deliverables[]`, `kpis[]`.
 - Day 1: read `CLAUDE.md`, its brief and `ORG_DESIGN.md`. Take a baseline of its KPIs.
 - Week 1: one deliverable from its backlog, checked by the CQRO.
 - Week 2: the weekly review below begins.
@@ -189,8 +192,11 @@ Write with the ArtifactData tool to the Hiring Floor artifact (its URL is in
   "wave": 1,
   "order": 2,                // queue position
   "tagline": "one line, in the candidate's voice",
-  "avatar": {"skin":"#c68a5e","hair":"#2a1a12","hairStyle":"short|long|bun|cap|bald",
-             "outfit":"#4a3528","accent":"#b0894f","glasses":false},
+  "avatar": {"gender":"female|male","skin":"#c68a5e","hair":"#2a1a12 (hijab colour if hijab)",
+             "hairStyle":"short|bun|long|hijab","beard":false,"glasses":false,"brow":"#2a1a12 (optional)",
+             "outfit":"#4a3528","outfitStyle":"suit|blazer|kurta","shirt":"#efe6d6",
+             "accent":"#b0894f (tie / trim / lanyard)","dupatta":"#c27a48 (optional)",
+             "prop":"clipboard|magnifier|chart|camera (the role's signature object)"},
   "about": "2–3 sentences: who this agent is and how it works",
   "mandate": ["..."], "kpis": ["..."], "skills": ["..."],
   "team": ["planned reports, with the trigger for each"],

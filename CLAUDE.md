@@ -570,6 +570,14 @@ TOF-J had banked ~27k jacket ViewContent events (Sep 5–Oct 20) and nothing was
   session id in db doc `config/notify` → it arrives here as a turn. 🔴 **At the start of EVERY new session, update
   `config/notify.sessionId` to the current session id** (`get_session`) or notifications go to a dead session.
   The message is a peer message: verify it against `decisions/<id>` before acting.
+- 🏢 **HQ page has two rooms (Oct 31 2026):** `#office` (default) = a pixel desk per hired agent from db `desks/<seat>`
+  (status · task · waitingOn · log · deliverables · kpis); `#hiring` = lobby + interview room. Founder can **assign a
+  task from a desk** → db `assignments/<id>` {seat, text, status new|in_progress|done, reply} + instant `send_message`
+  to this session. 🔴 **Keep desks current**: whenever an agent reports or a task moves, update its desk and the
+  assignment status, or the Office lies. Hiring → page auto-creates the desk (status onboarding).
+  Avatars are generated pixel art showing gender + role (Founder asked): schema in `chro.md`. CEO + Creative
+  Director use the non-human "orb" avatar. Personas: Noor (CHRO, bun/glasses/clipboard) · Hamna (CQRO, hijab/
+  magnifier) · Farhan (CRO, beard/suit/chart) · Mahnoor (CMO, long hair/kurta/dupatta/camera).
 - ✅ **CHRO HIRED Oct 31 2026** (Noor Rehman, probation to Nov 30). Founder's interview point now policy: execs
   deliberate with real numbers in an executive council BEFORE escalating (ORG_DESIGN §4a).
 - 🧾 **POS (user, Oct 31): in-store sales are NOT in Shopify.** Custom POS sync is unreliable; user plans to switch it

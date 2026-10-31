@@ -62,7 +62,7 @@ canvas{image-rendering:pixelated;image-rendering:crisp-edges;display:block}
 @media (max-width:860px){.room{grid-template-columns:1fr}}
 .lobby{padding:16px;display:grid;gap:12px}
 .queue{display:grid;gap:10px}
-.ticket{display:grid;grid-template-columns:48px minmax(0,1fr);gap:12px;align-items:center;text-align:left;
+.ticket{display:grid;grid-template-columns:64px minmax(0,1fr);gap:12px;align-items:center;text-align:left;
   background:var(--panel-2);border:3px solid var(--line);padding:8px 10px;width:100%}
 .ticket:hover{border-color:var(--line-hi)}
 .ticket[aria-current="true"]{border-color:var(--brass);background:#3a2a1e}
@@ -151,6 +151,39 @@ textarea{min-height:64px}
 .current{font-size:15px;color:var(--muted)}
 .current b{font-weight:700;color:var(--ink)}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* views */
+.views{display:flex;gap:6px;flex-wrap:wrap}
+.view-btn{font-family:var(--display);font-size:9px;padding:9px 12px;background:var(--panel-2);border:3px solid var(--line);color:var(--muted)}
+.view-btn[aria-current="page"]{background:var(--cognac);color:#1a100a;border-color:var(--shadow)}
+.view-btn .dot{display:inline-block;margin-left:6px;color:var(--amber)}
+/* office */
+.office{padding:16px 18px;display:grid;gap:16px}
+.desks{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+.deskcard{background:var(--panel-2);border:3px solid var(--line);padding:10px;display:grid;gap:8px;text-align:left;width:100%;min-width:0}
+.deskcard:hover{border-color:var(--line-hi)}
+.deskcard[aria-current="true"]{border-color:var(--brass);background:#3a2a1e}
+.deskcard canvas{width:100%;height:auto;max-width:100%}
+.deskcard .n{font-family:var(--display);font-size:9px;line-height:1.6}
+.deskcard .r{font-size:14px;color:var(--muted)}
+.deskcard .t{font-size:15px;overflow-wrap:anywhere}
+.deskcard .u{font-size:13px;color:var(--muted)}
+.chip.working{color:var(--olive)} .chip.waiting{color:var(--amber)} .chip.onboarding{color:var(--brass)} .chip.blocked{color:var(--red)} .chip.idle{color:var(--muted)}
+.detail{display:grid;grid-template-columns:auto minmax(0,1fr);gap:18px;border-top:4px dashed var(--line);padding-top:16px}
+@media (max-width:720px){.detail{grid-template-columns:1fr}}
+.detail .scene{background:#120d0a;border:4px solid var(--line);padding:8px;width:max-content;max-width:100%}
+.detail .scene canvas{max-width:100%;height:auto}
+.detail .info{display:grid;gap:12px;min-width:0}
+.detail h3{font-size:14px;line-height:1.5}
+.detail h4{font-family:var(--display);font-size:9px;color:var(--brass);margin:0;font-weight:400}
+.detail ul{margin:0;padding-left:20px;display:grid;gap:4px}
+.detail li::marker{color:var(--cognac)}
+.log{display:grid;gap:6px}
+.log .e{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;font-size:15px}
+.log .e time{font-size:13px;color:var(--muted);white-space:nowrap}
+.assign{display:grid;gap:8px}
+.asg{background:var(--panel-2);border:3px solid var(--line);padding:8px 10px;font-size:15px;display:grid;gap:2px}
+.asg small{color:var(--muted);font-size:13px}
 </style>
 
 <div class="app">
@@ -159,9 +192,13 @@ textarea{min-height:64px}
       <canvas id="logo" width="40" height="40" aria-hidden="true"></canvas>
       <div>
         <h1>KORDOVAN HQ</h1>
-        <small>HIRING FLOOR · LEVEL 1</small>
+        <small id="subtitle">HEADQUARTERS · LEVEL 1</small>
       </div>
     </div>
+    <nav class="views" aria-label="Rooms">
+      <button class="view-btn" data-view="office" type="button">Office</button>
+      <button class="view-btn" data-view="hiring" type="button">Hiring floor</button>
+    </nav>
     <div class="clock" id="clock" aria-live="off"></div>
   </header>
 
@@ -178,7 +215,22 @@ textarea{min-height:64px}
     <div class="seats" id="seats"><p class="empty">Loading the org floor…</p></div>
   </section>
 
-  <main class="room">
+  <section class="office px" id="view-office" aria-labelledby="office-h">
+    <div class="floor-head">
+      <h2 id="office-h">Office · every hire gets a desk</h2>
+      <div class="legend">
+        <span><i style="background:var(--olive)"></i>Working</span>
+        <span><i style="background:var(--amber)"></i>Waiting on you</span>
+        <span><i style="background:var(--brass)"></i>Onboarding</span>
+        <span><i style="background:var(--red)"></i>Blocked</span>
+        <span><i style="background:var(--line-hi)"></i>Idle</span>
+      </div>
+    </div>
+    <div class="desks" id="desks"><p class="empty">Opening the office…</p></div>
+    <div id="desk-detail"></div>
+  </section>
+
+  <main class="room" id="view-hiring">
     <aside class="lobby px" aria-labelledby="lobby-h">
       <h2 id="lobby-h">Lobby</h2>
       <div class="queue" id="queue"><p class="empty">Checking who is waiting…</p></div>
@@ -195,7 +247,7 @@ textarea{min-height:64px}
 <script>
 (function(){
 "use strict";
-const S={deskMsg:{},cfg:null,mcp:null,cands:[],dec:{},tr:{},seats:[],sel:null,tab:"dossier",busy:false,owner:false,db:null,sample:null,loaded:false,dbFailed:false};
+const S={desks:[],asg:[],deskSel:null,draft:{},asgMsg:{},deskMsg:{},cfg:null,mcp:null,cands:[],dec:{},tr:{},seats:[],sel:null,tab:"dossier",busy:false,owner:false,db:null,sample:null,loaded:false,dbFailed:false};
 const $=s=>document.querySelector(s);
 function el(tag,attrs,kids){const n=document.createElement(tag);if(attrs)for(const k in attrs){const v=attrs[k];if(v==null||v===false)continue;
   if(k==="class")n.className=v;else if(k==="text")n.textContent=v;else if(k.startsWith("on"))n.addEventListener(k.slice(2),v);else n.setAttribute(k,v===true?"":v);}
@@ -204,28 +256,86 @@ const arr=v=>Array.isArray(v)?v:[];
 const STATUS={hire:"Hired",hold:"Waiting",reject:"Rejected",new:"Awaiting interview"};
 function statusOf(id){const d=S.dec[id];return d&&STATUS[d.status]?d.status:"new";}
 
-/* ---------- pixel portraits ---------- */
-const BASE=["....HHHHHHHH....","...HHHHHHHHHH...","..HHHHHHHHHHHH..","..HHSSSSSSSSHH..","..HSSSSSSSSSSH..",
-"..SSSEESSEESSS..","..SSSEESSEESSS..","..SSSSSSSSSSSS..","...SSSSSSSSSS...","...SSSMMMMSSS...","....SSSSSSSS....",
-".....SSSSSS.....","...OOOOAAOOOO...","..OOOOOAAOOOOO..",".OOOOOOAAOOOOOO.",".OOOOOOAAOOOOOO.",".OOOOOOOOOOOOOO.",".OOOOOOOOOOOOOO."];
-function grid(av){const g=BASE.map(r=>r.split(""));const st=(av&&av.hairStyle)||"short";
-  const put=(r,c,ch)=>{if(g[r]&&c>=0&&c<16)g[r][c]=ch};
-  if(st==="long"){for(let r=3;r<=13;r++){put(r,1,"H");put(r,14,"H")}for(let r=10;r<=12;r++){put(r,2,"H");put(r,13,"H")}}
-  if(st==="bun"){g[0]="......HHHH......".split("");}
-  if(st==="cap"){g[0]="....AAAAAAAA....".split("");g[1]="...AAAAAAAAAA...".split("");g[2]="..AAAAAAAAAAAA..".split("");g[3]="..AAAAAAAAAAAAAA".split("");}
-  if(st==="bald"){g[0]="................".split("");g[1]="....SSSSSSSS....".split("");g[2]="...SSSSSSSSSS...".split("");g[3]="..SSSSSSSSSSSS..".split("");g[4]="..HSSSSSSSSSSH..".split("");}
-  if(av&&av.glasses){for(const c of [4,5,6,7,8,9,10,11])put(4,c,"G");for(const r of [5,6])for(const c of [4,7,8,11])put(r,c,"G");}
-  return g;}
-function shade(hex,f){const n=parseInt((hex||"#888888").slice(1),16);let r=n>>16,g=(n>>8)&255,b=n&255;
-  r=Math.max(0,Math.min(255,Math.round(r*f)));g=Math.max(0,Math.min(255,Math.round(g*f)));b=Math.max(0,Math.min(255,Math.round(b*f)));
-  return "#"+((1<<24)|(r<<16)|(g<<8)|b).toString(16).slice(1);}
-function avatar(av,scale){av=av||{};const c=document.createElement("canvas");c.width=16*scale;c.height=18*scale;
-  const x=c.getContext("2d");const skin=av.skin||"#c68a5e";
-  const pal={H:av.hair||"#2a1a12",S:skin,E:"#140d09",M:shade(skin,.68),O:av.outfit||"#4a3528",A:av.accent||"#b0894f",G:"#d6ad62"};
-  grid(av).forEach((row,r)=>row.forEach((ch,col)=>{if(ch==="."||!pal[ch])return;x.fillStyle=pal[ch];x.fillRect(col*scale,r*scale,scale,scale);
-    if(ch==="O"&&col>0&&row[col-1]==="."){x.fillStyle=shade(pal.O,1.25);x.fillRect(col*scale,r*scale,scale,scale)}}));
-  x.fillStyle="rgba(255,255,255,.18)";x.fillRect(5*scale,5*scale,Math.max(1,scale/2),Math.max(1,scale/2));x.fillRect(9*scale,5*scale,Math.max(1,scale/2),Math.max(1,scale/2));
-  return c;}
+/* ---------- pixel portraits (32x36 bust, auto-outlined) ---------- */
+function hex2rgb(h){const n=parseInt(String(h||"#888888").slice(1),16);return[n>>16,(n>>8)&255,n&255]}
+function rgb2hex(r,g,b){return"#"+((1<<24)|(r<<16)|(g<<8)|b).toString(16).slice(1)}
+function shade(h,f){const c=v=>Math.max(0,Math.min(255,Math.round(v*f)));const[r,g,b]=hex2rgb(h);return rgb2hex(c(r),c(g),c(b))}
+function mix(a,b,t){const A=hex2rgb(a),B=hex2rgb(b);return rgb2hex(...A.map((v,i)=>Math.round(v+(B[i]-v)*t)))}
+const INK="#140d09";
+function Grid(w,h){const g=new Array(w*h).fill(null);return{w,h,g,
+  set(x,y,c){if(c&&x>=0&&x<w&&y>=0&&y<h)g[y*w+x]=c},
+  get(x,y){return x>=0&&x<w&&y>=0&&y<h?g[y*w+x]:null},
+  span(y,x0,x1,c){for(let x=x0;x<=x1;x++)this.set(x,y,c)},
+  rect(x0,y0,x1,y1,c){for(let y=y0;y<=y1;y++)this.span(y,x0,x1,c)}};}
+function outline(G){const add=[];for(let y=0;y<G.h;y++)for(let x=0;x<G.w;x++){if(G.get(x,y))continue;
+  if(G.get(x-1,y)||G.get(x+1,y)||G.get(x,y-1)||G.get(x,y+1))add.push([x,y]);}add.forEach(([x,y])=>G.set(x,y,INK));return G;}
+function toCanvas(G,s){const c=document.createElement("canvas");c.width=G.w*s;c.height=G.h*s;const x=c.getContext("2d");
+  for(let y=0;y<G.h;y++)for(let i=0;i<G.w;i++){const v=G.g[y*G.w+i];if(v){x.fillStyle=v;x.fillRect(i*s,y*s,s,s)}}return c;}
+const CX=16,HY=7,HEAD=[4,5,6,6,7,7,7,7,7,7,7,6,6,5,4,3],SHOULDER=[8,10,11,12,13,13,13,13,13,13];
+function agentGrid(av,opts){av=av||{};opts=opts||{};const G=Grid(32,36);
+  if(av.kind==="orb"){const base=av.outfit||"#a0623a",ring=av.accent||"#d6ad62";
+    for(let y=4;y<=31;y++)for(let x=3;x<=29;x++){const d=Math.hypot(x-15.5,y-17.5);if(d>12.4)continue;
+      G.set(x,y,d>11.2?ring:mix(base,(x+y<30)?"#ffffff":"#000000",(x+y<30)?0.18:0.22*Math.min(1,d/11)))}
+    for(let i=-6;i<=6;i++){const w=Math.abs(i)<2?1:0;G.span(17+i,15-w,16+w,ring);G.set(15,17+i,ring);G.set(16,17+i,ring)}
+    G.span(17,9,22,ring);G.span(16,13,18,ring);G.span(18,13,18,ring);G.set(11,10,"#f4efe6");G.set(12,9,"#f4efe6");
+    return G;}
+  const fem=av.gender==="female";
+  const skin=av.skin||"#c68a5e",sS=shade(skin,.84),sH=mix(skin,"#ffffff",.12);
+  const hair=av.hair||"#2a1a12",hS=shade(hair,.7),hH=mix(hair,"#ffffff",.25);
+  const out=av.outfit||"#4a3528",oS=shade(out,.72),oH=mix(out,"#ffffff",.16);
+  const acc=av.accent||"#b0894f",shirt=av.shirt||"#efe6d6",EYE="#1a120d";
+  const style=av.hairStyle||(fem?"long":"short"),ost=av.outfitStyle||(fem?"blazer":"suit"),hij=style==="hijab";
+  const hw=y=>HEAD[y-HY]||0;
+  if(style==="long")for(let y=9;y<=31;y++){const h=y<12?8:9;G.span(y,CX-h,CX+h-1,hair);G.set(CX-h,y,hS);G.set(CX+h-1,y,hS)}
+  for(let y=26;y<=35;y++){const h=SHOULDER[y-26];for(let x=CX-h;x<=CX+h-1;x++)G.set(x,y,x<=CX-h+1?oH:x>=CX+h-2?oS:out)}
+  if(ost==="suit"||ost==="blazer"){for(let y=26;y<=35;y++){const w=Math.min(4,Math.floor((y-25)*0.7)+1);G.span(y,CX-w,CX+w-1,shirt);G.set(CX-w-1,y,oS);G.set(CX+w,y,oS)}
+    if(ost==="suit"){G.span(27,CX-1,CX,shade(acc,.8));for(let y=28;y<=35;y++)G.span(y,CX-1,CX,y>32?shade(acc,.85):acc)}
+    else{G.set(CX-1,28,acc);G.set(CX,28,acc);G.set(CX-2,27,acc);G.set(CX+1,27,acc)}}
+  if(ost==="kurta"){G.span(26,CX-2,CX+1,oS);for(let y=27;y<=34;y++)G.set(CX,y,oS);[28,30,32].forEach(y=>G.set(CX,y,acc))}
+  if(av.dupatta){for(let y=26;y<=35;y++){const x0=CX-12+Math.round((y-26)*2);for(let x=x0;x<x0+4;x++)if(G.get(x,y))G.set(x,y,x===x0?mix(av.dupatta,"#ffffff",.25):av.dupatta)}}
+  for(let y=22;y<=26;y++){G.span(y,CX-2,CX+1,skin);G.set(CX+1,y,sS)}
+  if(hij){G.span(5,CX-4,CX+3,hair);G.span(6,CX-6,CX+5,hair);for(let y=7;y<=22;y++)G.span(y,CX-9,CX+8,hair);
+    for(let y=23;y<=31;y++){const h=Math.min(13,7+(y-23));G.span(y,CX-h,CX+h-1,hair);G.set(CX+h-1,y,hS)}}
+  for(let y=HY;y<HY+HEAD.length;y++){const h=hw(y);for(let x=CX-h;x<=CX+h-1;x++)G.set(x,y,x>=CX+h-2?sS:x===CX-h?sH:skin)}
+  if(!hij&&style!=="long")for(let y=13;y<=15;y++){G.set(CX-8,y,sS);G.set(CX+7,y,sS)}
+  if(style==="short"||style==="bun"||style==="long"){
+    G.span(5,CX-4,CX+3,hair);G.span(6,CX-6,CX+5,hair);G.span(7,CX-7,CX+6,hair);G.span(8,CX-7,CX+6,hair);G.span(9,CX-7,CX+6,hair);
+    G.span(10,CX-7,CX-2,hair);G.span(10,CX+4,CX+6,hair);G.span(11,CX-7,CX-5,hair);
+    const side=style==="short"?13:style==="bun"?14:21;for(let y=11;y<=side;y++){G.set(CX-7,y,hair);G.set(CX+6,y,hair)}
+    G.span(6,CX-4,CX-2,hH);G.set(CX-5,7,hH);G.set(CX-6,8,hH);
+    if(style==="bun"){G.span(1,CX-1,CX,hair);G.span(2,CX-2,CX+1,hair);G.span(3,CX-2,CX+1,hair);G.span(4,CX-1,CX,hair);G.set(CX-1,2,hH)}
+    if(style==="long"){for(let y=11;y<=21;y++){G.set(CX-8,y,hair);G.set(CX+7,y,hS)}for(let y=22;y<=31;y++){G.span(y,CX-9,CX-7,hair);G.span(y,CX+6,CX+8,hS)}}}
+  if(hij){for(let y=7;y<=10;y++)G.span(y,CX-8,CX+7,hair);for(let y=11;y<=21;y++){G.span(y,CX-8,CX-7,hair);G.span(y,CX+6,CX+7,hS)}
+    for(let y=21;y<=24;y++)G.span(y,CX-6+(y-21>1?0:1),CX+5-(y-21>1?0:1),hair);G.span(8,CX-5,CX-2,hH);G.set(CX-6,9,hH)}
+  const browY=av.glasses?11:12,brow=av.brow||(hij?"#2a1a12":hS);
+  if(fem){G.span(browY,11,13,brow);G.span(browY,18,20,brow)}else{G.span(browY,10,13,brow);G.span(browY,18,21,brow)}
+  G.rect(12,13,13,14,EYE);G.rect(18,13,19,14,EYE);G.set(13,13,"#f4efe6");G.set(19,13,"#f4efe6");
+  if(fem){G.set(11,13,EYE);G.set(20,13,EYE)}
+  G.set(16,15,sS);G.set(16,16,sS);G.set(15,16,sS);
+  if(fem){const lips=av.lips||mix(skin,"#9c3f3a",.55);G.span(18,14,17,lips);G.span(19,15,16,mix(lips,"#ffffff",.12));
+    const bl=mix(skin,"#e06a5a",.28);G.span(16,11,12,bl);G.span(16,19,20,bl)}
+  else G.span(18,14,17,shade(skin,.62));
+  if(av.beard){const bc=mix(hair,skin,.2);for(let y=17;y<=22;y++){const h=hw(y);for(let x=CX-h;x<=CX+h-1;x++){
+      if(y===18&&x>=14&&x<=17)continue;if(y>=19||x<=CX-5||x>=CX+4)G.set(x,y,bc)}}G.span(17,14,17,hair)}
+  if(av.glasses){const F=av.glassesColor||"#2a2420",L=mix(skin,"#ffffff",.35);[[11,14],[17,20]].forEach(([a,b])=>{G.span(12,a,b,F);G.span(15,a,b,F);G.set(a,13,F);G.set(a,14,F);G.set(b,13,F);G.set(b,14,F);G.rect(a+1,13,b-1,14,L)});
+    G.span(13,15,16,F);G.rect(13,13,13,14,EYE);G.rect(19,13,19,14,EYE);G.set(12,14,EYE);G.set(18,14,EYE)}
+  const p=av.prop;
+  if(p==="clipboard"){G.rect(22,25,28,34,"#7a4e2d");G.rect(23,26,27,33,"#f2ece0");[28,30,32].forEach(y=>G.span(y,24,26,"#a89c8a"));G.span(25,24,26,"#c9c4bb");G.set(24,31,"#a0623a");G.set(21,30,skin);G.set(21,31,sS)}
+  if(p==="magnifier"){const B="#d6ad62";G.rect(24,26,28,30,"#bcdde4");G.span(25,25,27,B);G.span(31,25,27,B);for(let y=27;y<=29;y++){G.set(23,y,B);G.set(29,y,B)}
+    [[24,26],[28,26],[24,30],[28,30]].forEach(([x,y])=>G.set(x,y,B));G.set(25,27,"#ffffff");[[29,31],[29,32],[30,32],[30,33],[31,34]].forEach(([x,y])=>G.set(x,y,"#5a3a22"))}
+  if(p==="chart"){G.rect(21,26,29,33,"#2a2420");G.rect(22,27,28,32,"#1d3326");const g="#9ccf6a";G.rect(23,31,23,32,g);G.rect(25,29,25,32,g);G.rect(27,27,27,32,g);G.set(20,30,skin);G.set(20,31,sS)}
+  if(p==="camera"){G.rect(21,28,29,33,"#2b2b2b");G.rect(22,27,24,27,"#2b2b2b");G.rect(24,29,27,32,"#555555");G.rect(25,30,26,31,"#7fa8b8");G.set(25,30,"#d9eef5");G.set(28,29,"#e8e2d0");G.set(20,30,skin);G.set(20,31,sS)}
+  if(opts.hired){G.set(CX-3,27,acc);G.set(CX-4,28,acc);G.rect(CX-6,29,CX-4,31,"#f2ece0");G.span(29,CX-6,CX-4,"#a0623a")}
+  return G;}
+function avatar(av,scale,opts){return toCanvas(outline(agentGrid(av,opts)),scale);}
+const SCREEN={working:"#7f9a46",waiting:"#e3a043",blocked:"#d0614a",onboarding:"#d6ad62",idle:"#3a2b20"};
+function deskScene(av,status,scale){const G=Grid(50,40),A=agentGrid(av,{hired:true});
+  for(let y=0;y<A.h;y++)for(let x=0;x<A.w;x++){const v=A.g[y*A.w+x];if(v&&y+1<31)G.set(x+1,y+1,v)}
+  const scr=SCREEN[status]||SCREEN.idle;G.rect(33,15,48,28,"#2a2420");G.rect(34,16,47,27,scr);
+  if(status!=="idle")[18,20,22,24].forEach((y,i)=>G.span(y,35,35+[8,5,10,6][i],mix(scr,"#ffffff",.35)));
+  G.rect(39,29,42,30,"#2a2420");G.rect(0,31,49,32,"#a06c40");G.rect(0,33,49,39,"#6b4528");G.span(31,0,49,"#b8804e");G.span(36,5,16,"#5a3a22");G.span(36,30,41,"#5a3a22");
+  G.rect(17,34,32,36,"#b0894f");G.span(35,19,30,"#6b4f2a");
+  return toCanvas(outline(G),scale);}
 (function logo(){const c=$("#logo"),x=c.getContext("2d");const m=["BB....BB..","BB...BB...","BB..BB....","BB.BB.....","BBBB......","BBCC......","BB.BB.....","BB..BB....","BB...BB...","BB....BB.."];
   m.forEach((r,y)=>r.split("").forEach((ch,i)=>{if(ch===".")return;x.fillStyle=ch==="B"?"#d6ad62":"#c27a48";x.fillRect(i*4,y*4,4,4)}));})();
 
@@ -249,7 +359,7 @@ function renderQueue(){const box=$("#queue");
   if(!S.cands.length){box.replaceChildren(el("p",{class:"empty",text:S.loaded?"Nobody is waiting. The CHRO sends candidates here once they pass screening.":"Checking who is waiting…"}));return}
   box.replaceChildren(...S.cands.map(c=>{const st=statusOf(c.id);
     return el("button",{class:"ticket","aria-current":S.sel===c.id?"true":"false",onclick:()=>select(c.id)},[
-      avatar(c.avatar,3),
+      avatar(c.avatar,2,{hired:st==="hire"}),
       el("div",null,[el("div",{class:"n",text:c.name||c.id}),el("div",{class:"r",text:c.role||""}),el("span",{class:"chip "+st,text:STATUS[st]})])]);}));}
 
 /* ---------- interview room ---------- */
@@ -267,7 +377,7 @@ function list(title,items){items=arr(items);if(!items.length)return null;return 
 function renderInterview(){const box=$("#interview");const c=cand();
   if(!c){box.replaceChildren(el("div",{class:"welcome"},[el("h2",{text:"Interview room"}),el("p",{text:"Pick a candidate from the lobby. Read the dossier and the work sample, question them, then decide: hire, keep them waiting, or reject."})]));return}
   const st=statusOf(c.id);
-  const portrait=el("div",{class:"portrait"},[avatar(c.avatar,8),el("span",{class:"stamp "+st,text:STATUS[st]})]);
+  const portrait=el("div",{class:"portrait"},[avatar(c.avatar,6,{hired:st==="hire"}),el("span",{class:"stamp "+st,text:STATUS[st]})]);
   const plate=el("div",{class:"plate"},[el("h3",{text:c.name}),el("div",{class:"role",text:c.role}),
     el("div",{class:"meta",text:[c.level,c.reportsTo?"reports to "+c.reportsTo:null,c.wave!=null?"wave "+c.wave:null].filter(Boolean).join(" · ")}),
     c.tagline?el("div",{class:"tag",text:"“"+c.tagline+"”"}):null]);
@@ -368,10 +478,75 @@ async function decide(k){const c=cand();const note=($("#note").value||"").trim()
   if(!S.db){err.textContent="Decisions can't be saved in this view.";err.hidden=false;return}
   try{await S.db.doc("decisions/"+c.id).set({status:k,note,at:new Date().toISOString(),candidate:c.name||c.id,seat:c.seat||""});}
   catch(e){err.textContent="Couldn't save the decision. Check your connection and try again.";err.hidden=false;return}
+  if(k==="hire")openDesk(c);
   notifyCEO(c,k,note);}
 
+/* ---------- office ---------- */
+const DESK_STATUS={working:"Working",waiting:"Waiting on you",onboarding:"Onboarding",blocked:"Blocked",idle:"Idle"};
+function ago(t){if(!t)return"";const m=(Date.now()-new Date(t).getTime())/60000;if(isNaN(m))return"";if(m<1)return"just now";if(m<60)return Math.round(m)+" min ago";if(m<1440)return Math.round(m/60)+" h ago";return Math.round(m/1440)+" d ago";}
+function deskStatus(d){return DESK_STATUS[d.status]?d.status:"idle"}
+function renderDesks(){const box=$("#desks");
+  if(S.dbFailed){box.replaceChildren(el("p",{class:"empty",text:"The office can't be loaded in this view. Open the page signed in to claude.ai."}));return}
+  if(!S.desks.length){box.replaceChildren(el("p",{class:"empty",text:S.loaded?"No desks yet. Hire a candidate on the Hiring floor and their desk appears here.":"Opening the office…"}));return}
+  box.replaceChildren(...S.desks.map(d=>{const st=deskStatus(d);const open=S.asg.filter(a=>a.seat===d.id&&a.status!=="done").length;
+    return el("button",{class:"deskcard",type:"button","aria-current":S.deskSel===d.id?"true":"false",onclick:()=>{S.deskSel=d.id;renderDesks();renderDeskDetail(true);}},[
+      deskScene(d.avatar,st,3),
+      el("div",null,[el("div",{class:"n",text:d.name||d.id}),el("div",{class:"r",text:d.role||""})]),
+      el("span",{class:"chip "+st,text:DESK_STATUS[st]}),
+      el("div",{class:"t",text:d.task||"No current task."}),
+      el("div",{class:"u",text:[d.updatedAt?"Updated "+ago(d.updatedAt):null,open?open+" task"+(open>1?"s":"")+" from you":null].filter(Boolean).join(" · ")})]);}));}
+function renderDeskDetail(force){const box=$("#desk-detail");const d=S.desks.find(x=>x.id===S.deskSel);
+  if(!force&&document.activeElement&&document.activeElement.id==="assign-input")return;
+  if(!d){box.replaceChildren();return}
+  const st=deskStatus(d);
+  const asg=S.asg.filter(a=>a.seat===d.id).sort((a,b)=>String(b.at).localeCompare(String(a.at)));
+  const ta=el("textarea",{id:"assign-input",placeholder:"Give "+(d.name||"this agent")+" a task. The CEO is notified and routes it through the approval channel.","aria-label":"New task"});
+  ta.value=S.draft[d.id]||"";ta.addEventListener("input",()=>{S.draft[d.id]=ta.value});
+  const msg=el("p",{class:"hint",id:"assign-msg",text:S.asgMsg[d.id]||(S.owner?"":"Only the Founder can assign tasks.")});
+  const sec=(t,items)=>{items=arr(items);return items.length?el("div",null,[el("h4",{text:t}),el("ul",null,items.map(i=>el("li",{text:i})))]):null};
+  const log=arr(d.log).slice().reverse().slice(0,12);
+  const fmt=t=>{try{return new Date(t).toLocaleDateString("en-GB",{day:"numeric",month:"short"})}catch(e){return""}};
+  const stLabel=a=>a.status==="done"?"Done":a.status==="in_progress"?"In progress":"Sent to the CEO";
+  box.replaceChildren(el("div",{class:"detail"},[
+    el("div",{class:"scene"},[deskScene(d.avatar,st,5)]),
+    el("div",{class:"info"},[
+      el("div",{class:"plate"},[el("h3",{text:d.name||d.id}),el("div",{class:"role",text:d.role||""}),el("span",{class:"chip "+st,text:DESK_STATUS[st]})]),
+      el("div",null,[el("h4",{text:"Working on"}),el("p",{text:d.task||"No current task."}),d.updatedAt?el("p",{class:"hint",text:"Updated "+ago(d.updatedAt)}):null]),
+      sec("Waiting on you",d.waitingOn),
+      log.length?el("div",null,[el("h4",{text:"Recent work"}),el("div",{class:"log"},log.map(e=>el("div",{class:"e"},[el("time",{text:fmt(e.at)}),el("span",{text:e.text||""})])))]):null,
+      sec("Deliverables",d.deliverables),
+      sec("KPIs",d.kpis),
+      el("div",{class:"assign"},[el("h4",{text:"Give a task"}),S.owner?ta:null,
+        S.owner?el("div",{class:"desk-row"},[el("button",{class:"btn",type:"button",onclick:()=>assign(d)},["Assign"])]):null,msg,
+        ...asg.slice(0,6).map(a=>el("div",{class:"asg"},[el("span",{text:a.text||""}),el("small",{text:stLabel(a)+(a.at?" · "+ago(a.at):"")+(a.reply?" · "+a.reply:"")})]))])])]));}
+async function notify(message){const sid=S.cfg&&S.cfg.sessionId;
+  if(!sid||!S.mcp)return{ok:false,why:"The CEO reads it at the start of the next session."};
+  try{await S.mcp.callTool("Claude Code Remote","send_message",{session_id:sid,message});return{ok:true}}
+  catch(e){const code=e&&e.code;return{ok:false,why:(code==="consent_required"||code==="not_granted"||code==="approval_required")?"To notify the CEO instantly, allow Claude Code Remote for this page (Permissions menu). Until then the CEO reads it next session.":"The CEO's session couldn't be reached right now, so it will be read at the start of the next session."}}}
+async function assign(d){const text=(S.draft[d.id]||"").trim();
+  const setMsg=(t,ok)=>{S.asgMsg[d.id]=t;const m=$("#assign-msg");if(m){m.textContent=t;m.className=ok?"hint ok":"hint"}};
+  if(!text){setMsg("Write the task first.",false);return}
+  if(!S.db){setMsg("Tasks can't be saved in this view.",false);return}
+  let ref;try{ref=await S.db.collection("assignments").add({seat:d.id,agent:d.name||d.id,text,status:"new",at:new Date().toISOString()})}
+  catch(e){setMsg("Couldn't save the task. Check your connection and try again.",false);return}
+  S.draft[d.id]="";const ta=$("#assign-input");if(ta)ta.value="";
+  setMsg("Task saved. Notifying the CEO…",false);
+  const r=await notify("[Office] The Founder assigned a task to "+(d.name||d.id)+" ("+(d.role||d.id)+"): \""+text+"\". Read assignments/"+ref.id+" on the Hiring Floor page and route it.");
+  setMsg(r.ok?"Task saved. The CEO has been notified.":"Task saved. "+r.why,r.ok);}
+async function openDesk(c){if(!S.db)return;const seat=c.seat||c.id;if(S.desks.some(d=>d.id===seat))return;
+  const now=new Date().toISOString();
+  try{await S.db.doc("desks/"+seat).set({name:c.name||seat,role:c.role||"",seat,avatar:c.avatar||{},status:"onboarding",
+    task:"Onboarding. The CEO is setting up this desk.",updatedAt:now,order:c.order??50,kpis:arr(c.kpis),log:[{at:now,text:"Hired by the Founder."}]})}catch(e){}}
+function route(){const v=location.hash==="#hiring"?"hiring":"office";
+  $("#view-office").hidden=v!=="office";$("#view-hiring").hidden=v!=="hiring";
+  document.querySelectorAll(".view-btn").forEach(b=>b.setAttribute("aria-current",b.dataset.view===v?"page":"false"));}
+function updateNav(){const n=S.cands.filter(c=>statusOf(c.id)==="new").length;const b=document.querySelector('.view-btn[data-view="hiring"]');
+  if(b)b.textContent="Hiring floor"+(n?" ("+n+")":"");}
+document.querySelectorAll(".view-btn").forEach(b=>b.addEventListener("click",()=>{location.hash=b.dataset.view;route()}));
+window.addEventListener("hashchange",route);route();
+
 /* ---------- boot ---------- */
-function all(){renderSeats();renderQueue();if(S.sel)renderInterview();}
+function all(){renderSeats();renderQueue();renderDesks();updateNav();if(S.sel)renderInterview();}
 (async function boot(){
   const timer=setTimeout(()=>{if(!S.loaded){S.dbFailed=true;all();}},10000);
   const db=window.claude&&window.claude.use?await window.claude.use("db"):null;
@@ -380,14 +555,17 @@ function all(){renderSeats();renderQueue();if(S.sel)renderInterview();}
   db.collection("candidates").onSnapshot(s=>{clearTimeout(timer);S.loaded=true;S.dbFailed=false;
     S.cands=s.docs.map(d=>Object.assign({id:d.id},d.data())).sort((a,b)=>(a.order??99)-(b.order??99));
     if(!S.sel&&S.cands.length)S.sel=(S.cands.find(c=>statusOf(c.id)==="new")||S.cands[0]).id;
-    renderQueue();if(!S.busy)renderInterview();},fail);
+    renderQueue();updateNav();if(!S.busy)renderInterview();},fail);
   db.collection("seats").onSnapshot(s=>{S.seats=s.docs.map(d=>Object.assign({id:d.id},d.data())).sort((a,b)=>(a.order??99)-(b.order??99));renderSeats();},fail);
-  db.collection("decisions").onSnapshot(s=>{S.dec={};s.docs.forEach(d=>S.dec[d.id]=d.data());renderQueue();if(!S.busy)renderInterview();},fail);
+  db.collection("decisions").onSnapshot(s=>{S.dec={};s.docs.forEach(d=>S.dec[d.id]=d.data());renderQueue();updateNav();if(!S.busy)renderInterview();},fail);
   db.collection("transcripts").onSnapshot(s=>{if(S.busy)return;S.tr={};s.docs.forEach(d=>S.tr[d.id]=d.data());renderChat();},fail);
+  db.collection("desks").onSnapshot(s=>{S.desks=s.docs.map(d=>Object.assign({id:d.id},d.data())).sort((a,b)=>(a.order??99)-(b.order??99));
+    if(!S.deskSel&&S.desks.length)S.deskSel=S.desks[0].id;renderDesks();renderDeskDetail();},fail);
+  db.collection("assignments").onSnapshot(s=>{S.asg=s.docs.map(d=>Object.assign({id:d.id},d.data()));renderDesks();renderDeskDetail();},()=>{});
   window.claude.use("sample").then(x=>{S.sample=x}).catch(()=>{});
   window.claude.use("mcp").then(x=>{S.mcp=x}).catch(()=>{});
   db.doc("config/notify").onSnapshot(s=>{S.cfg=s.exists?s.data():null;},()=>{});
-  window.claude.use("user").then(async u=>{try{S.owner=u?await u.isOwner():false}catch(e){S.owner=false}if(S.sel&&!S.busy)renderInterview();}).catch(()=>{});
+  window.claude.use("user").then(async u=>{try{S.owner=u?await u.isOwner():false}catch(e){S.owner=false}if(S.sel&&!S.busy)renderInterview();renderDeskDetail(true);}).catch(()=>{});
 })();
 })();
 </script>
