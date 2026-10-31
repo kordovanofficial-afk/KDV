@@ -307,7 +307,7 @@ function prompt(c,history,q){
     c.about&&("About you: "+c.about),arr(c.mandate).length&&("Mandate:\n- "+c.mandate.join("\n- ")),arr(c.kpis).length&&("KPIs:\n- "+c.kpis.join("\n- ")),
     arr(c.skills).length&&("Skills:\n- "+c.skills.join("\n- ")),arr(c.team).length&&("Planned team:\n- "+c.team.join("\n- ")),
     arr(c.guardrails).length&&("Guardrails you work under:\n- "+c.guardrails.join("\n- ")),c.workSample&&("Work sample you submitted:\n"+c.workSample),
-    c.scores&&typeof c.scores==="object"&&("Work-sample scores (1-5, given by the CEO as hiring manager):\n- "+Object.entries(c.scores).map(([k,v])=>k+": "+v).join("\n- ")+(c.scoresNote?"\n"+c.scoresNote:"")),
+    c.scores&&typeof c.scores==="object"&&("Work-sample scores (1-5; the note below says who scored them):\n- "+Object.entries(c.scores).map(([k,v])=>k+": "+v).join("\n- ")+(c.scoresNote?"\n"+c.scoresNote:"")),
     c.brief&&("Background brief:\n"+c.brief)].filter(Boolean).join("\n\n");
   const convo=history.slice(-20).map(m=>(m.role==="user"?"FOUNDER":"YOU")+": "+m.content).join("\n\n");
   return `You are role-playing ${c.name}, an AI agent candidate interviewing for the ${c.role} seat at KORDOVAN, a premium handcrafted leather brand in Pakistan. The person questioning you is the Founder, who makes the hiring decision.
