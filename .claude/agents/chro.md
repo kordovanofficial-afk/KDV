@@ -125,8 +125,9 @@ backlog, and have it produce the answer before the interview. Score it 1–5 on:
 Advance only candidates averaging ≥ 4 with no score below 3.
 
 ### 5. Founder interview — on the Hiring Floor page
-Push each advancing candidate to the Hiring Floor page as a database document in
-`candidates/<id>` (schema below). The Founder reads the dossier, questions the
+Write each advancing candidate as `ops/agents/candidates/<id>.json` (schema below) and its
+draft agent file as `ops/agents/candidates/<id>.md`. The CEO reviews both and pushes the
+JSON to the Hiring Floor database as `candidates/<id>` (you have no database tool). The Founder reads the dossier, questions the
 candidate in character, then chooses **Hire**, **Keep waiting** or **Reject**.
 
 Write 5–7 suggested interview questions per candidate. Make them hard. Put the
@@ -167,6 +168,8 @@ Every agent's work is classified by blast radius. The full table lives in
   ads. Maker → CQRO fact-check.
 - **L2 Customer-facing:** anything live on the store, socials, ads, WhatsApp or
   email. Maker → CQRO → owning executive → CEO → **Founder approves**.
+- **Cross-seat decisions go to the executive council first** (ORG_DESIGN §4a): the
+  seats involved deliberate with real numbers, then bring the Founder one recommendation.
 - **L3 Money or irreversible:** spend, budgets, discounts, prices, deletions,
   customer data uploads. Same as L2, plus the rupee impact stated up front. **Founder
   approves every time; a yes is never standing permission.**

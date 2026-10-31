@@ -143,6 +143,7 @@ textarea{min-height:64px}
 .btn.hire{background:var(--olive)} .btn.hold{background:var(--amber)} .btn.reject{background:var(--red)}
 .hint{font-size:14px;color:var(--muted);margin:0}
 .err{font-size:15px;color:var(--red);margin:0}
+.hint.ok{color:var(--olive)}
 
 /* decision */
 .desk{border-top:4px dashed var(--line);padding-top:16px;display:grid;gap:10px}
@@ -194,7 +195,7 @@ textarea{min-height:64px}
 <script>
 (function(){
 "use strict";
-const S={cands:[],dec:{},tr:{},seats:[],sel:null,tab:"dossier",busy:false,owner:false,db:null,sample:null,loaded:false,dbFailed:false};
+const S={deskMsg:{},cfg:null,mcp:null,cands:[],dec:{},tr:{},seats:[],sel:null,tab:"dossier",busy:false,owner:false,db:null,sample:null,loaded:false,dbFailed:false};
 const $=s=>document.querySelector(s);
 function el(tag,attrs,kids){const n=document.createElement(tag);if(attrs)for(const k in attrs){const v=attrs[k];if(v==null||v===false)continue;
   if(k==="class")n.className=v;else if(k==="text")n.textContent=v;else if(k.startsWith("on"))n.addEventListener(k.slice(2),v);else n.setAttribute(k,v===true?"":v);}
@@ -306,6 +307,7 @@ function prompt(c,history,q){
     c.about&&("About you: "+c.about),arr(c.mandate).length&&("Mandate:\n- "+c.mandate.join("\n- ")),arr(c.kpis).length&&("KPIs:\n- "+c.kpis.join("\n- ")),
     arr(c.skills).length&&("Skills:\n- "+c.skills.join("\n- ")),arr(c.team).length&&("Planned team:\n- "+c.team.join("\n- ")),
     arr(c.guardrails).length&&("Guardrails you work under:\n- "+c.guardrails.join("\n- ")),c.workSample&&("Work sample you submitted:\n"+c.workSample),
+    c.scores&&typeof c.scores==="object"&&("Work-sample scores (1-5, given by the CEO as hiring manager):\n- "+Object.entries(c.scores).map(([k,v])=>k+": "+v).join("\n- ")+(c.scoresNote?"\n"+c.scoresNote:"")),
     c.brief&&("Background brief:\n"+c.brief)].filter(Boolean).join("\n\n");
   const convo=history.slice(-20).map(m=>(m.role==="user"?"FOUNDER":"YOU")+": "+m.content).join("\n\n");
   return `You are role-playing ${c.name}, an AI agent candidate interviewing for the ${c.role} seat at KORDOVAN, a premium handcrafted leather brand in Pakistan. The person questioning you is the Founder, who makes the hiring decision.
@@ -349,12 +351,24 @@ function deskBlock(c){const d=S.dec[c.id];const note=el("input",{type:"text",id:
     :el("p",{class:"current",text:"No decision yet."});
   if(!S.owner)return el("div",{class:"desk"},[el("h2",{text:"Decision"}),cur,el("p",{class:"hint",text:"Only the Founder can decide."})]);
   const b=(k,l)=>el("button",{class:"btn "+k,onclick:()=>decide(k)},[l]);
-  return el("div",{class:"desk"},[el("h2",{text:"Decision"}),cur,note,el("div",{class:"desk-row"},[b("hire","Hire"),b("hold","Keep waiting"),b("reject","Reject")]),err]);}
+  const dm=S.deskMsg[c.id];
+  return el("div",{class:"desk"},[el("h2",{text:"Decision"}),cur,note,el("div",{class:"desk-row"},[b("hire","Hire"),b("hold","Keep waiting"),b("reject","Reject")]),err,
+    dm?el("p",{class:dm.ok?"hint ok":"hint",text:dm.text}):null]);}
+async function notifyCEO(c,k,note){
+  const set=(text,ok)=>{S.deskMsg[c.id]={text,ok};if(S.sel===c.id&&!S.busy)renderInterview();};
+  const sid=S.cfg&&S.cfg.sessionId;
+  if(!sid||!S.mcp){set("Decision saved. The CEO reads it at the start of the next session.",false);return}
+  set("Decision saved. Notifying the CEO…",false);
+  try{await S.mcp.callTool("Claude Code Remote","send_message",{session_id:sid,message:"[Hiring Floor] The Founder decided "+STATUS[k].toUpperCase()+" for "+(c.name||c.id)+" ("+(c.role||"")+", seat "+(c.seat||c.id)+")."+(note?" Note: "+note:"")+" Read decisions/"+c.id+" and transcripts/"+c.id+" on the Hiring Floor and act on it."});
+    set("Decision saved. The CEO has been notified and is acting on it.",true);}
+  catch(e){const code=e&&e.code;
+    set(code==="consent_required"||code==="not_granted"||code==="approval_required"?"Decision saved. To notify the CEO instantly, allow Claude Code Remote for this page (Permissions menu). Until then the CEO reads it next session.":"Decision saved. The CEO's session couldn't be reached right now, so it will be read at the start of the next session.",false);}}
 async function decide(k){const c=cand();const note=($("#note").value||"").trim();const err=$("#desk-err");err.hidden=true;
   if(k==="reject"&&!note){err.textContent="Add a note saying what was missing. The CHRO uses it to find a better candidate.";err.hidden=false;return}
   if(!S.db){err.textContent="Decisions can't be saved in this view.";err.hidden=false;return}
   try{await S.db.doc("decisions/"+c.id).set({status:k,note,at:new Date().toISOString(),candidate:c.name||c.id,seat:c.seat||""});}
-  catch(e){err.textContent="Couldn't save the decision. Check your connection and try again.";err.hidden=false;}}
+  catch(e){err.textContent="Couldn't save the decision. Check your connection and try again.";err.hidden=false;return}
+  notifyCEO(c,k,note);}
 
 /* ---------- boot ---------- */
 function all(){renderSeats();renderQueue();if(S.sel)renderInterview();}
@@ -371,6 +385,8 @@ function all(){renderSeats();renderQueue();if(S.sel)renderInterview();}
   db.collection("decisions").onSnapshot(s=>{S.dec={};s.docs.forEach(d=>S.dec[d.id]=d.data());renderQueue();if(!S.busy)renderInterview();},fail);
   db.collection("transcripts").onSnapshot(s=>{if(S.busy)return;S.tr={};s.docs.forEach(d=>S.tr[d.id]=d.data());renderChat();},fail);
   window.claude.use("sample").then(x=>{S.sample=x}).catch(()=>{});
+  window.claude.use("mcp").then(x=>{S.mcp=x}).catch(()=>{});
+  db.doc("config/notify").onSnapshot(s=>{S.cfg=s.exists?s.data():null;},()=>{});
   window.claude.use("user").then(async u=>{try{S.owner=u?await u.isOwner():false}catch(e){S.owner=false}if(S.sel&&!S.busy)renderInterview();}).catch(()=>{});
 })();
 })();

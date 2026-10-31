@@ -1,7 +1,7 @@
 # Kordovan — Organisation Design (agent workforce)
 
 Owner: Chief People Officer (`.claude/agents/chro.md`). Approved by: Founder.
-Status: **DRAFT v1 (Oct 31 2026), pending the Founder's interview of the CHRO.**
+Status: **v1.1 (Oct 31 2026). CHRO hired; wave 1 sourcing under way.**
 
 ## 1. Org chart
 
@@ -71,6 +71,14 @@ Human team: **Mr. Tahir** (manager and business head, back-end finance), counter
 | **L1** Internal draft | Files on the `claude/*` branch, unpublished Shopify drafts, paused ad drafts, content packs | Maker → CQRO fact-check | No (informed in brief) |
 | **L2** Customer-facing | Anything live: store, theme, product copy, socials, comments/DMs, WhatsApp, email | Maker → CQRO → owning exec → CEO → Founder | **Yes, each item or batch** |
 | **L3** Money / irreversible | Ad spend and budgets, discounts, prices, deletions, customer-data uploads, stock write-offs | As L2 + rupee impact stated first | **Yes, every time** |
+
+### 4a. Executive council: deliberate before you escalate (Founder, Oct 31 2026)
+When a decision touches more than one seat (a discount, a budget move, a launch), the executives involved **meet first**,
+chaired by the CEO. Each brings its own numbers from source: the CFO brings unit costs and margin floors, the CRO brings
+the forecast and a kill rule, the CMO brings creative and capacity. They test the idea together (break-even volume,
+reversal rate, stock on hand) and come to the Founder with **one recommendation, the numbers behind it, and any
+remaining disagreement shown side by side**. No blended compromises to avoid conflict. The Founder never receives a
+bare question that the team could have answered with data.
 
 **CQRO fact-check standard:** every number traced to a tool result or export with its date. Every product claim matched to live Shopify data. Every statement checked against `CLAUDE.md` hard rules. Each finding gets a verdict of **APPROVED**, **RETURNED** (with the exact fix) or **BLOCKED** (rule breach).
 

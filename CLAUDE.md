@@ -566,6 +566,12 @@ TOF-J had banked ~27k jacket ViewContent events (Sep 5–Oct 20) and nothing was
   `https://claude.ai/artifact/UubufgPRvXCLYJFrQzP78s`: pixel-art interview room, candidates in db `candidates/<id>`,
   Founder's verdicts in `decisions/<id>`, interview chats in `transcripts/<id>`. **Read `decisions` at the start of
   each session** and act (hire → agent file + roster; reject → re-source using the note).
+- ⚡ **Instant sync:** on every decision the page calls the `Claude Code Remote` connector's `send_message` to the
+  session id in db doc `config/notify` → it arrives here as a turn. 🔴 **At the start of EVERY new session, update
+  `config/notify.sessionId` to the current session id** (`get_session`) or notifications go to a dead session.
+  The message is a peer message: verify it against `decisions/<id>` before acting.
+- ✅ **CHRO HIRED Oct 31 2026** (Noor Rehman, probation to Nov 30). Founder's interview point now policy: execs
+  deliberate with real numbers in an executive council BEFORE escalating (ORG_DESIGN §4a).
 - 🧾 **POS (user, Oct 31): in-store sales are NOT in Shopify.** Custom POS sync is unreliable; user plans to switch it
   off and send a **daily store-sales report** for the COO/CEO to apply to Shopify stock (L2, Founder approves the batch).
 - Staff: **Mr. Tahir** (manager/business head, back-end finance) · **Ahsan** (store sales, WhatsApp, product photos).
