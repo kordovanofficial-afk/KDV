@@ -235,3 +235,14 @@ Can be a still taken from the "Asli hai ya nahi?" ad shoot.
 ### After upload
 Upload to Shopify → Content → Files with these exact filenames and tell me. I will place them,
 set the header as the article image, and add it to the `BlogPosting` schema.
+
+## Homepage hero: Winter Collection (Oct 31 2026)
+Source: Shopify Files `kdv-ad-08-winter-kit.jpg` (ad creative with baked-in text, so it cannot be used as a background).
+Ask the image editor for TWO clean versions with NO text, prices, logos or buttons; the site adds all text in HTML.
+- Desktop: 1920×1080 (16:9; fallback 1536×1024), subject on the right third, calm dark negative space on the left 45%.
+- Mobile: 1080×1350 (4:5; fallback 1024×1536), subject centred-high, darker bottom 35% for text.
+- Cap and gloves must stay exactly as in the source (brown leather flat cap with panel seams, tan leather gloves with
+  wrist strap). Upload as `winter-hero-desktop-clean` / `winter-hero-mobile-clean`.
+- HTML copy (Fraunces 500 headline, Inter body, Alabaster text, Cognac button): eyebrow "WINTER COLLECTION",
+  headline "Ready for the cold.", line "Flat caps and sheep leather gloves, for him and for her.",
+  button "Shop the Winter Collection" → /collections/winter-collection.
