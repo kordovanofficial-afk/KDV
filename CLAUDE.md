@@ -575,10 +575,11 @@ TOF-J had banked ~27k jacket ViewContent events (Sep 5–Oct 20) and nothing was
 - 🧾 **POS (user, Oct 31): in-store sales are NOT in Shopify.** Custom POS sync is unreliable; user plans to switch it
   off and send a **daily store-sales report** for the COO/CEO to apply to Shopify stock (L2, Founder approves the batch).
 - Staff: **Mr. Tahir** (manager/business head, back-end finance) · **Ahsan** (store sales, WhatsApp, product photos).
-  Founder in Islamabad runs all online work, ~6h/day. Store sales PKR 250–350k/month. Fixed costs ≈ staff 135–150k +
+  Founder in Islamabad runs all online work, ~6h/day. **October reversal rate 31%** = Shopify ShopifyQL Oct 2026
+  `sales_reversals` 228,462 ÷ `gross_sales` 744,970 (30.7%); monthly online net: May 831k · Jun 842k · Jul 456k · Aug 602k · Sep 890k · Oct 512k. Store sales PKR 250–350k/month. Fixed costs ≈ staff 135–150k +
   rent/bills 80–85k. PostEx pays COD in 48–72h. User OK with building our own apps (Meta Graph API app etc.).
 - Wallet costs/margins (Shopify unitCost, Oct 31): KODO 400 (83%) · Kodo Vertical 2.0 450 (82%, **out of stock**) ·
-  Luke 450 (81%) · Mocha Mate 800 (75%, 25 left, **in production**) · Lord's/Bronco 1,500 (76%) · Nova 1,800 (57%).
+  Luke 450 (81%) · Mocha Mate 800 (75%, 25 left, **in production**) · Bronco 1,500 (76%) · Nova 1,800 (57%). (Pre-buffer figures; see below.)
   ✅ **Costs written to Shopify Oct 31 2026** (Founder's figure **+150 PKR buffer**, user: *"add 150 to each cost as they
   keep increasing"*; 22 variants, 0 errors): Bastion 950 (62%) · Razor 650 (73%) · Plain Bifold 750 (69%) · Shelby &
   Thomas 1,000 (64%) · Saffiano 1,350 (69%) · Aristocrat 1,250 (70%) · Rigor Lite 450 (70%) · Cleopatra 2,550 (65%) ·
