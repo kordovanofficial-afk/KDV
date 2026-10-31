@@ -582,7 +582,16 @@ TOF-J had banked ~27k jacket ViewContent events (Sep 5–Oct 20) and nothing was
   ✅ **Costs written to Shopify Oct 31 2026** (Founder's figure **+150 PKR buffer**, user: *"add 150 to each cost as they
   keep increasing"*; 22 variants, 0 errors): Bastion 950 (62%) · Razor 650 (73%) · Plain Bifold 750 (69%) · Shelby &
   Thomas 1,000 (64%) · Saffiano 1,350 (69%) · Aristocrat 1,250 (70%) · Rigor Lite 450 (70%) · Cleopatra 2,550 (65%) ·
-  Armour 1,950 (57%). ⚠️ The OTHER wallet costs above do NOT yet carry the +150 buffer (asked the Founder). Dead stock (0 online sales in 90d) ≈ 194 units / PKR 2.0M retail.
+  Armour 1,950 (57%). ✅ **+150 then applied to EVERY other wallet too (Founder: "yes add that 150 on all of them",
+  37 variants, 0 errors).** All wallet costs in Shopify now include the buffer: KODO 550 (76%) · Kodo Vertical 600 (76%) ·
+  Luke 600 (75%) · Kingsman 1,250 (73%) · Bronco 1,650 (73%) · Stallion 1,800 (72%) · Mocha Mate 950 (70%) · Hunter 950
+  (70%) · Truckkr 1,150 (70%) · Illusion 650 (68%) · Ladies Clutch 2,450 (66%) · Seamless 700 (65%) · Bellezza 2,350
+  (64%) · Sheppard/Midtown 550 (63%) · Elite Mobile 1,450 (63%) · Crazy Horse Long 1,500 (62%) · Money Clip 800 (59%) ·
+  Nova 1,950 (54%). ⚠️ **Never add +150 again** — it is already in every figure. The old costs listed above are pre-buffer.
+- 🗑 **HM The Lord's set to DRAFT Oct 31 2026** (Founder: "remove completely from online… wasnt a good sell"). Off all 3
+  online channels (Online Store, FB & IG, Google & YouTube). `publishableUnpublish` is BLOCKED by the connector's safety
+  policy, so DRAFT is the route. Redirect `/products/hm-the-lords-wallet-brown` → `/products/the-money-clip-minimal-wallet`.
+  No theme references to it. Dead stock (0 online sales in 90d) ≈ 194 units / PKR 2.0M retail.
   ✅ **Store count Oct 31 (Founder) for the top 10:** Cabin Trolley 11 (Shopify said 8) · CEO bag 5 · Master's 16 ·
   Branson 2 (Shopify 4) · Bella Duff 13 · Forester 3 · Gridle 6 · **HM The Lord's 0 (Shopify said 14 → corrected to 0
   live Oct 31, both variants)** · Bellezza 12 · Venture 9. Confirmed dead stock (9 lines) ≈ **PKR 1.41M retail**.
