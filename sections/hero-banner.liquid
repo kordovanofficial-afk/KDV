@@ -14,6 +14,51 @@
   endunless
 -%}
 
+{%- comment -%}
+  Seasonal winter banner (Nov 2026). On by default; untick "Winter banner" in the
+  theme editor to bring back the brand hero. A missing setting counts as on,
+  because the editor strips settings it did not create (see CLAUDE.md).
+  Separate art for phones (4:5) and desktop (16:9) via <picture>.
+{%- endcomment -%}
+{%- liquid
+  assign winter = true
+  if section.settings.winter == false
+    assign winter = false
+  endif
+  assign w_desk = 'WINTER_DESKTOP_URL'
+  assign w_mob = 'WINTER_MOBILE_URL'
+-%}
+
+{%- if winter -%}
+<section class="kv-home kv-hero kv-hero--winter">
+  <div class="kv-hero__photo">
+    <picture>
+      <source media="(max-width: 749px)"
+              srcset="{{ w_mob }}&width=600&format=webp 600w, {{ w_mob }}&width=900&format=webp 900w, {{ w_mob }}&width=1200&format=webp 1200w"
+              sizes="100vw">
+      <img src="{{ w_desk }}&width=1600&format=webp"
+           srcset="{{ w_desk }}&width=1200&format=webp 1200w,
+                   {{ w_desk }}&width=1600&format=webp 1600w,
+                   {{ w_desk }}&width=2000&format=webp 2000w,
+                   {{ w_desk }}&width=2400&format=webp 2400w"
+           sizes="100vw" width="1672" height="941"
+           alt="Man in a brown leather flat cap and tan sheep leather gloves on an old city street at dusk"
+           loading="eager" fetchpriority="high" decoding="async">
+    </picture>
+  </div>
+  <div class="kv-hero__scrim"></div>
+  <div class="kv-wrap kv-hero__inner"><div class="kv-hero__c">
+    <span class="kv-eyebrow">Winter Collection</span>
+    <h1>Ready for the <em>cold.</em></h1>
+    <p class="kv-hero__sub">Flat caps and sheep leather gloves, for him and for her.</p>
+    <div class="kv-hero__cta">
+      <a class="kv-btn kv-btn--cognac" href="{{ routes.collections_url }}/winter-collection">Shop the Winter Collection →</a>
+    </div>
+    <div class="kv-hero__trust">Cash on delivery · Free delivery over Rs 5,500 · <b>Genuine leather</b></div>
+  </div></div>
+</section>
+{%- else -%}
+
 <section class="kv-home kv-hero">
   <div class="kv-hero__photo">
     {%- if section.settings.image -%}
@@ -54,11 +99,13 @@
     <div class="kv-hero__trust">Free delivery · 7-day returns · <b>Genuine leather guaranteed</b></div>
   </div></div>
 </section>
+{%- endif -%}
 
 {% schema %}
 {
   "name": "Hero",
   "settings": [
+    { "type": "checkbox", "id": "winter", "label": "Winter banner", "default": true, "info": "Shows the Winter Collection banner. Untick to show the brand hero below." },
     { "type": "image_picker", "id": "image", "label": "Hero image", "info": "Wide leather/craft shot. Keep the left third dark for the text. Defaults to the brand hero." },
     { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Pakistan's Original Leather Craft House" },
     { "type": "textarea", "id": "subheading", "label": "Sub-headline", "default": "Handcrafted leather goods for those who value quality over quantity. Every stitch, every grain — made to outlast a lifetime." },
