@@ -213,3 +213,9 @@ Edit theme → push to draft theme `165057069296` (via Shopify) → review in br
 
 ## Header nav: Winter link (Oct 31 2026)
 - `sections/site-header.liquid`: "Winter" → `/collections/winter-collection` sits directly above Sale in the desktop `kv-nav` and the mobile `kv-mmenu`. Pushed to `kordovan` (c36afe6, user-requested), live theme file updated 2026-10-31T06:18Z. Collection `493073760496`, 4 products (brown + black men's gloves, women's dark red gloves, flat cap).
+
+## Homepage hero: Winter banner (LIVE Oct 31 2026, kordovan 41f61e1)
+- `sections/hero-banner.liquid` shows a Winter Collection banner when the "Winter banner" checkbox is on or missing (editor strips settings, so missing = on). Untick it in the theme editor to restore the brand hero.
+- Art: desktop `Dusk_Market_Portrait_in_Warm_Leather.png` (1672x941), phone `Cinematic_Historic_Street_Portrait.png` (1122x1402) via <picture> at 749px. Phone layout in `home.css` (.kv-hero--winter): text at the bottom, face clear.
+- Copy: WINTER COLLECTION / Ready for the cold. / Flat caps and sheep leather gloves, for him and for her. / Shop the Winter Collection → /collections/winter-collection / Cash on delivery · Free delivery over Rs 5,500 · Genuine leather.
+- Live theme checksums matched the repo files at 06:39Z.
