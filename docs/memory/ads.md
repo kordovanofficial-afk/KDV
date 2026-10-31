@@ -468,3 +468,11 @@ Same review: Retarget 13,567 / 14 purch / CPA 969 / 3.71x / freq 3.85 (keep) · 
   RT-W campaign `120255846370710428` · ad set `120255846373980428` (300/day) · W-RT1 `…377080428`, W-RT2 `…377130428`.
   All 11 objects VALIDATED, 0 errors; catalogue cleared on both campaigns; links resolve (brown 45, black 56 in stock).
   ⚠️ Lesson: API drafts and an already-open Ads Manager tab can disagree; tell the user to open Ads Manager fresh.
+- 🔴 Oct 31: ads built from the placement-customised creatives (creative_id, asset_feed) showed EMPTY in the Ads
+  Manager draft editor (no image/headline/description/URL params) and errored there, although the API read was fine.
+  ➡️ Rule: for drafts the user reviews in Ads Manager, build ads INLINE (object_story_spec.link_data + image_hash +
+  url_tags), never by referencing a PAC/asset_feed creative_id. Rebuilt all 7 inline (4:5 feed image only):
+  TOF-W ads W01 `120255846508150428` W02 `…513420428` W03 `…513530428` W04 `…513600428` W05 `…513690428` ·
+  RT-W W-RT1 `…513730428` W-RT2 `…513760428`. Old creative_id ads discarded.
+- RT-W ad set budget had become 84000 (Rs 840) and custom-audience expansion ON after creation; reset to 30000 and
+  expansion 0, re-verified.
