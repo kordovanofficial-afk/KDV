@@ -160,6 +160,18 @@
   .kv-hero__scrim{background:linear-gradient(180deg,rgba(28,20,14,.45),rgba(28,20,14,.85));}
 }
 
+/* Winter banner: the man stands on the right on desktop. On phones the 4:5 art
+   keeps his face in the top half, so the text sits at the bottom, not over him. */
+.kv-hero--winter .kv-hero__photo img{object-position:70% 30%;}
+@media(max-width:749px){
+  .kv-hero--winter{align-items:flex-end;padding-bottom:56px;}
+  .kv-hero--winter .kv-hero__photo img{object-position:50% 20%;}
+  .kv-hero--winter .kv-hero__scrim{background:linear-gradient(180deg,rgba(28,20,14,0) 30%,rgba(28,20,14,.55) 55%,rgba(28,20,14,.92) 100%);}
+  .kv-hero--winter h1{font-size:clamp(40px,11vw,56px);margin:12px 0 14px;}
+  .kv-hero--winter .kv-hero__sub{font-size:16px;margin-bottom:22px;}
+  .kv-hero--winter .kv-hero__cta{margin-bottom:20px;}
+}
+
 /* ============================================================
    Milestone 3: trust marquee + bestsellers (cross-ref homepage-final.html)
    ============================================================ */
