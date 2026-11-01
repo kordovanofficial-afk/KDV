@@ -154,7 +154,7 @@ Rendered: `creative/C3_carousel_card1_1x1.jpg` … `card5_1x1.jpg` (ad pack conc
 
 **Caption (final)**
 > 11.11: 25% off every wallet, 15% off everything else. 10–12 November.
-> Bastion, Razor, Luke, KODO, Aristocrat. Genuine leather, hamare apne workshop se, lifetime craftsmanship warranty ke saath.
+> Bastion, Luke, KODO, Aristocrat. Genuine leather, hamare apne workshop se, lifetime craftsmanship warranty ke saath.
 > Koi code nahin chahiye: 10 November raat 12 baje se 12 November raat 11:59 tak price khud kam dikhegi.
 > Rs 5,500 se upar online order par delivery free. Cash on delivery available, Rs 250 zyada, because a cash order costs a courier collection and sometimes a return trip.
 > "WALLET" likh kar DM karein, ya link bio mein.
@@ -194,7 +194,7 @@ Aim: answer the two objections from the one October jacket buyer (size and proce
 ### P06–P08 · Tue Nov 10, Wed Nov 11, Thu Nov 12 · Instagram Story set each day · 11.11 wallets · approved offer live
 
 Rendered creative (ad pack): Nov 10 `creative/C1_paanch_wallets_9x16_15s.mp4` · Nov 11 `creative/C2_bastion_story_9x16.jpg` + `creative/C4_bumper_9x16_6s.mp4` · Nov 12 `creative/C4_bumper_9x16_6s.mp4` + `creative/C3_carousel_card5_1x1.jpg` with "Aakhri din" as a text sticker.
-Frame text: "11.11: 25% off every wallet, 15% off everything else. 10–12 November." + "Koi code nahin chahiye." + link sticker. Daily heroes: Bastion (Nov 10), Razor (Nov 11), Luke and KODO (Nov 12). The Nov 12 story may say "Aakhri din" because the window ends 23:59 that night. That is a fact, not a countdown.
+Frame text: "11.11: 25% off every wallet, 15% off everything else. 10–12 November." + "Koi code nahin chahiye." + link sticker. Daily heroes: Bastion (Nov 10), Luke (Nov 11), KODO and Aristocrat (Nov 12). Razor is dropped from 11.11 creative (questioned photo set, ad pack v4). The Nov 12 story may say "Aakhri din" because the window ends 23:59 that night. That is a fact, not a countdown.
 
 **Shot list:** reuse the P04 photos. Add one 5-second clip per wallet: open, show card slots, close.
 **Links:** `/collections/mens-leather-wallets?utm_source=instagram&utm_medium=social&utm_campaign=wallets1111_nov26&utm_content=p06_story_nov10` (then `p07_story_nov11`, `p08_story_nov12`)
