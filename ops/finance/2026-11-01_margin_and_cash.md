@@ -6,11 +6,11 @@ Working files (session-local): `/tmp/claude-0/-home-user-KDV/f5fcf710-68f4-5237-
 ---
 
 ## Answer
-- **Decision:** Retire the 45% planning margin. October's measured all-in online margin is **64.2%** (range 59.7–68.0%), so October left about **PKR 170k** after ads and fixed costs, not 39k. Adopt the margin floor below as binding. Under it, the decided 11.11 offer breaches on **4 sellable lines by %** and **14 sellable lines by rupees when bought alone**; 23 sellable lines have **no unit cost** and cannot be tested.
+- **Decision:** Retire the 45% planning margin. October's measured all-in online margin is **64.2%** (range 59.7–68.0%), so October left about **PKR 170k** after ads and fixed costs, not 39k. Adopt the margin floor below as binding. Under it, the decided 11.11 offer breaches on **4 sellable lines by %** and **14 sellable lines by rupees when bought alone**; **22 products** that are sellable and live on the Online Store have **no unit cost** and cannot be tested (list and Mr. Tahir request in section 7).
 - **Rupee impact:** October contribution 169,705 (range 82,689 to 249,135). 11.11 margin given away on normal volume ≈ **PKR 9,100** for the 3 days (up to ~22,000 if 3 jackets sell inside the window); break-even needs **1.59x** wallet volume and **1.32x** other volume. PostEx Sync has recorded **PKR 86,616 of cash that was never received** on 6 orders.
 - **Confidence:** High on revenue, unit costs and the PostEx diagnosis (every order and transaction read). Medium on delivery/COD/card costs (estimated, no PostEx or XPay statement yet). Low on the store (Mr. Tahir's figure still missing), which is now the widest input.
 - **Risk:** The PostEx bug double-records cash on every edited or part-prepaid order and will keep doing it through 11.11. Shopify "paid" status on those orders can hide real money still owed, and the excess makes Shopify cash look 86k richer than the bank.
-- **I need from you:** (1) Approve the floor (L3) by **Nov 4**. (2) Decide by **Nov 6** what to do with the breaching lines in section 3 (exclude, add a minimum order, or accept with eyes open). (3) Mr. Tahir: October store sales, the PostEx October settlement statement and the XPay statement by **Nov 4**. (4) Costs for the 23 no-cost lines (list in 3d), or exclude them, by **Nov 6**.
+- **I need from you:** (1) Approve the floor (L3) by **Nov 4**. (2) Decide by **Nov 6** what to do with the breaching lines in section 3 (exclude, add a minimum order, or accept with eyes open). (3) Mr. Tahir: October store sales, the PostEx October settlement statement and the XPay statement by **Nov 4**. (4) Costs for the 22 uncosted products (section 7, one page for Mr. Tahir), or exclude them, by **Nov 6**.
 
 | October 2026 (orders placed Oct 1–31, not cancelled) | PKR | Source |
 |---|---|---|
@@ -117,9 +117,10 @@ Not sellable now (0 stock, DENY), would breach if restocked: The Armour (39.2%),
 
 **5c. Pass both** (99 of 142 sellable price lines), including every jacket and shoe at 15% (e.g. Iconic 22,000 → 18,700, contribution 7,914 = 42.3%) and the CEO bag (35,700, 14,404 = 40.3%, just over).
 
-**5d. No unit cost, cannot be tested (sellable now, 23 lines).** Supply costs or exclude:
-The Saffire Belt · Women's Casual Cap // Newsboy · The Case by Kordovan · Natural Milled Leather Dopp Kit · The Gentlemans' Duffle · Mini Leather Folio · Leather Tissue Box Rectangle · Mini Watch/Cufflink/Jewelry Box · Trinity Jewlery Case · Zimmer Leather Keychain · Leather Lanyard · Natural Milled slim laptop bag (3 of 4 variants) · The Corporate Office laptop bag · The Documate Office Bag · The Maverik Laptop Bag · The Millennial · The Staton office/laptop bag · The Executive Leather Briefcase (Brown, Coffee Brown) · Millard Office Bag · Voyager Suitcase Trolley Bag · The Beyond Backpack · The Rastov Backpack · Alison women's jacket and both Salemanco Brogues (MTO, 0 stock, CONTINUE).
-⚠️ **The Maverik Laptop Bag was the #1 product by 90-day net (274,275, data pack Oct 31) and has no cost in Shopify.** Get this one before Nov 10.
+**5d. No unit cost, cannot be tested: 22 products** *(restated Nov 1 at the CQRO's return)*
+Scope: sellable (stock > 0, or 0 with CONTINUE) **and** published on the Online Store (`onlineStoreUrl` set) **and** the sellable variant has no `unitCost`. Read live Nov 1.
+Dropped from the earlier list of 25: The Executive Leather Briefcase Brown and Coffee Brown (0 stock, DENY) · Leather Lanyard and Voyager Suitcase Trolley Bag (not on the Online Store) · Millard Office Bag Brown (has a cost, 8,000; Black and Tan stay) · **The Gentlemans' Duffle (also not on the Online Store, found on re-read)**.
+The ranked list is in **section 7**. ⚠️ **The Maverik Laptop Bag sold 12 units / PKR 318,000 gross in 90 days (ShopifyQL, Aug 3–Nov 1) and has no cost in Shopify.** It is the only one that matters before Nov 10.
 
 **5e. Expected margin given away (Nov 10–12)**
 - Normal 3-day volume = October run-rate ÷ 31 × 3: wallets 230,047 → **22,263**; other products 245,200 → **23,729**.
@@ -151,3 +152,39 @@ The Saffire Belt · Women's Casual Cap // Newsboy · The Case by Kordovan · Nat
 
 ## One idea nobody asked for: stop 11.11 creating the PostEx bug
 Every 11.11 order a staff member edits (size swap, colour swap, an extra item) is a new chance for the webhook to capture the pre-edit total. Until the CTO fix ships, a **free staff rule**: on any edited COD order, Mr. Tahir checks "received" against current total the day after delivery and flags any negative outstanding. In October that would have caught 86,616 of false cash in six checks of under a minute each. It costs nothing and protects the weekly cash forecast.
+
+---
+
+## 7. Request for Mr. Tahir: unit costs for 22 products (one page)
+**From:** Ayesha (CFO) · **Date:** Nov 1 2026 · **Needed by:** Nov 6, before the 11.11 sale (Nov 10–12)
+**Why:** These products are on the website and can be bought, but Shopify has no cost for them, so I cannot tell whether 15% off loses money. Please write the cost per piece (what we pay the workshop or supplier, no +150 buffer unless it is a wallet). If a cost is not known, write "unknown" and the Founder will decide whether to keep the product in the sale.
+Ranked by units sold online in the last 90 days (ShopifyQL `net_items_sold`, Aug 3–Nov 1 2026; store sales are not in this count).
+
+| # | Product | Variants with no cost (stock) | Price | Sold 90d (gross) | Cost per piece |
+|---|---|---|---|---|---|
+| 1 | **The Maverik Laptop Bag** | Black (2) | 26,500 | **12** (318,000) | |
+| 2 | Natural Milled Leather Dopp Kit | Black (2), Brown (4), Tan (4) | 6,600 | 3 (19,800) | |
+| 3 | Natural Milled slim laptop bag | Black (1), Tan (1) · Multicolor already 6,500 | 15,500 | 2 (46,500) | |
+| 4 | The Rastov Backpack | Bodo (1) | 15,400 | 2 (30,800) | |
+| 5 | Mini Leather Folio // Note Pad Organizer | Black (6) | 3,200 | 1 (9,600) | |
+| 6 | The Corporate Office // Laptop Bag | Black (1), Tan (1), Brown (1) | 28,500 | 1 (28,500) | |
+| 7 | Leather Tissue Box Rectangle | Brown (2), Black (1) | 6,250 | 1 (6,250) | |
+| 8 | The Case by Kordovan | Vintage Brown (9) | 2,250 | 0 (one sale, later returned) | |
+| 9 | Women's Casual Cap // Newsboy | Brown (1), Black (4) | 2,500 | −2 (net of returns) | |
+| 10 | Zimmer Leather Keychain | Black (40) | 500 | 0 | |
+| 11 | Trinity Jewellery Case | Black, Tan, Maroon, Red (1 each) | 6,600 | 0 | |
+| 12 | Mini Watch/Cufflink/Jewelry Box | Burgundy (1) | 8,500 | 0 | |
+| 13 | The Beyond Backpack // Unisex | Dark Brown (1), Tan (1) | 19,500 | 0 | |
+| 14 | The Documate Office Bag | Mustard (1), Tan (1) | 17,600 | 0 | |
+| 15 | The Millennial // Sleek laptop Bag | Black (1) | 22,500 | 0 | |
+| 16 | Millard Office Bag | Black (1), Tan (1) · Brown already 8,000 | 19,500 | 0 | |
+| 17 | The Staton Premium Cow Leather Office/Laptop Bag | Black (1), Brown (0, sells on order) | 42,000 | 0 | |
+| 18 | The Saffire Belt | Black, Brown, Tan (0, sells on order) | 4,400 | 0 | |
+| 19 | Sheffield Backpack | Black, Brown (0, sells on order) | 26,500 | 0 | |
+| 20 | Alison | Women's Black Leather Biker Jacket | all sizes (made to order) | 26,000 | 0 | |
+| 21 | The Salemanco Brogue // Black | (made to order) | 22,500 | 0 | |
+| 22 | The Salemanco Brogue // Tan | (made to order) | 22,500 | 0 | |
+
+- Rows 1–7 are the ones that have actually sold. **If time is short, give me row 1 today and rows 2–7 by Nov 6.**
+- Rows 17–22 show 0 stock but take orders ("sells on order"). Please also confirm the workshop can still make them; if not, they should come off the website.
+- Please send the costs to the CEO. I will not enter them myself; the Founder approves the batch (L2).
