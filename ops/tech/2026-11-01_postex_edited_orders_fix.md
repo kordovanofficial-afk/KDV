@@ -12,10 +12,10 @@ Diagnosis: CFO, confirmed by CQRO, `ops/finance/2026-11-01_margin_and_cash.md` �
 - **Poll:** `postexData.invoicePayment || o.total_price` is replaced by `resolveCodCapture()`. A mismatch or skip sends no "delivered" WhatsApp and schedules no review, the same as the old "already paid" skip.
 - **`/health`** now returns `{status, version: "5.1-edited-orders", ts}`.
 - **Unchanged:** `runPrepaidDeliveryPass` (still never calls `markOrderPaid`), the `ppass:init` baseline, every dedup key (`wasent:`, `rvdone:`, `rvdue:`, `wapend:`), payment-aware WhatsApp copy, RTO notes, and `markOrderPaid` itself.
-- Not in scope, flagged: the out-for-delivery WhatsApp ("keep Rs X ready") still quotes `total_price`, so an edited order is shown its pre-edit total. That is copy only and records no money. It is a candidate for a follow-up.
+- **Out-for-delivery WhatsApp** (added at the coordinator's request). `msgOutForDelivery()` now quotes what the rider will actually collect: `total_outstanding`, falling back to `current_total_price`, and never `total_price`. If the amount due is 0 or less, it sends the "nothing to hand over" line. If neither field is present, it says "the amount due" and quotes no figure. `getOpenCODOrders()` now also requests `total_outstanding,current_total_price`. The prepaid pass's out-for-delivery call is unchanged and still uses the prepaid line.
 
 ## Test results
-The real modified functions (`handleWebhook`, `runPollSync`, the default `fetch` export) were run in Node 22 against mocked Shopify REST, PostEx and KV. `node --check` passes. **13/13 pass.**
+The real modified functions (`handleWebhook`, `runPollSync`, the default `fetch` export) were run in Node 22 against mocked Shopify REST, PostEx and KV. `node --check` passes. **15/15 pass.**
 
 | Case | Result |
 |---|---|
@@ -27,8 +27,10 @@ The real modified functions (`handleWebhook`, `runPollSync`, the default `fetch`
 | (d2) PostEx 28,200.50 vs outstanding 28,200 (inside the PKR 1 tolerance) | captured 28,200.00 |
 | (e) `total_outstanding` missing | 0 captures (fails closed) |
 | (f) `/health` | `version: "5.1-edited-orders"` |
+| (g) poll sees "Out For Delivery" on the edited order (total 85,400, outstanding 28,200) | queued WhatsApp says **PKR 28,200** and contains no 85,400 |
+| (g2) message unit test: only `current_total_price` set / outstanding 0 / neither field set | quotes 4,570 / "nothing to hand over" / "the amount due"; `total_price` 85,400 never shown |
 
-Control run: the same suite against the pre-fix file failed 12 of 13 cases. It captured 85,400 in (b) and captured on `partially_paid` / `partially_refunded` in (c), which reproduces the CFO's diagnosis. Harness: scratchpad `postex-test/test.mjs` (session-local).
+Control run: the same suite against the pre-fix file failed 12 of the original 13 cases. It captured 85,400 in (b) and captured on `partially_paid` / `partially_refunded` in (c), which reproduces the CFO's diagnosis. Harness: scratchpad `postex-test/test.mjs` (session-local).
 
 ## Manual deploy steps (needs the Founder's yes first)
 1. Open Cloudflare → Workers → `kordovan-postex-sync` → **Edit code**.
