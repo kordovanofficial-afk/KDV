@@ -10,7 +10,7 @@ Owner: CHRO. Every agent, every stage, every decision. Never delete rows.
 | CHRO | `.claude/agents/chro.md` | PROBATION (to Nov 30 2026) | Oct 31 2026 | Custom build by CEO | "Noor Rehman". Hired by Founder Oct 31 2026. First task: wave 1 candidates |
 | Creative Director (under CMO) | `.claude/agents/ad-director.md` | ACTIVE (pre-existing) | — | Custom | Video ad production packages. Reports to CMO once CMO is hired |
 | CQRO | `.claude/agents/cqro.md` | PROBATION (to Nov 30 2026) | Oct 31 2026 | Custom build; structure from VoltAgent compliance-auditor.md (MIT) | "Hamna Qureshi". Hired by Founder Oct 31 2026: "monitor and give more authority that lies within her domain" → binding BLOCK (Founder-only override), direct fixes to L1 facts, standing audit rights, read-only Shopify/Meta/GSC. Register `approvals/REGISTER.md` |
-| CRO | `ops/agents/candidates/cro-sana.md` (draft) | INTERVIEW-READY, pending CEO review (Oct 31) | — | Custom build; structure from VoltAgent assumption-mapping.md (MIT) | "Sana Iqbal" `cro-sana`. Replaces Farhan (rejected: clarity, accuracy). Brief v2. Screening 7/7 PASS. Scores 4/5/4/5/4 = 4.4 (CHRO, CEO to re-score) |
+| CRO | `.claude/agents/cro.md` | PROBATION (to Dec 1 2026) | Nov 1 2026 | Custom build; structure from VoltAgent assumption-mapping.md (MIT) | "Sana Iqbal". Hired by Founder Nov 1 2026. Read-only Shopify/Meta/GSC. First task: final 11.11 recommendation on live data |
 | CMO | `ops/agents/candidates/cmo-omar.md` (draft) | INTERVIEW-READY, pending CEO review (Oct 31) | — | Custom build; structure from VoltAgent landing-page-copywriter.md (MIT) | "Omar Shafiq" `cmo-omar`. Replaces Mahnoor (rejected: commercial judgment). Brief v2. Screening 7/7 PASS. Scores 4/4/5/4/4 = 4.2 (CHRO, CEO to re-score) |
 | COO | — | PLANNED, wave 2 | — | — | — |
 | CFO | — | PLANNED, wave 2 | — | — | — |
@@ -23,6 +23,7 @@ Owner: CHRO. Every agent, every stage, every decision. Never delete rows.
 | Oct 31 2026 | Hamna Qureshi | CQRO | HIRE | monitor and give more authority that lies within her domain.. | Interview: challenged on CLAUDE.md-only checking (answer: live read access, fixed at hire) and on being the 11.11 bottleneck (answer: batch approvals, pre-approved templates, 24h turnaround). Authority expanded per note; weekly CHRO monitoring |
 | Oct 31 2026 | Farhan Malik | CRO | REJECT | lacks clarity and accuracy, which is highly needed for this role | Decided from the dossier (no interview). Re-source: verify every number live, one-page answer first |
 | Oct 31 2026 | Mahnoor Abbasi | CMO | REJECT | shes the CMO and lacks commercial Judgement | Decided from the dossier. Re-source: every content decision tied to rupees and measured |
+| Nov 1 2026 | Sana Iqbal | CRO | HIRE | (none) | Replaced Farhan. CEO verified every work-sample number against Shopify before the interview |
 
 ## Sourcing log (wave 1, Oct 31 2026)
 | Repo / file | Licence | Screen | Used for |
