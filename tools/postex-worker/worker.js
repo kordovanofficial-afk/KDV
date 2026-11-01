@@ -980,9 +980,15 @@ _Reply STOP to stop updates._`;
 }
 
 function msgOutForDelivery(order) {
-  const payLine = isPrepaid(order)
+  // v5.1: quote what the rider will actually collect. total_price is the
+  // pre-edit total and ignores prepayments, so it is never used here.
+  const pick = v => (v === null || v === undefined || v === '' || !Number.isFinite(Number(v))) ? null : Number(v);
+  const due  = pick(order.total_outstanding) ?? pick(order.current_total_price);
+  const payLine = (isPrepaid(order) || due === 0 || due < 0)
     ? `Already paid in full — nothing to hand over. Please stay reachable; the rider will call before arriving.`
-    : `Please keep *${waMoney(order.total_price)}* ready and stay reachable — the rider will call before arriving.`;
+    : due === null
+      ? `Please keep the amount due ready and stay reachable — the rider will call before arriving.`
+      : `Please keep *${waMoney(due)}* ready and stay reachable — the rider will call before arriving.`;
 
   return `${waFirstName(order)}, your Kordovan order *${order.name}* is out for delivery today 🛵
 
@@ -1709,7 +1715,7 @@ async function shopifyFetch(path, token, env, options = {}) {
 
 async function getOpenCODOrders(token, env) {
   const data = await shopifyFetch(
-    `/orders.json?status=any&financial_status=pending&fulfillment_status=fulfilled&limit=250&fields=id,order_number,name,financial_status,total_price,payment_gateway,fulfillments,note_attributes,phone,customer,shipping_address,line_items`,
+    `/orders.json?status=any&financial_status=pending&fulfillment_status=fulfilled&limit=250&fields=id,order_number,name,financial_status,total_price,total_outstanding,current_total_price,payment_gateway,fulfillments,note_attributes,phone,customer,shipping_address,line_items`,
     token, env
   );
   return (data.orders || []).filter(o => {
