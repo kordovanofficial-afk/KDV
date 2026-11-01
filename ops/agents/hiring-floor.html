@@ -635,23 +635,33 @@ async function requestChange(d,f){const text=(S.fdraft[f.id]||"").trim();if(!tex
   setF(d,r.ok?"Request sent. The CEO has been notified.":"Request saved. "+r.why)}
 
 const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+const MIC_OK=(()=>{try{const fp=document.permissionsPolicy||document.featurePolicy;if(fp&&fp.allowsFeature&&!fp.allowsFeature("microphone"))return false}catch(e){}return !!(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia&&window.MediaRecorder)})();
 function voiceSec(d){const v=S.voice[d.id]||(S.voice[d.id]={text:"",lang:"en-US"});const rec=S.vrec&&S.vrec.seat===d.id;
   const lang=el("select",{"aria-label":"Language you'll speak",onchange:e=>{v.lang=e.target.value}},[
     el("option",{value:"en-US",text:"English"}),el("option",{value:"ur-PK",text:"Urdu"})]);lang.value=v.lang;
+  const pick=el("label",{class:"btn"+(MIC_OK&&!S.micDenied?" ghost":""),style:"cursor:pointer"},["🎙 "+(MIC_OK&&!S.micDenied?"Or use your phone's recorder":"Record a voice note"),
+    el("input",{type:"file",accept:"audio/*,.opus,.ogg,.m4a,.mp3,.aac,.wav,.amr,.webm",capture:"user",style:"display:none",onchange:e=>pickAudio(d,e.target)})]);
   const btn=rec?el("button",{class:"btn rec",type:"button",onclick:()=>stopRec(d)},[el("span",{class:"rec-dot"}),"Stop ("+(S.vsec||0)+"s)"])
-               :el("button",{class:"btn",type:"button",onclick:()=>startRec(d)},["🎙 Record a voice note"]);
-  const txt=el("textarea",{id:"vtext",placeholder:"What you said appears here as you speak. Fix anything it got wrong — "+(d.name||"the agent")+" works from these words.","aria-label":"Voice note text"});
+               :(MIC_OK&&!S.micDenied?el("button",{class:"btn",type:"button",onclick:()=>startRec(d)},["🎙 Record here"]):null);
+  const txt=el("textarea",{id:"vtext",placeholder:"Optional: a one-line summary. If you leave it empty, the CEO writes out the recording for "+(d.name||"the agent")+".","aria-label":"Voice note text"});
   txt.value=v.text||"";txt.addEventListener("input",()=>{v.text=txt.value});
   return el("div",{class:"voice"},[el("h4",{text:"Voice note for "+(d.name||"this agent")}),
-    el("div",{class:"row"},[btn,rec?null:lang]),
+    el("div",{class:"row"},[btn,rec?null:pick,rec?null:lang]),
+    rec||v.url?null:el("p",{class:"hint",text:"Tap the button: your phone opens its voice recorder (or lets you pick a WhatsApp voice note). Speak, save, and it attaches here. Type a one-line summary below if you can — I turn the recording into text either way."}),
     v.url&&!rec?el("audio",{src:v.url,controls:true}):null,
     (v.url||v.text||rec)?txt:null,
     (v.url||v.text)&&!rec?el("div",{class:"row"},[el("button",{class:"btn",type:"button",onclick:()=>sendVoice(d)},["Send voice note"]),el("button",{class:"btn ghost",type:"button",onclick:()=>{S.voice[d.id]={text:"",lang:v.lang};renderDeskDetail(true)}},["Discard"])]):null,
     el("p",{class:"hint",id:"vmsg",text:S.vmsg[d.id]||(SR?"":"Live typing of your words isn't supported in this browser. The recording still sends; type a one-line summary if you can.")})]);}
 const setV=(d,t)=>{S.vmsg[d.id]=t;const m=$("#vmsg");if(m)m.textContent=t};
+
+function pickAudio(d,input){const f=input.files&&input.files[0];input.value="";if(!f)return;const v=S.voice[d.id]||(S.voice[d.id]={text:"",lang:"en-US"});
+  if(f.size>20*1048576){setV(d,"That recording is over 20 MB. Keep voice notes under about 10 minutes.");return}
+  v.blob=f;v.fname=f.name;if(v.url)URL.revokeObjectURL(v.url);v.url=URL.createObjectURL(f);v.dur=null;
+  const a=new Audio();a.preload="metadata";a.onloadedmetadata=()=>{if(isFinite(a.duration)){v.dur=Math.round(a.duration)}};a.src=v.url;
+  setV(d,"Recording attached. Listen back, add a line of text if you like, then send.");renderDeskDetail(true)}
 async function startRec(d){const v=S.voice[d.id];
   let stream;try{stream=await navigator.mediaDevices.getUserMedia({audio:true})}
-  catch(e){setV(d,"The microphone isn't available on this page. Use your phone keyboard's mic button to dictate into the task box below instead.");return}
+  catch(e){S.micDenied=true;setV(d,"This page can't use the microphone directly. Tap \"Record a voice note\" to use your phone's recorder instead.");renderDeskDetail(true);return}
   const type=["audio/webm;codecs=opus","audio/webm","audio/mp4"].find(t=>window.MediaRecorder&&MediaRecorder.isTypeSupported(t))||"";
   const mr=new MediaRecorder(stream,type?{mimeType:type}:undefined);const chunks=[];
   mr.ondataavailable=e=>{if(e.data&&e.data.size)chunks.push(e.data)};
@@ -665,9 +675,11 @@ async function startRec(d){const v=S.voice[d.id];
 function stopRec(d){if(!S.vrec)return;clearInterval(S.vtimer);try{S.vrec.sr&&S.vrec.sr.stop()}catch(e){}try{S.vrec.mr.stop()}catch(e){}S.vrec=null;setV(d,"Listen back, fix the text if needed, then send.");}
 async function sendVoice(d){const v=S.voice[d.id];if(!S.db){setV(d,"Can't save in this view.");return}
   setV(d,"Saving your voice note…");let voice=null;
-  if(v.blob&&S.assets){for(const t of [v.blob.type,"video/webm"]){try{const a=await S.assets.upload(t===v.blob.type?v.blob:new Blob([v.blob],{type:t}));voice=a.id;break}catch(e){}}}
-  const text=(v.text||"").trim()||"(Voice note — no text captured. CEO: transcribe the recording.)";
-  let ref;try{ref=await S.db.collection("assignments").add({seat:d.id,agent:d.name||d.id,text,voice,lang:v.lang,dur:v.dur||null,status:"new",at:new Date().toISOString()})}
+  if(v.blob&&S.assets){const n=(v.fname||"").toLowerCase();const ext=n.split(".").pop();
+    const alt=/m4a|mp4|aac|3gp/.test(ext)||/mp4|aac/.test(v.blob.type)?"video/mp4":/ogg|opus/.test(ext)||/ogg|opus/.test(v.blob.type)?"video/ogg":"video/webm";
+    for(const t of [v.blob.type||alt,alt,"text/plain"]){try{const a=await S.assets.upload(new Blob([v.blob],{type:t}));voice=a.id;break}catch(e){}}}
+  const text=(v.text||"").trim()||"(Voice note — CEO is writing it out from the recording.)";
+  let ref;try{ref=await S.db.collection("assignments").add({seat:d.id,agent:d.name||d.id,text,voice,lang:v.lang,dur:v.dur||null,fname:v.fname||null,needsTranscript:!(v.text||"").trim(),status:"new",at:new Date().toISOString()})}
   catch(e){setV(d,"Couldn't save. Try again.");return}
   S.voice[d.id]={text:"",lang:v.lang};renderDeskDetail(true);
   const r=await notify("[Office] Voice note from the Founder for "+(d.name||d.id)+" ("+(d.role||d.id)+"): \""+text.slice(0,600)+"\""+(voice?" — recording saved":" — recording not saved")+". Read assignments/"+ref.id+" and route it.",$("#vmsg"));
