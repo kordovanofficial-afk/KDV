@@ -1,0 +1,12 @@
+const {chromium}=require('playwright');
+(async()=>{const b=await chromium.launch({args:['--use-fake-ui-for-media-stream','--use-fake-device-for-media-stream']});
+const ctx=await b.newContext({viewport:{width:1250,height:950}});const pg=await ctx.newPage();pg.on('pageerror',e=>console.log('PAGEERR',e.message));
+await pg.goto('http://127.0.0.1:8001/hq.html');await pg.waitForTimeout(1500);
+const fr=pg.frame({url:/8002/});const f=pg.frameLocator('#f');
+await f.locator('.deskcard').first().click();await pg.waitForTimeout(500);
+ctx.on('page',p=>console.log('NEWPAGE',p.url()));const popP=ctx.waitForEvent('page',{timeout:8000});await f.locator('.voice button.btn').first().click();const pop=await popP;await pop.waitForLoadState();
+await pop.screenshot({path:'pop1.png'});await pop.click('#go');await pop.waitForTimeout(3000);await pop.click('#stop');await pop.waitForTimeout(800);
+await pop.fill('#txt','Omar, make the bumper end card bigger.');await pop.click('#send');await pg.waitForTimeout(2000);
+console.log('adds',JSON.stringify(await fr.evaluate(()=>window.__adds)));console.log('ups',await fr.evaluate(()=>window.__ups));
+console.log('msg',await fr.evaluate(()=>{const m=document.querySelector('#vmsg');return m&&m.textContent}));
+await f.locator('.voice').screenshot({path:'voice.png'});await b.close();})().catch(e=>{console.error(e);process.exit(1)});

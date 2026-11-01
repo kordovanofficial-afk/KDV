@@ -639,15 +639,14 @@ const MIC_OK=(()=>{try{const fp=document.permissionsPolicy||document.featurePoli
 function voiceSec(d){const v=S.voice[d.id]||(S.voice[d.id]={text:"",lang:"en-US"});const rec=S.vrec&&S.vrec.seat===d.id;
   const lang=el("select",{"aria-label":"Language you'll speak",onchange:e=>{v.lang=e.target.value}},[
     el("option",{value:"en-US",text:"English"}),el("option",{value:"ur-PK",text:"Urdu"})]);lang.value=v.lang;
-  const pick=el("label",{class:"btn"+(MIC_OK&&!S.micDenied?" ghost":""),style:"cursor:pointer"},["🎙 "+(MIC_OK&&!S.micDenied?"Or use your phone's recorder":"Record a voice note"),
-    el("input",{type:"file",accept:"audio/*,.opus,.ogg,.m4a,.mp3,.aac,.wav,.amr,.webm",capture:"user",style:"display:none",onchange:e=>pickAudio(d,e.target)})]);
-  const btn=rec?el("button",{class:"btn rec",type:"button",onclick:()=>stopRec(d)},[el("span",{class:"rec-dot"}),"Stop ("+(S.vsec||0)+"s)"])
-               :(MIC_OK&&!S.micDenied?el("button",{class:"btn",type:"button",onclick:()=>startRec(d)},["🎙 Record here"]):null);
+  const pick=el("label",{class:"btn ghost",style:"cursor:pointer"},["Attach a recording",
+    el("input",{type:"file",accept:"audio/*,video/webm,.opus,.ogg,.m4a,.mp3,.aac,.wav,.amr,.webm",style:"display:none",onchange:e=>pickAudio(d,e.target)})]);
+  const btn=el("button",{class:"btn",type:"button",onclick:()=>openRecorder(d)},["🎙 Record a voice note"]);
   const txt=el("textarea",{id:"vtext",placeholder:"Optional: a one-line summary. If you leave it empty, the CEO writes out the recording for "+(d.name||"the agent")+".","aria-label":"Voice note text"});
   txt.value=v.text||"";txt.addEventListener("input",()=>{v.text=txt.value});
   return el("div",{class:"voice"},[el("h4",{text:"Voice note for "+(d.name||"this agent")}),
-    el("div",{class:"row"},[btn,rec?null:pick,rec?null:lang]),
-    rec||v.url?null:el("p",{class:"hint",text:"Tap the button: your phone opens its voice recorder (or lets you pick a WhatsApp voice note). Speak, save, and it attaches here. Type a one-line summary below if you can — I turn the recording into text either way."}),
+    el("div",{class:"row"},[btn,pick]),
+    v.url?null:el("p",{class:"hint",text:"A small recorder window opens (allow the microphone the first time). Record, press “Send to HQ”, and the note lands on this desk. Already have a recording, e.g. a WhatsApp voice note? Use “Attach a recording”."}),
     v.url&&!rec?el("audio",{src:v.url,controls:true}):null,
     (v.url||v.text||rec)?txt:null,
     (v.url||v.text)&&!rec?el("div",{class:"row"},[el("button",{class:"btn",type:"button",onclick:()=>sendVoice(d)},["Send voice note"]),el("button",{class:"btn ghost",type:"button",onclick:()=>{S.voice[d.id]={text:"",lang:v.lang};renderDeskDetail(true)}},["Discard"])]):null,
@@ -659,6 +658,57 @@ function pickAudio(d,input){const f=input.files&&input.files[0];input.value="";i
   v.blob=f;v.fname=f.name;if(v.url)URL.revokeObjectURL(v.url);v.url=URL.createObjectURL(f);v.dur=null;
   const a=new Audio();a.preload="metadata";a.onloadedmetadata=()=>{if(isFinite(a.duration)){v.dur=Math.round(a.duration)}};a.src=v.url;
   setV(d,"Recording attached. Listen back, add a line of text if you like, then send.");renderDeskDetail(true)}
+/* ==== KV voice recorder: opens a top-level recorder tab (the page frame has no microphone) ==== */
+const REC_HTML=`<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Voice note · Kordovan HQ</title>
+<style>:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;min-height:100vh;background:#17110d;color:#efe4d2;font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif;display:grid;place-items:center;padding:16px}
+.c{width:100%;max-width:520px;background:#241a14;border:4px solid #5a4130;padding:18px;display:grid;gap:14px}
+h1{font-size:20px;margin:0}.who{color:#d6ad62;font-weight:600}.m{color:#a8957e;font-size:15px;margin:0}
+button,select{font:inherit;font-weight:600;padding:14px 16px;border:3px solid #0c0907;cursor:pointer}
+.go{background:#c27a48;color:#1a100a;font-size:19px}.stop{background:#d0614a;color:#fff;font-size:19px}.send{background:#9aa55a;color:#1a100a}.ghost{background:#2f2219;color:#efe4d2;border-color:#7a5a42}
+select{background:#2f2219;color:#efe4d2;border-color:#7a5a42;padding:10px}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}textarea{width:100%;min-height:110px;background:#120d0a;color:#efe4d2;border:3px solid #5a4130;padding:10px;font:inherit}
+audio{width:100%}.t{font-variant-numeric:tabular-nums;font-size:22px;font-weight:700}.dot{display:inline-block;width:12px;height:12px;background:#ff5a4a;margin-right:8px;animation:b 1s steps(2) infinite}@keyframes b{50%{opacity:0}}
+.err{color:#ffb4a6}[hidden]{display:none!important}</style></head><body><div class="c">
+<h1>Voice note for <span class="who" id="who"></span></h1>
+<div class="row"><label class="m" for="lang">I'll speak in</label><select id="lang"><option value="en-US">English</option><option value="ur-PK">Urdu</option></select></div>
+<div class="row"><button class="go" id="go">🎙 Start recording</button><button class="stop" id="stop" hidden><span class="dot"></span>Stop</button><span class="t" id="t" hidden>0:00</span></div>
+<audio id="play" controls hidden></audio>
+<textarea id="txt" placeholder="Your words appear here while you speak (Chrome / Edge). Fix anything it got wrong, or leave it empty: the CEO writes it out from the recording." hidden></textarea>
+<div class="row" id="acts" hidden><button class="send" id="send">Send to HQ</button><button class="ghost" id="again">Record again</button><button class="ghost" id="dl" hidden>Download recording</button></div>
+<p class="m" id="msg">Your browser will ask to use the microphone. Choose Allow.</p></div>
+<script>
+const P=window.KVP||JSON.parse(decodeURIComponent(location.hash.slice(1)||"%7B%7D"));document.getElementById("who").textContent=P.name||"the team";
+const $=id=>document.getElementById(id),msg=t=>{$("msg").textContent=t};let mr,stream,chunks=[],blob,t0,timer,sr,text="";
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+$("go").onclick=async()=>{try{stream=await navigator.mediaDevices.getUserMedia({audio:true})}catch(e){$("msg").className="m err";msg("The microphone was blocked ("+(e&&e.name||"error")+"). Click the lock / mic icon in the address bar, allow the microphone, then try again.");return}
+  $("msg").className="m";const ty=["audio/webm;codecs=opus","audio/webm","audio/mp4","audio/ogg"].find(x=>MediaRecorder.isTypeSupported(x))||"";
+  mr=new MediaRecorder(stream,ty?{mimeType:ty}:undefined);chunks=[];mr.ondataavailable=e=>{if(e.data.size)chunks.push(e.data)};
+  mr.onstop=()=>{stream.getTracks().forEach(x=>x.stop());blob=new Blob(chunks,{type:mr.mimeType||"audio/webm"});$("play").src=URL.createObjectURL(blob);$("play").hidden=false;$("acts").hidden=false;$("txt").hidden=false;$("go").hidden=false;$("go").textContent="🎙 Start again";msg("Listen back. Fix the text if needed, then Send to HQ.")};
+  mr.start(1000);t0=Date.now();$("go").hidden=true;$("stop").hidden=false;$("t").hidden=false;$("acts").hidden=true;$("play").hidden=true;$("txt").hidden=false;text="";$("txt").value="";
+  timer=setInterval(()=>{const s=Math.round((Date.now()-t0)/1000);$("t").textContent=Math.floor(s/60)+":"+String(s%60).padStart(2,"0");if(s>=600)stop()},500);
+  if(SR){try{sr=new SR();sr.lang=$("lang").value;sr.continuous=true;sr.interimResults=true;sr.onresult=e=>{let x="";for(let i=0;i<e.results.length;i++)x+=e.results[i][0].transcript;$("txt").value=x};sr.onend=()=>{if(mr&&mr.state==="recording"){try{sr.start()}catch(e){}}};sr.start()}catch(e){}}
+  msg("Recording… speak normally. Up to 10 minutes.")};
+function stop(){clearInterval(timer);$("stop").hidden=true;try{sr&&sr.stop()}catch(e){}if(mr&&mr.state!=="inactive")mr.stop()}
+$("stop").onclick=stop;$("again").onclick=()=>$("go").click();
+$("send").onclick=()=>{if(!blob)return;const dur=Math.round((Date.now()-t0)/1000);
+  if(window.opener){try{window.opener.postMessage({kind:"kv-voice",nonce:P.nonce,seat:P.seat,blob,text:$("txt").value,lang:$("lang").value,dur},"*");msg("Sent to HQ. You can close this tab.");$("send").disabled=true;setTimeout(()=>window.close(),900);return}catch(e){}}
+  $("dl").hidden=false;msg("This tab lost its link to HQ. Download the recording, then attach it on the desk with “Attach a recording”.")};
+$("dl").onclick=()=>{const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="voice-note-"+(P.seat||"hq")+"."+((blob.type.split("/")[1]||"webm").split(";")[0]);document.body.append(a);a.click();a.remove()};
+<\/script></body></html>`;
+function openRecorder(d){const nonce=Math.random().toString(36).slice(2);S.recNonce=nonce;S.recSeat=d.id;
+  const P={seat:d.id,name:d.name||d.id,nonce};let w=null;
+  try{w=window.open("","kv-recorder","popup,width=560,height=760");
+    if(w){w.document.open();w.document.write(REC_HTML.replace("<script>","<script>window.KVP="+JSON.stringify(P).replace(/</g,"\\u003c")+";"));w.document.close()}}
+  catch(e){try{if(w)w.close()}catch(_){}w=null}
+  if(!w){try{w=window.open(URL.createObjectURL(new Blob([REC_HTML],{type:"text/html"}))+"#"+encodeURIComponent(JSON.stringify(P)),"kv-recorder2","popup,width=560,height=760")}catch(e){w=null}}
+  try{S.db&&S.db.collection("diag").add({what:"recorder_open",ok:!!w,ua:navigator.userAgent,at:new Date().toISOString()})}catch(e){}
+  S.recWin=w;setV(d,w?"The recorder opened in a new window. Record there, then press “Send to HQ”.":"Your browser blocked the recorder window. Allow pop-ups for this page, or use “Attach a recording”.");return w}
+window.addEventListener("message",e=>{const m=e.data;if(!m||m.kind!=="kv-voice"||m.nonce!==S.recNonce||!(m.blob instanceof Blob))return;
+  const d=S.desks.find(x=>x.id===m.seat);if(!d)return;S.recNonce=null;
+  const v=S.voice[d.id]={text:m.text||"",lang:m.lang||"en-US",blob:m.blob,fname:"voice."+((m.blob.type.split("/")[1]||"webm").split(";")[0]),dur:m.dur||null};
+  v.url=URL.createObjectURL(m.blob);S.deskSel=d.id;renderDesks();renderDeskDetail(true);sendVoice(d);});
+/* ==== end recorder ==== */
+
 async function startRec(d){const v=S.voice[d.id];
   let stream;try{stream=await navigator.mediaDevices.getUserMedia({audio:true})}
   catch(e){S.micDenied=true;setV(d,"This page can't use the microphone directly. Tap \"Record a voice note\" to use your phone's recorder instead.");renderDeskDetail(true);return}
@@ -676,7 +726,7 @@ function stopRec(d){if(!S.vrec)return;clearInterval(S.vtimer);try{S.vrec.sr&&S.v
 async function sendVoice(d){const v=S.voice[d.id];if(!S.db){setV(d,"Can't save in this view.");return}
   setV(d,"Saving your voice note…");let voice=null;
   if(v.blob&&S.assets){const n=(v.fname||"").toLowerCase();const ext=n.split(".").pop();
-    const alt=/m4a|mp4|aac|3gp/.test(ext)||/mp4|aac/.test(v.blob.type)?"video/mp4":/ogg|opus/.test(ext)||/ogg|opus/.test(v.blob.type)?"video/ogg":"video/webm";
+    const bt=v.blob.type||"";const alt=/webm/.test(bt)||ext==="webm"?"video/webm":/m4a|mp4|aac|3gp/.test(ext)||/mp4|aac/.test(bt)?"video/mp4":/ogg|opus/.test(ext)||/ogg/.test(bt)?"video/ogg":"video/webm";
     for(const t of [v.blob.type||alt,alt,"text/plain"]){try{const a=await S.assets.upload(new Blob([v.blob],{type:t}));voice=a.id;break}catch(e){}}}
   const text=(v.text||"").trim()||"(Voice note — CEO is writing it out from the recording.)";
   let ref;try{ref=await S.db.collection("assignments").add({seat:d.id,agent:d.name||d.id,text,voice,lang:v.lang,dur:v.dur||null,fname:v.fname||null,needsTranscript:!(v.text||"").trim(),status:"new",at:new Date().toISOString()})}
