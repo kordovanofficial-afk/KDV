@@ -582,7 +582,6 @@ function renderDeskDetail(force){const box=$("#desk-detail");const d=S.desks.fin
       folderSec(d),
       sec("Deliverables",d.deliverables),
       sec("KPIs",d.kpis),
-      S.owner?voiceSec(d):null,
       el("div",{class:"assign"},[el("h4",{text:"Give a task"}),S.owner?ta:null,
         S.owner?el("div",{class:"desk-row"},[el("button",{class:"btn",type:"button",onclick:()=>assign(d)},["Assign"])]):null,msg,
         ...asg.slice(0,6).map(a=>el("div",{class:"asg"},[a.voice?el("small",{text:"🎙 Voice note"+(a.dur?" · "+a.dur+"s":"")}):null,el("span",{text:a.text||""}),a.voice?el("audio",{src:"/_blob/"+a.voice,controls:true,preload:"none"}):null,el("small",{text:stLabel(a)+(a.at?" · "+ago(a.at):"")+(a.reply?" · "+a.reply:"")})]))])])]));}

@@ -591,11 +591,8 @@ TOF-J had banked ~27k jacket ViewContent events (Sep 5–Oct 20) and nothing was
   request** on a file (→ `assignments` with `file`). 🔴 **Whenever an agent delivers a file, the CEO uploads it**
   (`Artifact` publish `asset:true` with the url) **and writes its `folders` row**, bumping `version` on re-deliveries.
   Capabilities now: comments, db, user, sample, mcp (send_message), assets, downloads.
-- 🎙 **VOICE NOTES (Nov 1 2026, Founder asked):** ⚠️ in-page mic is BLOCKED by the artifact frame's permissions policy (reproduced locally). FIX (tested end-to-end in Playwright, Nov 1): "Record a voice note" opens a top-level about:blank RECORDER WINDOW (window.open + document.write of REC_HTML), which has mic access, records with MediaRecorder + live speech-to-text, and postMessages the Blob back to the HQ frame (nonce-checked) → asset upload (as video/webm) + assignment. "Attach a recording" = file fallback. db `diag` logs whether the window opened. Rows with `needsTranscript:true` = CEO must transcribe. Original design: the page records audio, types the
-  words live (browser speech, English or Urdu) and the Founder fixes the text before sending → `assignments/<id>` {seat,
-  text, voice: assetId, lang, dur}. Agents work from the TEXT. If text is missing or doubtful: `Artifact` read
-  `path:<assetId>` to save the audio, then `pip install faster-whisper` and run `python3 tools/voice/transcribe.py <file> ur|en`
-  (free, local; verified working Nov 1). Reply on the assignment so the desk shows it was understood.
+- 🎙 **VOICE NOTES: REMOVED (Founder, Nov 1: "just remove it… it doesn't work, I'll just tell here").** The artifact frame blocks the mic; the recorder-window workaround also failed for the Founder. Do not rebuild. Code left dormant in the page (voiceSec unused); `tools/voice/transcribe.py` kept.
+- 👥 **Team pane (Nov 1):** mod `kordovan-team` (session dev-mods folder, container-local) shows the roster beside the chat; `/team` reopens it. Founder names agents in chat ("Omar, …") — route accordingly.
 - 🗓 **Mocha Mate restocks "in a few days" (Founder, Nov 1)** → do NOT pause TOF-M for stock; no need to worry about it.
 - ✅ **CRO HIRED Nov 1 2026** (Sana Iqbal, `.claude/agents/cro.md`) · ✅ **CMO HIRED Nov 1 2026** (Omar Shafiq,
   `.claude/agents/cmo.md`, has Shopify Files + free render tools: Bash/ffmpeg/HyperFrames; `cdn.shopify.com` ALLOWED in
