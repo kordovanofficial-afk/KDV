@@ -21,6 +21,7 @@ export const register: Register = on => {
   on('session.start', async ($, e, next) => {
     await $.command.register({ name: 'team', description: 'Show the Kordovan team beside the chat' })
     void $.ui.open({ id: PANE, title: TITLE })
+    $.ui.status('Team: Hamna · Noor · Sana · Omar · Zain · Ayesha')
     return next(e)
   })
 
@@ -42,5 +43,10 @@ export const register: Register = on => {
         ))}
       </Box>
     )
+  })
+
+  on('ui.render', { component: 'AbovePrompt' }, async ($, e) => {
+    const { Text } = $.ui.resolve(e)
+    return <Text dimColor>Team: Hamna (Quality) · Noor (People) · Sana (Revenue) · Omar (Marketing) · Zain (Ops) · Ayesha (Finance)</Text>
   })
 }
