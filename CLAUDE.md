@@ -641,6 +641,18 @@ TOF-J had banked ~27k jacket ViewContent events (Sep 5–Oct 20) and nothing was
 - ⚠️ **PostEx Sync anomaly:** 6 edited orders show more cash received than the order total (86,616 total; e.g. KDV#22898
   85,400 on 28,200). For the CFO/CTO to investigate. Awaiting Founder decisions (see report).
 
+## 🛍 11.11 SALE — FOUNDER DECISION (Boardroom, Nov 1 2026) — SCHEDULED, live Nov 10–12
+- Founder overrode the CRO's "no wallet discount": **25% off ALL wallets + 15% off every other product.**
+  Created as 2 AUTOMATIC discounts (no code), both `combinesWith` all false (WELCOME10 etc. cannot stack):
+  `gid://shopify/DiscountAutomaticNode/1489856954608` "11.11 — 25% off all wallets" (collection `kdv-wallets`
+  484044833008, 31 products) · `…/1489856987376` "11.11 — 15% off everything else" (all items; wallets get the better 25%).
+  Window **2026-11-09T19:00Z → 2026-11-12T18:59:59Z** = Nov 10 00:00 – Nov 12 23:59 PKT (CEO chose the CRO's window;
+  Founder can change). Founder also said NO to the jacket payment-rescue message and NO to COD advances.
+- Same Boardroom: content plan approved (Clifford hats ARE hand-shaped; hat sizes correct; Ahsan: hat Reel Nov 3,
+  bag photos by Nov 14) · 11.11 creative approved (Files photos are REAL photographs; render all 4) · live fixes:
+  shipping note "when paid online" = **NO, leave it** · Clifford: done Nov 1 — both hats' SEO description now
+  "hand-shaped, lightweight design" (was "heaviest build"); Faded Black size order S·M·L·XL so it opens on in-stock S.
+
 ## 🔌 Available integrations (MCP)
 Shopify, GitHub, Canva, Figma, Facebook Ads, Higgsfield, Cloudflare.
 (Playwright is NOT available in this remote env — design is done in code, then
