@@ -12,8 +12,8 @@ Owner: CHRO. Every agent, every stage, every decision. Never delete rows.
 | CQRO | `.claude/agents/cqro.md` | PROBATION (to Nov 30 2026) | Oct 31 2026 | Custom build; structure from VoltAgent compliance-auditor.md (MIT) | "Hamna Qureshi". Hired by Founder Oct 31 2026: "monitor and give more authority that lies within her domain" → binding BLOCK (Founder-only override), direct fixes to L1 facts, standing audit rights, read-only Shopify/Meta/GSC. Register `approvals/REGISTER.md` |
 | CRO | `.claude/agents/cro.md` | PROBATION (to Dec 1 2026) | Nov 1 2026 | Custom build; structure from VoltAgent assumption-mapping.md (MIT) | "Sana Iqbal". Hired by Founder Nov 1 2026. Read-only Shopify/Meta/GSC. First task: final 11.11 recommendation on live data |
 | CMO | `.claude/agents/cmo.md` | PROBATION (to Dec 1 2026) | Nov 1 2026 | Custom build; structure from VoltAgent landing-page-copywriter.md (MIT) | "Omar Shafiq". Hired by Founder Nov 1 2026. Read-only Shopify/Meta/GSC. Creative Director (ad-director) now reports here |
-| COO | candidate `coo-zain` | INTERVIEWING (pending CEO review + push) | Nov 1 2026 | Custom build; structure from VoltAgent risk-manager.md (MIT) | "Zain Haider". Wave 2, order 6. Brief `briefs/coo.md` |
-| CFO | candidate `cfo-ayesha` | INTERVIEWING (pending CEO review + push) | Nov 1 2026 | Custom build; structure from wshobson startup-analyst.md (MIT) | "Ayesha Naqvi". Wave 2, order 7. Brief `briefs/cfo.md` |
+| COO | `.claude/agents/coo.md` | PROBATION (to Dec 1 2026) | Nov 1 2026 | Custom build (CHRO, wave 2) | "Zain Haider". Hired by Founder Nov 1 2026. Read-only Shopify incl. inventory |
+| CFO | `.claude/agents/cfo.md` | PROBATION (to Dec 1 2026) | Nov 1 2026 | Custom build (CHRO, wave 2) | "Ayesha Naqvi". Hired by Founder Nov 1 2026. Read-only Shopify + Meta. Sets the binding margin floor |
 | CTO | — | PLANNED, wave 3 | — | — | — |
 
 ## Decision log
@@ -25,6 +25,8 @@ Owner: CHRO. Every agent, every stage, every decision. Never delete rows.
 | Oct 31 2026 | Mahnoor Abbasi | CMO | REJECT | shes the CMO and lacks commercial Judgement | Decided from the dossier. Re-source: every content decision tied to rupees and measured |
 | Nov 1 2026 | Sana Iqbal | CRO | HIRE | (none) | Replaced Farhan. CEO verified every work-sample number against Shopify before the interview |
 | Nov 1 2026 | Omar Shafiq | CMO | HIRE | (none) | Replaced Mahnoor. Known work-sample error (hat order value) to be corrected in first task |
+| Nov 1 2026 | Zain Haider | COO | HIRE | (none) | Wave 2 |
+| Nov 1 2026 | Ayesha Naqvi | CFO | HIRE | (none) | Wave 2 |
 
 ## Sourcing log (wave 1, Oct 31 2026)
 | Repo / file | Licence | Screen | Used for |
