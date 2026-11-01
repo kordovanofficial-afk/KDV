@@ -26,7 +26,7 @@ Working files (session-local): `/tmp/claude-0/-home-user-KDV/f5fcf710-68f4-5237-
 | **Left at month end** | **169,705** (82,689 to 249,135) | derived |
 
 ## Assumptions
-- **A1. Unit cost = current Shopify `unitCost`.** Wallets include the +150 buffer (written Oct 31), bags carry none. This is today's cost applied to October lines, which is conservative for wallets. Non-wallet, non-bag costs (hats, caps, gloves, belts, jackets 10,000, shoes) were not confirmed by the Founder; jackets show 10,000 in Shopify against 11,000 in CLAUDE.md. *Pull:* Mr. Tahir confirms the 10 biggest non-wallet costs.
+- **A1. Unit cost = current Shopify `unitCost`.** Wallets include the +150 buffer (written Oct 31), bags carry none. This is today's cost applied to October lines, which is conservative for wallets. Non-wallet, non-bag costs (hats, caps, gloves, belts, jackets 10,000, shoes) were not confirmed by the Founder; jackets show 7,500–10,000 in Shopify by style (11 at 10,000, 18 at 7,500–9,500, Alison blank) against a flat 11,000 in CLAUDE.md *(CQRO fix Nov 1, live unitCost read)*. *Pull:* Mr. Tahir confirms the 10 biggest non-wallet costs.
 - **A2. 49,400 of revenue has no cost** (Rastov Backpack 30,800 · Dopp Kit 6,600 · Roxanne Clutch Tan + Red 8,800 as custom lines · Mini Folio 3,200). Filled at 35% cost (range 25–50%). The 3,500 "TCS charges" custom line is treated as a delivery pass-through, not product.
 - **A3. Delivery** we pay PostEx: 225 per dispatched order (range 150–300) × 114 dispatched = 25,650. *Pull:* PostEx October invoice.
 - **A4. COD cost** 3% of COD cash (range 2.5–3.5%, CLAUDE.md Sep 15 "measured cost of COD ≈ 2.5–3.5% of cart") × 343,630 = 10,309. **Card/XPay fee** 2.5% (range 2–3.5%) × 179,667 = 4,492. *Pull:* XPay statement.
@@ -112,7 +112,7 @@ Not sellable now (0 stock, DENY), would breach if restocked: The Armour (39.2%),
 | Premium Leather Lipstick Case | 1,700 | 675 | 974 | 2 |
 | The Ripper Case | 1,785 | 750 | 981 | 17 |
 | Plain Bifold | 1,800 | 750 | 996 | 8 |
-- Midtown, Sheppard, Money Clip and the keychain are under 1,000 even at **full** price, so they never cover a Meta purchase alone.
+- Midtown, Sheppard and the keychain are under 1,000 even at **full** price, so they never cover a Meta purchase alone. *(CQRO fix Nov 1: Money Clip removed; at full price 1,950 − 800 − 58.5 = 1,091.5, above 1,000. Live price read Nov 1.)*
 - **Free alternative to excluding them:** a minimum order on the automatic discounts. The weakest line keeps 48.1% at sale, so 1,000 ÷ 0.481 = **PKR 2,100 discounted subtotal** clears every row in 5b (two cheap wallets, or one wallet plus gloves). CQRO to test on a draft cart whether Shopify's minimum counts only the discounted items.
 
 **5c. Pass both** (99 of 142 sellable price lines), including every jacket and shoe at 15% (e.g. Iconic 22,000 → 18,700, contribution 7,914 = 42.3%) and the CEO bag (35,700, 14,404 = 40.3%, just over).
