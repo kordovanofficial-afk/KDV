@@ -147,14 +147,12 @@ def c3():
     for i, (n, h, s) in enumerate(cards, 1):
         fr = Image.new("RGB", (W, H), ALABASTER)
         # K1 shows third-party bank cards at the top: crop to the wallet body only
-        fr.paste(fit_cover(img(n), W, 860, 1.12 if n == "K1" else 1.0, yoff=1.0 if n == "K1" else 0.5), (0, 0))
+        fr.paste(fit_cover(img(n), W, 820, 1.12 if n == "K1" else 1.0, yoff=1.0 if n == "K1" else 0.5), (0, 0))
         d = ImageDraw.Draw(fr)
-        d.rectangle([0, 860, W, H], fill=ALABASTER)
-        d.text((64, 885), h, font=font(FR, 64), fill=ESPRESSO)
-        d.text((64, 975), s, font=font(IN_R, 34), fill=STONE)
-        tag = "11.11 · 25% off every wallet"
-        tw = d.textlength(tag, font=font(IN_M, 32))
-        d.text((W - 64 - tw, 985), tag, font=font(IN_M, 32), fill=COGNAC)
+        d.rectangle([0, 820, W, H], fill=ALABASTER)
+        d.text((64, 845), h, font=font(FR, 60), fill=ESPRESSO)
+        d.text((64, 932), s, font=font(IN_R, 34), fill=STONE)
+        d.text((64, 995), "11.11 · 25% off every wallet", font=font(IN_M, 34), fill=COGNAC)
         fr.save(os.path.join(OUT, f"C3_carousel_card{i}_1x1.jpg"), quality=95)
     # card 5: offer card
     fr = Image.new("RGB", (W, H), PARCHMENT)
