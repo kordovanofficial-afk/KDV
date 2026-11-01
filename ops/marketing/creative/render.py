@@ -105,8 +105,8 @@ def c1():
     fps = 30
     sc = [
         dict(img="B1", caption="Paanch wallets.", sub="Bastion · distressed cow leather", kind="p"),
-        dict(img="R1", caption="Razor.", sub="RFID smart wallet", kind="p"),
-        dict(img="L2", caption="Luke.", sub="Slim, vertical", kind="p", pan=True),
+        dict(img="R4", caption="Razor.", sub="RFID smart wallet", kind="p"),
+        dict(img="L1", caption="Luke.", sub="Slim, vertical", kind="p"),
         dict(img="K4", caption="KODO.", sub="Crazy Horse leather, RFID", kind="p"),
         dict(img="A3", caption="Aristocrat.", sub="Slim classic", kind="p", dir=-1),
         dict(kind="end"),
@@ -139,7 +139,7 @@ def c2(W, H, name):
 def c3():
     cards = [
         ("L3", "Andar se dekhiye.", "Luke · card stack aur bill slot"),
-        ("R3", "Razor", "Elastic hold, cards aur cash"),
+        ("R4", "Razor", "Premium leather, RFID smart wallet"),
         ("A3", "Aristocrat", "Card aur cash compartments"),
         ("K1", "KODO", "Crazy Horse leather, RFID"),
     ]
@@ -152,18 +152,19 @@ def c3():
         d.rectangle([0, 860, W, H], fill=ALABASTER)
         d.text((64, 885), h, font=font(FR, 64), fill=ESPRESSO)
         d.text((64, 975), s, font=font(IN_R, 34), fill=STONE)
-        tag = "11.11 · 25% off"
+        tag = "11.11 · 25% off every wallet"
         tw = d.textlength(tag, font=font(IN_M, 32))
         d.text((W - 64 - tw, 985), tag, font=font(IN_M, 32), fill=COGNAC)
         fr.save(os.path.join(OUT, f"C3_carousel_card{i}_1x1.jpg"), quality=95)
     # card 5: offer card
     fr = Image.new("RGB", (W, H), PARCHMENT)
     d = ImageDraw.Draw(fr)
-    fr.paste(fit_cover(img("B2"), 420, 525), (330, 70))
+    fr.paste(fit_cover(img("BT1"), 420, 525), (330, 50))
     text_c(d, 640, OFFER_1, font(FR, 110), ESPRESSO, W)
     text_c(d, 790, OFFER_2, font(FR, 52), ESPRESSO, W)
     text_c(d, 860, OFFER_3, font(FR, 52), ESPRESSO, W)
-    text_c(d, 950, DATES + "  ·  hamare apne workshop se", font(IN_M, 32), COGNAC, W)
+    text_c(d, 940, DATES + "  ·  hamare apne workshop se", font(IN_M, 32), COGNAC, W)
+    text_c(d, 995, "No code needed.", font(IN_R, 30), STONE, W)
     fr.save(os.path.join(OUT, "C3_carousel_card5_1x1.jpg"), quality=95)
 
 
@@ -191,6 +192,7 @@ def c4(W, H, name):
         text_c(d, cy + int(W * 0.18), OFFER_2, font(FR, int(W * 0.06)), ESPRESSO, W)
         text_c(d, cy + int(W * 0.26), OFFER_3, font(FR, int(W * 0.06)), ESPRESSO, W)
         text_c(d, cy + int(W * 0.37), DATES + "  ·  Kordovan", font(IN_M, int(W * 0.04)), COGNAC, W)
+        text_c(d, cy + int(W * 0.44), "No code needed.", font(IN_R, int(W * 0.032)), STONE, W)
         return fr
 
     scenes = [(45, macro("L4", None)), (45, macro("K4", "Leather wears in,")),
