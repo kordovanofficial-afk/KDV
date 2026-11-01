@@ -1,6 +1,8 @@
 # Content batch, Nov 3–16 2026 (CMO, Omar Shafiq)
 
-**Status: READY FOR CQRO** (L2: CMO → CQRO → CEO → Founder). Nothing in this file has been posted, sent or published.
+**Status: READY FOR CQRO (v2, Nov 1 2026)** (L2: CMO → CQRO → CEO → Founder). Nothing in this file has been posted, sent or published.
+**v2 changes, after the Founder approved the batch (Nov 1):** the 11.11 offer is final and filled in (P04, P06–P08, R9, §4); the hand-shaped claim and the hat sizes are confirmed by the Founder (CQRO items returned in §9 are closed, see §10); Ahsan shoots the hat Reel Nov 3 and the bag photos by Nov 14; Mocha Mate restocks within days (P09/P10).
+**The approved 11.11 offer (Founder, Nov 1):** 25% off every wallet and 15% off every other product, **Nov 10 00:00 to Nov 12 23:59 PKT**, as two automatic discounts. No code. They do not combine with any other code. Shopify shows the reduced price itself, so no post states a "was" price.
 Prepared Nov 1 2026. Every price and stock count below was read live from Shopify (read-only GraphQL and ShopifyQL) on **Nov 1 2026**.
 Stock moves daily, so the CQRO re-reads it on the morning of each post (check list in §7).
 
@@ -8,11 +10,11 @@ Stock moves daily, so the CQRO re-reads it on the morning of each post (check li
 
 ## 1. The answer
 
-- **Decision:** In Nov 3–16, lead the organic content with the **Clifford Faded Black cowboy hat**. Run the 11.11 wallets as placeholders until the Founder approves the CRO's offer. **Do not run Mocha Mate "buy" posts until it is restocked.** Paid ads are already selling its last 22 units.
-- **Rupees (tagged links only):** base plan **Rs 35,175 placed / Rs 24,376 surviving**, all from hats. Conditional slots add up to Rs 41,728 placed / Rs 28,917 surviving more, if their gates open (11.11 offer approved, Mocha Mate restocked, hat stock holding).
+- **Decision:** In Nov 3–16, lead the organic content with the **Clifford Faded Black cowboy hat**. Run 11.11 (Nov 10–12) on the deep-stock wallets with the Founder's offer. **No Mocha Mate "buy" posts until the restock lands** (Founder: within days). Then P10 runs.
+- **Rupees (tagged links only):** base plan **Rs 35,175 placed / Rs 24,376 surviving**, all from hats. Conditional slots add up to Rs 38,030 placed / Rs 26,354 surviving more: 11.11 wallets at the approved 25% (no lift assumed), P10 once Mocha Mate is restocked, and P11 if hat stock holds.
 - **Confidence:** High on prices, stock and per-page conversion, all read live. Low on sessions per post (assumption A1, no history). Low on hats in particular: their 1.34% page rate rests on 6 checkouts.
 - **Risk:** Hat sizes. Faded Black is in stock only in **S and L**, and Rustic Brown only in XL. Anyone who needs an M cannot buy, so the hat forecast could come in at about half.
-- **What I need from the Founder:** (1) Approve or edit this batch (L2) by **Nov 3**. (2) The **Mocha Mate production date**, so the restock reply and the Nov 13 slot have a real date. (3) Confirm Ahsan can shoot the hat Reel on Nov 3 and the bag photos (§6) by Nov 14. (4) The 11.11 offer decision (from the CRO's recommendation) by Nov 6.
+- **What I need from the Founder (v2):** nothing new. All four Nov 1 asks were answered: batch approved, Mocha Mate restocks within days, Ahsan shoots Nov 3 and Nov 14, and the 11.11 offer is decided. Each post still comes back for its own yes before it goes out.
 
 ### Corrected ranking (expected surviving rupees from organic content, Nov 3–16)
 
@@ -76,9 +78,9 @@ Base URL `https://kordovanleather.com`. DM keywords: **HAT, MOCHA, JACKET, WALLE
 | P01 | Wed Nov 4 | Reel | Clifford Faded Black | Stock ≥ 4 on the morning | Base |
 | P02 | Thu Nov 5 | Story set (4 frames) | Clifford Faded Black: how to measure | Stock ≥ 3 | Base |
 | P03 | Sat Nov 7 | Story set (3 frames) | Clifford Faded Black: details | Stock ≥ 3 | Base |
-| P04 | Sun Nov 8 | Carousel | 11.11 wallets (or full price) | Founder offer decision | Conditional |
+| P04 | Sun Nov 8 | Carousel | 11.11 wallets (announces Nov 10–12) | Offer approved ✔ · wallet stock ≥ 3 | Base |
 | P05 | Mon Nov 9 | Reel | Desert Voyager jacket → WhatsApp | None | Counted at 0 |
-| P06–P08 | Tue Nov 10 – Thu Nov 12 | Story set each day | 11.11 wallets | Offer approved | Conditional |
+| P06–P08 | Tue Nov 10 – Thu Nov 12 | Story set each day | 11.11 wallets | Offer approved ✔ · wallet stock ≥ 3 | Base |
 | P09 | When Mocha Mate shows 0 | Story (1 frame) | Mocha Mate restock list | Stock = 0 | Counted at 0 |
 | P10 | Fri Nov 13 | Reel | Mocha Mate new vs used | Restocked, ≥ 20 units on Nov 12 | Conditional |
 | P11 | Sun Nov 15 | Carousel | Clifford: sizing and fit | Hat stock ≥ 3 on Nov 14 | Conditional |
@@ -121,7 +123,7 @@ Real footage only. Do not generate or AI-edit the product.
 **Frames**
 1. "Cowboy hat ka size inch mein hota hai. 2 minute lagte hain."
 2. "Measuring tape, maathe ke beech se, kaanon ke upar se, sar ke peeche tak."
-3. "S: 20–21.5 inch · L: 22.5–23 inch." *(the CQRO confirms these against the live Faded Black page first; see C4)*
+3. "S: 20–21.5 inch · L: 22.5–23 inch." *(Founder-confirmed Nov 1)*
 4. "Clifford Faded Black, Rs 10,500. Size confirm karna ho to "HAT" DM karein." + link sticker.
 
 **Shot list:** (1) a tape measure in hand, close-up; (2) a staff member measuring their own head, filmed from the side in 3 positions; (3) plain Parchment card with the text; (4) a still of the hat from P01, shot 6.
@@ -146,30 +148,23 @@ Real footage only. Do not generate or AI-edit the product.
 
 ---
 
-### P04 · Sun Nov 8 · Instagram Carousel (5 slides) · 11.11 wallets · ⛔ PLACEHOLDER: offer pending Founder approval
+### P04 · Sun Nov 8 · Instagram Carousel (5 slides) · 11.11 wallets · announces the approved offer
 
-**Do not fill in an offer here.** The CRO (Sana Iqbal) is preparing the recommendation. Nothing about a discount, percentage, dates or the word "sale" goes in until the Founder approves it.
+Rendered: `creative/C3_carousel_card1_1x1.jpg` … `card5_1x1.jpg` (ad pack concept C3). Posted Nov 8, so the caption says the offer **starts** Nov 10. Nothing is discounted on Nov 8.
 
-**Caption shell (offer version)**
-> 11.11 at Kordovan.
-> [OFFER LINE: exact wording from the approved CRO recommendation, plus its reason]
-> [DATES: from the approved recommendation]
+**Caption (final)**
+> 11.11: 25% off every wallet, 15% off everything else. 10–12 November.
 > Bastion, Razor, Luke, KODO, Aristocrat. Genuine leather, hamare apne workshop se, lifetime craftsmanship warranty ke saath.
-> Rs 5,500 se upar online order par delivery free. Cash on delivery available, Rs 250 zyada.
+> Koi code nahin chahiye: 10 November raat 12 baje se 12 November raat 11:59 tak price khud kam dikhegi.
+> Rs 5,500 se upar online order par delivery free. Cash on delivery available, Rs 250 zyada, because a cash order costs a courier collection and sometimes a return trip.
 > "WALLET" likh kar DM karein, ya link bio mein.
 
-**Fallback if the Founder says no to an offer (full price, no discount language):**
-> Paanch wallets, paanch tareeqe.
-> Bastion distressed cow leather, Rs 2,500. Razor RFID smart wallet, Rs 2,450. Luke minimalist vertical, Rs 2,400. KODO RFID smart wallet, Rs 2,300. Aristocrat slim, Rs 4,200.
-> Hamare apne workshop mein bane, lifetime craftsmanship warranty ke saath.
-> Cash on delivery available. Online pay karein to Rs 250 kam delivery.
-> "WALLET" likh kar DM karein, ya link bio mein.
-*(Under Rs 5,500, delivery is Rs 250 paid online and Rs 500 by COD. "Rs 250 kam" is that difference.)*
+*(No "was" price anywhere. Shopify shows the reduced price during the window. ⚠️ Razor carries a standing compare-at of Rs 2,999. Noted for the CRO; no creative is built around it.)*
 
 **Shot list (one photo per slide, square 1:1, top-down flat lay on wood or Parchment cloth, daylight):** Bastion Brown + Tan side by side · Razor open, showing the card slider · Luke in hand · KODO Black open · Aristocrat closed, then open. Do not use Rigor Lite or Plain Bifold: 8 units each.
 **Link:** `/collections/mens-leather-wallets?utm_source=instagram&utm_medium=social&utm_campaign=wallets1111_nov26&utm_content=p04_carousel_nov8`
 **DM keyword:** WALLET
-**Expected rupees (full price):** 100 × 1.66% = 1.66 × 2,228 = **Rs 3,698 placed / Rs 2,563 surviving**. With an offer: multiply the order value by (1 − discount). Lift is the CRO's number, not mine (A5).
+**Expected rupees (at the 25% offer price, no lift):** 100 × 1.66% = 1.66 orders × (2,228 × 0.75 = 1,671) = **Rs 2,774 placed / Rs 1,922 surviving**. No lift is assumed (A5).
 
 ---
 
@@ -196,14 +191,15 @@ Aim: answer the two objections from the one October jacket buyer (size and proce
 
 ---
 
-### P06–P08 · Tue Nov 10, Wed Nov 11, Thu Nov 12 · Instagram Story set each day · 11.11 wallets · ⛔ PLACEHOLDER
+### P06–P08 · Tue Nov 10, Wed Nov 11, Thu Nov 12 · Instagram Story set each day · 11.11 wallets · approved offer live
 
-Only if the Founder approves the CRO's offer. Each day is 3 frames: (1) hero wallet flat lay; (2) in hand; (3) "[OFFER LINE from approved recommendation]" + link sticker. Daily heroes: Bastion (Nov 10), Razor (Nov 11), Luke and KODO (Nov 12). If the offer is declined, these slots go to hats (if stock ≥ 3) or are left empty. No full-price "11.11" posts: using the date without an offer reads as a sale that does not exist.
+Rendered creative (ad pack): Nov 10 `creative/C1_paanch_wallets_9x16_15s.mp4` · Nov 11 `creative/C2_bastion_story_9x16.jpg` + `creative/C4_bumper_9x16_6s.mp4` · Nov 12 `creative/C4_bumper_9x16_6s.mp4` + `creative/C3_carousel_card5_1x1.jpg` with "Aakhri din" as a text sticker.
+Frame text: "11.11: 25% off every wallet, 15% off everything else. 10–12 November." + "Koi code nahin chahiye." + link sticker. Daily heroes: Bastion (Nov 10), Razor (Nov 11), Luke and KODO (Nov 12). The Nov 12 story may say "Aakhri din" because the window ends 23:59 that night. That is a fact, not a countdown.
 
 **Shot list:** reuse the P04 photos. Add one 5-second clip per wallet: open, show card slots, close.
 **Links:** `/collections/mens-leather-wallets?utm_source=instagram&utm_medium=social&utm_campaign=wallets1111_nov26&utm_content=p06_story_nov10` (then `p07_story_nov11`, `p08_story_nov12`)
 **DM keyword:** WALLET
-**Expected rupees (full price, before offer):** 3 × 100 × 1.66% = 4.98 × 2,228 = **Rs 11,095 placed / Rs 7,689 surviving**. The CRO's kill rules apply (K3: a wallet at 3 units leaves the creative).
+**Expected rupees (at the 25% offer price, no lift):** 3 × 100 × 1.66% = 4.98 × 1,671 = **Rs 8,322 placed / Rs 5,767 surviving**. The CRO's kill rules apply (K3: a wallet at 3 units leaves the creative).
 
 ---
 
@@ -262,9 +258,9 @@ Runs only if Shopify shows **≥ 20 units** on Nov 12. Otherwise it moves to the
 |---|---|---|---|---|
 | **Base: P01–P03 (hats)** | 250 | 3.35 | **35,175** | **24,376** |
 | Conditional: P11 hats | 100 | 1.34 | 14,070 | 9,750 |
-| Conditional: P04 + P06–P08 wallets, full price | 400 | 6.64 | 14,794 | 10,252 |
+| 11.11: P04 + P06–P08 wallets at 25% off (order value 1,671, no lift) | 400 | 6.64 | 11,096 | 7,689 |
 | Conditional: P10 Mocha Mate | 150 | 4.02 | 12,864 | 8,915 |
-| **Conditional total** | | | **41,728** | **28,917** |
+| **Total of the 11.11 + conditional rows** | | | **38,030** | **26,354** |
 | Counted at 0: P05 jacket, P09 Mocha Mate list, all Facebook cross-posts | | | 0 | 0 |
 
 **Stock check (no slot plans more demand than stock):** hats: base 3.35 + P11 1.34 + normal sales about 1 (3 Clifford units in 28 days) = 5.7 of 8 sellable. Mocha Mate: base plan 0 organic. P10 runs only on ≥ 20 units. Wallets: Bastion 65 / Razor 67 / Luke 30 carry the creative.
@@ -274,7 +270,8 @@ Runs only if Shopify shows **≥ 20 units** on Nov 12. Otherwise it moves to the
 > - **A2 Conversion by product page:** 90-day landing-page checkout rate, all sources (§2). These rates include paid traffic. Organic Instagram may convert differently. The hat rate rests on 6 checkouts, and the Rustic Brown page stands in for Faded Black. *Replaced by:* sessions → orders per `utm_campaign`, Nov 9 and Nov 16.
 > - **A3 Wallet order value Rs 2,228** = 91,357 net ÷ 41 orders across the 7 candidate wallets that sold in the 30 days to Nov 1 (Razor sold 0). A full-price figure.
 > - **A4 Survival 69.3%** = 1 − 30.7% October reversal rate (data pack). Orders are counted at day 14.
-> - **A5 No discount lift assumed.** The CRO owns lift and break-even.
+> - **A5 Offer: wallets at 25% off (order value 2,228 × 0.75 = 1,671), no lift assumed.** The CRO's data says last year's 20% wallet code sold 0.78x the week before, and coded orders cancelled 29.5% against 15.4%. So no lift is the honest base. *Replaced by:* wallet orders placed Nov 10–12, counted at day 14.
+> - **A8 Hats and 11.11:** hats are 15% off during Nov 10–12. P01–P03 run Nov 4–7 at full price, and some buyers may wait for the window. That moves revenue in time and costs 15% of it; it is not counted separately. Mocha Mate is a wallet, so if the restock lands before Nov 12 it sells at 25% off in the window.
 > - **A6 Size coverage not modelled.** Faded Black is in stock only in S and L. If most buyers need M, hat orders could halve. *Test:* HAT DMs asking for M or XL, logged by Ahsan.
 > - **A7 Not counted:** people who see a post and later arrive as Direct (676,227 in 90 days, data pack). Real, but no tag proves it.
 
@@ -328,11 +325,14 @@ Rules for whoever sends them (Ahsan): copy the reply, fill only the [brackets] f
 > Har jacket ek customer ke liye cut aur stitch hoti hai, is liye checkout se darwaze tak about 3 weeks lagte hain. Sardi hamara sab se busy season hai. Payment poori online hoti hai (card, debit card ya JazzCash), kyun ke jo cut aap ke liye hua woh kisi aur ko nahin bik sakta. Size pehle confirm karna ho to WhatsApp 0333 2601161.
 
 **R8 · Mocha Mate restock ("Mocha Mate kab aye ga?")**
-> Mocha Mate ka naya batch workshop mein ban raha hai. [Founder: date, once known. Until then no date is quoted.] Aap ka naam aur number note kar liya hai. Jaise hi wapas aaye, hum pehle aap ko message karein ge.
+> Mocha Mate ka naya batch kuch dinon mein aa raha hai. [No exact date until the stock is in Shopify.] Aap ka naam aur number note kar liya hai. Jaise hi wapas aaye, hum pehle aap ko message karein ge.
 > *(Ahsan logs keyword MOCHA, name, phone, date. The restock message to the list is a separate send that the Founder approves.)*
 
 **R9 · Discount / "koi offer hai?"**
-> Abhi koi offer live nahin hai. [After the Founder approves 11.11: replace with the approved wording only.]
+> *Before Nov 10:* 11.11 par, 10 se 12 November tak, har wallet par 25% off aur baqi sab par 15% off hoga. Koi code nahin chahiye, price khud kam dikhegi.
+> *Nov 10 00:00 to Nov 12 23:59:* Ji, 11.11 chal raha hai: har wallet par 25% off, baqi sab par 15% off, 12 November raat 11:59 tak. Koi code nahin chahiye.
+> *From Nov 13:* Abhi koi offer live nahin hai.
+> *(Never quote a "was" price, and never combine it with another code: the automatic discounts do not combine. Jackets and footwear are included at 15%, still paid online and about 3 weeks to the door, because each is cut for one customer.)*
 
 **R10 · Negative comment or complaint (public)**
 > Shukriya bataane ka. Hum yeh theek karna chahte hain. Apna order number DM ya WhatsApp 0333 2601161 par bhej dein. *(Never argue in public. Log it verbatim and pass it to the CEO the same day.)*
@@ -375,7 +375,7 @@ Both have **0 photos and are unpublished** (live, Nov 1). Master's: Rs 10,800, 1
 | Free options only | Native Instagram/Facebook, Meta Business Suite saved replies, WhatsApp Business quick replies, Shopify reports, a shared sheet for the DM log. No paid scheduler or app | PASS |
 | Never mention Karachi | Searched this file's customer-facing text: "our workshop" / "hamare apne workshop" only. Express-delivery rate deliberately not mentioned | PASS (CQRO to re-run the search) |
 | No exclamation marks, no emoji, no discount voice | None in any caption or reply | PASS |
-| No discount codes, no unapproved offer | P04 and P06–P08 are placeholders. R9 says no offer is live. No code anywhere | PASS |
+| No discount codes, no unapproved offer | Only the Founder-approved offer (Nov 1) appears, word for word. Automatic, "koi code nahin chahiye". No "was" price. No code anywhere | PASS |
 | Terms paired with their reason | COD fee (R2, P01), MTO prepaid and about 3 weeks (P05, R2, R3, R5, R7) | PASS |
 | Free delivery over Rs 5,500; COD Rs 250 more | P01, P04 fallback, P10, R1, R3 match the Sep 15 2026 rate table | PASS |
 | MTO = jackets and footwear prepaid, no COD | P05, R2, R7 | PASS |
@@ -389,7 +389,7 @@ Both have **0 photos and are unpublished** (live, Nov 1). Master's: Rs 10,800, 1
 - **C1** Re-read the price and stock of every featured product on the morning of each post. Cancel any slot whose gate (§3) fails.
 - **C2** Every handle in §3 resolves on the live store.
 - **C3** The P04 fallback prices still match live (Bastion 2,500 · Razor 2,450 · Luke 2,400 · KODO 2,300 · Aristocrat 4,200).
-- **C4** The Faded Black page shows sizes S and L without inch ranges. Confirm S = 20–21.5" and L = 22.5–23" (the Rustic Brown and Crushable charts) with the workshop before P02 and R4 quote them.
+- **C4** ✔ Closed. The Founder confirmed on Nov 1 that the hat sizes are correct as written.
 - **C5** The COD-fee reason ("courier collection and a possible return trip") matches how the Founder wants the fee explained. It is my wording of the Sep 15 2026 rationale.
 - **C6** The P11 care lines against `/pages/leather-care-guide`.
 - **C7** The Founder confirms the "used" wallet in P10 is a real used Mocha Mate.
@@ -413,3 +413,14 @@ Live Shopify read-only, Nov 1 2026. Register rows CB-1 to CB-12.
 - **C5 COD reason:** it is consistent with the CLAUDE.md Sep 15 rationale (return shipping plus courier COD handling). Approved as wording; the Founder may restyle it.
 
 **Approved:** P04 fallback, P05, P09, P10 (gated on C7 and on stock of 20 or more), P11 (care lines match `/pages/leather-care-guide`: dry naturally, no heater, avoid direct sun), R1, R2, R5, R7–R10, all prices and stock in §2 and §7, all forecast arithmetic. Banned-word sweep (Karachi, "!", codes, 4–7, 50%) returned 0 in customer text.
+
+---
+
+## 10. CMO response to the CQRO review (v2, Nov 1 2026)
+- **"Haath se shape" (P01, P03):** the Founder confirmed on Nov 1 that the Clifford hats are hand-shaped. The claim stays. "Hand-cut aur stitch" is also sourced: the live `custom.benefits` on both Clifford hats reads "Hand-cut and stitched in our own workshop" (read Nov 1).
+- **Hat inch sizes (P02 frame 3, R4):** the Founder confirmed they are correct as written. The XL / 23+ variant is out of stock, so no post names it.
+- **CQRO corrections accepted as made:** warranty wording, the R3 reason line, "Rs 250 zyada".
+- **11.11 offer filled in** with the Founder's exact terms (25% wallets, 15% everything else, Nov 10 00:00 to 12 23:59 PKT, automatic, no code, does not combine). The full-price fallback is removed.
+- **Razor compare-at Rs 2,999** is noted (F3). No creative uses it, and no post shows a "was" price.
+
+**READY FOR CQRO (v2)** (Omar Shafiq, CMO, Nov 1 2026)
