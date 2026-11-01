@@ -584,6 +584,13 @@ TOF-J had banked ~27k jacket ViewContent events (Sep 5–Oct 20) and nothing was
   Founder answers each decision + Approve / Request changes / Reject → page notifies this session (comments). 🔴 **Every
   deliverable needing the Founder goes on the Boardroom table**, after the CQRO check. HQ fonts: body Atkinson
   Hyperlegible, labels Pixelify Sans, Press Start 2P only for H1/H2 (Founder: "more readable").
+- 📁 **DESK FOLDERS (Nov 1 2026, Founder asked):** every desk in `#office` has a Folder of that agent's handed-in files.
+  Files live in the artifact's asset store; db `folders/<id>` {seat, name, assetId, size, kind image|video|text|pdf|file,
+  from agent|founder, note, version, at}. The page previews (image/video/markdown), downloads via the `downloads`
+  capability, lets the Founder **upload** an improved version (from:"founder", notifies the CEO), and **send a change
+  request** on a file (→ `assignments` with `file`). 🔴 **Whenever an agent delivers a file, the CEO uploads it**
+  (`Artifact` publish `asset:true` with the url) **and writes its `folders` row**, bumping `version` on re-deliveries.
+  Capabilities now: comments, db, user, sample, mcp (send_message), assets, downloads.
 - 🗓 **Mocha Mate restocks "in a few days" (Founder, Nov 1)** → do NOT pause TOF-M for stock; no need to worry about it.
 - ✅ **CRO HIRED Nov 1 2026** (Sana Iqbal, `.claude/agents/cro.md`) · ✅ **CMO HIRED Nov 1 2026** (Omar Shafiq,
   `.claude/agents/cmo.md`, has Shopify Files + free render tools: Bash/ffmpeg/HyperFrames; `cdn.shopify.com` ALLOWED in

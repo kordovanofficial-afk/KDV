@@ -219,6 +219,23 @@ textarea{min-height:64px}
 .mdbody table{border-collapse:collapse;font-size:15px;min-width:100%}
 .mdbody th,.mdbody td{border:2px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
 .mdbody th{background:var(--panel-2);font-family:var(--label);font-weight:600}
+.fold{display:grid;gap:8px}
+.fold .hd{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px}
+.files{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.file{background:var(--panel-2);border:3px solid var(--line);padding:6px;display:grid;gap:6px;text-align:left;color:var(--ink);min-width:0;font:inherit;cursor:pointer}
+.file:hover,.file[aria-current="true"]{border-color:var(--brass)}
+.file .th{aspect-ratio:1;background:#120d0a;display:grid;place-items:center;overflow:hidden}
+.file .th img{width:100%;height:100%;object-fit:cover}
+.file .th span{font-family:var(--label);font-weight:600;font-size:15px;color:var(--muted)}
+.file .nm{font-size:14px;overflow-wrap:anywhere;line-height:1.3}
+.file .mt{font-size:12px;color:var(--muted)}
+.file .by{font-family:var(--label);font-size:12px;color:var(--brass)}
+.fview{background:var(--panel-2);border:3px solid var(--line);padding:10px;display:grid;gap:8px;min-width:0}
+.fview img,.fview video{max-width:100%;max-height:520px;justify-self:center;background:#000}
+.fview pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:420px;overflow:auto;font-size:14px;margin:0;background:#120d0a;padding:10px}
+.fview .acts{display:flex;flex-wrap:wrap;gap:8px}
+.fview textarea{width:100%;min-height:70px}
+.btn.ghost{background:var(--panel);color:var(--ink);border-color:var(--line-hi)}
 </style>
 
 <div class="app">
@@ -288,7 +305,7 @@ textarea{min-height:64px}
 <script>
 (function(){
 "use strict";
-const S={board:[],boardSel:null,boardDraft:{},boardMsg:{},desks:[],asg:[],deskSel:null,draft:{},asgMsg:{},deskMsg:{},cfg:null,mcp:null,cands:[],dec:{},tr:{},seats:[],sel:null,tab:"dossier",busy:false,owner:false,db:null,sample:null,loaded:false,dbFailed:false};
+const S={files:[],fsel:{},ftext:{},fdraft:{},fmsg:{},board:[],boardSel:null,boardDraft:{},boardMsg:{},desks:[],asg:[],deskSel:null,draft:{},asgMsg:{},deskMsg:{},cfg:null,mcp:null,cands:[],dec:{},tr:{},seats:[],sel:null,tab:"dossier",busy:false,owner:false,db:null,sample:null,loaded:false,dbFailed:false};
 const $=s=>document.querySelector(s);
 function el(tag,attrs,kids){const n=document.createElement(tag);if(attrs)for(const k in attrs){const v=attrs[k];if(v==null||v===false)continue;
   if(k==="class")n.className=v;else if(k==="text")n.textContent=v;else if(k.startsWith("on"))n.addEventListener(k.slice(2),v);else n.setAttribute(k,v===true?"":v);}
@@ -533,7 +550,8 @@ function renderDesks(){const box=$("#desks");
       el("div",{class:"t",text:d.task||"No current task."}),
       el("div",{class:"u",text:[d.updatedAt?"Updated "+ago(d.updatedAt):null,open?open+" task"+(open>1?"s":"")+" from you":null].filter(Boolean).join(" · ")})]);}));}
 function renderDeskDetail(force){const box=$("#desk-detail");const d=S.desks.find(x=>x.id===S.deskSel);
-  if(!force&&document.activeElement&&document.activeElement.id==="assign-input")return;
+  if(!force&&document.activeElement&&["assign-input","fnote"].includes(document.activeElement.id))return;
+  {const v=document.querySelector("#desk-detail video");if(!force&&v&&!v.paused)return;}
   if(!d){box.replaceChildren();return}
   const st=deskStatus(d);
   const asg=S.asg.filter(a=>a.seat===d.id).sort((a,b)=>String(b.at).localeCompare(String(a.at)));
@@ -551,11 +569,59 @@ function renderDeskDetail(force){const box=$("#desk-detail");const d=S.desks.fin
       el("div",null,[el("h4",{text:"Working on"}),el("p",{text:d.task||"No current task."}),d.updatedAt?el("p",{class:"hint",text:"Updated "+ago(d.updatedAt)}):null]),
       sec("Waiting on you",d.waitingOn),
       log.length?el("div",null,[el("h4",{text:"Recent work"}),el("div",{class:"log"},log.map(e=>el("div",{class:"e"},[el("time",{text:fmt(e.at)}),el("span",{text:e.text||""})])))]):null,
+      folderSec(d),
       sec("Deliverables",d.deliverables),
       sec("KPIs",d.kpis),
       el("div",{class:"assign"},[el("h4",{text:"Give a task"}),S.owner?ta:null,
         S.owner?el("div",{class:"desk-row"},[el("button",{class:"btn",type:"button",onclick:()=>assign(d)},["Assign"])]):null,msg,
         ...asg.slice(0,6).map(a=>el("div",{class:"asg"},[el("span",{text:a.text||""}),el("small",{text:stLabel(a)+(a.at?" · "+ago(a.at):"")+(a.reply?" · "+a.reply:"")})]))])])]));}
+
+const KIND=n=>{const e=(n.split(".").pop()||"").toLowerCase();return ["jpg","jpeg","png","webp","gif"].includes(e)?"image":["mp4","webm","mov"].includes(e)?"video":["md","txt","csv","json"].includes(e)?"text":e==="pdf"?"pdf":"file"};
+const SIZE=b=>!b?"":b>1048576?(b/1048576).toFixed(1)+" MB":Math.max(1,Math.round(b/1024))+" KB";
+const blobUrl=f=>f.assetId?"/_blob/"+f.assetId:(f.url||"");
+function folderSec(d){
+  const files=S.files.filter(f=>f.seat===d.id).sort((a,b)=>String(b.at).localeCompare(String(a.at)));
+  const up=S.assets&&S.owner?el("label",{class:"btn ghost",style:"cursor:pointer"},["Upload a file",el("input",{type:"file",style:"display:none",onchange:e=>uploadFile(d,e.target)})]):null;
+  const head=el("div",{class:"hd"},[el("h4",{text:"Folder · "+files.length+" file"+(files.length===1?"":"s")}),up]);
+  if(!files.length)return el("div",{class:"fold"},[head,el("p",{class:"hint",id:"fmsg",text:S.fmsg[d.id]||"No files yet. When "+(d.name||"this agent")+" hands in finished work, it lands here."})]);
+  if(!files.some(f=>f.id===S.fsel[d.id]))S.fsel[d.id]=files[0].id;
+  const grid=el("div",{class:"files"},files.map(f=>{const k=f.kind||KIND(f.name||"");
+    return el("button",{class:"file",type:"button","aria-current":S.fsel[d.id]===f.id?"true":"false",onclick:()=>{S.fsel[d.id]=f.id;renderDeskDetail(true)}},[
+      el("div",{class:"th"},[k==="image"?el("img",{src:blobUrl(f),alt:f.name||"",loading:"lazy"}):el("span",{text:k==="video"?"▶ VIDEO":(f.name||"").split(".").pop().toUpperCase()})]),
+      el("div",{class:"nm",text:f.name||"file"}),
+      el("div",{class:"mt",text:[SIZE(f.size),f.at?ago(f.at):null].filter(Boolean).join(" · ")}),
+      f.from==="founder"?el("div",{class:"by",text:"From you"}):f.version>1?el("div",{class:"by",text:"Version "+f.version}):null]);}));
+  return el("div",{class:"fold"},[head,grid,fileView(d,files.find(f=>f.id===S.fsel[d.id])),el("p",{class:"hint",id:"fmsg",text:S.fmsg[d.id]||""})]);}
+function fileView(d,f){if(!f)return null;const k=f.kind||KIND(f.name||"");const src=blobUrl(f);let body;
+  if(k==="image")body=el("img",{src,alt:f.name||""});
+  else if(k==="video")body=el("video",{src,controls:true,playsinline:true,preload:"metadata"});
+  else if(k==="text"){body=el("pre",{text:S.ftext[f.id]||"Loading…"});if(!S.ftext[f.id])fetch(src).then(r=>r.text()).then(t=>{S.ftext[f.id]=t;renderDeskDetail(true)}).catch(()=>{S.ftext[f.id]="This file can't be previewed here. Download it instead.";renderDeskDetail(true)});}
+  else body=el("p",{class:"hint",text:"No preview for this type. Download it to open."});
+  const note=el("textarea",{id:"fnote",placeholder:"What should "+(d.name||"they")+" change in this file? The CEO gets it and routes it.","aria-label":"Change request"});
+  note.value=S.fdraft[f.id]||"";note.addEventListener("input",()=>{S.fdraft[f.id]=note.value});
+  return el("div",{class:"fview"},[
+    el("div",{class:"plate"},[el("h4",{text:f.name||"file"}),f.note?el("p",{class:"hint",text:f.note}):null]),body,
+    el("div",{class:"acts"},[S.dl?el("button",{class:"btn",type:"button",onclick:()=>downloadFile(d,f)},["Download"]):el("a",{class:"btn",href:src,download:f.name||"file",target:"_blank",rel:"noopener"},["Download"])]),
+    S.owner?note:null,S.owner?el("div",{class:"acts"},[el("button",{class:"btn ghost",type:"button",onclick:()=>requestChange(d,f)},["Send change request"])]):null]);}
+const setF=(d,t)=>{S.fmsg[d.id]=t;const m=$("#fmsg");if(m)m.textContent=t};
+async function downloadFile(d,f){try{const r=await fetch(blobUrl(f));if(!r.ok)throw 0;const b=await r.blob();await S.dl.save({filename:f.name||"file",data:b});setF(d,"Saved "+(f.name||"the file")+".")}
+  catch(e){const c=e&&e.code;setF(d,c==="declined"?"Download cancelled.":c==="rejected_extension"?"This file type can't be downloaded here.":"Couldn't download it right now. Try again in a moment.")}}
+async function uploadFile(d,input){const file=input.files&&input.files[0];if(!file)return;input.value="";
+  if(!S.assets||!S.db){setF(d,"Uploads aren't available in this view.");return}
+  setF(d,"Uploading "+file.name+"…");
+  try{const a=await S.assets.upload(file);const now=new Date().toISOString();
+    const ref=await S.db.collection("folders").add({seat:d.id,name:file.name,assetId:a.id,size:a.sizeBytes||file.size,kind:KIND(file.name),from:"founder",at:now});
+    S.fsel[d.id]=ref.id;setF(d,"Uploaded. Notifying the CEO…");
+    const r=await notify("[Office] The Founder uploaded \""+file.name+"\" to "+(d.name||d.id)+"'s folder ("+d.id+"). Read folders/"+ref.id+" on the HQ page and route it.",$("#fmsg"));
+    setF(d,r.ok?"Uploaded. The CEO has been notified.":"Uploaded. "+r.why)}
+  catch(e){setF(d,e&&e.code==="too_large"?"That file is too big (20 MB limit).":"Upload failed. Check the file type and try again.")}}
+async function requestChange(d,f){const text=(S.fdraft[f.id]||"").trim();if(!text){setF(d,"Write what should change first.");return}
+  if(!S.db)return;let ref;
+  try{ref=await S.db.collection("assignments").add({seat:d.id,agent:d.name||d.id,text:"Change \""+(f.name||"file")+"\": "+text,file:f.id,status:"new",at:new Date().toISOString()})}
+  catch(e){setF(d,"Couldn't save the request. Try again.");return}
+  S.fdraft[f.id]="";const n=$("#fnote");if(n)n.value="";setF(d,"Saved. Notifying the CEO…");
+  const r=await notify("[Office] Change request on \""+(f.name||"file")+"\" for "+(d.name||d.id)+": \""+text+"\". Read assignments/"+ref.id+" (file folders/"+f.id+") and route it.",$("#fmsg"));
+  setF(d,r.ok?"Request sent. The CEO has been notified.":"Request saved. "+r.why)}
 async function notify(message,anchorEl){
   if(S.comments&&anchorEl){try{const can=await S.comments.canSendToClaude();
     if(can==="available"){const anchor=await S.comments.anchorFor(anchorEl);await S.comments.sendToClaude({anchor,text:message});return{ok:true}}}catch(e){}}
@@ -665,6 +731,9 @@ function all(){renderSeats();renderQueue();renderDesks();updateNav();renderBoard
     if(!S.deskSel&&S.desks.length)S.deskSel=S.desks[0].id;renderDesks();renderDeskDetail();},fail);
   db.collection("boardroom").onSnapshot(s=>{S.board=s.docs.map(d=>Object.assign({id:d.id},d.data()));
     if(!S.boardSel&&S.board.length)S.boardSel=S.board.slice().sort(boardSort)[0].id;renderBoardList();renderBoardItem();updateBoardNav();},fail);
+  db.collection("folders").onSnapshot(s=>{S.files=s.docs.map(d=>Object.assign({id:d.id},d.data()));renderDeskDetail();},()=>{});
+  window.claude.use("assets").then(x=>{S.assets=x;renderDeskDetail(true)}).catch(()=>{});
+  window.claude.use("downloads").then(x=>{S.dl=x;renderDeskDetail(true)}).catch(()=>{});
   db.collection("assignments").onSnapshot(s=>{S.asg=s.docs.map(d=>Object.assign({id:d.id},d.data()));renderDesks();renderDeskDetail();},()=>{});
   window.claude.use("sample").then(x=>{S.sample=x}).catch(()=>{});
   window.claude.use("mcp").then(x=>{S.mcp=x}).catch(()=>{});
