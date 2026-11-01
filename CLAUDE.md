@@ -591,6 +591,11 @@ TOF-J had banked ~27k jacket ViewContent events (Sep 5–Oct 20) and nothing was
   request** on a file (→ `assignments` with `file`). 🔴 **Whenever an agent delivers a file, the CEO uploads it**
   (`Artifact` publish `asset:true` with the url) **and writes its `folders` row**, bumping `version` on re-deliveries.
   Capabilities now: comments, db, user, sample, mcp (send_message), assets, downloads.
+- 🎙 **VOICE NOTES (Nov 1 2026, Founder asked):** each desk has "Record a voice note". The page records audio, types the
+  words live (browser speech, English or Urdu) and the Founder fixes the text before sending → `assignments/<id>` {seat,
+  text, voice: assetId, lang, dur}. Agents work from the TEXT. If text is missing or doubtful: `Artifact` read
+  `path:<assetId>` to save the audio, then `pip install faster-whisper` and run `python3 tools/voice/transcribe.py <file> ur|en`
+  (free, local; verified working Nov 1). Reply on the assignment so the desk shows it was understood.
 - 🗓 **Mocha Mate restocks "in a few days" (Founder, Nov 1)** → do NOT pause TOF-M for stock; no need to worry about it.
 - ✅ **CRO HIRED Nov 1 2026** (Sana Iqbal, `.claude/agents/cro.md`) · ✅ **CMO HIRED Nov 1 2026** (Omar Shafiq,
   `.claude/agents/cmo.md`, has Shopify Files + free render tools: Bash/ffmpeg/HyperFrames; `cdn.shopify.com` ALLOWED in
