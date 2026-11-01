@@ -663,7 +663,7 @@ TOF-J had banked ~27k jacket ViewContent events (Sep 5–Oct 20) and nothing was
   "hand-shaped, lightweight design" (was "heaviest build"); Faded Black size order S·M·L·XL so it opens on in-stock S.
 - ✅ **cro-1111-plan APPROVED by Founder (Boardroom, Nov 1 09:25Z):** thin wallets stay at 25% · kill rule ON (CRO reads Nov 11–13,
   Founder decides) · Ahsan shelf count yes · **ad budget "5000 a day" during the sale**. ⚠️ Live spend is ALREADY ~5,340/day
-  (Retarget 1,000 · TOF-M 2,000 · NEW TOF-W Gloves `120255846370500428` 1,500 · NEW RT-W `120255846370710428` 840; RT-J paused).
+  (Retarget 1,000 · TOF-M 2,000 · NEW TOF-W Gloves 1,500 (campaign `120255846370500428`, ad set `120255846373560428`) · NEW RT-W 840 (campaign `120255846370710428`, ad set `120255846373980428`; TOF-M/TOF-W/RT-W also include "frequently in" locations, unlike the home+recent standard); RT-J paused).
   Asked the Founder: (A) hold total ≈5,000 [CEO rec: Retarget 2,000 · TOF-M 1,500 · TOF-W 1,000 · RT-W 500] or (B) +5,000 on top.
   No budget change made until answered. Window Nov 10 00:00 → revert Nov 13 00:00 PKT.
 
