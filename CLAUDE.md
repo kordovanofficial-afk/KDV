@@ -592,7 +592,7 @@ TOF-J had banked ~27k jacket ViewContent events (Sep 5–Oct 20) and nothing was
   (`Artifact` publish `asset:true` with the url) **and writes its `folders` row**, bumping `version` on re-deliveries.
   Capabilities now: comments, db, user, sample, mcp (send_message), assets, downloads.
 - 🎙 **VOICE NOTES: REMOVED (Founder, Nov 1: "just remove it… it doesn't work, I'll just tell here").** The artifact frame blocks the mic; the recorder-window workaround also failed for the Founder. Do not rebuild. Code left dormant in the page (voiceSec unused); `tools/voice/transcribe.py` kept.
-- 👥 **Team pane (Nov 1):** mod `kordovan-team` (session dev-mods folder, container-local) shows the roster beside the chat; `/team` reopens it. Founder names agents in chat ("Omar, …") — route accordingly.
+- 👥 **Team rail (Nov 1, Founder asked "team with avatars on the right at all times"):** mod panes DO NOT render on the claude.ai web Code view (Founder uses web on Windows). Built a free Chrome extension `tools/team-rail/` (zip `Kordovan_Team_Rail.zip` at repo root) — content script on claude.ai, avatars rendered from HQ desk avatars, click inserts "Name, " in the chat box. Re-zip + Reload when the roster changes. Older: **Team pane:** mod `kordovan-team` (session dev-mods folder, container-local) shows the roster beside the chat; `/team` reopens it. Founder names agents in chat ("Omar, …") — route accordingly.
 - 🗓 **Mocha Mate restocks "in a few days" (Founder, Nov 1)** → do NOT pause TOF-M for stock; no need to worry about it.
 - ✅ **CRO HIRED Nov 1 2026** (Sana Iqbal, `.claude/agents/cro.md`) · ✅ **CMO HIRED Nov 1 2026** (Omar Shafiq,
   `.claude/agents/cmo.md`, has Shopify Files + free render tools: Bash/ffmpeg/HyperFrames; `cdn.shopify.com` ALLOWED in

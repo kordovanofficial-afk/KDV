@@ -1,0 +1,9 @@
+{
+  "manifest_version": 3,
+  "name": "Kordovan Team Rail",
+  "version": "1.0.0",
+  "description": "Pins the Kordovan agent team, with avatars, to the right side of claude.ai. Click a person to address them in the chat.",
+  "content_scripts": [{ "matches": ["https://claude.ai/*"], "js": ["rail.js"], "css": ["rail.css"], "run_at": "document_idle" }],
+  "web_accessible_resources": [{ "resources": ["icons/*.png"], "matches": ["https://claude.ai/*"] }],
+  "icons": { "128": "icons/ceo.png" }
+}
