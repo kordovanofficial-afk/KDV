@@ -161,7 +161,7 @@ Rendered: `creative/C3_carousel_card1_1x1.jpg` … `card5_1x1.jpg` (ad pack conc
 
 *(No "was" price anywhere. Shopify shows the reduced price during the window. ⚠️ Razor carries a standing compare-at of Rs 2,999. Noted for the CRO; no creative is built around it.)*
 
-**Shot list (one photo per slide, square 1:1, top-down flat lay on wood or Parchment cloth, daylight):** Bastion Brown + Tan side by side · Razor open, showing the card slider · Luke in hand · KODO Black open · Aristocrat closed, then open. Do not use Rigor Lite or Plain Bifold: 8 units each.
+**Shot list (one photo per slide, square 1:1, top-down flat lay on wood or Parchment cloth, daylight):** Bastion Brown + Tan side by side · Luke in hand · KODO Black open · Aristocrat closed, then open. Do not use Rigor Lite or Plain Bifold: 8 units each.
 **Link:** `/collections/mens-leather-wallets?utm_source=instagram&utm_medium=social&utm_campaign=wallets1111_nov26&utm_content=p04_carousel_nov8`
 **DM keyword:** WALLET
 **Expected rupees (at the 25% offer price, no lift):** 100 × 1.66% = 1.66 orders × (2,228 × 0.75 = 1,671) = **Rs 2,774 placed / Rs 1,922 surviving**. No lift is assumed (A5).

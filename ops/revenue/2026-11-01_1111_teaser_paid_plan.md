@@ -32,7 +32,7 @@ Live reads: Meta `ads_get_ad_entities`, ad set and campaign level, Nov 1 2026 (`
 - **Why ThruPlay rather than Reach or 2s views:** Reach buys exposures, not attention. A 2s view is a scroll. ThruPlay (15s, or the whole video if shorter) is the cheapest signal that a person watched, and it makes a good retarget seed.
 - **Learning arithmetic:** at the 9 kill line, 1,000 ÷ 9 = 111 ThruPlays/day = 777/week, far above 50. It exits learning in about a day, so the day-3 read is a fair one.
 - **Build:** campaign "TEASE | 11.11 Teaser | ThruPlay | Nov 2026", objective **Engagement** (video views), ABO, **one ad set, both cuts as 2 ads**. Meta picks the winner, and one larger ad set is better than two small ones (playbook §5). Not OUTCOME_SALES. If any sales objective is used, clear the injected catalogue (`promoted_object:{}`) and read it back (CLAUDE.md, Oct 24).
-- Link → `/collections/kdv-wallets`, UTMs `utm_source=facebook&utm_medium=paid_social&utm_campaign=tease_1111_nov26&utm_content={{placement}}`. **No discount code and no "% off"** in creative (hard rule). No Karachi. No COD claim (jackets and footwear are in the 15%).
+- Link → `/collections/kdv-wallets`, UTMs `utm_source=facebook&utm_medium=paid_social&utm_campaign=tease_1111_nov26&utm_content={{placement}}`. **No discount code and no "% off"** in creative (design choice: the offer is not live until Nov 10; not a CLAUDE.md hard rule, CQRO fix Nov 1). No Karachi. No COD claim (jackets and footwear are in the 15%).
 
 ### 2. Budget
 - **1,000/day, Nov 3 00:00 PKT (Nov 2 19:00Z) → Nov 9 23:59 PKT (Nov 9 18:59Z), total 7,000.** Each day the creative is late cuts 1,000 and about a day of pool. Do not extend into Nov 10: on Nov 10 the creative is wrong.

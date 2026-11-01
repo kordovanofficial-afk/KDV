@@ -666,6 +666,17 @@ TOF-J had banked ~27k jacket ViewContent events (Sep 5–Oct 20) and nothing was
   (Retarget 1,000 · TOF-M 2,000 · NEW TOF-W Gloves 1,500 (campaign `120255846370500428`, ad set `120255846373560428`) · NEW RT-W 840 (campaign `120255846370710428`, ad set `120255846373980428`; TOF-M/TOF-W/RT-W also include "frequently in" locations, unlike the home+recent standard); RT-J paused).
   Asked the Founder: (A) hold total ≈5,000 [CEO rec: Retarget 2,000 · TOF-M 1,500 · TOF-W 1,000 · RT-W 500] or (B) +5,000 on top.
   No budget change made until answered. Window Nov 10 00:00 → revert Nov 13 00:00 PKT.
+- ✅ **Boardroom Nov 1 (15:44–15:46Z), executed same evening:** discounts now `combinesWith.productDiscounts:true` (best one per line) and
+  target 2 HIDDEN collections: `sale-1111-wallets` `493087817968` (30 wallets, manual) → 25% · `sale-1111-rest` `493087850736`
+  (all ACTIVE minus wallets minus the 4 floor exclusions = 141, condition-based, so new products join) → 15%. **Excluded from
+  11.11 (CFO floor):** Nova, Elite Laptop Bag, City Backpack Rustic Red, Executive Briefcase (whole product). ⚠️ `collectionCreate`
+  now needs `collection:{sources:[…]}` (input/ruleSet deprecated); discounts cap explicit product lists at 100.
+  Razor compare-at 2,999 REMOVED (6 variants). Maverick/Marc Ed/Nightfall → untracked + CONTINUE. Bellezza, Gentlemans' Duffle,
+  Bull Rider PUBLISHED (Online Store pub `44250300605` + `67510894781`). Margin floor (≥40% & ≥PKR 1,000) starts BLACK FRIDAY.
+  Razor photo set confirmed REAL by Founder. POS sync-off date: Founder picked "Other" with empty note → asked again.
+  Mr. Tahir pack = `Kordovan_Mr_Tahir_Requests_Nov2026.xlsx` (count by Nov 8, MTO-or-stock, 22 costs by Nov 6) for the Founder to forward.
+  PostEx edited-order fix being written (deploy needs Founder yes). Mixed-cart test scheduled Nov 9 19:10Z (send_later).
+
 
 ## 🔌 Available integrations (MCP)
 Shopify, GitHub, Canva, Figma, Facebook Ads, Higgsfield, Cloudflare.

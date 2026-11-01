@@ -11,7 +11,16 @@
  * nothing is lost when it does.
  * Requires env: BRIDGE_URL, BRIDGE_SECRET, WEBHOOK_TOKEN.
  *
- * v5.0
+ * v5.1
+ *
+ * v5.1 (Nov 1 2026) — edited / part-paid orders. Marking a delivered COD order
+ * paid now records the order's CURRENT Shopify `total_outstanding`, re-read
+ * fresh just before capture — never `total_price` (the pre-edit total, which
+ * ignores card/bank prepayments). Orders with outstanding ≤ 0 are skipped as
+ * already handled, whatever their financial_status label. If PostEx reports a
+ * COD amount that differs from outstanding by more than PKR 1, nothing is
+ * captured and a "check manually" note is written once (KV `codmm:<id>`).
+ * See resolveCodCapture(). /health now returns `version`.
  *
  * v5.0 (Jul 26 2026) — adds a PUBLIC tracking endpoint for the storefront:
  *   GET /track?cn=<trackingNumber>
@@ -32,6 +41,8 @@
  * - Webhook + hourly cron both fully operational
  */
 
+const WORKER_VERSION = '5.1-edited-orders';   // returned by /health — confirms a deploy
+const COD_MATCH_TOLERANCE = 1;                // PKR; PostEx vs Shopify outstanding
 const POSTEX_BASE  = 'https://api.postex.pk/services/integration/api/order/v1';
 const SHOPIFY_API  = '2024-01';
 
@@ -89,7 +100,7 @@ export default {
     if (request.method === 'OPTIONS') return new Response(null, { headers: cors });
 
     if (url.pathname === '/health')
-      return Response.json({ status: 'ok', ts: new Date().toISOString() }, { headers: cors });
+      return Response.json({ status: 'ok', version: WORKER_VERSION, ts: new Date().toISOString() }, { headers: cors });
 
     // ── Reviews ──
     // /r/<token> is public by design: the token IS the authorisation, and it
@@ -1474,13 +1485,25 @@ async function handleWebhook(payload, env) {
   const now = new Date().toLocaleString('en-PK', { timeZone: 'Asia/Karachi' });
 
   if (status === DELIVERED_STATUS) {
-    if (order.financial_status === 'paid') {
-      console.log(`Order ${order.order_number} already paid`);
-      return;
-    }
     try {
-      await markOrderPaid(order.id, amount || order.total_price, trackingNum, orderRef, token, env);
-      console.log(`Webhook: ✅ Order ${order.order_number} marked paid`);
+      // The webhook usually carries no amount — ask PostEx for its COD figure.
+      let pxAmount = amount;
+      if (toAmount(pxAmount) === null && trackingNum) {
+        try { pxAmount = (await trackSinglePostEx(trackingNum, env.POSTEX_TOKEN)).invoicePayment ?? null; }
+        catch (e) { console.log(`Webhook: PostEx amount lookup failed (${e.message}) — using Shopify outstanding`); }
+      }
+      const cap = await resolveCodCapture(order.id, pxAmount, token, env);
+      if (cap.action === 'skip') {
+        console.log(`Order ${order.order_number} outstanding ${cap.outstanding} (${cap.financialStatus}) — already handled`);
+        return;
+      }
+      if (cap.action === 'mismatch') {
+        await noteCodMismatch(env, order.id, cap, trackingNum, orderRef, token);
+        console.log(`Webhook: ⚠️ Order ${order.order_number} PostEx ${cap.postex} ≠ outstanding ${cap.outstanding} — not marked paid`);
+        return;
+      }
+      await markOrderPaid(order.id, cap.amount, trackingNum, orderRef, token, env);
+      console.log(`Webhook: ✅ Order ${order.order_number} marked paid (PKR ${cap.amount})`);
       await incrementStat(env, 'webhookPaid');
     } catch (e) {
       console.error(`Webhook mark paid failed:`, e.message);
@@ -1558,17 +1581,26 @@ async function runPollSync(env) {
       try {
         const postexData = await trackSinglePostEx(tn, env.POSTEX_TOKEN);
         const status     = postexData.transactionStatus || '';
-        const amount     = postexData.invoicePayment || o.total_price;
 
         if (status === DELIVERED_STATUS) {
-          if (o.financial_status === 'paid') {
-            log(`Order #${o.order_number} already paid — skipping`);
+          let cap;
+          try { cap = await resolveCodCapture(o.id, postexData.invoicePayment, token, env); }
+          catch (e) { log(`Order #${o.order_number} outstanding lookup ERROR: ${e.message}`); result.errors++; continue; }
+          if (cap.action === 'skip') {
+            log(`Order #${o.order_number} outstanding ${cap.outstanding} (${cap.financialStatus}) — already handled, skipping`);
             result.skipped++;
             continue;
           }
+          if (cap.action === 'mismatch') {
+            await noteCodMismatch(env, o.id, cap, tn, o.name, token);
+            log(`Order #${o.order_number} ⚠️ PostEx ${cap.postex} ≠ outstanding ${cap.outstanding} — NOT marked paid`);
+            result.skipped++;
+            continue;
+          }
+          const amount = cap.amount;
           log(`Order #${o.order_number} [${tn}] — DELIVERED → marking paid`);
           try {
-            await markOrderPaid(o.id, String(amount), tn, o.name, token, env);
+            await markOrderPaid(o.id, amount, tn, o.name, token, env);
             result.markedPaid++;
             log(`Order #${o.order_number} ✅ marked paid (PKR ${amount})`);
             // Delivered → thank-you. ref keeps it to exactly one per order.
@@ -1874,6 +1906,47 @@ async function findOrderByTracking(trackingNumber, token, env) {
       if (getTrackingNumber(o) === String(trackingNumber)) return o;
   } catch (e) { console.error('findOrderByTracking:', e.message); }
   return null;
+}
+
+// ─── COD capture amount (v5.1) ───────────────────────────────────────────────
+// The ONLY place that decides how much COD to record. Never uses total_price:
+// on an edited order that is the pre-edit total, and it ignores any card or
+// bank prepayment. Re-reads the order fresh so a webhook arriving minutes after
+// the poll (or vice versa) sees the first capture and skips.
+const toAmount = v => {
+  if (v === null || v === undefined || v === '') return null;
+  const n = Number(String(v).replace(/[^0-9.\-]/g, ''));
+  return Number.isFinite(n) ? n : null;
+};
+const fmtPKR = n => Number(n).toLocaleString('en-US', { maximumFractionDigits: 2 });
+
+async function resolveCodCapture(orderId, postexAmount, token, env) {
+  const d = await shopifyFetch(
+    `/orders/${orderId}.json?fields=id,name,financial_status,total_outstanding,current_total_price`,
+    token, env);
+  const o = d.order || {};
+  const outstanding = toAmount(o.total_outstanding);
+  // Fail closed: without an outstanding figure we never guess an amount.
+  if (outstanding === null) throw new Error(`order ${orderId}: total_outstanding missing`);
+  if (outstanding <= 0)
+    return { action: 'skip', outstanding, financialStatus: o.financial_status || '' };
+  const postex = toAmount(postexAmount);
+  if (postex !== null && Math.abs(postex - outstanding) > COD_MATCH_TOLERANCE)
+    return { action: 'mismatch', postex, outstanding };
+  // Record Shopify's outstanding (within PKR 1 of PostEx) so the balance lands on exactly 0.
+  return { action: 'capture', amount: outstanding.toFixed(2), postex, outstanding };
+}
+
+// One note per order, not one per hourly sweep.
+async function noteCodMismatch(env, orderId, cap, trackingNumber, orderRef, token) {
+  const key = `codmm:${orderId}`;
+  try { if (await env.SYNC_KV.get(key)) return false; } catch (e) {}
+  const now = new Date().toLocaleString('en-PK', { timeZone: 'Asia/Karachi' });
+  await addOrderNote(orderId,
+    `⚠️ PostEx COD amount ${fmtPKR(cap.postex)} ≠ Shopify outstanding ${fmtPKR(cap.outstanding)}, check manually\nNOT marked paid by PostEx Sync\nTracking: ${trackingNumber}\nRef: ${orderRef}\nUpdated: ${now}`,
+    token, env);
+  try { await env.SYNC_KV.put(key, '1', { expirationTtl: 60 * 60 * 24 * 30 }); } catch (e) {}
+  return true;
 }
 
 async function markOrderPaid(orderId, amount, trackingNumber, orderRef, token, env) {
