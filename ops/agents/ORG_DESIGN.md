@@ -47,7 +47,7 @@ Human team: **Mr. Tahir** (manager and business head, back-end finance), counter
 | **CTO** | Building and running our own tools: theme releases, Shopify Functions, Cloudflare Workers, the Meta Graph API app (auto-post, comment/DM replies), POS/stock sync | Uptime of our tools · manual hours removed per week | Founder |
 
 **RACI rules that settle the obvious overlaps**
-- **Promotions:** CRO is accountable for the offer and the rupees. CFO is consulted on margin floors. CMO is responsible for the creative.
+- **Promotions and discount codes:** CRO is accountable for the offer, the rupees and code hygiene. The CFO sets a **binding margin floor** (CEO ruling, Nov 1 2026): no offer may go below it without the Founder's explicit yes. CMO is responsible for the creative.
 - **Ads:** CRO is accountable for spend and targeting. CMO is responsible for the creative supplied to it. CFO reports the real ROAS. CRO never grades its own results.
 - **Product pages:** CRO is accountable for conversion. CMO is responsible for copy and imagery. CTO is responsible for template code.
 - **Social replies:** CMO is accountable. CTO builds the automation. COO is consulted on order-status answers.

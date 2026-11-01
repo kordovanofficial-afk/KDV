@@ -578,6 +578,16 @@ TOF-J had banked ~27k jacket ViewContent events (Sep 5–Oct 20) and nothing was
   Avatars are generated pixel art showing gender + role (Founder asked): schema in `chro.md`. CEO + Creative
   Director use the non-human "orb" avatar. Personas: Noor (CHRO, bun/glasses/clipboard) · Hamna (CQRO, hijab/
   magnifier) · Farhan (CRO, beard/suit/chart) · Mahnoor (CMO, long hair/kurta/dupatta/camera).
+- 🏛 **BOARDROOM (Nov 1 2026, Founder asked):** HQ page `#boardroom`. Every report/plan an agent sends for approval is a
+  db doc `boardroom/<id>` {title, from, seat, level, verdict (Quality), summary[], decisions[{id,short,q,options[],
+  recommended}], body (full markdown), files[], status pending|approved|changes|rejected, answers{}, note, decidedAt}.
+  Founder answers each decision + Approve / Request changes / Reject → page notifies this session (comments). 🔴 **Every
+  deliverable needing the Founder goes on the Boardroom table**, after the CQRO check. HQ fonts: body Atkinson
+  Hyperlegible, labels Pixelify Sans, Press Start 2P only for H1/H2 (Founder: "more readable").
+- 🗓 **Mocha Mate restocks "in a few days" (Founder, Nov 1)** → do NOT pause TOF-M for stock; no need to worry about it.
+- ✅ **CRO HIRED Nov 1 2026** (Sana Iqbal, `.claude/agents/cro.md`) · ✅ **CMO HIRED Nov 1 2026** (Omar Shafiq,
+  `.claude/agents/cmo.md`, has Shopify Files + free render tools: Bash/ffmpeg/HyperFrames; `cdn.shopify.com` ALLOWED in
+  the environment by the Founder Nov 1, verified). Wave 2 candidates: COO Zain Haider, CFO Ayesha Naqvi.
 - ✅ **CQRO HIRED Oct 31 2026** (Hamna Qureshi, `.claude/agents/cqro.md`, probation to Nov 30). Founder: *"monitor and give
   more authority that lies within her domain"* → binding BLOCK (Founder-only override), may fix sourced facts in L1 drafts
   directly, standing audit rights, read-only Shopify/Meta/GSC tools. Register `ops/agents/approvals/REGISTER.md`.

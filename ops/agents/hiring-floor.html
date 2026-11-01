@@ -2,7 +2,7 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Pixelify+Sans:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Pixelify+Sans:wght@500;600;700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
 <style>
 /* Layout: a night-shift HQ floor seen as a pixel game. Org floor strip on top,
    lobby queue on the left, the interview room on the right. Deliberately single-theme. */
@@ -12,12 +12,13 @@
   --ink:#efe4d2; --muted:#a8957e; --cognac:#c27a48; --brass:#d6ad62;
   --olive:#9aa55a; --red:#d0614a; --amber:#e3a043; --shadow:#0c0907;
   --display:"Press Start 2P", ui-monospace, "Courier New", monospace;
-  --ui:"Pixelify Sans", ui-monospace, "Courier New", monospace;
+  --ui:"Atkinson Hyperlegible", system-ui, "Segoe UI", sans-serif;
+  --label:"Pixelify Sans", ui-monospace, "Courier New", monospace;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
 html,body{background:var(--bg);color:var(--ink)}
-body{font-family:var(--ui);font-size:17px;line-height:1.45;
+body{font-family:var(--ui);font-size:17px;line-height:1.55;
   background:
     repeating-linear-gradient(90deg, transparent 0 63px, rgba(0,0,0,.18) 63px 64px),
     repeating-linear-gradient(0deg, var(--floor-a) 0 32px, var(--floor-b) 32px 64px);
@@ -28,8 +29,9 @@ body{font-family:var(--ui);font-size:17px;line-height:1.45;
   display:grid;gap:20px}
 .px{background:var(--panel);border:4px solid var(--line);
   box-shadow:inset -4px -4px 0 rgba(0,0,0,.28), inset 4px 4px 0 rgba(255,255,255,.04), 6px 6px 0 var(--shadow)}
-h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance}
-h2{font-size:11px;letter-spacing:.08em;color:var(--brass);text-transform:uppercase}
+h1,h2{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance}
+h3{font-family:var(--label);font-weight:700;margin:0;text-wrap:balance}
+h2{font-size:12px;letter-spacing:.08em;color:var(--brass);text-transform:uppercase}
 button{font:inherit;color:inherit;cursor:pointer}
 button:focus-visible,textarea:focus-visible,input:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--brass);outline-offset:2px}
 canvas{image-rendering:pixelated;image-rendering:crisp-edges;display:block}
@@ -38,8 +40,8 @@ canvas{image-rendering:pixelated;image-rendering:crisp-edges;display:block}
 .top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px}
 .brand{display:flex;align-items:center;gap:14px;min-width:0}
 .brand h1{font-size:15px;line-height:1.5;color:var(--ink)}
-.brand small{display:block;font-family:var(--display);font-size:9px;color:var(--cognac);letter-spacing:.1em;margin-top:6px}
-.clock{font-family:var(--display);font-size:9px;color:var(--muted);text-align:right;line-height:1.9}
+.brand small{display:block;font-family:var(--label);font-weight:600;font-size:15px;color:var(--cognac);letter-spacing:.1em;margin-top:6px}
+.clock{font-family:var(--label);font-weight:600;font-size:15px;color:var(--muted);text-align:right;line-height:1.9}
 .clock b{color:var(--brass);font-weight:400}
 
 /* org floor */
@@ -50,7 +52,7 @@ canvas{image-rendering:pixelated;image-rendering:crisp-edges;display:block}
 .seats{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
 .seat{background:var(--panel-2);border:3px solid var(--line);padding:10px 10px 10px 16px;position:relative;min-width:0}
 .seat::before{content:"";position:absolute;left:0;top:0;bottom:0;width:6px;background:var(--c,var(--line))}
-.seat .t{font-family:var(--display);font-size:9px;line-height:1.6;color:var(--ink)}
+.seat .t{font-family:var(--label);font-weight:600;font-size:15px;line-height:1.6;color:var(--ink)}
 .seat .h{font-size:14px;color:var(--muted);margin-top:4px;overflow-wrap:anywhere}
 .seat .w{font-size:12px;color:var(--muted);opacity:.8}
 .seat.is-filled{--c:var(--olive)} .seat.is-interviewing{--c:var(--amber)}
@@ -66,9 +68,9 @@ canvas{image-rendering:pixelated;image-rendering:crisp-edges;display:block}
   background:var(--panel-2);border:3px solid var(--line);padding:8px 10px;width:100%}
 .ticket:hover{border-color:var(--line-hi)}
 .ticket[aria-current="true"]{border-color:var(--brass);background:#3a2a1e}
-.ticket .n{font-family:var(--display);font-size:9px;line-height:1.6}
+.ticket .n{font-family:var(--label);font-weight:600;font-size:15px;line-height:1.6}
 .ticket .r{font-size:14px;color:var(--muted)}
-.chip{display:inline-block;font-family:var(--display);font-size:7px;letter-spacing:.06em;padding:4px 6px;margin-top:4px;
+.chip{display:inline-block;font-family:var(--label);font-weight:600;font-size:13px;letter-spacing:.06em;padding:4px 6px;margin-top:4px;
   border:2px solid currentColor;text-transform:uppercase}
 .chip.new{color:var(--brass)} .chip.hire{color:var(--olive)} .chip.hold{color:var(--amber)} .chip.reject{color:var(--red)}
 .empty{color:var(--muted);font-size:15px;padding:6px 2px}
@@ -86,11 +88,11 @@ canvas{image-rendering:pixelated;image-rendering:crisp-edges;display:block}
 @keyframes bob{50%{transform:translateY(-3px)}}
 @media (prefers-reduced-motion:reduce){.portrait canvas{animation:none}}
 .plate{display:grid;gap:8px;min-width:0}
-.plate h3{font-size:16px;line-height:1.5}
-.plate .role{font-family:var(--display);font-size:10px;color:var(--cognac);line-height:1.7}
+.plate h3{font-size:26px;line-height:1.2}
+.plate .role{font-family:var(--label);font-weight:600;font-size:16px;color:var(--cognac);line-height:1.7}
 .plate .meta{font-size:15px;color:var(--muted)}
 .plate .tag{font-size:17px;color:var(--ink);font-style:italic;max-width:60ch}
-.stamp{position:absolute;right:-10px;bottom:-12px;font-family:var(--display);font-size:9px;padding:6px 8px;
+.stamp{position:absolute;right:-10px;bottom:-12px;font-family:var(--label);font-weight:600;font-size:15px;padding:6px 8px;
   border:3px solid currentColor;background:var(--panel);transform:rotate(-8deg);text-transform:uppercase}
 .stamp.new{color:var(--brass)} .stamp.hire{color:var(--olive)} .stamp.hold{color:var(--amber)} .stamp.reject{color:var(--red)}
 
@@ -102,18 +104,18 @@ canvas{image-rendering:pixelated;image-rendering:crisp-edges;display:block}
 .scores-note{font-size:13px;color:var(--muted);grid-column:1/-1}
 
 .tabs{display:flex;flex-wrap:wrap;gap:6px;border-bottom:4px solid var(--line);padding-bottom:0}
-.tab{background:var(--panel-2);border:3px solid var(--line);border-bottom:0;padding:9px 12px;font-family:var(--display);font-size:9px;color:var(--muted)}
+.tab{background:var(--panel-2);border:3px solid var(--line);border-bottom:0;padding:9px 12px;font-family:var(--label);font-weight:600;font-size:15px;color:var(--muted)}
 .tab[aria-selected="true"]{background:var(--line);color:var(--ink)}
 .panel{display:grid;gap:14px;min-width:0}
 .panel p{margin:0;max-width:68ch}
-.panel h4{font-family:var(--display);font-size:10px;color:var(--brass);margin:6px 0 0;font-weight:400;line-height:1.6}
+.panel h4{font-family:var(--label);font-weight:600;font-size:16px;color:var(--brass);margin:6px 0 0;font-weight:400;line-height:1.6}
 .panel ul{margin:0;padding-left:20px;display:grid;gap:4px;max-width:68ch}
 .panel li::marker{color:var(--cognac)}
 .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
 .cols > div{min-width:0}
 .checks{display:grid;gap:8px}
 .check{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 12px;background:var(--panel-2);border:3px solid var(--line);padding:8px 10px}
-.check .v{font-family:var(--display);font-size:8px;padding:4px 6px;border:2px solid currentColor;align-self:start}
+.check .v{font-family:var(--label);font-weight:600;font-size:14px;padding:4px 6px;border:2px solid currentColor;align-self:start}
 .check .v.PASS{color:var(--olive)} .check .v.FAIL{color:var(--red)} .check .v.PENDING{color:var(--amber)}
 .check .k{font-weight:700} .check .nt{grid-column:2;color:var(--muted);font-size:15px}
 .qs{display:grid;gap:8px}
@@ -124,7 +126,7 @@ canvas{image-rendering:pixelated;image-rendering:crisp-edges;display:block}
 .chat{display:grid;gap:10px}
 .log{background:#120d0a;border:4px solid var(--line);padding:12px;display:grid;gap:12px;max-height:440px;overflow-y:auto;min-height:120px}
 .msg{display:grid;gap:4px;max-width:92%}
-.msg .who{font-family:var(--display);font-size:8px;color:var(--muted)}
+.msg .who{font-family:var(--label);font-weight:600;font-size:14px;color:var(--muted)}
 .msg .txt{white-space:pre-wrap;overflow-wrap:anywhere;padding:10px 12px;border:3px solid var(--line);background:var(--panel)}
 .msg.me{justify-self:end}
 .msg.me .who{text-align:right;color:var(--cognac)}
@@ -136,7 +138,7 @@ canvas{image-rendering:pixelated;image-rendering:crisp-edges;display:block}
 @media (max-width:520px){.ask{grid-template-columns:1fr}}
 textarea,input[type=text]{font:inherit;color:var(--ink);background:#120d0a;border:3px solid var(--line);padding:10px 12px;width:100%;resize:vertical}
 textarea{min-height:64px}
-.btn{font-family:var(--display);font-size:10px;padding:12px 14px;border:3px solid var(--shadow);background:var(--cognac);color:#1a100a;
+.btn{font-family:var(--label);font-weight:600;font-size:16px;padding:12px 14px;border:3px solid var(--shadow);background:var(--cognac);color:#1a100a;
   box-shadow:inset -3px -3px 0 rgba(0,0,0,.25), 4px 4px 0 var(--shadow)}
 .btn:active{transform:translate(2px,2px);box-shadow:inset -3px -3px 0 rgba(0,0,0,.25), 2px 2px 0 var(--shadow)}
 .btn[disabled]{opacity:.5;cursor:not-allowed}
@@ -154,7 +156,7 @@ textarea{min-height:64px}
 
 /* views */
 .views{display:flex;gap:6px;flex-wrap:wrap}
-.view-btn{font-family:var(--display);font-size:9px;padding:9px 12px;background:var(--panel-2);border:3px solid var(--line);color:var(--muted)}
+.view-btn{font-family:var(--label);font-weight:600;font-size:15px;padding:9px 12px;background:var(--panel-2);border:3px solid var(--line);color:var(--muted)}
 .view-btn[aria-current="page"]{background:var(--cognac);color:#1a100a;border-color:var(--shadow)}
 .view-btn .dot{display:inline-block;margin-left:6px;color:var(--amber)}
 /* office */
@@ -164,7 +166,7 @@ textarea{min-height:64px}
 .deskcard:hover{border-color:var(--line-hi)}
 .deskcard[aria-current="true"]{border-color:var(--brass);background:#3a2a1e}
 .deskcard canvas{width:100%;height:auto;max-width:100%}
-.deskcard .n{font-family:var(--display);font-size:9px;line-height:1.6}
+.deskcard .n{font-family:var(--label);font-weight:600;font-size:15px;line-height:1.6}
 .deskcard .r{font-size:14px;color:var(--muted)}
 .deskcard .t{font-size:15px;overflow-wrap:anywhere}
 .deskcard .u{font-size:13px;color:var(--muted)}
@@ -174,8 +176,8 @@ textarea{min-height:64px}
 .detail .scene{background:#120d0a;border:4px solid var(--line);padding:8px;width:max-content;max-width:100%}
 .detail .scene canvas{max-width:100%;height:auto}
 .detail .info{display:grid;gap:12px;min-width:0}
-.detail h3{font-size:14px;line-height:1.5}
-.detail h4{font-family:var(--display);font-size:9px;color:var(--brass);margin:0;font-weight:400}
+.detail h3{font-size:24px;line-height:1.2}
+.detail h4{font-family:var(--label);font-weight:600;font-size:15px;color:var(--brass);margin:0;font-weight:400}
 .detail ul{margin:0;padding-left:20px;display:grid;gap:4px}
 .detail li::marker{color:var(--cognac)}
 .log{display:grid;gap:6px}
@@ -184,6 +186,39 @@ textarea{min-height:64px}
 .assign{display:grid;gap:8px}
 .asg{background:var(--panel-2);border:3px solid var(--line);padding:8px 10px;font-size:15px;display:grid;gap:2px}
 .asg small{color:var(--muted);font-size:13px}
+
+/* boardroom */
+.boardroom{display:grid;grid-template-columns:300px minmax(0,1fr);gap:20px;align-items:start}
+@media (max-width:860px){.boardroom{grid-template-columns:1fr}}
+.board-side{padding:16px;display:grid;gap:12px}
+.board-main{padding:18px;display:grid;gap:16px;min-width:0}
+.bhead{display:grid;gap:8px}
+.bhead h3{font-size:24px;line-height:1.25}
+.bhead .meta{color:var(--muted);font-size:15px}
+.chip.q{color:var(--olive)}
+.board-main h4{font-family:var(--label);font-weight:600;font-size:15px;color:var(--brass);margin:0 0 6px;letter-spacing:.04em;text-transform:uppercase}
+.bsum ul{margin:0;padding-left:20px;display:grid;gap:6px}
+.bdec{display:grid;gap:12px}
+.bq{background:var(--panel-2);border:3px solid var(--line);padding:10px 12px;display:grid;gap:8px}
+.bq-q{margin:0}
+.bq-opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{font-family:var(--label);font-weight:600;font-size:15px;background:#120d0a;border:3px solid var(--line);padding:8px 12px;color:var(--ink);text-align:left}
+.opt[aria-pressed="true"]{border-color:var(--olive);background:#26301a}
+.opt[disabled]{cursor:default}
+.bact{display:grid;gap:10px;border-top:4px dashed var(--line);padding-top:14px}
+.bdoc{border:3px solid var(--line);background:#120d0a}
+.bdoc summary{cursor:pointer;padding:10px 12px;font-family:var(--label);font-weight:600;font-size:15px;color:var(--brass)}
+.mdbody{padding:4px 16px 16px;display:grid;gap:10px;max-height:70vh;overflow:auto;min-width:0}
+.mdbody p,.mdbody li{max-width:75ch;margin:0}
+.mdbody ul{margin:0;padding-left:20px;display:grid;gap:4px}
+.mdbody .mdh{font-family:var(--label);font-weight:700;color:var(--ink);margin:10px 0 0;line-height:1.3}
+.mdbody h3.mdh{font-size:22px} .mdbody h4.mdh{font-size:19px} .mdbody h5.mdh,.mdbody h6.mdh{font-size:17px;color:var(--brass)}
+.mdbody code{font-family:ui-monospace,Menlo,monospace;font-size:14px;background:var(--panel-2);padding:1px 4px;overflow-wrap:anywhere}
+.mdbody hr{border:0;border-top:3px dashed var(--line);width:100%}
+.tblwrap{overflow-x:auto;max-width:100%}
+.mdbody table{border-collapse:collapse;font-size:15px;min-width:100%}
+.mdbody th,.mdbody td{border:2px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+.mdbody th{background:var(--panel-2);font-family:var(--label);font-weight:600}
 </style>
 
 <div class="app">
@@ -197,6 +232,7 @@ textarea{min-height:64px}
     </div>
     <nav class="views" aria-label="Rooms">
       <button class="view-btn" data-view="office" type="button">Office</button>
+      <button class="view-btn" data-view="boardroom" type="button">Boardroom</button>
       <button class="view-btn" data-view="hiring" type="button">Hiring floor</button>
     </nav>
     <div class="clock" id="clock" aria-live="off"></div>
@@ -230,6 +266,11 @@ textarea{min-height:64px}
     <div id="desk-detail"></div>
   </section>
 
+  <section class="boardroom" id="view-boardroom" aria-label="Boardroom">
+    <aside class="board-side px"><h2>On the table</h2><div class="queue" id="board-list"><p class="empty">Opening the boardroom…</p></div></aside>
+    <section class="board-main px" id="board-item" aria-live="polite"></section>
+  </section>
+
   <main class="room" id="view-hiring">
     <aside class="lobby px" aria-labelledby="lobby-h">
       <h2 id="lobby-h">Lobby</h2>
@@ -247,7 +288,7 @@ textarea{min-height:64px}
 <script>
 (function(){
 "use strict";
-const S={desks:[],asg:[],deskSel:null,draft:{},asgMsg:{},deskMsg:{},cfg:null,mcp:null,cands:[],dec:{},tr:{},seats:[],sel:null,tab:"dossier",busy:false,owner:false,db:null,sample:null,loaded:false,dbFailed:false};
+const S={board:[],boardSel:null,boardDraft:{},boardMsg:{},desks:[],asg:[],deskSel:null,draft:{},asgMsg:{},deskMsg:{},cfg:null,mcp:null,cands:[],dec:{},tr:{},seats:[],sel:null,tab:"dossier",busy:false,owner:false,db:null,sample:null,loaded:false,dbFailed:false};
 const $=s=>document.querySelector(s);
 function el(tag,attrs,kids){const n=document.createElement(tag);if(attrs)for(const k in attrs){const v=attrs[k];if(v==null||v===false)continue;
   if(k==="class")n.className=v;else if(k==="text")n.textContent=v;else if(k.startsWith("on"))n.addEventListener(k.slice(2),v);else n.setAttribute(k,v===true?"":v);}
@@ -536,16 +577,78 @@ async function openDesk(c){if(!S.db)return;const seat=c.seat||c.id;if(S.desks.so
   const now=new Date().toISOString();
   try{await S.db.doc("desks/"+seat).set({name:c.name||seat,role:c.role||"",seat,avatar:c.avatar||{},status:"onboarding",
     task:"Onboarding. The CEO is setting up this desk.",updatedAt:now,order:c.order??50,kpis:arr(c.kpis),log:[{at:now,text:"Hired by the Founder."}]})}catch(e){}}
-function route(){const v=location.hash==="#hiring"?"hiring":"office";
-  $("#view-office").hidden=v!=="office";$("#view-hiring").hidden=v!=="hiring";
+function route(){const h=location.hash.slice(1);const v=["hiring","boardroom"].includes(h)?h:"office";
+  $("#view-office").hidden=v!=="office";$("#view-hiring").hidden=v!=="hiring";$("#view-boardroom").hidden=v!=="boardroom";
   document.querySelectorAll(".view-btn").forEach(b=>b.setAttribute("aria-current",b.dataset.view===v?"page":"false"));}
 function updateNav(){const n=S.cands.filter(c=>statusOf(c.id)==="new").length;const b=document.querySelector('.view-btn[data-view="hiring"]');
   if(b)b.textContent="Hiring floor"+(n?" ("+n+")":"");}
 document.querySelectorAll(".view-btn").forEach(b=>b.addEventListener("click",()=>{location.hash=b.dataset.view;route()}));
 window.addEventListener("hashchange",route);route();
 
+/* ---------- boardroom ---------- */
+const BSTAT={pending:"Awaiting you",approved:"Approved",changes:"Changes requested",rejected:"Rejected"};
+const BCHIP={pending:"waiting",approved:"working",changes:"onboarding",rejected:"blocked"};
+function inline(t){const out=[];const re=/(\*\*[^*]+\*\*|`[^`]+`)/g;let last=0,m;t=String(t);
+  while((m=re.exec(t))){if(m.index>last)out.push(t.slice(last,m.index));const s=m[0];
+    out.push(s.startsWith("**")?el("strong",{text:s.slice(2,-2)}):el("code",{text:s.slice(1,-1)}));last=re.lastIndex;}
+  if(last<t.length)out.push(t.slice(last));return out;}
+function md(text){const lines=String(text||"").split(/\r?\n/);const out=[];let list=null,tbl=null;
+  const flush=()=>{list=null;tbl=null;};
+  for(let i=0;i<lines.length;i++){const l=lines[i];const t=l.trim();
+    if(!t){flush();continue}
+    if(/^\|/.test(t)){const cells=t.replace(/^\||\|$/g,"").split("|").map(c=>c.trim());
+      if(cells.every(c=>/^:?-{2,}:?$/.test(c)))continue;
+      if(!tbl){const wrap=el("div",{class:"tblwrap"});tbl=el("table");wrap.append(tbl);out.push(wrap);tbl.append(el("tr",null,cells.map(c=>el("th",null,inline(c)))));list=null;continue}
+      tbl.append(el("tr",null,cells.map(c=>el("td",null,inline(c)))));continue}
+    tbl=null;
+    const h=t.match(/^(#{1,4})\s+(.*)$/);if(h){list=null;out.push(el("h"+Math.min(6,h[1].length+2),{class:"mdh"},inline(h[2])));continue}
+    const b=t.match(/^[-*]\s+(.*)$/)||t.match(/^\d+[.)]\s+(.*)$/);
+    if(b){if(!list){list=el("ul");out.push(list)}list.append(el("li",null,inline(b[1])));continue}
+    if(/^---+$/.test(t)){flush();out.push(el("hr"));continue}
+    list=null;out.push(el("p",null,inline(t)));}
+  return out;}
+function boardSort(a,b){const p=x=>x.status==="pending"?0:1;return p(a)-p(b)||String(b.submittedAt||"").localeCompare(String(a.submittedAt||""));}
+function renderBoardList(){const box=$("#board-list");if(!box)return;
+  if(S.dbFailed){box.replaceChildren(el("p",{class:"empty",text:"The boardroom can't be loaded in this view."}));return}
+  if(!S.board.length){box.replaceChildren(el("p",{class:"empty",text:S.loaded?"Nothing on the table. Agents' reports and proposals appear here for your approval.":"Opening the boardroom…"}));return}
+  box.replaceChildren(...S.board.slice().sort(boardSort).map(it=>{const st=BSTAT[it.status]?it.status:"pending";const d=S.desks.find(x=>x.id===it.seat);
+    return el("button",{class:"ticket",type:"button","aria-current":S.boardSel===it.id?"true":"false",onclick:()=>{S.boardSel=it.id;renderBoardList();renderBoardItem();}},[
+      avatar(d?d.avatar:{kind:"orb"},2,{hired:true}),
+      el("div",null,[el("div",{class:"n",text:it.title||it.id}),el("div",{class:"r",text:(it.from||"")+(it.submittedAt?" · "+ago(it.submittedAt):"")}),el("span",{class:"chip "+BCHIP[st],text:BSTAT[st]})])]);}));}
+function renderBoardItem(force){const box=$("#board-item");if(!box)return;const it=S.board.find(x=>x.id===S.boardSel);
+  if(!force&&document.activeElement&&box.contains(document.activeElement)&&/TEXTAREA|INPUT/.test(document.activeElement.tagName))return;
+  if(!it){box.replaceChildren(el("div",{class:"welcome"},[el("h2",{text:"Boardroom"}),el("p",{text:"Every report, plan and proposal your team sends for approval lands here. Open one, answer its decisions, then approve, ask for changes or reject. The CEO is told the moment you decide."})]));return}
+  const st=BSTAT[it.status]?it.status:"pending";const dr=S.boardDraft[it.id]||(S.boardDraft[it.id]={answers:Object.assign({},it.answers||{}),note:it.note||""});
+  const decs=arr(it.decisions).map(q=>el("div",{class:"bq"},[el("p",{class:"bq-q"},inline(q.q||"")),
+    el("div",{class:"bq-opts"},arr(q.options).map(o=>el("button",{type:"button",class:"opt","aria-pressed":dr.answers[q.id]===o?"true":"false",disabled:!S.owner,
+      onclick:()=>{dr.answers[q.id]=o;renderBoardItem(true)}},[o+(q.recommended===o?"  ★ recommended":"")])))]));
+  const note=el("textarea",{id:"board-note",placeholder:"Your note to the team (optional; required to reject)","aria-label":"Note"});note.value=dr.note||"";note.addEventListener("input",()=>{dr.note=note.value});
+  const msg=el("p",{class:"hint",id:"board-msg",text:S.boardMsg[it.id]||(S.owner?"":"Only the Founder can decide.")});
+  const act=(k,l)=>el("button",{class:"btn "+k,type:"button",onclick:()=>boardDecide(it,k)},[l]);
+  const files=arr(it.files);
+  box.replaceChildren(
+    el("div",{class:"bhead"},[el("h3",{text:it.title||it.id}),
+      el("div",{class:"meta",text:[it.from,it.level?"Level "+it.level:null,it.submittedAt?"sent "+ago(it.submittedAt):null].filter(Boolean).join(" · ")}),
+      el("div",{class:"desk-row"},[el("span",{class:"chip "+BCHIP[st],text:BSTAT[st]}),it.verdict?el("span",{class:"chip q",text:"Quality: "+it.verdict}):null])]),
+    arr(it.summary).length?el("div",{class:"bsum"},[el("h4",{text:"In short"}),el("ul",null,arr(it.summary).map(s=>el("li",null,inline(s))))]):null,
+    decs.length?el("div",{class:"bdec"},[el("h4",{text:"Your decisions"}),...decs]):null,
+    el("div",{class:"bact"},[S.owner?note:null,S.owner?el("div",{class:"desk-row"},[act("hire","Approve"),act("hold","Request changes"),act("reject","Reject")]):null,msg,
+      it.decidedAt?el("p",{class:"current"},["Last decision: ",el("b",{text:BSTAT[st]})," · "+ago(it.decidedAt)+(it.note?" · “"+it.note+"”":"")]):null]),
+    el("details",{class:"bdoc",open:true},[el("summary",{text:"Full document"+(files.length?" · "+files.join(", "):"")}),el("div",{class:"mdbody"},md(it.body))]));}
+async function boardDecide(it,k){const dr=S.boardDraft[it.id];const status={hire:"approved",hold:"changes",reject:"rejected"}[k];
+  const setMsg=(t,ok)=>{S.boardMsg[it.id]=t;const m=$("#board-msg");if(m){m.textContent=t;m.className=ok?"hint ok":"hint"}};
+  if(status==="rejected"&&!(dr.note||"").trim()){setMsg("Add a note saying why, so the team can fix it.",false);return}
+  if(!S.db){setMsg("Decisions can't be saved in this view.",false);return}
+  try{await S.db.doc("boardroom/"+it.id).update({status,answers:dr.answers,note:(dr.note||"").trim(),decidedAt:new Date().toISOString()})}
+  catch(e){setMsg("Couldn't save. Check your connection and try again.",false);return}
+  const qa=arr(it.decisions).map(q=>(q.short||q.id)+": "+(dr.answers[q.id]||"(no answer)")).join("; ");
+  setMsg("Saved. Notifying the CEO…",false);
+  const r=await notify("[Boardroom] The Founder marked \""+(it.title||it.id)+"\" from "+(it.from||it.seat)+" as "+BSTAT[status].toUpperCase()+". "+(qa?"Answers: "+qa+". ":"")+((dr.note||"").trim()?"Note: "+dr.note.trim()+". ":"")+"Read boardroom/"+it.id+" and act on it.",$("#board-msg"));
+  setMsg(r.ok?"Saved. The CEO has been notified.":"Saved. "+r.why,r.ok);}
+function updateBoardNav(){const n=S.board.filter(x=>(x.status||"pending")==="pending").length;const b=document.querySelector('.view-btn[data-view="boardroom"]');if(b)b.textContent="Boardroom"+(n?" ("+n+")":"");}
+
 /* ---------- boot ---------- */
-function all(){renderSeats();renderQueue();renderDesks();updateNav();if(S.sel)renderInterview();}
+function all(){renderSeats();renderQueue();renderDesks();updateNav();renderBoardList();renderBoardItem();updateBoardNav();if(S.sel)renderInterview();}
 (async function boot(){
   const timer=setTimeout(()=>{if(!S.loaded){S.dbFailed=true;all();}},10000);
   const db=window.claude&&window.claude.use?await window.claude.use("db"):null;
@@ -560,12 +663,14 @@ function all(){renderSeats();renderQueue();renderDesks();updateNav();if(S.sel)re
   db.collection("transcripts").onSnapshot(s=>{if(S.busy)return;S.tr={};s.docs.forEach(d=>S.tr[d.id]=d.data());renderChat();},fail);
   db.collection("desks").onSnapshot(s=>{S.desks=s.docs.map(d=>Object.assign({id:d.id},d.data())).sort((a,b)=>(a.order??99)-(b.order??99));
     if(!S.deskSel&&S.desks.length)S.deskSel=S.desks[0].id;renderDesks();renderDeskDetail();},fail);
+  db.collection("boardroom").onSnapshot(s=>{S.board=s.docs.map(d=>Object.assign({id:d.id},d.data()));
+    if(!S.boardSel&&S.board.length)S.boardSel=S.board.slice().sort(boardSort)[0].id;renderBoardList();renderBoardItem();updateBoardNav();},fail);
   db.collection("assignments").onSnapshot(s=>{S.asg=s.docs.map(d=>Object.assign({id:d.id},d.data()));renderDesks();renderDeskDetail();},()=>{});
   window.claude.use("sample").then(x=>{S.sample=x}).catch(()=>{});
   window.claude.use("mcp").then(x=>{S.mcp=x}).catch(()=>{});
   window.claude.use("comments").then(x=>{S.comments=x}).catch(()=>{});
   db.doc("config/notify").onSnapshot(s=>{S.cfg=s.exists?s.data():null;},()=>{});
-  window.claude.use("user").then(async u=>{try{S.owner=u?await u.isOwner():false}catch(e){S.owner=false}if(S.sel&&!S.busy)renderInterview();renderDeskDetail(true);}).catch(()=>{});
+  window.claude.use("user").then(async u=>{try{S.owner=u?await u.isOwner():false}catch(e){S.owner=false}if(S.sel&&!S.busy)renderInterview();renderDeskDetail(true);renderBoardItem(true);}).catch(()=>{});
 })();
 })();
 </script>

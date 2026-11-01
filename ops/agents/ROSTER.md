@@ -12,8 +12,8 @@ Owner: CHRO. Every agent, every stage, every decision. Never delete rows.
 | CQRO | `.claude/agents/cqro.md` | PROBATION (to Nov 30 2026) | Oct 31 2026 | Custom build; structure from VoltAgent compliance-auditor.md (MIT) | "Hamna Qureshi". Hired by Founder Oct 31 2026: "monitor and give more authority that lies within her domain" → binding BLOCK (Founder-only override), direct fixes to L1 facts, standing audit rights, read-only Shopify/Meta/GSC. Register `approvals/REGISTER.md` |
 | CRO | `.claude/agents/cro.md` | PROBATION (to Dec 1 2026) | Nov 1 2026 | Custom build; structure from VoltAgent assumption-mapping.md (MIT) | "Sana Iqbal". Hired by Founder Nov 1 2026. Read-only Shopify/Meta/GSC. First task: final 11.11 recommendation on live data |
 | CMO | `.claude/agents/cmo.md` | PROBATION (to Dec 1 2026) | Nov 1 2026 | Custom build; structure from VoltAgent landing-page-copywriter.md (MIT) | "Omar Shafiq". Hired by Founder Nov 1 2026. Read-only Shopify/Meta/GSC. Creative Director (ad-director) now reports here |
-| COO | — | PLANNED, wave 2 | — | — | — |
-| CFO | — | PLANNED, wave 2 | — | — | — |
+| COO | candidate `coo-zain` | INTERVIEWING (pending CEO review + push) | Nov 1 2026 | Custom build; structure from VoltAgent risk-manager.md (MIT) | "Zain Haider". Wave 2, order 6. Brief `briefs/coo.md` |
+| CFO | candidate `cfo-ayesha` | INTERVIEWING (pending CEO review + push) | Nov 1 2026 | Custom build; structure from wshobson startup-analyst.md (MIT) | "Ayesha Naqvi". Wave 2, order 7. Brief `briefs/cfo.md` |
 | CTO | — | PLANNED, wave 3 | — | — | — |
 
 ## Decision log
@@ -49,3 +49,15 @@ Spec = the Founder's notes. CRO bar: clarity + accuracy. CMO bar: commercial jud
 | wshobson/agents `plugins/customer-sales-automation/agents/sales-automator.md` | MIT | PASS on safety, rejected on fit (B2B cold email, "Use PROACTIVELY") | — |
 | 0xfurai/claude-code-subagents | MIT | No business/marketing agents found | — |
 Stage record: Requisition v2 (Oct 31) → Sourcing (Oct 31) → Screening 7/7 PASS both (Oct 31) → Work sample scored (Oct 31, CHRO; CEO re-score pending) → candidate JSON + draft agent file written → **awaiting CEO review and push to `candidates/cro-sana`, `candidates/cmo-omar`; `seats/cro` and `seats/cmo` → status "interviewing"**.
+
+## Sourcing log (wave 2: COO + CFO, Nov 1 2026)
+Hiring bar carried from wave 1: five lines first, every number sourced and dated, assumptions boxed, commercial judgment, plus one idea the Founder has not asked for (Founder in Sana's interview). Work samples use only `briefs/DATA_PACK_2026-10-31.md` and dated CLAUDE.md figures.
+| Repo / file | Licence | Screen | Used for |
+|---|---|---|---|
+| VoltAgent `categories/07-specialized-domains/risk-manager.md` | MIT | PASS after removing Bash, "context manager" JSON protocol, template result figures and autonomous "implement" steps (structure only: control + KRI + cost of failure) | COO `coo-zain` |
+| wshobson/agents `plugins/startup-business-analyst/agents/startup-analyst.md` | MIT | PASS after removing "use PROACTIVELY", slash-command integrations, web research and US benchmark figures (structure only: quality standards) | CFO `cfo-ayesha` |
+| wshobson/agents `plugins/customer-sales-automation/agents/customer-support.md` | MIT | PASS on safety items read, **rejected on fit + rules**: paid helpdesk stack (Zendesk, Intercom, Gorgias), autonomous outreach with no approval step | — |
+| VoltAgent `categories/08-business-product/customer-success-manager.md` | MIT | Rejected on fit (SaaS account management; sample results read as real figures) | — |
+Read via WebFetch (summarised pages, not byte-level). No text copied. No inventory/supply-chain agent found in VoltAgent, wshobson or the aggregator search.
+Stage record: Requisition (Nov 1, `briefs/coo.md`, `briefs/cfo.md`) → Sourcing (Nov 1) → Screening 7/7 PASS both (Nov 1) → Work sample scored by CHRO (COO 4/4/5/4/5 = 4.4; CFO 5/4/4/4/4 = 4.2; CEO re-score pending) → `candidates/coo-zain.{json,md}`, `candidates/cfo-ayesha.{json,md}` written → **awaiting CEO review and push to `candidates/coo-zain`, `candidates/cfo-ayesha`; `seats/coo` and `seats/cfo` → status "interviewing"**.
+Conflicts raised with the CEO (not resolved quietly): (1) `briefs/cro.md` RACI lists CRO A/R on discount codes vs the CFO seat's "discount control": proposed split = CRO owns offer + code hygiene, CFO owns the binding margin floor; (2) "ad spend ~4,000/day" is the rate since Oct 24 only; October was ~3,000/day for 23 days; (3) Mocha Mate 43 units (Oct 24) vs 25 (Oct 31) vs data pack 72 units / 101 orders; (4) Bellezza cost 2,350 carries the wallet buffer though bags carry none (Founder said 2,200).
