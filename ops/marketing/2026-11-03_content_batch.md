@@ -91,7 +91,7 @@ Base URL `https://kordovanleather.com`. DM keywords: **HAT, MOCHA, JACKET, WALLE
 > Clifford. Faded Black.
 >
 > Genuine leather, haath se shape ki hui. Halki, aur saalon mein aap ke saath wear-in hoti hai.
-> Hamare apne workshop mein hand-cut aur stitch. Stitching aur hardware par lifetime craftsmanship warranty.
+> Hamare apne workshop mein hand-cut aur stitch. Lifetime craftsmanship warranty ke saath.
 >
 > Rs 10,500. Online pay karein to delivery free. Cash on delivery bhi hai, Rs 250 delivery ke saath, because a cash order costs us a courier collection and a possible return trip.
 >
@@ -155,7 +155,7 @@ Real footage only. Do not generate or AI-edit the product.
 > [OFFER LINE: exact wording from the approved CRO recommendation, plus its reason]
 > [DATES: from the approved recommendation]
 > Bastion, Razor, Luke, KODO, Aristocrat. Genuine leather, hamare apne workshop se, lifetime craftsmanship warranty ke saath.
-> Rs 5,500 se upar online order par delivery free. Cash on delivery available.
+> Rs 5,500 se upar online order par delivery free. Cash on delivery available, Rs 250 zyada.
 > "WALLET" likh kar DM karein, ya link bio mein.
 
 **Fallback if the Founder says no to an offer (full price, no discount language):**
@@ -312,7 +312,7 @@ Rules for whoever sends them (Ahsan): copy the reply, fill only the [brackets] f
 **R3 · Delivery ("kab tak milega?", "delivery charges?")**
 > Ready pieces: order confirm hone par PostEx se dispatch hota hai, aur tracking number WhatsApp par aa jata hai. [COO: insert the standard dispatch-to-door days once confirmed. Until then, no number of days is quoted.]
 > Delivery charges: Rs 5,500 se upar online payment par free. Rs 5,500 se kam par online Rs 250, cash on delivery Rs 500. Rs 5,500 se upar cash on delivery Rs 250.
-> Jackets aur footwear: about 3 weeks, checkout se aap ke darwaze tak (made to order).
+> Jackets aur footwear: about 3 weeks, checkout se aap ke darwaze tak. Har piece ek customer ke liye cut hota hai, aur sardi hamara sab se busy season hai.
 
 **R4 · Size: hats**
 > Hat ka size inch mein hota hai. Measuring tape maathe ke beech se, kaanon ke upar se, sar ke peeche tak le jayein. Clifford mein S 20–21.5 inch aur L 22.5–23 inch hai. [Ahsan: check today's sizes in stock on the product page before replying.] Naap bhej dein, hum size confirm kar dein ge.
@@ -321,7 +321,7 @@ Rules for whoever sends them (Ahsan): copy the reply, fill only the [brackets] f
 > Pay karne se pehle size confirm kar lein: chest (jackets) ya UK/EU size (shoes) yahan ya WhatsApp 0333 2601161 par bhejein. Har piece aap ke size par cut hota hai, is liye pehle confirm karna zaroori hai.
 
 **R6 · "Is it real leather?" / "Asli leather hai?"**
-> Ji. [Product] [custom.material from the product page, e.g. "Cow Leather", "Top-grain sheep leather"] se bana hai, hamare apne workshop mein, aur stitching aur hardware par lifetime craftsmanship warranty hai.
+> Ji. [Product] [custom.material from the product page, e.g. "Cow Leather", "Top-grain sheep leather"] se bana hai, hamare apne workshop mein, aur us par lifetime craftsmanship warranty hai.
 > *(Exceptions, never call these leather: The Diva Tote // Vegan and The Vibe // LITE // Vegan are vegan. The croc- and snake-textured belts are genuine leather with an embossed pattern, not exotic skin. The Stallion boot: confirm the material with the CEO first, as its data conflicts.)*
 
 **R7 · Jacket timeline ("jacket kab tak?", "itna time kyun?")**
@@ -396,3 +396,20 @@ Both have **0 photos and are unpublished** (live, Nov 1). Master's: Rs 10,800, 1
 - **C8** A search for "Karachi", "!", "%", "code", "4–7" and "50%" in the customer-facing text returns 0.
 
 **READY FOR CQRO** (Omar Shafiq, CMO, Nov 1 2026)
+
+---
+
+## 9. CQRO review (Hamna Qureshi, Nov 1 2026) — APPROVED WITH FIXES, 3 lines RETURNED
+Live Shopify read-only, Nov 1 2026. Register rows CB-1 to CB-12.
+
+**Corrected directly (sourced, meaning unchanged):**
+- P01 + R6: "Stitching aur hardware par lifetime craftsmanship warranty" → "Lifetime craftsmanship warranty". Source `snippets/pdp-main.liquid:401`: the warranty covers any failure "because of how it was made". No surface limits it to stitching and hardware.
+- R3: the jacket/footwear "about 3 weeks" line now carries its reason (CLAUDE.md hard rule: terms always stated with the reason; the wording is taken from R7).
+- P04 offer shell: "Cash on delivery available" → "Cash on delivery available, Rs 250 zyada" (live delivery profile, Sep 15 rate table).
+
+**RETURNED to the CMO (needs your judgment or a source):**
+- **P01 + P03 "haath se shape" / "Haath ka kaam, kinare tak" / "hand-cut aur stitch":** the Faded Black page only says "Premium Quality Craftsmanship". No source says the hat is hand-shaped or hand-cut. Either the Founder confirms it, or use: caption "Genuine leather, halki aur aaraam deh. Saalon mein aap ke saath wear-in hoti hai. Hamare apne workshop se, lifetime craftsmanship warranty ke saath." · card 2 "Genuine leather. Halki. Saalon mein wear-in." · P03 frame 1 "Kinare tak saaf kaam." ("Halki" is sourced: the description says "lightweight design".)
+- **P02 frame 3 + R4 inch sizes:** unverified (C4). Live Faded Black also has an "XL / 23+ Inch" variant, so "L: 22.5–23" overlaps XL. Do not post until the workshop confirms the inch ranges.
+- **C5 COD reason:** it is consistent with the CLAUDE.md Sep 15 rationale (return shipping plus courier COD handling). Approved as wording; the Founder may restyle it.
+
+**Approved:** P04 fallback, P05, P09, P10 (gated on C7 and on stock of 20 or more), P11 (care lines match `/pages/leather-care-guide`: dry naturally, no heater, avoid direct sun), R1, R2, R5, R7–R10, all prices and stock in §2 and §7, all forecast arithmetic. Banned-word sweep (Karachi, "!", codes, 4–7, 50%) returned 0 in customer text.

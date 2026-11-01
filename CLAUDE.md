@@ -618,6 +618,19 @@ TOF-J had banked ~27k jacket ViewContent events (Sep 5–Oct 20) and nothing was
   (Founder said 2,200 = the pre-buffer wallet cost). **The 9 dead lines tie up ≈ PKR 561k AT COST** (1.41M retail),
   more than 2 months of fixed costs; even 40% off stays above cost on every line.
 
+## 💰 CRO FIRST REPORT (Sana Iqbal, Nov 1 2026): `ops/revenue/2026-11-01_reversals_and_1111.md`
+- October by ORDER date (137 orders): real money lost 166,896 = 86,696 cancelled + 28,000 refunded + **52,200 in 2 jacket
+  card payments that expired unpaid** (still counted inside net sales). ~87k of the "30.7% reversals" were staff order
+  EDITS (size/colour swaps) that lost nothing → **real lost-order rate 25.3%**. All 18 cancellations were COD (0 prepaid);
+  Meta-paid traffic = 23% of gross but 64% of cancelled value; 87% cancelled pre-dispatch; outside the 9 cities 23%
+  cancelled vs 9% inside. ShopifyQL 228,462 reconciles = 201,263 (Oct orders) + 27,199 (9 Sep orders).
+- Recommends: **no wallet discount for 11.11** (last year wallets sold 0.78x the prior week while WCM20 20% ran, and
+  coded orders cancelled 29.5% vs 15.4%); fallback 10% on Bastion/Razor/Luke/KODO, non-combining (WELCOME10 combines with
+  everything). **Pause TOF-M when Mocha Mate stock hits 8 (~Nov 6)**; sell-out ~Nov 9–10. Live TOF-M budgets are
+  H1 1,500 + H3 500/day (not 1,000 each).
+- ⚠️ **PostEx Sync anomaly:** 6 edited orders show more cash received than the order total (86,616 total; e.g. KDV#22898
+  85,400 on 28,200). For the CFO/CTO to investigate. Awaiting Founder decisions (see report).
+
 ## 🔌 Available integrations (MCP)
 Shopify, GitHub, Canva, Figma, Facebook Ads, Higgsfield, Cloudflare.
 (Playwright is NOT available in this remote env — design is done in code, then
