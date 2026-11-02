@@ -11,7 +11,15 @@
  * nothing is lost when it does.
  * Requires env: BRIDGE_URL, BRIDGE_SECRET, WEBHOOK_TOKEN.
  *
- * v5.1
+ * v5.2
+ *
+ * v5.2 (Nov 2 2026) — same-second race (KDV#22707: webhook + poll captured 3 s
+ * apart). Every COD capture now runs through codCaptureOnce(): a per-order KV
+ * lock `caplock:<orderId>` (120 s TTL, owner token re-read to confirm), the
+ * outstanding balance re-read INSIDE the lock right before capturing, and a
+ * post-capture re-read that writes one "Over-captured by X, check manually"
+ * note (KV `overcap:<id>`) if the balance went negative. KV is not atomic, so
+ * the lock narrows the window and the post-check catches anything that slips.
  *
  * v5.1 (Nov 1 2026) — edited / part-paid orders. Marking a delivered COD order
  * paid now records the order's CURRENT Shopify `total_outstanding`, re-read
@@ -41,7 +49,7 @@
  * - Webhook + hourly cron both fully operational
  */
 
-const WORKER_VERSION = '5.1-edited-orders';   // returned by /health — confirms a deploy
+const WORKER_VERSION = '5.2-capture-lock';     // returned by /health — confirms a deploy
 const COD_MATCH_TOLERANCE = 1;                // PKR; PostEx vs Shopify outstanding
 const POSTEX_BASE  = 'https://api.postex.pk/services/integration/api/order/v1';
 const SHOPIFY_API  = '2024-01';
@@ -1498,17 +1506,19 @@ async function handleWebhook(payload, env) {
         try { pxAmount = (await trackSinglePostEx(trackingNum, env.POSTEX_TOKEN)).invoicePayment ?? null; }
         catch (e) { console.log(`Webhook: PostEx amount lookup failed (${e.message}) — using Shopify outstanding`); }
       }
-      const cap = await resolveCodCapture(order.id, pxAmount, token, env);
+      const cap = await codCaptureOnce(env, order.id, pxAmount, trackingNum, orderRef, token);
+      if (cap.action === 'locked') {
+        console.log(`Order ${order.order_number} capture already in progress elsewhere — skipping`);
+        return;
+      }
       if (cap.action === 'skip') {
         console.log(`Order ${order.order_number} outstanding ${cap.outstanding} (${cap.financialStatus}) — already handled`);
         return;
       }
       if (cap.action === 'mismatch') {
-        await noteCodMismatch(env, order.id, cap, trackingNum, orderRef, token);
         console.log(`Webhook: ⚠️ Order ${order.order_number} PostEx ${cap.postex} ≠ outstanding ${cap.outstanding} — not marked paid`);
         return;
       }
-      await markOrderPaid(order.id, cap.amount, trackingNum, orderRef, token, env);
       console.log(`Webhook: ✅ Order ${order.order_number} marked paid (PKR ${cap.amount})`);
       await incrementStat(env, 'webhookPaid');
     } catch (e) {
@@ -1590,23 +1600,26 @@ async function runPollSync(env) {
 
         if (status === DELIVERED_STATUS) {
           let cap;
-          try { cap = await resolveCodCapture(o.id, postexData.invoicePayment, token, env); }
-          catch (e) { log(`Order #${o.order_number} outstanding lookup ERROR: ${e.message}`); result.errors++; continue; }
+          try { cap = await codCaptureOnce(env, o.id, postexData.invoicePayment, tn, o.name, token); }
+          catch (e) { log(`Order #${o.order_number} mark paid ERROR: ${e.message}`); result.errors++; continue; }
+          if (cap.action === 'locked') {
+            log(`Order #${o.order_number} capture already in progress elsewhere — skipping`);
+            result.skipped++;
+            continue;
+          }
           if (cap.action === 'skip') {
             log(`Order #${o.order_number} outstanding ${cap.outstanding} (${cap.financialStatus}) — already handled, skipping`);
             result.skipped++;
             continue;
           }
           if (cap.action === 'mismatch') {
-            await noteCodMismatch(env, o.id, cap, tn, o.name, token);
             log(`Order #${o.order_number} ⚠️ PostEx ${cap.postex} ≠ outstanding ${cap.outstanding} — NOT marked paid`);
             result.skipped++;
             continue;
           }
           const amount = cap.amount;
-          log(`Order #${o.order_number} [${tn}] — DELIVERED → marking paid`);
+          log(`Order #${o.order_number} [${tn}] — DELIVERED → marked paid`);
           try {
-            await markOrderPaid(o.id, amount, tn, o.name, token, env);
             result.markedPaid++;
             log(`Order #${o.order_number} ✅ marked paid (PKR ${amount})`);
             // Delivered → thank-you. ref keeps it to exactly one per order.
@@ -1615,7 +1628,7 @@ async function runPollSync(env) {
             // Same moment schedules the review ask — it fires RV_DELAY_DAYS later.
             await rvSchedule(env, o);
           } catch (e) {
-            log(`Order #${o.order_number} mark paid ERROR: ${e.message}`);
+            log(`Order #${o.order_number} post-capture notify ERROR: ${e.message}`);
             result.errors++;
           }
         } else if (String(status).toLowerCase() === OUT_FOR_DELIVERY) {
@@ -1941,6 +1954,45 @@ async function resolveCodCapture(orderId, postexAmount, token, env) {
     return { action: 'mismatch', postex, outstanding };
   // Record Shopify's outstanding (within PKR 1 of PostEx) so the balance lands on exactly 0.
   return { action: 'capture', amount: outstanding.toFixed(2), postex, outstanding };
+}
+
+// v5.2: the only caller of markOrderPaid for COD. Lock → fresh outstanding →
+// capture → re-read. Returns {action: locked|skip|mismatch|captured, ...}.
+const CAPLOCK_TTL_S = 120;
+async function codCaptureOnce(env, orderId, postexAmount, trackingNumber, orderRef, token) {
+  const lockKey = `caplock:${orderId}`;
+  const me = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+  if (await env.SYNC_KV.get(lockKey)) return { action: 'locked' };
+  await env.SYNC_KV.put(lockKey, me, { expirationTtl: CAPLOCK_TTL_S });
+  if ((await env.SYNC_KV.get(lockKey)) !== me) return { action: 'locked' };   // lost the race
+  try {
+    const cap = await resolveCodCapture(orderId, postexAmount, token, env);     // fresh read, inside the lock
+    if (cap.action === 'mismatch') await noteCodMismatch(env, orderId, cap, trackingNumber, orderRef, token);
+    if (cap.action !== 'capture') return cap;
+    await markOrderPaid(orderId, cap.amount, trackingNumber, orderRef, token, env);
+    await checkOverCapture(env, orderId, token);
+    return { ...cap, action: 'captured' };
+  } finally {
+    try { if ((await env.SYNC_KV.get(lockKey)) === me) await env.SYNC_KV.delete(lockKey); } catch (e) {}
+  }
+}
+
+// Backstop for anything the lock misses: a negative balance means money was
+// recorded twice. One note per order (KV `overcap:<id>`).
+async function checkOverCapture(env, orderId, token) {
+  try {
+    const d = await shopifyFetch(`/orders/${orderId}.json?fields=id,total_outstanding`, token, env);
+    const out = toAmount(d.order?.total_outstanding);
+    if (out === null || out >= 0) return false;
+    const key = `overcap:${orderId}`;
+    if (await env.SYNC_KV.get(key)) return false;
+    const now = new Date().toLocaleString('en-PK', { timeZone: 'Asia/Karachi' });
+    await addOrderNote(orderId,
+      `⚠️ Over-captured by ${fmtPKR(-out)}, check manually\nShopify outstanding is ${fmtPKR(out)} after PostEx Sync capture\nUpdated: ${now}`,
+      token, env);
+    await env.SYNC_KV.put(key, '1', { expirationTtl: 60 * 60 * 24 * 30 });
+    return true;
+  } catch (e) { console.error('checkOverCapture:', e.message); return false; }
 }
 
 // One note per order, not one per hourly sweep.
