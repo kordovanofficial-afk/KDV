@@ -676,6 +676,16 @@ TOF-J had banked ~27k jacket ViewContent events (Sep 5–Oct 20) and nothing was
   Razor photo set confirmed REAL by Founder. POS sync-off date: Founder picked "Other" with empty note → asked again.
   Mr. Tahir pack = `Kordovan_Mr_Tahir_Requests_Nov2026.xlsx` (count by Nov 8, MTO-or-stock, 22 costs by Nov 6) for the Founder to forward.
   PostEx edited-order fix being written (deploy needs Founder yes). Mixed-cart test scheduled Nov 9 19:10Z (send_later).
+- ✅ **Founder (chat, Nov 2):** teasers **PKR 1,000/day** · sale conversion ads **PKR 5,000/day MAX** · POS sync off "in a day or two".
+  **TEASER campaign LIVE (published Nov 2, in review):** campaign `120255866086090428` OUTCOME_ENGAGEMENT · ad set `120255866086510428`
+  THRUPLAY, ON_VIDEO, page `2738478432836892`, 1,000/day, **start 2026-11-03 00:00 PKT, end 2026-11-09 23:59 PKT (read back ✓, CQRO
+  condition)**, 9 cities home+recent, LLA 1%+3%, excl refusers/purchasers/SEED/All Visitors 180D `120252468018150428`. Ads T1
+  `120255866087680428` (video `1682959663215301`) · T2 `120255866087870428` (video `1127959146287616`), CTA Learn More → homepage,
+  UTMs `utm_campaign=teaser_1111_nov26`. IG user `17841440239172690`. Videos hosted via Shopify Files (stagedUploads → fileCreate)
+  to get a public cdn URL for Meta.
+  ⏰ send_later: Nov 9 18:50Z apply sale split (Retarget 2,000 · TOF-M 1,000 · TOF-W 800 · RT-W 600 · RT-T 600 ≤5,000) ·
+  Nov 9 19:10Z mixed-cart test · Nov 12 19:05Z revert budgets. RT-T + teaser-viewer audience still to build (needs video IDs above).
+
 
 
 ## 🔌 Available integrations (MCP)
