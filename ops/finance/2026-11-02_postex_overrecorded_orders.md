@@ -1,7 +1,7 @@
 # Orders where Shopify shows more cash than we received (PostEx Sync)
 CFO (Ayesha Naqvi) · Nov 2 2026 · L0, read-only. Nothing was changed. Source: Shopify Admin GraphQL `orders{totalOutstandingSet totalReceivedSet netPaymentSet transactions events}`, all orders placed Aug 1 – Oct 31 2026 PKT (350 Aug–Sep + 137 Oct), read Nov 2.
 
-**Answer:** It is **14 orders, not 6: PKR 116,366** recorded as received that never came in. October has 6 orders (86,616), the CRO's figure. August–September has 8 more (29,750), all between Aug 31 and Sep 15. No order before Aug 31 is affected. Real money is fine: every customer paid what they owed, and nobody is owed a refund. Only Shopify's "received" figure is wrong.
+**Answer:** It is **14 orders, not 6: PKR 116,366** recorded as received that never came in. October has 6 orders (86,616), the CRO's figure. August–September has 8 more (29,750), all between Aug 31 and Sep 15. No order before Aug 31 is affected. Real money is fine: no customer is owed a refund, and only Shopify's "received" figure is wrong. **"Real balance 0" is proven for 8 orders** (22898 paid by card; 22890, 22863, 22677, 22715, 22751, 22707 and 22719, where the sync recorded PostEx's own collected figure). **The other 6 (22906, 22929, 22862, 22665, 22724, 22674) are expected to be 0 but are not yet proven.** They wait on PostEx's settlement statement, because only the webhook ran on them and it recorded the order total, not what PostEx collected. *(CQRO fix Nov 2.)*
 
 | Order | Current total | Recorded as received | Real cash (how paid) | What PostEx collected | Shopify shows | Real balance | Over-recorded |
 |---|---|---|---|---|---|---|---|
@@ -23,15 +23,16 @@ CFO (Ayesha Naqvi) · Nov 2 2026 · L0, read-only. Nothing was changed. Source: 
 
 "Seen" = the hourly sync recorded PostEx's own `invoicePayment` figure for that order. "Not visible" = only the webhook ran, and it recorded the order total instead. Confirm those 6 figures from PostEx's settlement statement.
 
-**Three ways this happened (all in `tools/postex-worker/worker.js`):**
+**Four ways this happened (all in `tools/postex-worker/worker.js`):**
 1. **Customer paid an advance, then the sync captured twice** (22890, 22863, 22677, 22715, 22751, 22719). The hourly poll correctly captured the COD balance. Minutes later the webhook captured the full order total again: the "already paid" check only skips `paid`, and these orders were `partially_paid`.
 2. **Staff edited the order, then the sync captured the pre-edit total** (22906, 22862, 22665, 22724, 22674, plus 22929 on top of a part-prepayment). The webhook falls back to `order.total_price` when PostEx sends no amount.
-3. **Fully paid by card, then captured as COD anyway** (22898). It was `partially_refunded` after a 400 refund, so it passed the check. 22707 is a pure same-minute duplicate with no edit and no advance.
-- Also: the 6 bank advances (**PKR 49,252**) were never entered in Shopify as payments. The duplicate captures happen to "cover" them, which is why the numbers looked plausible.
+3. **Fully paid by card, then captured as COD anyway** (22898). It was `partially_refunded` after a 400 refund, so it passed the check.
+4. **Same-second race** (22707): two captures of 2,200 in the same second, with no edit and no advance. The poll and the webhook both acted before either capture was saved, so the status check could not see the other one. The fix needs a lock (a "captured" marker in KV written before posting), not just a stricter status check. *(CQRO fix Nov 2: a fourth cause, not part of the other three.)*
+- Also: the 6 bank advances (8,951 + 4,400 + 14,400 + 5,250 + 2,500 + 5,000 = **PKR 40,501**; corrected from 49,252, which was an addition error) were never entered in Shopify as payments. The duplicate captures happen to "cover" them, which is why the numbers looked plausible.
 
 **Proposed correction, in plain words (Founder decides, L3; nothing done yet):**
 1. **Do not refund anyone and do not touch the card gateway.** On 22898 and 22929 a refund through XPay would send real money to the customer. Any correction goes only on the "cash on delivery" record.
-2. **Test on one small order first** (KDV#22719, 50). Record a refund of the over-recorded amount on the "cash on delivery" gateway, no items, no restock, customer notification **off**. Then check that ShopifyQL net sales for that day did not change. If net sales moved, stop: keep Shopify as it is and correct the books in Mr. Tahir's ledger only, with a note on each order.
+2. **Test on one small order first** (KDV#22719, 50). Record a refund of the over-recorded amount on the "cash on delivery" gateway, no items, no restock, customer notification **off**. Then check ShopifyQL **twice**: net sales for the **day the test refund is made**, because refunds book on the refund date, and the 22719 line (`GROUP BY order_name`). Neither may change. Checking the order's original date (Sep 10) would miss it. *(CQRO fix Nov 2.)* If net sales moved, stop: keep Shopify as it is and correct the books in Mr. Tahir's ledger only, with a note on each order.
 3. If the test is clean, apply the same to the other 13, smallest first, each amount from this table. Afterwards every order should show outstanding 0.
 4. **From now on, the cash figure comes from the PostEx settlement statement and the bank, not Shopify's "received".** Until the fix is deployed, Mr. Tahir checks any edited or advance-paid order the day after delivery.
 
