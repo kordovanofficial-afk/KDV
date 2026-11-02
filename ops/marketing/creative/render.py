@@ -157,8 +157,15 @@ def offer_band(W, h, bg=ESPRESSO):
     d = ImageDraw.Draw(band)
     m = int(W * 0.06)
     f_num = fit(d, "11.11", FR, W * 0.34, int(h * 0.62))
-    f_off = fit(d, "25% OFF", FR, W * 0.50, int(h * 0.50))
-    f_ew = font(IN_SB, max(18, int(h * 0.13)))
+    xdiv0 = m + tw(d, "11.11", f_num) + int(W * 0.04)
+    room = (W - m) - (xdiv0 + int(W * 0.05))  # right block must clear the divider by >=5% of width
+    f_off = fit(d, "25% OFF", FR, min(W * 0.50, room), int(h * 0.50))
+    ew_size = max(18, int(h * 0.13))
+    while ew_size > 14:
+        f_ew = font(IN_SB, ew_size)
+        if sum(tw(d, c, f_ew) for c in "EVERY WALLET") + f_ew.size * 0.14 * 11 <= room:
+            break
+        ew_size -= 1
     nh, ntop = text_h(f_num, "11.11")
     d.text((m, (h - nh) / 2 - ntop), "11.11", font=f_num, fill=ALABASTER)
     # divider
@@ -229,6 +236,7 @@ def c3():
         ("L1", "Luke", "Slim, vertical", dict()),
         ("A3", "Aristocrat", "Slim classic", dict()),
         ("K1", "KODO", "Crazy Horse leather, RFID", dict(crop_top=0.47, zoom=1.0)),  # crop out bank cards
+        ("R4", "Razor", "RFID smart wallet", dict()),  # v5: Razor back, leather close-up (no cards)
     ]
     band_h = int(H * 0.36)
     strip_h = int(H * 0.15)
@@ -291,8 +299,9 @@ def c1():
     for n, t, s, kw in [("B1", "Bastion", "Distressed cow leather", None),
                         ("L1", "Luke", "Slim, vertical", None),
                         ("K4", "KODO", "Crazy Horse leather, RFID", None),
-                        ("A3", "Aristocrat", "Slim classic", None)]:
-        scenes.append((int(1.875 * fps), product_scene(W, H, n, t, s, kw)))
+                        ("A3", "Aristocrat", "Slim classic", None),
+                        ("R4", "Razor", "RFID smart wallet", None)]:
+        scenes.append((int(1.5 * fps), product_scene(W, H, n, t, s, kw)))
     scenes.append((int(5.0 * fps), closer(W, H)))
     render_video(os.path.join(OUT, "C1_paanch_wallets_9x16_15s.mp4"), scenes, W, H, fps)
 
