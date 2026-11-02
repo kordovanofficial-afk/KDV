@@ -688,6 +688,12 @@ TOF-J had banked ~27k jacket ViewContent events (Sep 5–Oct 20) and nothing was
 - ✅ **Boardroom Nov 2 04:12–04:15Z:** PostEx fix APPROVED (deploy steps + worker.js sent; Founder deploys in Cloudflare, then
   verify /health `5.1-edited-orders` + diff live code) · 6 over-recorded orders → CFO listing them for approval · v4 creatives
   APPROVED + **Razor back in (v5, Omar)** · teasers APPROVED both videos + budget + **RT-T yes (600/day in the 5,000 cap)**.
+- ✅ **PostEx correction APPROVED (Nov 2 09:44Z):** test + rest + PostEx statements = yes. 🔴 **`refundCreate` is BLOCKED by the
+  connector's safety policy** ("refunds must be issued manually") → Founder does each correction in admin (no items, amount only,
+  'cash on delivery' gateway, notification OFF). Test = KDV#22719 Rs 50; baseline ShopifyQL net_sales Nov 2 = 31,905 (before
+  test). After the test: re-run `FROM sales SHOW net_sales … SINCE/UNTIL refund date` + the 22719 line; if unchanged, send the
+  other 13 as one checklist. PostEx Sync **v5.2** (`5.2-capture-lock`) sent for deploy; v5.1 superseded, do not deploy it.
+
 
 
 
