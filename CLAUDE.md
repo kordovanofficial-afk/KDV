@@ -573,6 +573,16 @@ TOF-J had banked ~27k jacket ViewContent events (Sep 5–Oct 20) and nothing was
   W-RT1 547 / 1 ✅ · W03 Chai Dhaba 1,062 / 0 and W-RT2 4,673 / CPA 1,558 were ALREADY paused. TOF-M Comparison CPA 773,
   Founder ad 930 · Retarget 638. PostEx worker v5.2 deploy VERIFIED Nov 7 (/health 5.2-capture-lock + code diff identical).
 
+## 🛍 11.11 MOVED + SWITCHED TO PRICE CHANGES (Founder, Nov 7 2026)
+- Runs **Nov 8 00:00 → Nov 12 23:59 PKT** (moved earlier because competitors had already started). The sale shows as real
+  PRICE + compare-at strikethrough on every page, so customers see it on landing.
+- Both automatic discounts were **DEACTIVATED Nov 7** (status EXPIRED) so nothing double-discounts. 🔴 Never reactivate them.
+- Snapshot of every original price, plus the apply/revert batches: `ops/revenue/1111/` (171 products, 587 variants;
+  wallets 25.0–25.3% off, the rest 15.0–16.3%; sale price rounded DOWN to the nearest 10 so the advertised % always holds).
+- Scheduled tasks: `trig_014xygz1pesVa2bzPstJLym4` Nov 7 19:00Z (apply prices + sale budgets + pause teaser) ·
+  `trig_01WyrESV1ANvpmToo8kkweVq` Nov 12 19:00Z (revert prices + budgets + sale read). The mixed-cart test task was deleted.
+- ⚠️ POS is synced, so the store shows the sale prices too. Founder must NOT also schedule his own price change (that would double it).
+
 ## 🏛 AGENT ORGANISATION (started Oct 31 2026): read `ops/agents/ORG_DESIGN.md` + `ROSTER.md`
 - **Founder = the user (Chairman, approves every hire and every live change). CEO = Claude (the main session).**
   User: *"youre the CEO i hired"*. Morning brief to the Founder daily.

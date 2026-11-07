@@ -1,0 +1,5872 @@
+[
+{
+"g": "W",
+"pid": "gid://shopify/Product/8362293035248",
+"handle": "mocha-mate",
+"vid": "gid://shopify/ProductVariant/44340364476656",
+"price": "3200.00",
+"cap": null,
+"sale": 2400,
+"effpct": 25.0
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/9393545052400",
+"handle": "kodo-vertical-2-0",
+"vid": "gid://shopify/ProductVariant/49898106421488",
+"price": "2450.00",
+"cap": null,
+"sale": 1830,
+"effpct": 25.3
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/9393545052400",
+"handle": "kodo-vertical-2-0",
+"vid": "gid://shopify/ProductVariant/49898106454256",
+"price": "2450.00",
+"cap": null,
+"sale": 1830,
+"effpct": 25.3
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/6155979849917",
+"handle": "rfid-protected-kodo-smart-wallet",
+"vid": "gid://shopify/ProductVariant/50075215298800",
+"price": "2300.00",
+"cap": null,
+"sale": 1720,
+"effpct": 25.2
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/6155979849917",
+"handle": "rfid-protected-kodo-smart-wallet",
+"vid": "gid://shopify/ProductVariant/50075215331568",
+"price": "2300.00",
+"cap": null,
+"sale": 1720,
+"effpct": 25.2
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/6155979849917",
+"handle": "rfid-protected-kodo-smart-wallet",
+"vid": "gid://shopify/ProductVariant/50075215364336",
+"price": "2300.00",
+"cap": null,
+"sale": 1720,
+"effpct": 25.2
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/6155979849917",
+"handle": "rfid-protected-kodo-smart-wallet",
+"vid": "gid://shopify/ProductVariant/50075215397104",
+"price": "2300.00",
+"cap": null,
+"sale": 1720,
+"effpct": 25.2
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/6155979849917",
+"handle": "rfid-protected-kodo-smart-wallet",
+"vid": "gid://shopify/ProductVariant/50075215429872",
+"price": "2300.00",
+"cap": null,
+"sale": 1720,
+"effpct": 25.2
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/9793108672752",
+"handle": "the-bastion-handcrafted-genuine-leather-bifold-wallet-for-men-slim-classic-everyday-wallet",
+"vid": "gid://shopify/ProductVariant/50007942824176",
+"price": "2500.00",
+"cap": null,
+"sale": 1870,
+"effpct": 25.2
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/9793108672752",
+"handle": "the-bastion-handcrafted-genuine-leather-bifold-wallet-for-men-slim-classic-everyday-wallet",
+"vid": "gid://shopify/ProductVariant/50007942856944",
+"price": "2500.00",
+"cap": null,
+"sale": 1870,
+"effpct": 25.2
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/8301073694960",
+"handle": "the-money-clip-minimal-wallet",
+"vid": "gid://shopify/ProductVariant/44177193140464",
+"price": "1950.00",
+"cap": null,
+"sale": 1460,
+"effpct": 25.1
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/7959199351024",
+"handle": "shelby-thomas-soft-milled-leather-wallet",
+"vid": "gid://shopify/ProductVariant/50008017961200",
+"price": "2800.00",
+"cap": null,
+"sale": 2100,
+"effpct": 25.0
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/7959199351024",
+"handle": "shelby-thomas-soft-milled-leather-wallet",
+"vid": "gid://shopify/ProductVariant/50008017993968",
+"price": "2800.00",
+"cap": null,
+"sale": 2100,
+"effpct": 25.0
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/8312321933552",
+"handle": "the-luke-minimalist-wallet",
+"vid": "gid://shopify/ProductVariant/44204515361008",
+"price": "2400.00",
+"cap": null,
+"sale": 1800,
+"effpct": 25.0
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/7845134434544",
+"handle": "nappa-leather-bifold-wallet-for-men-dark-brown",
+"vid": "gid://shopify/ProductVariant/50008004460784",
+"price": "2400.00",
+"cap": null,
+"sale": 1800,
+"effpct": 25.0
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/7845134434544",
+"handle": "nappa-leather-bifold-wallet-for-men-dark-brown",
+"vid": "gid://shopify/ProductVariant/50008004493552",
+"price": "2400.00",
+"cap": null,
+"sale": 1800,
+"effpct": 25.0
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/7958272147696",
+"handle": "the-elite-mobile-wallet-unisex",
+"vid": "gid://shopify/ProductVariant/50008012226800",
+"price": "3900.00",
+"cap": null,
+"sale": 2920,
+"effpct": 25.1
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/7958272147696",
+"handle": "the-elite-mobile-wallet-unisex",
+"vid": "gid://shopify/ProductVariant/50008012259568",
+"price": "3900.00",
+"cap": null,
+"sale": 2920,
+"effpct": 25.1
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/9478371016944",
+"handle": "rigor-wallet-lite",
+"vid": "gid://shopify/ProductVariant/50016420364528",
+"price": "1499.00",
+"cap": null,
+"sale": 1120,
+"effpct": 25.3
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/9478371016944",
+"handle": "rigor-wallet-lite",
+"vid": "gid://shopify/ProductVariant/50016420397296",
+"price": "1499.00",
+"cap": null,
+"sale": 1120,
+"effpct": 25.3
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/8168840397040",
+"handle": "crazy-horse-long-wallet-unisex-kordovan-light",
+"vid": "gid://shopify/ProductVariant/50008053842160",
+"price": "3900.00",
+"cap": null,
+"sale": 2920,
+"effpct": 25.1
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/8168840397040",
+"handle": "crazy-horse-long-wallet-unisex-kordovan-light",
+"vid": "gid://shopify/ProductVariant/50008053874928",
+"price": "3900.00",
+"cap": null,
+"sale": 2920,
+"effpct": 25.1
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/8159248056560",
+"handle": "illusion-magic-wallet-by-kordovan-camel",
+"vid": "gid://shopify/ProductVariant/50008049287408",
+"price": "2000.00",
+"cap": null,
+"sale": 1500,
+"effpct": 25.0
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/8159248056560",
+"handle": "illusion-magic-wallet-by-kordovan-camel",
+"vid": "gid://shopify/ProductVariant/50008049320176",
+"price": "2000.00",
+"cap": null,
+"sale": 1500,
+"effpct": 25.0
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/8159248056560",
+"handle": "illusion-magic-wallet-by-kordovan-camel",
+"vid": "gid://shopify/ProductVariant/50008049352944",
+"price": "2000.00",
+"cap": null,
+"sale": 1500,
+"effpct": 25.0
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/8351957287152",
+"handle": "the-aristocrat-wallet",
+"vid": "gid://shopify/ProductVariant/50008160764144",
+"price": "4200.00",
+"cap": null,
+"sale": 3150,
+"effpct": 25.0
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/8351957287152",
+"handle": "the-aristocrat-wallet",
+"vid": "gid://shopify/ProductVariant/50008160796912",
+"price": "4200.00",
+"cap": null,
+"sale": 3150,
+"effpct": 25.0
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/8447602393328",
+"handle": "elite-card-holder-black",
+"vid": "gid://shopify/ProductVariant/50054913491184",
+"price": "1800.00",
+"cap": null,
+"sale": 1350,
+"effpct": 25.0
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/8447602393328",
+"handle": "elite-card-holder-black",
+"vid": "gid://shopify/ProductVariant/50054913523952",
+"price": "1800.00",
+"cap": null,
+"sale": 1350,
+"effpct": 25.0
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/8447602393328",
+"handle": "elite-card-holder-black",
+"vid": "gid://shopify/ProductVariant/50054913556720",
+"price": "1800.00",
+"cap": null,
+"sale": 1350,
+"effpct": 25.0
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/8429209485552",
+"handle": "the-truckkr-bi-fold",
+"vid": "gid://shopify/ProductVariant/44668730081520",
+"price": "3800.00",
+"cap": null,
+"sale": 2850,
+"effpct": 25.0
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/8268805636336",
+"handle": "bronco-handcrafted-wallet",
+"vid": "gid://shopify/ProductVariant/50104526143728",
+"price": "6200.00",
+"cap": null,
+"sale": 4650,
+"effpct": 25.0
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/8268805636336",
+"handle": "bronco-handcrafted-wallet",
+"vid": "gid://shopify/ProductVariant/50008077533424",
+"price": "6200.00",
+"cap": null,
+"sale": 4650,
+"effpct": 25.0
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/8172472959216",
+"handle": "premium-saffiano-leather-wallet",
+"vid": "gid://shopify/ProductVariant/50008057184496",
+"price": "4300.00",
+"cap": null,
+"sale": 3220,
+"effpct": 25.1
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/8172472959216",
+"handle": "premium-saffiano-leather-wallet",
+"vid": "gid://shopify/ProductVariant/50008057217264",
+"price": "4300.00",
+"cap": null,
+"sale": 3220,
+"effpct": 25.1
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/9478383010032",
+"handle": "midtown-lite-wallet",
+"vid": "gid://shopify/ProductVariant/47573551972592",
+"price": "1499.00",
+"cap": null,
+"sale": 1120,
+"effpct": 25.3
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/7670476603632",
+"handle": "the-gator-bifold-wallet-for-men",
+"vid": "gid://shopify/ProductVariant/50007998955760",
+"price": "2800.00",
+"cap": null,
+"sale": 2100,
+"effpct": 25.0
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/7670476603632",
+"handle": "the-gator-bifold-wallet-for-men",
+"vid": "gid://shopify/ProductVariant/50007998988528",
+"price": "2800.00",
+"cap": null,
+"sale": 2100,
+"effpct": 25.0
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/9478377177328",
+"handle": "sheppard-wallet",
+"vid": "gid://shopify/ProductVariant/47573528248560",
+"price": "1499.00",
+"cap": null,
+"sale": 1120,
+"effpct": 25.3
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/9968825008368",
+"handle": "the-razor-rfid-smart-leather-wallet-kordovan",
+"vid": "gid://shopify/ProductVariant/50007980474608",
+"price": "2450.00",
+"cap": null,
+"sale": 1830,
+"effpct": 25.3
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/9968825008368",
+"handle": "the-razor-rfid-smart-leather-wallet-kordovan",
+"vid": "gid://shopify/ProductVariant/50007980507376",
+"price": "2450.00",
+"cap": null,
+"sale": 1830,
+"effpct": 25.3
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/9968825008368",
+"handle": "the-razor-rfid-smart-leather-wallet-kordovan",
+"vid": "gid://shopify/ProductVariant/50007980540144",
+"price": "2450.00",
+"cap": null,
+"sale": 1830,
+"effpct": 25.3
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/9968825008368",
+"handle": "the-razor-rfid-smart-leather-wallet-kordovan",
+"vid": "gid://shopify/ProductVariant/50007980572912",
+"price": "2450.00",
+"cap": null,
+"sale": 1830,
+"effpct": 25.3
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/9968825008368",
+"handle": "the-razor-rfid-smart-leather-wallet-kordovan",
+"vid": "gid://shopify/ProductVariant/50007980605680",
+"price": "2450.00",
+"cap": null,
+"sale": 1830,
+"effpct": 25.3
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/9968825008368",
+"handle": "the-razor-rfid-smart-leather-wallet-kordovan",
+"vid": "gid://shopify/ProductVariant/50007980638448",
+"price": "2450.00",
+"cap": null,
+"sale": 1830,
+"effpct": 25.3
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/9481279406320",
+"handle": "the-armour-dual-mobile-wallet-with-notepad",
+"vid": "gid://shopify/ProductVariant/50054875742448",
+"price": "4500.00",
+"cap": null,
+"sale": 3370,
+"effpct": 25.1
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/9481279406320",
+"handle": "the-armour-dual-mobile-wallet-with-notepad",
+"vid": "gid://shopify/ProductVariant/50054875775216",
+"price": "4500.00",
+"cap": null,
+"sale": 3370,
+"effpct": 25.1
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/9099749392624",
+"handle": "stallion-handcrafted-wallet",
+"vid": "gid://shopify/ProductVariant/46785657340144",
+"price": "6500.00",
+"cap": null,
+"sale": 4870,
+"effpct": 25.1
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/9530038518000",
+"handle": "the-hunter-hm-wallet",
+"vid": "gid://shopify/ProductVariant/47727092596976",
+"price": "3200.00",
+"cap": null,
+"sale": 2400,
+"effpct": 25.0
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/7701930017008",
+"handle": "the-luxurious-ladies-clutch",
+"vid": "gid://shopify/ProductVariant/50008001249520",
+"price": "7200.00",
+"cap": null,
+"sale": 5400,
+"effpct": 25.0
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/7701930017008",
+"handle": "the-luxurious-ladies-clutch",
+"vid": "gid://shopify/ProductVariant/50008001282288",
+"price": "7200.00",
+"cap": null,
+"sale": 5400,
+"effpct": 25.0
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/7701930017008",
+"handle": "the-luxurious-ladies-clutch",
+"vid": "gid://shopify/ProductVariant/50008001315056",
+"price": "7200.00",
+"cap": null,
+"sale": 5400,
+"effpct": 25.0
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/8951120920816",
+"handle": "the-kingsman-wallet",
+"vid": "gid://shopify/ProductVariant/46404563927280",
+"price": "4600.00",
+"cap": null,
+"sale": 3450,
+"effpct": 25.0
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/8876584370416",
+"handle": "hm-the-lords-wallet-brown",
+"vid": "gid://shopify/ProductVariant/50008222695664",
+"price": "6250.00",
+"cap": null,
+"sale": 4680,
+"effpct": 25.1
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/8876584370416",
+"handle": "hm-the-lords-wallet-brown",
+"vid": "gid://shopify/ProductVariant/50008222728432",
+"price": "6250.00",
+"cap": null,
+"sale": 4680,
+"effpct": 25.1
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/9099752571120",
+"handle": "the-cleopatra-handcrafted-ladies-wallet",
+"vid": "gid://shopify/ProductVariant/50299951710448",
+"price": "7200.00",
+"cap": null,
+"sale": 5400,
+"effpct": 25.0
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/9099752571120",
+"handle": "the-cleopatra-handcrafted-ladies-wallet",
+"vid": "gid://shopify/ProductVariant/50054901235952",
+"price": "7200.00",
+"cap": null,
+"sale": 5400,
+"effpct": 25.0
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/9782937518320",
+"handle": "bellezza-clutch",
+"vid": "gid://shopify/ProductVariant/50054692143344",
+"price": "6500.00",
+"cap": null,
+"sale": 4870,
+"effpct": 25.1
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/9782937518320",
+"handle": "bellezza-clutch",
+"vid": "gid://shopify/ProductVariant/50054692176112",
+"price": "6500.00",
+"cap": null,
+"sale": 4870,
+"effpct": 25.1
+},
+{
+"g": "W",
+"pid": "gid://shopify/Product/9044435599600",
+"handle": "the-seamless-stitch-less-wallet-brown",
+"vid": "gid://shopify/ProductVariant/46628653564144",
+"price": "2000.00",
+"cap": null,
+"sale": 1500,
+"effpct": 25.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7007209128125",
+"handle": "genuine-sheep-leather-adjustable-baseball-cap-unisex",
+"vid": "gid://shopify/ProductVariant/50299941421296",
+"price": "1950.00",
+"cap": null,
+"sale": 1650,
+"effpct": 15.4
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7007209128125",
+"handle": "genuine-sheep-leather-adjustable-baseball-cap-unisex",
+"vid": "gid://shopify/ProductVariant/50299941454064",
+"price": "1950.00",
+"cap": null,
+"sale": 1650,
+"effpct": 15.4
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7007209128125",
+"handle": "genuine-sheep-leather-adjustable-baseball-cap-unisex",
+"vid": "gid://shopify/ProductVariant/50299941486832",
+"price": "1950.00",
+"cap": null,
+"sale": 1650,
+"effpct": 15.4
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7007209128125",
+"handle": "genuine-sheep-leather-adjustable-baseball-cap-unisex",
+"vid": "gid://shopify/ProductVariant/50299941519600",
+"price": "1950.00",
+"cap": null,
+"sale": 1650,
+"effpct": 15.4
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7471350350064",
+"handle": "durable-mens-leather-gloves-light-brown-kordovan",
+"vid": "gid://shopify/ProductVariant/45884119253232",
+"price": "1950.00",
+"cap": null,
+"sale": 1650,
+"effpct": 15.4
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7471350350064",
+"handle": "durable-mens-leather-gloves-light-brown-kordovan",
+"vid": "gid://shopify/ProductVariant/42116398186736",
+"price": "1950.00",
+"cap": null,
+"sale": 1650,
+"effpct": 15.4
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7471350350064",
+"handle": "durable-mens-leather-gloves-light-brown-kordovan",
+"vid": "gid://shopify/ProductVariant/42116398219504",
+"price": "1950.00",
+"cap": null,
+"sale": 1650,
+"effpct": 15.4
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7471350350064",
+"handle": "durable-mens-leather-gloves-light-brown-kordovan",
+"vid": "gid://shopify/ProductVariant/42116398252272",
+"price": "1950.00",
+"cap": null,
+"sale": 1650,
+"effpct": 15.4
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7471350350064",
+"handle": "durable-mens-leather-gloves-light-brown-kordovan",
+"vid": "gid://shopify/ProductVariant/48602085228784",
+"price": "1950.00",
+"cap": null,
+"sale": 1650,
+"effpct": 15.4
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7471350087920",
+"handle": "durable-mens-leather-gloves-black-kordovan",
+"vid": "gid://shopify/ProductVariant/42116397793520",
+"price": "1950.00",
+"cap": null,
+"sale": 1650,
+"effpct": 15.4
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7471350087920",
+"handle": "durable-mens-leather-gloves-black-kordovan",
+"vid": "gid://shopify/ProductVariant/50251389796592",
+"price": "1950.00",
+"cap": null,
+"sale": 1650,
+"effpct": 15.4
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7471350087920",
+"handle": "durable-mens-leather-gloves-black-kordovan",
+"vid": "gid://shopify/ProductVariant/42116397826288",
+"price": "1950.00",
+"cap": null,
+"sale": 1650,
+"effpct": 15.4
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7471350087920",
+"handle": "durable-mens-leather-gloves-black-kordovan",
+"vid": "gid://shopify/ProductVariant/42116397859056",
+"price": "1950.00",
+"cap": null,
+"sale": 1650,
+"effpct": 15.4
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7471350087920",
+"handle": "durable-mens-leather-gloves-black-kordovan",
+"vid": "gid://shopify/ProductVariant/48602098729200",
+"price": "1950.00",
+"cap": null,
+"sale": 1650,
+"effpct": 15.4
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7643980136688",
+"handle": "genuine-sheep-leather-flat-cap-newsboy-unisex",
+"vid": "gid://shopify/ProductVariant/50007998660848",
+"price": "2500.00",
+"cap": null,
+"sale": 2120,
+"effpct": 15.2
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7643980136688",
+"handle": "genuine-sheep-leather-flat-cap-newsboy-unisex",
+"vid": "gid://shopify/ProductVariant/50007998693616",
+"price": "2500.00",
+"cap": null,
+"sale": 2120,
+"effpct": 15.2
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7643980136688",
+"handle": "genuine-sheep-leather-flat-cap-newsboy-unisex",
+"vid": "gid://shopify/ProductVariant/50007998726384",
+"price": "2500.00",
+"cap": null,
+"sale": 2120,
+"effpct": 15.2
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7894642786544",
+"handle": "the-ripper-case-by-kordovan",
+"vid": "gid://shopify/ProductVariant/50008009572592",
+"price": "2100.00",
+"cap": null,
+"sale": 1780,
+"effpct": 15.2
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7894642786544",
+"handle": "the-ripper-case-by-kordovan",
+"vid": "gid://shopify/ProductVariant/50008009605360",
+"price": "2100.00",
+"cap": null,
+"sale": 1780,
+"effpct": 15.2
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7894642786544",
+"handle": "the-ripper-case-by-kordovan",
+"vid": "gid://shopify/ProductVariant/50008009638128",
+"price": "2100.00",
+"cap": null,
+"sale": 1780,
+"effpct": 15.2
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7738872201456",
+"handle": "the-diva-tote",
+"vid": "gid://shopify/ProductVariant/50008001446128",
+"price": "6600.00",
+"cap": null,
+"sale": 5610,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7738872201456",
+"handle": "the-diva-tote",
+"vid": "gid://shopify/ProductVariant/50008001478896",
+"price": "6600.00",
+"cap": null,
+"sale": 5610,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7738872201456",
+"handle": "the-diva-tote",
+"vid": "gid://shopify/ProductVariant/50008001511664",
+"price": "6600.00",
+"cap": null,
+"sale": 5610,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7436689015024",
+"handle": "the-case-by-kordovan-vintage-brown",
+"vid": "gid://shopify/ProductVariant/50016434454768",
+"price": "2250.00",
+"cap": null,
+"sale": 1910,
+"effpct": 15.1
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7436689015024",
+"handle": "the-case-by-kordovan-vintage-brown",
+"vid": "gid://shopify/ProductVariant/50016434487536",
+"price": "2250.00",
+"cap": null,
+"sale": 1910,
+"effpct": 15.1
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7788511658224",
+"handle": "premium-nappa-leather-reversible-belt-black-brown",
+"vid": "gid://shopify/ProductVariant/42408726954224",
+"price": "3900.00",
+"cap": null,
+"sale": 3310,
+"effpct": 15.1
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8226206810352",
+"handle": "leather-key-chain-with-belt-loop",
+"vid": "gid://shopify/ProductVariant/50008068030704",
+"price": "1150.00",
+"cap": null,
+"sale": 970,
+"effpct": 15.7
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8226206810352",
+"handle": "leather-key-chain-with-belt-loop",
+"vid": "gid://shopify/ProductVariant/50008068063472",
+"price": "1150.00",
+"cap": null,
+"sale": 970,
+"effpct": 15.7
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7466990534896",
+"handle": "copy-of-kordovans-crushable-premium-genuine-leather-western-cowboy-hat-s012",
+"vid": "gid://shopify/ProductVariant/42101915222256",
+"price": "4800.00",
+"cap": null,
+"sale": 4080,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7466990534896",
+"handle": "copy-of-kordovans-crushable-premium-genuine-leather-western-cowboy-hat-s012",
+"vid": "gid://shopify/ProductVariant/42101915255024",
+"price": "4800.00",
+"cap": null,
+"sale": 4080,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7466990534896",
+"handle": "copy-of-kordovans-crushable-premium-genuine-leather-western-cowboy-hat-s012",
+"vid": "gid://shopify/ProductVariant/42101915287792",
+"price": "4800.00",
+"cap": null,
+"sale": 4080,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7466990534896",
+"handle": "copy-of-kordovans-crushable-premium-genuine-leather-western-cowboy-hat-s012",
+"vid": "gid://shopify/ProductVariant/42101915320560",
+"price": "4800.00",
+"cap": null,
+"sale": 4080,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8127207801072",
+"handle": "copy-of-mens-leather-fanny-pack",
+"vid": "gid://shopify/ProductVariant/50008047649008",
+"price": "3600.00",
+"cap": null,
+"sale": 3060,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8127207801072",
+"handle": "copy-of-mens-leather-fanny-pack",
+"vid": "gid://shopify/ProductVariant/50008047681776",
+"price": "3600.00",
+"cap": null,
+"sale": 3060,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7777745895664",
+"handle": "natural-grain-double-stich-leather-belt",
+"vid": "gid://shopify/ProductVariant/50008001970416",
+"price": "3300.00",
+"cap": null,
+"sale": 2800,
+"effpct": 15.2
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7777745895664",
+"handle": "natural-grain-double-stich-leather-belt",
+"vid": "gid://shopify/ProductVariant/50546162565360",
+"price": "3300.00",
+"cap": null,
+"sale": 2800,
+"effpct": 15.2
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7777745895664",
+"handle": "natural-grain-double-stich-leather-belt",
+"vid": "gid://shopify/ProductVariant/50008002003184",
+"price": "3300.00",
+"cap": null,
+"sale": 2800,
+"effpct": 15.2
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7777745895664",
+"handle": "natural-grain-double-stich-leather-belt",
+"vid": "gid://shopify/ProductVariant/50008002035952",
+"price": "3300.00",
+"cap": null,
+"sale": 2800,
+"effpct": 15.2
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7529585737968",
+"handle": "mini-leather-folio-note-pad-organizer",
+"vid": "gid://shopify/ProductVariant/50007997382896",
+"price": "3200.00",
+"cap": null,
+"sale": 2720,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7529585737968",
+"handle": "mini-leather-folio-note-pad-organizer",
+"vid": "gid://shopify/ProductVariant/50007997415664",
+"price": "3200.00",
+"cap": null,
+"sale": 2720,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7898097025264",
+"handle": "mini-crossbody-bag-small-messenger-bag",
+"vid": "gid://shopify/ProductVariant/50008010981616",
+"price": "9000.00",
+"cap": null,
+"sale": 7650,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8429207093488",
+"handle": "breathable-sheep-leather-adjustable-baseball-cap-unisex",
+"vid": "gid://shopify/ProductVariant/50008165187824",
+"price": "2550.00",
+"cap": null,
+"sale": 2160,
+"effpct": 15.3
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8429207093488",
+"handle": "breathable-sheep-leather-adjustable-baseball-cap-unisex",
+"vid": "gid://shopify/ProductVariant/50008165220592",
+"price": "2550.00",
+"cap": null,
+"sale": 2160,
+"effpct": 15.3
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7471350939888",
+"handle": "durable-womens-leather-gloves-dark-red-kordovan",
+"vid": "gid://shopify/ProductVariant/42116399235312",
+"price": "1950.00",
+"cap": null,
+"sale": 1650,
+"effpct": 15.4
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7471350939888",
+"handle": "durable-womens-leather-gloves-dark-red-kordovan",
+"vid": "gid://shopify/ProductVariant/42116399268080",
+"price": "1950.00",
+"cap": null,
+"sale": 1650,
+"effpct": 15.4
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7471350939888",
+"handle": "durable-womens-leather-gloves-dark-red-kordovan",
+"vid": "gid://shopify/ProductVariant/42116399300848",
+"price": "1950.00",
+"cap": null,
+"sale": 1650,
+"effpct": 15.4
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7471350939888",
+"handle": "durable-womens-leather-gloves-dark-red-kordovan",
+"vid": "gid://shopify/ProductVariant/42116399333616",
+"price": "1950.00",
+"cap": null,
+"sale": 1650,
+"effpct": 15.4
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/6982108545213",
+"handle": "premium-leather-lipstick-case-black",
+"vid": "gid://shopify/ProductVariant/50299941257456",
+"price": "2000.00",
+"cap": null,
+"sale": 1700,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/6982108545213",
+"handle": "premium-leather-lipstick-case-black",
+"vid": "gid://shopify/ProductVariant/50299941290224",
+"price": "2000.00",
+"cap": null,
+"sale": 1700,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/6982108545213",
+"handle": "premium-leather-lipstick-case-black",
+"vid": "gid://shopify/ProductVariant/50299941322992",
+"price": "2000.00",
+"cap": null,
+"sale": 1700,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/6982108545213",
+"handle": "premium-leather-lipstick-case-black",
+"vid": "gid://shopify/ProductVariant/50299941355760",
+"price": "2000.00",
+"cap": null,
+"sale": 1700,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8429204144368",
+"handle": "kordovans-clifford-cowboy-hat-rustic-brown",
+"vid": "gid://shopify/ProductVariant/44668629942512",
+"price": "10500.00",
+"cap": null,
+"sale": 8920,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8429204144368",
+"handle": "kordovans-clifford-cowboy-hat-rustic-brown",
+"vid": "gid://shopify/ProductVariant/50266004783344",
+"price": "10500.00",
+"cap": null,
+"sale": 8920,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8429204144368",
+"handle": "kordovans-clifford-cowboy-hat-rustic-brown",
+"vid": "gid://shopify/ProductVariant/50266004816112",
+"price": "10500.00",
+"cap": null,
+"sale": 8920,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8429204144368",
+"handle": "kordovans-clifford-cowboy-hat-rustic-brown",
+"vid": "gid://shopify/ProductVariant/50266004848880",
+"price": "10500.00",
+"cap": null,
+"sale": 8920,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8429204144368",
+"handle": "kordovans-clifford-cowboy-hat-rustic-brown",
+"vid": "gid://shopify/ProductVariant/46926101151984",
+"price": "10500.00",
+"cap": null,
+"sale": 8920,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8137559245040",
+"handle": "hawkeye-mens-brown-double-breasted-vintage-coat-s012",
+"vid": "gid://shopify/ProductVariant/50279852933360",
+"price": "32000.00",
+"cap": null,
+"sale": 27200,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8137559245040",
+"handle": "hawkeye-mens-brown-double-breasted-vintage-coat-s012",
+"vid": "gid://shopify/ProductVariant/43549829595376",
+"price": "32000.00",
+"cap": null,
+"sale": 27200,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8137559245040",
+"handle": "hawkeye-mens-brown-double-breasted-vintage-coat-s012",
+"vid": "gid://shopify/ProductVariant/43549829628144",
+"price": "32000.00",
+"cap": null,
+"sale": 27200,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8137559245040",
+"handle": "hawkeye-mens-brown-double-breasted-vintage-coat-s012",
+"vid": "gid://shopify/ProductVariant/43549829660912",
+"price": "32000.00",
+"cap": null,
+"sale": 27200,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8137559245040",
+"handle": "hawkeye-mens-brown-double-breasted-vintage-coat-s012",
+"vid": "gid://shopify/ProductVariant/43549829693680",
+"price": "32000.00",
+"cap": null,
+"sale": 27200,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8137559245040",
+"handle": "hawkeye-mens-brown-double-breasted-vintage-coat-s012",
+"vid": "gid://shopify/ProductVariant/43549829726448",
+"price": "32000.00",
+"cap": null,
+"sale": 27200,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8076736233712",
+"handle": "copy-of-natural-oil-tanned-leather-casual-belt-rustic-brown",
+"vid": "gid://shopify/ProductVariant/43339877548272",
+"price": "3800.00",
+"cap": null,
+"sale": 3230,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8329405235440",
+"handle": "imperial-keychain",
+"vid": "gid://shopify/ProductVariant/50008159322352",
+"price": "1950.00",
+"cap": null,
+"sale": 1650,
+"effpct": 15.4
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8329405235440",
+"handle": "imperial-keychain",
+"vid": "gid://shopify/ProductVariant/50417938235632",
+"price": "1950.00",
+"cap": null,
+"sale": 1650,
+"effpct": 15.4
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8329405235440",
+"handle": "imperial-keychain",
+"vid": "gid://shopify/ProductVariant/50008159355120",
+"price": "1950.00",
+"cap": null,
+"sale": 1650,
+"effpct": 15.4
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8329405235440",
+"handle": "imperial-keychain",
+"vid": "gid://shopify/ProductVariant/50008159387888",
+"price": "1950.00",
+"cap": null,
+"sale": 1650,
+"effpct": 15.4
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8070928597232",
+"handle": "leather-tray-organizer",
+"vid": "gid://shopify/ProductVariant/50008024842480",
+"price": "3000.00",
+"cap": null,
+"sale": 2550,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8070928597232",
+"handle": "leather-tray-organizer",
+"vid": "gid://shopify/ProductVariant/50008024875248",
+"price": "3000.00",
+"cap": null,
+"sale": 2550,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8070928597232",
+"handle": "leather-tray-organizer",
+"vid": "gid://shopify/ProductVariant/50008024908016",
+"price": "3000.00",
+"cap": null,
+"sale": 2550,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8070928597232",
+"handle": "leather-tray-organizer",
+"vid": "gid://shopify/ProductVariant/50008024940784",
+"price": "3000.00",
+"cap": null,
+"sale": 2550,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7693032915184",
+"handle": "copy-of-womens-casual-cap-newsboy-cap-beret-for-girl-brown",
+"vid": "gid://shopify/ProductVariant/50007999545584",
+"price": "2500.00",
+"cap": null,
+"sale": 2120,
+"effpct": 15.2
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7693032915184",
+"handle": "copy-of-womens-casual-cap-newsboy-cap-beret-for-girl-brown",
+"vid": "gid://shopify/ProductVariant/50007999578352",
+"price": "2500.00",
+"cap": null,
+"sale": 2120,
+"effpct": 15.2
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7848062124272",
+"handle": "mens-solid-one-piece-leather-dress-casual-belt",
+"vid": "gid://shopify/ProductVariant/50008005116144",
+"price": "2300.00",
+"cap": null,
+"sale": 1950,
+"effpct": 15.2
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7848062124272",
+"handle": "mens-solid-one-piece-leather-dress-casual-belt",
+"vid": "gid://shopify/ProductVariant/50008005148912",
+"price": "2300.00",
+"cap": null,
+"sale": 1950,
+"effpct": 15.2
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7848062124272",
+"handle": "mens-solid-one-piece-leather-dress-casual-belt",
+"vid": "gid://shopify/ProductVariant/50008005181680",
+"price": "2300.00",
+"cap": null,
+"sale": 1950,
+"effpct": 15.2
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7848062124272",
+"handle": "mens-solid-one-piece-leather-dress-casual-belt",
+"vid": "gid://shopify/ProductVariant/50008005214448",
+"price": "2300.00",
+"cap": null,
+"sale": 1950,
+"effpct": 15.2
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9012956463344",
+"handle": "the-vibe-lite-by-kordovan-vegan",
+"vid": "gid://shopify/ProductVariant/50299948990704",
+"price": "6000.00",
+"cap": null,
+"sale": 5100,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9012956463344",
+"handle": "the-vibe-lite-by-kordovan-vegan",
+"vid": "gid://shopify/ProductVariant/50299949023472",
+"price": "6000.00",
+"cap": null,
+"sale": 5100,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9012956463344",
+"handle": "the-vibe-lite-by-kordovan-vegan",
+"vid": "gid://shopify/ProductVariant/50299949056240",
+"price": "6000.00",
+"cap": null,
+"sale": 5100,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9012956463344",
+"handle": "the-vibe-lite-by-kordovan-vegan",
+"vid": "gid://shopify/ProductVariant/50299949089008",
+"price": "6000.00",
+"cap": null,
+"sale": 5100,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7056480239805",
+"handle": "double-pocket-extendable-travel-laptop-bag-natural-milld-leather-black",
+"vid": "gid://shopify/ProductVariant/50016424198384",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7056480239805",
+"handle": "double-pocket-extendable-travel-laptop-bag-natural-milld-leather-black",
+"vid": "gid://shopify/ProductVariant/50016424231152",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7056480239805",
+"handle": "double-pocket-extendable-travel-laptop-bag-natural-milld-leather-black",
+"vid": "gid://shopify/ProductVariant/50016424263920",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8808772468976",
+"handle": "buffalo-bob-leather-belt",
+"vid": "gid://shopify/ProductVariant/50008218796272",
+"price": "2800.00",
+"cap": null,
+"sale": 2380,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8808772468976",
+"handle": "buffalo-bob-leather-belt",
+"vid": "gid://shopify/ProductVariant/50008218829040",
+"price": "2800.00",
+"cap": null,
+"sale": 2380,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7448893980912",
+"handle": "natural-milled-leather-slim-laptop-bag-by-kordovan-brown",
+"vid": "gid://shopify/ProductVariant/50016423313648",
+"price": "15500.00",
+"cap": null,
+"sale": 13170,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7448893980912",
+"handle": "natural-milled-leather-slim-laptop-bag-by-kordovan-brown",
+"vid": "gid://shopify/ProductVariant/50016423346416",
+"price": "15500.00",
+"cap": null,
+"sale": 13170,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7448893980912",
+"handle": "natural-milled-leather-slim-laptop-bag-by-kordovan-brown",
+"vid": "gid://shopify/ProductVariant/50016423379184",
+"price": "15500.00",
+"cap": null,
+"sale": 13170,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7448893980912",
+"handle": "natural-milled-leather-slim-laptop-bag-by-kordovan-brown",
+"vid": "gid://shopify/ProductVariant/50299941978352",
+"price": "15500.00",
+"cap": null,
+"sale": 13170,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8429202571504",
+"handle": "copy-of-kordovans-premium-leather-western-cowboy-hat-rustic-maroon",
+"vid": "gid://shopify/ProductVariant/50265952452848",
+"price": "10500.00",
+"cap": null,
+"sale": 8920,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8429202571504",
+"handle": "copy-of-kordovans-premium-leather-western-cowboy-hat-rustic-maroon",
+"vid": "gid://shopify/ProductVariant/50265952420080",
+"price": "10500.00",
+"cap": null,
+"sale": 8920,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8429202571504",
+"handle": "copy-of-kordovans-premium-leather-western-cowboy-hat-rustic-maroon",
+"vid": "gid://shopify/ProductVariant/50265952387312",
+"price": "10500.00",
+"cap": null,
+"sale": 8920,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8429202571504",
+"handle": "copy-of-kordovans-premium-leather-western-cowboy-hat-rustic-maroon",
+"vid": "gid://shopify/ProductVariant/44668605726960",
+"price": "10500.00",
+"cap": null,
+"sale": 8920,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8884311425264",
+"handle": "bella-duff-mini-duffle-bag",
+"vid": "gid://shopify/ProductVariant/50008225022192",
+"price": "10500.00",
+"cap": null,
+"sale": 8920,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8884311425264",
+"handle": "bella-duff-mini-duffle-bag",
+"vid": "gid://shopify/ProductVariant/50008225054960",
+"price": "10500.00",
+"cap": null,
+"sale": 8920,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8884311425264",
+"handle": "bella-duff-mini-duffle-bag",
+"vid": "gid://shopify/ProductVariant/50008225087728",
+"price": "10500.00",
+"cap": null,
+"sale": 8920,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8884311425264",
+"handle": "bella-duff-mini-duffle-bag",
+"vid": "gid://shopify/ProductVariant/50008225120496",
+"price": "10500.00",
+"cap": null,
+"sale": 8920,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8757368815856",
+"handle": "kordovans-affordable-cowboy-hat",
+"vid": "gid://shopify/ProductVariant/50008180293872",
+"price": "4800.00",
+"cap": null,
+"sale": 4080,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8757368815856",
+"handle": "kordovans-affordable-cowboy-hat",
+"vid": "gid://shopify/ProductVariant/50008180326640",
+"price": "4800.00",
+"cap": null,
+"sale": 4080,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8757368815856",
+"handle": "kordovans-affordable-cowboy-hat",
+"vid": "gid://shopify/ProductVariant/50008180359408",
+"price": "4800.00",
+"cap": null,
+"sale": 4080,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8757368815856",
+"handle": "kordovans-affordable-cowboy-hat",
+"vid": "gid://shopify/ProductVariant/50008180392176",
+"price": "4800.00",
+"cap": null,
+"sale": 4080,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8079155134704",
+"handle": "rebel-mens-brown-cafe-racer-sheepskin-leather-jacket",
+"vid": "gid://shopify/ProductVariant/43348810170608",
+"price": "33600.00",
+"cap": null,
+"sale": 28560,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8079155134704",
+"handle": "rebel-mens-brown-cafe-racer-sheepskin-leather-jacket",
+"vid": "gid://shopify/ProductVariant/50279851786480",
+"price": "33600.00",
+"cap": null,
+"sale": 28560,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8079155134704",
+"handle": "rebel-mens-brown-cafe-racer-sheepskin-leather-jacket",
+"vid": "gid://shopify/ProductVariant/50279851819248",
+"price": "33600.00",
+"cap": null,
+"sale": 28560,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8079155134704",
+"handle": "rebel-mens-brown-cafe-racer-sheepskin-leather-jacket",
+"vid": "gid://shopify/ProductVariant/50279851852016",
+"price": "33600.00",
+"cap": null,
+"sale": 28560,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8079155134704",
+"handle": "rebel-mens-brown-cafe-racer-sheepskin-leather-jacket",
+"vid": "gid://shopify/ProductVariant/50279851884784",
+"price": "33600.00",
+"cap": null,
+"sale": 28560,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8079155134704",
+"handle": "rebel-mens-brown-cafe-racer-sheepskin-leather-jacket",
+"vid": "gid://shopify/ProductVariant/50279851917552",
+"price": "33600.00",
+"cap": null,
+"sale": 28560,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9342852989168",
+"handle": "tp-venture-pack",
+"vid": "gid://shopify/ProductVariant/50016428949744",
+"price": "8600.00",
+"cap": null,
+"sale": 7310,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9342852989168",
+"handle": "tp-venture-pack",
+"vid": "gid://shopify/ProductVariant/50016428982512",
+"price": "8600.00",
+"cap": null,
+"sale": 7310,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9342852989168",
+"handle": "tp-venture-pack",
+"vid": "gid://shopify/ProductVariant/50016429015280",
+"price": "8600.00",
+"cap": null,
+"sale": 7310,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8792912724208",
+"handle": "tp-millard-office-bag",
+"vid": "gid://shopify/ProductVariant/50008217321712",
+"price": "19500.00",
+"cap": null,
+"sale": 16570,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8792912724208",
+"handle": "tp-millard-office-bag",
+"vid": "gid://shopify/ProductVariant/50055067205872",
+"price": "19500.00",
+"cap": null,
+"sale": 16570,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8792912724208",
+"handle": "tp-millard-office-bag",
+"vid": "gid://shopify/ProductVariant/50008217387248",
+"price": "19500.00",
+"cap": null,
+"sale": 16570,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8792912724208",
+"handle": "tp-millard-office-bag",
+"vid": "gid://shopify/ProductVariant/50008217420016",
+"price": "19500.00",
+"cap": null,
+"sale": 16570,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7935003689200",
+"handle": "the-documate-office-bag-briefcase-with-code-lock",
+"vid": "gid://shopify/ProductVariant/50016424001776",
+"price": "17600.00",
+"cap": null,
+"sale": 14960,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7935003689200",
+"handle": "the-documate-office-bag-briefcase-with-code-lock",
+"vid": "gid://shopify/ProductVariant/50055191462128",
+"price": "17600.00",
+"cap": null,
+"sale": 14960,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7935003689200",
+"handle": "the-documate-office-bag-briefcase-with-code-lock",
+"vid": "gid://shopify/ProductVariant/50055191494896",
+"price": "17600.00",
+"cap": null,
+"sale": 14960,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7935003689200",
+"handle": "the-documate-office-bag-briefcase-with-code-lock",
+"vid": "gid://shopify/ProductVariant/50055191527664",
+"price": "17600.00",
+"cap": null,
+"sale": 14960,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7935003689200",
+"handle": "the-documate-office-bag-briefcase-with-code-lock",
+"vid": "gid://shopify/ProductVariant/50055191560432",
+"price": "17600.00",
+"cap": null,
+"sale": 14960,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7935003689200",
+"handle": "the-documate-office-bag-briefcase-with-code-lock",
+"vid": "gid://shopify/ProductVariant/50055191593200",
+"price": "17600.00",
+"cap": null,
+"sale": 14960,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8085252014320",
+"handle": "kordovans-premium-crazy-horse-leather-western-cowboy-hat",
+"vid": "gid://shopify/ProductVariant/43374116864240",
+"price": "9000.00",
+"cap": null,
+"sale": 7650,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8085252014320",
+"handle": "kordovans-premium-crazy-horse-leather-western-cowboy-hat",
+"vid": "gid://shopify/ProductVariant/43374116897008",
+"price": "9000.00",
+"cap": null,
+"sale": 7650,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8085252014320",
+"handle": "kordovans-premium-crazy-horse-leather-western-cowboy-hat",
+"vid": "gid://shopify/ProductVariant/43374116929776",
+"price": "9000.00",
+"cap": null,
+"sale": 7650,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8314261078256",
+"handle": "copy-of-mock-croc-leather-dress-belt-black",
+"vid": "gid://shopify/ProductVariant/50008105484528",
+"price": "4400.00",
+"cap": null,
+"sale": 3740,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8314261078256",
+"handle": "copy-of-mock-croc-leather-dress-belt-black",
+"vid": "gid://shopify/ProductVariant/50008105517296",
+"price": "4400.00",
+"cap": null,
+"sale": 3740,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8314261078256",
+"handle": "copy-of-mock-croc-leather-dress-belt-black",
+"vid": "gid://shopify/ProductVariant/50008105550064",
+"price": "4400.00",
+"cap": null,
+"sale": 3740,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8090785415408",
+"handle": "the-travel-mate-trolley-bag",
+"vid": "gid://shopify/ProductVariant/50055185432816",
+"price": "38000.00",
+"cap": null,
+"sale": 32300,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8090785415408",
+"handle": "the-travel-mate-trolley-bag",
+"vid": "gid://shopify/ProductVariant/50008046731504",
+"price": "38000.00",
+"cap": null,
+"sale": 32300,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/6632056815805",
+"handle": "the-stallion-premium-leather-boot",
+"vid": "gid://shopify/ProductVariant/39527972765885",
+"price": "24000.00",
+"cap": null,
+"sale": 20400,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/6632056815805",
+"handle": "the-stallion-premium-leather-boot",
+"vid": "gid://shopify/ProductVariant/39527972798653",
+"price": "24000.00",
+"cap": null,
+"sale": 20400,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/6632056815805",
+"handle": "the-stallion-premium-leather-boot",
+"vid": "gid://shopify/ProductVariant/39527972831421",
+"price": "24000.00",
+"cap": null,
+"sale": 20400,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/6632056815805",
+"handle": "the-stallion-premium-leather-boot",
+"vid": "gid://shopify/ProductVariant/39527972864189",
+"price": "24000.00",
+"cap": null,
+"sale": 20400,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/6632056815805",
+"handle": "the-stallion-premium-leather-boot",
+"vid": "gid://shopify/ProductVariant/39527972896957",
+"price": "24000.00",
+"cap": null,
+"sale": 20400,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/6632056815805",
+"handle": "the-stallion-premium-leather-boot",
+"vid": "gid://shopify/ProductVariant/39527972929725",
+"price": "24000.00",
+"cap": null,
+"sale": 20400,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/6632056815805",
+"handle": "the-stallion-premium-leather-boot",
+"vid": "gid://shopify/ProductVariant/39527972962493",
+"price": "24000.00",
+"cap": null,
+"sale": 20400,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9370390167792",
+"handle": "tp-natural-milled-leather-dopp-kit",
+"vid": "gid://shopify/ProductVariant/50016423182576",
+"price": "6600.00",
+"cap": null,
+"sale": 5610,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9370390167792",
+"handle": "tp-natural-milled-leather-dopp-kit",
+"vid": "gid://shopify/ProductVariant/50016423215344",
+"price": "6600.00",
+"cap": null,
+"sale": 5610,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9370390167792",
+"handle": "tp-natural-milled-leather-dopp-kit",
+"vid": "gid://shopify/ProductVariant/50016423248112",
+"price": "6600.00",
+"cap": null,
+"sale": 5610,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018550354160",
+"handle": "maverick-mens-brown-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566863634672",
+"price": "32000.00",
+"cap": null,
+"sale": 27200,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018550354160",
+"handle": "maverick-mens-brown-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566863667440",
+"price": "32000.00",
+"cap": null,
+"sale": 27200,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018550354160",
+"handle": "maverick-mens-brown-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566863700208",
+"price": "32000.00",
+"cap": null,
+"sale": 27200,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018550354160",
+"handle": "maverick-mens-brown-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566863732976",
+"price": "32000.00",
+"cap": null,
+"sale": 27200,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018550354160",
+"handle": "maverick-mens-brown-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566863765744",
+"price": "32000.00",
+"cap": null,
+"sale": 27200,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018550354160",
+"handle": "maverick-mens-brown-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566863798512",
+"price": "32000.00",
+"cap": null,
+"sale": 27200,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8759353966832",
+"handle": "tp-dblp-laptop-bag",
+"vid": "gid://shopify/ProductVariant/50008213553392",
+"price": "18500.00",
+"cap": null,
+"sale": 15720,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8759353966832",
+"handle": "tp-dblp-laptop-bag",
+"vid": "gid://shopify/ProductVariant/50008213586160",
+"price": "18500.00",
+"cap": null,
+"sale": 15720,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8759353966832",
+"handle": "tp-dblp-laptop-bag",
+"vid": "gid://shopify/ProductVariant/50008213618928",
+"price": "18500.00",
+"cap": null,
+"sale": 15720,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8220921266416",
+"handle": "kordovans-premium-oxford-leather-shoes-black",
+"vid": "gid://shopify/ProductVariant/43842430370032",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8220921266416",
+"handle": "kordovans-premium-oxford-leather-shoes-black",
+"vid": "gid://shopify/ProductVariant/43842430402800",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8220921266416",
+"handle": "kordovans-premium-oxford-leather-shoes-black",
+"vid": "gid://shopify/ProductVariant/43842430435568",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8220921266416",
+"handle": "kordovans-premium-oxford-leather-shoes-black",
+"vid": "gid://shopify/ProductVariant/43842430468336",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8220921266416",
+"handle": "kordovans-premium-oxford-leather-shoes-black",
+"vid": "gid://shopify/ProductVariant/43842430501104",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8220921266416",
+"handle": "kordovans-premium-oxford-leather-shoes-black",
+"vid": "gid://shopify/ProductVariant/43842430533872",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/6632049017021",
+"handle": "the-tuxedo-premium-leather-shoe",
+"vid": "gid://shopify/ProductVariant/39527906771133",
+"price": "32000.00",
+"cap": null,
+"sale": 27200,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/6632049017021",
+"handle": "the-tuxedo-premium-leather-shoe",
+"vid": "gid://shopify/ProductVariant/39527906803901",
+"price": "32000.00",
+"cap": null,
+"sale": 27200,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/6632049017021",
+"handle": "the-tuxedo-premium-leather-shoe",
+"vid": "gid://shopify/ProductVariant/39527906836669",
+"price": "32000.00",
+"cap": null,
+"sale": 27200,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/6632049017021",
+"handle": "the-tuxedo-premium-leather-shoe",
+"vid": "gid://shopify/ProductVariant/39527906869437",
+"price": "32000.00",
+"cap": null,
+"sale": 27200,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/6632049017021",
+"handle": "the-tuxedo-premium-leather-shoe",
+"vid": "gid://shopify/ProductVariant/39527906902205",
+"price": "32000.00",
+"cap": null,
+"sale": 27200,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/6632049017021",
+"handle": "the-tuxedo-premium-leather-shoe",
+"vid": "gid://shopify/ProductVariant/39527906934973",
+"price": "32000.00",
+"cap": null,
+"sale": 27200,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/6632049017021",
+"handle": "the-tuxedo-premium-leather-shoe",
+"vid": "gid://shopify/ProductVariant/39527906967741",
+"price": "32000.00",
+"cap": null,
+"sale": 27200,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8273517576432",
+"handle": "kordovan-sleek-laptop-sleeves-brown",
+"vid": "gid://shopify/ProductVariant/44092730081520",
+"price": "8500.00",
+"cap": null,
+"sale": 7220,
+"effpct": 15.1
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8273517576432",
+"handle": "kordovan-sleek-laptop-sleeves-brown",
+"vid": "gid://shopify/ProductVariant/50183875657968",
+"price": "8500.00",
+"cap": null,
+"sale": 7220,
+"effpct": 15.1
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8273517576432",
+"handle": "kordovan-sleek-laptop-sleeves-brown",
+"vid": "gid://shopify/ProductVariant/50183875690736",
+"price": "8500.00",
+"cap": null,
+"sale": 7220,
+"effpct": 15.1
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8207108571376",
+"handle": "copy-of-the-travel-mate-trolley-bag",
+"vid": "gid://shopify/ProductVariant/50008059379952",
+"price": "42000.00",
+"cap": null,
+"sale": 35700,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8207108571376",
+"handle": "copy-of-the-travel-mate-trolley-bag",
+"vid": "gid://shopify/ProductVariant/50008059412720",
+"price": "42000.00",
+"cap": null,
+"sale": 35700,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8207108571376",
+"handle": "copy-of-the-travel-mate-trolley-bag",
+"vid": "gid://shopify/ProductVariant/50008059445488",
+"price": "42000.00",
+"cap": null,
+"sale": 35700,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8919014080752",
+"handle": "the-cindy-tote-bag",
+"vid": "gid://shopify/ProductVariant/50016434520304",
+"price": "18500.00",
+"cap": null,
+"sale": 15720,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8919014080752",
+"handle": "the-cindy-tote-bag",
+"vid": "gid://shopify/ProductVariant/50016434553072",
+"price": "18500.00",
+"cap": null,
+"sale": 15720,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8919014080752",
+"handle": "the-cindy-tote-bag",
+"vid": "gid://shopify/ProductVariant/50016434585840",
+"price": "18500.00",
+"cap": null,
+"sale": 15720,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8273516888304",
+"handle": "copy-of-kordovan-sleek-laptop-sleeves-tan",
+"vid": "gid://shopify/ProductVariant/44092729262320",
+"price": "9300.00",
+"cap": null,
+"sale": 7900,
+"effpct": 15.1
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8273516888304",
+"handle": "copy-of-kordovan-sleek-laptop-sleeves-tan",
+"vid": "gid://shopify/ProductVariant/50183904362736",
+"price": "9300.00",
+"cap": null,
+"sale": 7900,
+"effpct": 15.1
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8273516888304",
+"handle": "copy-of-kordovan-sleek-laptop-sleeves-tan",
+"vid": "gid://shopify/ProductVariant/50183904395504",
+"price": "9300.00",
+"cap": null,
+"sale": 7900,
+"effpct": 15.1
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8047184314608",
+"handle": "the-executive-ceo-office-bag",
+"vid": "gid://shopify/ProductVariant/50104526471408",
+"price": "42000.00",
+"cap": null,
+"sale": 35700,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8047184314608",
+"handle": "the-executive-ceo-office-bag",
+"vid": "gid://shopify/ProductVariant/50054964281584",
+"price": "42000.00",
+"cap": null,
+"sale": 35700,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8047184314608",
+"handle": "the-executive-ceo-office-bag",
+"vid": "gid://shopify/ProductVariant/50054964314352",
+"price": "42000.00",
+"cap": null,
+"sale": 35700,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8047184314608",
+"handle": "the-executive-ceo-office-bag",
+"vid": "gid://shopify/ProductVariant/50054966509808",
+"price": "42000.00",
+"cap": null,
+"sale": 35700,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9650093097200",
+"handle": "rl-the-hilford-backpack",
+"vid": "gid://shopify/ProductVariant/50016413876464",
+"price": "15400.00",
+"cap": null,
+"sale": 13090,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9650093097200",
+"handle": "rl-the-hilford-backpack",
+"vid": "gid://shopify/ProductVariant/50016413909232",
+"price": "15400.00",
+"cap": null,
+"sale": 13090,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9650093097200",
+"handle": "rl-the-hilford-backpack",
+"vid": "gid://shopify/ProductVariant/50016413942000",
+"price": "15400.00",
+"cap": null,
+"sale": 13090,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9037387694320",
+"handle": "the-forester-backpack-duffle-bag",
+"vid": "gid://shopify/ProductVariant/50055011270896",
+"price": "34500.00",
+"cap": null,
+"sale": 29320,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9037387694320",
+"handle": "the-forester-backpack-duffle-bag",
+"vid": "gid://shopify/ProductVariant/50016422134000",
+"price": "34500.00",
+"cap": null,
+"sale": 29320,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9037387694320",
+"handle": "the-forester-backpack-duffle-bag",
+"vid": "gid://shopify/ProductVariant/50016422166768",
+"price": "34500.00",
+"cap": null,
+"sale": 29320,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9037387694320",
+"handle": "the-forester-backpack-duffle-bag",
+"vid": "gid://shopify/ProductVariant/50016422199536",
+"price": "34500.00",
+"cap": null,
+"sale": 29320,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018554646768",
+"handle": "desert-voyager-mens-brown-sheepskin-leather-bomber-jacket",
+"vid": "gid://shopify/ProductVariant/46566871171312",
+"price": "32000.00",
+"cap": null,
+"sale": 27200,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018554646768",
+"handle": "desert-voyager-mens-brown-sheepskin-leather-bomber-jacket",
+"vid": "gid://shopify/ProductVariant/46566871204080",
+"price": "32000.00",
+"cap": null,
+"sale": 27200,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018554646768",
+"handle": "desert-voyager-mens-brown-sheepskin-leather-bomber-jacket",
+"vid": "gid://shopify/ProductVariant/46566871236848",
+"price": "32000.00",
+"cap": null,
+"sale": 27200,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018554646768",
+"handle": "desert-voyager-mens-brown-sheepskin-leather-bomber-jacket",
+"vid": "gid://shopify/ProductVariant/46566871269616",
+"price": "32000.00",
+"cap": null,
+"sale": 27200,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018554646768",
+"handle": "desert-voyager-mens-brown-sheepskin-leather-bomber-jacket",
+"vid": "gid://shopify/ProductVariant/46566871302384",
+"price": "32000.00",
+"cap": null,
+"sale": 27200,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018554646768",
+"handle": "desert-voyager-mens-brown-sheepskin-leather-bomber-jacket",
+"vid": "gid://shopify/ProductVariant/46566871335152",
+"price": "32000.00",
+"cap": null,
+"sale": 27200,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8830969807088",
+"handle": "diana-cross-body-bag-pebbled-leather",
+"vid": "gid://shopify/ProductVariant/50008220074224",
+"price": "10500.00",
+"cap": null,
+"sale": 8920,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8830969807088",
+"handle": "diana-cross-body-bag-pebbled-leather",
+"vid": "gid://shopify/ProductVariant/50008220106992",
+"price": "10500.00",
+"cap": null,
+"sale": 8920,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8830969807088",
+"handle": "diana-cross-body-bag-pebbled-leather",
+"vid": "gid://shopify/ProductVariant/50008220139760",
+"price": "10500.00",
+"cap": null,
+"sale": 8920,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8830969807088",
+"handle": "diana-cross-body-bag-pebbled-leather",
+"vid": "gid://shopify/ProductVariant/50008220172528",
+"price": "10500.00",
+"cap": null,
+"sale": 8920,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8830969807088",
+"handle": "diana-cross-body-bag-pebbled-leather",
+"vid": "gid://shopify/ProductVariant/50008220205296",
+"price": "10500.00",
+"cap": null,
+"sale": 8920,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8283751383280",
+"handle": "the-beyond-backpack-unisex",
+"vid": "gid://shopify/ProductVariant/50008083398896",
+"price": "19500.00",
+"cap": null,
+"sale": 16570,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8283751383280",
+"handle": "the-beyond-backpack-unisex",
+"vid": "gid://shopify/ProductVariant/50008083431664",
+"price": "19500.00",
+"cap": null,
+"sale": 16570,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8283751383280",
+"handle": "the-beyond-backpack-unisex",
+"vid": "gid://shopify/ProductVariant/50008083464432",
+"price": "19500.00",
+"cap": null,
+"sale": 16570,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7599688122608",
+"handle": "tri-fold-premium-durable-belt",
+"vid": "gid://shopify/ProductVariant/50007998333168",
+"price": "4000.00",
+"cap": null,
+"sale": 3400,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7599688122608",
+"handle": "tri-fold-premium-durable-belt",
+"vid": "gid://shopify/ProductVariant/50007998365936",
+"price": "4000.00",
+"cap": null,
+"sale": 3400,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7599688122608",
+"handle": "tri-fold-premium-durable-belt",
+"vid": "gid://shopify/ProductVariant/50007998398704",
+"price": "4000.00",
+"cap": null,
+"sale": 3400,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9385792143600",
+"handle": "a4-handle-folio-bali",
+"vid": "gid://shopify/ProductVariant/50299951907056",
+"price": "7500.00",
+"cap": null,
+"sale": 6370,
+"effpct": 15.1
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9070593900784",
+"handle": "tp-the-city-backpack",
+"vid": "gid://shopify/ProductVariant/50016423739632",
+"price": "15500.00",
+"cap": null,
+"sale": 13170,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9070593900784",
+"handle": "tp-the-city-backpack",
+"vid": "gid://shopify/ProductVariant/50016423772400",
+"price": "15500.00",
+"cap": null,
+"sale": 13170,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9070593900784",
+"handle": "tp-the-city-backpack",
+"vid": "gid://shopify/ProductVariant/50016423805168",
+"price": "15500.00",
+"cap": null,
+"sale": 13170,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018555859184",
+"handle": "shadow-rider-mens-black-cafe-racer-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566873628912",
+"price": "25600.00",
+"cap": null,
+"sale": 21760,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018555859184",
+"handle": "shadow-rider-mens-black-cafe-racer-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566873661680",
+"price": "25600.00",
+"cap": null,
+"sale": 21760,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018555859184",
+"handle": "shadow-rider-mens-black-cafe-racer-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566873694448",
+"price": "25600.00",
+"cap": null,
+"sale": 21760,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018555859184",
+"handle": "shadow-rider-mens-black-cafe-racer-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566873727216",
+"price": "25600.00",
+"cap": null,
+"sale": 21760,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018555859184",
+"handle": "shadow-rider-mens-black-cafe-racer-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566873759984",
+"price": "25600.00",
+"cap": null,
+"sale": 21760,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018555859184",
+"handle": "shadow-rider-mens-black-cafe-racer-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566873792752",
+"price": "25600.00",
+"cap": null,
+"sale": 21760,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8919014441200",
+"handle": "the-stella-tote-bag",
+"vid": "gid://shopify/ProductVariant/46292473315568",
+"price": "19500.00",
+"cap": null,
+"sale": 16570,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8831025152240",
+"handle": "diana-cross-body-bag-crazy-horse-leather",
+"vid": "gid://shopify/ProductVariant/50008221548784",
+"price": "10500.00",
+"cap": null,
+"sale": 8920,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8831025152240",
+"handle": "diana-cross-body-bag-crazy-horse-leather",
+"vid": "gid://shopify/ProductVariant/50008221581552",
+"price": "10500.00",
+"cap": null,
+"sale": 8920,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8321351319792",
+"handle": "the-maverik-laptop-bag",
+"vid": "gid://shopify/ProductVariant/50008130781424",
+"price": "26500.00",
+"cap": null,
+"sale": 22520,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8321351319792",
+"handle": "the-maverik-laptop-bag",
+"vid": "gid://shopify/ProductVariant/50008130814192",
+"price": "26500.00",
+"cap": null,
+"sale": 22520,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8321351319792",
+"handle": "the-maverik-laptop-bag",
+"vid": "gid://shopify/ProductVariant/50008130846960",
+"price": "26500.00",
+"cap": null,
+"sale": 22520,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8167109722352",
+"handle": "iconic-mens-black-sheepskin-leather-jacket",
+"vid": "gid://shopify/ProductVariant/43657296642288",
+"price": "22000.00",
+"cap": null,
+"sale": 18700,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8167109722352",
+"handle": "iconic-mens-black-sheepskin-leather-jacket",
+"vid": "gid://shopify/ProductVariant/43657296675056",
+"price": "22000.00",
+"cap": null,
+"sale": 18700,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8167109722352",
+"handle": "iconic-mens-black-sheepskin-leather-jacket",
+"vid": "gid://shopify/ProductVariant/43657296707824",
+"price": "22000.00",
+"cap": null,
+"sale": 18700,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8167109722352",
+"handle": "iconic-mens-black-sheepskin-leather-jacket",
+"vid": "gid://shopify/ProductVariant/43657296740592",
+"price": "22000.00",
+"cap": null,
+"sale": 18700,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8167109722352",
+"handle": "iconic-mens-black-sheepskin-leather-jacket",
+"vid": "gid://shopify/ProductVariant/43657296773360",
+"price": "22000.00",
+"cap": null,
+"sale": 18700,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8167109722352",
+"handle": "iconic-mens-black-sheepskin-leather-jacket",
+"vid": "gid://shopify/ProductVariant/43657296806128",
+"price": "22000.00",
+"cap": null,
+"sale": 18700,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9429869953264",
+"handle": "zimmer-leather-keychain",
+"vid": "gid://shopify/ProductVariant/50054881050864",
+"price": "500.00",
+"cap": null,
+"sale": 420,
+"effpct": 16.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9429869953264",
+"handle": "zimmer-leather-keychain",
+"vid": "gid://shopify/ProductVariant/50054881083632",
+"price": "500.00",
+"cap": null,
+"sale": 420,
+"effpct": 16.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018547667184",
+"handle": "stryker-mens-black-zippered-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/46566858981616",
+"price": "27000.00",
+"cap": null,
+"sale": 22950,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018547667184",
+"handle": "stryker-mens-black-zippered-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/46566859014384",
+"price": "27000.00",
+"cap": null,
+"sale": 22950,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018547667184",
+"handle": "stryker-mens-black-zippered-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/46566859047152",
+"price": "27000.00",
+"cap": null,
+"sale": 22950,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018547667184",
+"handle": "stryker-mens-black-zippered-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/46566859079920",
+"price": "27000.00",
+"cap": null,
+"sale": 22950,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018547667184",
+"handle": "stryker-mens-black-zippered-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/46566859112688",
+"price": "27000.00",
+"cap": null,
+"sale": 22950,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018547667184",
+"handle": "stryker-mens-black-zippered-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/46566859210992",
+"price": "27000.00",
+"cap": null,
+"sale": 22950,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9012943651056",
+"handle": "bull-rider-calf-leather-belt",
+"vid": "gid://shopify/ProductVariant/50299948859632",
+"price": "2800.00",
+"cap": null,
+"sale": 2380,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9012943651056",
+"handle": "bull-rider-calf-leather-belt",
+"vid": "gid://shopify/ProductVariant/50299948892400",
+"price": "2800.00",
+"cap": null,
+"sale": 2380,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8170262823152",
+"handle": "cobalt-mens-blue-leather-bomber-jacket",
+"vid": "gid://shopify/ProductVariant/43666118082800",
+"price": "27500.00",
+"cap": null,
+"sale": 23370,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8170262823152",
+"handle": "cobalt-mens-blue-leather-bomber-jacket",
+"vid": "gid://shopify/ProductVariant/50279852310768",
+"price": "27500.00",
+"cap": null,
+"sale": 23370,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8170262823152",
+"handle": "cobalt-mens-blue-leather-bomber-jacket",
+"vid": "gid://shopify/ProductVariant/50279852343536",
+"price": "27500.00",
+"cap": null,
+"sale": 23370,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8170262823152",
+"handle": "cobalt-mens-blue-leather-bomber-jacket",
+"vid": "gid://shopify/ProductVariant/50279852376304",
+"price": "27500.00",
+"cap": null,
+"sale": 23370,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8170262823152",
+"handle": "cobalt-mens-blue-leather-bomber-jacket",
+"vid": "gid://shopify/ProductVariant/50279852409072",
+"price": "27500.00",
+"cap": null,
+"sale": 23370,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8170262823152",
+"handle": "cobalt-mens-blue-leather-bomber-jacket",
+"vid": "gid://shopify/ProductVariant/50279852441840",
+"price": "27500.00",
+"cap": null,
+"sale": 23370,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8170261512432",
+"handle": "mens-ace-black-leather-bomber-jacket",
+"vid": "gid://shopify/ProductVariant/43666107629808",
+"price": "27500.00",
+"cap": null,
+"sale": 23370,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8170261512432",
+"handle": "mens-ace-black-leather-bomber-jacket",
+"vid": "gid://shopify/ProductVariant/50279852638448",
+"price": "27500.00",
+"cap": null,
+"sale": 23370,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8170261512432",
+"handle": "mens-ace-black-leather-bomber-jacket",
+"vid": "gid://shopify/ProductVariant/50279852671216",
+"price": "27500.00",
+"cap": null,
+"sale": 23370,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8170261512432",
+"handle": "mens-ace-black-leather-bomber-jacket",
+"vid": "gid://shopify/ProductVariant/50279852703984",
+"price": "27500.00",
+"cap": null,
+"sale": 23370,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8170261512432",
+"handle": "mens-ace-black-leather-bomber-jacket",
+"vid": "gid://shopify/ProductVariant/50279852736752",
+"price": "27500.00",
+"cap": null,
+"sale": 23370,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8170261512432",
+"handle": "mens-ace-black-leather-bomber-jacket",
+"vid": "gid://shopify/ProductVariant/50279852769520",
+"price": "27500.00",
+"cap": null,
+"sale": 23370,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7805039870192",
+"handle": "the-millennial-sleek-laptop-bag",
+"vid": "gid://shopify/ProductVariant/50008002363632",
+"price": "22500.00",
+"cap": null,
+"sale": 19120,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7805039870192",
+"handle": "the-millennial-sleek-laptop-bag",
+"vid": "gid://shopify/ProductVariant/50008002396400",
+"price": "22500.00",
+"cap": null,
+"sale": 19120,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9119662801136",
+"handle": "tp-the-corporate-laptop-bag",
+"vid": "gid://shopify/ProductVariant/50054898417904",
+"price": "28500.00",
+"cap": null,
+"sale": 24220,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9119662801136",
+"handle": "tp-the-corporate-laptop-bag",
+"vid": "gid://shopify/ProductVariant/50054898450672",
+"price": "28500.00",
+"cap": null,
+"sale": 24220,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9119662801136",
+"handle": "tp-the-corporate-laptop-bag",
+"vid": "gid://shopify/ProductVariant/50054898483440",
+"price": "28500.00",
+"cap": null,
+"sale": 24220,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018548420848",
+"handle": "reacher-mens-black-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566860554480",
+"price": "33600.00",
+"cap": null,
+"sale": 28560,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018548420848",
+"handle": "reacher-mens-black-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46574756495600",
+"price": "33600.00",
+"cap": null,
+"sale": 28560,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018548420848",
+"handle": "reacher-mens-black-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46574756528368",
+"price": "33600.00",
+"cap": null,
+"sale": 28560,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018548420848",
+"handle": "reacher-mens-black-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46574756561136",
+"price": "33600.00",
+"cap": null,
+"sale": 28560,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018548420848",
+"handle": "reacher-mens-black-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46574756593904",
+"price": "33600.00",
+"cap": null,
+"sale": 28560,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018548420848",
+"handle": "reacher-mens-black-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46574756626672",
+"price": "33600.00",
+"cap": null,
+"sale": 28560,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8329350283504",
+"handle": "vouge-jewellery-case",
+"vid": "gid://shopify/ProductVariant/50008158470384",
+"price": "6600.00",
+"cap": null,
+"sale": 5610,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8329350283504",
+"handle": "vouge-jewellery-case",
+"vid": "gid://shopify/ProductVariant/50008158503152",
+"price": "6600.00",
+"cap": null,
+"sale": 5610,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8329350283504",
+"handle": "vouge-jewellery-case",
+"vid": "gid://shopify/ProductVariant/50008158535920",
+"price": "6600.00",
+"cap": null,
+"sale": 5610,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8329350283504",
+"handle": "vouge-jewellery-case",
+"vid": "gid://shopify/ProductVariant/50008158568688",
+"price": "6600.00",
+"cap": null,
+"sale": 5610,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9660447424752",
+"handle": "bl-textured-backpack-black",
+"vid": "gid://shopify/ProductVariant/50007494852848",
+"price": "19800.00",
+"cap": null,
+"sale": 16830,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018553073904",
+"handle": "vanguard-mens-black-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/46566868091120",
+"price": "25350.00",
+"cap": null,
+"sale": 21540,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018553073904",
+"handle": "vanguard-mens-black-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/46566868123888",
+"price": "25350.00",
+"cap": null,
+"sale": 21540,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018553073904",
+"handle": "vanguard-mens-black-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/46566868156656",
+"price": "25350.00",
+"cap": null,
+"sale": 21540,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018553073904",
+"handle": "vanguard-mens-black-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/46566868189424",
+"price": "25350.00",
+"cap": null,
+"sale": 21540,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018553073904",
+"handle": "vanguard-mens-black-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/46566868222192",
+"price": "25350.00",
+"cap": null,
+"sale": 21540,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018553073904",
+"handle": "vanguard-mens-black-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/46566868254960",
+"price": "25350.00",
+"cap": null,
+"sale": 21540,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8759339483376",
+"handle": "tp-the-gentlemans-duffle",
+"vid": "gid://shopify/ProductVariant/50008212865264",
+"price": "18500.00",
+"cap": null,
+"sale": 15720,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8759339483376",
+"handle": "tp-the-gentlemans-duffle",
+"vid": "gid://shopify/ProductVariant/50008212898032",
+"price": "18500.00",
+"cap": null,
+"sale": 15720,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8297214705904",
+"handle": "leather-tissue-box-1",
+"vid": "gid://shopify/ProductVariant/50008096669936",
+"price": "6250.00",
+"cap": null,
+"sale": 5310,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8297214705904",
+"handle": "leather-tissue-box-1",
+"vid": "gid://shopify/ProductVariant/50008096702704",
+"price": "6250.00",
+"cap": null,
+"sale": 5310,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8274150850800",
+"handle": "the-expedition-leather-passport-cover",
+"vid": "gid://shopify/ProductVariant/50008080154864",
+"price": "2500.00",
+"cap": null,
+"sale": 2120,
+"effpct": 15.2
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8274150850800",
+"handle": "the-expedition-leather-passport-cover",
+"vid": "gid://shopify/ProductVariant/50008080187632",
+"price": "2500.00",
+"cap": null,
+"sale": 2120,
+"effpct": 15.2
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8273509613808",
+"handle": "kordovan-sleek-laptop-sleeves-black",
+"vid": "gid://shopify/ProductVariant/50183890305264",
+"price": "9300.00",
+"cap": null,
+"sale": 7900,
+"effpct": 15.1
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8273509613808",
+"handle": "kordovan-sleek-laptop-sleeves-black",
+"vid": "gid://shopify/ProductVariant/50183890338032",
+"price": "9300.00",
+"cap": null,
+"sale": 7900,
+"effpct": 15.1
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8273509613808",
+"handle": "kordovan-sleek-laptop-sleeves-black",
+"vid": "gid://shopify/ProductVariant/50183890370800",
+"price": "9300.00",
+"cap": null,
+"sale": 7900,
+"effpct": 15.1
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8220869984496",
+"handle": "copy-of-cardinal-blue-premium-oxford-brogue-wingtip-suede-genuine-leather-shoes",
+"vid": "gid://shopify/ProductVariant/43842237300976",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8220869984496",
+"handle": "copy-of-cardinal-blue-premium-oxford-brogue-wingtip-suede-genuine-leather-shoes",
+"vid": "gid://shopify/ProductVariant/43842237333744",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8220869984496",
+"handle": "copy-of-cardinal-blue-premium-oxford-brogue-wingtip-suede-genuine-leather-shoes",
+"vid": "gid://shopify/ProductVariant/43842237366512",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8220869984496",
+"handle": "copy-of-cardinal-blue-premium-oxford-brogue-wingtip-suede-genuine-leather-shoes",
+"vid": "gid://shopify/ProductVariant/43842237399280",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8220869984496",
+"handle": "copy-of-cardinal-blue-premium-oxford-brogue-wingtip-suede-genuine-leather-shoes",
+"vid": "gid://shopify/ProductVariant/43842237432048",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8220869984496",
+"handle": "copy-of-cardinal-blue-premium-oxford-brogue-wingtip-suede-genuine-leather-shoes",
+"vid": "gid://shopify/ProductVariant/43842237464816",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7993577046256",
+"handle": "kordovans-suede-premium-genuine-leather-western-cowboy-hat-brown",
+"vid": "gid://shopify/ProductVariant/42991953346800",
+"price": "4800.00",
+"cap": null,
+"sale": 4080,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7993577046256",
+"handle": "kordovans-suede-premium-genuine-leather-western-cowboy-hat-brown",
+"vid": "gid://shopify/ProductVariant/42991953379568",
+"price": "4800.00",
+"cap": null,
+"sale": 4080,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7993577046256",
+"handle": "kordovans-suede-premium-genuine-leather-western-cowboy-hat-brown",
+"vid": "gid://shopify/ProductVariant/42991953412336",
+"price": "4800.00",
+"cap": null,
+"sale": 4080,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/7993577046256",
+"handle": "kordovans-suede-premium-genuine-leather-western-cowboy-hat-brown",
+"vid": "gid://shopify/ProductVariant/42991953445104",
+"price": "4800.00",
+"cap": null,
+"sale": 4080,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9815382819056",
+"handle": "the-masters-leather-laptop-bag",
+"vid": "gid://shopify/ProductVariant/50054669664496",
+"price": "10800.00",
+"cap": null,
+"sale": 9180,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9815382819056",
+"handle": "the-masters-leather-laptop-bag",
+"vid": "gid://shopify/ProductVariant/50054669697264",
+"price": "10800.00",
+"cap": null,
+"sale": 9180,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018552680688",
+"handle": "alonzo-mens-brown-sheepskin-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566867468528",
+"price": "26100.00",
+"cap": null,
+"sale": 22180,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018552680688",
+"handle": "alonzo-mens-brown-sheepskin-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566867501296",
+"price": "26100.00",
+"cap": null,
+"sale": 22180,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018552680688",
+"handle": "alonzo-mens-brown-sheepskin-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566867534064",
+"price": "26100.00",
+"cap": null,
+"sale": 22180,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018552680688",
+"handle": "alonzo-mens-brown-sheepskin-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566867566832",
+"price": "26100.00",
+"cap": null,
+"sale": 22180,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018552680688",
+"handle": "alonzo-mens-brown-sheepskin-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566867599600",
+"price": "26100.00",
+"cap": null,
+"sale": 22180,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018552680688",
+"handle": "alonzo-mens-brown-sheepskin-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566867632368",
+"price": "26100.00",
+"cap": null,
+"sale": 22180,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018552320240",
+"handle": "bohemia-mens-vintage-brown-sheepskin-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566866878704",
+"price": "26100.00",
+"cap": null,
+"sale": 22180,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018552320240",
+"handle": "bohemia-mens-vintage-brown-sheepskin-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566866911472",
+"price": "26100.00",
+"cap": null,
+"sale": 22180,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018552320240",
+"handle": "bohemia-mens-vintage-brown-sheepskin-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566866944240",
+"price": "26100.00",
+"cap": null,
+"sale": 22180,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018552320240",
+"handle": "bohemia-mens-vintage-brown-sheepskin-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566866977008",
+"price": "26100.00",
+"cap": null,
+"sale": 22180,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018552320240",
+"handle": "bohemia-mens-vintage-brown-sheepskin-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566867009776",
+"price": "26100.00",
+"cap": null,
+"sale": 22180,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018552320240",
+"handle": "bohemia-mens-vintage-brown-sheepskin-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566867042544",
+"price": "26100.00",
+"cap": null,
+"sale": 22180,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8209910726896",
+"handle": "the-executive-leather-briefcase-office-bag-with-laptop-compartment-brown",
+"vid": "gid://shopify/ProductVariant/50008061739248",
+"price": "42000.00",
+"cap": null,
+"sale": 35700,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8209910726896",
+"handle": "the-executive-leather-briefcase-office-bag-with-laptop-compartment-brown",
+"vid": "gid://shopify/ProductVariant/50008061772016",
+"price": "42000.00",
+"cap": null,
+"sale": 35700,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8170267279600",
+"handle": "mens-spy-brown-leather-bomber-jacket",
+"vid": "gid://shopify/ProductVariant/43666164252912",
+"price": "28500.00",
+"cap": null,
+"sale": 24220,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8170267279600",
+"handle": "mens-spy-brown-leather-bomber-jacket",
+"vid": "gid://shopify/ProductVariant/43666164285680",
+"price": "28500.00",
+"cap": null,
+"sale": 24220,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8170267279600",
+"handle": "mens-spy-brown-leather-bomber-jacket",
+"vid": "gid://shopify/ProductVariant/43666164318448",
+"price": "28500.00",
+"cap": null,
+"sale": 24220,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8170267279600",
+"handle": "mens-spy-brown-leather-bomber-jacket",
+"vid": "gid://shopify/ProductVariant/43666164351216",
+"price": "28500.00",
+"cap": null,
+"sale": 24220,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8170267279600",
+"handle": "mens-spy-brown-leather-bomber-jacket",
+"vid": "gid://shopify/ProductVariant/43666164383984",
+"price": "28500.00",
+"cap": null,
+"sale": 24220,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8170267279600",
+"handle": "mens-spy-brown-leather-bomber-jacket",
+"vid": "gid://shopify/ProductVariant/43666164416752",
+"price": "28500.00",
+"cap": null,
+"sale": 24220,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9732802248944",
+"handle": "leather-lanyard",
+"vid": "gid://shopify/ProductVariant/50054699745520",
+"price": "2250.00",
+"cap": "0.00",
+"sale": 1910,
+"effpct": 15.1
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9732802248944",
+"handle": "leather-lanyard",
+"vid": "gid://shopify/ProductVariant/50054699778288",
+"price": "2250.00",
+"cap": "0.00",
+"sale": 1910,
+"effpct": 15.1
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9732802248944",
+"handle": "leather-lanyard",
+"vid": "gid://shopify/ProductVariant/50054699811056",
+"price": "2250.00",
+"cap": "0.00",
+"sale": 1910,
+"effpct": 15.1
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9405753196784",
+"handle": "gridle-crossbody",
+"vid": "gid://shopify/ProductVariant/47362207351024",
+"price": "15500.00",
+"cap": null,
+"sale": 13170,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018553598192",
+"handle": "sheppard-mens-cafe-racer-black-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566869074160",
+"price": "24300.00",
+"cap": null,
+"sale": 20650,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018553598192",
+"handle": "sheppard-mens-cafe-racer-black-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566869106928",
+"price": "24300.00",
+"cap": null,
+"sale": 20650,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018553598192",
+"handle": "sheppard-mens-cafe-racer-black-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566869139696",
+"price": "24300.00",
+"cap": null,
+"sale": 20650,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018553598192",
+"handle": "sheppard-mens-cafe-racer-black-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566869172464",
+"price": "24300.00",
+"cap": null,
+"sale": 20650,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018553598192",
+"handle": "sheppard-mens-cafe-racer-black-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566869205232",
+"price": "24300.00",
+"cap": null,
+"sale": 20650,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018553598192",
+"handle": "sheppard-mens-cafe-racer-black-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566869238000",
+"price": "24300.00",
+"cap": null,
+"sale": 20650,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018551632112",
+"handle": "ralph-mens-dark-brown-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/46566865993968",
+"price": "24500.00",
+"cap": null,
+"sale": 20820,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018551632112",
+"handle": "ralph-mens-dark-brown-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/46566866026736",
+"price": "24500.00",
+"cap": null,
+"sale": 20820,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018551632112",
+"handle": "ralph-mens-dark-brown-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/46566866059504",
+"price": "24500.00",
+"cap": null,
+"sale": 20820,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018551632112",
+"handle": "ralph-mens-dark-brown-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/46566866092272",
+"price": "24500.00",
+"cap": null,
+"sale": 20820,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018551632112",
+"handle": "ralph-mens-dark-brown-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/46566866125040",
+"price": "24500.00",
+"cap": null,
+"sale": 20820,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018551632112",
+"handle": "ralph-mens-dark-brown-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/46566866157808",
+"price": "24500.00",
+"cap": null,
+"sale": 20820,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018550583536",
+"handle": "alveraz-mens-black-sheepskin-biker-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566864355568",
+"price": "23000.00",
+"cap": null,
+"sale": 19550,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018550583536",
+"handle": "alveraz-mens-black-sheepskin-biker-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46574709735664",
+"price": "23000.00",
+"cap": null,
+"sale": 19550,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018550583536",
+"handle": "alveraz-mens-black-sheepskin-biker-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46574709768432",
+"price": "23000.00",
+"cap": null,
+"sale": 19550,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018550583536",
+"handle": "alveraz-mens-black-sheepskin-biker-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46574709801200",
+"price": "23000.00",
+"cap": null,
+"sale": 19550,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018550583536",
+"handle": "alveraz-mens-black-sheepskin-biker-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46574709833968",
+"price": "23000.00",
+"cap": null,
+"sale": 19550,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018550583536",
+"handle": "alveraz-mens-black-sheepskin-biker-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46574709866736",
+"price": "23000.00",
+"cap": null,
+"sale": 19550,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018550157552",
+"handle": "durham-waxed-mens-black-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/46566863110384",
+"price": "26700.00",
+"cap": null,
+"sale": 22690,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018550157552",
+"handle": "durham-waxed-mens-black-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/46566863143152",
+"price": "26700.00",
+"cap": null,
+"sale": 22690,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018550157552",
+"handle": "durham-waxed-mens-black-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/46566863175920",
+"price": "26700.00",
+"cap": null,
+"sale": 22690,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018550157552",
+"handle": "durham-waxed-mens-black-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/46566863208688",
+"price": "26700.00",
+"cap": null,
+"sale": 22690,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018550157552",
+"handle": "durham-waxed-mens-black-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/46566863241456",
+"price": "26700.00",
+"cap": null,
+"sale": 22690,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018550157552",
+"handle": "durham-waxed-mens-black-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/46566863274224",
+"price": "26700.00",
+"cap": null,
+"sale": 22690,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8251539718384",
+"handle": "executive-comfort-oxford",
+"vid": "gid://shopify/ProductVariant/44027368898800",
+"price": "24000.00",
+"cap": null,
+"sale": 20400,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8251539718384",
+"handle": "executive-comfort-oxford",
+"vid": "gid://shopify/ProductVariant/44027368931568",
+"price": "24000.00",
+"cap": null,
+"sale": 20400,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8251539718384",
+"handle": "executive-comfort-oxford",
+"vid": "gid://shopify/ProductVariant/44027368964336",
+"price": "24000.00",
+"cap": null,
+"sale": 20400,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8251539718384",
+"handle": "executive-comfort-oxford",
+"vid": "gid://shopify/ProductVariant/44027368997104",
+"price": "24000.00",
+"cap": null,
+"sale": 20400,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8251539718384",
+"handle": "executive-comfort-oxford",
+"vid": "gid://shopify/ProductVariant/44027369029872",
+"price": "24000.00",
+"cap": null,
+"sale": 20400,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8251539718384",
+"handle": "executive-comfort-oxford",
+"vid": "gid://shopify/ProductVariant/44027369062640",
+"price": "24000.00",
+"cap": null,
+"sale": 20400,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8209190879472",
+"handle": "mini-watch-cufflink-box",
+"vid": "gid://shopify/ProductVariant/50008059904240",
+"price": "8500.00",
+"cap": null,
+"sale": 7220,
+"effpct": 15.1
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8209190879472",
+"handle": "mini-watch-cufflink-box",
+"vid": "gid://shopify/ProductVariant/50008059937008",
+"price": "8500.00",
+"cap": null,
+"sale": 7220,
+"effpct": 15.1
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018555334896",
+"handle": "nightfall-mens-diamond-quilted-black-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566872744176",
+"price": "27500.00",
+"cap": null,
+"sale": 23370,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018555334896",
+"handle": "nightfall-mens-diamond-quilted-black-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566872776944",
+"price": "27500.00",
+"cap": null,
+"sale": 23370,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018555334896",
+"handle": "nightfall-mens-diamond-quilted-black-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566872809712",
+"price": "27500.00",
+"cap": null,
+"sale": 23370,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018555334896",
+"handle": "nightfall-mens-diamond-quilted-black-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566872842480",
+"price": "27500.00",
+"cap": null,
+"sale": 23370,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018555334896",
+"handle": "nightfall-mens-diamond-quilted-black-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566872875248",
+"price": "27500.00",
+"cap": null,
+"sale": 23370,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018555334896",
+"handle": "nightfall-mens-diamond-quilted-black-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566872908016",
+"price": "27500.00",
+"cap": null,
+"sale": 23370,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018549862640",
+"handle": "rockafella-mens-black-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566862553328",
+"price": "29800.00",
+"cap": null,
+"sale": 25330,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018549862640",
+"handle": "rockafella-mens-black-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566862586096",
+"price": "29800.00",
+"cap": null,
+"sale": 25330,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018549862640",
+"handle": "rockafella-mens-black-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566862618864",
+"price": "29800.00",
+"cap": null,
+"sale": 25330,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018549862640",
+"handle": "rockafella-mens-black-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566862651632",
+"price": "29800.00",
+"cap": null,
+"sale": 25330,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018549862640",
+"handle": "rockafella-mens-black-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566862684400",
+"price": "29800.00",
+"cap": null,
+"sale": 25330,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018549862640",
+"handle": "rockafella-mens-black-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566862717168",
+"price": "29800.00",
+"cap": null,
+"sale": 25330,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8758144958704",
+"handle": "croc-textured-shaded-belt",
+"vid": "gid://shopify/ProductVariant/45896159559920",
+"price": "3500.00",
+"cap": null,
+"sale": 2970,
+"effpct": 15.1
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8322899968240",
+"handle": "the-salemanco-brogue-tan",
+"vid": "gid://shopify/ProductVariant/50007378100464",
+"price": "22500.00",
+"cap": null,
+"sale": 19120,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8253329244400",
+"handle": "soleil-oxfords",
+"vid": "gid://shopify/ProductVariant/44032324370672",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8253329244400",
+"handle": "soleil-oxfords",
+"vid": "gid://shopify/ProductVariant/44032324403440",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8253329244400",
+"handle": "soleil-oxfords",
+"vid": "gid://shopify/ProductVariant/44032324436208",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8253329244400",
+"handle": "soleil-oxfords",
+"vid": "gid://shopify/ProductVariant/44032324468976",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8253329244400",
+"handle": "soleil-oxfords",
+"vid": "gid://shopify/ProductVariant/44032324501744",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8253329244400",
+"handle": "soleil-oxfords",
+"vid": "gid://shopify/ProductVariant/44032324534512",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8252769403120",
+"handle": "the-saachi",
+"vid": "gid://shopify/ProductVariant/44031162712304",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8252769403120",
+"handle": "the-saachi",
+"vid": "gid://shopify/ProductVariant/44031162745072",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8252769403120",
+"handle": "the-saachi",
+"vid": "gid://shopify/ProductVariant/44031162777840",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8252769403120",
+"handle": "the-saachi",
+"vid": "gid://shopify/ProductVariant/44031162810608",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8252769403120",
+"handle": "the-saachi",
+"vid": "gid://shopify/ProductVariant/44031162843376",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8252769403120",
+"handle": "the-saachi",
+"vid": "gid://shopify/ProductVariant/44031162876144",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8251522842864",
+"handle": "copy-of-the-regal-weaver",
+"vid": "gid://shopify/ProductVariant/44027345371376",
+"price": "24000.00",
+"cap": null,
+"sale": 20400,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8251522842864",
+"handle": "copy-of-the-regal-weaver",
+"vid": "gid://shopify/ProductVariant/44027345404144",
+"price": "24000.00",
+"cap": null,
+"sale": 20400,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8251522842864",
+"handle": "copy-of-the-regal-weaver",
+"vid": "gid://shopify/ProductVariant/44027345436912",
+"price": "24000.00",
+"cap": null,
+"sale": 20400,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8251522842864",
+"handle": "copy-of-the-regal-weaver",
+"vid": "gid://shopify/ProductVariant/44027345469680",
+"price": "24000.00",
+"cap": null,
+"sale": 20400,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8251522842864",
+"handle": "copy-of-the-regal-weaver",
+"vid": "gid://shopify/ProductVariant/44027345502448",
+"price": "24000.00",
+"cap": null,
+"sale": 20400,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8251522842864",
+"handle": "copy-of-the-regal-weaver",
+"vid": "gid://shopify/ProductVariant/44027345535216",
+"price": "24000.00",
+"cap": null,
+"sale": 20400,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8180111933680",
+"handle": "alison-black-womens-biker-jacket",
+"vid": "gid://shopify/ProductVariant/50299952726256",
+"price": "26000.00",
+"cap": null,
+"sale": 22100,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8180111933680",
+"handle": "alison-black-womens-biker-jacket",
+"vid": "gid://shopify/ProductVariant/50280913502448",
+"price": "26000.00",
+"cap": null,
+"sale": 22100,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8180111933680",
+"handle": "alison-black-womens-biker-jacket",
+"vid": "gid://shopify/ProductVariant/50280913535216",
+"price": "26000.00",
+"cap": null,
+"sale": 22100,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8180111933680",
+"handle": "alison-black-womens-biker-jacket",
+"vid": "gid://shopify/ProductVariant/50280913567984",
+"price": "26000.00",
+"cap": null,
+"sale": 22100,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8180111933680",
+"handle": "alison-black-womens-biker-jacket",
+"vid": "gid://shopify/ProductVariant/50280913600752",
+"price": "26000.00",
+"cap": null,
+"sale": 22100,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8180111933680",
+"handle": "alison-black-womens-biker-jacket",
+"vid": "gid://shopify/ProductVariant/50280913633520",
+"price": "26000.00",
+"cap": null,
+"sale": 22100,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8180111933680",
+"handle": "alison-black-womens-biker-jacket",
+"vid": "gid://shopify/ProductVariant/50280913666288",
+"price": "26000.00",
+"cap": null,
+"sale": 22100,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8180111933680",
+"handle": "alison-black-womens-biker-jacket",
+"vid": "gid://shopify/ProductVariant/50280913699056",
+"price": "26000.00",
+"cap": null,
+"sale": 22100,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8180111933680",
+"handle": "alison-black-womens-biker-jacket",
+"vid": "gid://shopify/ProductVariant/50280913731824",
+"price": "26000.00",
+"cap": null,
+"sale": 22100,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8170264035568",
+"handle": "allaric-alley-distressed-brown-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/43666128503024",
+"price": "29500.00",
+"cap": null,
+"sale": 25070,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8170264035568",
+"handle": "allaric-alley-distressed-brown-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/43666128535792",
+"price": "29500.00",
+"cap": null,
+"sale": 25070,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8170264035568",
+"handle": "allaric-alley-distressed-brown-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/43666128568560",
+"price": "29500.00",
+"cap": null,
+"sale": 25070,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8170264035568",
+"handle": "allaric-alley-distressed-brown-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/43666128601328",
+"price": "29500.00",
+"cap": null,
+"sale": 25070,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8170264035568",
+"handle": "allaric-alley-distressed-brown-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/43666128634096",
+"price": "29500.00",
+"cap": null,
+"sale": 25070,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8170264035568",
+"handle": "allaric-alley-distressed-brown-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/43666128666864",
+"price": "29500.00",
+"cap": null,
+"sale": 25070,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8167115030768",
+"handle": "mens-apex-black-plain-suede-bomber-jacket",
+"vid": "gid://shopify/ProductVariant/43657305948400",
+"price": "32000.00",
+"cap": null,
+"sale": 27200,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8167115030768",
+"handle": "mens-apex-black-plain-suede-bomber-jacket",
+"vid": "gid://shopify/ProductVariant/43657305981168",
+"price": "32000.00",
+"cap": null,
+"sale": 27200,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8167115030768",
+"handle": "mens-apex-black-plain-suede-bomber-jacket",
+"vid": "gid://shopify/ProductVariant/43657306013936",
+"price": "32000.00",
+"cap": null,
+"sale": 27200,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8167115030768",
+"handle": "mens-apex-black-plain-suede-bomber-jacket",
+"vid": "gid://shopify/ProductVariant/43657306046704",
+"price": "32000.00",
+"cap": null,
+"sale": 27200,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8167115030768",
+"handle": "mens-apex-black-plain-suede-bomber-jacket",
+"vid": "gid://shopify/ProductVariant/43657306079472",
+"price": "32000.00",
+"cap": null,
+"sale": 27200,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8167115030768",
+"handle": "mens-apex-black-plain-suede-bomber-jacket",
+"vid": "gid://shopify/ProductVariant/43657306112240",
+"price": "32000.00",
+"cap": null,
+"sale": 27200,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8167112540400",
+"handle": "mens-legender-black-black-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/43657301557488",
+"price": "28000.00",
+"cap": null,
+"sale": 23800,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8167112540400",
+"handle": "mens-legender-black-black-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/43657301590256",
+"price": "28000.00",
+"cap": null,
+"sale": 23800,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8167112540400",
+"handle": "mens-legender-black-black-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/43657301623024",
+"price": "28000.00",
+"cap": null,
+"sale": 23800,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8167112540400",
+"handle": "mens-legender-black-black-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/43657301655792",
+"price": "28000.00",
+"cap": null,
+"sale": 23800,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8167112540400",
+"handle": "mens-legender-black-black-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/43657301688560",
+"price": "28000.00",
+"cap": null,
+"sale": 23800,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8167112540400",
+"handle": "mens-legender-black-black-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/43657301721328",
+"price": "28000.00",
+"cap": null,
+"sale": 23800,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9406707400944",
+"handle": "zulfiqar-laptop-bag",
+"vid": "gid://shopify/ProductVariant/47364618125552",
+"price": "24500.00",
+"cap": null,
+"sale": 20820,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018554155248",
+"handle": "waxed-rider-mens-brown-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566870352112",
+"price": "25000.00",
+"cap": null,
+"sale": 21250,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018554155248",
+"handle": "waxed-rider-mens-brown-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566870384880",
+"price": "25000.00",
+"cap": null,
+"sale": 21250,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018554155248",
+"handle": "waxed-rider-mens-brown-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566870417648",
+"price": "25000.00",
+"cap": null,
+"sale": 21250,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018554155248",
+"handle": "waxed-rider-mens-brown-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566870450416",
+"price": "25000.00",
+"cap": null,
+"sale": 21250,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018554155248",
+"handle": "waxed-rider-mens-brown-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566870483184",
+"price": "25000.00",
+"cap": null,
+"sale": 21250,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018554155248",
+"handle": "waxed-rider-mens-brown-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566870515952",
+"price": "25000.00",
+"cap": null,
+"sale": 21250,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8431356936432",
+"handle": "omega-ruboff-loafers",
+"vid": "gid://shopify/ProductVariant/44692965163248",
+"price": "11400.00",
+"cap": null,
+"sale": 9690,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8431356936432",
+"handle": "omega-ruboff-loafers",
+"vid": "gid://shopify/ProductVariant/44692965196016",
+"price": "11400.00",
+"cap": null,
+"sale": 9690,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8431356936432",
+"handle": "omega-ruboff-loafers",
+"vid": "gid://shopify/ProductVariant/44692965228784",
+"price": "11400.00",
+"cap": null,
+"sale": 9690,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8431356936432",
+"handle": "omega-ruboff-loafers",
+"vid": "gid://shopify/ProductVariant/44692965261552",
+"price": "11400.00",
+"cap": null,
+"sale": 9690,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8431356936432",
+"handle": "omega-ruboff-loafers",
+"vid": "gid://shopify/ProductVariant/44692965294320",
+"price": "11400.00",
+"cap": null,
+"sale": 9690,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8322901278960",
+"handle": "the-tassel-shoe",
+"vid": "gid://shopify/ProductVariant/44231976648944",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8251546534128",
+"handle": "copy-of-enigma-burnished-loafers",
+"vid": "gid://shopify/ProductVariant/44027378630896",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8251546534128",
+"handle": "copy-of-enigma-burnished-loafers",
+"vid": "gid://shopify/ProductVariant/44027378663664",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8251546534128",
+"handle": "copy-of-enigma-burnished-loafers",
+"vid": "gid://shopify/ProductVariant/44027378696432",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8251546534128",
+"handle": "copy-of-enigma-burnished-loafers",
+"vid": "gid://shopify/ProductVariant/44027378729200",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8251546534128",
+"handle": "copy-of-enigma-burnished-loafers",
+"vid": "gid://shopify/ProductVariant/44027378761968",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8251546534128",
+"handle": "copy-of-enigma-burnished-loafers",
+"vid": "gid://shopify/ProductVariant/44027378794736",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9406701469936",
+"handle": "the-saloon-laptop-bag",
+"vid": "gid://shopify/ProductVariant/47364586340592",
+"price": "28500.00",
+"cap": null,
+"sale": 24220,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9384520024304",
+"handle": "the-traveler-multi-function-crazy-horse-leather-duffle-bag",
+"vid": "gid://shopify/ProductVariant/47308229443824",
+"price": "45000.00",
+"cap": null,
+"sale": 38250,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018553368816",
+"handle": "marc-ed-mens-black-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/46566868615408",
+"price": "29400.00",
+"cap": null,
+"sale": 24990,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018553368816",
+"handle": "marc-ed-mens-black-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/46566868648176",
+"price": "29400.00",
+"cap": null,
+"sale": 24990,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018553368816",
+"handle": "marc-ed-mens-black-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/46566868680944",
+"price": "29400.00",
+"cap": null,
+"sale": 24990,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018553368816",
+"handle": "marc-ed-mens-black-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/46566868713712",
+"price": "29400.00",
+"cap": null,
+"sale": 24990,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018553368816",
+"handle": "marc-ed-mens-black-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/46566868746480",
+"price": "29400.00",
+"cap": null,
+"sale": 24990,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018553368816",
+"handle": "marc-ed-mens-black-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/46566868779248",
+"price": "29400.00",
+"cap": null,
+"sale": 24990,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8775960789232",
+"handle": "sheffield-backpack-black",
+"vid": "gid://shopify/ProductVariant/50008215814384",
+"price": "26500.00",
+"cap": null,
+"sale": 22520,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8775960789232",
+"handle": "sheffield-backpack-black",
+"vid": "gid://shopify/ProductVariant/50008215847152",
+"price": "26500.00",
+"cap": null,
+"sale": 22520,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8758146171120",
+"handle": "snake-leather-belt",
+"vid": "gid://shopify/ProductVariant/45896161460464",
+"price": "3500.00",
+"cap": null,
+"sale": 2970,
+"effpct": 15.1
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8431371092208",
+"handle": "lionel-loafer-moccasin-tan",
+"vid": "gid://shopify/ProductVariant/44693154038000",
+"price": "21400.00",
+"cap": null,
+"sale": 18190,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8431371092208",
+"handle": "lionel-loafer-moccasin-tan",
+"vid": "gid://shopify/ProductVariant/44693154070768",
+"price": "21400.00",
+"cap": null,
+"sale": 18190,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8431371092208",
+"handle": "lionel-loafer-moccasin-tan",
+"vid": "gid://shopify/ProductVariant/44693154103536",
+"price": "21400.00",
+"cap": null,
+"sale": 18190,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8431371092208",
+"handle": "lionel-loafer-moccasin-tan",
+"vid": "gid://shopify/ProductVariant/44693154136304",
+"price": "21400.00",
+"cap": null,
+"sale": 18190,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8431371092208",
+"handle": "lionel-loafer-moccasin-tan",
+"vid": "gid://shopify/ProductVariant/44693154169072",
+"price": "21400.00",
+"cap": null,
+"sale": 18190,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8431369683184",
+"handle": "lionel-loafer-mocassin",
+"vid": "gid://shopify/ProductVariant/44693137850608",
+"price": "21400.00",
+"cap": null,
+"sale": 18190,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8431369683184",
+"handle": "lionel-loafer-mocassin",
+"vid": "gid://shopify/ProductVariant/44693137883376",
+"price": "21400.00",
+"cap": null,
+"sale": 18190,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8431369683184",
+"handle": "lionel-loafer-mocassin",
+"vid": "gid://shopify/ProductVariant/44693137916144",
+"price": "21400.00",
+"cap": null,
+"sale": 18190,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8431369683184",
+"handle": "lionel-loafer-mocassin",
+"vid": "gid://shopify/ProductVariant/44693137948912",
+"price": "21400.00",
+"cap": null,
+"sale": 18190,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8431369683184",
+"handle": "lionel-loafer-mocassin",
+"vid": "gid://shopify/ProductVariant/44693137981680",
+"price": "21400.00",
+"cap": null,
+"sale": 18190,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8429210730736",
+"handle": "the-elite-passport-holder",
+"vid": "gid://shopify/ProductVariant/44668750594288",
+"price": "1800.00",
+"cap": null,
+"sale": 1530,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8322901573872",
+"handle": "copy-of-the-tassel-shoe",
+"vid": "gid://shopify/ProductVariant/44231978221808",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8317154361584",
+"handle": "the-travel-mate-trolley-bag-brown-1",
+"vid": "gid://shopify/ProductVariant/44216795234544",
+"price": "36000.00",
+"cap": null,
+"sale": 30600,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9568867877104",
+"handle": "tp-voyager-suitcase-trolley-bag-1",
+"vid": "gid://shopify/ProductVariant/50054862143728",
+"price": "48000.00",
+"cap": null,
+"sale": 40800,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9568867877104",
+"handle": "tp-voyager-suitcase-trolley-bag-1",
+"vid": "gid://shopify/ProductVariant/50054862176496",
+"price": "48000.00",
+"cap": null,
+"sale": 40800,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9463563518192",
+"handle": "tp-executive-a4-folder",
+"vid": "gid://shopify/ProductVariant/50016421937392",
+"price": "8800.00",
+"cap": null,
+"sale": 7480,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9463563518192",
+"handle": "tp-executive-a4-folder",
+"vid": "gid://shopify/ProductVariant/50016421970160",
+"price": "8800.00",
+"cap": null,
+"sale": 7480,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018550943984",
+"handle": "rodriguez-mens-quilted-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/46566864650480",
+"price": "26400.00",
+"cap": null,
+"sale": 22440,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018550943984",
+"handle": "rodriguez-mens-quilted-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/46566864683248",
+"price": "26400.00",
+"cap": null,
+"sale": 22440,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018550943984",
+"handle": "rodriguez-mens-quilted-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/46566864716016",
+"price": "26400.00",
+"cap": null,
+"sale": 22440,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018550943984",
+"handle": "rodriguez-mens-quilted-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/46566864748784",
+"price": "26400.00",
+"cap": null,
+"sale": 22440,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018550943984",
+"handle": "rodriguez-mens-quilted-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/46566864781552",
+"price": "26400.00",
+"cap": null,
+"sale": 22440,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018550943984",
+"handle": "rodriguez-mens-quilted-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/46566864814320",
+"price": "26400.00",
+"cap": null,
+"sale": 22440,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8948093911280",
+"handle": "hilford-backpack",
+"vid": "gid://shopify/ProductVariant/46394250264816",
+"price": "31000.00",
+"cap": null,
+"sale": 26350,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8431364538608",
+"handle": "linker-moccassin",
+"vid": "gid://shopify/ProductVariant/44693082996976",
+"price": "21500.00",
+"cap": null,
+"sale": 18270,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8431364538608",
+"handle": "linker-moccassin",
+"vid": "gid://shopify/ProductVariant/44693083029744",
+"price": "21500.00",
+"cap": null,
+"sale": 18270,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8431364538608",
+"handle": "linker-moccassin",
+"vid": "gid://shopify/ProductVariant/44693083062512",
+"price": "21500.00",
+"cap": null,
+"sale": 18270,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8431364538608",
+"handle": "linker-moccassin",
+"vid": "gid://shopify/ProductVariant/44693083095280",
+"price": "21500.00",
+"cap": null,
+"sale": 18270,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8431364538608",
+"handle": "linker-moccassin",
+"vid": "gid://shopify/ProductVariant/44693083128048",
+"price": "21500.00",
+"cap": null,
+"sale": 18270,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8322900525296",
+"handle": "copy-of-the-salemanco-brogue-burnished-brown",
+"vid": "gid://shopify/ProductVariant/44231970586864",
+"price": "22500.00",
+"cap": null,
+"sale": 19120,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8322900066544",
+"handle": "the-salemanco-brogue-burnished-brown",
+"vid": "gid://shopify/ProductVariant/44231968293104",
+"price": "22500.00",
+"cap": null,
+"sale": 19120,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8322893906160",
+"handle": "copy-of-oxford-brogue-patent-black-limited-trot-series",
+"vid": "gid://shopify/ProductVariant/50007377051888",
+"price": "22500.00",
+"cap": null,
+"sale": 19120,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8251541782768",
+"handle": "copy-of-executive-comfort-oxford",
+"vid": "gid://shopify/ProductVariant/44027371946224",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8251541782768",
+"handle": "copy-of-executive-comfort-oxford",
+"vid": "gid://shopify/ProductVariant/44027371978992",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8251541782768",
+"handle": "copy-of-executive-comfort-oxford",
+"vid": "gid://shopify/ProductVariant/44027372011760",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8251541782768",
+"handle": "copy-of-executive-comfort-oxford",
+"vid": "gid://shopify/ProductVariant/44027372044528",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8251541782768",
+"handle": "copy-of-executive-comfort-oxford",
+"vid": "gid://shopify/ProductVariant/44027372077296",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8251541782768",
+"handle": "copy-of-executive-comfort-oxford",
+"vid": "gid://shopify/ProductVariant/44027372110064",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8251522089200",
+"handle": "the-regal-weaver",
+"vid": "gid://shopify/ProductVariant/44027344290032",
+"price": "24000.00",
+"cap": null,
+"sale": 20400,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8251522089200",
+"handle": "the-regal-weaver",
+"vid": "gid://shopify/ProductVariant/44027344322800",
+"price": "24000.00",
+"cap": null,
+"sale": 20400,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8251522089200",
+"handle": "the-regal-weaver",
+"vid": "gid://shopify/ProductVariant/44027344355568",
+"price": "24000.00",
+"cap": null,
+"sale": 20400,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8251522089200",
+"handle": "the-regal-weaver",
+"vid": "gid://shopify/ProductVariant/44027344388336",
+"price": "24000.00",
+"cap": null,
+"sale": 20400,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8251522089200",
+"handle": "the-regal-weaver",
+"vid": "gid://shopify/ProductVariant/44027344421104",
+"price": "24000.00",
+"cap": null,
+"sale": 20400,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8251522089200",
+"handle": "the-regal-weaver",
+"vid": "gid://shopify/ProductVariant/44027344453872",
+"price": "24000.00",
+"cap": null,
+"sale": 20400,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/10247311655152",
+"handle": "luxe-card-lite",
+"vid": "gid://shopify/ProductVariant/50393290539248",
+"price": "1250.00",
+"cap": null,
+"sale": 1060,
+"effpct": 15.2
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/10247310803184",
+"handle": "mini-card-cash-carry",
+"vid": "gid://shopify/ProductVariant/50393289687280",
+"price": "600.00",
+"cap": null,
+"sale": 510,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/10247310770416",
+"handle": "gift-box-4-pieces-set",
+"vid": "gid://shopify/ProductVariant/50393289654512",
+"price": "490.00",
+"cap": null,
+"sale": 410,
+"effpct": 16.3
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/10247310737648",
+"handle": "tp-branson-briefcase-business-attache",
+"vid": "gid://shopify/ProductVariant/50393289523440",
+"price": "38000.00",
+"cap": null,
+"sale": 32300,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/10247310737648",
+"handle": "tp-branson-briefcase-business-attache",
+"vid": "gid://shopify/ProductVariant/50393289556208",
+"price": "38000.00",
+"cap": null,
+"sale": 32300,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/10247310737648",
+"handle": "tp-branson-briefcase-business-attache",
+"vid": "gid://shopify/ProductVariant/50393289588976",
+"price": "38000.00",
+"cap": null,
+"sale": 32300,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/10247310672112",
+"handle": "four-in-one-leather-gift-set",
+"vid": "gid://shopify/ProductVariant/50393289457904",
+"price": "9000.00",
+"cap": null,
+"sale": 7650,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/10247310639344",
+"handle": "the-braided-belt",
+"vid": "gid://shopify/ProductVariant/50393289392368",
+"price": "3800.00",
+"cap": null,
+"sale": 3230,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/10247310639344",
+"handle": "the-braided-belt",
+"vid": "gid://shopify/ProductVariant/50393289425136",
+"price": "3800.00",
+"cap": null,
+"sale": 3230,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018549305584",
+"handle": "wayne-mens-sheepskin-black-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566861603056",
+"price": "25900.00",
+"cap": null,
+"sale": 22010,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018549305584",
+"handle": "wayne-mens-sheepskin-black-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566861635824",
+"price": "25900.00",
+"cap": null,
+"sale": 22010,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018549305584",
+"handle": "wayne-mens-sheepskin-black-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566861668592",
+"price": "25900.00",
+"cap": null,
+"sale": 22010,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018549305584",
+"handle": "wayne-mens-sheepskin-black-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566861701360",
+"price": "25900.00",
+"cap": null,
+"sale": 22010,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018549305584",
+"handle": "wayne-mens-sheepskin-black-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566861799664",
+"price": "25900.00",
+"cap": null,
+"sale": 22010,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/9018549305584",
+"handle": "wayne-mens-sheepskin-black-leather-jacket",
+"vid": "gid://shopify/ProductVariant/46566861832432",
+"price": "25900.00",
+"cap": null,
+"sale": 22010,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8867005858032",
+"handle": "pinto-hair-on-duffle-bag",
+"vid": "gid://shopify/ProductVariant/50008222204144",
+"price": "29000.00",
+"cap": null,
+"sale": 24650,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8867005858032",
+"handle": "pinto-hair-on-duffle-bag",
+"vid": "gid://shopify/ProductVariant/50008222236912",
+"price": "29000.00",
+"cap": null,
+"sale": 24650,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8253332947184",
+"handle": "legacy-wholecut-wingtip",
+"vid": "gid://shopify/ProductVariant/44032330006768",
+"price": "22500.00",
+"cap": null,
+"sale": 19120,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8253332947184",
+"handle": "legacy-wholecut-wingtip",
+"vid": "gid://shopify/ProductVariant/44032330039536",
+"price": "22500.00",
+"cap": null,
+"sale": 19120,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8253332947184",
+"handle": "legacy-wholecut-wingtip",
+"vid": "gid://shopify/ProductVariant/44032330072304",
+"price": "22500.00",
+"cap": null,
+"sale": 19120,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8253332947184",
+"handle": "legacy-wholecut-wingtip",
+"vid": "gid://shopify/ProductVariant/44032330105072",
+"price": "22500.00",
+"cap": null,
+"sale": 19120,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8253332947184",
+"handle": "legacy-wholecut-wingtip",
+"vid": "gid://shopify/ProductVariant/44032330137840",
+"price": "22500.00",
+"cap": null,
+"sale": 19120,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8253332947184",
+"handle": "legacy-wholecut-wingtip",
+"vid": "gid://shopify/ProductVariant/44032330170608",
+"price": "22500.00",
+"cap": null,
+"sale": 19120,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8253332521200",
+"handle": "slip-on-kordovan-oxford",
+"vid": "gid://shopify/ProductVariant/44032329449712",
+"price": "22500.00",
+"cap": null,
+"sale": 19120,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8253332521200",
+"handle": "slip-on-kordovan-oxford",
+"vid": "gid://shopify/ProductVariant/44032329482480",
+"price": "22500.00",
+"cap": null,
+"sale": 19120,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8253332521200",
+"handle": "slip-on-kordovan-oxford",
+"vid": "gid://shopify/ProductVariant/44032329515248",
+"price": "22500.00",
+"cap": null,
+"sale": 19120,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8253332521200",
+"handle": "slip-on-kordovan-oxford",
+"vid": "gid://shopify/ProductVariant/44032329548016",
+"price": "22500.00",
+"cap": null,
+"sale": 19120,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8253332521200",
+"handle": "slip-on-kordovan-oxford",
+"vid": "gid://shopify/ProductVariant/44032329580784",
+"price": "22500.00",
+"cap": null,
+"sale": 19120,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8253332521200",
+"handle": "slip-on-kordovan-oxford",
+"vid": "gid://shopify/ProductVariant/44032329613552",
+"price": "22500.00",
+"cap": null,
+"sale": 19120,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8253329670384",
+"handle": "imperial-moccasin",
+"vid": "gid://shopify/ProductVariant/44032324993264",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8253329670384",
+"handle": "imperial-moccasin",
+"vid": "gid://shopify/ProductVariant/44032325026032",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8253329670384",
+"handle": "imperial-moccasin",
+"vid": "gid://shopify/ProductVariant/44032325058800",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8253329670384",
+"handle": "imperial-moccasin",
+"vid": "gid://shopify/ProductVariant/44032325091568",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8253329670384",
+"handle": "imperial-moccasin",
+"vid": "gid://shopify/ProductVariant/44032325124336",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8253329670384",
+"handle": "imperial-moccasin",
+"vid": "gid://shopify/ProductVariant/44032325157104",
+"price": "21000.00",
+"cap": null,
+"sale": 17850,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8180219347184",
+"handle": "bliss-maroon-leather-bomber-women-jacket",
+"vid": "gid://shopify/ProductVariant/43696712220912",
+"price": "23000.00",
+"cap": null,
+"sale": 19550,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8180219347184",
+"handle": "bliss-maroon-leather-bomber-women-jacket",
+"vid": "gid://shopify/ProductVariant/50280913862896",
+"price": "23000.00",
+"cap": null,
+"sale": 19550,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8180219347184",
+"handle": "bliss-maroon-leather-bomber-women-jacket",
+"vid": "gid://shopify/ProductVariant/50280913895664",
+"price": "23000.00",
+"cap": null,
+"sale": 19550,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8180219347184",
+"handle": "bliss-maroon-leather-bomber-women-jacket",
+"vid": "gid://shopify/ProductVariant/50280913928432",
+"price": "23000.00",
+"cap": null,
+"sale": 19550,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8180219347184",
+"handle": "bliss-maroon-leather-bomber-women-jacket",
+"vid": "gid://shopify/ProductVariant/50280913961200",
+"price": "23000.00",
+"cap": null,
+"sale": 19550,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8180219347184",
+"handle": "bliss-maroon-leather-bomber-women-jacket",
+"vid": "gid://shopify/ProductVariant/50280913993968",
+"price": "23000.00",
+"cap": null,
+"sale": 19550,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8180219347184",
+"handle": "bliss-maroon-leather-bomber-women-jacket",
+"vid": "gid://shopify/ProductVariant/50280914026736",
+"price": "23000.00",
+"cap": null,
+"sale": 19550,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8180219347184",
+"handle": "bliss-maroon-leather-bomber-women-jacket",
+"vid": "gid://shopify/ProductVariant/50280914059504",
+"price": "23000.00",
+"cap": null,
+"sale": 19550,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8180219347184",
+"handle": "bliss-maroon-leather-bomber-women-jacket",
+"vid": "gid://shopify/ProductVariant/50280914092272",
+"price": "23000.00",
+"cap": null,
+"sale": 19550,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8167106674928",
+"handle": "mens-urban-rider-brown-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/43657290711280",
+"price": "35000.00",
+"cap": null,
+"sale": 29750,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8167106674928",
+"handle": "mens-urban-rider-brown-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/43657290744048",
+"price": "35000.00",
+"cap": null,
+"sale": 29750,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8167106674928",
+"handle": "mens-urban-rider-brown-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/43657290776816",
+"price": "35000.00",
+"cap": null,
+"sale": 29750,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8167106674928",
+"handle": "mens-urban-rider-brown-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/43657290809584",
+"price": "35000.00",
+"cap": null,
+"sale": 29750,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8167106674928",
+"handle": "mens-urban-rider-brown-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/43657290842352",
+"price": "35000.00",
+"cap": null,
+"sale": 29750,
+"effpct": 15.0
+},
+{
+"g": "R",
+"pid": "gid://shopify/Product/8167106674928",
+"handle": "mens-urban-rider-brown-leather-biker-jacket",
+"vid": "gid://shopify/ProductVariant/43657290875120",
+"price": "35000.00",
+"cap": null,
+"sale": 29750,
+"effpct": 15.0
+}
+]
