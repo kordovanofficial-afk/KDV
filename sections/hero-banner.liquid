@@ -41,7 +41,13 @@
     assign sale1111 = true
   endif
   assign s_desk_img = images['kv-1111-hero-desktop.jpg']
+  if s_desk_img == blank
+    assign s_desk_img = images['kv-1111-hero-desktop.png']
+  endif
   assign s_mob_img = images['kv-1111-hero-mobile.jpg']
+  if s_mob_img == blank
+    assign s_mob_img = images['kv-1111-hero-mobile.png']
+  endif
 -%}
 
 {%- if sale1111 -%}
@@ -63,7 +69,7 @@
                    {{ s_desk_img | image_url: width: 1600, format: 'webp' }} 1600w,
                    {{ s_desk_img | image_url: width: 2000, format: 'webp' }} 2000w,
                    {{ s_desk_img | image_url: width: 2400, format: 'webp' }} 2400w"
-           sizes="100vw" width="2560" height="1440"
+           sizes="100vw" width="1672" height="941"
            alt="Kordovan full-grain leather wallets, brown and tan, 11.11 sale"
            loading="eager" fetchpriority="high" decoding="async">
       {%- else -%}
