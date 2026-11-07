@@ -94,6 +94,25 @@ canvas{image-rendering:pixelated;image-rendering:crisp-edges;display:block}
 @keyframes floaty{50%{transform:translateY(-4px)}}
 @media (prefers-reduced-motion:reduce){.portrait .anime{animation:none}}
 .deskcard .anime{width:100%!important;max-width:220px;justify-self:center}
+.char{display:block;max-width:100%;justify-self:center}
+.char .stage{position:relative;aspect-ratio:2/3;border-radius:18px;overflow:hidden;background:radial-gradient(ellipse at 50% 30%,#3a2a1e,#140e0a 75%);
+  box-shadow:0 0 0 3px var(--glow),0 0 26px -6px var(--glow),inset 0 -40px 60px -30px #000}
+.char .pose{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%;transition:opacity 1.2s ease;will-change:transform,opacity}
+.char.busy .idle{opacity:0}.char.busy .work{opacity:1;animation:busy 1.8s ease-in-out infinite}
+.char.free .work{opacity:0;animation:glance 11s ease-in-out infinite}.char.free .idle{opacity:1;animation:breathe 5.5s ease-in-out infinite}
+@keyframes busy{0%,100%{transform:translateY(0) scale(1.02)}50%{transform:translateY(-1.6%) scale(1.03)}}
+@keyframes breathe{0%,100%{transform:scale(1.02) rotate(0)}30%{transform:scale(1.035) rotate(-.4deg)}70%{transform:scale(1.03) rotate(.4deg)}}
+@keyframes glance{0%,70%,100%{opacity:0}78%,90%{opacity:1}}
+.char .mote{position:absolute;bottom:-6%;width:6px;height:6px;border-radius:50%;background:radial-gradient(circle,#ffe2a8,rgba(214,173,98,0) 70%);
+  opacity:0;animation:rise 7s linear infinite;pointer-events:none;mix-blend-mode:screen}
+.char .m1{left:18%;animation-delay:0s}.char .m2{left:42%;animation-delay:1.6s;width:4px;height:4px}.char .m3{left:63%;animation-delay:3.1s}
+.char .m4{left:80%;animation-delay:4.4s;width:8px;height:8px}.char .m5{left:30%;animation-delay:5.6s;width:5px;height:5px}
+.char.busy .mote{animation-duration:4.5s}
+@keyframes rise{0%{transform:translateY(0) scale(.6);opacity:0}15%{opacity:.9}100%{transform:translateY(-120%) translateX(12px) scale(1.1);opacity:0}}
+.char.st-blocked .stage{filter:saturate(.75)}
+.deskcard .char{width:100%!important;max-width:220px}
+.detail .scene .char{max-width:340px}
+@media (prefers-reduced-motion:reduce){.char .pose,.char .mote{animation:none!important}}
 .plate{display:grid;gap:8px;min-width:0}
 .plate h3{font-size:26px;line-height:1.2}
 .plate .role{font-family:var(--label);font-weight:600;font-size:16px;color:var(--cognac);line-height:1.7}
@@ -478,7 +497,18 @@ function animeAvatar(av,px,mood,cls){const w=document.createElement("span");w.cl
   w.innerHTML=`<svg xmlns="${SVGNS}" viewBox="0 0 200 220" role="img" aria-label="avatar">${animeSVG(av,mood)}</svg>`;return w;}
 function avatar(av,scale,opts){opts=opts||{};return animeAvatar(av,32*scale,opts.mood||(opts.hired?"onboarding":"idle"));}
 const SCREEN={working:"#7f9a46",waiting:"#e3a043",blocked:"#d0614a",onboarding:"#d6ad62",idle:"#3a2b20"};
-function deskScene(av,status,scale){const w=animeAvatar(av,50*scale,{working:"working",waiting:"waiting",blocked:"blocked",onboarding:"onboarding",done:"done"}[status]||"idle","desk");
+/* Step 2a: real anime characters. Each desk uses the newest images in its Folder whose names contain "work" / "idle".
+   Working: WORK pose with a busy bob and glow. Otherwise: IDLE pose, slow breathing and sway; every few seconds it
+   glances back at work. Light particles drift around everyone. */
+function charFor(seat){if(!seat)return null;const f=(S.files||[]).filter(x=>x.seat===seat&&x.kind==="image");
+  const pick=re=>f.filter(x=>re.test(x.name||"")).sort((a,b)=>String(b.at).localeCompare(String(a.at)))[0];
+  const w=pick(/work/i),i=pick(/idle/i);return (w||i)?{work:blobUrl(w||i),idle:blobUrl(i||w)}:null;}
+function charView(seat,status,px,big){const c=charFor(seat);if(!c)return null;const busy=status==="working"||status==="onboarding";
+  const w=document.createElement("div");w.className="char "+(busy?"busy":"free")+" st-"+status+(big?" big":"");w.style.width=px+"px";
+  w.style.setProperty("--glow",SCREEN[status]||SCREEN.idle);
+  w.innerHTML='<div class="stage"><img class="pose work" src="'+c.work+'" alt="" loading="lazy"><img class="pose idle" src="'+c.idle+'" alt="" loading="lazy">'+
+    '<i class="mote m1"></i><i class="mote m2"></i><i class="mote m3"></i><i class="mote m4"></i><i class="mote m5"></i></div>';return w;}
+function deskScene(av,status,scale,seat){const cv=charView(seat,status,50*scale,scale>=5);if(cv)return cv;const w=animeAvatar(av,50*scale,{working:"working",waiting:"waiting",blocked:"blocked",onboarding:"onboarding",done:"done"}[status]||"idle","desk");
   w.style.setProperty("--glow",SCREEN[status]||SCREEN.idle);return w;}
 
 function tick(){try{const d=new Date();
@@ -628,7 +658,7 @@ function renderDesks(){const box=$("#desks");
   if(!S.desks.length){box.replaceChildren(el("p",{class:"empty",text:S.loaded?"No desks yet. Hire a candidate on the Hiring floor and their desk appears here.":"Opening the office…"}));return}
   box.replaceChildren(...S.desks.map(d=>{const st=deskStatus(d);const open=S.asg.filter(a=>a.seat===d.id&&a.status!=="done").length;
     return el("button",{class:"deskcard",type:"button","aria-current":S.deskSel===d.id?"true":"false",onclick:()=>{S.deskSel=d.id;renderDesks();renderDeskDetail(true);}},[
-      deskScene(d.avatar,st,3),
+      deskScene(d.avatar,st,3,d.id),
       el("div",null,[el("div",{class:"n",text:d.name||d.id}),el("div",{class:"r",text:d.role||""})]),
       el("span",{class:"chip "+st,text:DESK_STATUS[st]}),
       el("div",{class:"t",text:d.task||"No current task."}),
@@ -648,7 +678,7 @@ function renderDeskDetail(force){const box=$("#desk-detail");const d=S.desks.fin
   const fmt=t=>{try{return new Date(t).toLocaleDateString("en-GB",{day:"numeric",month:"short"})}catch(e){return""}};
   const stLabel=a=>a.status==="done"?"Done":a.status==="in_progress"?"In progress":"Sent to the CEO";
   box.replaceChildren(el("div",{class:"detail"},[
-    el("div",{class:"scene"},[deskScene(d.avatar,st,5)]),
+    el("div",{class:"scene"},[deskScene(d.avatar,st,5,d.id)]),
     el("div",{class:"info"},[
       el("div",{class:"plate"},[el("h3",{text:d.name||d.id}),el("div",{class:"role",text:d.role||""}),el("span",{class:"chip "+st,text:DESK_STATUS[st]})]),
       el("div",null,[el("h4",{text:"Working on"}),el("p",{text:d.task||"No current task."}),d.updatedAt?el("p",{class:"hint",text:"Updated "+ago(d.updatedAt)}):null]),
@@ -917,7 +947,7 @@ function all(){renderSeats();renderQueue();renderDesks();updateNav();renderBoard
     if(!S.deskSel&&S.desks.length)S.deskSel=S.desks[0].id;renderDesks();renderDeskDetail();},fail);
   db.collection("boardroom").onSnapshot(s=>{S.board=s.docs.map(d=>Object.assign({id:d.id},d.data()));
     if(!S.boardSel&&S.board.length)S.boardSel=S.board.slice().sort(boardSort)[0].id;renderBoardList();renderBoardItem();updateBoardNav();},fail);
-  db.collection("folders").onSnapshot(s=>{S.files=s.docs.map(d=>Object.assign({id:d.id},d.data()));renderDeskDetail();},()=>{});
+  db.collection("folders").onSnapshot(s=>{S.files=s.docs.map(d=>Object.assign({id:d.id},d.data()));renderDesks();renderDeskDetail();},()=>{});
   window.claude.use("assets").then(x=>{S.assets=x;renderDeskDetail(true)}).catch(()=>{});
   window.claude.use("downloads").then(x=>{S.dl=x;renderDeskDetail(true)}).catch(()=>{});
   db.collection("assignments").onSnapshot(s=>{S.asg=s.docs.map(d=>Object.assign({id:d.id},d.data()));renderDesks();renderDeskDetail();},()=>{});
