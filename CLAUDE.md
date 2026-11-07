@@ -81,7 +81,15 @@ add only a short rule and a pointer here.
 - Scheduled: `trig_014xygz1pesVa2bzPstJLym4` Nov 7 19:00Z (apply prices, sale budgets, pause the teaser) ·
   `trig_01WyrESV1ANvpmToo8kkweVq` Nov 12 19:00Z (revert prices and budgets, sale read).
 - The POS shows the sale prices too. The Founder must NOT schedule his own price change.
-- **Nov 7 sale ad:** SALE-1111 campaign `120255969486070428` / ad set `120255972987580428` / ad `120255972988670428` PUBLISHED Nov 7 14:03Z after Founder approval (Boardroom `ceo-1111-sale-ad-v6`); starts Nov 8 00:00 PKT, 1,000/day; Retarget drops to 1,600 at go-live.
+- **SALE-1111 (Founder approved 8,000/day total, Nov 7):** campaign `120255969486070428`, 4 ad sets × 1,000/day, Nov 8 00:00 →
+  Nov 12 23:59 PKT, All Visitors 180D, 9 cities, refusers excluded:
+  - S1 static `120255972987580428`
+  - S2 video `120255973229880428`
+  - S3 9x16 Stories/Reels `120255973229930428`
+  - S4 carousel `120255973230250428`
+  Others during the sale: Retarget 1,600 · TOF-M 800+200 · TOF-W 800 · RT-W 600.
+  Daily check `trig_01KfL3aDuW3hYsvbyPAbiRoF` (12:47 PKT, Nov 8–12). It has the Founder's standing OK to pause failing sale
+  ad sets and move their budget within 8,000.
 - **v6 creatives** (dates "8–12 November") in `ops/marketing/creative/`; assets/ and fonts/ rebuilt there.
 - Black Friday margin floor: ≥40% GM and ≥ PKR 1,000 GP per line.
 
