@@ -124,7 +124,7 @@ def offer_block(W, H, bg=ESPRESSO, full=False):
         f_meta = font(IN_M, int(W * 0.04))
         lines += [("rule", None, None, None),
                   ("text", "15% off everything else.", f_15, num),
-                  ("text", "10–12 November", f_meta, accent),
+                  ("text", "8–12 November", f_meta, accent),
                   ("text", "No code needed.", font(IN_R, int(W * 0.036)), PARCHMENT if bg == ESPRESSO else ALABASTER)]
     gaps = {"eyebrow": 0.055, "big": 0.035, "track": 0.04, "rule": 0.035, "text": 0.022}
     # measure
@@ -218,7 +218,7 @@ def c2(W, H, name):
     f1 = font(FR, int(strip * 0.34))
     f2 = font(IN_M, int(strip * 0.16))
     t1 = "Bastion. Brown ya Tan."
-    t2 = "15% off everything else  ·  10–12 November  ·  No code needed"
+    t2 = "15% off everything else  ·  8–12 November  ·  No code needed"
     t2f = fit(d, t2, IN_M, W * 0.9, int(strip * 0.16))
     h1, o1 = text_h(f1, t1)
     h2, o2 = text_h(t2f, t2)
@@ -245,7 +245,7 @@ def c3():
         fr.paste(offer_band(W, band_h, ESPRESSO), (0, 0))
         ph = H - band_h - strip_h
         fr.paste(product_fit(img(n), W, ph, kw.get("zoom", 1.3), kw.get("crop_top", 0.0)), (0, band_h))
-        fr.paste(caption_strip(W, strip_h, t, s + "  ·  10–12 November  ·  No code needed"), (0, H - strip_h))
+        fr.paste(caption_strip(W, strip_h, t, s + "  ·  8–12 November  ·  No code needed"), (0, H - strip_h))
         fr.save(os.path.join(OUT, f"C3_carousel_card{i}_1x1.jpg"), quality=95)
 
 # ------------------------------------------------------------------ video

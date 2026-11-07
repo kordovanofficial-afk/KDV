@@ -81,6 +81,8 @@ add only a short rule and a pointer here.
 - Scheduled: `trig_014xygz1pesVa2bzPstJLym4` Nov 7 19:00Z (apply prices, sale budgets, pause the teaser) ·
   `trig_01WyrESV1ANvpmToo8kkweVq` Nov 12 19:00Z (revert prices and budgets, sale read).
 - The POS shows the sale prices too. The Founder must NOT schedule his own price change.
+- **Nov 7 sale ad:** SALE-1111 campaign `120255969486070428` / ad set `120255972987580428` / ad `120255972988670428` DRAFTED (1,000/day from Retarget, v6 Bastion static). Boardroom card `ceo-1111-sale-ad-v6`; the go-live task publishes it only if the Founder said yes.
+- **v6 creatives** (dates "8–12 November") in `ops/marketing/creative/`; assets/ and fonts/ rebuilt there.
 - Black Friday margin floor: ≥40% GM and ≥ PKR 1,000 GP per line.
 
 ## 📣 META ADS — current state (re-read live before acting; IDs drift)
