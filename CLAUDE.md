@@ -65,8 +65,12 @@ add only a short rule and a pointer here.
   Stock ADDITIONS go to the Founder. If a line doesn't match exactly one variant, ask; never guess.
   Report format: `STORE SALES dd-Mon`, then `Product Colour/Size xQty` per line.
 - POS → Shopify inventory sync is OFF; in-store sales reach Shopify only through these reports.
-- ⏳ **Front-desk Worker (free Cloudflare, approved Nov 7, being built):** an instant acknowledgement, the store-sales
-  report applied immediately, simple stock lookups, and everything else queued for me. See `tools/whatsapp-desk/`.
+- ✅ **Front-desk Worker LIVE Nov 7:** `https://kordovan-whatsapp-desk.kordovan-official.workers.dev` (desk-1.0,
+  `tools/whatsapp-desk/`). Kapso webhook `d2e2c364-0bb6-4879-adcd-1ec71e47bb51` points at `/webhook`.
+  - Instant acknowledgements, store-sales applied, `STOCK x` lookups, strangers redirected to 0333 2601161.
+  - Sales the Worker applied are confirmed in its "Done:" reply. The nightly run applies only UNCONFIRMED lines.
+  - ⚠️ The Shopify app lacks the `read_inventory`/`write_inventory` scopes (`/selftest` Nov 7). Until the Founder adds
+    them, store sales fall back to the nightly run.
 
 ## 🛍 LIVE NOW: 11.11 SALE (Nov 8 00:00 → Nov 12 23:59 PKT)
 - Shown as real PRICE + compare-at (strikethrough): wallets 25% off, everything else 15% off. 171 products and
