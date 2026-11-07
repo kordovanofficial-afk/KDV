@@ -69,8 +69,8 @@ add only a short rule and a pointer here.
   `tools/whatsapp-desk/`). Kapso webhook `d2e2c364-0bb6-4879-adcd-1ec71e47bb51` points at `/webhook`.
   - Instant acknowledgements, store-sales applied, `STOCK x` lookups, strangers redirected to 0333 2601161.
   - Sales the Worker applied are confirmed in its "Done:" reply. The nightly run applies only UNCONFIRMED lines.
-  - ⚠️ The Shopify app lacks the `read_inventory`/`write_inventory` scopes (`/selftest` Nov 7). Until the Founder adds
-    them, store sales fall back to the nightly run.
+  - ✅ The Shopify app "PostEx Sync" (dev dashboard version postex-sync-3) now has read/write_inventory, read_locations
+    and read_products, approved by the store Nov 7; `/selftest` all green. The Worker and the PostEx worker share this app.
 
 ## 🛍 LIVE NOW: 11.11 SALE (Nov 8 00:00 → Nov 12 23:59 PKT)
 - Shown as real PRICE + compare-at (strikethrough): wallets 25% off, everything else 15% off. 171 products and
