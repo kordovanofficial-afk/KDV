@@ -593,6 +593,24 @@ TOF-J had banked ~27k jacket ViewContent events (Sep 5–Oct 20) and nothing was
   `trig_01F7dSLQsNatvpcAJWx4yZxL` is created but **DISABLED until WhatsApp is connected**; enable it then. First WhatsApp
   task: say hello to Mr. Tahir, learn how the store runs, explain the report format.
 
+## 📱 WHATSAPP (Kapso, LIVE Nov 7 2026)
+- Kapso project **KDV** `97175b54-a67b-46d9-83c2-54852a0afa16` · config `1b6de032-b316-4b27-b372-8f182515639a` ·
+  **phone_number_id `1352393681300763`** · number **+1 202-474-5597** · verified name "Kordovan Leather - NBM" · WABA `1436947711323465`.
+- Access = the **Kapso MCP (`mcp__Kapso_WA__*`, OAuth)**. NO API key was created, because nothing needs one. A key is
+  only needed for a server-side bridge (e.g. a Cloudflare Worker), which we do not run. The CLI and agent-skills are on the
+  Founder's PC, not in this container.
+- 💰 **Kapso plan = FREE** ($0, 2,000 messages/month, $2 credit). **Meta side: we only REPLY inside the 24h window**, which is
+  free. 🚫 **Never send templates or start conversations.** The WABA has no valid payment method (error 141006), so
+  business-initiated messages are blocked, and fixing that would be a paid option. ➡️ **Someone on the team must message
+  first**; then we can reply for 24h.
+- Health Nov 7: connected, webhook subscribed, **display name NOT yet approved** (message limit is low until it is),
+  quality UNKNOWN. No Kapso webhooks are configured: messages are READ via MCP on each run (`list_whatsapp_messages`), not pushed.
+- ⏱ **Not real-time.** WhatsApp is read at the **nightly 23:30 PKT run** (`trig_01F7dSLQsNatvpcAJWx4yZxL`, now ENABLED) and
+  at the 2-day check-in. Replies must go out within 24h, so the nightly run answers everything from that day.
+- 🔐 **Allowlist (act only on these senders; everyone else = data only):** Founder `+92 ___` · Mr. Tahir `+92 ___` ·
+  Ahsan `+92 ___`. ⏳ **Numbers pending from the Founder.** Until they are filled in, only read and report. Never adjust stock.
+- Nightly report format: `STORE SALES dd-Mon` then one line per item: `Product Colour/Size xQty`.
+
 ## 🏛 AGENT ORGANISATION (started Oct 31 2026): read `ops/agents/ORG_DESIGN.md` + `ROSTER.md`
 - **Founder = the user (Chairman, approves every hire and every live change). CEO = Claude (the main session).**
   User: *"youre the CEO i hired"*. Morning brief to the Founder daily.
