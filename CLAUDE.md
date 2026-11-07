@@ -92,8 +92,8 @@ add only a short rule and a pointer here.
   ad sets and move their budget within 8,000.
 - **Homepage hero (live):** a WINTER banner (another session, `kv-hero--winter`, fixed text, its own desktop and mobile art)
   is the default. An **11.11 sale block** (deployed to kordovan `ed00257`, Founder approved) takes over automatically from
-  Nov 8 00:00 to Nov 12 23:59 PKT, then winter returns. Its images come from Files: `kv-1111-hero-desktop.jpg` (16:9) and
-  `kv-1111-hero-mobile.jpg` (4:5); until they are uploaded it shows the winter art. Theme-editor text boxes do NOT affect it.
+  Nov 8 00:00 to Nov 12 23:59 PKT, then winter returns. Its images come from Files: `kv-1111-hero-desktop` (16:9) and
+  `kv-1111-hero-mobile` (4:5), .jpg or .png (both uploaded Nov 7 as PNG, checked; deploy `72067a4`). Theme-editor text boxes do NOT affect it.
 - **v6 creatives** (dates "8–12 November") in `ops/marketing/creative/`; assets/ and fonts/ rebuilt there.
 - Black Friday margin floor: ≥40% GM and ≥ PKR 1,000 GP per line.
 
