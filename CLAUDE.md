@@ -554,6 +554,17 @@ TOF-J had banked ~27k jacket ViewContent events (Sep 5–Oct 20) and nothing was
   jacket order, not CTR; the 19 October abandons say the bottleneck is checkout, so also watch
   abandoned jacket checkouts in Shopify alongside Meta's numbers.
 
+## ⏱ WORK CADENCE (Founder, Nov 7 2026): the team runs EVERY 2 DAYS at 11:59 PKT, nothing in between
+- Reason: continuous running used up all the Founder's credits until Nov 7. Scheduled task `trig_01FZUWyfpBhnn9BUytoB2t45`
+  (`CRON_TZ=Asia/Karachi 59 11 */2 * *`, fires into this session): read HQ assignments, decisions and Boardroom → act on them →
+  if nothing is waiting, pick and assign the ONE highest-impact sales/SEO/content task → max 1–2 agents → 5-line brief → push → STOP.
+- ⚠️ `*/2` on day-of-month fires on odd dates, so 31st → 1st is two days in a row. That is acceptable.
+- Exceptions that stay scheduled (11.11 sale operations): Nov 9 18:50Z budgets ON · Nov 9 19:10Z mixed-cart test · Nov 12 19:05Z revert.
+- 🚫 Do not run long autonomous loops between check-ins unless the Founder asks in chat.
+- 💸 PostEx over-recording (Nov 7): **no refunds.** These are COD orders that PostEx delivered and paid, so no customer is owed
+  anything. Only Shopify's "received" figure is double-counted. Shopify stays as it is, and Mr. Tahir corrects the ledger by
+  PKR 116,366 across the 14 orders (list: `ops/finance/2026-11-02_postex_overrecorded_orders.md`).
+
 ## 🏛 AGENT ORGANISATION (started Oct 31 2026): read `ops/agents/ORG_DESIGN.md` + `ROSTER.md`
 - **Founder = the user (Chairman, approves every hire and every live change). CEO = Claude (the main session).**
   User: *"youre the CEO i hired"*. Morning brief to the Founder daily.
