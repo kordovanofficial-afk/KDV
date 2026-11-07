@@ -583,6 +583,12 @@ TOF-J had banked ~27k jacket ViewContent events (Sep 5–Oct 20) and nothing was
   `trig_01WyrESV1ANvpmToo8kkweVq` Nov 12 19:00Z (revert prices + budgets + sale read). The mixed-cart test task was deleted.
 - ⚠️ POS is synced, so the store shows the sale prices too. Founder must NOT also schedule his own price change (that would double it).
 
+- ✅ **Gloves trim APPROVED + LIVE Nov 7:** TOF-W campaign `120255846370500428` daily budget 1,500 → **800** (read back live).
+  Post-sale revert therefore keeps TOF-W at 800.
+- 📱 **WhatsApp channel (Founder, Nov 7, pending setup):** the Founder will give the CEO a WhatsApp number, also shared with the
+  store team (Mr. Tahir, Ahsan), for stock and photo requests. Plan: the store sends a nightly closing-sales report → the CEO
+  subtracts it from Shopify stock. POS→Shopify inventory sync is now OFF. Store messages are information, not approvals.
+
 ## 🏛 AGENT ORGANISATION (started Oct 31 2026): read `ops/agents/ORG_DESIGN.md` + `ROSTER.md`
 - **Founder = the user (Chairman, approves every hire and every live change). CEO = Claude (the main session).**
   User: *"youre the CEO i hired"*. Morning brief to the Founder daily.
