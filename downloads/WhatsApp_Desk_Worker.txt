@@ -18,11 +18,11 @@
 //   ALLOWLIST          var     923005555968,923002042352,923042528729
 //   LOCATION_ID        var     gid://shopify/Location/36710940861
 
-const VERSION = 'desk-1.0';
+const VERSION = 'desk-1.1';
 const SHOPIFY_API = '2026-01';
 const KAPSO_BASE = 'https://api.kapso.ai/meta/whatsapp/v24.0';
 const PUBLIC_LINE = '0333 2601161';
-const ACK_COOLDOWN_S = 2 * 3600;      // one "got it" per sender per 2h
+const ACK_COOLDOWN_S = 10 * 60;       // at most one "got it" per sender per 10 min (never silent for long)
 const STRANGER_COOLDOWN_S = 24 * 3600;
 const CATALOG_TTL_S = 6 * 3600;
 const DAY_TTL_S = 14 * 24 * 3600;
@@ -88,6 +88,11 @@ export async function handleMessage(payload, env) {
   const trimmed = text.trim();
   if (/^store\s*sales?\b/i.test(trimmed)) return handleSalesReport(trimmed, from, env, day);
   if (/^stock\b/i.test(trimmed)) return handleStockQuery(trimmed.replace(/^stock\b[:\s-]*/i, ''), from, env);
+  // Natural questions: "what's the update on the kodo stock", "how many bastion left", "mocha kitne hain"
+  if (/\b(stock|inventory|left|available|kitn[aei]|kitne|baqi|bachay?)\b/i.test(trimmed)) {
+    const q = stockQueryFromQuestion(trimmed);
+    if (q && (await handleStockQuery(q, from, env, true))) return;
+  }
 
   await appendDay(env, day, 'inbox', { from, type: m.type || 'text', text: text.slice(0, 2000), at: nowIso() });
   if (!(await env.DESK_KV.get('ack:' + from))) {
@@ -148,13 +153,30 @@ async function handleSalesReport(text, from, env, day) {
 
 // ─── STOCK lookup ────────────────────────────────────────────────────────────
 
-async function handleStockQuery(q, from, env) {
+export function stockQueryFromQuestion(t) {
+  const FILL = new Set(['what','whats','what s','is','are','the','on','of','for','about','update','latest','any','news',
+    'stock','inventory','left','available','how','many','much','do','we','have','our','still','in','please','pls','plz',
+    'kitna','kitni','kitne','hain','hai','he','ka','ki','ke','baqi','bacha','bachay','bache','abhi','website','online',
+    'wallet','wallets','check','tell','me','give','current','status','count','qty','quantity','units','pieces','pcs']);
+  return norm(t.replace(/[’'`]/g, '')).split(' ').filter(w => w.length >= 2 && !FILL.has(w)).join(' ');
+}
+
+async function handleStockQuery(q, from, env, quiet = false) {
   const catalog = await getCatalog(env);
-  const hits = matchVariants(catalog, q).slice(0, 8);
-  if (!hits.length) { await sendText(env, from, `No product found for "${q}". Try a shorter name, e.g. STOCK mocha mate`); return; }
+  let hits = matchVariants(catalog, q);
+  if (!hits.length && q.includes(' ')) {
+    // be forgiving: try each word alone and keep the first word that matches something
+    for (const w of q.split(' ').filter(x => x.length >= 3)) { hits = matchVariants(catalog, w); if (hits.length) break; }
+  }
+  hits = hits.slice(0, 12);
+  if (!hits.length) {
+    if (quiet) return false;
+    await sendText(env, from, `No product found for "${q}". Try a shorter name, e.g. STOCK mocha mate`); return false;
+  }
   const fresh = await freshQuantities(env, hits.map(h => h.id));
   await sendText(env, from, 'Website stock:\n' + hits.map(h =>
     `- ${h.label}: ${fresh[h.id] === null ? 'not tracked (made to order / always available)' : fresh[h.id]}`).join('\n'));
+  return true;
 }
 
 // ─── matching ────────────────────────────────────────────────────────────────
