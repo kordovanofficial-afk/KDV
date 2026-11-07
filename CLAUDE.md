@@ -588,6 +588,10 @@ TOF-J had banked ~27k jacket ViewContent events (Sep 5–Oct 20) and nothing was
 - 📱 **WhatsApp channel (Founder, Nov 7, pending setup):** the Founder will give the CEO a WhatsApp number, also shared with the
   store team (Mr. Tahir, Ahsan), for stock and photo requests. Plan: the store sends a nightly closing-sales report → the CEO
   subtracts it from Shopify stock. POS→Shopify inventory sync is now OFF. Store messages are information, not approvals.
+- ✅ **Founder decisions (Nov 7):** stock updates run **nightly at 23:30 PKT**, and store SALES are applied **automatically** with no
+  approval (the team only reports when something sold). Adding stock still goes to the Founder. Scheduled task
+  `trig_01F7dSLQsNatvpcAJWx4yZxL` is created but **DISABLED until WhatsApp is connected**; enable it then. First WhatsApp
+  task: say hello to Mr. Tahir, learn how the store runs, explain the report format.
 
 ## 🏛 AGENT ORGANISATION (started Oct 31 2026): read `ops/agents/ORG_DESIGN.md` + `ROSTER.md`
 - **Founder = the user (Chairman, approves every hire and every live change). CEO = Claude (the main session).**
