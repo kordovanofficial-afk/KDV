@@ -29,7 +29,68 @@
   assign w_mob = 'https://cdn.shopify.com/s/files/1/0267/9164/1277/files/Cinematic_Historic_Street_Portrait.png?v=1793428593'
 -%}
 
-{%- if winter -%}
+{%- comment -%}
+  11.11 SALE BANNER (Founder approved Nov 7 2026). Turns itself ON at Nov 8 00:00 PKT and OFF after Nov 12 23:59 PKT
+  (unix 1794078000 to 1794510000), then the winter banner returns on its own. Images come from Shopify Files by filename:
+  kv-1111-hero-desktop.jpg (16:9) and kv-1111-hero-mobile.jpg (4:5). Until they are uploaded it shows the winter art.
+{%- endcomment -%}
+{%- liquid
+  assign now_s = 'now' | date: '%s' | plus: 0
+  assign sale1111 = false
+  if now_s >= 1794078000 and now_s < 1794510000
+    assign sale1111 = true
+  endif
+  assign s_desk_img = images['kv-1111-hero-desktop.jpg']
+  assign s_mob_img = images['kv-1111-hero-mobile.jpg']
+-%}
+
+{%- if sale1111 -%}
+<section class="kv-home kv-hero kv-hero--winter kv-hero--sale">
+  <div class="kv-hero__photo">
+    <picture>
+      {%- if s_mob_img != blank -%}
+      <source media="(max-width: 749px)"
+              srcset="{{ s_mob_img | image_url: width: 600, format: 'webp' }} 600w, {{ s_mob_img | image_url: width: 900, format: 'webp' }} 900w, {{ s_mob_img | image_url: width: 1200, format: 'webp' }} 1200w"
+              sizes="100vw">
+      {%- else -%}
+      <source media="(max-width: 749px)"
+              srcset="{{ w_mob }}&width=600&format=webp 600w, {{ w_mob }}&width=900&format=webp 900w, {{ w_mob }}&width=1200&format=webp 1200w"
+              sizes="100vw">
+      {%- endif -%}
+      {%- if s_desk_img != blank -%}
+      <img src="{{ s_desk_img | image_url: width: 1600, format: 'webp' }}"
+           srcset="{{ s_desk_img | image_url: width: 1200, format: 'webp' }} 1200w,
+                   {{ s_desk_img | image_url: width: 1600, format: 'webp' }} 1600w,
+                   {{ s_desk_img | image_url: width: 2000, format: 'webp' }} 2000w,
+                   {{ s_desk_img | image_url: width: 2400, format: 'webp' }} 2400w"
+           sizes="100vw" width="2560" height="1440"
+           alt="Kordovan full-grain leather wallets, brown and tan, 11.11 sale"
+           loading="eager" fetchpriority="high" decoding="async">
+      {%- else -%}
+      <img src="{{ w_desk }}&width=1600&format=webp"
+           srcset="{{ w_desk }}&width=1200&format=webp 1200w,
+                   {{ w_desk }}&width=1600&format=webp 1600w,
+                   {{ w_desk }}&width=2000&format=webp 2000w,
+                   {{ w_desk }}&width=2400&format=webp 2400w"
+           sizes="100vw" width="1672" height="941"
+           alt="Kordovan full-grain leather, 11.11 sale"
+           loading="eager" fetchpriority="high" decoding="async">
+      {%- endif -%}
+    </picture>
+  </div>
+  <div class="kv-hero__scrim"></div>
+  <div class="kv-wrap kv-hero__inner"><div class="kv-hero__c">
+    <span class="kv-eyebrow">11.11 Sale · 8–12 November</span>
+    <h1>25% off <em>every wallet.</em></h1>
+    <p class="kv-hero__sub">15% off everything else. No code needed: the sale price is already on every product. Ends 12 November.</p>
+    <div class="kv-hero__cta">
+      <a class="kv-btn kv-btn--cognac" href="{{ routes.collections_url }}/kdv-wallets">Shop the sale →</a>
+      <a class="kv-btn kv-btn--ghost" href="{{ routes.all_products_collection_url }}">Shop everything</a>
+    </div>
+    <div class="kv-hero__trust">Cash on delivery · Free delivery over Rs 5,500 · <b>Genuine leather</b></div>
+  </div></div>
+</section>
+{%- elsif winter -%}
 <section class="kv-home kv-hero kv-hero--winter">
   <div class="kv-hero__photo">
     <picture>
