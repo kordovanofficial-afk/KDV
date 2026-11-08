@@ -185,6 +185,7 @@ add only a short rule and a pointer here.
   - `#boardroom`: Founder approvals. Every deliverable goes there after the CQRO check.
   - `#hiring`.
   - db collections: desks, assignments, boardroom, folders, decisions, candidates, config. Keep desks current.
+- **Models (Founder, Nov 8, to save credits):** CQRO/CFO/CRO/CMO/ad-director = sonnet · COO/CHRO = haiku (set in each agent's `model:`). Use Opus only when the Founder asks or a decision is genuinely hard; prefer the free WhatsApp Worker over Claude runs.
 - Seats: CQRO Hamna (binding quality gate) · CHRO Noor · CRO Sana · CMO Omar (Creative Director under him) · COO Zain ·
   CFO Ayesha. Agent files are in `.claude/agents/`; roster and design in `ops/agents/ROSTER.md` and `ORG_DESIGN.md`;
   register in `ops/agents/approvals/REGISTER.md`. `TEAM.md` = who to name.
