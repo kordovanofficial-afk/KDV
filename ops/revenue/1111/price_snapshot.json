@@ -454,20 +454,11 @@
 "pid": "gid://shopify/Product/9481279406320",
 "handle": "the-armour-dual-mobile-wallet-with-notepad",
 "vid": "gid://shopify/ProductVariant/50054875742448",
-"price": "4500.00",
+"price": "5850.00",
 "cap": null,
-"sale": 3370,
-"effpct": 25.1
-},
-{
-"g": "W",
-"pid": "gid://shopify/Product/9481279406320",
-"handle": "the-armour-dual-mobile-wallet-with-notepad",
-"vid": "gid://shopify/ProductVariant/50054875775216",
-"price": "4500.00",
-"cap": null,
-"sale": 3370,
-"effpct": 25.1
+"sale": 4380,
+"effpct": 25.1,
+"note": "Founder repriced Nov 8"
 },
 {
 "g": "W",
