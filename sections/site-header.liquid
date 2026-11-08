@@ -20,8 +20,17 @@
     endif
   endif
 -%}
+{%- comment -%}
+  11.11 line (Nov 8 00:00 → Nov 12 23:59 PKT = 1794078000 → 1794510000), same
+  window as the sale hero. Turns itself off; no revert needed.
+{%- endcomment -%}
+{%- assign kv_now = 'now' | date: '%s' | plus: 0 -%}
 <div class="kv-announce" id="kv-announce">
-  Free delivery over <b>PKR 5,500</b> &nbsp;·&nbsp; {% if announce_mto %}Made to order · paid online{% else %}Cash on delivery nationwide{% endif %} &nbsp;·&nbsp; 100% genuine leather
+  {%- if kv_now >= 1794078000 and kv_now < 1794510000 -%}
+    <b>11.11 Sale</b> &nbsp;·&nbsp; {% if announce_mto %}15% off · made to order · paid online{% else %}Wallets 25% off · Everything else 15%{% endif %} &nbsp;·&nbsp; Free delivery over <b>PKR 5,500</b>
+  {%- else -%}
+    Free delivery over <b>PKR 5,500</b> &nbsp;·&nbsp; {% if announce_mto %}Made to order · paid online{% else %}Cash on delivery nationwide{% endif %} &nbsp;·&nbsp; 100% genuine leather
+  {%- endif -%}
 </div>
 
 <header class="kv-hdr{% unless is_home %} kv-hdr--page{% endunless %}" id="kv-hdr">

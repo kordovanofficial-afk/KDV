@@ -504,7 +504,7 @@ class CartDrawer {
     if (!this.itemsContainer) return;
     const empty = cart.item_count === 0;
     if (this.shipEl) this.shipEl.style.display = empty ? 'none' : '';
-    if (this.crossEl) this.crossEl.style.display = empty ? 'none' : '';
+    if (this.crossEl && empty) this.crossEl.style.display = 'none';
 
     if (empty) {
       this.itemsContainer.innerHTML = `
@@ -517,6 +517,7 @@ class CartDrawer {
     }
 
     this.renderShip(cart);
+    this.renderCross(cart);
 
     this.itemsContainer.innerHTML = cart.items.map(item => `
       <div class="cd-item" data-key="${item.key}">
@@ -557,6 +558,65 @@ class CartDrawer {
       const pct = Math.round(t * 100 / threshold);
       this.shipEl.innerHTML = `<p>You're just <b>${KDV.utils.formatMoney(threshold - t)}</b> away from <b>FREE delivery</b> 🚚</p><div class="track"><div class="fill" style="width:${pct}%"></div></div>`;
     }
+  }
+
+  // Smart add-ons: suggest pieces that close the gap to free delivery.
+  // Pool comes from #kv-addons (sections/cart-drawer.liquid). Over the line,
+  // it falls back to two "complete your carry" pairings.
+  renderCross(cart) {
+    if (!this.crossEl) return;
+    if (!this.addons) {
+      try { this.addons = JSON.parse(document.getElementById('kv-addons')?.textContent || '[]'); }
+      catch { this.addons = []; }
+    }
+    const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const fm = KDV.utils.formatMoney;
+    const inCart = new Set(cart.items.map(i => i.product_id));
+    const pool = this.addons.filter(a => a.v && a.v.length && !inCart.has(a.pid));
+    if (!cart.item_count || !pool.length) { this.crossEl.style.display = 'none'; return; }
+    const gap = 550000 - cart.total_price; // keep in step with renderShip()
+    const minP = a => Math.min(...a.v.map(v => v.p));
+    let ranked;
+    if (gap > 0) {
+      const over = pool.filter(a => minP(a) >= gap).sort((a, b) => minP(a) - minP(b));
+      const under = pool.filter(a => minP(a) < gap).sort((a, b) => minP(b) - minP(a));
+      ranked = over.concat(under);
+    } else {
+      ranked = pool.slice();
+    }
+    const want = gap > 0 ? 3 : 2, seen = new Set(), picks = [];
+    for (const a of ranked) {
+      if (seen.has(a.type)) continue;
+      seen.add(a.type); picks.push(a);
+      if (picks.length === want) break;
+    }
+    const head = gap > 0 ? 'Add one more piece &middot; <b>free delivery</b>' : 'Complete your carry';
+    this.crossEl.innerHTML = `<h3>${head}</h3>` + picks.map(a => {
+      const p = minP(a);
+      const tag = gap <= 0 ? '' : (p >= gap
+        ? '<span class="xs__tag xs__tag--ok">Unlocks free delivery</span>'
+        : `<span class="xs__tag">Then just ${fm(gap - p)} to go</span>`);
+      const sel = a.v.length > 1
+        ? `<select class="xs__sel" aria-label="Option for ${esc(a.t)}">${a.v.map(v => `<option value="${v.id}">${esc(v.t)}</option>`).join('')}</select>`
+        : '';
+      return `<div class="xs">
+        <a class="xs__img" href="${esc(a.u)}"><img src="${esc(a.img)}" alt="${esc(a.t)}" loading="lazy" decoding="async" width="48" height="58"></a>
+        <div class="xs__i"><a href="${esc(a.u)}" class="xs__n">${esc(a.t)}</a><div class="xs__p">${fm(p)}</div>${tag}${sel}</div>
+        <button class="xs__add" type="button" data-vid="${a.v[0].id}">+ Add</button>
+      </div>`;
+    }).join('');
+    this.crossEl.style.display = '';
+    this.crossEl.querySelectorAll('.xs__add').forEach(btn => btn.addEventListener('click', async () => {
+      const sel = btn.parentElement.querySelector('.xs__sel');
+      const id = Number(sel ? sel.value : btn.dataset.vid);
+      btn.disabled = true; btn.textContent = 'Adding…';
+      try {
+        await KDV.utils.fetchJSON('/cart/add.js', { method: 'POST', body: JSON.stringify({ id, quantity: 1 }) });
+        const c = await KDV.utils.fetchJSON('/cart.js');
+        this.render(c);
+        KDV.updateCartCount(c.item_count);
+      } catch { btn.disabled = false; btn.textContent = '+ Add'; }
+    }));
   }
 
   async updateQty(key, action) {
