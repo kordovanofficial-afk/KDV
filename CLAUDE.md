@@ -147,7 +147,7 @@ add only a short rule and a pointer here.
   `crossbody-messenger-bags` (TYPE `Crossbody Bag`) and the MTO `type contains 'Jacket'` rule depend on
   `productType`, so check before normalising it.
 - **Gift sets are DISCONTINUED (Founder, Nov 8):** all 3 gift-set products are DRAFT; a single premium gift option launches later. Don't re-activate or promote them.
-- Open: 9 live products with no images (shoot list sent Nov 8: `downloads/Kordovan_Photo_Shoot_List_Nov8.xlsx`) · discount-code sprawl (WELCOME10 combines with everything; raise it before any promo)
+- Open: 7 live products with no images (all in stock; Braided Belt, Mini Card & Cash Carry, Luxe Card Lite DRAFTED Nov 8 until restock + photos) (shoot list sent Nov 8: `downloads/Kordovan_Photo_Shoot_List_Nov8.xlsx`) · discount-code sprawl (WELCOME10 combines with everything; raise it before any promo)
   · PAYONLINE10 is redundant · the MTO cart still SHOWS the COD rate · 27 of 30 jackets have no real reviews (review
   pack: `Kordovan_Review_Collection.xlsx`).
 
