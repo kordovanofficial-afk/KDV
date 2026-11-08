@@ -7,3 +7,4 @@
 - Changes today (Founder, ~12:30 PKT, the day's one batch): H3 Founder Mocha PAUSED (lifetime CPA 987 Meta); H1 Mocha 500→1,000; Retarget stays 1,600. Total 8,000.
 - Pending Founder: gloves TOF-W (lifetime CPA 1,024) and RT-W (1,225) are over the 1,000 gloves line. Not paused without his answer.
 - WhatsApp brief sent to Founder.
+- **Nov 8 evening correction:** gloves ad sets had been paused on ad-SET averages; ad level showed W01 (CPA 890, ~9 Shopify UTM orders) and W-RT1 (CPA 850) were working. Re-enabled ONLY those two (W01 600 via TOF-W campaign, W-RT1 500 via RT-W). Mocha H1 2,400 → 1,300. Total 8,000. Safeguard checklist added to CLAUDE.md.

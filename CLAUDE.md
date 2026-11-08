@@ -88,7 +88,7 @@ add only a short rule and a pointer here.
   - S2 video `120255973229880428`
   - S3 9x16 Stories/Reels `120255973229930428`
   - S4 carousel `120255973230250428`
-  Others during the sale (LIVE, verified Nov 8): Retarget 1,600 · TOF-M H1 **2,400** (Founder Nov 8: H3 + both gloves budgets go to Mocha) · **H3 Founder PAUSED** (Founder, Nov 8: lifetime 10,859 spent / 11 Meta purchases = CPA 987, ~2,000 real) · **Gloves TOF-W + RT-W PAUSED** (Founder Nov 8: CPA 1,024 / 1,225 > 1,000 rule). Teaser PAUSED. Nov 12: Retarget → 1,000; H1 stays 2,400 unless Founder says otherwise; H3, TOF-W, RT-W STAY PAUSED. Mocha Mate restock due ~Nov 9–10 (Founder): do NOT throttle Mocha ads for low stock.
+  Others during the sale (LIVE, verified Nov 8 evening; total 8,000): Retarget 1,600 · TOF-M H1 Mocha **1,300** · **H3 Founder PAUSED** (lifetime CPA 987 Meta) · **Gloves: ONLY W01 Comparison (TOF-W campaign 600, CPA 890, ~9 Shopify-confirmed orders) and W-RT1 Winter Kit (RT-W 500, CPA 850) ACTIVE**; W02/W03/W04/W05/W-RT2 PAUSED. Teaser PAUSED. Nov 12: Retarget → 1,000; everything else stays as is unless the Founder says otherwise. Mocha Mate restock due ~Nov 9–10 (Founder): do NOT throttle Mocha ads for low stock.
   Daily check `trig_01KfL3aDuW3hYsvbyPAbiRoF` (12:47 PKT, Nov 8–12). It has the Founder's standing OK to pause failing sale
   ad sets and move their budget within 8,000.
 - **Homepage hero (live):** a WINTER banner (another session, `kv-hero--winter`, fixed text, its own desktop and mobile art)
@@ -108,6 +108,12 @@ add only a short rule and a pointer here.
 | 11.11 Teaser (ThruPlay) | campaign `120255866086090428` / ad set `120255866086510428` | 1,000, ends Nov 9 |
 | Paused: TOF-C `120254472805020428` · BOF DPA `120254220299340428` · TOF-J `120254923438760428` · RT-J `120255674363190428` | | |
 - During the sale: see the 11.11 section (TOF-M 500+500).
+- 🔴 **BEFORE ANY PAUSE (lesson Nov 8, I paused the winning gloves ad W01 by judging ad SETS):**
+  1. Pull AD-level lifetime + 14-day numbers. Never pause an ad set without listing every ad inside it.
+  2. Cross-check each ad against Shopify orders by `utm_content` (each ad has its own, e.g. `w01_comparison`).
+  3. If an ad set mixes winners and losers, pause the losing ADS, not the set.
+  4. Before proposing a budget move, add the totals (must equal the cap) and respect Meta's ~PKR 495 minimum per ad set.
+  5. Show the Founder the per-ad table with the proposal.
 - **Ad-level kill rule (Founder, Nov 7):** judge every AD.
   - Gloves: ≥ PKR 1,000 spent with 0 sales, or CPA > 1,000 → pause.
   - Wallets (e.g. Mocha Mate): CPA ceiling ~1,300.
