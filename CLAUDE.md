@@ -87,7 +87,7 @@ add only a short rule and a pointer here.
   - S2 video `120255973229880428`
   - S3 9x16 Stories/Reels `120255973229930428`
   - S4 carousel `120255973230250428`
-  Others during the sale: Retarget 1,600 · TOF-M 800+200 · TOF-W 800 · RT-W 600.
+  Others during the sale (LIVE, verified Nov 8 00:0x): Retarget 1,600 · TOF-M 500+500 (Meta min ~495/ad set) · TOF-W 800 · RT-W 600. Teaser PAUSED. Pre-sale to restore Nov 12: Retarget 1,000 · H1 1,500 · H3 500 · RT-W 840.
   Daily check `trig_01KfL3aDuW3hYsvbyPAbiRoF` (12:47 PKT, Nov 8–12). It has the Founder's standing OK to pause failing sale
   ad sets and move their budget within 8,000.
 - **Homepage hero (live):** a WINTER banner (another session, `kv-hero--winter`, fixed text, its own desktop and mobile art)
@@ -106,7 +106,7 @@ add only a short rule and a pointer here.
 | RT-W Gloves + cap warm | ad set `120255846373980428` | 840 |
 | 11.11 Teaser (ThruPlay) | campaign `120255866086090428` / ad set `120255866086510428` | 1,000, ends Nov 9 |
 | Paused: TOF-C `120254472805020428` · BOF DPA `120254220299340428` · TOF-J `120254923438760428` · RT-J `120255674363190428` | | |
-- During the sale (≤5,000/day): Retarget 2,600 · TOF-M 800+200 · TOF-W 800 · RT-W 600; the teaser is paused.
+- During the sale: see the 11.11 section (TOF-M 500+500).
 - **Ad-level kill rule (Founder, Nov 7):** judge every AD.
   - Gloves: ≥ PKR 1,000 spent with 0 sales, or CPA > 1,000 → pause.
   - Wallets (e.g. Mocha Mate): CPA ceiling ~1,300.
