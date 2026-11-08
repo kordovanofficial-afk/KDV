@@ -136,7 +136,7 @@ add only a short rule and a pointer here.
   (archive: "OCT 2026"); don't scale jacket spend until checkout completion recovers.
 
 ## 🛒 STORE RULES
-- Free delivery over **PKR 5,500**. The value lives in exactly 3 code places: `assets/theme.js` `renderShip()`,
+- Free delivery over **PKR 5,500**. The value lives in exactly 4 code places: `assets/theme.js` `renderShip()` and `renderCross()`,
   `sections/main-cart.liquid`, and `snippets/pdp-jsonld.liquid` (`550000`). Change all three together.
 - **COD fee = +PKR 250** through shipping rates: Pay Online 250, or 0 over 5,500; COD 500, or 250 over 5,500.
   Delivery profile `48076685501` · zone `103282671805`. A discount cannot depend on payment method in Shopify.
@@ -146,6 +146,7 @@ add only a short rule and a pointer here.
 - `kdv-*` smart collections are referenced by handle in Liquid. `leather-backpacks` (TYPE `backpack`),
   `crossbody-messenger-bags` (TYPE `Crossbody Bag`) and the MTO `type contains 'Jacket'` rule depend on
   `productType`, so check before normalising it.
+- **Cart drawer smart add-ons (LIVE Nov 8, `a93e5e8`):** suggests pieces that close the gap to free delivery; pool = 12 handles in `sections/cart-drawer.liquid` (`addon_handles`). Edit that list to change suggestions. 11.11 announcement line is time-locked in `site-header` (off after Nov 12).
 - **Gift sets are DISCONTINUED (Founder, Nov 8):** all 3 gift-set products are DRAFT; a single premium gift option launches later. Don't re-activate or promote them.
 - Open: 7 live products with no images (all in stock; Braided Belt, Mini Card & Cash Carry, Luxe Card Lite DRAFTED Nov 8 until restock + photos) (shoot list sent Nov 8: `downloads/Kordovan_Photo_Shoot_List_Nov8.xlsx`) · discount-code sprawl (WELCOME10 combines with everything; raise it before any promo)
   · PAYONLINE10 is redundant · the MTO cart still SHOWS the COD rate · 27 of 30 jackets have no real reviews (review
