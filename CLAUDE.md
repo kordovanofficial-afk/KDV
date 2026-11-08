@@ -45,7 +45,8 @@ add only a short rule and a pointer here.
   1. Read HQ assignments, decisions and Boardroom, and act on them.
   2. If nothing is waiting, pick and assign the ONE highest-impact sales/SEO/content task.
   3. Use at most 1–2 agents.
-  4. Send a 5-line brief, push, then STOP.
+  4. **Team handover (Founder, Nov 8):** anything a human must do goes out as a ready-to-forward FILE in `downloads/` (sent with SendUserFile), naming who it is for. Log in `ops/operations/TEAM_HANDOVER.md`.
+  5. Send a short brief (incl. "FOR THE TEAM"), push, then STOP.
 - **Nightly 23:30 PKT** (`trig_01F7dSLQsNatvpcAJWx4yZxL`): read WhatsApp, apply store sales to Shopify stock, reply
   to the day's messages, log to `ops/operations/store_sales_log.md`.
 - 🚫 No long autonomous loops between runs unless the Founder asks in chat.
@@ -145,7 +146,7 @@ add only a short rule and a pointer here.
 - `kdv-*` smart collections are referenced by handle in Liquid. `leather-backpacks` (TYPE `backpack`),
   `crossbody-messenger-bags` (TYPE `Crossbody Bag`) and the MTO `type contains 'Jacket'` rule depend on
   `productType`, so check before normalising it.
-- Open: 12 products with no images · discount-code sprawl (WELCOME10 combines with everything; raise it before any promo)
+- Open: 12 products with no images (shoot list sent Nov 8: `downloads/Kordovan_Photo_Shoot_List_Nov8.xlsx`) · discount-code sprawl (WELCOME10 combines with everything; raise it before any promo)
   · PAYONLINE10 is redundant · the MTO cart still SHOWS the COD rate · 27 of 30 jackets have no real reviews (review
   pack: `Kordovan_Review_Collection.xlsx`).
 
