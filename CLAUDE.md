@@ -180,6 +180,7 @@ add only a short rule and a pointer here.
   - `dimensionFilterGroups` is ignored, so filter locally.
   - Run `gsc_debug` first if it misbehaves.
 - Merchant Center `5365730451` is live, with free listings.
+- **BigQuery connector** (added Nov 8): project `kordovan-seo` is EMPTY. Founder: park it, don't build on it unless asked. If revived, start with a COD-refusal predictor in the free sandbox (no billing account).
 - Email: Zoho free, with DNS on Cloudflare. Never delete the `facebook-domain-verification` TXT record.
 
 ## 🏛 AGENT ORG + HQ
