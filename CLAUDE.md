@@ -88,7 +88,7 @@ add only a short rule and a pointer here.
   - S2 video `120255973229880428`
   - S3 9x16 Stories/Reels `120255973229930428`
   - S4 carousel `120255973230250428`
-  Others during the sale (LIVE, verified Nov 8): Retarget 1,600 · TOF-M H1 **1,000** (Founder: H3 budget goes to Mocha, not Retarget) · **H3 Founder PAUSED** (Founder, Nov 8: lifetime 10,859 spent / 11 Meta purchases = CPA 987, ~2,000 real) · TOF-W 800 · RT-W 600. Teaser PAUSED. Pre-sale to restore Nov 12: Retarget 1,000 · H1 1,500 · RT-W 840. H3 STAYS PAUSED. Mocha Mate restock due ~Nov 9–10 (Founder): do NOT throttle Mocha ads for low stock.
+  Others during the sale (LIVE, verified Nov 8): Retarget 1,600 · TOF-M H1 **2,400** (Founder Nov 8: H3 + both gloves budgets go to Mocha) · **H3 Founder PAUSED** (Founder, Nov 8: lifetime 10,859 spent / 11 Meta purchases = CPA 987, ~2,000 real) · **Gloves TOF-W + RT-W PAUSED** (Founder Nov 8: CPA 1,024 / 1,225 > 1,000 rule). Teaser PAUSED. Nov 12: Retarget → 1,000; H1 stays 2,400 unless Founder says otherwise; H3, TOF-W, RT-W STAY PAUSED. Mocha Mate restock due ~Nov 9–10 (Founder): do NOT throttle Mocha ads for low stock.
   Daily check `trig_01KfL3aDuW3hYsvbyPAbiRoF` (12:47 PKT, Nov 8–12). It has the Founder's standing OK to pause failing sale
   ad sets and move their budget within 8,000.
 - **Homepage hero (live):** a WINTER banner (another session, `kv-hero--winter`, fixed text, its own desktop and mobile art)
