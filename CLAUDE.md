@@ -200,4 +200,6 @@ add only a short rule and a pointer here.
 - Online net sales: Sep 890k · Oct 512k. Store sales 250–350k/month. Fixed costs ≈ 215–235k/month.
 - October real lost-order rate was 25.3%. Real RTO is ~9–10%.
 - Organic search ≈ 51% of Meta's output at zero cost, so keep investing in SEO.
+- **Nov 1–8 channel split (last visit, live orders):** Meta 34 orders / PKR 111k (avg 3.3k, ~2.3x on 47.7k spend before refusals) · Organic search incl. AI 23 / 170k (avg 7.4k, all big jacket orders) · direct/WA/IG 10 / 64k.
+- **Founder, Nov 8:** keep Meta spend STEADY (8,000/day) through the sale, no increases. After Nov 12, SEO is the main focus (price-in-Pakistan pages first, then blog refreshes + new Top 10 articles).
 - The proven blog format is "Top 10 [category] brands in Pakistan" with price bands, never exact competitor prices.
