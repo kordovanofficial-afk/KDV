@@ -47,7 +47,7 @@ Collection `gid://shopify/Collection/438804021488` · 28 products, all ACTIVE, a
 ### a) Proposed SEO (send BOTH, because `seo` is a full replace)
 - **Title (53):** `Leather Jacket Price in Pakistan: Rs 22,000 to 35,000`
   - There is no room for "| Kordovan" inside 60 characters. Google already shows the site name above the title, and the theme appends nothing (`layout/theme.liquid:96` prints `page_title` only).
-- **Meta description (151):** `Original men's leather jacket prices in Pakistan: Rs 22,000 to 35,000. Top-grain sheepskin, each cut in your size, so allow about 3 weeks to your door.`
+- **Meta description (151):** `Original men's leather jacket prices in Pakistan: Rs 22,000–35,000. Each cut in your size for one customer, so paid online; about 3 weeks to your door.` *(CQRO fix F1, Nov 9: added "paid online" with its reason; removed "Top-grain sheepskin" until the Founder settles the grade. Omar may restore the material word once Q1 is answered, if it still fits in 155.)*
   - The terms come with their reason: "each cut in your size, so allow about 3 weeks".
   - The meta leads with the highest-volume variants: "original", "men's", "leather jacket price in pakistan".
 
@@ -69,13 +69,13 @@ New price block: about 475 words including headings and link text (prose alone i
 <ul>
 <li><strong>Rs 22,000 to 25,999.</strong> Our simplest patterns: <a href="/products/iconic-mens-black-sheepskin-leather-jacket">The Iconic</a> and the <a href="/products/sheppard-mens-cafe-racer-black-leather-jacket">Sheppard</a> cafe racer.</li>
 <li><strong>Rs 26,000 to 29,999.</strong> More panels, quilting, bomber trims and waxed or vintage finishes: <a href="/products/alonzo-mens-brown-sheepskin-leather-jacket">Alonzo</a>, <a href="/products/mens-ace-black-leather-bomber-jacket">The Ace</a>, <a href="/products/rodriguez-mens-quilted-leather-biker-jacket">Rodriguez</a>.</li>
-<li><strong>Rs 30,000 to 35,000.</strong> The patterns that use the most hide: <a href="/products/desert-voyager-mens-brown-sheepskin-leather-bomber-jacket">Desert Voyager</a>, the double-breasted <a href="/products/hawkeye-mens-brown-double-breasted-vintage-coat-s012">Hawkeye</a>, <a href="/products/mens-urban-rider-brown-leather-biker-jacket">Urban Rider</a>.</li>
+<li><strong>Rs 30,000 to 35,000.</strong> The top of the range: <a href="/products/desert-voyager-mens-brown-sheepskin-leather-bomber-jacket">Desert Voyager</a>, the double-breasted <a href="/products/hawkeye-mens-brown-double-breasted-vintage-coat-s012">Hawkeye</a>, <a href="/products/mens-urban-rider-brown-leather-biker-jacket">Urban Rider</a>.</li>
 </ul>
 
 <h3>What drives the price</h3>
 <ul>
 <li><strong>The grade of hide.</strong> Full-grain keeps the whole outer surface; top-grain is lightly corrected for an even finish. "Genuine leather" on a label is a grade name, often split hide, the weaker under-layer. Every jacket here is top-grain sheepskin, lighter and softer than cowhide.</li>
-<li><strong>How much hide.</strong> A jacket takes roughly 25 to 35 square feet. Longer cuts, quilting and double-breasted fronts use more.</li>
+<li><strong>How much hide.</strong> Longer cuts, quilting and double-breasted fronts use more of it.</li>
 <li><strong>Lining, stitching and zips.</strong> The parts you notice in the second winter.</li>
 </ul>
 
@@ -121,7 +121,7 @@ The questions follow price intent and are worded differently from the blog's FAQ
 <h3>How can I tell a real leather jacket from rexine?</h3>
 <p>Check three things: irregular pores (rexine repeats), a surface that creases and springs back when pressed, and a fibrous, suede-like underside at a cut edge instead of a fabric backing.</p>
 <h3>Is a sheep leather jacket cheaper than cow leather?</h3>
-<p>Not by rule. Price follows the grade and the amount of hide more than the animal. Sheepskin is lighter and softer; cowhide is heavier and tougher. Every jacket we make is sheepskin.</p>
+<p>Not by rule. Price follows the grade and the amount of hide more than the animal. Sheepskin is lighter and softer; cowhide is heavier and tougher. Every jacket on this page is sheepskin; any style can also be made in cowhide, priced separately, if you ask us on WhatsApp.</p>
 <h3>Why are your jackets paid online, and how long is delivery?</h3>
 <p>Each jacket is cut for one customer in your size and cannot be resold, so it is paid in full online and cash on delivery is not offered. Allow about 3 weeks to your door; winter is our busiest season. Delivery is free.</p>
 
@@ -133,7 +133,7 @@ The questions follow price intent and are worded differently from the blog's FAQ
     {"@type": "Question", "name": "What is the price of an original leather jacket in Pakistan?", "acceptedAnswer": {"@type": "Answer", "text": "A genuine leather jacket made in Pakistan costs roughly Rs 20,000 to Rs 40,000. Ours run from Rs 22,000 to Rs 35,000 at regular price, all in top-grain sheepskin."}},
     {"@type": "Question", "name": "Why are some leather jackets so cheap?", "acceptedAnswer": {"@type": "Answer", "text": "Below about Rs 8,000 a jacket is almost always PU, rexine or bonded leather, because the hide for a full jacket costs more than that before any cutting or stitching."}},
     {"@type": "Question", "name": "How can I tell a real leather jacket from rexine?", "acceptedAnswer": {"@type": "Answer", "text": "Check three things: irregular pores (rexine repeats), a surface that creases and springs back when pressed, and a fibrous, suede-like underside at a cut edge instead of a fabric backing."}},
-    {"@type": "Question", "name": "Is a sheep leather jacket cheaper than cow leather?", "acceptedAnswer": {"@type": "Answer", "text": "Not by rule. Price follows the grade and the amount of hide more than the animal. Sheepskin is lighter and softer; cowhide is heavier and tougher. Every jacket we make is sheepskin."}},
+    {"@type": "Question", "name": "Is a sheep leather jacket cheaper than cow leather?", "acceptedAnswer": {"@type": "Answer", "text": "Not by rule. Price follows the grade and the amount of hide more than the animal. Sheepskin is lighter and softer; cowhide is heavier and tougher. Every jacket on this page is sheepskin; any style can also be made in cowhide, priced separately, if you ask us on WhatsApp."}},
     {"@type": "Question", "name": "Why are your jackets paid online, and how long is delivery?", "acceptedAnswer": {"@type": "Answer", "text": "Each jacket is cut for one customer in your size and cannot be resold, so it is paid in full online and cash on delivery is not offered. Allow about 3 weeks to your door; winter is our busiest season. Delivery is free."}}
   ]
 }
@@ -167,8 +167,8 @@ Product `gid://shopify/Product/8220921266416` · ACTIVE · `custom.made_to_order
 
 ### d) Proposed SEO (send BOTH; the product body stays as it is)
 - **Title (52):** `Oxford Shoes Price in Pakistan: Rs 21,000 | Kordovan`
-- **Meta description (153):** `Oxford shoes price in Pakistan: Rs 21,000. Black cow leather, leather sole, made in your size in our own workshop, so allow about 3 weeks. Free delivery.`
-  - "Made in your size … so allow about 3 weeks" pairs the term with its reason.
+- **Meta description (153):** `Oxford shoes price in Pakistan: Rs 21,000. Black cow leather, made in your size for one customer, paid online, about 3 weeks to your door. Free delivery.` *(CQRO fix F5, Nov 9: the draft omitted "paid online"; added it next to its reason and restored the standard "about 3 weeks to your door". "Leather sole" and "our own workshop" dropped for length; both stay true on the product page.)*
+  - "Made in your size for one customer" is the reason for both terms (paid online, about 3 weeks).
   - "Free delivery" is true: footwear is paid online, and Rs 21,000 is above 5,500.
   - Nothing promises COD.
 - **Field:** product `seo { title description }` only.
@@ -204,7 +204,7 @@ Out-of-stock wallets are deliberately not named: Crazy Horse Long, Elite Card Ho
 
 ### a) Proposed SEO (send BOTH)
 - **Title (59):** `Leather Wallet Price in Pakistan: Rs 1,499–6,500 | Kordovan`
-- **Meta description (154):** `Genuine leather wallet prices in Pakistan: Rs 1,499 to 6,500. Full-grain, crazy horse and nappa, stitched in our own workshop. Cash on delivery available.`
+- **Meta description (150):** `Genuine leather wallet prices in Pakistan: Rs 1,499 to 6,500. Full-grain, crazy horse and nappa, made in our own workshop. COD available, Rs 250 more.` *(CQRO fix F6, Nov 9: COD stated with its fee, as in CB-4 and LIVE-d; "stitched" → "made" because The Seamless is stitch-less.)*
   - No free-delivery claim in the meta, because COD orders over 5,500 still pay 250.
 - **Trade-off (CEO decision):**
   - The price cluster is about 1,100 impr. The "wallets for men" cluster on the same page is much larger, and the current title serves it.
@@ -222,16 +222,16 @@ New price block: about 440 words including headings, from `<h2>Leather wallet pr
 
 ```html
 <h2>Leather Wallets for Men in Pakistan</h2>
-<p>A wallet is the one piece of leather you reach for every single day, so it is the one that shows whether you bought well. Ours are cut and hand-stitched in Pakistan from full-grain, nappa and crazy horse hide — leathers that do not merely survive daily carry but improve with it, darkening at the fold and along the edge into a patina that is yours alone.</p>
+<p>A wallet is the one piece of leather you reach for every single day, so it is the one that shows whether you bought well. Ours are made in Pakistan from full-grain, nappa and crazy horse hide — leathers that do not merely survive daily carry but improve with it, darkening at the fold and along the edge into a patina that is yours alone.</p>
 
 <h2>Leather wallet price in Pakistan</h2>
 <p>Our men's wallets cost <strong>Rs 1,499 to Rs 6,500</strong> at regular price, inside the honest band for a genuine leather wallet made in Pakistan.</p>
 <ul>
 <li><strong>Rs 1,499 to 2,499.</strong> Slim sheep leather and minimal card carry: <a href="/products/rigor-wallet-lite">Rigor Lite</a>, the full-grain <a href="/products/the-luke-minimalist-wallet">Luke</a>, the nappa <a href="/products/nappa-leather-bifold-wallet-for-men-dark-brown">Plain Bifold</a>.</li>
-<li><strong>Rs 2,500 to 3,999.</strong> Everyday cow-leather bifolds: <a href="/products/the-bastion-handcrafted-genuine-leather-bifold-wallet-for-men-slim-classic-everyday-wallet">The Bastion</a>, <a href="/products/mocha-mate">Mocha Mate</a>, the crazy horse <a href="/products/the-truckkr-bi-fold">Truckkr</a>.</li>
+<li><strong>Rs 2,500 to 3,999.</strong> Everyday bifolds in cow and crazy horse leather: <a href="/products/the-bastion-handcrafted-genuine-leather-bifold-wallet-for-men-slim-classic-everyday-wallet">The Bastion</a>, <a href="/products/mocha-mate">Mocha Mate</a>, the crazy horse <a href="/products/the-truckkr-bi-fold">Truckkr</a>.</li>
 <li><strong>Rs 4,000 to 6,500.</strong> More leather, more hand work: <a href="/products/the-armour-dual-mobile-wallet-with-notepad">The Armour</a>, <a href="/products/bronco-handcrafted-wallet">Bronco</a>, the handwoven full-grain <a href="/products/stallion-handcrafted-wallet">Stallion</a>.</li>
 </ul>
-<p>Our <a href="/collections/smart-wallets">RFID smart wallets</a> sit at Rs 2,300 to Rs 2,450.</p>
+<p>Our RFID wallets, the KODO and The Razor, sit at Rs 2,300 to Rs 2,450; see the <a href="/collections/smart-wallets">smart wallet range</a>.</p>
 
 <h3>What drives the price</h3>
 <ul>
@@ -256,7 +256,7 @@ New price block: about 440 words including headings, from `<h2>Leather wallet pr
 <li><strong>Look at the pores.</strong> Irregular on hide, repeating on printed PU.</li>
 <li><strong>Look inside a card slot.</strong> A fibrous, suede-like cut edge, not a fabric mesh.</li>
 </ul>
-<p>Wallets are ready-made and dispatched from stock, so <strong>cash on delivery is available</strong>, along with card and JazzCash. Delivery is free on orders over Rs 5,500 paid online.</p>
+<p>Wallets are ready-made and dispatched from stock, so <strong>cash on delivery is available</strong> (Rs 250 more), along with card and JazzCash. Delivery is free on orders over Rs 5,500 paid online.</p>
 <p>Comparing brands? Read our <a href="/blogs/wallets/top-10-leather-wallet-brands-in-pakistan">guide to the top 10 leather wallet brands in Pakistan</a>.</p>
 
 <h3>Which wallet suits how you carry</h3>
@@ -277,11 +277,11 @@ New price block: about 440 words including headings, from `<h2>Leather wallet pr
 <h3>Why are some leather wallets under Rs 1,000?</h3>
 <p>Below about Rs 800 a wallet is almost always PU, rexine or bonded leather. It looks right for a season, then cracks along the fold, because that is where a coating fails first.</p>
 <h3>Is a cow leather wallet better than sheep leather?</h3>
-<p>Cow leather is tougher and darkens well with use, so it suits a bifold you carry daily. Sheep leather is thinner and lighter, which is why slim front-pocket wallets use it.</p>
+<p>Cow leather is tougher and darkens well with use, so it suits a bifold you carry daily. Sheep leather is thinner and lighter, which is why our slimmest wallets, such as the Rigor Lite, use it.</p>
 <h3>How much does an RFID wallet cost, and do I need one?</h3>
-<p>Our RFID smart wallets are Rs 2,300 to Rs 2,450. RFID shielding only matters if you carry contactless cards; with chip-and-PIN cards alone, it does nothing for you.</p>
+<p>Our RFID wallets, the KODO and The Razor, are Rs 2,300 to Rs 2,450. RFID shielding only matters if you carry contactless cards; with chip-and-PIN cards alone, it does nothing for you.</p>
 <h3>Can I pay cash on delivery for a wallet?</h3>
-<p>Yes. Wallets are ready-made and dispatched from stock, so cash on delivery is available, as well as card and JazzCash. Delivery is free on orders over Rs 5,500 paid online.</p>
+<p>Yes. Wallets are ready-made and dispatched from stock, so cash on delivery is available (Rs 250 more), as well as card and JazzCash. Delivery is free on orders over Rs 5,500 paid online.</p>
 
 <script type="application/ld+json">
 {
@@ -290,9 +290,9 @@ New price block: about 440 words including headings, from `<h2>Leather wallet pr
   "mainEntity": [
     {"@type": "Question", "name": "What is the price of a genuine leather wallet in Pakistan?", "acceptedAnswer": {"@type": "Answer", "text": "A genuine leather wallet made in Pakistan costs roughly Rs 1,500 to Rs 7,000. Ours run from Rs 1,499 to Rs 6,500 at regular price, depending on the leather and how much hand work goes into it."}},
     {"@type": "Question", "name": "Why are some leather wallets under Rs 1,000?", "acceptedAnswer": {"@type": "Answer", "text": "Below about Rs 800 a wallet is almost always PU, rexine or bonded leather. It looks right for a season, then cracks along the fold, because that is where a coating fails first."}},
-    {"@type": "Question", "name": "Is a cow leather wallet better than sheep leather?", "acceptedAnswer": {"@type": "Answer", "text": "Cow leather is tougher and darkens well with use, so it suits a bifold you carry daily. Sheep leather is thinner and lighter, which is why slim front-pocket wallets use it."}},
-    {"@type": "Question", "name": "How much does an RFID wallet cost, and do I need one?", "acceptedAnswer": {"@type": "Answer", "text": "Our RFID smart wallets are Rs 2,300 to Rs 2,450. RFID shielding only matters if you carry contactless cards; with chip-and-PIN cards alone, it does nothing for you."}},
-    {"@type": "Question", "name": "Can I pay cash on delivery for a wallet?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Wallets are ready-made and dispatched from stock, so cash on delivery is available, as well as card and JazzCash. Delivery is free on orders over Rs 5,500 paid online."}}
+    {"@type": "Question", "name": "Is a cow leather wallet better than sheep leather?", "acceptedAnswer": {"@type": "Answer", "text": "Cow leather is tougher and darkens well with use, so it suits a bifold you carry daily. Sheep leather is thinner and lighter, which is why our slimmest wallets, such as the Rigor Lite, use it."}},
+    {"@type": "Question", "name": "How much does an RFID wallet cost, and do I need one?", "acceptedAnswer": {"@type": "Answer", "text": "Our RFID wallets, the KODO and The Razor, are Rs 2,300 to Rs 2,450. RFID shielding only matters if you carry contactless cards; with chip-and-PIN cards alone, it does nothing for you."}},
+    {"@type": "Question", "name": "Can I pay cash on delivery for a wallet?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Wallets are ready-made and dispatched from stock, so cash on delivery is available (Rs 250 more), as well as card and JazzCash. Delivery is free on orders over Rs 5,500 paid online."}}
   ]
 }
 </script>
@@ -377,3 +377,56 @@ The first paragraph (the 40 words that render) is accurate; keep it. Everything 
 4. Whether jacket linings are a full lining on every style ("properly lined" is carried over from the blog).
 
 **READY FOR CQRO**
+
+---
+
+## 7. CQRO review (Hamna Qureshi, 2026-11-09)
+
+**Level:** L2 (customer-facing, Founder approves). The maker's classification is correct. Register rows PP-1 to PP-14.
+**Sources (all read-only, 2026-11-09):** Shopify GraphQL: both collections with every product, variant price/compareAt/stock, `custom.material`, `custom.made_to_order`, `custom.editorial`, SEO; Oxford product; Iconic + Hawkeye size options; Nightfall, Waxed Rider and Urban Rider descriptions; `smart-wallets` collection; the 3 linked jacket collections; all blogs/articles; delivery profile `48076685501`. GSC `["page"]`, queries containing "price", 2026-08-10 → 11-07. `sections/main-collection.liquid:34-35, 144-145`.
+
+### Verdict per page
+| Page | Verdict | Gate before publish |
+|---|---|---|
+| `/collections/mens-leather-jackets` | **APPROVED WITH FIXES** | (1) Founder answers Q1 (grade). (2) The hero `descriptionHtml` fix is **mandatory, not optional**, and ships in the same change, or the page says full-grain above the grid and top-grain below it. |
+| `/products/kordovans-premium-oxford-leather-shoes-black` | **APPROVED WITH FIXES** | Publish on/after Nov 13 (price revert). |
+| `/collections/mens-leather-wallets` | **APPROVED WITH FIXES** | Title choice (Q2). Publish on/after Nov 13. |
+
+### What checked out (live, Nov 9)
+- **Jacket bands:** 28 products, all ACTIVE, all `made_to_order = true`, regular (compare-at) min 22,000 (Iconic), max 35,000 (Urban Rider). Bands 8 / 13 / 7 reproduce exactly. Average compare-at = 785,850 ÷ 28 = **28,066.07**, which matches the CLAUDE.md figure used in §4. Sizes S to XXXL with chest ranges (Iconic, Hawkeye).
+- **Oxford:** ACTIVE, MTO true + tag, 6 sizes at 17,850 / compare-at **21,000**. "Cow leather" is sourced (description "Soft cow leather", tags `cow`, `cowleather`).
+- **Wallets:** 23 in collection, 21 ACTIVE (Gator, HM The Lord's DRAFT). In-stock regular min 1,499 (Rigor Lite, also Sheppard 1 unit), max 6,500 (Stallion, 8 units). Every named wallet is ACTIVE and in stock. Materials match `custom.material` (Rigor Lite sheep, Luke full-grain cow, Plain Bifold nappa, Bastion distressed cow, Mocha Mate cow, Truckkr crazy horse, Stallion full-grain cow). RFID: KODO 2,300 (16) and Razor 2,450 (65); Kodo Vertical 2.0 out of stock, correctly not named.
+- **Delivery terms:** live profile: Pay Online 250 (≤5,499) / 0 (≥5,500); COD 500 / 250. So "free over 5,500 paid online" and "COD Rs 250 more" are exact; jackets and the Oxford are always prepaid and over 5,500, so "Delivery is free" is true for them.
+- **Links:** every product/collection/blog link in the blocks (8 jacket products, 9 wallet products, 4 collections, 2 articles) resolves to ACTIVE products, published collections (biker 17, bomber 6, black 15, smart-wallets 6 products) or published articles (`jackets/top-10-leather-jacket-brands-in-pakistan`, `wallets/top-10-leather-wallet-brands-in-pakistan`). The repaired Bastion handle is correct.
+- **Hard rules:** no Karachi, no competitor named, no review, rating, count or "sold" figure, no 4–7 days, no 50% deposit, no COD on any MTO line, no "!".
+- **JSON-LD:** both blocks are well-formed JSON (straight quotes, no inner double quotes, no trailing commas) and each Answer text is identical to its visible `<p>` (re-checked after my edits). Rendered raw by `main-collection.liquid:145`, so it will reach the HTML. Agree with §5: no FAQ rich result is expected; CTR estimates do not rely on it.
+- **Character counts** (recounted): jacket title 53, Oxford title 52, wallet title 59 (alternative 57). Metas after fixes: 151 / 153 / 150. Both SEO fields are given for all three pages.
+- **Arithmetic:** 4,606 × 5.0% = 230 (+102); 1,671 × 4.0% = 67 (+51); 1,101 × 7.0% = 77 (+19). Rupee lines 12,209 / 4,659 / 248 = 17,116; jackets 71%. All labelled ESTIMATE. GSC clicks reproduce exactly (128 / 16 / 58). Note: page-level impressions are higher (4,740 / 1,815 / 1,261) because the page view includes anonymised queries; **the Dec 11 re-measure must use the same query+page method**, or the before/after will not compare.
+
+### Fixes made by CQRO (mechanical, sourced; meaning, offer and price unchanged)
+| # | Where | Was | Now | Source / rule |
+|---|---|---|---|---|
+| F1 | Jacket meta | No payment term; "Top-grain sheepskin" | "Each cut in your size for one customer, so paid online; about 3 weeks to your door." Material word removed pending Q1 | MTO terms always with reason (CLAUDE.md); grade unresolved |
+| F2 | Jacket block, top band | "The patterns that use the most hide" | "The top of the range" | Unsourced product fact |
+| F3 | Jacket "What drives the price" | "A jacket takes roughly 25 to 35 square feet" | Number removed | Only source is our own unpublished blog draft `docs/blog/leather-jacket-price-in-pakistan.html:71`; no workshop figure |
+| F4 | Jacket FAQ Q4 (visible + JSON-LD) | "Every jacket we make is sheepskin." | "Every jacket on this page is sheepskin; any style can also be made in cowhide, priced separately, if you ask us on WhatsApp." | Every jacket description (live): "We can also make any of them in cow hide… priced separately" |
+| F5 | Oxford meta | No "paid online" | "made in your size for one customer, paid online, about 3 weeks to your door. Free delivery." | MTO rule |
+| F6 | Wallet meta | "stitched…", "Cash on delivery available." | "made in our own workshop. COD available, Rs 250 more." | Delivery profile; precedent CB-4, LIVE-d; The Seamless is stitch-less |
+| F7 | Wallet intro | "cut and hand-stitched" (universal) | "made in Pakistan" | The Seamless "Stitch-less" (live title) |
+| F8 | Wallet band 2 | "Everyday cow-leather bifolds" | "Everyday bifolds in cow and crazy horse leather" | Truckkr `custom.material` "Crazy Horse Leather" (no animal stated) |
+| F9 | Wallet RFID line + FAQ Q4 (visible + JSON-LD) | "RFID smart wallets" linked to `smart-wallets` | "RFID wallets, the KODO and The Razor…; see the smart wallet range" | `smart-wallets` also holds non-RFID Mocha Mate, Illusion, Elite Card Holder |
+| F10 | Wallet payment line + FAQ Q5 (visible + JSON-LD) | "cash on delivery is available" | "…available (Rs 250 more)" | Delivery profile |
+| F11 | Wallet FAQ Q3 (visible + JSON-LD) | "which is why slim front-pocket wallets use it" | "which is why our slimmest wallets, such as the Rigor Lite, use it" | Luke and Stallion are slim but cow leather |
+
+### Corrections to the maker's findings (§0)
+- **Finding 3 is half right.** Standard sizes S to XXXL are the default, but every jacket description offers "built to your own measurements" on WhatsApp. So the live "built to your measurements" is over-broad, not false. The draft wording "cut in your size" is true and stays.
+- **Finding 2:** 26 of 28 `custom.material` values say top-grain; Nightfall ("Diamond-quilted sheep leather") and Waxed Rider ("Waxed pull-up sheep leather") state no grade. Both *descriptions* say "Premium top-grain sheep leather", as do all the others, so the top-grain claim is sourced across all 28. The full-grain claim lives only on the collection hero, the collection editorial and the blog, and in my own Oct 31 AD-1 fix to `ad-director.md` (which used "full-grain"; that must be swept too).
+
+### Returned / open (needs the Founder or Omar)
+- **R1 (Founder, Q1):** jacket grade. Product data says top-grain on all 28. If confirmed, sweep: collection hero + editorial (this draft), `seo.description` of every jacket, the jacket blog(s), `ad-director.md` (AD-1 text), any live jacket ad creative. If full-grain is true instead, all 28 product descriptions and 26 metafields are wrong and the drafts must change.
+- **R2 (CEO/Founder, Q2):** wallet title. CQRO has no compliance preference; both are true and within 60. Omar recommends the alternative to protect the "wallets for men" cluster.
+- **R3 (Omar, low):** the market list jumps from "8,000 to 15,000" to "20,000 to 40,000" and from 40,000 to "above 45,000" (wallets: 7,000 to 12,000). A reader will ask about the gap. Close it or say "bands are indicative" earlier. Not a blocker.
+- **R4 (Omar, low):** §4 uses wallet order value 3,000 with no source (CLAUDE.md: the 8 sale orders before Nov 8 averaged ~2,300; regular in-stock wallet midpoint ~2,800). Label it an assumption. Survival 0.75 uses CLAUDE.md's 25.3%; register CR-5 restated October at 22.3%. Either way the total moves by under Rs 1,000.
+- Warranty line on wallets: sourced to the theme's PDP fallback (`snippets/pdp-main.liquid`, CB-2) and already live; no wallet has a narrower warranty (the 1-year exception is the Stallion **boot**, not the Stallion wallet). Approved.
+
+**Riskiest item:** publishing the jacket editorial without the hero fix (or without Q1), which would put "full-grain" and "top-grain" on one page. **Next check:** on Nov 13, before apply, re-read compare-at = price on all three pages (revert done) and read back the written `custom.editorial` values.
