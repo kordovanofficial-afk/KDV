@@ -89,6 +89,7 @@ add only a short rule and a pointer here.
   - S3 9x16 Stories/Reels `120255973229930428`
   - S4 carousel `120255973230250428`
   Others during the sale (LIVE, verified Nov 8 evening; total 8,000): Retarget 1,600 · TOF-M H1 Mocha **1,300** · **H3 Founder PAUSED** (lifetime CPA 987 Meta) · **Gloves: ONLY W01 Comparison (TOF-W campaign 600, CPA 890, ~9 Shopify-confirmed orders) and W-RT1 Winter Kit (RT-W 500, CPA 850) ACTIVE**; W02/W03/W04/W05/W-RT2 PAUSED. Teaser PAUSED. Nov 12: Retarget → 1,000; everything else stays as is unless the Founder says otherwise. Mocha Mate restock due ~Nov 9–10 (Founder): do NOT throttle Mocha ads for low stock.
+  **S3 Bastion story PAUSED Nov 9 09:40 PKT (Founder; 971 spent, 0 purchases). Its 1,000/day is left UNUSED (total now 7,000) until the Wednesday review.**
   **FOUNDER HOLD (Nov 8 evening): no ad changes for 72h. Nov 9–10 daily checks are REPORT ONLY; Wednesday Nov 11 = full per-ad review, recommendations to the Founder for a yes.**
   Daily check `trig_01KfL3aDuW3hYsvbyPAbiRoF` (12:47 PKT, Nov 8–12). (Standing OK to pause failing sale ad sets is suspended by the hold.) It had the Founder's standing OK to pause failing sale
   ad sets and move their budget within 8,000.
