@@ -14,3 +14,4 @@ Every morning run adds to this and lists what is still open. Files live in `down
 - Ahsan: photo shoot (7 products), no photos received yet.
 - Jacket call list (Nov 7): no call results reported yet.
 - Ahsan: shop count of Kodo Vertical (asked on WhatsApp Nov 8).
+- Nov 9 · Founder · `downloads/Blessed_Friday_Creative_Prompts.md`: image/carousel/animation prompts + copy for the Blessed Friday bag ads (due Nov 18)

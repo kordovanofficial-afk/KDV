@@ -1,4 +1,6 @@
-# Black Friday 2026: plan (DRAFT, for Founder approval, L3)
+# BLESSED FRIDAY SALE 2026: plan (APPROVED by Founder Nov 9: all 5 decisions YES)
+Name: always **"Blessed Friday Sale"**, never "Black Friday", in customer-facing copy.
+Creative prompts: `downloads/Blessed_Friday_Creative_Prompts.md` (Founder makes the creatives, delivered by Nov 18).
 Prepared Nov 9 2026 by the CEO. Prices and costs are live Shopify values read Nov 9; costs are unit cost.
 
 ## The call in one line
@@ -62,7 +64,7 @@ Don't repeat 11.11. Run a **4-day BAG & WINTER CLEARANCE (Fri Nov 27 00:00 → M
 | Nov 30 23:59 | Revert prices + ads | auto |
 | Dec 1–3 | Sale read; leftover dead stock → in-store or bundle plan | CEO / Ayesha |
 
-## Founder decisions needed (by Nov 13)
+## Founder decisions: ALL APPROVED Nov 9 (bag clearance only · Fri–Mon · 2,000/day carve-out · WELCOME10 non-combinable from Nov 20 · POS same prices)
 1. Bag & winter clearance only (recommended) **or** a sitewide repeat of 11.11?
 2. Fri–Mon window (Nov 27–30)?
 3. Carve 2,000/day out of the 8,000 for the BF carousel (source picked Nov 11)?
