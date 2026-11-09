@@ -9,3 +9,11 @@
 - WhatsApp brief sent to Founder.
 - **Nov 8 evening correction:** gloves ad sets had been paused on ad-SET averages; ad level showed W01 (CPA 890, ~9 Shopify UTM orders) and W-RT1 (CPA 850) were working. Re-enabled ONLY those two (W01 600 via TOF-W campaign, W-RT1 500 via RT-W). Mocha H1 2,400 → 1,300. Total 8,000. Safeguard checklist added to CLAUDE.md.
 - **Nov 9 09:40 PKT:** S3 Bastion story ad set PAUSED on the Founder's call (sale-to-date 971 spent, 0 purchases). Budget left unused (7,000/day total) to keep the hold clean; Wednesday review decides where it goes (S4 carousel is the leader: 5 purchases / PKR 1,274).
+
+## Nov 9 (Day 2), 12:50 PKT, REPORT ONLY (Founder hold)
+- Sale-to-date (Nov 8 00:00 → now): 22 live orders (1 cancelled). Today so far: 2 orders (slow morning).
+- Meta spend Nov 8 + Nov 9 to date on active ads: ~10,360 (+ S3 971 before its pause).
+- Shopify utm_content sale-to-date: S4 carousel 4 · Mocha H1 3 · S2 video 2 · S1 Bastion static 1 · W01 gloves 1 · W-RT1 gloves 1 · untagged 9 + others.
+- Meta purchases sale-to-date: S4 5 (CPA 281) · Mocha 3 (743) · Retarget 3 (807) · S2 2 (665) · S1 1 (1,340) · W-RT1 1 (639) · W01 0 on Meta / 1 in Shopify (990 spent).
+- Flags for Wednesday (no action now): S1 Bastion static at ~1,340 per purchase, just over the 1,300 wallet line. W01 gloves near 1,000 sale-to-date spend; lifetime CPA still ~890 with ~10 Shopify orders, so it passes on the 14-day rule.
+- WhatsApp window to the Founder closed (last inbound Nov 8 07:51Z) → brief posted in chat only.
