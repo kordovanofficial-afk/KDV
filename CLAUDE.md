@@ -105,6 +105,7 @@ add only a short rule and a pointer here.
 - Per-line prices: `ops/revenue/blackfriday/BF_PLAN_2026.md`. Bags without a cost stay out. The POS runs the same prices.
 - Ads: 2,000/day of the 8,000 goes to a BF bag carousel Nov 26–30 (source picked at the Nov 11 AD-level review).
 - **WELCOME10 → not combinable with product discounts: do it at the Nov 19 check-in (Founder OK).** Retire PAYONLINE10.
+- **Stock buffer (Founder, Nov 9):** in-stock clearance variants are raised to 10 for the sale; sold-out ones stay out. Revert by subtracting the recorded delta (never reset); negatives = a to-source list for Mr. Tahir. Method in the plan's change log. No "only X left" copy.
 - The Founder makes the creatives from `downloads/Blessed_Friday_Creative_Prompts.md` by Nov 18. Snapshot + apply/revert batches + 2 scheduled tasks by Nov 23.
 
 ## 📣 META ADS — current state (re-read live before acting; IDs drift)

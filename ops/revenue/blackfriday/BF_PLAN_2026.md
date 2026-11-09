@@ -74,3 +74,8 @@ Don't repeat 11.11. Run a **4-day BAG & WINTER CLEARANCE (Fri Nov 27 00:00 → M
 
 ## Change log
 - Nov 9: Founder swapped Master's Laptop Bag → **The Corporate Office // Laptop Bag** in the creatives (Master's may be discontinued). Corporate Office: regular 28,500, 3 units (1 Black / 1 Tan / 1 Brown), **NO unit cost in Shopify** → BF price pending Mr. Tahir's cost (max off = 1 − cost/(0.6×28,500)). Open question: does Master's (16 units, 20% planned) still get a BF price for clearance?
+- Nov 9: **Founder: sale stock buffer.** Every clearance-line variant IN STOCK on Nov 26 is raised to **10** for the sale (variants already ≥10 are left alone; sold-out variants stay sold out). Bags can be re-sourced in about a day.
+  - Method: record per variant `added = 10 − real` in `ops/revenue/blackfriday/stock_buffer.json` at apply time (Nov 26 ~23:55 PKT, same scheduled task as the prices; online location only, checked on Nov 23).
+  - Revert (Dec 1, 00:05 PKT): subtract exactly `added`, NOT "set back to the old number" (sales during the sale must stay counted). Any variant that goes NEGATIVE = units sold beyond real stock → a **"to source" list for Mr. Tahir** (product, colour, qty) the same morning, and those orders ship once sourced.
+  - Store sales reported on WhatsApp during the sale keep applying as normal on top of the buffer.
+  - Consequence: no "only X left" scarcity copy in any creative (fixed in the prompts file).

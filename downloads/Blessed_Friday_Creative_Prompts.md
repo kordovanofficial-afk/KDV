@@ -20,7 +20,7 @@ Art direction: quiet luxury heritage brand, like a premium menswear editorial, n
 ```
 
 ### ✍️ Voice rules (already written into the prompts)
-Calm and certain, never shouting. Short lines. Talk about the craft and the years ahead, not the "deal of a lifetime". The discount is stated once and plainly. Scarcity is used only when it's true.
+Calm and certain, never shouting. Short lines. Talk about the craft and the years ahead, not the "deal of a lifetime". The discount is stated once and plainly. **No stock-scarcity lines** ("only X left", "when it's gone"): during the sale the store shows 10 per variant and we restock in a day, so they would be false. The deadline (ends Monday) is the only urgency.
 
 ---
 ## 1. STATIC ADS (4:5)
@@ -59,13 +59,13 @@ Aspect ratio 4:5.
 ```
 *CEO Office Bag: Rs 42,000 → Rs 33,600 · DBLP Laptop Bag: Rs 18,500 → Rs 13,870*
 
-### S4 · CABIN TROLLEY (re-check stock the morning you post; it's 8 now)
+### S4 · CABIN TROLLEY
 ```
 [LOCK] [STYLE] The leather cabin trolley standing by a tall window in a quiet airport lounge at golden hour, an aircraft softly blurred on the runway outside, polished stone floor reflecting warm light. A man's legs in dark chinos and brown leather boots walking beside it, no face. Text in the upper area, centred:
 small uppercase brass label: "BLESSED FRIDAY"
 cream serif headline: "Travel like it was always first class."
 price line: "Rs 42,000" stone-grey strikethrough, then "Rs 29,390" larger in brass
-tiny cream uppercase line: "ONLY 8 MADE · PRICE ENDS MONDAY"
+tiny cream uppercase line: "BLESSED FRIDAY PRICE ENDS MONDAY"
 Bottom centre: small KORDOVAN logo in cream.
 Aspect ratio 4:5.
 ```
@@ -145,8 +145,8 @@ The product stays exactly the same shape, colour and design in every frame: no m
 **B · Craft first**
 > Some things you buy once. Every KORDOVAN bag is hand-cut and hand-stitched to carry you for years, not seasons. This Blessed Friday, it costs up to 35% less. Ends Monday at midnight.
 
-**C · Scarcity (only if still true on the day)**
-> We make these in small numbers. The Cabin Trolley, our laptop bags, duffles and clutches are up to 35% off for Blessed Friday. When a piece is gone, it's gone.
+**C · The deadline**
+> Four days, then the prices go back. The Cabin Trolley, our laptop bags, duffles and clutches are up to 35% off for Blessed Friday, until Monday 30 November at midnight.
 
 **Headlines:** `The Blessed Friday Sale` · `Up to 35% off handcrafted bags` · `Four days. Ends Monday.`
 
