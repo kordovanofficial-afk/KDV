@@ -1,0 +1,70 @@
+# Black Friday 2026: plan (DRAFT, for Founder approval, L3)
+Prepared Nov 9 2026 by the CEO. Prices and costs are live Shopify values read Nov 9; costs are unit cost.
+
+## The call in one line
+Don't repeat 11.11. Run a **4-day BAG & WINTER CLEARANCE (Fri Nov 27 00:00 → Mon Nov 30 23:59 PKT)**. It moves the dead bag stock to cash at ≥40% GM. Wallets, belts and gloves stay at full price. Jackets get a **deadline**, not a discount.
+
+## Why not another sitewide sale
+- It is only 15 days after 11.11 (25%/15% off almost everything). Running that again teaches buyers to wait for sales and hurts December wallet/gift sales at full price.
+- The real problem is cash tied up in slow bags: about **PKR 758k at cost / 2.0M at regular price** across 13 lines (table below). Wallets don't have that problem.
+- Black Friday in Pakistan is a "clearance/deal" moment more than a gifting one. Deep cuts on a narrow range read as a real deal; a shallow cut sitewide reads as noise.
+
+## The offer (each line passes the margin floor: ≥40% GM and ≥PKR 1,000 GP)
+| Line | Stock | Regular | Off | BF price | GP/unit | GM |
+|---|---|---|---|---|---|---|
+| Cabin Trolley | 8 | 42,000 | 30% | 29,390 | 12,390 | 42% |
+| CEO Office Bag | 5 | 42,000 | 20% | 33,600 | 13,600 | 40% |
+| Master's Laptop Bag | 16 | 10,800 | 20% | 8,640 | 3,740 | 43% |
+| Bella Duff | 12 | 10,500 | 35% | 6,820 | 3,320 | 49% |
+| Forester Duffle | 3 | 34,500 | 35% | 22,420 | 10,920 | 49% |
+| Venture Pack | 9 | 8,600 | 20% | 6,880 | 3,080 | 45% |
+| Gridle Crossbody | 6 | 15,500 | 35% | 10,070 | 5,070 | 50% |
+| Bellezza Clutch | 12 | 6,500 | 35% | 4,220 | 1,870 | 44% |
+| Branson Briefcase | 4 | 38,000 | 35% | 24,700 | 13,200 | 53% |
+| Ladies Clutch & Wallet | 40 | 7,200 | 35% | 4,680 | 2,230 | 48% |
+| Diva Tote (vegan) | 18 | 6,600 | 35% | 4,290 | 2,090 | 49% |
+| DBLP Laptop Bag | 4 | 18,500 | 25% | 13,870 | 5,870 | 42% |
+| Clifford Hats | 17 | 10,500 | 35% | 6,820 | 3,320 | 49% |
+- Headline: **"Up to 35% off bags"**. Prices are rounded DOWN to the nearest 10. Price + compare-at are applied the same way as 11.11 (snapshot, apply and revert batches, scheduled triggers).
+- Bags with **no cost recorded** in Shopify are left out until Mr. Tahir supplies a cost, so we never discount blind.
+- **Wallets, belts, gloves: full price.** The cart free-delivery add-ons (+~30% AOV) do the work. Gloves are in season, so there is no reason to cut them.
+- **Jackets (MTO): no discount.** Use the message "Order by Nov 30 → at your door before winter peaks (about 3 weeks)", always paired with the reason. The urgency costs nothing in margin. October showed jacket orders die at payment, not at price.
+
+## Expected outcome (assumption: 25–40% of clearance units sell in 4 days + the week after)
+- Revenue **PKR 350k–560k** at BF prices. Cash freed from stock: **190k–300k at cost**.
+- Wallet/gift margin is protected for the December run-up.
+- Risk: bags are slow because of demand, not price. The Day-1 read decides whether to add a 2nd creative or stop.
+
+## Ads (keep total at 8,000/day, per the Founder)
+- Nov 26–30: run a **BF bag carousel** in the S4 format (the 11.11 winner) to All Visitors 180D + bag/collection viewers. 9 cities, refusers excluded.
+- **Proposed carve-out: 2,000/day of the 8,000.** The source is decided at the Nov 11 review using AD-level numbers (per the BEFORE ANY PAUSE checklist). No new spend.
+- No paid teaser: the 11.11 ThruPlay teaser has no proven sales link. The teaser goes out organically (IG stories, WhatsApp status, homepage strip from Nov 24).
+
+## Must-fix before launch
+1. **WELCOME10 stacking**: set it to NOT combine with product discounts before Nov 20, or 35% + 10% breaks the floor.
+2. **Retire PAYONLINE10** (redundant).
+3. Confirm the 11.11 revert landed (Nov 12) so the compare-at prices are honest regular prices.
+4. A homepage BF block in the 11.11 pattern, time-locked to the same window; the cart announcement line too.
+5. Shopify Email (free tier) to past buyers on Nov 26 evening plus a Nov 30 "last day". No WhatsApp broadcast (templates need paid Meta billing).
+
+## Timeline
+| Date | What | Owner |
+|---|---|---|
+| Nov 11 | Sana (CRO) + Ayesha (CFO) review this plan at the check-in; ad source for the 2,000/day | CEO |
+| Nov 13 | **Founder decisions** (below) | Founder |
+| Nov 14–18 | Creatives (carousel, story, email) + homepage block mockup | Omar / Creative |
+| Nov 19–20 | CQRO check → Boardroom; WELCOME10 fix | Hamna / CEO |
+| Nov 23 | Price snapshot + apply/revert batches + 2 scheduled tasks | CEO |
+| Nov 24 | Organic teaser starts | Ahsan / Omar |
+| Nov 26 | 11.11 day-14 read (refusals) → final go/no-go; email 1 | CEO / Founder |
+| Nov 27 00:00 | LIVE | auto |
+| Nov 28 | Day-1 read (report only) | CEO |
+| Nov 30 23:59 | Revert prices + ads | auto |
+| Dec 1–3 | Sale read; leftover dead stock → in-store or bundle plan | CEO / Ayesha |
+
+## Founder decisions needed (by Nov 13)
+1. Bag & winter clearance only (recommended) **or** a sitewide repeat of 11.11?
+2. Fri–Mon window (Nov 27–30)?
+3. Carve 2,000/day out of the 8,000 for the BF carousel (source picked Nov 11)?
+4. OK to make WELCOME10 non-combinable from Nov 20?
+5. Should the store (POS) run the same bag prices? It will automatically if we change Shopify prices (as in 11.11).
