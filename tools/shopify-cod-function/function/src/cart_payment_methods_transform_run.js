@@ -1,7 +1,8 @@
 // @ts-check
 
 /**
- * Hide Cash on Delivery when the cart contains a made-to-order product.
+ * Made-to-order cart: hide Cash on Delivery.
+ * Ready-stock cart: move Cash on Delivery to the top of the payment list.
  *
  * Why this exists: jackets are cut for one customer over ~3 weeks and
  * are prepaid. When COD stayed selectable, roughly 60% of jacket orders were
@@ -36,12 +37,21 @@ export function cartPaymentMethodsTransformRun(input) {
     return flagged || product.taggedMadeToOrder === true;
   });
 
-  if (!cartIsMadeToOrder) return NO_CHANGES;
-
   const methods = input?.paymentMethods ?? [];
   const cod = methods.filter((m) => COD_PATTERN.test(m?.name ?? ""));
 
   if (cod.length === 0) return NO_CHANGES;
+
+  // Ready-stock carts (Founder, Nov 9 2026): show Cash on Delivery FIRST,
+  // above card and JazzCash. Pakistani buyers look for COD; at the bottom of
+  // the list some assume it is missing and leave.
+  if (!cartIsMadeToOrder) {
+    return {
+      operations: cod.map((m, i) => ({
+        paymentMethodMove: { paymentMethodId: m.id, index: i },
+      })),
+    };
+  }
 
   // Never strand the buyer. If COD were somehow the only method available,
   // hiding it would leave a checkout with nothing to pay by — worse than
