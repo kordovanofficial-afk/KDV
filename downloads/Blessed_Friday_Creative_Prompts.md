@@ -26,7 +26,7 @@ Calm and certain, never shouting. Short lines. Talk about the craft and the year
 ## 1. STATIC ADS (4:5)
 
 ### S1 · HERO: three bags (Cabin Trolley + Master's Laptop Bag + Bella Duff)
-*(Upload all three product photos + logo.)*
+*(Upload all three product photos + logo. Use The Corporate Office in place of Master's.)*
 ```
 [LOCK] [STYLE] Three leather bags arranged as an editorial group on a dark walnut floor against a deep espresso plaster wall: the cabin trolley standing upright at back left, the laptop bag leaning against it, the mini duffle in front right. One warm golden spotlight from the upper left, soft dust in the beam, cinematic and moody. Text in the dark upper third, centred:
 small uppercase brass label: "THE BLESSED FRIDAY SALE"
@@ -46,13 +46,14 @@ Bottom left: small KORDOVAN logo in espresso.
 Aspect ratio 4:5.
 ```
 
-### S3 · LAPTOP BAG: Master's (the same prompt works for CEO Bag / DBLP; change the name and prices)
+### S3 · LAPTOP BAG: The Corporate Office (Founder swap Nov 9; the same prompt works for CEO Bag / DBLP)
+⚠️ The Corporate Office price is NOT final until Mr. Tahir gives its unit cost. Keep the Rs [NEW] placeholder until I confirm it.
 ```
 [LOCK] [STYLE] The leather laptop bag standing on a dark walnut executive desk beside a closed laptop, a fountain pen, a leather notebook and a black coffee with faint steam. Late-afternoon golden light through window blinds casting soft striped shadows. Confident, masculine, unhurried. Text on the dark left side, left-aligned:
 small uppercase brass label: "BLESSED FRIDAY"
 cream serif headline on two lines: "Walk in like / you own the room."
-price line: "Rs 10,800" stone-grey strikethrough, then "Rs 8,640" larger in brass
-small cream sans line: "The Master's Laptop Bag · ends Monday"
+price line: "Rs 28,500" stone-grey strikethrough, then "Rs [NEW]" larger in brass
+small cream sans line: "The Corporate Office · ends Monday"
 Bottom left: small KORDOVAN logo in cream.
 Aspect ratio 4:5.
 ```
@@ -111,7 +112,7 @@ The product centred on a dark walnut surface against a deep espresso textured pl
 |---|---|---|
 | 1 | Group shot (S1 scene, 1:1). Replace the card base with: large cream serif "Up to 35% off bags", small sans "Four days · Fri 27 – Mon 30 Nov", tiny brass "SWIPE →" | none |
 | 2 | Cabin Trolley | "The Cabin Trolley" · 42,000 → 29,390 |
-| 3 | Master's Laptop Bag | "The Master's Laptop Bag" · 10,800 → 8,640 |
+| 3 | The Corporate Office | "The Corporate Office" · 28,500 → [NEW, pending cost] |
 | 4 | Bella Duff | "Bella Duff" · 10,500 → 6,820 |
 | 5 | Ladies Clutch & Wallet | "The Ladies Clutch" · 7,200 → 4,680 |
 | 6 | Diva Tote | "The Diva Tote · Vegan" · 6,600 → 4,290 |

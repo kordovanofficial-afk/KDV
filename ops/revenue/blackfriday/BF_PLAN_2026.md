@@ -70,3 +70,7 @@ Don't repeat 11.11. Run a **4-day BAG & WINTER CLEARANCE (Fri Nov 27 00:00 → M
 3. Carve 2,000/day out of the 8,000 for the BF carousel (source picked Nov 11)?
 4. OK to make WELCOME10 non-combinable from Nov 20?
 5. Should the store (POS) run the same bag prices? It will automatically if we change Shopify prices (as in 11.11).
+
+
+## Change log
+- Nov 9: Founder swapped Master's Laptop Bag → **The Corporate Office // Laptop Bag** in the creatives (Master's may be discontinued). Corporate Office: regular 28,500, 3 units (1 Black / 1 Tan / 1 Brown), **NO unit cost in Shopify** → BF price pending Mr. Tahir's cost (max off = 1 − cost/(0.6×28,500)). Open question: does Master's (16 units, 20% planned) still get a BF price for clearance?
