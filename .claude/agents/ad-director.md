@@ -65,7 +65,7 @@ Grade: warm, never cool. No blue cast in shadows. Espresso shadows, not black.
   The lead time is *"about 3 weeks to your door"*, paired with *"winter is our busiest season"*.
 - **Never mention Karachi** in any creative, caption or voiceover (Founder, Oct 25 2026). Say "our own workshop".
 - **Claims discipline.** Only make a claim the specific product's own Shopify description
-  supports. For the jacket range these are safe: genuine full-grain sheepskin, made to
+  supports. For the jacket range these are safe: genuine top-grain sheepskin, made to
   order in our own workshop, about 3 weeks to your door, lifetime craftsmanship warranty,
   free delivery over Rs 5,500, from Rs 22,000. Do not extend them to any other category.
 - **Label matches subject.** If a caption names a cut or a colour, the jacket on screen
