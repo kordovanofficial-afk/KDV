@@ -90,3 +90,4 @@ Don't repeat 11.11. Run a **4-day BAG & WINTER CLEARANCE (Fri Nov 27 00:00 → M
 - Nov 10: R1 receipt + R3 'too expensive' (4:5) delivered and APPROVED (all numbers exact, products match the Shopify photos). 9:16 versions still to come.
 - Nov 10: Founder: NO 9:16 versions; the 4:5 creatives run on all placements (Meta fits them to Stories/Reels). Post-sale read must include a PLACEMENT breakdown (feed vs stories/reels) per ad, to decide whether 9:16 is worth making next time.
 - Nov 10: 'Our mistake' bags ad delivered + APPROVED (Cabin Trolley, Bella Duff grey, Diva Tote + pouch match; no leather claim on the image). 'Ordered vs arrived' Mocha Mate (always-on, Dec 1) delivered + approved, pending the Founder's confirmation that the right half is Ahsan's untouched real photo.
+- Nov 10: Ordered-vs-arrived right half CONFIRMED by the Founder as Ahsan's untouched real photo. Carousel prompts (10 cards) sent: downloads/Blessed_Friday_Carousel_Prompts.md.
