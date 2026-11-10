@@ -106,7 +106,7 @@ add only a short rule and a pointer here.
 - Ads: 2,000/day of the 8,000 goes to a BF bag carousel Nov 26–30 (source picked at the Nov 11 AD-level review).
 - **WELCOME10 → not combinable with product discounts: do it at the Nov 19 check-in (Founder OK).** Retire PAYONLINE10.
 - **Stock buffer (Founder, Nov 9):** in-stock clearance variants are raised to 10 for the sale; sold-out ones stay out. Revert by subtracting the recorded delta (never reset); negatives = a to-source list for Mr. Tahir. Method in the plan's change log. No "only X left" copy.
-- The Founder makes the creatives from `downloads/Blessed_Friday_Creative_Prompts.md` by Nov 18. Snapshot + apply/revert batches + 2 scheduled tasks by Nov 23.
+- The Founder makes the creatives from `downloads/Blessed_Friday_Creative_Prompts.md` by Nov 18. 4:5 ONLY (no 9:16, Founder Nov 10); the post-sale read includes a placement breakdown (feed vs stories/reels). Snapshot + apply/revert batches + 2 scheduled tasks by Nov 23.
 
 ## 🎯 ALWAYS-ON CREATIVE FUNNEL (Founder, Nov 10)
 - Omar + Sana draft it at the **Nov 11 check-in** (HQ assignment `founder-always-on-creative-funnel`). Founder produces before Dec 1; it runs 90 days from Dec 1. One new-customer ad set with several formats (~60%) + warm retargeting (~30%) + a weekly format test (~10%). Judge each ad on Shopify CPA AND COD refusal rate. Real-only formats (workshop, patina, reviews) come from Ahsan. VIP pre-hype REJECTED (revisit for an exclusive launch next year).
