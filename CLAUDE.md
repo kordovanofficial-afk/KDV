@@ -109,6 +109,7 @@ add only a short rule and a pointer here.
 - The Founder makes the creatives from `downloads/Blessed_Friday_Creative_Prompts.md` by Nov 18. 4:5 ONLY (no 9:16, Founder Nov 10); the post-sale read includes a placement breakdown (feed vs stories/reels). Snapshot + apply/revert batches + 2 scheduled tasks by Nov 23.
 
 ## 🎯 ALWAYS-ON CREATIVE FUNNEL (Founder, Nov 10)
+- **`ops/marketing/CREATIVE_PLAYBOOK.md` = the single source of truth for what sells** (proven / lost / in test / queue, Shopify-confirmed only). Update it after every read; every reel the Founder shares gets judged into it.
 - Omar + Sana draft it at the **Nov 11 check-in** (HQ assignment `founder-always-on-creative-funnel`). Founder produces before Dec 1; it runs 90 days from Dec 1. One new-customer ad set with several formats (~60%) + warm retargeting (~30%) + a weekly format test (~10%). Judge each ad on Shopify CPA AND COD refusal rate. Real-only formats (workshop, patina, reviews) come from Ahsan. VIP pre-hype REJECTED (revisit for an exclusive launch next year).
 
 ## 📣 META ADS — current state (re-read live before acting; IDs drift)
