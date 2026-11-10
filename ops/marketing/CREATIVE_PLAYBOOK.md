@@ -23,6 +23,8 @@ Started Nov 10 2026 (Founder: "pinpoint the exact formula that sells, not just r
 | Objection flip ("too expensive" → price) | R3 Corporate Office | bf_r3_objection |
 | Premium lifestyle static + strikethrough price | S2/S5/S6/S7 | bf_s*_ |
 | 4:5 in Stories (no 9:16) | all BF ads, placement breakdown | n/a |
+| "Our mistake" (true over-stock) | BF bags | bf_ourmistake |
+| Ordered vs arrived (REAL unboxing photo) | Mocha Mate, always-on from Dec 1 | aon_ordered_vs_arrived_mocha |
 
 ## 4. QUEUE (ranked; candidates from reels reviewed with the Founder)
 | # | Format | Source | Kordovan angle | Condition |
