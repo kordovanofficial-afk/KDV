@@ -157,3 +157,48 @@ The product stays exactly the same shape, colour and design in every frame: no m
 - [ ] The logo isn't distorted; no stray extra words
 - [ ] 4:5 + 9:16 for every static; 10 carousel cards
 - [ ] In the shared folder by **Wed 18 Nov**. I run the quality check and build the ads for launch on the 26th.
+
+---
+## 6. NEW STYLES (from the Nov 10 "Black Friday ads" reel): KORDOVAN versions
+Use the same LOCK + STYLE blocks first. Upload the product photo(s) + logo as before.
+
+### R1 · THE RECEIPT AD: Cabin Trolley (the strongest fit: real prices, the saving is visible instantly)
+```
+[LOCK] [STYLE] A single long printed paper receipt lying slightly curled on a dark walnut desk, warm spotlight from the upper left, the leather cabin trolley standing softly out of focus behind it on the right. The receipt is cream thermal paper with crisp black monospace print, perfectly legible, laid out exactly like this, line by line:
+"KORDOVAN"
+"THE WORKSHOP · MADE IN PAKISTAN"
+"- - - - - - - - - - - - - - - -"
+"THE CABIN TROLLEY          42,000"
+"BLESSED FRIDAY  −30%      −12,610"
+"- - - - - - - - - - - - - - - -"
+"TOTAL                Rs 29,390"
+"PAYMENT     CASH ON DELIVERY"
+"- - - - - - - - - - - - - - - -"
+"YOU SAVE           Rs 12,610"   (this line circled by hand in cognac-brown ink)
+"FRI 27 – MON 30 NOV"
+"THANK YOU. BUILT TO LAST."
+Small KORDOVAN logo in cream at the bottom-right corner of the image, off the receipt. Aspect ratio 4:5.
+```
+
+### R2 · THE RECEIPT AD: "Her" gift pair (Ladies Clutch + Diva Tote, ~9k basket, pushes AOV)
+Same prompt as R1, but the product behind the receipt is the clutch and the tote side by side, and the receipt lines are:
+```
+"THE LADIES CLUTCH & WALLET     7,200"
+"THE DIVA TOTE (VEGAN)          6,600"
+"BLESSED FRIDAY  −35%          −4,830"
+"TOTAL                     Rs 8,970"
+"YOU SAVE                  Rs 4,830"   (circled in cognac ink)
+```
+
+### R3 · THE "TOO EXPENSIVE" FLIP (the honest version of the one-star review ad)
+We do NOT fake a bad review (hard rule). We use the real objection every leather buyer has.
+```
+[LOCK] [STYLE] The leather laptop bag (The Corporate Office) on a dark walnut desk, warm low light. Across the top in a large cream serif, in quotation marks: "“Leather bags are too expensive.”" Beneath it, smaller, in brass serif italic: "Fair. So for four days, they aren’t." Then the price line: "Rs 28,500" in thin stone-grey with a strikethrough and "Rs 21,370" larger in brass. Tiny cream uppercase line: "BLESSED FRIDAY · FRI 27 – MON 30 NOV". Small KORDOVAN logo in cream at the bottom. Aspect ratio 4:5.
+```
+The same template works for any bag. Swap the product, the old price and the new price.
+
+### R4 · THE AI-ANSWER AD: ONLY if real
+Ask ChatGPT/Gemini yourself, e.g. "best leather bag brand in Pakistan" or "where to buy a genuine leather laptop bag in Pakistan". **Only if KORDOVAN genuinely comes up**, screenshot it (keep the date) and use the real screenshot as the ad with a small "Blessed Friday · up to 35% off bags" strip under it. Never generate a fake chat.
+
+### ✗ AirDrop ad: SKIP
+It's an iPhone-only feature (most of our buyers are on Android), and mocking up phone-system pop-ups risks Meta rejecting the ad.
