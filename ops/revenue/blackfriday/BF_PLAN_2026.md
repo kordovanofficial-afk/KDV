@@ -25,6 +25,7 @@ Don't repeat 11.11. Run a **4-day BAG & WINTER CLEARANCE (Fri Nov 27 00:00 → M
 | Branson Briefcase | 4 | 38,000 | 35% | 24,700 | 13,200 | 53% |
 | Ladies Clutch & Wallet | 40 | 7,200 | 35% | 4,680 | 2,230 | 48% |
 | Diva Tote (vegan) | 18 | 6,600 | 35% | 4,290 | 2,090 | 49% |
+| The Corporate Office | 3 | 28,500 | 25% | 21,370 | 9,370 | 44% |
 | DBLP Laptop Bag | 4 | 18,500 | 25% | 13,870 | 5,870 | 42% |
 | Clifford Hats | 17 | 10,500 | 35% | 6,820 | 3,320 | 49% |
 - Headline: **"Up to 35% off bags"**. Prices are rounded DOWN to the nearest 10. Price + compare-at are applied the same way as 11.11 (snapshot, apply and revert batches, scheduled triggers).
@@ -81,3 +82,6 @@ Don't repeat 11.11. Run a **4-day BAG & WINTER CLEARANCE (Fri Nov 27 00:00 → M
   - Consequence: no "only X left" scarcity copy in any creative (fixed in the prompts file).
 - Nov 9: Founder delivered 5 statics (4:5) → `ops/marketing/creative/blessed-friday/`. CEO check vs the Shopify product photos: products, prices and logo all correct. Bella Duff Red + Elephant Grey, Clifford Rustic Brown, Diva Tote (with pouch, "VEGAN" label) APPROVED. Cabin Trolley: "ONLY 8 MADE" line must become "BLESSED FRIDAY PRICE ENDS MONDAY" (stock buffer). Still to come: S1 hero, S2 Ladies Clutch, S3 Corporate Office (cost pending), carousel, 9:16 versions.
 - Nov 9 (batch 2): S2 Ladies Clutch (Chocolate Brown, ostrich-PATTERN cow leather: never call it ostrich/exotic in copy) APPROVED. S1 hero (Cabin Trolley + Corporate Office black + Bella Duff red), products correct, but the footer reads "PARTIAL CASH ON DELIVERY" while the live policy is full COD with no advance → fix to "CASH ON DELIVERY" unless the Founder changed policy.
+- Nov 10: Corporate Office cost 12,000 entered by the Founder → max 29.8% off under the floor → **25%, Rs 21,370** (GM 44%). Added to the table.
+- Nov 10: Founder decisions: the S1 footer "PARTIAL CASH ON DELIVERY" stays (his wording); the S4 "ONLY 8 MADE" line stays. Both creatives APPROVED as delivered.
+- Nov 10: The Founder will share high-converting ad styles; Blessed Friday ads will also be made in those styles (prompts to follow).

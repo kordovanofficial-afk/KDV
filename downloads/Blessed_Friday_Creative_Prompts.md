@@ -47,12 +47,12 @@ Aspect ratio 4:5.
 ```
 
 ### S3 · LAPTOP BAG: The Corporate Office (Founder swap Nov 9; the same prompt works for CEO Bag / DBLP)
-⚠️ The Corporate Office price is NOT final until Mr. Tahir gives its unit cost. Keep the Rs [NEW] placeholder until I confirm it.
+Corporate Office: Rs 28,500 → **Rs 21,370** (25% off; cost 12,000; confirmed Nov 10).
 ```
 [LOCK] [STYLE] The leather laptop bag standing on a dark walnut executive desk beside a closed laptop, a fountain pen, a leather notebook and a black coffee with faint steam. Late-afternoon golden light through window blinds casting soft striped shadows. Confident, masculine, unhurried. Text on the dark left side, left-aligned:
 small uppercase brass label: "BLESSED FRIDAY"
 cream serif headline on two lines: "Walk in like / you own the room."
-price line: "Rs 28,500" stone-grey strikethrough, then "Rs [NEW]" larger in brass
+price line: "Rs 28,500" stone-grey strikethrough, then "Rs 21,370" larger in brass
 small cream sans line: "The Corporate Office · ends Monday"
 Bottom left: small KORDOVAN logo in cream.
 Aspect ratio 4:5.
@@ -112,7 +112,7 @@ The product centred on a dark walnut surface against a deep espresso textured pl
 |---|---|---|
 | 1 | Group shot (S1 scene, 1:1). Replace the card base with: large cream serif "Up to 35% off bags", small sans "Four days · Fri 27 – Mon 30 Nov", tiny brass "SWIPE →" | none |
 | 2 | Cabin Trolley | "The Cabin Trolley" · 42,000 → 29,390 |
-| 3 | The Corporate Office | "The Corporate Office" · 28,500 → [NEW, pending cost] |
+| 3 | The Corporate Office | "The Corporate Office" · 28,500 → 21,370 |
 | 4 | Bella Duff | "Bella Duff" · 10,500 → 6,820 |
 | 5 | Ladies Clutch & Wallet | "The Ladies Clutch" · 7,200 → 4,680 |
 | 6 | Diva Tote | "The Diva Tote · Vegan" · 6,600 → 4,290 |
