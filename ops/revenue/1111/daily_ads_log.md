@@ -17,3 +17,17 @@
 - Meta purchases sale-to-date: S4 5 (CPA 281) · Mocha 3 (743) · Retarget 3 (807) · S2 2 (665) · S1 1 (1,340) · W-RT1 1 (639) · W01 0 on Meta / 1 in Shopify (990 spent).
 - Flags for Wednesday (no action now): S1 Bastion static at ~1,340 per purchase, just over the 1,300 wallet line. W01 gloves near 1,000 sale-to-date spend; lifetime CPA still ~890 with ~10 Shopify orders, so it passes on the 14-day rule.
 - WhatsApp window to the Founder closed (last inbound Nov 8 07:51Z) → brief posted in chat only.
+
+## Nov 10 12:48 PKT: daily check (REPORT ONLY, Founder hold)
+Sale-to-date (Nov 8 → Nov 10 morning), active ads, Meta-reported:
+| Ad | Spend | Meta purch | CPA | Shopify orders (utm_content) |
+|---|---|---|---|---|
+| Retarget | 4,060 | 6 | 677 | 2 (Facebook_UA) |
+| H1 Mocha Comparison | 3,565 | 5 | 713 | 5 (h1_comparison) |
+| S2 five-wallets video | 2,412 | 3 | 804 | 2 |
+| S4 carousel | 2,294 | 5 | 459 | 4, the sale leader |
+| S1 Bastion static | 2,222 | 1 | 2,222 | 2 (Shopify CPA ~1,111) |
+| W01 gloves | 1,601 | 0 | n/a | 1 (w01_comparison) |
+| W-RT1 winter kit | 1,213 | 1 | 1,213 | 1 (4,450 order) |
+Total ≈ 17,366 + S3 971 (paused). Shopify: 32 live orders since Nov 8 00:00, PKR 80,530 subtotal; 17 carry a Meta utm.
+Flags for Wednesday: S1 is over the 2,000 flag on Meta but Shopify shows 2 orders (~1,111 each), so keep watching. W01: 1,601 spent, Meta 0, Shopify 1 → CPA ~1,600 > gloves 1,000 line; review it Wed with its lifetime numbers (it was the winner pre-sale). No changes made. WhatsApp window to the Founder closed, so the brief was posted in chat.
