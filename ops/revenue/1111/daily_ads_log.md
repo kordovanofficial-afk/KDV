@@ -31,3 +31,18 @@ Sale-to-date (Nov 8 → Nov 10 morning), active ads, Meta-reported:
 | W-RT1 winter kit | 1,213 | 1 | 1,213 | 1 (4,450 order) |
 Total ≈ 17,366 + S3 971 (paused). Shopify: 32 live orders since Nov 8 00:00, PKR 80,530 subtotal; 17 carry a Meta utm.
 Flags for Wednesday: S1 is over the 2,000 flag on Meta but Shopify shows 2 orders (~1,111 each), so keep watching. W01: 1,601 spent, Meta 0, Shopify 1 → CPA ~1,600 > gloves 1,000 line; review it Wed with its lifetime numbers (it was the winner pre-sale). No changes made. WhatsApp window to the Founder closed, so the brief was posted in chat.
+
+## Nov 11 12:48 PKT: WEDNESDAY per-ad review (recommendations → Founder; NO changes made)
+Sale-to-date Nov 8–11, active ads. Shopify = live orders whose last visit carries that utm_content.
+| Ad | Spend | Meta purch | Meta CPA | Shopify orders | Shopify CPA | Call |
+|---|---|---|---|---|---|---|
+| S4 carousel | 3,303 | 7 | 472 | 5 | 661 | ✅ leader → +1,000/day (S3's unused budget) |
+| H1 Mocha Comparison | 4,799 | 6 | 800 | 6 | 800 | ✅ keep |
+| S2 five-wallets video | 3,272 | 4 | 818 | 3 | 1,091 | ✅ keep (under 1,300) |
+| S1 Bastion static | 3,384 | 2 | 1,692 | 3 | 1,128 | ✅ keep (under 1,300) |
+| Retarget (catalogue) | 5,734 | 10 | 573 | 3 tagged* | n/a | ✅ keep; → 1,000 on Nov 12 as planned |
+| W01 gloves | 2,230 | 1 | 2,230 | 2 | 1,115 | ⚠️ keep: lifetime 10,575 / ~11 orders ≈ 961 (≤1,000); recount Dec 1 |
+| W-RT1 winter kit | 1,756 | 1 | 1,756 | 1 (4,450 order) | 1,756 | ⚠️ rule says pause (CPA > 1,000), but real ROAS ≈ 2.5x > 2.22 break-even → keep to sale end, judge Dec 1 |
+*catalogue clicks often arrive as Facebook_UA/untagged.
+Totals: spend ≈ 25,449 incl. S3 971; Shopify 46 live orders since Nov 8 00:00, ≈ PKR 152.9k subtotal.
+Recommendation for the Founder's yes: S4 ad set 1,000 → 2,000/day until the sale ends (total back to 8,000). Everything else unchanged.
