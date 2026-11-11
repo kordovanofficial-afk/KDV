@@ -1,0 +1,1523 @@
+{
+  "rfid-protected-kodo-smart-wallet": {
+    "title": "KODO | RFID Smart Wallet for Men",
+    "status": "ACTIVE",
+    "product_id": "gid://shopify/Product/6155979849917",
+    "avg": 4.63,
+    "count": 172,
+    "histogram": {
+      "5": 109,
+      "4": 63,
+      "3": 0,
+      "2": 0,
+      "1": 0
+    },
+    "reviews": [
+      {
+        "id": "223c8978-b2b4-44fa-9a8a-0067c76c5ce7",
+        "name_display": "Anonymous",
+        "rating": 4,
+        "date": "2024-12-19",
+        "title": "Good yet overpriced",
+        "body": "Looks: Decent\nQuality: 4/5",
+        "verified": true,
+        "source": "review_collected_via_store_invitation"
+      },
+      {
+        "id": "69d68082-c017-4e82-a4a4-6f5acb69fe4d",
+        "name_display": "Tahir A.",
+        "rating": 5,
+        "date": "2024-08-18",
+        "title": "Alaaaa💯",
+        "body": "I have been using it for 4 years. Their product is of great quality. 👍",
+        "verified": true,
+        "source": "review_collected_via_store_invitation"
+      },
+      {
+        "id": "59d7981b-f42e-4558-b1b7-d9d3ffe5d65c",
+        "name_display": "Hassan R.",
+        "rating": 4,
+        "date": "2024-06-24",
+        "title": "Excellent Wallet!",
+        "body": "The leather quality is amazing and it looks very stylish.",
+        "verified": false,
+        "source": "review_collected_from_another_provider",
+        "note": "UNVERIFIED buyer (review_collected_from_another_provider) - check provenance before publishing"
+      },
+      {
+        "id": "e63b7dfc-2598-47f1-a1de-4a5e19b1da77",
+        "name_display": "Mohammad U.",
+        "rating": 5,
+        "date": "2024-06-20",
+        "title": "Very Stylish",
+        "body": "Excellent product, well made and durable.",
+        "verified": false,
+        "source": "review_collected_from_another_provider",
+        "note": "UNVERIFIED buyer (review_collected_from_another_provider) - check provenance before publishing"
+      },
+      {
+        "id": "33919e53-7547-4fd3-8975-49f9460e1817",
+        "name_display": "Zainab I.",
+        "rating": 4,
+        "date": "2024-06-17",
+        "title": "Perfect for Everyday Use",
+        "body": "This is the best wallet I have ever owned. Highly recommend!",
+        "verified": false,
+        "source": "review_collected_from_another_provider",
+        "note": "UNVERIFIED buyer (review_collected_from_another_provider) - check provenance before publishing"
+      }
+    ],
+    "reviews_in_widget": 5,
+    "rating_only_skipped": 0,
+    "has_custom_reviews": true,
+    "current_reviews_rating": 4.9,
+    "current_reviews_rating_count": 47
+  },
+  "genuine-sheep-leather-adjustable-baseball-cap-unisex": {
+    "title": "Genuine Sheep Leather Adjustable Baseball Cap // Unisex",
+    "status": "ACTIVE",
+    "product_id": "gid://shopify/Product/7007209128125",
+    "avg": 4.8,
+    "count": 5,
+    "histogram": {
+      "5": 4,
+      "4": 1,
+      "3": 0,
+      "2": 0,
+      "1": 0
+    },
+    "reviews": [
+      {
+        "id": "4f7b1477-38f0-4b35-ad7e-3d46108de14c",
+        "name_display": "Kamran E.",
+        "rating": 5,
+        "date": "2025-11-27",
+        "title": "Excellent",
+        "body": "Excellent product!",
+        "verified": true,
+        "source": "review_collected_via_store_invitation"
+      },
+      {
+        "id": "e16bcdcd-4c23-4c5c-bb94-738b0c2375b7",
+        "name_display": "Romanus T.",
+        "rating": 5,
+        "date": "2024-09-15",
+        "title": "Very nice",
+        "body": "Good quality",
+        "verified": true,
+        "source": "review_collected_via_store_invitation"
+      },
+      {
+        "id": "1f090dcb-be28-46d9-9e6e-944b81f601f0",
+        "name_display": "Muhammad R.",
+        "rating": 5,
+        "date": "2024-07-01",
+        "title": "Superior",
+        "body": "Product is nice and very soft and wrinkle free leather.",
+        "verified": true,
+        "source": "review_collected_via_store_invitation"
+      },
+      {
+        "id": "4382ab91-2733-491c-bfb9-0ce40f95c4af",
+        "name_display": "Arslan N.",
+        "rating": 4,
+        "date": "2023-04-30",
+        "title": "Sheep Leather Cap",
+        "body": "Cap is good but no shine rather a mat look",
+        "verified": true,
+        "source": "review_collected_via_store_invitation"
+      },
+      {
+        "id": "94e8f671-76fc-44a9-85fc-5639ff22a7eb",
+        "name_display": "Maria S.",
+        "rating": 5,
+        "date": "2023-04-26",
+        "title": "",
+        "body": "Such a good quality cap.",
+        "verified": true,
+        "source": "review_collected_via_store_invitation"
+      }
+    ],
+    "reviews_in_widget": 5,
+    "rating_only_skipped": 0,
+    "has_custom_reviews": false,
+    "current_reviews_rating": 4.8,
+    "current_reviews_rating_count": 5
+  },
+  "durable-mens-leather-gloves-black-kordovan": {
+    "title": "Durable Men's Sheep Leather Winter Gloves // Black",
+    "status": "ACTIVE",
+    "product_id": "gid://shopify/Product/7471350087920",
+    "avg": 4.67,
+    "count": 6,
+    "histogram": {
+      "5": 5,
+      "4": 0,
+      "3": 1,
+      "2": 0,
+      "1": 0
+    },
+    "reviews": [
+      {
+        "id": "aa87ee54-e5b1-4a59-a1e2-5f5b7f51c5bb",
+        "name_display": "Farooq H.",
+        "rating": 5,
+        "date": "2025-11-26",
+        "title": "Very good quality",
+        "body": "Very good quality, but if the inner lining was a bit more thick, gloves would be warmer.",
+        "verified": true,
+        "source": null
+      },
+      {
+        "id": "3326f695-e98c-49ff-9d18-2f38fd8cca39",
+        "name_display": "Muhammad N.",
+        "rating": 3,
+        "date": "2025-01-19",
+        "title": "I am since long in the business of leather",
+        "body": "I found your product satisfactory .\nIt seems You are  professional in your feild.\nThanks\nNasir",
+        "verified": true,
+        "source": null
+      },
+      {
+        "id": "c457ee35-b388-4908-8e48-18ea0da91254",
+        "name_display": "Hafiz Hammad U.",
+        "rating": 5,
+        "date": "2024-04-10",
+        "title": "",
+        "body": "Good Quality, same as described in the website",
+        "verified": true,
+        "source": null
+      },
+      {
+        "id": "da509953-7896-4097-a36c-81a0c85c0204",
+        "name_display": "Irfan A.",
+        "rating": 5,
+        "date": "2024-02-13",
+        "title": "Leather gloves",
+        "body": "It's made from a high-quality leather from a renowned leather goods brand.",
+        "verified": true,
+        "source": null
+      },
+      {
+        "id": "5aa86959-a19f-451f-97c3-77f32c81b668",
+        "name_display": "Mazhar A.",
+        "rating": 5,
+        "date": "2023-12-22",
+        "title": "Very nice product",
+        "body": "Material is very good, size perfect, overall perfect.",
+        "verified": true,
+        "source": null
+      }
+    ],
+    "reviews_in_widget": 5,
+    "rating_only_skipped": 0,
+    "has_custom_reviews": false,
+    "current_reviews_rating": 4.67,
+    "current_reviews_rating_count": 6
+  },
+  "durable-mens-leather-gloves-light-brown-kordovan": {
+    "title": "Durable Men's Sheep Leather Winter Gloves // Brown",
+    "status": "ACTIVE",
+    "product_id": "gid://shopify/Product/7471350350064",
+    "avg": 4.8,
+    "count": 10,
+    "histogram": {
+      "5": 8,
+      "4": 2,
+      "3": 0,
+      "2": 0,
+      "1": 0
+    },
+    "reviews": [
+      {
+        "id": "ff8efafb-04d3-48e8-8784-9f5ff828eff9",
+        "name_display": "Zahid A.",
+        "rating": 5,
+        "date": "2025-12-07",
+        "title": "Excellent quality and great customer service",
+        "body": "Excellent quality and great customer service.",
+        "verified": true,
+        "source": null
+      },
+      {
+        "id": "f597c7de-ef7d-45f3-a5a9-7516aca7fcec",
+        "name_display": "Tipu A.",
+        "rating": 5,
+        "date": "2025-01-13",
+        "title": "",
+        "body": "The material and craftsmanship are very good.",
+        "verified": true,
+        "source": null
+      },
+      {
+        "id": "ab89193a-54a5-4992-ab8a-68ad6c5d4f82",
+        "name_display": "Farhan A.",
+        "rating": 5,
+        "date": "2024-08-06",
+        "title": "Good quality mashallah",
+        "body": "Good quality mashallah",
+        "verified": true,
+        "source": null
+      }
+    ],
+    "reviews_in_widget": 5,
+    "rating_only_skipped": 2,
+    "has_custom_reviews": false,
+    "current_reviews_rating": 4.8,
+    "current_reviews_rating_count": 10
+  },
+  "genuine-sheep-leather-flat-cap-newsboy-unisex": {
+    "title": "Flat Cap Newsboy // Unisex",
+    "status": "ACTIVE",
+    "product_id": "gid://shopify/Product/7643980136688",
+    "avg": 5.0,
+    "count": 1,
+    "histogram": {
+      "5": 1,
+      "4": 0,
+      "3": 0,
+      "2": 0,
+      "1": 0
+    },
+    "reviews": [
+      {
+        "id": "f17a8029-437a-415f-9441-bb8aa641bf9d",
+        "name_display": "Malik",
+        "rating": 5,
+        "date": "2023-04-07",
+        "title": "Purchase of Leather Products",
+        "body": "Highly recommended, their customer service is awesome at competitive prices. I have purchased variety of their goods and very happy with my purchase. I did online shopping and when I received the goods here in Lahore, there wasn’t any difference in what was advertised and what I received. Well done “Kordovan team” to live by your products.",
+        "verified": true,
+        "source": null
+      }
+    ],
+    "reviews_in_widget": 1,
+    "rating_only_skipped": 0,
+    "has_custom_reviews": false,
+    "current_reviews_rating": 5.0,
+    "current_reviews_rating_count": 1
+  },
+  "the-diva-tote": {
+    "title": "The Diva Tote  // Vegan",
+    "status": "ACTIVE",
+    "product_id": "gid://shopify/Product/7738872201456",
+    "avg": 4.67,
+    "count": 3,
+    "histogram": {
+      "5": 2,
+      "4": 1,
+      "3": 0,
+      "2": 0,
+      "1": 0
+    },
+    "reviews": [
+      {
+        "id": "fe53bf55-ac7f-4fc1-ac01-212544b183bb",
+        "name_display": "Aneeqa K.",
+        "rating": 5,
+        "date": "2025-02-06",
+        "title": "Very nicr quality",
+        "body": "Nice  quality and  spacious.",
+        "verified": true,
+        "source": "review_collected_from_store_visitor"
+      },
+      {
+        "id": "529abeb0-675c-4a4e-aaed-f573e5adf3f5",
+        "name_display": "Asma M.",
+        "rating": 5,
+        "date": "2024-12-10",
+        "title": "",
+        "body": "finishing,stitching,light weight,colour, overall sooper dooper bag\nThanks Kordovan",
+        "verified": true,
+        "source": "review_collected_from_store_visitor"
+      },
+      {
+        "id": "112f45da-1264-42a2-9d5b-7e7e34228b6b",
+        "name_display": "Jansher K.",
+        "rating": 4,
+        "date": "2024-08-25",
+        "title": "Amazing bags",
+        "body": "Good Quality and nice price in this financial crisis in Pakistan.",
+        "verified": true,
+        "source": "review_collected_via_store_invitation"
+      }
+    ],
+    "reviews_in_widget": 3,
+    "rating_only_skipped": 0,
+    "has_custom_reviews": false,
+    "current_reviews_rating": 4.67,
+    "current_reviews_rating_count": 3
+  },
+  "natural-grain-double-stich-leather-belt": {
+    "title": "The Executive Double Stitched Belt",
+    "status": "ACTIVE",
+    "product_id": "gid://shopify/Product/7777745895664",
+    "avg": 5.0,
+    "count": 1,
+    "histogram": {
+      "5": 1,
+      "4": 0,
+      "3": 0,
+      "2": 0,
+      "1": 0
+    },
+    "reviews": [
+      {
+        "id": "675b78d0-45ec-479c-8e0f-19a026cba483",
+        "name_display": "Raza W.",
+        "rating": 5,
+        "date": "2024-08-18",
+        "title": "Great collection",
+        "body": "I have bought 1 belt and I liked it very much.",
+        "verified": true,
+        "source": null
+      }
+    ],
+    "reviews_in_widget": 1,
+    "rating_only_skipped": 0,
+    "has_custom_reviews": false,
+    "current_reviews_rating": 5.0,
+    "current_reviews_rating_count": 1
+  },
+  "premium-nappa-leather-reversible-belt-black-brown": {
+    "title": "The Imperial Reversible Belt // Black & Brown",
+    "status": "ACTIVE",
+    "product_id": "gid://shopify/Product/7788511658224",
+    "avg": 5.0,
+    "count": 1,
+    "histogram": {
+      "5": 1,
+      "4": 0,
+      "3": 0,
+      "2": 0,
+      "1": 0
+    },
+    "reviews": [
+      {
+        "id": "46496fa4-4c8d-4a20-aa91-f0a661dfd161",
+        "name_display": "Col. Vahidy M.",
+        "rating": 5,
+        "date": "2025-03-15",
+        "title": "",
+        "body": "Beautifuly crafted and superior quality items.\nWorth their cost.",
+        "verified": true,
+        "source": null
+      }
+    ],
+    "reviews_in_widget": 1,
+    "rating_only_skipped": 0,
+    "has_custom_reviews": false,
+    "current_reviews_rating": 5.0,
+    "current_reviews_rating_count": 1
+  },
+  "nappa-leather-bifold-wallet-for-men-dark-brown": {
+    "title": "Plain Bifold | Men's Nappa Leather Wallet",
+    "status": "ACTIVE",
+    "product_id": "gid://shopify/Product/7845134434544",
+    "avg": 4.75,
+    "count": 4,
+    "histogram": {
+      "5": 3,
+      "4": 1,
+      "3": 0,
+      "2": 0,
+      "1": 0
+    },
+    "reviews": [
+      {
+        "id": "5ad8990d-2f89-449b-9fc1-2eac4448afe9",
+        "name_display": "Afraz K.",
+        "rating": 5,
+        "date": "2024-12-09",
+        "title": "Behtreen",
+        "body": "Amazing product",
+        "verified": true,
+        "source": null
+      },
+      {
+        "id": "705509b6-3396-48ec-a4be-af051dddc5d0",
+        "name_display": "Salman M.",
+        "rating": 4,
+        "date": "2024-12-02",
+        "title": "",
+        "body": "Average",
+        "verified": true,
+        "source": null
+      },
+      {
+        "id": "1918aab8-a974-4530-86a1-154e0dbbad11",
+        "name_display": "Huzaifa A.",
+        "rating": 5,
+        "date": "2024-03-23",
+        "title": "I like it",
+        "body": "Thank you for delivering my order on time and quality is also good",
+        "verified": true,
+        "source": null
+      },
+      {
+        "id": "1cf866f1-115e-48a9-8ab0-249060095eb3",
+        "name_display": "Hina H.",
+        "rating": 5,
+        "date": "2023-04-08",
+        "title": "",
+        "body": "Completely satisfied with the quality 🤍Good job",
+        "verified": true,
+        "source": null
+      }
+    ],
+    "reviews_in_widget": 4,
+    "rating_only_skipped": 0,
+    "has_custom_reviews": true,
+    "current_reviews_rating": 4.9,
+    "current_reviews_rating_count": 34
+  },
+  "the-ripper-case-by-kordovan": {
+    "title": "The Ripper Case by Kordovan",
+    "status": "ACTIVE",
+    "product_id": "gid://shopify/Product/7894642786544",
+    "avg": 5.0,
+    "count": 1,
+    "histogram": {
+      "5": 1,
+      "4": 0,
+      "3": 0,
+      "2": 0,
+      "1": 0
+    },
+    "reviews": [
+      {
+        "id": "513c37ed-2a9f-4823-9889-fbcac5a13025",
+        "name_display": "Awais A.",
+        "rating": 5,
+        "date": "2025-03-27",
+        "title": "Good product",
+        "body": "Same as pics good product.",
+        "verified": true,
+        "source": null
+      }
+    ],
+    "reviews_in_widget": 1,
+    "rating_only_skipped": 0,
+    "has_custom_reviews": false,
+    "current_reviews_rating": 5.0,
+    "current_reviews_rating_count": 1
+  },
+  "mini-crossbody-bag-small-messenger-bag": {
+    "title": "Mini Crossbody Messenger Bag",
+    "status": "ACTIVE",
+    "product_id": "gid://shopify/Product/7898097025264",
+    "avg": 4.0,
+    "count": 1,
+    "histogram": {
+      "5": 0,
+      "4": 1,
+      "3": 0,
+      "2": 0,
+      "1": 0
+    },
+    "reviews": [
+      {
+        "id": "de3c5619-43c0-427c-9514-d9166d4313ce",
+        "name_display": "Col Bilal",
+        "rating": 4,
+        "date": "2024-09-26",
+        "title": "Good leather products",
+        "body": "I discovered Kordovan and I'm absolutely impressed! As a leather enthusiast, I've tried various brands, but this shop stands out for its exceptional quality, stylish designs, and affordability.",
+        "verified": true,
+        "source": null
+      }
+    ],
+    "reviews_in_widget": 1,
+    "rating_only_skipped": 0,
+    "has_custom_reviews": false,
+    "current_reviews_rating": 4.0,
+    "current_reviews_rating_count": 1
+  },
+  "shelby-thomas-soft-milled-leather-wallet": {
+    "title": "Shelby & Thomas | Men's Soft Milled Leather Bifold Wallet",
+    "status": "ACTIVE",
+    "product_id": "gid://shopify/Product/7959199351024",
+    "avg": 4.8,
+    "count": 5,
+    "histogram": {
+      "5": 4,
+      "4": 1,
+      "3": 0,
+      "2": 0,
+      "1": 0
+    },
+    "reviews": [
+      {
+        "id": "e7920659-0780-459d-8e47-ddf01b00060a",
+        "name_display": "Muhammad K.",
+        "rating": 5,
+        "date": "2025-11-14",
+        "title": "It was a great purchase",
+        "body": "It was a great purchase.",
+        "verified": true,
+        "source": null
+      },
+      {
+        "id": "7a8b158f-f5ce-4e6d-a139-870b24d443c3",
+        "name_display": "Muhammad A.",
+        "rating": 5,
+        "date": "2025-03-26",
+        "title": "Excellent",
+        "body": "Excellent quality",
+        "verified": true,
+        "source": null
+      },
+      {
+        "id": "99296f5b-d5b9-4f48-8e69-c475a7f62e21",
+        "name_display": "Minahil W.",
+        "rating": 5,
+        "date": "2024-08-13",
+        "title": "",
+        "body": "Satisfied 😃",
+        "verified": true,
+        "source": null
+      },
+      {
+        "id": "28f7cb7b-8eac-4a6a-b3e9-fcb840906b32",
+        "name_display": "Shahkar H.",
+        "rating": 5,
+        "date": "2023-04-24",
+        "title": "Satisfied",
+        "body": "Delivery , Quality and design is too good",
+        "verified": true,
+        "source": null
+      }
+    ],
+    "reviews_in_widget": 5,
+    "rating_only_skipped": 1,
+    "has_custom_reviews": true,
+    "current_reviews_rating": 4.8,
+    "current_reviews_rating_count": 19
+  },
+  "copy-of-mens-leather-fanny-pack": {
+    "title": "Unisex Leather Crossbody Fanny Pack",
+    "status": "ACTIVE",
+    "product_id": "gid://shopify/Product/8127207801072",
+    "avg": 4.5,
+    "count": 2,
+    "histogram": {
+      "5": 1,
+      "4": 1,
+      "3": 0,
+      "2": 0,
+      "1": 0
+    },
+    "reviews": [
+      {
+        "id": "a93270fb-111b-4deb-a434-85856e89d23b",
+        "name_display": "Wadan A.",
+        "rating": 5,
+        "date": "2024-08-15",
+        "title": "Black Fanny pack",
+        "body": "All I can say is \"Amazing\" leather!\n\nThose whom are interested in purchasing it, I would say \"Go for it\" !\n10/10 for quality and service.",
+        "verified": true,
+        "source": null
+      },
+      {
+        "id": "5eb8a71e-0788-45aa-8120-100fd24345c8",
+        "name_display": "Noor Z.",
+        "rating": 4,
+        "date": "2024-05-19",
+        "title": "Fanny pack",
+        "body": "Very well made product.  Looking frwrd to trying more of their items .",
+        "verified": true,
+        "source": null
+      }
+    ],
+    "reviews_in_widget": 2,
+    "rating_only_skipped": 0,
+    "has_custom_reviews": false,
+    "current_reviews_rating": 4.5,
+    "current_reviews_rating_count": 2
+  },
+  "illusion-magic-wallet-by-kordovan-camel": {
+    "title": "Illusion | Leather Magic Wallet",
+    "status": "ACTIVE",
+    "product_id": "gid://shopify/Product/8159248056560",
+    "avg": 5.0,
+    "count": 5,
+    "histogram": {
+      "5": 5,
+      "4": 0,
+      "3": 0,
+      "2": 0,
+      "1": 0
+    },
+    "reviews": [
+      {
+        "id": "61116d90-bc76-4dc0-b88e-1a634a6353bb",
+        "name_display": "Muhammad F.",
+        "rating": 5,
+        "date": "2024-04-06",
+        "title": "Very much satisfied",
+        "body": "Received parcel and 9.5/10 overall good product",
+        "verified": true,
+        "source": null
+      }
+    ],
+    "reviews_in_widget": 5,
+    "rating_only_skipped": 4,
+    "has_custom_reviews": true,
+    "current_reviews_rating": 4.9,
+    "current_reviews_rating_count": 26
+  },
+  "crazy-horse-long-wallet-unisex-kordovan-light": {
+    "title": "Crazy Horse Long | Men's Leather Long Wallet",
+    "status": "ACTIVE",
+    "product_id": "gid://shopify/Product/8168840397040",
+    "avg": 5.0,
+    "count": 3,
+    "histogram": {
+      "5": 3,
+      "4": 0,
+      "3": 0,
+      "2": 0,
+      "1": 0
+    },
+    "reviews": [
+      {
+        "id": "e5ad6d4f-c057-4aad-9e4c-747fce54a14b",
+        "name_display": "Hilal S.",
+        "rating": 5,
+        "date": "2025-03-18",
+        "title": "Recommend 👍",
+        "body": "Like it 👍",
+        "verified": false,
+        "source": null,
+        "note": "UNVERIFIED buyer - check provenance before publishing"
+      },
+      {
+        "id": "2634ea8d-ca65-463b-858e-f34b4f169779",
+        "name_display": "Muhammad S.",
+        "rating": 5,
+        "date": "2024-12-10",
+        "title": "Crazy horse wallet long",
+        "body": "So beautiful januane leather ...\nFinishing is so nice 👍🏼🙂.\nSegments are also nice.",
+        "verified": false,
+        "source": null,
+        "note": "UNVERIFIED buyer - check provenance before publishing"
+      }
+    ],
+    "reviews_in_widget": 3,
+    "rating_only_skipped": 1,
+    "has_custom_reviews": true,
+    "current_reviews_rating": 4.9,
+    "current_reviews_rating_count": 18
+  },
+  "mens-spy-brown-leather-bomber-jacket": {
+    "title": "The Spy | Men's Brown Leather Bomber Jacket",
+    "status": "ACTIVE",
+    "product_id": "gid://shopify/Product/8170267279600",
+    "avg": 3.0,
+    "count": 1,
+    "histogram": {
+      "5": 0,
+      "4": 0,
+      "3": 1,
+      "2": 0,
+      "1": 0
+    },
+    "reviews": [],
+    "reviews_in_widget": 1,
+    "rating_only_skipped": 1,
+    "has_custom_reviews": false,
+    "current_reviews_rating": 3.0,
+    "current_reviews_rating_count": 1
+  },
+  "premium-saffiano-leather-wallet": {
+    "title": "Premium Saffiano | Men's Saffiano Leather Bifold Wallet",
+    "status": "ACTIVE",
+    "product_id": "gid://shopify/Product/8172472959216",
+    "avg": 4.0,
+    "count": 1,
+    "histogram": {
+      "5": 0,
+      "4": 1,
+      "3": 0,
+      "2": 0,
+      "1": 0
+    },
+    "reviews": [
+      {
+        "id": "3c7a3965-2f86-4c00-a103-7013c81c0929",
+        "name_display": "Erum K.",
+        "rating": 4,
+        "date": "2024-10-31",
+        "title": "",
+        "body": "I like it's unique colour hope it will also turned out amazing in usage as other wallets by kordovan",
+        "verified": true,
+        "source": "review_collected_via_store_invitation"
+      }
+    ],
+    "reviews_in_widget": 1,
+    "rating_only_skipped": 0,
+    "has_custom_reviews": true,
+    "current_reviews_rating": 4.8,
+    "current_reviews_rating_count": 16
+  },
+  "the-executive-leather-briefcase-office-bag-with-laptop-compartment-brown": {
+    "title": "The Staton Premium Cow Leather Office/Laptop Bag",
+    "status": "ACTIVE",
+    "product_id": "gid://shopify/Product/8209910726896",
+    "avg": 5.0,
+    "count": 1,
+    "histogram": {
+      "5": 1,
+      "4": 0,
+      "3": 0,
+      "2": 0,
+      "1": 0
+    },
+    "reviews": [
+      {
+        "id": "a3071c55-d720-403d-8769-2c296bbe55c3",
+        "name_display": "Sobia L.",
+        "rating": 5,
+        "date": "2024-09-19",
+        "title": "",
+        "body": "Please update when restock this article. Thanks",
+        "verified": false,
+        "source": null,
+        "note": "UNVERIFIED buyer - check provenance before publishing"
+      }
+    ],
+    "reviews_in_widget": 1,
+    "rating_only_skipped": 0,
+    "has_custom_reviews": false,
+    "current_reviews_rating": 5.0,
+    "current_reviews_rating_count": 1
+  },
+  "leather-tissue-box-1": {
+    "title": "Leather Tissue Box Rectangle",
+    "status": "ACTIVE",
+    "product_id": "gid://shopify/Product/8297214705904",
+    "avg": 5.0,
+    "count": 1,
+    "histogram": {
+      "5": 1,
+      "4": 0,
+      "3": 0,
+      "2": 0,
+      "1": 0
+    },
+    "reviews": [
+      {
+        "id": "a042a442-7977-4403-a7d1-2e1a46ff170f",
+        "name_display": "Khawaja Y.",
+        "rating": 5,
+        "date": "2024-03-20",
+        "title": "Worth buying",
+        "body": "Highly recommended bought dozen for my office",
+        "verified": true,
+        "source": null
+      }
+    ],
+    "reviews_in_widget": 1,
+    "rating_only_skipped": 0,
+    "has_custom_reviews": false,
+    "current_reviews_rating": 5.0,
+    "current_reviews_rating_count": 1
+  },
+  "the-money-clip-minimal-wallet": {
+    "title": "The Money Clip | Men's Crazy Horse Leather Money Clip Wallet",
+    "status": "ACTIVE",
+    "product_id": "gid://shopify/Product/8301073694960",
+    "avg": 5.0,
+    "count": 10,
+    "histogram": {
+      "5": 10,
+      "4": 0,
+      "3": 0,
+      "2": 0,
+      "1": 0
+    },
+    "reviews": [
+      {
+        "id": "9180502a-770e-4023-872e-01730763676d",
+        "name_display": "S.A.",
+        "rating": 5,
+        "date": "2024-07-06",
+        "title": "Good Wallet",
+        "body": "Good Service and shop",
+        "verified": false,
+        "source": "review_collected_from_store_visitor",
+        "note": "UNVERIFIED buyer (review_collected_from_store_visitor) - check provenance before publishing"
+      },
+      {
+        "id": "17e2758d-a6a9-426d-88ba-77a68bd71f57",
+        "name_display": "Zikria M.",
+        "rating": 5,
+        "date": "2023-12-30",
+        "title": "Product is excellent but need some more colours to it ! 👌",
+        "body": "Product quality is good but still need some new innovative colours for your money clip !",
+        "verified": true,
+        "source": "review_collected_via_store_invitation"
+      },
+      {
+        "id": "e4ce4739-99f4-4fce-bbad-0319ab87c716",
+        "name_display": "Nazia M.",
+        "rating": 5,
+        "date": "2023-12-16",
+        "title": "Money clip",
+        "body": "Superb quality",
+        "verified": true,
+        "source": "review_collected_via_store_invitation"
+      },
+      {
+        "id": "1e0c2351-6358-4859-8fdb-9a17587a77b9",
+        "name_display": "Ayyan A.",
+        "rating": 5,
+        "date": "2023-12-16",
+        "title": "",
+        "body": "I like this kind of wallet easy to carry",
+        "verified": true,
+        "source": "review_collected_via_store_invitation"
+      }
+    ],
+    "reviews_in_widget": 5,
+    "rating_only_skipped": 1,
+    "has_custom_reviews": true,
+    "current_reviews_rating": 4.8,
+    "current_reviews_rating_count": 24
+  },
+  "the-luke-minimalist-wallet": {
+    "title": "The Luke | Men's Minimalist Vertical Leather Wallet",
+    "status": "ACTIVE",
+    "product_id": "gid://shopify/Product/8312321933552",
+    "avg": 4.67,
+    "count": 6,
+    "histogram": {
+      "5": 4,
+      "4": 2,
+      "3": 0,
+      "2": 0,
+      "1": 0
+    },
+    "reviews": [
+      {
+        "id": "8f639c3c-717f-46f1-958f-fac87a84b554",
+        "name_display": "Hafiz Tahir",
+        "rating": 5,
+        "date": "2023-12-01",
+        "title": "Excellent Leather Quality",
+        "body": "After using this wallet I found excellent leather quality and slim and smart wallet",
+        "verified": true,
+        "source": null
+      },
+      {
+        "id": "d13b5a67-57f6-4649-8175-0066e6ec96f5",
+        "name_display": "Harris K.",
+        "rating": 4,
+        "date": "2023-10-31",
+        "title": "Overall a good product.",
+        "body": "Quality is good. This is definitely a product you can count on.\nThe color is a little bit different than in the picture. A little bit pricey.",
+        "verified": true,
+        "source": null
+      },
+      {
+        "id": "c3df72a0-c5be-4c45-9946-bd6b5c2057eb",
+        "name_display": "Ahmed S.",
+        "rating": 4,
+        "date": "2023-10-13",
+        "title": "Simple and most fit",
+        "body": "It's very nice, I recommended. I think little bit expensive.",
+        "verified": true,
+        "source": null
+      }
+    ],
+    "reviews_in_widget": 5,
+    "rating_only_skipped": 2,
+    "has_custom_reviews": true,
+    "current_reviews_rating": 4.9,
+    "current_reviews_rating_count": 29
+  },
+  "the-aristocrat-wallet": {
+    "title": "The Aristocrat | Men's Slim Leather Wallet",
+    "status": "ACTIVE",
+    "product_id": "gid://shopify/Product/8351957287152",
+    "avg": 5.0,
+    "count": 3,
+    "histogram": {
+      "5": 3,
+      "4": 0,
+      "3": 0,
+      "2": 0,
+      "1": 0
+    },
+    "reviews": [
+      {
+        "id": "7f800769-1178-49ef-94ed-b89d2dd1e0f6",
+        "name_display": "Ateeq R.",
+        "rating": 5,
+        "date": "2024-08-11",
+        "title": "",
+        "body": "Article was good.as it received to me.next day it was on discount.this thing diappoint me a bit",
+        "verified": true,
+        "source": "review_collected_via_store_invitation"
+      },
+      {
+        "id": "7dc181fc-485f-4a17-b3bc-6732db46dd15",
+        "name_display": "Ali",
+        "rating": 5,
+        "date": "2024-06-25",
+        "title": "Elegance and Functionality Combined",
+        "body": "HM THE LORD'S WALLET offers a perfect blend of style and practicality, making it an excellent choice.",
+        "verified": false,
+        "source": "review_collected_from_store_visitor",
+        "note": "UNVERIFIED buyer (review_collected_from_store_visitor) - check provenance before publishing"
+      },
+      {
+        "id": "a8f25055-7852-4304-a598-14c12347c4c7",
+        "name_display": "Ali",
+        "rating": 5,
+        "date": "2024-06-25",
+        "title": "Elegant and Durable Wallet",
+        "body": "This wallet combines sophisticated style with robust construction. Perfect for everyday use and special occasions.",
+        "verified": false,
+        "source": "review_collected_from_store_visitor",
+        "note": "UNVERIFIED buyer (review_collected_from_store_visitor) - check provenance before publishing"
+      }
+    ],
+    "reviews_in_widget": 3,
+    "rating_only_skipped": 0,
+    "has_custom_reviews": true,
+    "current_reviews_rating": 4.8,
+    "current_reviews_rating_count": 17
+  },
+  "mocha-mate": {
+    "title": "Mocha Mate | Men's Leather Bifold Wallet with Coin Pocket",
+    "status": "ACTIVE",
+    "product_id": "gid://shopify/Product/8362293035248",
+    "avg": 4.67,
+    "count": 6,
+    "histogram": {
+      "5": 4,
+      "4": 2,
+      "3": 0,
+      "2": 0,
+      "1": 0
+    },
+    "reviews": [
+      {
+        "id": "7b5ecb78-ac52-4685-ab16-1dcafd6e6421",
+        "name_display": "Osama P.",
+        "rating": 4,
+        "date": "2024-12-15",
+        "title": "Mocha Mate wallet",
+        "body": "Good quality wallet",
+        "verified": true,
+        "source": "review_collected_via_store_invitation"
+      },
+      {
+        "id": "ac2d8301-78fc-47c8-b923-a86b29b5e62a",
+        "name_display": "Sameer R.",
+        "rating": 5,
+        "date": "2024-11-08",
+        "title": "Highly recommended",
+        "body": "Amazing wallet, definitely worth the money. Just go for it I'm vouching..!!",
+        "verified": true,
+        "source": "review_collected_via_store_invitation"
+      },
+      {
+        "id": "bea5fb55-21c0-4a54-ad6d-d4ca18a2b06d",
+        "name_display": "Tahir A.",
+        "rating": 5,
+        "date": "2024-08-13",
+        "title": "Alaaaa💯",
+        "body": "Alaaa",
+        "verified": true,
+        "source": "review_collected_via_store_invitation"
+      },
+      {
+        "id": "bf9fbca3-4f26-4a91-baa7-37c501ea6f42",
+        "name_display": "S.S.",
+        "rating": 5,
+        "date": "2024-07-06",
+        "title": "Best",
+        "body": "This is the best wallet i had ever purchased!",
+        "verified": false,
+        "source": "review_collected_from_store_visitor",
+        "note": "UNVERIFIED buyer (review_collected_from_store_visitor) - check provenance before publishing"
+      }
+    ],
+    "reviews_in_widget": 5,
+    "rating_only_skipped": 1,
+    "has_custom_reviews": true,
+    "current_reviews_rating": 4.8,
+    "current_reviews_rating_count": 41
+  },
+  "copy-of-kordovans-premium-leather-western-cowboy-hat-rustic-maroon": {
+    "title": "KORDOVAN's Clifford Cowboy Hat // Faded Black",
+    "status": "ACTIVE",
+    "product_id": "gid://shopify/Product/8429202571504",
+    "avg": 5.0,
+    "count": 1,
+    "histogram": {
+      "5": 1,
+      "4": 0,
+      "3": 0,
+      "2": 0,
+      "1": 0
+    },
+    "reviews": [
+      {
+        "id": "93166541-f08d-452b-9525-3cb463206fb9",
+        "name_display": "Danny",
+        "rating": 5,
+        "date": "2024-03-19",
+        "title": "Excellent service ,very quick delivery",
+        "body": "So pleased with my recent purchase of new faded black cowboy hat xl size ...Its top quality ,very light in weight ,and fits perfect ...Delivery was fast and no damage ...Very happy ,thankyou very much and God bless.",
+        "verified": true,
+        "source": null
+      }
+    ],
+    "reviews_in_widget": 1,
+    "rating_only_skipped": 0,
+    "has_custom_reviews": false,
+    "current_reviews_rating": 5.0,
+    "current_reviews_rating_count": 1
+  },
+  "the-truckkr-bi-fold": {
+    "title": "The Truckkr | Men's Crazy Horse Leather Bifold Wallet with Zip Pocket",
+    "status": "ACTIVE",
+    "product_id": "gid://shopify/Product/8429209485552",
+    "avg": 4.0,
+    "count": 1,
+    "histogram": {
+      "5": 0,
+      "4": 1,
+      "3": 0,
+      "2": 0,
+      "1": 0
+    },
+    "reviews": [
+      {
+        "id": "1d5349ad-45af-4ca0-bbfe-eb14388bb046",
+        "name_display": "Mrs Rayyan",
+        "rating": 4,
+        "date": "2024-11-22",
+        "title": "Nice one in quality but Color is dark brown not good",
+        "body": "It's Color is not same as shown ..here it seems little tannish brown but in real it's very off brown color",
+        "verified": true,
+        "source": null
+      }
+    ],
+    "reviews_in_widget": 1,
+    "rating_only_skipped": 0,
+    "has_custom_reviews": true,
+    "current_reviews_rating": 4.7,
+    "current_reviews_rating_count": 12
+  },
+  "elite-card-holder-black": {
+    "title": "Elite | Slim Leather Card Holder Wallet",
+    "status": "ACTIVE",
+    "product_id": "gid://shopify/Product/8447602393328",
+    "avg": 5.0,
+    "count": 38,
+    "histogram": {
+      "5": 38,
+      "4": 0,
+      "3": 0,
+      "2": 0,
+      "1": 0
+    },
+    "reviews": [
+      {
+        "id": "769967c5-76cf-4ef3-9cb3-808fcf0cc8bd",
+        "name_display": "Ahsan M.",
+        "rating": 5,
+        "date": "2024-12-10",
+        "title": "Perfect",
+        "body": "Always received Quality Stuff. Thanks",
+        "verified": true,
+        "source": null
+      },
+      {
+        "id": "20f961a2-8358-489c-8e2c-9af87854fa8f",
+        "name_display": "Rao S.",
+        "rating": 5,
+        "date": "2024-10-14",
+        "title": "Mini wallet",
+        "body": "Excellent quality great experience",
+        "verified": true,
+        "source": null
+      },
+      {
+        "id": "b70d0532-d9b1-4c82-82aa-26d3e17218fa",
+        "name_display": "S.S.",
+        "rating": 5,
+        "date": "2024-07-06",
+        "title": "Amazing Delivery",
+        "body": "Fast Delivery and amazing service",
+        "verified": false,
+        "source": null,
+        "note": "UNVERIFIED buyer - check provenance before publishing"
+      },
+      {
+        "id": "33ad8f25-d5ca-4b7d-8388-dc4a972591ba",
+        "name_display": "Zainab I.",
+        "rating": 5,
+        "date": "2024-06-10",
+        "title": "Stylish and Secure",
+        "body": "This card holder is both stylish and secure. The burnished black leather is smooth and the design is very practical. It holds all my cards and cash securely. Highly recommend for anyone who values luxury and functionality.",
+        "verified": false,
+        "source": null,
+        "note": "UNVERIFIED buyer - check provenance before publishing"
+      },
+      {
+        "id": "28beb9b5-d992-40f5-96b7-9e3691aef148",
+        "name_display": "Hassan R.",
+        "rating": 5,
+        "date": "2024-06-08",
+        "title": "Excellent Quality",
+        "body": "The quality of this card holder is outstanding. The burnished black leather is durable and looks elegant. The multiple pockets are very convenient. Perfect for daily use and special occasions.",
+        "verified": false,
+        "source": null,
+        "note": "UNVERIFIED buyer - check provenance before publishing"
+      }
+    ],
+    "reviews_in_widget": 5,
+    "rating_only_skipped": 0,
+    "has_custom_reviews": true,
+    "current_reviews_rating": 5.0,
+    "current_reviews_rating_count": 38
+  },
+  "tp-elite-laptop-bag": {
+    "title": "Elite Laptop Bag",
+    "status": "ACTIVE",
+    "product_id": "gid://shopify/Product/8759356489968",
+    "avg": 5.0,
+    "count": 1,
+    "histogram": {
+      "5": 1,
+      "4": 0,
+      "3": 0,
+      "2": 0,
+      "1": 0
+    },
+    "reviews": [
+      {
+        "id": "bc6e534e-05f8-4371-8757-6819a850aa8e",
+        "name_display": "Mahmood K.",
+        "rating": 5,
+        "date": "2025-01-03",
+        "title": "Amazing product",
+        "body": "This is my first time order. I did not expect it to be that good. No compromise on quality. And the price is so good.",
+        "verified": true,
+        "source": null
+      }
+    ],
+    "reviews_in_widget": 1,
+    "rating_only_skipped": 0,
+    "has_custom_reviews": false,
+    "current_reviews_rating": 5.0,
+    "current_reviews_rating_count": 1
+  },
+  "sheffield-backpack-black": {
+    "title": "Sheffield Backpack",
+    "status": "ACTIVE",
+    "product_id": "gid://shopify/Product/8775960789232",
+    "avg": 4.0,
+    "count": 1,
+    "histogram": {
+      "5": 0,
+      "4": 1,
+      "3": 0,
+      "2": 0,
+      "1": 0
+    },
+    "reviews": [],
+    "reviews_in_widget": 1,
+    "rating_only_skipped": 1,
+    "has_custom_reviews": false,
+    "current_reviews_rating": 4.0,
+    "current_reviews_rating_count": 1
+  },
+  "diana-cross-body-bag-pebbled-leather": {
+    "title": "Diana Cross-body Bag // Pebbled Leather",
+    "status": "ACTIVE",
+    "product_id": "gid://shopify/Product/8830969807088",
+    "avg": 5.0,
+    "count": 1,
+    "histogram": {
+      "5": 1,
+      "4": 0,
+      "3": 0,
+      "2": 0,
+      "1": 0
+    },
+    "reviews": [
+      {
+        "id": "1d033574-54f4-460b-ae5f-01bd7e3325f2",
+        "name_display": "Salman M.",
+        "rating": 5,
+        "date": "2024-11-25",
+        "title": "Satisfied",
+        "body": "Good quality bag",
+        "verified": true,
+        "source": null
+      }
+    ],
+    "reviews_in_widget": 1,
+    "rating_only_skipped": 0,
+    "has_custom_reviews": false,
+    "current_reviews_rating": 5.0,
+    "current_reviews_rating_count": 1
+  },
+  "hm-the-lords-wallet-brown": {
+    "title": "HM The Lord's | Men's Leather Money Clip Wallet",
+    "status": "DRAFT",
+    "product_id": "gid://shopify/Product/8876584370416",
+    "avg": 5.0,
+    "count": 2,
+    "histogram": {
+      "5": 2,
+      "4": 0,
+      "3": 0,
+      "2": 0,
+      "1": 0
+    },
+    "reviews": [
+      {
+        "id": "37ad4158-1d52-45b4-8baf-7a647c4df4b1",
+        "name_display": "Ali",
+        "rating": 5,
+        "date": "2024-06-25",
+        "title": "Regal Elegance in Every Detail",
+        "body": "The craftsmanship of HM THE LORD'S WALLET is impeccable, blending luxury with functionality. Truly outstanding quality!",
+        "verified": false,
+        "source": null,
+        "note": "UNVERIFIED buyer - check provenance before publishing"
+      },
+      {
+        "id": "a5a3463e-8864-4d91-8ea8-ad77c0d999a6",
+        "name_display": "Ali",
+        "rating": 5,
+        "date": "2024-06-25",
+        "title": "A Stylish Wallet Fit for Royalty",
+        "body": "Elegant design with premium quality leather, perfect for daily use. A true symbol of sophistication.",
+        "verified": false,
+        "source": null,
+        "note": "UNVERIFIED buyer - check provenance before publishing"
+      }
+    ],
+    "reviews_in_widget": 2,
+    "rating_only_skipped": 0,
+    "has_custom_reviews": true,
+    "current_reviews_rating": 4.8,
+    "current_reviews_rating_count": 14
+  },
+  "stryker-mens-black-zippered-leather-biker-jacket": {
+    "title": "Stryker | Men's Black Zippered Accents Leather Biker Jacket",
+    "status": "ACTIVE",
+    "product_id": "gid://shopify/Product/9018547667184",
+    "avg": 1.0,
+    "count": 1,
+    "histogram": {
+      "5": 0,
+      "4": 0,
+      "3": 0,
+      "2": 0,
+      "1": 1
+    },
+    "reviews": [
+      {
+        "id": "0fd6ce63-6f6d-4ae2-b001-bea67f972961",
+        "name_display": "Hassan M.",
+        "rating": 1,
+        "date": "2025-01-15",
+        "title": "",
+        "body": "You team done an excellent work 🌹🌹🌹👍👍👍👍👍👍",
+        "verified": true,
+        "source": null
+      }
+    ],
+    "reviews_in_widget": 1,
+    "rating_only_skipped": 0,
+    "has_custom_reviews": false,
+    "current_reviews_rating": 1.0,
+    "current_reviews_rating_count": 1
+  },
+  "shadow-rider-mens-black-cafe-racer-leather-jacket": {
+    "title": "Shadow Rider | Men's Black Cafe Racer Leather Jacket",
+    "status": "ACTIVE",
+    "product_id": "gid://shopify/Product/9018555859184",
+    "avg": 5.0,
+    "count": 1,
+    "histogram": {
+      "5": 1,
+      "4": 0,
+      "3": 0,
+      "2": 0,
+      "1": 0
+    },
+    "reviews": [
+      {
+        "id": "12cda214-7247-41c7-9103-4a3cebc0d27e",
+        "name_display": "Zohaib S.",
+        "rating": 5,
+        "date": "2025-01-30",
+        "title": "Jacket",
+        "body": "It's very good but some my fresinds are saying that it's not pure leather then I replied them that this company is guarantee for life time it's leather purity",
+        "verified": true,
+        "source": null
+      }
+    ],
+    "reviews_in_widget": 1,
+    "rating_only_skipped": 0,
+    "has_custom_reviews": false,
+    "current_reviews_rating": 5.0,
+    "current_reviews_rating_count": 1
+  },
+  "_unsourced_only": [
+    {
+      "handle": "the-gator-bifold-wallet-for-men",
+      "title": "The Gator Bifold Wallet for Men",
+      "status": "DRAFT",
+      "metafield_id": "gid://shopify/Metafield/58914192490736",
+      "current_reviews_rating": 4.7,
+      "current_reviews_rating_count": 14
+    },
+    {
+      "handle": "the-luxurious-ladies-clutch",
+      "title": "The Luxurious Ladies Clutch & Wallet",
+      "status": "ACTIVE",
+      "metafield_id": "gid://shopify/Metafield/59089933435120",
+      "current_reviews_rating": 4.8,
+      "current_reviews_rating_count": 20
+    },
+    {
+      "handle": "the-elite-mobile-wallet-unisex",
+      "title": "The Elite | Leather Mobile Wallet for Men & Women",
+      "status": "ACTIVE",
+      "metafield_id": "gid://shopify/Metafield/58789338546416",
+      "current_reviews_rating": 4.9,
+      "current_reviews_rating_count": 27
+    },
+    {
+      "handle": "bronco-handcrafted-wallet",
+      "title": "Bronco | Men's Crazy Horse Leather Bifold Wallet",
+      "status": "ACTIVE",
+      "metafield_id": "gid://shopify/Metafield/58816629833968",
+      "current_reviews_rating": 4.8,
+      "current_reviews_rating_count": 21
+    },
+    {
+      "handle": "the-kingsman-wallet",
+      "title": "The Kingsman | Men's Pebble-Grain Leather Bifold Wallet",
+      "status": "ACTIVE",
+      "metafield_id": "gid://shopify/Metafield/58914393456880",
+      "current_reviews_rating": 4.7,
+      "current_reviews_rating_count": 13
+    },
+    {
+      "handle": "the-seamless-stitch-less-wallet-brown",
+      "title": "The Seamless | Stitch-less Slim Leather Card Wallet",
+      "status": "ACTIVE",
+      "metafield_id": "gid://shopify/Metafield/60274950832368",
+      "current_reviews_rating": 4.9,
+      "current_reviews_rating_count": 25
+    },
+    {
+      "handle": "stallion-handcrafted-wallet",
+      "title": "The Stallion | Men's Handwoven Full-Grain Leather Wallet",
+      "status": "ACTIVE",
+      "metafield_id": "gid://shopify/Metafield/60274631966960",
+      "current_reviews_rating": 4.8,
+      "current_reviews_rating_count": 15
+    },
+    {
+      "handle": "the-cleopatra-handcrafted-ladies-wallet",
+      "title": "The Cleopatra Handcrafted Ladies Wallet",
+      "status": "ACTIVE",
+      "metafield_id": "gid://shopify/Metafield/58914192195824",
+      "current_reviews_rating": 4.9,
+      "current_reviews_rating_count": 16
+    },
+    {
+      "handle": "tp-the-nova-weaved-leather-wallet-clutch",
+      "title": "The Nova // Weaved Leather Wallet & Clutch",
+      "status": "ACTIVE",
+      "metafield_id": "gid://shopify/Metafield/60274285936880",
+      "current_reviews_rating": 4.7,
+      "current_reviews_rating_count": 14
+    },
+    {
+      "handle": "kodo-vertical-2-0",
+      "title": "Kodo Vertical 2.0 | RFID Slim Leather Smart Wallet",
+      "status": "ACTIVE",
+      "metafield_id": "gid://shopify/Metafield/58820145119472",
+      "current_reviews_rating": 4.9,
+      "current_reviews_rating_count": 31
+    },
+    {
+      "handle": "rigor-wallet-lite",
+      "title": "Rigor Lite | Men's Slim Sheep Leather Wallet",
+      "status": "ACTIVE",
+      "metafield_id": "gid://shopify/Metafield/58857740828912",
+      "current_reviews_rating": 4.7,
+      "current_reviews_rating_count": 12
+    },
+    {
+      "handle": "sheppard-wallet",
+      "title": "Sheppard | Men's Soft Sheep Leather Wallet",
+      "status": "ACTIVE",
+      "metafield_id": "gid://shopify/Metafield/58882650046704",
+      "current_reviews_rating": 4.7,
+      "current_reviews_rating_count": 15
+    },
+    {
+      "handle": "midtown-lite-wallet",
+      "title": "Midtown Lite | Men's Slim Sheep Leather Wallet",
+      "status": "ACTIVE",
+      "metafield_id": "gid://shopify/Metafield/58835370213616",
+      "current_reviews_rating": 4.8,
+      "current_reviews_rating_count": 23
+    },
+    {
+      "handle": "the-armour-dual-mobile-wallet-with-notepad",
+      "title": "The Armour | Leather Dual Mobile Wallet with Notepad",
+      "status": "ACTIVE",
+      "metafield_id": "gid://shopify/Metafield/58883500441840",
+      "current_reviews_rating": 4.8,
+      "current_reviews_rating_count": 13
+    },
+    {
+      "handle": "the-hunter-hm-wallet",
+      "title": "The Hunter HM | Men's Handmade Leather Bifold Wallet",
+      "status": "ACTIVE",
+      "metafield_id": "gid://shopify/Metafield/58914192687344",
+      "current_reviews_rating": 4.8,
+      "current_reviews_rating_count": 11
+    },
+    {
+      "handle": "bellezza-clutch",
+      "title": "Bellezza Clutch",
+      "status": "ACTIVE",
+      "metafield_id": "gid://shopify/Metafield/60274951028976",
+      "current_reviews_rating": 4.7,
+      "current_reviews_rating_count": 13
+    },
+    {
+      "handle": "the-bastion-handcrafted-genuine-leather-bifold-wallet-for-men-slim-classic-everyday-wallet",
+      "title": "The Bastion | Men's Distressed Leather Bifold Wallet",
+      "status": "ACTIVE",
+      "metafield_id": "gid://shopify/Metafield/58912546554096",
+      "current_reviews_rating": 4.8,
+      "current_reviews_rating_count": 22
+    },
+    {
+      "handle": "the-razor-rfid-smart-leather-wallet-kordovan",
+      "title": "The Razor | RFID Smart Leather Wallet for Men",
+      "status": "ACTIVE",
+      "metafield_id": "gid://shopify/Metafield/60274631770352",
+      "current_reviews_rating": 4.8,
+      "current_reviews_rating_count": 20
+    }
+  ]
+}
