@@ -15,3 +15,8 @@ Every morning run adds to this and lists what is still open. Files live in `down
 - Jacket call list (Nov 7): no call results reported yet.
 - Ahsan: shop count of Kodo Vertical (asked on WhatsApp Nov 8).
 - Nov 9 · Founder · `downloads/Blessed_Friday_Creative_Prompts.md`: image/carousel/animation prompts + copy for the Blessed Friday bag ads (due Nov 18)
+
+### Nov 11 check-in
+| Nov 11 | Founder | `downloads/Always_On_December_Prompts.md` | Make the December always-on ads in GPT (4 approved; prompts 3 + 6 have small CQRO fixes noted in the plan) | open, due Nov 30 |
+| Nov 11 | Ahsan | `downloads/Ahsan_Filming_List_December.md` | Film workshop clips + a patina before/after + comment-reply clips on his phone | open, due Nov 28 |
+Still open from before: Ahsan's photo shoot (7 products) · jacket call-list results · Ahsan's Kodo Vertical shop count (asked Nov 8, read, no reply) · Blessed Friday carousel v2 (Founder, due Nov 18).
