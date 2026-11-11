@@ -7,8 +7,8 @@
 
   Curated, per-product content reads from metafields and is hidden when empty
   (to be populated during the SEO pass). Brand-universal fallbacks keep the page
-  looking complete in the meantime. No review app — reviews are self-authored via
-  the `reviews` / `custom.reviews` metafields.
+  looking complete in the meantime. No review app: genuine reviews live in the
+  `custom.reviews_verified` JSON metafield (+ `reviews.rating` / `rating_count`).
 {%- endcomment -%}
 {%- liquid
   assign v = product.selected_or_first_available_variant
@@ -71,8 +71,9 @@
         <p class="kv-pdp__sub">{{ product.metafields.custom.subtitle }}</p>
       {%- endif -%}
 
-      {%- if product.metafields.reviews.rating != blank -%}
-        <div class="kv-pdp__rate"><span class="stars">★★★★★</span> <b>{{ rating_num }}</b> · <a href="#reviews">{{ product.metafields.reviews.rating_count | default: 0 }} reviews</a></div>
+      {%- assign vr_top = product.metafields.custom.reviews_verified.value -%}
+      {%- if vr_top.reviews.size > 0 -%}
+        <div class="kv-pdp__rate"><span class="kv-rstars" style="--pct:{{ vr_top.avg | times: 20 }}%" aria-hidden="true"></span> <b>{{ vr_top.avg | round: 1 }}</b> · <a href="#reviews">{{ vr_top.count }} review{% if vr_top.count != 1 %}s{% endif %}</a></div>
       {%- endif -%}
 
       <div class="kv-pdp__price product-info__price">
@@ -402,25 +403,46 @@
     </div>
   </div></div></section>
 
-  <!-- REVIEWS (self-authored; hidden until a rating metafield is set) -->
-  {%- if product.metafields.reviews.rating != blank -%}
+  <!-- REVIEWS: genuine customer reviews only (custom.reviews_verified JSON, recovered from our
+       Judge.me history, Nov 2026). Hidden unless that metafield holds at least one review. No app. -->
+  {%- assign vr = product.metafields.custom.reviews_verified.value -%}
+  {%- if vr.reviews.size > 0 -%}
+    {%- assign vr_avg = vr.avg | default: rating_num -%}
+    {%- assign vr_pct = vr_avg | times: 20 -%}
     <section class="kv-pdp__sec kv-pdp__sec--parch" id="reviews"><div class="kv-wrap">
       <div class="kv-pdp__shead"><span class="eyebrow">Reviews</span><h2>What customers say.</h2></div>
       <div class="kv-pdp__rev">
         <div class="kv-pdp__revsum">
-          <div class="kv-pdp__revbig">{{ rating_num }}</div>
-          <span class="stars">★★★★★</span>
-          <div class="kv-pdp__revcnt">Based on {{ product.metafields.reviews.rating_count | default: 0 }} verified reviews</div>
+          <div class="kv-pdp__revbig">{{ vr_avg | round: 1 }}</div>
+          <span class="kv-rstars kv-rstars--lg" style="--pct:{{ vr_pct }}%" aria-label="{{ vr_avg | round: 1 }} out of 5 stars"></span>
+          <div class="kv-pdp__revcnt">Based on {{ vr.count }} customer review{% if vr.count != 1 %}s{% endif %}</div>
+          {%- if vr.hist -%}
+            <div class="kv-pdp__bars">
+              {%- for n in (1..5) reversed -%}
+                {%- assign key = n | append: '' -%}
+                {%- assign f = vr.hist[key] | default: 0 -%}
+                {%- assign w = 0 -%}{%- if vr.count > 0 -%}{%- assign w = f | times: 100 | divided_by: vr.count -%}{%- endif -%}
+                <div class="kv-pdp__bar"><span class="t">{{ n }}★</span><span class="track"><span class="fill" style="width:{{ w }}%"></span></span><span class="c">{{ f }}</span></div>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+          <p class="kv-pdp__revnote">Written by customers after delivery. We never edit what they say.</p>
         </div>
         <div class="kv-pdp__revlist">
-          {%- assign revs = product.metafields.custom.reviews | newline_to_br | split: '<br />' -%}
-          {%- for r in revs -%}{%- assign p = r | strip | split: '|' -%}{%- if p[2] != blank -%}
-            <div class="kv-pdp__rcard">
-              <div class="top"><span class="stars">★★★★★</span><span class="v"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Verified Purchase</span></div>
-              <div class="by">{{ p[0] | strip }} <span>· {{ p[1] | strip }}</span></div>
-              <p>{{ p[2] | strip }}</p>
-            </div>
-          {%- endif -%}{%- endfor -%}
+          {%- for r in vr.reviews -%}
+            <article class="kv-pdp__rcard">
+              <div class="top">
+                <span class="kv-rstars" style="--pct:{{ r.rating | times: 20 }}%" aria-label="{{ r.rating }} out of 5 stars"></span>
+                {%- if r.verified -%}<span class="v"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Verified buyer</span>{%- endif -%}
+              </div>
+              {%- if r.title != blank -%}<h3 class="ttl">{{ r.title | escape }}</h3>{%- endif -%}
+              <p>{{ r.body | escape }}</p>
+              <div class="by">{{ r.name | escape }}{% if r.date != blank %} <span>· {{ r.date | date: '%b %Y' }}</span>{% endif %}</div>
+            </article>
+          {%- endfor -%}
+          {%- if vr.count > vr.reviews.size -%}
+            <p class="kv-pdp__revmore">Showing the {{ vr.reviews.size }} most recent of {{ vr.count }} reviews.</p>
+          {%- endif -%}
         </div>
       </div>
     </div></section>

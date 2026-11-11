@@ -740,6 +740,17 @@
 .kv-pdp__rcard p{color:var(--walnut);font-size:14.5px;line-height:1.7;margin:10px 0 0;}
 .kv-pdp__rcard .by{font-size:13px;color:var(--ink);font-weight:600;}.kv-pdp__rcard .by span{color:var(--stone);font-weight:400;}
 
+/* Genuine reviews (Nov 2026): partial-fill stars driven by --pct */
+.kv-rstars{--pct:100%;position:relative;display:inline-block;font-size:14px;line-height:1;letter-spacing:2px;color:var(--border);}
+.kv-rstars::before{content:"★★★★★";}
+.kv-rstars::after{content:"★★★★★";position:absolute;left:0;top:0;width:var(--pct);overflow:hidden;white-space:nowrap;color:var(--brass);}
+.kv-rstars--lg{font-size:22px;display:block;width:max-content;margin:10px auto;}
+.kv-pdp__bar .c{width:22px;text-align:left;}
+.kv-pdp__revnote{font-size:12px;color:var(--stone);line-height:1.6;margin:18px 0 0;}
+.kv-pdp__rcard .ttl{font-family:var(--kv-heading);font-weight:500;font-size:18px;color:var(--ink);margin:4px 0 0;}
+.kv-pdp__rcard .by{margin-top:14px;}
+.kv-pdp__revmore{font-size:13px;color:var(--stone);text-align:center;margin:4px 0 0;}
+
 .kv-pdp__guar{background:var(--ink);color:var(--canvas);text-align:center;padding:74px 0;}
 .kv-pdp__guar .eyebrow{color:var(--brass-light);}
 .kv-pdp__guar h2{color:var(--canvas);font-size:clamp(26px,3vw,38px);margin:14px 0;}

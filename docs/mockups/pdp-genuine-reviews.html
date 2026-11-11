@@ -1,0 +1,50 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--canvas:#F7F2EA;--parchment:#EFE6D8;--ink:#241C16;--walnut:#4A3A2E;--stone:#8B8174;--border:#DDD2C0;--brass:#B0894F;--pine:#3F5B45;--kv-heading:'Fraunces',serif;--kv-body:'Inter',sans-serif}
+body{margin:0;background:var(--parchment);font-family:var(--kv-body);color:var(--ink)}
+.kv-wrap{max-width:1160px;margin:0 auto;padding:64px 24px}
+.eyebrow{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--brass);font-weight:600}
+h2{font-family:var(--kv-heading);font-weight:500;font-size:36px;margin:10px 0 34px}
+.kv-pdp__rev{display:grid;grid-template-columns:300px 1fr;gap:54px;align-items:start}
+.kv-pdp__revsum{text-align:center;border:1px solid var(--border);border-radius:14px;padding:34px 26px;background:var(--canvas)}
+.kv-pdp__revbig{font-family:var(--kv-heading);font-weight:500;font-size:60px;line-height:1}
+.kv-pdp__revcnt{font-size:13px;color:var(--stone)}
+.kv-pdp__bars{margin:22px 0;display:grid;gap:7px}
+.kv-pdp__bar{display:flex;align-items:center;gap:9px;font-size:12px;color:var(--stone)}
+.kv-pdp__bar .t{width:30px;text-align:right}.kv-pdp__bar .c{width:22px;text-align:left}
+.kv-pdp__bar .track{flex:1;height:7px;background:var(--parchment);border-radius:4px;overflow:hidden}
+.kv-pdp__bar .fill{display:block;height:100%;background:var(--brass)}
+.kv-pdp__revlist{display:grid;gap:22px}
+.kv-pdp__rcard{border:1px solid var(--border);border-radius:12px;padding:26px 28px;background:var(--canvas)}
+.kv-pdp__rcard .top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.kv-pdp__rcard .v{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--pine);font-weight:600;display:inline-flex;gap:5px;align-items:center}
+.kv-pdp__rcard .v svg{width:12px;height:12px;stroke:var(--pine);fill:none;stroke-width:2.2}
+.kv-pdp__rcard p{color:var(--walnut);font-size:14.5px;line-height:1.7;margin:10px 0 0}
+.kv-pdp__rcard .by{font-size:13px;color:var(--ink);font-weight:600;margin-top:14px}.kv-pdp__rcard .by span{color:var(--stone);font-weight:400}
+.kv-rstars{--pct:100%;position:relative;display:inline-block;font-size:14px;line-height:1;letter-spacing:2px;color:var(--border)}
+.kv-rstars::before{content:"★★★★★"}
+.kv-rstars::after{content:"★★★★★";position:absolute;left:0;top:0;width:var(--pct);overflow:hidden;white-space:nowrap;color:var(--brass)}
+.kv-rstars--lg{font-size:22px;display:block;width:max-content;margin:10px auto}
+.kv-pdp__revnote{font-size:12px;color:var(--stone);line-height:1.6;margin:18px 0 0}
+.kv-pdp__rcard .ttl{font-family:var(--kv-heading);font-weight:500;font-size:18px;margin:4px 0 0}
+.kv-pdp__revmore{font-size:13px;color:var(--stone);text-align:center;margin:4px 0 0}
+@media(max-width:980px){.kv-pdp__rev{grid-template-columns:1fr;gap:32px}}
+</style></head><body><section><div class="kv-wrap">
+<span class="eyebrow">Reviews</span><h2>What customers say.</h2>
+<div class="kv-pdp__rev">
+ <div class="kv-pdp__revsum"><div class="kv-pdp__revbig">4.7</div><span class="kv-rstars kv-rstars--lg" style="--pct:93.4%"></span>
+  <div class="kv-pdp__revcnt">Based on 6 customer reviews</div>
+  <div class="kv-pdp__bars">
+   <div class="kv-pdp__bar"><span class="t">5★</span><span class="track"><span class="fill" style="width:66%"></span></span><span class="c">4</span></div>
+   <div class="kv-pdp__bar"><span class="t">4★</span><span class="track"><span class="fill" style="width:33%"></span></span><span class="c">2</span></div>
+   <div class="kv-pdp__bar"><span class="t">3★</span><span class="track"><span class="fill" style="width:0%"></span></span><span class="c">0</span></div>
+   <div class="kv-pdp__bar"><span class="t">2★</span><span class="track"><span class="fill" style="width:0%"></span></span><span class="c">0</span></div>
+   <div class="kv-pdp__bar"><span class="t">1★</span><span class="track"><span class="fill" style="width:0%"></span></span><span class="c">0</span></div>
+  </div><p class="kv-pdp__revnote">Written by customers after delivery. We never edit what they say.</p></div>
+ <div class="kv-pdp__revlist">
+  <article class="kv-pdp__rcard"><div class="top"><span class="kv-rstars" style="--pct:80%"></span><span class="v"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Verified buyer</span></div><h3 class="ttl">Mocha Mate wallet</h3><p>Good quality wallet</p><div class="by">Osama P. <span>· Dec 2024</span></div></article>
+  <article class="kv-pdp__rcard"><div class="top"><span class="kv-rstars" style="--pct:100%"></span><span class="v"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Verified buyer</span></div><h3 class="ttl">Highly recommended</h3><p>Amazing wallet, definitely worth the money. Just go for it I'm vouching..!!</p><div class="by">Sameer R. <span>· Nov 2024</span></div></article>
+  <article class="kv-pdp__rcard"><div class="top"><span class="kv-rstars" style="--pct:100%"></span></div><h3 class="ttl">Best</h3><p>This is the best wallet i had ever purchased!</p><div class="by">S.S. <span>· Jul 2024</span></div></article>
+  <p class="kv-pdp__revmore">Showing the 3 most recent of 6 reviews.</p>
+ </div></div></div></section></body></html>
