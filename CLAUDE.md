@@ -89,6 +89,7 @@ add only a short rule and a pointer here.
   - S3 9x16 Stories/Reels `120255973229930428`
   - S4 carousel `120255973230250428`
   Others during the sale (LIVE, verified Nov 8 evening; total 8,000): Retarget 1,600 · TOF-M H1 Mocha **1,300** · **H3 Founder PAUSED** (lifetime CPA 987 Meta) · **Gloves: ONLY W01 Comparison (TOF-W campaign 600, CPA 890, ~9 Shopify-confirmed orders) and W-RT1 Winter Kit (RT-W 500, CPA 850) ACTIVE**; W02/W03/W04/W05/W-RT2 PAUSED. Teaser PAUSED. Nov 12: Retarget → 1,000; everything else stays as is unless the Founder says otherwise. Mocha Mate restock due ~Nov 9–10 (Founder): do NOT throttle Mocha ads for low stock.
+  **Nov 11 (Founder): S4 carousel ad set 1,000 → 2,000/day (live, verified); W-RT1 ad PAUSED (CPA not sustainable even with a big order); RT-W now has no active ad. Total ≈ 7,500/day.**
   **S3 Bastion story PAUSED Nov 9 09:40 PKT (Founder; 971 spent, 0 purchases). Its 1,000/day is left UNUSED (total now 7,000) until the Wednesday review.**
   **FOUNDER HOLD (Nov 8 evening): no ad changes for 72h. Nov 9–10 daily checks are REPORT ONLY; Wednesday Nov 11 = full per-ad review, recommendations to the Founder for a yes.**
   Daily check `trig_01KfL3aDuW3hYsvbyPAbiRoF` (12:47 PKT, Nov 8–12). (Standing OK to pause failing sale ad sets is suspended by the hold.) It had the Founder's standing OK to pause failing sale
@@ -110,6 +111,8 @@ add only a short rule and a pointer here.
 
 ## 🎯 ALWAYS-ON CREATIVE FUNNEL (Founder, Nov 10)
 - **`ops/marketing/CREATIVE_PLAYBOOK.md` = the single source of truth for what sells** (proven / lost / in test / queue, Shopify-confirmed only). Update it after every read; every reel the Founder shares gets judged into it.
+- **Founder Nov 11:** December starts at **5,000/day**, structured as a real TOF / MOF / BOF funnel (tiers by AUDIENCE, all optimising for purchases) so we learn which ads belong in which tier. Merge campaigns only where they share a tier. H1 Mocha ad stays as is. Mocha Mate restock ordered.
+- **REVIEWS (Nov 11 finding):** genuine Judge.me reviews survive in each product's `judgeme.widget`/`judgeme.badge` metafields (e.g. KODO 172, Elite Card Holder 38, Mocha 6 verified buyers, 2024). The `custom.reviews` lists shown on the PDPs ("Imran K., Lahore…") do NOT match them → swap them for the genuine Judge.me reviews (needs the Founder's yes; L2). A full export needs a Judge.me reinstall (free plan).
 - Omar + Sana draft it at the **Nov 11 check-in** (HQ assignment `founder-always-on-creative-funnel`). Founder produces before Dec 1; it runs 90 days from Dec 1. One new-customer ad set with several formats (~60%) + warm retargeting (~30%) + a weekly format test (~10%). Judge each ad on Shopify CPA AND COD refusal rate. Real-only formats (workshop, patina, reviews) come from Ahsan. VIP pre-hype REJECTED (revisit for an exclusive launch next year).
 
 ## 📣 META ADS — current state (re-read live before acting; IDs drift)
