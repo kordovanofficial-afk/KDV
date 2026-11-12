@@ -40,6 +40,9 @@ add only a short rule and a pointer here.
   Merchant Center publishes), every product metafield (`custom.fits/benefits/subtitle/material`), and collection
   `descriptionHtml` **plus** `custom.editorial`. Grep the live values; don't trust old "done" notes.
 
+## 🗓 ACTIVE PLAN: `ops/PLAN_2026-11-12_to_12-31.md` (Founder approved Nov 12). Check-ins work from it first.
+- Between sales (Nov 13–25) Meta ≈ 3,000/day on proven ads (Retarget 1,000 · H1 1,300 · W01 600). BF Nov 26–30: +2,000/day on top.
+
 ## ⏱ HOW I RUN (Founder, Nov 7): scheduled, not continuous (protects the Founder's credit limits)
 - **Team check-in every 2 days at 11:59 PKT** (`trig_01FZUWyfpBhnn9BUytoB2t45`).
   1. Read HQ assignments, decisions and Boardroom, and act on them.
