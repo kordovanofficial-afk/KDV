@@ -1,0 +1,155 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+@page{size:A4;margin:16mm 15mm}
+:root{--a:#F7F2EA;--e:#241C16;--c:#A0623A;--b:#B0894F;--s:#8B8174;--bd:#DDD2C0;--p:#EFE6D8}
+body{font-family:Inter,sans-serif;color:var(--e);font-size:10.5pt;line-height:1.5;margin:0}
+h1,h2,h3{font-family:Fraunces,serif;font-weight:500;margin:0}
+h1{font-size:30pt;line-height:1.1}h2{font-size:18pt;margin:0 0 8px;border-bottom:1px solid var(--bd);padding-bottom:6px}
+h3{font-size:13pt;margin:10px 0 4px}
+.ey{font-size:8pt;letter-spacing:.18em;text-transform:uppercase;color:var(--b);font-weight:600}
+.cover{background:var(--e);color:var(--a);padding:40px 34px;border-radius:10px;margin-bottom:18px}
+.cover p{color:#d9cfc0;max-width:520px}
+.pb{page-break-before:always}
+table{width:100%;border-collapse:collapse;margin:6px 0 10px;font-size:9.3pt}
+th{background:var(--p);text-align:left;padding:6px 7px;font-weight:600}
+td{padding:6px 7px;border-bottom:1px solid var(--bd);vertical-align:top}
+.tier{border:1px solid var(--bd);border-radius:10px;padding:12px 14px;margin:10px 0;background:#fff;page-break-inside:avoid}
+.tier .tag{display:inline-block;font-size:8pt;font-weight:600;letter-spacing:.1em;padding:2px 8px;border-radius:20px;color:#fff;margin-bottom:4px}
+.g{display:grid;grid-template-columns:1fr 1fr;gap:6px 16px}
+.k{font-size:8pt;color:var(--s);text-transform:uppercase;letter-spacing:.08em;font-weight:600}
+.note{background:var(--p);border-left:3px solid var(--c);padding:8px 10px;border-radius:4px;font-size:9.5pt;margin:8px 0}
+ul{margin:4px 0 4px 16px;padding:0}li{margin:2px 0}
+.small{font-size:8.5pt;color:var(--s)}
+</style></head><body>
+
+<div class="cover">
+<div class="ey" style="color:#C08B5C">KORDOVAN · Meta Ads Operating System · Nov 2026</div>
+<h1 style="margin:10px 0 12px">The Kordovan Funnel</h1>
+<p>How every rupee of Meta spend moves a stranger to a delivered order: the tiers, what each one is for, which ads, formats, hooks and styles go where, how we judge them, and when we stop, keep or scale. Blessed Friday runs inside this system.</p>
+<p style="margin-top:14px;font-size:9pt">Live from 13 Nov 2026 at PKR 3,000/day · PKR 5,000/day during Blessed Friday (26–30 Nov) and from 1 Dec</p>
+</div>
+
+<h2>1 · The funnel at a glance</h2>
+<svg viewBox="0 0 700 250" width="100%" style="margin:4px 0 8px">
+ <polygon points="40,10 660,10 600,70 100,70" fill="#241C16"/>
+ <text x="350" y="36" fill="#F7F2EA" font-family="Fraunces" font-size="17" text-anchor="middle">TOP · Strangers (cold)</text>
+ <text x="350" y="56" fill="#C08B5C" font-family="Inter" font-size="11" text-anchor="middle">Job: find NEW buyers · Comparison, carousel, close-ups, workshop</text>
+ <polygon points="105,78 595,78 545,138 155,138" fill="#6B4A33"/>
+ <text x="350" y="104" fill="#F7F2EA" font-family="Fraunces" font-size="17" text-anchor="middle">MIDDLE · People who know us (warm)</text>
+ <text x="350" y="124" fill="#EFD9BF" font-family="Inter" font-size="11" text-anchor="middle">Job: remove doubt · Ordered vs Arrived, FAQ, real reviews, patina</text>
+ <polygon points="160,146 540,146 490,206 210,206" fill="#A0623A"/>
+ <text x="350" y="172" fill="#fff" font-family="Fraunces" font-size="17" text-anchor="middle">BOTTOM · Ready to buy (hot)</text>
+ <text x="350" y="192" fill="#fff" font-family="Inter" font-size="11" text-anchor="middle">Job: close the sale · Catalogue, comparison, offers</text>
+ <rect x="215" y="214" width="270" height="30" rx="6" fill="#B0894F"/>
+ <text x="350" y="234" fill="#241C16" font-family="Inter" font-weight="600" font-size="11.5" text-anchor="middle">DELIVERED ORDER (Shopify-confirmed, not refused)</text>
+</svg>
+<div class="note"><b>One rule ties it together:</b> every tier is judged on <b>real Shopify orders</b> (each ad has its own tracking tag) and, 14 days later, on whether those orders were <b>delivered, not refused</b>. Meta's own count is never used alone: it over-reports by about 2x.</div>
+
+<h3>Why a funnel, and what it fixes for us</h3>
+<ul>
+<li><b>Cheaper new customers:</b> cold ads only have to start interest; warm tiers finish the job at a fraction of the cost.</li>
+<li><b>Fewer COD refusals:</b> the middle tier answers "is it real leather / will what arrives match?" <i>before</i> the order, not at the door. October lost 25% of orders.</li>
+<li><b>We learn what works where:</b> each ad is tagged by format, hook and style, so after 4–6 weeks we know, with evidence, which combination sells in which tier.</li>
+<li><b>No more guessing on pauses:</b> stop/keep/scale rules are written down in advance (section 5).</li>
+</ul>
+
+<h2 class="pb">2 · The tiers in detail</h2>
+
+<div class="tier"><span class="tag" style="background:#241C16">TOP · COLD</span>
+<h3>Strangers: find new buyers</h3>
+<div class="g">
+<div><div class="k">Who sees it</div>New people in the 9 cities. Meta's Advantage+ audience, steered by our lookalikes of real delivered buyers. Excludes site visitors, buyers and COD refusers.</div>
+<div><div class="k">What it must do</div>Stop the scroll and earn a first visit and first order. Benefit: fills every tier below it.</div>
+<div><div class="k">Formats</div>Comparison (proven) · carousel (proven) · product close-up · workshop behind-the-scenes · value receipt</div>
+<div><div class="k">Hooks</div><b>proof</b> ("one is 6 months old, can you tell?") · <b>value</b> · <b>problem</b> (cold hands, coins everywhere) · <b>craft</b></div>
+<div><div class="k">Styles</div>studio (clean product) · lifestyle (dark heritage scene) · real (phone footage from the workshop)</div>
+<div><div class="k">Live now</div>Mocha Mate H1 Comparison · Gloves W01 Comparison</div>
+<div><div class="k">Watch</div>CTR ≥ 0.9% · cost per landing view · Shopify CPA vs product break-even</div>
+<div><div class="k">Budget</div>1,200 + 500 test (1,700 until the first test creative) → 2,000 + 500 from Dec 1</div>
+</div></div>
+
+<div class="tier"><span class="tag" style="background:#6B4A33">TEST · inside TOP</span>
+<h3>One new idea every week</h3>
+<p style="margin:2px 0">A single challenger runs against the current best. It "graduates" to TOP or MIDDLE only after ≥ 2 Shopify orders at or under break-even with a normal refusal rate. Queue: FAQ, value-per-year, "our mistake", workshop clips, patina, countdowns.</p></div>
+
+<div class="tier"><span class="tag" style="background:#6B4A33">MIDDLE · WARM</span>
+<h3>People who know us: remove doubt</h3>
+<div class="g">
+<div><div class="k">Who sees it</div>Product viewers (90 days) and site visitors (180 days) who have NOT added to cart or bought.</div>
+<div><div class="k">What it must do</div>Answer the fear behind COD refusals: fake leather, wrong colour, no returns. Benefit: more orders that actually get delivered.</div>
+<div><div class="k">Formats</div>Ordered vs Arrived (real photo) · FAQ "You asked. We answered." · real reviews · patina before/after · comment replies</div>
+<div><div class="k">Hooks</div><b>trust</b> (COD, 7-day returns, what arrives) · <b>proof</b> · <b>craft</b></div>
+<div><div class="k">Styles</div><b>real</b> first (phone photos/video from the store and workshop), text-led for FAQ</div>
+<div><div class="k">Live now</div>Ordered vs Arrived: Mocha Mate (Ahsan's real photo)</div>
+<div><div class="k">Watch</div>Shopify CPA AND <b>refusal rate per ad</b>: this tier wins by lowering refusals, not just CPA</div>
+<div><div class="k">Budget</div>500 → 1,000 from Dec 1 (merged into BOTTOM if the audience is too small)</div>
+</div></div>
+
+<div class="tier"><span class="tag" style="background:#A0623A">BOTTOM · HOT</span>
+<h3>Ready to buy: close the sale</h3>
+<div class="g">
+<div><div class="k">Who sees it</div>Visitors, product viewers, add-to-cart and checkout starters, past buyers (catalogue retargeting).</div>
+<div><div class="k">What it must do</div>Bring back people who nearly bought. Benefit: our cheapest orders (about 600–700 per order).</div>
+<div><div class="k">Formats</div>Catalogue (shows the exact product they viewed) · comparison · offer/countdown during sales</div>
+<div><div class="k">Hooks</div><b>deadline</b> (real dates only) · <b>saving</b> · <b>trust</b> (COD, free delivery over Rs 5,500)</div>
+<div><div class="k">Styles</div>studio · catalogue product shots</div>
+<div><div class="k">Live now</div>Catalogue retargeting (renamed BOTTOM)</div>
+<div><div class="k">Watch</div>Frequency (refresh above 6), Shopify CPA, refusals</div>
+<div><div class="k">Budget</div>800 → 1,500 from Dec 1</div>
+</div></div>
+
+<h2 class="pb">3 · Budget by period (PKR/day)</h2>
+<table><tr><th>Period</th><th>Top</th><th>Test</th><th>Middle</th><th>Bottom</th><th>Blessed Friday</th><th>Total</th></tr>
+<tr><td>13–25 Nov</td><td>1,700*</td><td>(0)*</td><td>500</td><td>800</td><td>–</td><td><b>3,000</b></td></tr>
+<tr><td>26–30 Nov</td><td>1,700</td><td>–</td><td>500</td><td>800</td><td>+2,000 (1,200 warm · 800 cold)</td><td><b>5,000</b></td></tr>
+<tr><td>From 1 Dec</td><td>2,000</td><td>500</td><td>1,000</td><td>1,500</td><td>–</td><td><b>5,000</b></td></tr></table>
+<p class="small">*Test's 500 sits in Top until the first test creative is ready. Every ad set ≥ PKR 500/day (Meta's minimum is ~495).</p>
+
+<h2>4 · Every ad is tagged by what's in it</h2>
+<p>The ad's name is also its tracking tag in Shopify: <b>tier_product_format_hook_style_version</b>, e.g. <code>mof_mocha_orderedvsarrived_trust_real_v1</code>.</p>
+<table><tr><th>Dimension</th><th>Values we use</th></tr>
+<tr><td>Format</td><td>comparison · carousel · static · video · receipt · objection · orderedvsarrived · faq · closeup · ugc · countdown · ourmistake</td></tr>
+<tr><td>Hook</td><td>value · saving · proof · trust · status · gift · problem · deadline · craft</td></tr>
+<tr><td>Style</td><td>lifestyle (dark heritage) · studio (clean product) · real (phone/UGC) · textled (headline-first)</td></tr>
+<tr><td>Placement (from Meta)</td><td>Feed · Stories · Reels: read per ad every week (we run 4:5 only)</td></tr></table>
+<p>This lets us answer: <i>Which hook wins on cold audiences for wallets? Does real phone footage beat lifestyle on warm audiences? Do 4:5 ads sell in Stories?</i> A pattern only counts once it has won in <b>two or more ads</b>.</p>
+
+<h2>5 · When to stop, when NOT to stop, when to scale</h2>
+<p><b>Break-even is per product</b>: profit per order placed, after cost, delivery and that product's refusal rate. It is refreshed with Aug–Oct data before the first weekly read (e.g. Mocha Mate ≈ 990, gloves 1,000, Aristocrat ≈ 3,000).</p>
+<table><tr><th>Situation</th><th>Decision</th></tr>
+<tr><td>New ad, spent less than its break-even, no sale yet</td><td><b>Keep.</b> Too early.</td></tr>
+<tr><td>Cold CTR below 0.6% after 3,000 impressions</td><td><b>Stop:</b> the hook failed.</td></tr>
+<tr><td>Clicks and add-to-carts, but no sale yet</td><td><b>Keep</b> up to 2× break-even.</td></tr>
+<tr><td>1.5× break-even spent, 0 Shopify orders</td><td><b>Stop.</b></td></tr>
+<tr><td>7-day cost per order above 1.3× break-even</td><td><b>Stop</b>, or move a trust ad to a warmer tier.</td></tr>
+<tr><td>A winner has 1–2 bad days</td><td><b>Keep.</b> Judge on 7 days, never on 1.</td></tr>
+<tr><td>7-day cost per order ≤ 0.7× break-even with 3+ orders</td><td><b>Scale</b> +20%, then wait 72h.</td></tr>
+<tr><td>Seen too often (frequency &gt;3 cold / &gt;6 warm) and CTR down 30%</td><td><b>Refresh</b>: new creative, same winning hook.</td></tr>
+<tr><td>Refusal rate 10+ points above average (day 14)</td><td><b>Stop</b> even if it looks cheap.</td></tr></table>
+<p class="small">Always: one change per ad set per 72h, batched; never judge an ad set without listing every ad in it; every pause or scale goes to the Founder as a per-ad table for a yes.</p>
+
+<h2 class="pb">6 · How often we look</h2>
+<table><tr><th>When</th><th>What</th></tr>
+<tr><td>Every check-in</td><td>Problems only: an ad over 2× break-even with no orders, spend not delivering, WhatsApp bridge down.</td></tr>
+<tr><td>Every Monday</td><td>Full per-ad 7-day table: Meta + Shopify + cost per order vs break-even, plus breakdowns by placement, age/gender, city, device, and the format/hook/style roll-up. Recommendations go to the Founder for a yes.</td></tr>
+<tr><td>Day 14 of each ad</td><td>Refusal rate joined to the ad (the truth column).</td></tr>
+<tr><td>1st of each month</td><td>Scorecard → Creative Playbook (proven / lost / next tests).</td></tr></table>
+
+<h2>7 · Blessed Friday inside the funnel (26–30 Nov)</h2>
+<div class="g">
+<div class="tier" style="margin:4px 0"><b>BF · Warm</b> (1,200/day)<br><span class="small">Visitors 180D + viewers 90D</span><br>Carousel (10-card range) · R1 Receipt · R3 "Too expensive" · Our Mistake · Ladies Clutch static</div>
+<div class="tier" style="margin:4px 0"><b>BF · Cold</b> (800/day)<br><span class="small">Top-tier exclusions</span><br>Carousel · R1 Receipt</div></div>
+<p>All tagged <code>bf_…</code>. The Dec 1–3 read answers: receipt vs objection vs carousel vs "our mistake", warm vs cold, Feed vs Stories. The winners join the playbook; the tiers keep running underneath and BF stops at midnight on 30 Nov.</p>
+
+<h2>8 · Timeline</h2>
+<table><tr><th>Date</th><th>Step</th></tr>
+<tr><td>12 Nov, midnight</td><td>11.11 ends → funnel campaigns go live (Top + Middle new; Bottom = renamed catalogue retargeting); old duplicates paused. Total 3,000/day.</td></tr>
+<tr><td>13–15 Nov</td><td>Break-even per product refreshed (CFO) · audience sizes checked (CRO).</td></tr>
+<tr><td>17 Nov (Mon)</td><td>First weekly read.</td></tr>
+<tr><td>23 Nov</td><td>Blessed Friday ad sets built as drafts.</td></tr>
+<tr><td>26–30 Nov</td><td>Blessed Friday live (+2,000/day).</td></tr>
+<tr><td>1 Dec</td><td>5,000/day; December test calendar begins (FAQ, Ordered vs Arrived gloves, workshop, patina).</td></tr>
+<tr><td>14 Dec</td><td>First funnel review: step down to a smaller budget if cost per order is above 1,300 or revenue is below 2× spend.</td></tr></table>
+<p class="small" style="margin-top:14px">Kordovan · prepared by Claude (CEO) for Asad Janjua (Founder) · 12 Nov 2026. Source of truth for rules: ops/marketing/ADS_OPERATING_SYSTEM.md · for results: ops/marketing/CREATIVE_PLAYBOOK.md</p>
+</body></html>

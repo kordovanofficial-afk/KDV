@@ -84,3 +84,9 @@ Always: change at most once per 72h per ad set; batch edits; never pause an ad s
 3. Build the 3 campaigns as DRAFTS with the naming + UTMs; carry H1 + W01 over by ID (keeps their history) only if their ceiling check passes. CEO · Nov 15.
 4. Founder approves the draft (per-ad table) → live **Nov 16** at 3,000/day.
 5. BF ad sets built Nov 23, live Nov 26 evening. Dec 1 → 5,000/day.
+
+---
+## 8. BUILD LOG
+- Nov 12: DRAFTS created. TOF campaign `120256055924930428` · ad set `120256055941820428` (1,700/day; A+A with the LLA 1%/3% signal; excludes refusers, purchasers 180D, visitors 180D, seed, Kodo/Fulfilled customers) · ads `120256055946060428` H1 Mocha (creative 1789159075513560), `120256055946350428` W01 gloves (creative 1808182100454013). MOF campaign `120256055925770428` · ad set `120256055942050428` (500/day; ViewContent 90D + Visitors 180D minus ATC/IC/buyers/refusers) · ad `120256055946470428` Ordered vs Arrived Mocha (image hash e3aa15c3…, utm mof_mocha_orderedvsarrived_trust_real_v1). BOF = Retarget `120228534676850428`, renamed + 800/day at go-live.
+- Go-live scheduled: send_later `trig_018gyqQQKBPa5D1AVeY28CZy` at 2026-11-12 19:35Z (00:35 PKT Nov 13), after the 11.11 revert. Old TOF-M ad set `120255717721520428`, TOF-W `120255846370500428` and RT-W `120255846373980428` are paused then.
+- PDF for the Founder: `downloads/Kordovan_Funnel_System_Nov2026.pdf` (source `docs/funnel_system_nov2026.html`).
