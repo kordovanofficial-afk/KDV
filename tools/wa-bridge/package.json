@@ -1,6 +1,6 @@
 {
   "name": "kordovan-wa-bridge",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "private": true,
   "description": "WhatsApp session bridge for Kordovan. Holds the session only - no Shopify access, no order data.",
   "main": "server.js",
@@ -8,10 +8,10 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "@whiskeysockets/baileys": "^6.7.9",
     "express": "^4.21.2",
     "pino": "^9.5.0",
-    "qrcode": "^1.5.4"
+    "qrcode": "^1.5.4",
+    "baileys": "7.0.0-rc14"
   },
   "engines": {
     "node": ">=20"

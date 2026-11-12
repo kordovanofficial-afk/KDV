@@ -53,7 +53,7 @@ cat > package.json <<'PKGEOF'
   "main": "server.js",
   "scripts": { "start": "node server.js" },
   "dependencies": {
-    "@whiskeysockets/baileys": "^6.7.9",
+    "baileys": "7.0.0-rc14",
     "express": "^4.21.2",
     "pino": "^9.5.0",
     "qrcode": "^1.5.4"

@@ -1,5 +1,5 @@
 /**
- * KORDOVAN WhatsApp BRIDGE  v1.1
+ * KORDOVAN WhatsApp BRIDGE  v1.2 (Baileys 7, LID-aware)
  * ============================================================================
  * Runs on a small always-on cloud VM (NOT the office laptop). Holds the
  * WhatsApp session and does two things:
@@ -21,12 +21,16 @@
 const express = require('express');
 const pino = require('pino');
 const QR = require('qrcode');
-const {
-  default: makeWASocket,
-  useMultiFileAuthState,
-  DisconnectReason,
-  fetchLatestBaileysVersion,
-} = require('@whiskeysockets/baileys');
+// v1.2 (Nov 12 2026): Baileys 7. Version 6 cannot address WhatsApp's new hidden
+// "LID" chat IDs, so a reply sent after the customer wrote in ("CONFIRM",
+// "CANCEL") showed "Waiting for this message" or never arrived. Baileys 7 maps
+// phone numbers ⇄ LIDs itself. It is ESM-only, hence the dynamic import.
+let makeWASocket, useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion;
+async function loadBaileys() {
+  const B = await import('baileys');
+  makeWASocket = B.makeWASocket || B.default;
+  ({ useMultiFileAuthState, DisconnectReason, fetchLatestBaileysVersion } = B);
+}
 
 // ─── Config (set in .env, never in this file) ────────────────────────────────
 const PORT           = process.env.PORT || 8787;
@@ -364,4 +368,4 @@ app.post('/send', (req, res, next) => {
 });
 
 app.listen(PORT, () => console.log(`[http] bridge listening on :${PORT}`));
-connect().catch(e => { console.error('FATAL', e); process.exit(1); });
+loadBaileys().then(connect).catch(e => { console.error('FATAL', e); process.exit(1); });
