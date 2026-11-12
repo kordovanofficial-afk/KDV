@@ -44,6 +44,36 @@ if (!BRIDGE_SECRET || !ADMIN_KEY) {
   process.exit(1);
 }
 
+// ─── Resend support (Nov 12 2026 fix) ─────────────────────────────────────────
+// When a recipient's phone cannot decrypt a message (new linked device, changed
+// keys) it asks us to resend. Baileys can only do that if it can look the message
+// up again via getMessage(). Without this the customer sees "Waiting for this
+// message. This may take a while." forever. Kept in memory AND on disk so a
+// restart does not lose the last messages.
+const fs = require('fs');
+const STORE_FILE = process.env.SENT_STORE || './sent-store.json';
+const STORE_MAX  = 2000;
+const sentStore = new Map();
+try { for (const [k, v] of JSON.parse(fs.readFileSync(STORE_FILE, 'utf8'))) sentStore.set(k, v); } catch (_) {}
+let storeDirty = false;
+function remember(msg) {
+  if (!msg?.key?.id || !msg.message) return;
+  sentStore.set(msg.key.id, msg.message);
+  while (sentStore.size > STORE_MAX) sentStore.delete(sentStore.keys().next().value);
+  storeDirty = true;
+}
+setInterval(() => {
+  if (!storeDirty) return;
+  storeDirty = false;
+  fs.writeFile(STORE_FILE, JSON.stringify([...sentStore]), () => {});
+}, 10000);
+// Minimal cache Baileys uses to count resend attempts per message.
+const retryMap = new Map();
+const msgRetryCounterCache = {
+  get: k => retryMap.get(k), set: (k, v) => { retryMap.set(k, v); return true; },
+  del: k => retryMap.delete(k), flushAll: () => retryMap.clear(),
+};
+
 let sock = null;
 let connected = false;
 let currentQR = null;          // data-URL of the pairing QR, null once linked
@@ -106,7 +136,8 @@ async function drain() {
     const job = queue.shift();
     try {
       await sleep(job.prio === 0 ? fastJitter() : jitter());
-      await sock.sendMessage(job.jid, { text: job.text });
+      const sentMsg = await sock.sendMessage(job.jid, { text: job.text });
+      remember(sentMsg);
       stats.sent++; stats.lastSent = { ref: job.ref, at: new Date().toISOString() };
       console.log(`[sent] ${job.ref || ''} → ${job.jid}`);
     } catch (e) {
@@ -129,6 +160,8 @@ async function connect() {
     logger: pino({ level: 'silent' }),
     markOnlineOnConnect: false,   // don't steal "online" from the team's phone
     syncFullHistory: false,
+    msgRetryCounterCache,
+    getMessage: async (key) => sentStore.get(key.id),   // answers resend requests
   });
 
   sock.ev.on('creds.update', saveCreds);
