@@ -1,0 +1,34 @@
+FIX THE CUSTOMER WHATSAPP BRIDGE (about 5 minutes) - for Asad (+ Ahsan with the store phone)
+
+WHY IT FAILS: the bridge was logged out on 30 Sep. After a logout, the bridge stopped and its
+"Link WhatsApp" page kept showing the LAST, DEAD QR code. That is why every scan fails.
+The fix: wipe the old session on the server and restart, which creates a fresh, working QR.
+
+STEP 1 - On the STORE PHONE (Ahsan)
+WhatsApp > Settings (or the 3-dot menu) > Linked devices.
+If you see an old device (Ubuntu / Chrome / "Kordovan" / unknown), tap it > Log out.
+
+STEP 2 - Open the server (Asad, on a computer)
+1. Go to https://cloud.oracle.com and log in.
+2. Top-right ">_" icon (Cloud Shell). Wait for the $ prompt.
+3. Menu > Compute > Instances > "kordovan-whatsapp" > copy its Public IP address.
+4. In Cloud Shell type (put your IP in):
+   ssh ubuntu@YOUR_IP
+
+STEP 3 - Paste this ONE line and press Enter:
+cd ~/wa-bridge && pm2 stop wa-bridge && rm -rf auth && npm install @whiskeysockets/baileys@6 --save && pm2 restart wa-bridge && sleep 15 && pm2 logs wa-bridge --lines 10 --nostream
+
+Wait about a minute. Near the end you should see:  "pairing QR ready"
+
+STEP 4 - Scan (Asad + Ahsan together)
+Open the same status link you use, then click "Link WhatsApp".
+On the store phone: WhatsApp > Linked devices > Link a device > scan the QR on the screen.
+Scan quickly; the code changes every 20 seconds (the page refreshes itself).
+Within about 20 seconds the status page should say: WhatsApp  connected
+
+IF IT STILL FAILS: in Cloud Shell paste
+pm2 logs wa-bridge --lines 30 --nostream
+and send Claude a screenshot.
+
+KEEP IT CONNECTED: keep the store phone charged and online. If the phone is offline for about 2 weeks,
+WhatsApp unlinks the bridge again.
