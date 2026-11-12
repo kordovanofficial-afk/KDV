@@ -49,7 +49,7 @@
  * - Webhook + hourly cron both fully operational
  */
 
-const WORKER_VERSION = '5.3-wa-direct';     // returned by /health — confirms a deploy
+const WORKER_VERSION = '5.4-wa-complete';     // returned by /health — confirms a deploy
 const COD_MATCH_TOLERANCE = 1;                // PKR; PostEx vs Shopify outstanding
 const POSTEX_BASE  = 'https://api.postex.pk/services/integration/api/order/v1';
 const SHOPIFY_API  = '2024-01';
@@ -69,6 +69,15 @@ const WA_HOURS_END   = 21;
 const WA_MAX_TRIES   = 24;     // ~24h of hourly retries, then give up
 const WA_QUEUE_CAP   = 12;     // max drained per cron tick
 const STORE_URL      = 'https://kordovanleather.com';
+
+// v5.4: a message that arrives late is worse than none ("your order shipped"
+// three days after it was delivered). Anything older than this when the drain
+// reaches it is dropped and marked sent, never delivered.
+const WA_STALE_H = { placed: 24, confirmack: 6, cancelack: 6, cancellate: 6,
+                     dispatched: 36, ofd: 10, delivered: 48, review: 72, recover: 20 };
+// Not urgent → wait for daylight (09–21 PKT) like marketing, but keep txn priority.
+const WA_DAYLIGHT_REFS = ['dispatched', 'delivered'];
+const WA_DISPATCH_WINDOW_H = 72;   // only orders fulfilled in the last 72h get "on its way" (no backlog blasts)
 
 // ─── Abandoned checkout recovery (MARKETING — see guardrails on runAbandoned) ─
 const WA_AC_MIN_AGE_H = 2;            // give them time to come back on their own
@@ -94,6 +103,7 @@ export default {
       // called and confirmations silently piled up. Each step is isolated so one
       // failure can no longer stop the ones after it.
       const step = async (name, fn) => { try { await fn(env); } catch (e) { console.error(`[cron] ${name} failed:`, e.message); } };
+      await step('waReset54', waReset54);                     // one-time: clear the outage backlog before anything sends
       await step('waDrain', waDrain);                         // send anything queued, plus earlier retries
       await step('runPollSync', runPollSync);                 // payment sync
       await step('runPrepaidDeliveryPass', runPrepaidDeliveryPass);
@@ -550,6 +560,18 @@ async function waDrain(env) {
     // untouched (no `tries` increment, so holding overnight cannot burn through
     // the retry budget and give up on it).
     if (job.kind === 'mktg' && !hoursOpen) { out.heldMarketing++; continue; }
+
+    // v5.4: drop anything that is no longer true or timely.
+    const suffix = String(job.ref || '').split(':').pop();
+    const maxH = WA_STALE_H[suffix];
+    if (maxH && job.firstAt && (Date.now() - job.firstAt) > maxH * 3600_000) {
+      out.stale = (out.stale || 0) + 1;
+      await env.SYNC_KV.put(`wasent:${job.ref}`, 'stale', { expirationTtl: 60 * 60 * 24 * 30 });
+      await env.SYNC_KV.delete(k.name);
+      await env.SYNC_KV.delete(`waqref:${job.ref}`);
+      continue;
+    }
+    if (WA_DAYLIGHT_REFS.includes(suffix) && !hoursOpen) { out.heldMarketing++; continue; }
     out.drained++;
 
     seenRefs.add(job.ref);
@@ -587,6 +609,39 @@ async function waDrain(env) {
       }
     }
   }
+  return out;
+}
+
+/**
+ * v5.4 one-time cleanup, runs on the first cron after deploy. The bridge was
+ * down from Sep 30 to Nov 12, so the queue holds weeks of re-queued thank-yous
+ * and delivery notices that are no longer true. Everything except a fresh
+ * (<24h) order confirmation is suppressed (marked sent, never delivered), and
+ * the prepaid pass re-seeds so it does not re-queue a month of old deliveries.
+ */
+async function waReset54(env) {
+  if (!env.SYNC_KV || await env.SYNC_KV.get('wa:reset54')) return { skipped: true };
+  const out = { kept: 0, suppressed: 0 };
+  let cursor;
+  do {
+    const page = await env.SYNC_KV.list({ prefix: 'waq:', limit: 1000, cursor });
+    for (const k of page.keys) {
+      const raw = await env.SYNC_KV.get(k.name);
+      let job = null; try { job = JSON.parse(raw); } catch {}
+      const fresh = job && String(job.ref || '').endsWith(':placed')
+        && job.firstAt && (Date.now() - job.firstAt) < 24 * 3600_000;
+      if (fresh) { out.kept++; continue; }
+      if (job?.ref) {
+        await env.SYNC_KV.put(`wasent:${job.ref}`, 'reset54', { expirationTtl: 60 * 60 * 24 * 30 });
+        await env.SYNC_KV.delete(`waqref:${job.ref}`);
+      }
+      await env.SYNC_KV.delete(k.name);
+      out.suppressed++;
+    }
+    cursor = page.list_complete ? null : page.cursor;
+  } while (cursor);
+  await env.SYNC_KV.put('wa:reset54', JSON.stringify({ at: new Date().toISOString(), ...out }));
+  console.log(`[reset54] kept=${out.kept} suppressed=${out.suppressed}`);
   return out;
 }
 
@@ -661,7 +716,7 @@ async function waStatus(env) {
 // as the page, the star rating would be a lie. Held reviews are counted and
 // unpublished, which is honest and still protects the page.
 
-const RV_DELAY_DAYS  = 3;      // after delivery — long enough to have worn it
+const RV_DELAY_DAYS  = 2;      // after delivery (Founder: 2 days) — long enough to have used it
 const RV_MIN_PUBLISH = 3.5;    // below this → held for you to resolve first
 const RV_HOLD_DAYS   = 7;      // unresolved holds auto-publish after this
 const RV_BATCH       = 15;     // requests sent per cron tick
@@ -670,13 +725,14 @@ const RV_TOKEN_DAYS  = 45;
 const rvToken = () => Math.random().toString(36).slice(2, 8) + Math.random().toString(36).slice(2, 8);
 
 function msgReviewRequest(order, link) {
-  return `${waFirstName(order)}, hope you are enjoying your Kordovan 🙂
+  return `${waFirstName(order)}, we hope your Kordovan piece is treating you well 🙂
 
-Would you take 30 seconds to tell us how it is? It genuinely helps the next customer decide.
-
+If you have a minute, an honest review on Google helps other people find a leather brand they can trust:
 ${link}
 
-If anything is not right instead, just reply here and we will fix it.
+And if anything is not right, just reply here first. We would rather fix it.
+
+— Kordovan
 _Reply STOP to stop updates._`;
 }
 
@@ -726,7 +782,15 @@ async function runReviewRequests(env) {
     const job = JSON.parse(raw);
     if (Date.now() < job.dueAt) continue;
 
-    const link = `${workerBase(env)}/r/${job.token}`;
+    // v5.4: the ask points to our Google Business profile (Founder, Nov 12).
+    // No link configured, or the ask is more than 3 days overdue (bridge was
+    // down) → drop it quietly rather than send it late or pile up a backlog.
+    const link = String(env.GOOGLE_REVIEW_URL || '').trim();
+    if (!link || Date.now() - job.dueAt > 3 * 86400_000) {
+      await env.SYNC_KV.delete(k.name);
+      await env.SYNC_KV.put(`rvdone:${job.orderId}`, link ? 'stale' : 'no_link', { expirationTtl: 60 * 60 * 24 * 365 });
+      continue;
+    }
     const fake = { name: job.orderName, customer: { first_name: job.first } };
     const r = await waEnqueue(env, {
       to: job.phone, text: msgReviewRequest(fake, link),
@@ -1052,6 +1116,37 @@ ${STORE_URL}
 _Reply STOP to stop updates._`;
 }
 
+function msgDispatched(order, tn) {
+  return `${waFirstName(order)}, your Kordovan order *${order.name}* is on its way 📦
+
+Courier: PostEx
+Tracking number: *${tn}*
+Track it: ${STORE_URL}/pages/track-order
+
+Most orders arrive in 2–4 working days. The rider will call before delivery${isPrepaid(order) ? '.' : ', so please keep your phone close and the cash ready.'}
+
+— Kordovan
+_Reply STOP to stop updates._`;
+}
+
+/**
+ * v5.4: "on its way" with the tracking number, once per order. Only for orders
+ * fulfilled in the last WA_DISPATCH_WINDOW_H hours, so switching this on never
+ * messages people whose parcels left weeks ago. Skipped once the parcel is
+ * already out for delivery or delivered (that message says more).
+ */
+async function waMaybeDispatched(env, o, tn, status) {
+  const st = String(status || '').toLowerCase();
+  if (!tn || st === DELIVERED_STATUS.toLowerCase() || st === OUT_FOR_DELIVERY
+      || RTO_STATUSES.map(x => x.toLowerCase()).includes(st)) return null;
+  const times = (o.fulfillments || []).map(f => Date.parse(f.created_at)).filter(Number.isFinite);
+  const shippedAt = times.length ? Math.min(...times) : null;
+  if (!shippedAt || Date.now() - shippedAt > WA_DISPATCH_WINDOW_H * 3600_000) return null;
+  const phone = normalisePK(o.phone || o.shipping_address?.phone || o.customer?.phone);
+  if (!phone) return null;
+  return waEnqueue(env, { to: phone, text: msgDispatched(o, tn), ref: `${o.id}:dispatched` });
+}
+
 /**
  * Breadcrumb trail for /shopify-order. Keeps the last 8 hits so a silent
  * failure can be told apart from a rejected one. Shopify stamps its own
@@ -1148,9 +1243,7 @@ function waAbandonedOn(env) {
 
 function msgAbandoned(co, firstItem) {
   const name = (co.customer?.first_name || co.shipping_address?.first_name || '').trim().split(' ')[0] || 'there';
-  return `${name}, you left something behind 👀
-
-Your *${firstItem}* is still in your cart.
+  return `${name}, your *${firstItem}* is still waiting in your cart.
 
 Here is *10% off* if you complete your order today — use code *${WA_AC_CODE}* at checkout.
 
@@ -1345,7 +1438,7 @@ async function handleInbound(body, env) {
   let pend; try { pend = JSON.parse(pendRaw); } catch { return; }
 
   const isConfirm = ['confirm', 'confirmed', 'yes', 'ok', 'okay', 'haan', 'han', 'jee', 'ji', 'theek'].includes(norm);
-  const isCancel  = ['cancel', 'cancelled', 'cancelorder', 'no'].includes(norm);
+  const isCancel  = ['cancel', 'cancelled', 'cancelorder'].includes(norm);   // v5.4: bare "no" removed — too easy to cancel a real order by accident
 
   if (isConfirm) {
     await tagOrderSafe(env, pend.orderId, ['✅ WA CONFIRMED']);
@@ -1634,6 +1727,7 @@ async function runPollSync(env) {
       try {
         const postexData = await trackSinglePostEx(tn, env.POSTEX_TOKEN);
         const status     = postexData.transactionStatus || '';
+        try { await waMaybeDispatched(env, o, tn, status); } catch (e) { log(`${o.name} dispatch msg ERROR: ${e.message}`); }
 
         if (status === DELIVERED_STATUS) {
           let cap;
@@ -1848,7 +1942,9 @@ async function runPrepaidDeliveryPass(env) {
     // sending a thing. Switching this on cold would otherwise blast a month of
     // customers who got their order weeks ago — the worst failure mode here, and
     // the kind that gets a WhatsApp number blocked.
-    const seeding = !(await env.SYNC_KV.get('ppass:init'));
+    // v5.4: re-seed once as well — the 6-week bridge outage left every prepaid
+    // delivery since Sep 30 without a wasent: marker.
+    const seeding = !(await env.SYNC_KV.get('ppass:init')) || !(await env.SYNC_KV.get('ppass:seed54'));
     if (seeding) log('FIRST RUN — seeding a baseline, no messages will be sent this pass');
 
     for (const o of orders) {
@@ -1858,6 +1954,7 @@ async function runPrepaidDeliveryPass(env) {
       try {
         const status = (await trackSinglePostEx(tn, env.POSTEX_TOKEN)).transactionStatus || '';
         const phone  = normalisePK(o.phone || o.shipping_address?.phone || o.customer?.phone);
+        try { await waMaybeDispatched(env, o, tn, status); } catch (e) { log(`${o.name} dispatch msg ERROR: ${e.message}`); }
 
         if (status === DELIVERED_STATUS) {
           if (seeding) {
@@ -1900,6 +1997,7 @@ async function runPrepaidDeliveryPass(env) {
 
     if (seeding) {
       await env.SYNC_KV.put('ppass:init', new Date().toISOString());
+      await env.SYNC_KV.put('ppass:seed54', new Date().toISOString());
       log(`Baseline set on ${result.seeded} orders — real messages begin next run`);
     }
   } catch (e) {

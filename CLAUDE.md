@@ -204,7 +204,7 @@ add only a short rule and a pointer here.
 - Namespace page wrappers (a `.kv-coll` class collision happened before).
 
 ## 📦 TOOLS
-- **PostEx Sync Worker** `kordovan-postex-sync` (`tools/postex-worker/worker.js`, **v5.2 live; v5.3-wa-direct READY Nov 12** (fixes WhatsApp never sent: new-order confirmations now sent directly; cron drains WA first)).
+- **PostEx Sync Worker** `kordovan-postex-sync` (`tools/postex-worker/worker.js`, **v5.2 live; v5.4-wa-complete READY Nov 12** (direct sends, dispatch+tracking msg, Google review ask 2d after delivery via env GOOGLE_REVIEW_URL, stale-message drop, one-time outage backlog purge, daylight hold for dispatched/delivered)).
   - Deploys are MANUAL: the Founder pastes the code into Cloudflare and clicks Deploy. Send it as a `.txt`, because
     Windows blocks `.js` downloads.
   - Verify with `/health` (`version`) plus a `workers_get_worker_code` diff.
