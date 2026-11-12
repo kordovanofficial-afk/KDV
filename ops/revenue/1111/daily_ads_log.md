@@ -46,3 +46,8 @@ Sale-to-date Nov 8–11, active ads. Shopify = live orders whose last visit carr
 *catalogue clicks often arrive as Facebook_UA/untagged.
 Totals: spend ≈ 25,449 incl. S3 971; Shopify 46 live orders since Nov 8 00:00, ≈ PKR 152.9k subtotal.
 Recommendation for the Founder's yes: S4 ad set 1,000 → 2,000/day until the sale ends (total back to 8,000). Everything else unchanged.
+
+## Nov 12 12:48 PKT: final-day check (REPORT ONLY)
+Sale-to-date Nov 8–12 morning (active ads, Meta): Retarget 7,031 / 11 purch (639) · H1 Mocha 5,871 / 6 (979) · S4 carousel 5,178 / 7 (740) · S1 4,374 / 3 (1,458) · S2 4,335 / 5 (867) · W01 gloves 2,860 / 1 (2,860). Plus S3 971 and W-RT1 ~1,756 (both paused). Total ≈ PKR 32.4k.
+Shopify: 54 live orders since Nov 8 00:00.
+FLAG for the Founder: W01 gloves in the sale window ≈ 2,860 for ~2 Shopify orders (~1,430 each), above the 1,000 gloves line. It sits in the approved ≈3,000/day bridge budget; recommend a decision at the Nov 13 check-in (lifetime ~1,000 per order, so borderline). No changes made. The sale ends tonight; the 11.11 OVER task resets.
