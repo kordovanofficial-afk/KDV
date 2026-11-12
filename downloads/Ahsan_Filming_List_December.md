@@ -1,3 +1,5 @@
+> ⚠️ SUPERSEDED (Founder, Nov 12): crafting is outsourced and the staff won't film. Shots now come from the Founder's office (desk demos) + website photos + AI. The weekly social pack carries the office shot list.
+
 # Ahsan: filming list for December ads
 **For:** Ahsan Khan · **From:** Omar (marketing) · **Start:** Nov 16 · **Send everything by:** the dates below
 Send all files on the Kordovan WhatsApp **as a Document** (not as a photo or video), so the quality stays full.

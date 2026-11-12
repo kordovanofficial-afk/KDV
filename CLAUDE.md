@@ -44,6 +44,11 @@ add only a short rule and a pointer here.
 - **Ads Operating System: `ops/marketing/ADS_OPERATING_SYSTEM.md`** (TOF/TEST/MOF/BOF, tags in the ad name = utm_content, per-PRODUCT CPA ceilings, stop/scale rules, Monday weekly read). Funnel live target Nov 16; BF runs inside it.
 - Between sales (Nov 13–25) Meta ≈ 3,000/day on proven ads (Retarget 1,000 · H1 1,300 · W01 600). BF Nov 26–30: +2,000/day on top.
 
+## 🎥 CONTENT REALITY (Founder, Nov 12)
+- Crafting is OUTSOURCED: **no workshop/craft/stitching footage exists or can be shot**. Staff won't film in the store. Available material: website product photos, GPT/AI images (and AI motion from them), and the **Founder's own office clips** (hands + product on his desk), which Claude edits (cut, on-screen text, end card).
+- Every shot list, social pack and ad plan must use only those sources. "Real" proof = store/office phone photos (e.g. Ordered vs Arrived), the Founder's own used wallet (patina), desk demos.
+- Claims: until the Founder confirms, write "handcrafted in Pakistan", not "our workshop" / "made in our workshop" (crafting is outsourced).
+
 ## ⏱ HOW I RUN (Founder, Nov 7): scheduled, not continuous (protects the Founder's credit limits)
 - **Team check-in every 2 days at 11:59 PKT** (`trig_01FZUWyfpBhnn9BUytoB2t45`).
   1. Read HQ assignments, decisions and Boardroom, and act on them.

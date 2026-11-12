@@ -31,8 +31,8 @@ Started Nov 10 2026 (Founder: "pinpoint the exact formula that sells, not just r
 |---|---|---|---|---|
 | 1 | FAQ "You asked. We answered." | funnel slide | real leather? COD? returns? | none: GPT-makeable |
 | 2 | "What you ordered vs what arrived" | static-formats reel | a real unboxing photo of what actually arrives (fights the fear of fakes → fewer refusals) | REAL photo only |
-| 3 | Workshop behind-the-scenes | funnel slide | cutting, stitching, edge finishing | real footage (Ahsan) |
-| 4 | Patina before & after | funnel slide | new vs 2-year-old wallet | real used wallet |
+| 3 | ~~Workshop behind-the-scenes~~ → **Office desk demos** | funnel slide | Founder's hands + product: pocket test, flex/water test, unboxing, what fits | Founder films, Claude edits (no workshop footage: crafting is outsourced) |
+| 4 | Patina before & after | funnel slide | new vs 2-year-old wallet | the Founder's own used wallet, shot in the office |
 | 5 | Value graph (cost per year of use) | static-formats reel | Rs X lasting years vs cheap wallets replaced yearly | only honest, defensible numbers |
 | 6 | "Our mistake" | static-formats reel | "Our mistake: we made too many bags" for clearance | only when it's true |
 | 7 | Countdown (3/2/1 days left) | funnel slide | real sale dates only | sales only |
