@@ -41,6 +41,7 @@ add only a short rule and a pointer here.
   `descriptionHtml` **plus** `custom.editorial`. Grep the live values; don't trust old "done" notes.
 
 ## 🗓 ACTIVE PLAN: `ops/PLAN_2026-11-12_to_12-31.md` (Founder approved Nov 12). Check-ins work from it first.
+- **Ads Operating System: `ops/marketing/ADS_OPERATING_SYSTEM.md`** (TOF/TEST/MOF/BOF, tags in the ad name = utm_content, per-PRODUCT CPA ceilings, stop/scale rules, Monday weekly read). Funnel live target Nov 16; BF runs inside it.
 - Between sales (Nov 13–25) Meta ≈ 3,000/day on proven ads (Retarget 1,000 · H1 1,300 · W01 600). BF Nov 26–30: +2,000/day on top.
 
 ## ⏱ HOW I RUN (Founder, Nov 7): scheduled, not continuous (protects the Founder's credit limits)
