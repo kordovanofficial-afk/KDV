@@ -74,6 +74,21 @@ const msgRetryCounterCache = {
   del: k => retryMap.delete(k), flushAll: () => retryMap.clear(),
 };
 
+// ─── Reply-to address (Nov 12 2026 fix) ──────────────────────────────────────
+// WhatsApp now moves 1:1 chats to hidden "LID" addresses (<id>@lid). Once a
+// customer has written to us, their chat lives on that address; sending to their
+// phone-number address afterwards lands in a different session and shows
+// "Waiting for this message" or never arrives. So we remember the address each
+// customer last wrote from and always reply there.
+const LID_FILE = process.env.LID_MAP || './lid-map.json';
+const lidMap = new Map();
+try { for (const [k, v] of JSON.parse(fs.readFileSync(LID_FILE, 'utf8'))) lidMap.set(k, v); } catch (_) {}
+function rememberLid(phone, jid) {
+  if (!phone || !jid || !jid.endsWith('@lid') || lidMap.get(phone) === jid) return;
+  lidMap.set(phone, jid);
+  fs.writeFile(LID_FILE, JSON.stringify([...lidMap]), () => {});
+}
+
 let sock = null;
 let connected = false;
 let currentQR = null;          // data-URL of the pairing QR, null once linked
@@ -236,6 +251,7 @@ async function connect() {
           continue;
         }
 
+        rememberLid(from, jid);
         stats.lastInbound = { from, at: new Date().toISOString() };
         await fetch(WORKER_INBOUND, {
           method: 'POST',
@@ -329,9 +345,14 @@ app.post('/send', (req, res, next) => {
   // is a ban signal — and the "not on WhatsApp" answer is exactly what tells the
   // Worker to flag the order for a phone call instead.
   try {
-    const [found] = await sock.onWhatsApp(num);
-    if (!found?.exists) return res.json({ ok: true, sent: false, reason: 'not_on_whatsapp' });
-    const job = { jid: found.jid, text, ref, kind: kind === 'mktg' ? 'mktg' : 'txn', prio: Number(prio) || 0 };
+    const lid = lidMap.get(num);   // they've written to us → reply where they wrote from
+    let target = lid;
+    if (!target) {
+      const [found] = await sock.onWhatsApp(num);
+      if (!found?.exists) return res.json({ ok: true, sent: false, reason: 'not_on_whatsapp' });
+      target = found.jid;
+    }
+    const job = { jid: target, text, ref, kind: kind === 'mktg' ? 'mktg' : 'txn', prio: Number(prio) || 0 };
     // Priority 0 (confirm/cancel asks and replies in a live conversation) goes
     // to the FRONT — it must not sit behind a batch of delivery notices.
     if (job.prio === 0) queue.unshift(job); else queue.push(job);
