@@ -49,7 +49,7 @@
  * - Webhook + hourly cron both fully operational
  */
 
-const WORKER_VERSION = '5.2-capture-lock';     // returned by /health — confirms a deploy
+const WORKER_VERSION = '5.3-wa-direct';     // returned by /health — confirms a deploy
 const COD_MATCH_TOLERANCE = 1;                // PKR; PostEx vs Shopify outstanding
 const POSTEX_BASE  = 'https://api.postex.pk/services/integration/api/order/v1';
 const SHOPIFY_API  = '2024-01';
@@ -88,12 +88,18 @@ const TRACK_ALLOWED_ORIGINS = [
 export default {
   async scheduled(event, env, ctx) {
     ctx.waitUntil((async () => {
-      await runPollSync(env);              // payment sync FIRST — never blocked by WhatsApp
-      await runPrepaidDeliveryPass(env);   // notify-only twin for prepaid orders; never marks paid
-      await runAbandonedCheckouts(env);    // no-op unless WA_ABANDONED === 'on'
-      await runReviewRequests(env);        // ask buyers whose delay has elapsed
-      await rvReleaseStale(env);           // held reviews you never got to
-      await waDrain(env);                  // send anything queued, plus earlier retries
+      // v5.3 (Nov 12 2026): WhatsApp drain runs FIRST. Before, it ran last and the
+      // earlier steps (one PostEx call per open COD order, abandoned checkouts…)
+      // used up the invocation's subrequest/CPU budget, so the bridge was never
+      // called and confirmations silently piled up. Each step is isolated so one
+      // failure can no longer stop the ones after it.
+      const step = async (name, fn) => { try { await fn(env); } catch (e) { console.error(`[cron] ${name} failed:`, e.message); } };
+      await step('waDrain', waDrain);                         // send anything queued, plus earlier retries
+      await step('runPollSync', runPollSync);                 // payment sync
+      await step('runPrepaidDeliveryPass', runPrepaidDeliveryPass);
+      await step('runAbandonedCheckouts', runAbandonedCheckouts);
+      await step('runReviewRequests', runReviewRequests);
+      await step('rvReleaseStale', rvReleaseStale);
     })());
   },
 
@@ -465,6 +471,37 @@ async function waSendViaBridge(env, to, text, ref, kind) {
     }),
   });
   return res.json();
+}
+
+/**
+ * v5.3: send ONE just-queued job straight away, found by its ref (KV get is
+ * read-your-write in the same location; KV list() can lag ~60s, which is why the
+ * old "enqueue then waDrain()" pattern usually sent nothing). On failure the job
+ * simply stays queued for the cron drain.
+ */
+async function waSendNow(env, ref) {
+  if (!env.SYNC_KV || !ref) return { ok: false, error: 'no_kv_or_ref' };
+  const key = await env.SYNC_KV.get(`waqref:${ref}`);
+  if (!key) return { ok: false, error: 'not_queued' };
+  const raw = await env.SYNC_KV.get(key);
+  if (!raw) return { ok: false, error: 'job_missing' };
+  let job; try { job = JSON.parse(raw); } catch { return { ok: false, error: 'bad_job' }; }
+  if (await env.SYNC_KV.get(`wasent:${ref}`)) { await env.SYNC_KV.delete(key); return { ok: true, duplicate: true }; }
+  if (job.kind === 'mktg' && !waWithinHours()) return { ok: true, held: 'marketing_hours' };
+  let r;
+  try { r = await waSendViaBridge(env, job.to, job.text, job.ref, job.kind); }
+  catch (e) { r = { ok: false, error: e.message }; }
+  if (r.ok && r.sent) {
+    await env.SYNC_KV.put(`wasent:${ref}`, '1', { expirationTtl: 60 * 60 * 24 * 30 });
+    await env.SYNC_KV.delete(key);
+    await env.SYNC_KV.delete(`waqref:${ref}`);
+  } else if (r.ok && r.sent === false && r.reason === 'not_on_whatsapp') {
+    await env.SYNC_KV.delete(key);
+    await env.SYNC_KV.delete(`waqref:${ref}`);
+    const orderId = (ref || '').split(':')[0];
+    if (orderId) await tagOrderSafe(env, orderId, ['📞 NO WHATSAPP — CALL']);
+  }
+  return r;
 }
 
 /**
@@ -1269,7 +1306,7 @@ async function handleNewOrder(order, env) {
       trace.stage = 'tagging';
       trace.tagError = await tagOrderSafe(env, order.id, ['⏳ WA SENT']);
       trace.stage = 'draining';
-      trace.drain = await waDrain(env);   // try immediately; the queue is the safety net
+      trace.drain = await waSendNow(env, `${order.id}:placed`);   // v5.3: send this one directly; the queue + cron is the safety net
       trace.stage = 'done';
     } else {
       trace.stage = 'enqueue_refused';
@@ -1318,7 +1355,7 @@ async function handleInbound(body, env) {
       text: `Shukriya! Your order *${pend.name}* is confirmed ✅\n\nWe will dispatch it shortly and send you the tracking details.\n\n— Kordovan`,
       ref: `${pend.orderId}:confirmack`,
     });
-    await waDrain(env);
+    await waSendNow(env, `${pend.orderId}:confirmack`);
     return;
   }
 
@@ -1364,7 +1401,7 @@ async function handleCancelRequest(env, phone, pend, rawText) {
       text: `Your order *${pend.name}* has already been dispatched, so we cannot cancel it automatically.\n\nOur team will call you shortly to sort this out.\n\n— Kordovan`,
       ref: `${pend.orderId}:cancellate`,
     });
-    await waDrain(env);
+    await waSendNow(env, `${pend.orderId}:cancellate`);
     return;
   }
 
@@ -1399,7 +1436,7 @@ async function handleCancelRequest(env, phone, pend, rawText) {
     text: `Your order *${pend.name}* has been cancelled as requested.\n\nIf that was a mistake, just reply here and we will help you reorder.\n\n— Kordovan`,
     ref: `${pend.orderId}:cancelack`,
   });
-  await waDrain(env);
+  await waSendNow(env, `${pend.orderId}:cancelack`);
 }
 
 // ─── Token Management ─────────────────────────────────────────────────────────

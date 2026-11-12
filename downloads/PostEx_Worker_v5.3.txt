@@ -1,0 +1,2094 @@
+/**
+ * KORDOVAN × POSTEX SYNC WORKER v6.0
+ *
+ * v6.0 (Jul 27 2026) — WhatsApp order confirmation + delivery updates.
+ *   POST /shopify-order?s=WEBHOOK_TOKEN Shopify orders/create webhook
+ *   POST /wa-inbound                    replies forwarded by the bridge
+ *   GET  /wa-status?s=SYNC_SECRET       queue depth + bridge reachability
+ *
+ * Messages are QUEUED IN KV, never sent inline, and drained on the hourly cron.
+ * The bridge lives on a small VM that can reboot or lose network; queueing means
+ * nothing is lost when it does.
+ * Requires env: BRIDGE_URL, BRIDGE_SECRET, WEBHOOK_TOKEN.
+ *
+ * v5.2
+ *
+ * v5.2 (Nov 2 2026) — same-second race (KDV#22707: webhook + poll captured 3 s
+ * apart). Every COD capture now runs through codCaptureOnce(): a per-order KV
+ * lock `caplock:<orderId>` (120 s TTL, owner token re-read to confirm), the
+ * outstanding balance re-read INSIDE the lock right before capturing, and a
+ * post-capture re-read that writes one "Over-captured by X, check manually"
+ * note (KV `overcap:<id>`) if the balance went negative. KV is not atomic, so
+ * the lock narrows the window and the post-check catches anything that slips.
+ *
+ * v5.1 (Nov 1 2026) — edited / part-paid orders. Marking a delivered COD order
+ * paid now records the order's CURRENT Shopify `total_outstanding`, re-read
+ * fresh just before capture — never `total_price` (the pre-edit total, which
+ * ignores card/bank prepayments). Orders with outstanding ≤ 0 are skipped as
+ * already handled, whatever their financial_status label. If PostEx reports a
+ * COD amount that differs from outstanding by more than PKR 1, nothing is
+ * captured and a "check manually" note is written once (KV `codmm:<id>`).
+ * See resolveCodCapture(). /health now returns `version`.
+ *
+ * v5.0 (Jul 26 2026) — adds a PUBLIC tracking endpoint for the storefront:
+ *   GET /track?cn=<trackingNumber>
+ * so the Track Your Order page can show live status in a popup without the
+ * PostEx token ever reaching the browser.
+ *
+ * ⚠️ SECURITY — DO NOT MAKE /track A PASSTHROUGH ⚠️
+ * /track is public and keyed only by a tracking number, and PostEx numbers are
+ * guessable. The PostEx `dist` payload contains customer name, phone, delivery
+ * address and the COD amount. Returning it raw would let anyone enumerate
+ * numbers and harvest the customer base. Only the allowlist in sanitiseTrack()
+ * may leave this Worker. Never `return Response.json(dist)`.
+ *
+ * v4.0 behaviour is unchanged:
+ * - Individual PostEx track calls instead of bulk (bulk misses Delivered status)
+ * - KV token renewal fixed — always refreshes before expiry
+ * - note_attributes tracking extraction added (hxs_courier_tracking)
+ * - Webhook + hourly cron both fully operational
+ */
+
+const WORKER_VERSION = '5.3-wa-direct';     // returned by /health — confirms a deploy
+const COD_MATCH_TOLERANCE = 1;                // PKR; PostEx vs Shopify outstanding
+const POSTEX_BASE  = 'https://api.postex.pk/services/integration/api/order/v1';
+const SHOPIFY_API  = '2024-01';
+
+const DELIVERED_STATUS = 'Delivered';
+const RTO_STATUSES     = ['Returned', 'Out For Return'];
+const OUT_FOR_DELIVERY = 'out for delivery';   // matched lowercase; PostEx casing varies
+
+// ─── WhatsApp ───────────────────────────────────────────────────────────────
+// Quiet hours apply to MARKETING only (kind: 'mktg'). Transactional messages —
+// order confirmations, delivery updates — go out 24/7: an order placed at 2am
+// needs its confirm/cancel window immediately, and the customer is expecting to
+// hear from us because they just checked out. Unsolicited offers at 2am are the
+// thing that earns spam reports, so those still wait for morning.
+const WA_HOURS_START = 9;      // 09:00 PKT — marketing only
+const WA_HOURS_END   = 21;
+const WA_MAX_TRIES   = 24;     // ~24h of hourly retries, then give up
+const WA_QUEUE_CAP   = 12;     // max drained per cron tick
+const STORE_URL      = 'https://kordovanleather.com';
+
+// ─── Abandoned checkout recovery (MARKETING — see guardrails on runAbandoned) ─
+const WA_AC_MIN_AGE_H = 2;            // give them time to come back on their own
+const WA_AC_MAX_AGE_H = 24;           // older than this and the moment has passed
+const WA_AC_CODE      = 'COMEBACK10'; // NEVER PAYONLINE10 — that stays reserved
+const WA_AC_CAP_DAYS  = 30;           // at most one recovery message per number
+const WA_AC_BATCH     = 10;           // per cron tick
+
+// Storefront origins allowed to call the public /track endpoint.
+const TRACK_ALLOWED_ORIGINS = [
+  'https://kordovanleather.com',
+  'https://www.kordovanleather.com',
+];
+
+// ─── Entry Point ──────────────────────────────────────────────────────────────
+
+export default {
+  async scheduled(event, env, ctx) {
+    ctx.waitUntil((async () => {
+      // v5.3 (Nov 12 2026): WhatsApp drain runs FIRST. Before, it ran last and the
+      // earlier steps (one PostEx call per open COD order, abandoned checkouts…)
+      // used up the invocation's subrequest/CPU budget, so the bridge was never
+      // called and confirmations silently piled up. Each step is isolated so one
+      // failure can no longer stop the ones after it.
+      const step = async (name, fn) => { try { await fn(env); } catch (e) { console.error(`[cron] ${name} failed:`, e.message); } };
+      await step('waDrain', waDrain);                         // send anything queued, plus earlier retries
+      await step('runPollSync', runPollSync);                 // payment sync
+      await step('runPrepaidDeliveryPass', runPrepaidDeliveryPass);
+      await step('runAbandonedCheckouts', runAbandonedCheckouts);
+      await step('runReviewRequests', runReviewRequests);
+      await step('rvReleaseStale', rvReleaseStale);
+    })());
+  },
+
+  async fetch(request, env, ctx) {
+    const url  = new URL(request.url);
+    const cors = {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, X-Sync-Secret',
+    };
+
+    if (request.method === 'OPTIONS') return new Response(null, { headers: cors });
+
+    if (url.pathname === '/health')
+      return Response.json({ status: 'ok', version: WORKER_VERSION, ts: new Date().toISOString() }, { headers: cors });
+
+    // ── Reviews ──
+    // /r/<token> is public by design: the token IS the authorisation, and it
+    // only exists because that person took delivery of that order.
+    if (url.pathname.startsWith('/r/')) {
+      const token = url.pathname.slice(3).replace(/[^a-z0-9]/gi, '');
+      if (!token) return rvPage('Not found', 'That link is not valid.');
+      if (request.method === 'POST') return rvSubmit(env, token, await request.formData());
+      return rvForm(env, token);
+    }
+    if (url.pathname === '/reviews') {
+      if (!waAdminOk(url, env)) return new Response('nope', { status: 401 });
+      return Response.json(await rvPending(env), { headers: cors });
+    }
+    if (url.pathname === '/review-approve') {
+      if (!waAdminOk(url, env)) return new Response('nope', { status: 401 });
+      const key = url.searchParams.get('key') || '';
+      if (!key.startsWith('rvhold:')) return Response.json({ ok: false, error: 'bad_key' }, { headers: cors });
+      return Response.json(await rvApprove(env, key, url.searchParams.get('drop') === '1'), { headers: cors });
+    }
+
+    // ─── PUBLIC: storefront tracking lookup ───────────────────────────────────
+    if (url.pathname === '/track') {
+      return handlePublicTrack(request, env, ctx);
+    }
+
+    // One-off diagnostic: returns ONLY the key names PostEx sends, never the
+    // values, so the sanitiseTrack allowlist can be checked against reality
+    // without leaking customer data. Safe to leave in place (secret-protected).
+    if (url.pathname === '/track-debug') {
+      if (request.headers.get('X-Sync-Secret') !== env.SYNC_SECRET)
+        return Response.json({ error: 'Unauthorized' }, { status: 401, headers: cors });
+      const cn = url.searchParams.get('cn');
+      try {
+        const dist = await trackSinglePostEx(cn, env.POSTEX_TOKEN);
+        const historyKeys = Array.isArray(dist.transactionStatusHistory) && dist.transactionStatusHistory[0]
+          ? Object.keys(dist.transactionStatusHistory[0]) : null;
+        return Response.json({ keys: Object.keys(dist), historyItemKeys: historyKeys }, { headers: cors });
+      } catch (e) {
+        return Response.json({ error: e.message }, { status: 404, headers: cors });
+      }
+    }
+
+    // ⚠️ Read the body BEFORE returning. Once the fetch handler returns its
+    // Response, the request body stream is disposed — ctx.waitUntil keeps the
+    // Worker alive but NOT the body, so an await request.json() in there reads
+    // a cancelled stream and throws. Parse first, hand the plain object over.
+    if (url.pathname === '/webhook/postex') {
+      let payload = null;
+      try { payload = await request.json(); } catch (e) { console.error('postex webhook parse:', e.message); }
+      ctx.waitUntil(handleWebhook(payload, env));
+      return new Response('OK', { status: 200 });
+    }
+
+    if (url.pathname === '/sync') {
+      if (request.headers.get('X-Sync-Secret') !== env.SYNC_SECRET)
+        return Response.json({ error: 'Unauthorized' }, { status: 401, headers: cors });
+      const result = await runPollSync(env);
+      return Response.json(result, { headers: cors });
+    }
+
+    // Same job the cron runs, on demand. Handy for the first deploy: the very
+    // first call only seeds the baseline and sends nothing, so run it once by
+    // hand and read `seeded` before letting the hourly cron message anyone.
+    if (url.pathname === '/prepaid-sync') {
+      if (request.headers.get('X-Sync-Secret') !== env.SYNC_SECRET)
+        return Response.json({ error: 'Unauthorized' }, { status: 401, headers: cors });
+      return Response.json(await runPrepaidDeliveryPass(env), { headers: cors });
+    }
+
+    if (url.pathname === '/stats') {
+      if (request.headers.get('X-Sync-Secret') !== env.SYNC_SECRET)
+        return Response.json({ error: 'Unauthorized' }, { status: 401, headers: cors });
+      return Response.json(await getStats(env), { headers: cors });
+    }
+
+    // ─── WhatsApp ─────────────────────────────────────────────────────────────
+    // Authenticated with its OWN token, not SYNC_SECRET. The URL is stored in
+    // Shopify admin and echoed in delivery logs, so it must not carry the secret
+    // that also unlocks /sync, /stats and /wa-drain. SYNC_SECRET is still
+    // accepted so an already-registered webhook keeps working.
+    if (url.pathname === '/shopify-order') {
+      const s = url.searchParams.get('s');
+      const authed = Boolean(s) && (s === env.WEBHOOK_TOKEN || s === env.SYNC_SECRET);
+
+      // ?probe=1 → read the breadcrumb trail instead of processing an order.
+      if (authed && url.searchParams.get('probe') === '1')
+        return Response.json(await getWebhookHits(env), { headers: cors });
+
+      // Record EVERY hit, accepted or rejected, BEFORE the auth check. Without
+      // this there is no way to distinguish "Shopify never called" from
+      // "Shopify called and we turned it away" — and those need opposite fixes.
+      ctx.waitUntil(recordWebhookHit(env, {
+        method: request.method,
+        suppliedLength: s ? s.length : 0,
+        shopifyTopic:  request.headers.get('X-Shopify-Topic')       || null,
+        shopifyDomain: request.headers.get('X-Shopify-Shop-Domain') || null,
+      }, authed));
+
+      if (!authed) return Response.json(waAuthDiagnosis(s, env), { status: 401, headers: cors });
+
+      // Body first — see the note on /webhook/postex above.
+      let order = null;
+      try { order = await request.json(); } catch (e) { console.error('shopify-order parse:', e.message); }
+      ctx.waitUntil(handleNewOrder(order, env));
+      return new Response('OK', { status: 200 });   // ack fast; Shopify retries on slow
+    }
+
+    if (url.pathname === '/wa-inbound') {
+      if (request.headers.get('X-Bridge-Secret') !== env.BRIDGE_SECRET)
+        return Response.json({ error: 'Unauthorized' }, { status: 401, headers: cors });
+      let inbound = null;
+      try { inbound = await request.json(); } catch (e) { console.error('wa-inbound parse:', e.message); }
+      ctx.waitUntil(handleInbound(inbound, env));
+      return new Response('OK', { status: 200 });
+    }
+
+    if (url.pathname === '/wa-status') {
+      if (!waAdminOk(url, env))
+        return Response.json({ error: 'Unauthorized' }, { status: 401, headers: cors });
+      return Response.json(await waStatus(env), { headers: cors });
+    }
+
+    // EMERGENCY: throw away everything queued without sending it. Use when the
+    // queue has accumulated junk that must not reach customers. Requires an
+    // explicit confirm=yes so a stray click cannot wipe pending messages.
+    if (url.pathname === '/wa-purge') {
+      if (!waAdminOk(url, env))
+        return Response.json({ error: 'Unauthorized' }, { status: 401, headers: cors });
+      if (url.searchParams.get('confirm') !== 'yes')
+        return Response.json({ error: 'add &confirm=yes to actually purge' }, { status: 400, headers: cors });
+      return Response.json(await waPurge(env), { headers: cors });
+    }
+
+    if (url.pathname === '/wa-abandoned') {
+      if (!waAdminOk(url, env))
+        return Response.json({ error: 'Unauthorized' }, { status: 401, headers: cors });
+      return Response.json(await runAbandonedCheckouts(env), { headers: cors });
+    }
+
+    if (url.pathname === '/wa-drain') {
+      if (!waAdminOk(url, env))
+        return Response.json({ error: 'Unauthorized' }, { status: 401, headers: cors });
+      return Response.json(await waDrain(env), { headers: cors });
+    }
+
+    return Response.json({ error: 'Not found' }, { status: 404, headers: cors });
+  }
+};
+
+/**
+ * Admin auth for the WhatsApp operations endpoints.
+ *
+ * Accepts WEBHOOK_TOKEN as well as SYNC_SECRET. Cloudflare secrets cannot be
+ * read back from the dashboard, so an endpoint gated ONLY on SYNC_SECRET is
+ * unusable by the person who needs it in an emergency — which is exactly when
+ * these endpoints matter. WEBHOOK_TOKEN is scoped to this Worker and rotatable
+ * on its own, so widening to it costs nothing.
+ */
+function waAdminOk(url, env) {
+  const s = url.searchParams.get('s');
+  return Boolean(s) && (s === env.SYNC_SECRET || s === env.WEBHOOK_TOKEN);
+}
+
+// ─── PUBLIC TRACKING ──────────────────────────────────────────────────────────
+
+async function handlePublicTrack(request, env, ctx) {
+  const url    = new URL(request.url);
+  const origin = request.headers.get('Origin') || '';
+  const allow  = TRACK_ALLOWED_ORIGINS.includes(origin) ? origin : TRACK_ALLOWED_ORIGINS[0];
+
+  const headers = {
+    'Access-Control-Allow-Origin': allow,
+    'Content-Type': 'application/json',
+    'Cache-Control': 'public, max-age=60',
+  };
+
+  // Reject implausible input before spending a PostEx call on it.
+  const cn = (url.searchParams.get('cn') || '').trim();
+  if (!/^[A-Za-z0-9-]{6,30}$/.test(cn)) {
+    return Response.json(
+      { ok: false, error: 'invalid_number', message: 'That does not look like a tracking number.' },
+      { status: 400, headers }
+    );
+  }
+
+  // Edge cache: a customer refreshing, or someone sweeping numbers, costs
+  // PostEx nothing for 2 minutes.
+  const cacheKey = new Request(`https://track.internal/${cn}`, { method: 'GET' });
+  const cache    = caches.default;
+  const hit      = await cache.match(cacheKey);
+  if (hit) {
+    const cached = await hit.json();
+    return Response.json(cached, { headers });
+  }
+
+  let dist;
+  try {
+    dist = await trackSinglePostEx(cn, env.POSTEX_TOKEN);
+  } catch (e) {
+    const notFound = e.message.includes('RECORD NOT FOUND');
+    return Response.json(
+      {
+        ok: false,
+        error: notFound ? 'not_found' : 'upstream_error',
+        message: notFound
+          ? "We can't find that tracking number yet. Newly dispatched orders can take a few hours to appear."
+          : 'Tracking is temporarily unavailable. Please try again shortly, or message us on WhatsApp.',
+      },
+      { status: notFound ? 404 : 502, headers }
+    );
+  }
+
+  const payload = sanitiseTrack(dist, cn);
+
+  ctx.waitUntil(
+    cache.put(
+      cacheKey,
+      new Response(JSON.stringify(payload), {
+        headers: { 'Content-Type': 'application/json', 'Cache-Control': 'public, max-age=120' },
+      })
+    )
+  );
+
+  return Response.json(payload, { headers });
+}
+
+/**
+ * Allowlist. Anything not named here is dropped.
+ *
+ * DELIBERATELY EXCLUDED — do not add:
+ *   customerName / consigneeName / customerPhone / phone → PII
+ *   deliveryAddress / address                            → PII
+ *   invoicePayment / codAmount                           → reveals order value
+ *   orderRefNumber                                       → maps to a Shopify order
+ */
+function sanitiseTrack(dist, cn) {
+  const pick = (...keys) => {
+    for (const k of keys) {
+      if (dist[k] !== undefined && dist[k] !== null && dist[k] !== '') return dist[k];
+    }
+    return null;
+  };
+
+  const rawHistory =
+    pick('transactionStatusHistory', 'statusHistory', 'trackingHistory', 'history') || [];
+
+  const history = (Array.isArray(rawHistory) ? rawHistory : [])
+    .map(h => ({
+      status: h.transactionStatusMessage || h.transactionStatus || h.status || h.statusMessage || null,
+      at:     h.updatedAt || h.transactionDate || h.modifiedDatetime || h.date || null,
+    }))
+    .filter(h => h.status)
+    .slice(-12);
+
+  return {
+    ok: true,
+    trackingNumber: cn,
+    status: pick('transactionStatus', 'orderStatus', 'status'),
+    city:   pick('cityName', 'destinationCity', 'city'),
+    updatedAt: pick('transactionDate', 'updatedAt', 'modifiedDatetime', 'orderDate'),
+    history,
+  };
+}
+
+
+// ═══════════════════════════════════════════════════════════════════════════
+// WHATSAPP  —  queue, messaging, order state
+//
+// Nothing is sent inline. Everything is queued in KV and drained on the hourly
+// cron (plus one immediate attempt). The bridge runs on a small VM that can
+// reboot, lose network or be rate-limited; queueing means a customer message is
+// never silently lost because the box happened to be down.
+// ═══════════════════════════════════════════════════════════════════════════
+
+/** Pakistan phone normalisation → bare 923XXXXXXXXX. MUST match the bridge. */
+function normalisePK(raw) {
+  let d = String(raw || '').replace(/\D/g, '');
+  if (d.startsWith('0092')) d = d.slice(2);
+  else if (d.startsWith('00')) d = d.slice(2);
+  if (d.startsWith('0')) d = '92' + d.slice(1);
+  if (d.length === 10 && d.startsWith('3')) d = '92' + d;
+  return /^923\d{9}$/.test(d) ? d : null;
+}
+
+function pktHour() {
+  const now = new Date();
+  return new Date(now.getTime() + (300 + now.getTimezoneOffset()) * 60000).getHours();
+}
+const waWithinHours = () => { const h = pktHour(); return h >= WA_HOURS_START && h < WA_HOURS_END; };
+
+/**
+ * Send priority. Lower goes first.
+ *
+ * A confirmation ask is worth most in the minutes after checkout — that is the
+ * window in which a customer changes their mind, and the entire point of the
+ * message. An out-for-delivery notice can wait an hour. Draining strictly
+ * oldest-first meant a busy dispatch day pushed live confirmations behind a
+ * backlog of bulk notifications, which is exactly backwards.
+ *
+ * Derived from `ref` so jobs queued before this existed still sort correctly.
+ */
+function waPriority(ref, kind) {
+  if (kind === 'mktg') return 3;
+  const r = String(ref || '');
+  if (r.endsWith(':placed')) return 0;                       // the confirm/cancel ask
+  if (r.endsWith(':confirmack') || r.endsWith(':cancelack')
+      || r.endsWith(':cancellate')) return 0;                // replies to a live conversation
+  if (r.endsWith(':ofd')) return 2;                          // useful, not urgent
+  return 1;
+}
+
+/**
+ * Queue a message. `ref` makes the send idempotent across cron re-runs.
+ * `kind` is 'txn' (default, sends at any hour) or 'mktg' (holds for 09–21 PKT).
+ */
+async function waEnqueue(env, { to, text, ref, kind }) {
+  if (!env.SYNC_KV) return { ok: false, error: 'no_kv' };
+  const phone = normalisePK(to);
+  if (!phone || !text) return { ok: false, error: 'bad_input' };
+
+  // Never message someone who asked us to stop. Permanent, no expiry.
+  if (await env.SYNC_KV.get(`waopt:${phone}`)) return { ok: false, error: 'opted_out' };
+  // Already sent this exact thing — the cron re-runs, duplicates get you blocked.
+  if (await env.SYNC_KV.get(`wasent:${ref}`)) return { ok: false, error: 'already_sent' };
+
+  // 🔴 And already WAITING to be sent. `wasent:` is only written on a
+  // successful send, so while the bridge was down the hourly cron re-queued the
+  // same message every hour as a separate job — then flushed all of them the
+  // moment it came back, hammering customers with ~10 identical messages.
+  // This marker makes a ref un-queueable while a copy is still pending.
+  if (await env.SYNC_KV.get(`waqref:${ref}`)) return { ok: false, error: 'already_queued' };
+
+  const key = `waq:${Date.now()}:${Math.random().toString(36).slice(2, 8)}`;
+  await env.SYNC_KV.put(key, JSON.stringify({
+    to: phone, text, ref, tries: 0, firstAt: Date.now(),
+    kind: kind === 'mktg' ? 'mktg' : 'txn',
+    prio: waPriority(ref, kind),
+  }), { expirationTtl: 60 * 60 * 30 });
+  await env.SYNC_KV.put(`waqref:${ref}`, key, { expirationTtl: 60 * 60 * 30 });
+  return { ok: true, queued: key };
+}
+
+/** Hand one message to the bridge. Returns the bridge's own verdict. */
+async function waSendViaBridge(env, to, text, ref, kind) {
+  if (!env.BRIDGE_URL || !env.BRIDGE_SECRET) return { ok: false, error: 'bridge_not_configured' };
+  const res = await fetch(`${env.BRIDGE_URL.replace(/\/+$/, '')}/send`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'X-Bridge-Secret': env.BRIDGE_SECRET },
+    body: JSON.stringify({
+      to, text, ref,
+      kind: kind === 'mktg' ? 'mktg' : 'txn',
+      prio: waPriority(ref, kind),   // 0 = jump the bridge queue, short jitter
+    }),
+  });
+  return res.json();
+}
+
+/**
+ * v5.3: send ONE just-queued job straight away, found by its ref (KV get is
+ * read-your-write in the same location; KV list() can lag ~60s, which is why the
+ * old "enqueue then waDrain()" pattern usually sent nothing). On failure the job
+ * simply stays queued for the cron drain.
+ */
+async function waSendNow(env, ref) {
+  if (!env.SYNC_KV || !ref) return { ok: false, error: 'no_kv_or_ref' };
+  const key = await env.SYNC_KV.get(`waqref:${ref}`);
+  if (!key) return { ok: false, error: 'not_queued' };
+  const raw = await env.SYNC_KV.get(key);
+  if (!raw) return { ok: false, error: 'job_missing' };
+  let job; try { job = JSON.parse(raw); } catch { return { ok: false, error: 'bad_job' }; }
+  if (await env.SYNC_KV.get(`wasent:${ref}`)) { await env.SYNC_KV.delete(key); return { ok: true, duplicate: true }; }
+  if (job.kind === 'mktg' && !waWithinHours()) return { ok: true, held: 'marketing_hours' };
+  let r;
+  try { r = await waSendViaBridge(env, job.to, job.text, job.ref, job.kind); }
+  catch (e) { r = { ok: false, error: e.message }; }
+  if (r.ok && r.sent) {
+    await env.SYNC_KV.put(`wasent:${ref}`, '1', { expirationTtl: 60 * 60 * 24 * 30 });
+    await env.SYNC_KV.delete(key);
+    await env.SYNC_KV.delete(`waqref:${ref}`);
+  } else if (r.ok && r.sent === false && r.reason === 'not_on_whatsapp') {
+    await env.SYNC_KV.delete(key);
+    await env.SYNC_KV.delete(`waqref:${ref}`);
+    const orderId = (ref || '').split(':')[0];
+    if (orderId) await tagOrderSafe(env, orderId, ['📞 NO WHATSAPP — CALL']);
+  }
+  return r;
+}
+
+/**
+ * Drain the queue. Leaves anything it cannot deliver in place for the next tick.
+ * After WA_MAX_TRIES (~24h) it gives up and flags the order for a phone call —
+ * silence is worse than a wrong channel.
+ */
+async function waDrain(env) {
+  const out = { drained: 0, sent: 0, noWhatsapp: 0, retry: 0, gaveUp: 0, heldMarketing: 0 };
+  if (!env.SYNC_KV) return out;
+  const hoursOpen = waWithinHours();
+
+  // Load a wide page, then sort by priority before sending. KV lists
+  // lexicographically, which is oldest-first — that buried live confirmations
+  // behind bulk delivery notices. Sort in memory instead of relying on key order
+  // so jobs queued before waPriority existed are ranked correctly too.
+  const page = await env.SYNC_KV.list({ prefix: 'waq:', limit: 100 });
+  const loaded = [];
+  for (const k of page.keys) {
+    const raw = await env.SYNC_KV.get(k.name);
+    if (!raw) continue;
+    let job; try { job = JSON.parse(raw); } catch { await env.SYNC_KV.delete(k.name); continue; }
+    if (job.prio === undefined) job.prio = waPriority(job.ref, job.kind);
+    loaded.push({ name: k.name, job });
+  }
+  loaded.sort((a, b) => (a.job.prio - b.job.prio) || ((a.job.firstAt || 0) - (b.job.firstAt || 0)));
+
+  const seenRefs = new Set();     // never send the same ref twice in one run
+  const perNumber = new Map();    // and never flood one person in one run
+
+  for (const { name: keyName, job } of loaded.slice(0, WA_QUEUE_CAP)) {
+    const k = { name: keyName };
+
+    // 🔴 Duplicate guards. Historic duplicates are already sitting in KV from
+    // the days the bridge was down, so it is not enough to stop NEW ones being
+    // queued — the existing copies must be dropped rather than delivered.
+    if (seenRefs.has(job.ref) || await env.SYNC_KV.get(`wasent:${job.ref}`)) {
+      out.duplicates = (out.duplicates || 0) + 1;
+      await env.SYNC_KV.delete(k.name);
+      continue;
+    }
+    const nCount = perNumber.get(job.to) || 0;
+    if (nCount >= 2) { out.throttledPerNumber = (out.throttledPerNumber || 0) + 1; continue; }
+
+    // Marketing waits for daylight. Transactional never does — leave the job
+    // untouched (no `tries` increment, so holding overnight cannot burn through
+    // the retry budget and give up on it).
+    if (job.kind === 'mktg' && !hoursOpen) { out.heldMarketing++; continue; }
+    out.drained++;
+
+    seenRefs.add(job.ref);
+    perNumber.set(job.to, (perNumber.get(job.to) || 0) + 1);
+
+    let r;
+    try { r = await waSendViaBridge(env, job.to, job.text, job.ref, job.kind); }
+    catch (e) { r = { ok: false, error: e.message }; }
+
+    if (r.ok && r.sent) {
+      out.sent++;
+      await env.SYNC_KV.put(`wasent:${job.ref}`, '1', { expirationTtl: 60 * 60 * 24 * 30 });
+      await env.SYNC_KV.delete(k.name);
+      await env.SYNC_KV.delete(`waqref:${job.ref}`);
+
+    } else if (r.ok && r.sent === false && r.reason === 'not_on_whatsapp') {
+      // Not a failure — actionable information. Tell the team to phone them.
+      out.noWhatsapp++;
+      await env.SYNC_KV.delete(k.name);
+      await env.SYNC_KV.delete(`waqref:${job.ref}`);
+      const orderId = (job.ref || '').split(':')[0];
+      if (orderId) await tagOrderSafe(env, orderId, ['📞 NO WHATSAPP — CALL']);
+
+    } else {
+      job.tries = (job.tries || 0) + 1;
+      if (job.tries >= WA_MAX_TRIES) {
+        out.gaveUp++;
+        await env.SYNC_KV.delete(k.name);
+        await env.SYNC_KV.delete(`waqref:${job.ref}`);
+        const orderId = (job.ref || '').split(':')[0];
+        if (orderId) await tagOrderSafe(env, orderId, ['📞 NO WHATSAPP — CALL']);
+      } else {
+        out.retry++;
+        await env.SYNC_KV.put(k.name, JSON.stringify(job), { expirationTtl: 60 * 60 * 30 });
+      }
+    }
+  }
+  return out;
+}
+
+/**
+ * Delete every queued message without sending. Also marks each ref as sent, so
+ * the hourly cron does not simply re-queue what was just discarded — that is
+ * what would turn a purge into a loop.
+ */
+async function waPurge(env) {
+  const out = { deleted: 0, refsSuppressed: 0 };
+  if (!env.SYNC_KV) return out;
+  for (const prefix of ['waq:', 'waqref:']) {
+    let cursor;
+    do {
+      const page = await env.SYNC_KV.list({ prefix, limit: 1000, cursor });
+      for (const k of page.keys) {
+        if (prefix === 'waq:') {
+          const raw = await env.SYNC_KV.get(k.name);
+          if (raw) {
+            try {
+              const job = JSON.parse(raw);
+              if (job.ref) {
+                await env.SYNC_KV.put(`wasent:${job.ref}`, 'purged',
+                  { expirationTtl: 60 * 60 * 24 * 30 });
+                out.refsSuppressed++;
+              }
+            } catch {}
+          }
+        }
+        await env.SYNC_KV.delete(k.name);
+        out.deleted++;
+      }
+      cursor = page.list_complete ? null : page.cursor;
+    } while (cursor);
+  }
+  return out;
+}
+
+async function waStatus(env) {
+  const q = env.SYNC_KV ? await env.SYNC_KV.list({ prefix: 'waq:', limit: 1000 }) : { keys: [] };
+  let bridge = 'unknown';
+  try {
+    const r = await fetch(`${(env.BRIDGE_URL || '').replace(/\/+$/, '')}/health`);
+    bridge = r.ok ? await r.json() : `http_${r.status}`;
+  } catch (e) { bridge = `unreachable: ${e.message}`; }
+  return {
+    queued: q.keys.length,
+    transactionalSending: '24/7',
+    marketingWindowOpen: waWithinHours(),   // 09–21 PKT, marketing only
+    abandonedCheckoutRecovery: waAbandonedOn(env) ? 'ON' : 'OFF (set WA_ABANDONED=on)',
+    // Diagnostic, not a secret. Distinguishes "variable never reached the
+    // deployed version" (null) from "reached it with a value we reject"
+    // (a string) — the two failure modes look identical in the dashboard.
+    waAbandonedRaw: env.WA_ABANDONED === undefined ? null : JSON.stringify(String(env.WA_ABANDONED)),
+    pktHour: pktHour(),
+    bridgeConfigured: Boolean(env.BRIDGE_URL && env.BRIDGE_SECRET),
+    bridge,
+  };
+}
+
+// ─── Shopify GraphQL (the REST helper above stays for the payment path) ──────
+
+// ─── REVIEWS  —  request, collect, moderate, publish ─────────────────────────
+//
+// Delivered order → wait RV_DELAY_DAYS → one WhatsApp asking for a review.
+// The link carries a single-use token so nobody can review a product they did
+// not buy. Ratings at or above RV_MIN_PUBLISH publish straight to the product's
+// custom.reviews metafield, which the PDP already renders. Anything below is
+// HELD for you, not discarded — and it still counts toward the average.
+//
+// That last point matters: if low scores were dropped from the average as well
+// as the page, the star rating would be a lie. Held reviews are counted and
+// unpublished, which is honest and still protects the page.
+
+const RV_DELAY_DAYS  = 3;      // after delivery — long enough to have worn it
+const RV_MIN_PUBLISH = 3.5;    // below this → held for you to resolve first
+const RV_HOLD_DAYS   = 7;      // unresolved holds auto-publish after this
+const RV_BATCH       = 15;     // requests sent per cron tick
+const RV_TOKEN_DAYS  = 45;
+
+const rvToken = () => Math.random().toString(36).slice(2, 8) + Math.random().toString(36).slice(2, 8);
+
+function msgReviewRequest(order, link) {
+  return `${waFirstName(order)}, hope you are enjoying your Kordovan 🙂
+
+Would you take 30 seconds to tell us how it is? It genuinely helps the next customer decide.
+
+${link}
+
+If anything is not right instead, just reply here and we will fix it.
+_Reply STOP to stop updates._`;
+}
+
+/**
+ * Called at the moment PostEx reports Delivered. Stores the intent only —
+ * the message itself goes out RV_DELAY_DAYS later from the cron, so the
+ * customer has actually worn the thing before we ask.
+ */
+async function rvSchedule(env, order) {
+  if (!env.SYNC_KV) return;
+  const phone = normalisePK(order.phone || order.shipping_address?.phone || order.customer?.phone);
+  if (!phone) return;
+  if (await env.SYNC_KV.get(`rvdone:${order.id}`)) return;
+
+  const items = (order.line_items || [])
+    .filter(li => li.product_id)
+    .map(li => ({ pid: String(li.product_id), title: li.title }));
+  if (!items.length) return;
+
+  const token = rvToken();
+  await env.SYNC_KV.put(`rvtok:${token}`, JSON.stringify({
+    orderId: String(order.id),
+    orderName: order.name,
+    name: waFirstName(order),
+    city: order.shipping_address?.city || '',
+    items,
+  }), { expirationTtl: 60 * 60 * 24 * RV_TOKEN_DAYS });
+
+  await env.SYNC_KV.put(`rvdue:${order.id}`, JSON.stringify({
+    dueAt: Date.now() + RV_DELAY_DAYS * 86400_000,
+    phone, token, orderId: String(order.id),
+    orderName: order.name,
+    first: waFirstName(order),
+  }), { expirationTtl: 60 * 60 * 24 * RV_TOKEN_DAYS });
+}
+
+/** Cron pass: send any review request whose delay has elapsed. */
+async function runReviewRequests(env) {
+  if (!env.SYNC_KV) return { sent: 0 };
+  const list = await env.SYNC_KV.list({ prefix: 'rvdue:', limit: 200 });
+  let sent = 0;
+
+  for (const k of list.keys) {
+    if (sent >= RV_BATCH) break;
+    const raw = await env.SYNC_KV.get(k.name);
+    if (!raw) continue;
+    const job = JSON.parse(raw);
+    if (Date.now() < job.dueAt) continue;
+
+    const link = `${workerBase(env)}/r/${job.token}`;
+    const fake = { name: job.orderName, customer: { first_name: job.first } };
+    const r = await waEnqueue(env, {
+      to: job.phone, text: msgReviewRequest(fake, link),
+      ref: `${job.orderId}:review`, kind: 'mktg',
+    });
+    // Queued or refused for a permanent reason — either way stop retrying it.
+    if (r.ok || ['opted_out', 'already_sent', 'already_queued'].includes(r.error)) {
+      await env.SYNC_KV.delete(k.name);
+      await env.SYNC_KV.put(`rvdone:${job.orderId}`, '1',
+        { expirationTtl: 60 * 60 * 24 * 365 });
+      if (r.ok) sent++;
+    }
+  }
+  return { sent };
+}
+
+function workerBase(env) {
+  return (env.WORKER_URL || 'https://kordovan-postex-sync.kordovan-official.workers.dev')
+    .replace(/\/+$/, '');
+}
+
+const rvEsc = s => String(s || '').replace(/[<>&"']/g, c =>
+  ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;', "'": '&#39;' }[c]));
+
+/** GET /r/:token — the form. Self-contained, no external assets. */
+async function rvForm(env, token) {
+  const raw = env.SYNC_KV ? await env.SYNC_KV.get(`rvtok:${token}`) : null;
+  if (!raw) return rvPage('This review link has expired', 'Links stay valid for 45 days after delivery. Message us on WhatsApp and we will send a fresh one.');
+  const t = JSON.parse(raw);
+  if (t.used) return rvPage('Thank you — already received', 'You have already reviewed this order. We appreciate it.');
+
+  const opts = t.items.map((it, i) =>
+    `<option value="${i}">${rvEsc(it.title)}</option>`).join('');
+
+  return rvPage('How was it?', '', `
+  <form method="POST" class="f">
+    ${t.items.length > 1
+      ? `<label>Which item?<select name="item" required>${opts}</select></label>`
+      : `<input type="hidden" name="item" value="0"><p class="prod">${rvEsc(t.items[0].title)}</p>`}
+    <label>Your rating
+      <div class="stars" id="st">
+        ${[1,2,3,4,5].map(n => `<button type="button" data-n="${n}" aria-label="${n} star${n>1?'s':''}">&#9733;</button>`).join('')}
+      </div>
+      <input type="hidden" name="rating" id="rt" required>
+    </label>
+    <label>Your review<textarea name="text" rows="4" maxlength="400" required
+      placeholder="What did you think of the leather, the fit, the finish?"></textarea></label>
+    <label>Your name<input name="name" maxlength="40" value="${rvEsc(t.name)}" required></label>
+    <label>Your city<input name="city" maxlength="30" value="${rvEsc(t.city)}" required></label>
+    <button class="go" type="submit">Send review</button>
+    <p class="fine">We publish your first name, city and review. Never your phone number or address.</p>
+  </form>
+  <script>
+    var cur=0,box=document.getElementById('st'),rt=document.getElementById('rt');
+    box.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
+      cur=+b.dataset.n;rt.value=cur;
+      [].forEach.call(box.children,function(c,i){c.className=i<cur?'on':'';});});
+    document.querySelector('form').addEventListener('submit',function(e){
+      if(!rt.value){e.preventDefault();alert('Please pick a star rating.');}});
+  </script>`);
+}
+
+/** POST /r/:token — store it. Publishes or holds depending on the score. */
+async function rvSubmit(env, token, form) {
+  const raw = env.SYNC_KV ? await env.SYNC_KV.get(`rvtok:${token}`) : null;
+  if (!raw) return rvPage('This link has expired', 'Message us on WhatsApp and we will send a fresh one.');
+  const t = JSON.parse(raw);
+  if (t.used) return rvPage('Already received', 'Thank you — we have your review.');
+
+  const rating = Math.max(1, Math.min(5, Number(form.get('rating') || 0)));
+  const text   = String(form.get('text') || '').trim().slice(0, 400);
+  const name   = String(form.get('name') || '').trim().slice(0, 40);
+  const city   = String(form.get('city') || '').trim().slice(0, 30);
+  const item   = t.items[Number(form.get('item') || 0)] || t.items[0];
+  if (!rating || !text || !name || !item) return rvPage('Something was missing', 'Please go back and fill in the rating and review.');
+
+  // Pipes and newlines would break the name|city|text format the PDP parses.
+  const clean = s => s.replace(/[|\r\n]+/g, ' ').replace(/\s+/g, ' ').trim();
+  const rec = {
+    pid: item.pid, product: item.title, rating,
+    name: clean(name), city: clean(city), text: clean(text),
+    orderId: t.orderId, orderName: t.orderName, at: new Date().toISOString(),
+  };
+
+  // Burn the token first — a double submit must never double-count.
+  await env.SYNC_KV.put(`rvtok:${token}`, JSON.stringify({ ...t, used: true }),
+    { expirationTtl: 60 * 60 * 24 * RV_TOKEN_DAYS });
+
+  // Every rating counts toward the average, published or not.
+  await rvBumpAverage(env, rec);
+
+  if (rating >= RV_MIN_PUBLISH) {
+    await rvPublish(env, rec);
+    return rvPage('Thank you', 'Your review is live on the product page. We genuinely appreciate it.');
+  }
+
+  await env.SYNC_KV.put(`rvhold:${Date.now()}:${rec.pid}`, JSON.stringify(rec),
+    { expirationTtl: 60 * 60 * 24 * 120 });
+  await tagOrderSafe(env, rec.orderId, ['⭐ LOW REVIEW — RESOLVE']);
+  return rvPage('Thank you — and sorry',
+    'That is not the standard we aim for. Someone will message you on WhatsApp shortly to put it right.');
+}
+
+/** Running total per product. Held reviews are included — that is the point. */
+async function rvBumpAverage(env, rec) {
+  const key = `rvagg:${rec.pid}`;
+  const raw = await env.SYNC_KV.get(key);
+  const agg = raw ? JSON.parse(raw) : { sum: 0, count: 0 };
+  agg.sum += rec.rating; agg.count += 1;
+  await env.SYNC_KV.put(key, JSON.stringify(agg));
+
+  const avg = Math.round((agg.sum / agg.count) * 10) / 10;
+  await shopifyGQL(`mutation($m:[MetafieldsSetInput!]!){metafieldsSet(metafields:$m){userErrors{message}}}`, {
+    m: [
+      { ownerId: `gid://shopify/Product/${rec.pid}`, namespace: 'reviews', key: 'rating',
+        type: 'rating', value: JSON.stringify({ scale_min: '1.0', scale_max: '5.0', value: String(avg) }) },
+      { ownerId: `gid://shopify/Product/${rec.pid}`, namespace: 'reviews', key: 'rating_count',
+        type: 'number_integer', value: String(agg.count) },
+    ],
+  }, env.SHOPIFY_TOKEN, env);
+  return agg;
+}
+
+/** Append one line to custom.reviews, newest first. */
+async function rvPublish(env, rec) {
+  const gid = `gid://shopify/Product/${rec.pid}`;
+  const cur = await shopifyGQL(
+    `query($id:ID!){product(id:$id){metafield(namespace:"custom",key:"reviews"){value}}}`,
+    { id: gid }, env.SHOPIFY_TOKEN, env);
+  const existing = cur?.data?.product?.metafield?.value || '';
+  const line = `${rec.name}|${rec.city}|${rec.text}`;
+  const next = (line + (existing ? '\n' + existing : '')).split('\n').slice(0, 40).join('\n');
+
+  await shopifyGQL(`mutation($m:[MetafieldsSetInput!]!){metafieldsSet(metafields:$m){userErrors{message}}}`, {
+    m: [{ ownerId: gid, namespace: 'custom', key: 'reviews',
+          type: 'multi_line_text_field', value: next }],
+  }, env.SHOPIFY_TOKEN, env);
+}
+
+/** GET /reviews?s=SECRET — everything held, plus how to act on it. */
+async function rvPending(env) {
+  const list = await env.SYNC_KV.list({ prefix: 'rvhold:', limit: 100 });
+  const out = [];
+  for (const k of list.keys) {
+    const raw = await env.SYNC_KV.get(k.name);
+    if (raw) out.push({ key: k.name, ...JSON.parse(raw) });
+  }
+  return {
+    held: out.length,
+    note: `Ratings under ${RV_MIN_PUBLISH} are held here, not deleted. They already count toward the product average. Publish one with /review-approve?s=SECRET&key=<key>, drop it with &drop=1. Anything left ${RV_HOLD_DAYS} days publishes itself.`,
+    reviews: out,
+  };
+}
+
+/** Publish or discard one held review. Discard is for abuse and spam only. */
+async function rvApprove(env, key, drop) {
+  const raw = await env.SYNC_KV.get(key);
+  if (!raw) return { ok: false, error: 'not_found' };
+  const rec = JSON.parse(raw);
+  if (!drop) await rvPublish(env, rec);
+  await env.SYNC_KV.delete(key);
+  return { ok: true, action: drop ? 'dropped' : 'published', product: rec.product };
+}
+
+/** Held longer than RV_HOLD_DAYS with no decision → it publishes. */
+async function rvReleaseStale(env) {
+  if (!env.SYNC_KV) return { released: 0 };
+  const list = await env.SYNC_KV.list({ prefix: 'rvhold:', limit: 100 });
+  let released = 0;
+  for (const k of list.keys) {
+    const ts = Number(k.name.split(':')[1] || 0);
+    if (!ts || Date.now() - ts < RV_HOLD_DAYS * 86400_000) continue;
+    const raw = await env.SYNC_KV.get(k.name);
+    if (!raw) continue;
+    await rvPublish(env, JSON.parse(raw));
+    await env.SYNC_KV.delete(k.name);
+    released++;
+  }
+  return { released };
+}
+
+function rvPage(title, sub, body = '') {
+  return new Response(`<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex"><title>${rvEsc(title)} · Kordovan</title><style>
+:root{--bg:#F7F2EA;--sf:#fff;--ink:#241C16;--mut:#8B8174;--ln:#DDD2C0;--ac:#A0623A}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);
+font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+display:flex;justify-content:center;padding:32px 18px 64px}
+.w{width:100%;max-width:460px}
+h1{font-family:Georgia,serif;font-size:27px;margin:0 0 6px}
+.sub{color:var(--mut);margin:0 0 24px}
+.prod{background:var(--sf);border:1px solid var(--ln);border-radius:9px;padding:11px 14px;margin:0 0 4px;font-weight:600}
+.f{display:flex;flex-direction:column;gap:17px}
+label{display:flex;flex-direction:column;gap:7px;font-size:14px;font-weight:600}
+input,textarea,select{font:inherit;padding:11px 13px;border:1px solid var(--ln);
+border-radius:9px;background:var(--sf);color:var(--ink);width:100%;font-weight:400}
+input:focus,textarea:focus,select:focus{outline:2px solid var(--ac);outline-offset:1px;border-color:var(--ac)}
+.stars{display:flex;gap:5px}
+.stars button{font-size:34px;line-height:1;background:none;border:none;cursor:pointer;
+padding:0 2px;color:var(--ln)}
+.stars button.on{color:var(--ac)}
+.stars button:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+.go{background:var(--ac);color:#fff;border:none;border-radius:9px;padding:15px;
+font:600 16px/1 inherit;cursor:pointer}
+.go:hover{background:#C08B5C}
+.fine{font-size:12.5px;color:var(--mut);margin:0;font-weight:400}
+@media(prefers-color-scheme:dark){:root{--bg:#1A1410;--sf:#241C16;--ink:#F2EADD;
+--mut:#9C9082;--ln:#3D3228;--ac:#C08B5C}}
+</style></head><body><div class="w">
+<h1>${rvEsc(title)}</h1>${sub ? `<p class="sub">${rvEsc(sub)}</p>` : ''}${body}
+</div></body></html>`, { headers: { 'content-type': 'text/html; charset=utf-8' } });
+}
+
+async function shopifyGQL(query, variables, token, env) {
+  const res = await fetch(`https://${env.SHOPIFY_STORE}/admin/api/${SHOPIFY_API}/graphql.json`, {
+    method: 'POST',
+    headers: { 'X-Shopify-Access-Token': token, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ query, variables }),
+  });
+  const d = await res.json();
+  if (d.errors) throw new Error(JSON.stringify(d.errors).slice(0, 200));
+  return d.data;
+}
+
+/**
+ * Tag an order. Never throws — a tagging failure must not break a send.
+ * Returns null on success, or the error message, so callers can record why a
+ * tag never appeared instead of the failure vanishing into the console.
+ */
+async function tagOrderSafe(env, orderIdNum, tags) {
+  try {
+    const token = await getShopifyToken(env);
+    const d = await shopifyGQL(
+      `mutation($id: ID!, $tags: [String!]!) {
+         tagsAdd(id: $id, tags: $tags) { userErrors { message } } }`,
+      { id: `gid://shopify/Order/${orderIdNum}`, tags }, token, env);
+    const errs = d?.tagsAdd?.userErrors || [];
+    if (errs.length) return errs.map(e => e.message).join('; ');
+    return null;
+  } catch (e) { console.error('tagOrderSafe:', e.message); return e.message; }
+}
+
+// ─── Message copy ────────────────────────────────────────────────────────────
+
+const waFirstName = o =>
+  (o?.customer?.first_name || o?.shipping_address?.first_name || '').trim().split(' ')[0] || 'there';
+
+const waMoney = v => `PKR ${Math.round(Number(v || 0)).toLocaleString('en-PK')}`;
+
+/**
+ * An order is COD only while Shopify still shows money outstanding. Anything
+ * already settled — card, debit card, JazzCash — is prepaid, and since Sep 2026
+ * that includes EVERY jacket and every pair of shoes, because a made-to-order
+ * line hides COD and bank transfer at checkout.
+ *
+ * Never send a prepaid customer COD wording. They have already paid, so "keep
+ * the cash ready" reads as though the payment failed, and "reply CONFIRM to lock
+ * your order" invites a cancellation on an order that is already money in hand.
+ */
+const isPrepaid = o => Boolean(o?.financial_status) && o.financial_status !== 'pending';
+
+function msgOrderPlaced(order) {
+  const items = (order.line_items || [])
+    .map(li => `• ${li.title}${li.quantity > 1 ? ` ×${li.quantity}` : ''}`).join('\n');
+  const city = order.shipping_address?.city || '';
+  const where = city ? `\nDelivery to: ${city}` : '';
+
+  // Prepaid: confirm the money landed and set the wait expectation. No CONFIRM
+  // ask — there is nothing left to confirm, and prompting invites second thoughts.
+  if (isPrepaid(order)) {
+    return `Assalam o Alaikum ${waFirstName(order)} 👋
+
+Thank you for your Kordovan order *${order.name}*:
+${items}
+
+Paid in full: *${waMoney(order.total_price)}* — nothing to pay on delivery.${where}
+
+Made-to-order pieces (jackets and shoes) take *about 3 weeks* to reach you — winter is our busiest season and every piece is cut for one customer. Everything else is dispatched in 1–2 days. We will message you the moment it ships.
+
+— Kordovan
+_Reply STOP to stop updates._`;
+  }
+
+  return `Assalam o Alaikum ${waFirstName(order)} 👋
+
+Thank you for your Kordovan order *${order.name}*:
+${items}
+
+Total: *${waMoney(order.total_price)}* (Cash on Delivery)${where}
+
+Please reply *CONFIRM* to lock your order, or *CANCEL* if you have changed your mind.
+
+— Kordovan
+_Reply STOP to stop updates._`;
+}
+
+function msgOutForDelivery(order) {
+  // v5.1: quote what the rider will actually collect. total_price is the
+  // pre-edit total and ignores prepayments, so it is never used here.
+  const pick = v => (v === null || v === undefined || v === '' || !Number.isFinite(Number(v))) ? null : Number(v);
+  const due  = pick(order.total_outstanding) ?? pick(order.current_total_price);
+  const payLine = (isPrepaid(order) || due === 0 || due < 0)
+    ? `Already paid in full — nothing to hand over. Please stay reachable; the rider will call before arriving.`
+    : due === null
+      ? `Please keep the amount due ready and stay reachable — the rider will call before arriving.`
+      : `Please keep *${waMoney(due)}* ready and stay reachable — the rider will call before arriving.`;
+
+  return `${waFirstName(order)}, your Kordovan order *${order.name}* is out for delivery today 🛵
+
+${payLine}
+
+Track it: ${STORE_URL}/pages/track-order
+_Reply STOP to stop updates._`;
+}
+
+function msgDelivered(order) {
+  return `Shukriya ${waFirstName(order)} 🙏
+
+Your Kordovan order *${order.name}* has been delivered. Good leather only gets better with use — if anything is not right, just reply here and we will sort it.
+
+${STORE_URL}
+_Reply STOP to stop updates._`;
+}
+
+/**
+ * Breadcrumb trail for /shopify-order. Keeps the last 8 hits so a silent
+ * failure can be told apart from a rejected one. Shopify stamps its own
+ * headers on every webhook, so their presence proves the caller was Shopify
+ * and not something else knocking.
+ */
+async function recordWebhookHit(env, meta, authed) {
+  if (!env.SYNC_KV) return;
+  try {
+    const hit = { at: new Date().toISOString(), authed, ...meta };
+    const raw  = await env.SYNC_KV.get('wahook:hits');
+    const hits = raw ? JSON.parse(raw) : [];
+    hits.unshift(hit);
+    await env.SYNC_KV.put('wahook:hits', JSON.stringify(hits.slice(0, 8)),
+      { expirationTtl: 60 * 60 * 24 * 7 });
+  } catch (e) { console.error('recordWebhookHit:', e.message); }
+}
+
+async function getWebhookHits(env) {
+  const raw  = env.SYNC_KV ? await env.SYNC_KV.get('wahook:hits') : null;
+  const hits = raw ? JSON.parse(raw) : [];
+  const lastRaw = env.SYNC_KV ? await env.SYNC_KV.get('wahook:lastorder') : null;
+  return {
+    now: new Date().toISOString(),
+    lastOrderProcessing: lastRaw ? JSON.parse(lastRaw) : null,
+    whatsapp: await waStatus(env),
+    totalRecorded: hits.length,
+    verdict: hits.length === 0
+      ? 'Nothing has EVER called /shopify-order. Shopify is not sending — the webhook is missing, points somewhere else, or is on the wrong event.'
+      : (hits.some(h => h.authed && h.shopifyTopic)
+          ? 'Shopify has reached this Worker successfully. If orders are still untagged, the problem is after the webhook.'
+          : 'Something called, but was rejected or was not Shopify. Check the entries below.'),
+    hits,
+  };
+}
+
+/**
+ * Why a 401 happened, without leaking the secret.
+ *
+ * A bare "Unauthorized" cannot distinguish "the variable never reached the
+ * Worker" from "the token in the URL is wrong" — and those need opposite fixes.
+ * This reports SHAPES only: binding names, lengths, and whether the two would
+ * match after trimming. No part of either token is ever echoed back, so this is
+ * safe to leave on a public route.
+ */
+function waAuthDiagnosis(supplied, env) {
+  const cfg = env.WEBHOOK_TOKEN;
+  let diagnosis;
+  if (!cfg)           diagnosis = 'WEBHOOK_TOKEN is NOT set on this Worker. The variable did not reach the deployed version — add it, then Deploy.';
+  else if (!supplied) diagnosis = 'The URL has no ?s= value at all.';
+  else if (supplied.trim() === cfg.trim())
+                      diagnosis = 'They match except for whitespace — one of them has a stray space or newline. Re-add the variable, taking care not to copy a trailing space.';
+  else if (supplied.startsWith(cfg))
+                      diagnosis = 'The correct token is there, with extra characters stuck on the end. See unexpectedSuffix below — delete exactly that from the URL.';
+  else if (cfg.startsWith(supplied))
+                      diagnosis = 'The token in the URL is cut short. Re-paste the full URL into the webhook.';
+  else                diagnosis = 'The token in the URL is a different value from WEBHOOK_TOKEN.';
+
+  const out = {
+    error: 'Unauthorized',
+    diagnosis,
+    suppliedLength:   supplied ? supplied.length : 0,
+    configuredLength: cfg ? cfg.length : 0,
+    expectedLength:   36,
+    bindings: Object.keys(env).sort(),   // names only — never values
+  };
+
+  // Safe to echo: this is the junk AFTER a full correct token, so it is by
+  // definition not part of the secret. It is the only way to see what got
+  // picked up during the copy — invisible characters included.
+  if (supplied && cfg && supplied.startsWith(cfg) && supplied !== cfg) {
+    const extra = supplied.slice(cfg.length);
+    out.unexpectedSuffix = extra;
+    out.unexpectedSuffixCodes = [...extra].map(c => c.charCodeAt(0));
+  }
+  return out;
+}
+
+// ─── Abandoned checkout recovery ─────────────────────────────────────────────
+
+/**
+ * Is abandoned-checkout recovery switched on?
+ *
+ * This used to be a strict `env.WA_ABANDONED === 'on'`, which meant "ON",
+ * "On", "true", "1" or a value with a stray space silently did nothing while
+ * looking perfectly correct in the Cloudflare dashboard — indistinguishable
+ * from the saved-but-never-deployed failure that has already cost this project
+ * days. Accept the obvious truthy spellings; only the deploy problem is left.
+ */
+function waAbandonedOn(env) {
+  const v = String(env.WA_ABANDONED ?? '').trim().toLowerCase();
+  return v === 'on' || v === 'true' || v === '1' || v === 'yes' || v === 'enabled';
+}
+
+function msgAbandoned(co, firstItem) {
+  const name = (co.customer?.first_name || co.shipping_address?.first_name || '').trim().split(' ')[0] || 'there';
+  return `${name}, you left something behind 👀
+
+Your *${firstItem}* is still in your cart.
+
+Here is *10% off* if you complete your order today — use code *${WA_AC_CODE}* at checkout.
+
+${co.abandoned_checkout_url || STORE_URL}
+
+— Kordovan
+_Reply STOP to stop updates._`;
+}
+
+/**
+ * ⚠️ THIS IS MARKETING, NOT TRANSACTIONAL.
+ * It is the message most likely to be reported as spam, and reports are what
+ * get a Baileys number banned — the same number that carries POS, online orders
+ * and public contact. Every guardrail below is mandatory:
+ *
+ *   1. OFF unless env WA_ABANDONED === 'on'. Kill switch, default off.
+ *   2. One message per phone per 30 days, and one per checkout ever.
+ *   3. Only 2–24h old and still incomplete.
+ *   4. Never to a FRAUD RISK customer.
+ *   5. Never to someone who already ordered since abandoning.
+ *   6. kind 'mktg' → held outside 09:00–21:00 PKT.
+ *   7. Opt-out (STOP) honoured permanently — enforced inside waEnqueue.
+ *   8. COMEBACK10, never PAYONLINE10.
+ *
+ * If spam reports appear, set WA_ABANDONED to anything but 'on'. The
+ * transactional messages are worth far more and must not be risked for this.
+ */
+async function runAbandonedCheckouts(env) {
+  const out = { enabled: false, scanned: 0, queued: 0, skipped: {} };
+  const skip = k => { out.skipped[k] = (out.skipped[k] || 0) + 1; };
+  if (!env.SYNC_KV) return out;
+  if (!waAbandonedOn(env)) return out;             // guardrail 1
+  out.enabled = true;
+
+  let token;
+  try { token = await getShopifyToken(env); } catch (e) { out.error = e.message; return out; }
+
+  const now = Date.now();
+  const minC = new Date(now - WA_AC_MAX_AGE_H * 3600e3).toISOString();
+  const maxC = new Date(now - WA_AC_MIN_AGE_H * 3600e3).toISOString();
+
+  let data;
+  try {
+    data = await shopifyFetch(
+      `/checkouts.json?limit=250&created_at_min=${encodeURIComponent(minC)}&created_at_max=${encodeURIComponent(maxC)}`,
+      token, env);
+  } catch (e) { out.error = e.message; return out; }
+
+  for (const co of (data.checkouts || [])) {
+    if (out.queued >= WA_AC_BATCH) break;
+    out.scanned++;
+
+    if (co.completed_at) { skip('completed'); continue; }              // guardrail 3
+
+    const phone = normalisePK(co.phone || co.shipping_address?.phone
+      || co.billing_address?.phone || co.customer?.phone);
+    if (!phone) { skip('no_phone'); continue; }
+
+    const coKey = `waac:${co.token || co.id}`;
+    if (await env.SYNC_KV.get(coKey)) { skip('already_messaged'); continue; }   // guardrail 2
+    if (await env.SYNC_KV.get(`waacph:${phone}`)) { skip('capped_30d'); continue; }
+
+    // Guardrail 5 — did they order anyway? Never chase a customer who bought.
+    try {
+      const o = await shopifyFetch(
+        `/orders.json?status=any&limit=5&created_at_min=${encodeURIComponent(co.created_at)}&fields=id,phone,shipping_address`,
+        token, env);
+      const bought = (o.orders || []).some(x =>
+        normalisePK(x.phone || x.shipping_address?.phone) === phone);
+      if (bought) { skip('already_ordered'); continue; }
+    } catch { /* non-fatal — a lookup failure must not block the run */ }
+
+    // Guardrail 4 — never message a known COD refuser.
+    if (co.customer?.id) {
+      try {
+        const c = await shopifyFetch(`/customers/${co.customer.id}.json?fields=tags`, token, env);
+        if (String(c.customer?.tags || '').toUpperCase().includes('FRAUD RISK')) {
+          skip('fraud_risk'); continue;
+        }
+      } catch { /* non-fatal */ }
+    }
+
+    const firstItem = co.line_items?.[0]?.title || 'order';
+    const r = await waEnqueue(env, {
+      to: phone, text: msgAbandoned(co, firstItem),
+      ref: `ac${co.token || co.id}:recover`, kind: 'mktg',      // guardrail 6
+    });
+    if (!r.ok) { skip(r.error || 'enqueue_failed'); continue; }
+
+    await env.SYNC_KV.put(coKey, '1', { expirationTtl: 60 * 60 * 24 * 90 });
+    await env.SYNC_KV.put(`waacph:${phone}`, '1', { expirationTtl: 60 * 60 * 24 * WA_AC_CAP_DAYS });
+    out.queued++;
+  }
+  return out;
+}
+
+// ─── New order → confirmation ask ────────────────────────────────────────────
+
+/**
+ * This runs inside ctx.waitUntil, AFTER the 200 has gone back to Shopify, so a
+ * throw in here is invisible from every angle — Shopify sees success, the order
+ * gets no tag, no message is sent, and nothing surfaces anywhere. The trace
+ * below is written whatever happens (note the `finally`) and is readable via
+ * ?probe=1, so a silent failure always leaves evidence.
+ */
+async function handleNewOrder(order, env) {
+  const trace = { at: new Date().toISOString(), stage: 'start' };
+  try {
+    if (!order)     { trace.stage = 'no_payload';   return; }
+    if (!order.id)  { trace.stage = 'no_order_id';  return; }
+
+    trace.orderId         = order.id;
+    trace.orderName       = order.name;
+    trace.financialStatus = order.financial_status || null;
+    trace.lineItemCount   = (order.line_items || []).length;
+
+    const phone = normalisePK(
+      order.phone || order.shipping_address?.phone || order.billing_address?.phone || order.customer?.phone);
+    trace.phoneNormalised = Boolean(phone);
+    trace.phoneTail = phone ? `…${phone.slice(-4)}` : null;
+
+    if (!phone) {
+      trace.stage = 'no_usable_phone';
+      trace.tagError = await tagOrderSafe(env, order.id, ['📞 NO WHATSAPP — CALL']);
+      return;
+    }
+
+    // Prepaid orders used to be dropped here entirely, which left every jacket
+    // and shoe buyer — the highest-value orders in the store, waiting ~3 weeks
+    // for production — with total silence. They now get their own message; only
+    // the COD confirmation flow below is skipped, because there is nothing to
+    // confirm once the money has landed.
+    const prepaid = isPrepaid(order);
+    trace.prepaid = prepaid;
+
+    // Remember who this phone belongs to so a bare "CONFIRM" can be matched back.
+    // Prepaid orders never ask for CONFIRM, so they need no pending record.
+    if (env.SYNC_KV && !prepaid) {
+      await env.SYNC_KV.put(`wapend:${phone}`, JSON.stringify({
+        orderId: order.id, name: order.name, total: order.total_price, at: Date.now(),
+      }), { expirationTtl: 60 * 60 * 48 });
+    }
+
+    trace.stage = 'composing';
+    const text = msgOrderPlaced(order);
+    trace.messageLength = text.length;
+
+    trace.stage = 'enqueueing';
+    const r = await waEnqueue(env, { to: phone, text, ref: `${order.id}:placed` });
+    trace.enqueue = r;
+
+    if (r.ok) {
+      trace.stage = 'tagging';
+      trace.tagError = await tagOrderSafe(env, order.id, ['⏳ WA SENT']);
+      trace.stage = 'draining';
+      trace.drain = await waSendNow(env, `${order.id}:placed`);   // v5.3: send this one directly; the queue + cron is the safety net
+      trace.stage = 'done';
+    } else {
+      trace.stage = 'enqueue_refused';
+    }
+  } catch (e) {
+    trace.stage = trace.stage + '_THREW';
+    trace.error = e.message;
+    trace.stack = String(e.stack || '').split('\n').slice(0, 3).join(' | ');
+  } finally {
+    if (env.SYNC_KV) {
+      await env.SYNC_KV.put('wahook:lastorder', JSON.stringify(trace),
+        { expirationTtl: 60 * 60 * 24 * 7 }).catch(() => {});
+    }
+  }
+}
+
+// ─── Customer replies ────────────────────────────────────────────────────────
+
+async function handleInbound(body, env) {
+  if (!body) return;
+  const phone = normalisePK(body?.from);
+  const text  = String(body?.text || '').trim();
+  if (!phone || !text) return;
+
+  const norm = text.toLowerCase().replace(/[^a-z؀-ۿ]/g, '');
+
+  // Opt-out is honoured for anyone, order or not, permanently.
+  if (norm === 'stop' || norm === 'unsubscribe') {
+    if (env.SYNC_KV) await env.SYNC_KV.put(`waopt:${phone}`, '1');
+    return;
+  }
+
+  if (!env.SYNC_KV) return;
+  const pendRaw = await env.SYNC_KV.get(`wapend:${phone}`);
+  if (!pendRaw) return;   // not awaiting anything from this number — stay silent
+  let pend; try { pend = JSON.parse(pendRaw); } catch { return; }
+
+  const isConfirm = ['confirm', 'confirmed', 'yes', 'ok', 'okay', 'haan', 'han', 'jee', 'ji', 'theek'].includes(norm);
+  const isCancel  = ['cancel', 'cancelled', 'cancelorder', 'no'].includes(norm);
+
+  if (isConfirm) {
+    await tagOrderSafe(env, pend.orderId, ['✅ WA CONFIRMED']);
+    await env.SYNC_KV.delete(`wapend:${phone}`);
+    await waEnqueue(env, {
+      to: phone,
+      text: `Shukriya! Your order *${pend.name}* is confirmed ✅\n\nWe will dispatch it shortly and send you the tracking details.\n\n— Kordovan`,
+      ref: `${pend.orderId}:confirmack`,
+    });
+    await waSendNow(env, `${pend.orderId}:confirmack`);
+    return;
+  }
+
+  if (isCancel) {
+    await handleCancelRequest(env, phone, pend, text);
+    return;
+  }
+
+  // Anything else is a real conversation — leave it for the team's phone.
+}
+
+/**
+ * Cancellation. orderCancel is IRREVERSIBLE, so every guardrail below is
+ * mandatory and anything ambiguous is handed to a human instead of guessed.
+ */
+async function handleCancelRequest(env, phone, pend, rawText) {
+  const token = await getShopifyToken(env);
+
+  const data = await shopifyGQL(
+    `query($id: ID!) { order(id: $id) {
+        id name displayFinancialStatus displayFulfillmentStatus cancelledAt
+        phone shippingAddress { phone }
+      } }`,
+    { id: `gid://shopify/Order/${pend.orderId}` }, token, env);
+
+  const o = data?.order;
+  if (!o || o.cancelledAt) { await env.SYNC_KV.delete(`wapend:${phone}`); return; }
+
+  // 1. IDENTITY — the sender must be the phone on the order. This is the check
+  //    that makes auto-cancel safe rather than reckless.
+  const orderPhone = normalisePK(o.phone || o.shippingAddress?.phone);
+  if (!orderPhone || orderPhone !== phone) {
+    await tagOrderSafe(env, pend.orderId, ['⚠️ WA CANCEL — VERIFY']);
+    return;
+  }
+
+  // 2. Already dispatched → too late to cancel; this is an RTO decision.
+  if (o.displayFulfillmentStatus === 'FULFILLED') {
+    await tagOrderSafe(env, pend.orderId, ['↩️ WA CANCEL AFTER DISPATCH']);
+    await env.SYNC_KV.delete(`wapend:${phone}`);
+    await waEnqueue(env, {
+      to: phone,
+      text: `Your order *${pend.name}* has already been dispatched, so we cannot cancel it automatically.\n\nOur team will call you shortly to sort this out.\n\n— Kordovan`,
+      ref: `${pend.orderId}:cancellate`,
+    });
+    await waSendNow(env, `${pend.orderId}:cancellate`);
+    return;
+  }
+
+  // 3. COD only. Anything paid involves a refund — that goes to a human.
+  if (o.displayFinancialStatus !== 'PENDING') {
+    await tagOrderSafe(env, pend.orderId, ['⚠️ WA CANCEL — VERIFY']);
+    return;
+  }
+
+  const res = await shopifyGQL(
+    `mutation($id: ID!) {
+       orderCancel(orderId: $id, reason: CUSTOMER, refund: false,
+                   restock: true, notifyCustomer: false) {
+         userErrors { message } } }`,
+    { id: `gid://shopify/Order/${pend.orderId}` }, token, env);
+
+  const errs = res?.orderCancel?.userErrors || [];
+  if (errs.length) {
+    console.error('orderCancel:', JSON.stringify(errs));
+    await tagOrderSafe(env, pend.orderId, ['⚠️ WA CANCEL — VERIFY']);
+    return;
+  }
+
+  await tagOrderSafe(env, pend.orderId, ['🚫 WA CANCELLED']);
+  await addOrderNote(pend.orderId,
+    `🚫 Cancelled on customer request via WhatsApp\nFrom: ${phone}\nMessage: "${rawText}"\nAt: ${new Date().toLocaleString('en-PK', { timeZone: 'Asia/Karachi' })}`,
+    token, env);
+  await env.SYNC_KV.delete(`wapend:${phone}`);
+
+  await waEnqueue(env, {
+    to: phone,
+    text: `Your order *${pend.name}* has been cancelled as requested.\n\nIf that was a mistake, just reply here and we will help you reorder.\n\n— Kordovan`,
+    ref: `${pend.orderId}:cancelack`,
+  });
+  await waSendNow(env, `${pend.orderId}:cancelack`);
+}
+
+// ─── Token Management ─────────────────────────────────────────────────────────
+// Always fetches a fresh token. Caches in KV for 22 hours.
+// Falls back to SHOPIFY_TOKEN env var if refresh fails.
+
+async function getShopifyToken(env) {
+  // Try KV cache first
+  if (env.SYNC_KV) {
+    try {
+      const raw = await env.SYNC_KV.get('shopify_token');
+      if (raw) {
+        const cached = JSON.parse(raw);
+        const expiresAt = new Date(cached.expiresAt).getTime();
+        // Use cached token if it has more than 2 hours left
+        if (expiresAt > Date.now() + 2 * 60 * 60 * 1000) {
+          console.log(`Using cached token, expires ${cached.expiresAt}`);
+          return cached.token;
+        }
+      }
+    } catch (e) {
+      console.log('KV read failed:', e.message);
+    }
+  }
+
+  // Fetch fresh token
+  console.log('Fetching fresh Shopify token...');
+  try {
+    const res = await fetch(`https://${env.SHOPIFY_STORE}/admin/oauth/access_token`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        client_id: env.SHOPIFY_CLIENT_ID,
+        client_secret: env.SHOPIFY_CLIENT_SECRET,
+        grant_type: 'client_credentials'
+      })
+    });
+
+    if (!res.ok) throw new Error(`Token endpoint ${res.status}`);
+
+    const data      = await res.json();
+    const token     = data.access_token;
+    const expiresIn = data.expires_in || 86399;
+    const expiresAt = new Date(Date.now() + expiresIn * 1000).toISOString();
+
+    console.log(`Fresh token obtained, expires ${expiresAt}`);
+
+    // Cache in KV for 22 hours
+    if (env.SYNC_KV) {
+      await env.SYNC_KV.put(
+        'shopify_token',
+        JSON.stringify({ token, expiresAt }),
+        { expirationTtl: 22 * 60 * 60 }
+      ).catch(e => console.log('KV write failed:', e.message));
+    }
+
+    return token;
+
+  } catch (e) {
+    console.log(`Token refresh failed: ${e.message} — falling back to env token`);
+    // Fallback to manually set token
+    if (env.SHOPIFY_TOKEN) return env.SHOPIFY_TOKEN;
+    throw new Error('No valid Shopify token available');
+  }
+}
+
+// ─── Webhook Handler ──────────────────────────────────────────────────────────
+
+async function handleWebhook(payload, env) {
+  if (!payload) { console.error('Webhook: no payload'); return; }
+
+  console.log('Webhook received:', JSON.stringify(payload));
+
+  const status      = payload.transactionStatus || payload.orderStatus || '';
+  const orderRef    = payload.orderRefNumber || payload.orderRef || '';
+  const trackingNum = payload.trackingNumber || '';
+  const amount      = payload.invoicePayment || payload.amount || null;
+
+  if (!orderRef && !trackingNum) {
+    console.log('Webhook: no ref or tracking — skipping');
+    return;
+  }
+
+  let token;
+  try { token = await getShopifyToken(env); }
+  catch (e) { console.error('Webhook: token failed:', e.message); return; }
+
+  let order = null;
+  if (orderRef) order = await findOrderByRef(orderRef, token, env);
+  if (!order && trackingNum) order = await findOrderByTracking(trackingNum, token, env);
+
+  if (!order) {
+    console.log(`Webhook: no order found ref=${orderRef} tracking=${trackingNum}`);
+    return;
+  }
+
+  const now = new Date().toLocaleString('en-PK', { timeZone: 'Asia/Karachi' });
+
+  if (status === DELIVERED_STATUS) {
+    try {
+      // The webhook usually carries no amount — ask PostEx for its COD figure.
+      let pxAmount = amount;
+      if (toAmount(pxAmount) === null && trackingNum) {
+        try { pxAmount = (await trackSinglePostEx(trackingNum, env.POSTEX_TOKEN)).invoicePayment ?? null; }
+        catch (e) { console.log(`Webhook: PostEx amount lookup failed (${e.message}) — using Shopify outstanding`); }
+      }
+      const cap = await codCaptureOnce(env, order.id, pxAmount, trackingNum, orderRef, token);
+      if (cap.action === 'locked') {
+        console.log(`Order ${order.order_number} capture already in progress elsewhere — skipping`);
+        return;
+      }
+      if (cap.action === 'skip') {
+        console.log(`Order ${order.order_number} outstanding ${cap.outstanding} (${cap.financialStatus}) — already handled`);
+        return;
+      }
+      if (cap.action === 'mismatch') {
+        console.log(`Webhook: ⚠️ Order ${order.order_number} PostEx ${cap.postex} ≠ outstanding ${cap.outstanding} — not marked paid`);
+        return;
+      }
+      console.log(`Webhook: ✅ Order ${order.order_number} marked paid (PKR ${cap.amount})`);
+      await incrementStat(env, 'webhookPaid');
+    } catch (e) {
+      console.error(`Webhook mark paid failed:`, e.message);
+    }
+  } else if (RTO_STATUSES.includes(status)) {
+    try {
+      await addOrderNote(order.id,
+        `⚠️ RTO — PostEx: "${status}"\nTracking: ${trackingNum}\nRef: ${orderRef}\nUpdated: ${now}\nSource: PostEx webhook`,
+        token, env);
+      await incrementStat(env, 'webhookRTO');
+    } catch (e) {
+      console.error(`Webhook RTO note failed:`, e.message);
+    }
+  }
+}
+
+// ─── Poll Sync ────────────────────────────────────────────────────────────────
+// Checks each order individually against PostEx track API.
+// Individual calls return full delivery detail — bulk track does not.
+
+async function runPollSync(env) {
+  const start = Date.now();
+  const result = {
+    trigger: 'poll', startedAt: new Date().toISOString(),
+    ordersChecked: 0, markedPaid: 0, rtoFlagged: 0,
+    errors: 0, skipped: 0, log: []
+  };
+
+  const log = msg => {
+    console.log(msg);
+    result.log.push({ ts: new Date().toISOString(), msg });
+  };
+
+  try {
+    let token;
+    try {
+      token = await getShopifyToken(env);
+      log('Shopify token ready');
+    } catch (e) {
+      log(`FATAL: Token failed — ${e.message}`);
+      result.errors++;
+      return finalize(result, start, env);
+    }
+
+    log('Fetching open COD orders from Shopify...');
+    const orders = await getOpenCODOrders(token, env);
+    log(`Found ${orders.length} open fulfilled+pending orders`);
+    result.ordersChecked = orders.length;
+
+    if (!orders.length) return finalize(result, start, env);
+
+    // Extract tracking numbers — check fulfillments AND note_attributes
+    const withTracking = [];
+    for (const o of orders) {
+      const tn = getTrackingNumber(o);
+      if (tn) {
+        withTracking.push({ order: o, tracking: tn });
+      } else {
+        result.skipped++;
+      }
+    }
+
+    log(`${withTracking.length} have tracking | ${result.skipped} skipped (no tracking)`);
+
+    if (!withTracking.length) return finalize(result, start, env);
+
+    log(`Checking ${withTracking.length} orders against PostEx individually...`);
+
+    // Check individually — more reliable than bulk for delivery status
+    for (const item of withTracking) {
+      const o  = item.order;
+      const tn = item.tracking;
+      const now = new Date().toLocaleString('en-PK', { timeZone: 'Asia/Karachi' });
+
+      try {
+        const postexData = await trackSinglePostEx(tn, env.POSTEX_TOKEN);
+        const status     = postexData.transactionStatus || '';
+
+        if (status === DELIVERED_STATUS) {
+          let cap;
+          try { cap = await codCaptureOnce(env, o.id, postexData.invoicePayment, tn, o.name, token); }
+          catch (e) { log(`Order #${o.order_number} mark paid ERROR: ${e.message}`); result.errors++; continue; }
+          if (cap.action === 'locked') {
+            log(`Order #${o.order_number} capture already in progress elsewhere — skipping`);
+            result.skipped++;
+            continue;
+          }
+          if (cap.action === 'skip') {
+            log(`Order #${o.order_number} outstanding ${cap.outstanding} (${cap.financialStatus}) — already handled, skipping`);
+            result.skipped++;
+            continue;
+          }
+          if (cap.action === 'mismatch') {
+            log(`Order #${o.order_number} ⚠️ PostEx ${cap.postex} ≠ outstanding ${cap.outstanding} — NOT marked paid`);
+            result.skipped++;
+            continue;
+          }
+          const amount = cap.amount;
+          log(`Order #${o.order_number} [${tn}] — DELIVERED → marked paid`);
+          try {
+            result.markedPaid++;
+            log(`Order #${o.order_number} ✅ marked paid (PKR ${amount})`);
+            // Delivered → thank-you. ref keeps it to exactly one per order.
+            const phD = normalisePK(o.phone || o.shipping_address?.phone || o.customer?.phone);
+            if (phD) await waEnqueue(env, { to: phD, text: msgDelivered(o), ref: `${o.id}:delivered` });
+            // Same moment schedules the review ask — it fires RV_DELAY_DAYS later.
+            await rvSchedule(env, o);
+          } catch (e) {
+            log(`Order #${o.order_number} post-capture notify ERROR: ${e.message}`);
+            result.errors++;
+          }
+        } else if (String(status).toLowerCase() === OUT_FOR_DELIVERY) {
+          const phO = normalisePK(o.phone || o.shipping_address?.phone || o.customer?.phone);
+          if (phO) await waEnqueue(env, { to: phO, text: msgOutForDelivery(o), ref: `${o.id}:ofd` });
+          result.skipped++;
+        } else if (RTO_STATUSES.includes(status)) {
+          try {
+            await addOrderNote(o.id,
+              `⚠️ RTO — PostEx: "${status}" | Tracking: ${tn} | ${now} | Via hourly sync`,
+              token, env);
+            result.rtoFlagged++;
+            log(`Order #${o.order_number} ↩️ RTO noted (${status})`);
+          } catch (e) {
+            log(`Order #${o.order_number} RTO note ERROR: ${e.message}`);
+            result.errors++;
+          }
+        } else {
+          result.skipped++;
+        }
+
+        await sleep(150); // Respect PostEx rate limits
+
+      } catch (e) {
+        // PostEx not found or error — skip silently
+        if (!e.message.includes('RECORD NOT FOUND')) {
+          log(`Order #${o.order_number} PostEx error: ${e.message}`);
+          result.errors++;
+        } else {
+          result.skipped++;
+        }
+      }
+    }
+
+  } catch (e) {
+    log(`FATAL: ${e.message}`);
+    result.errors++;
+  }
+
+  return finalize(result, start, env);
+}
+
+function finalize(result, start, env) {
+  result.durationMs  = Date.now() - start;
+  result.completedAt = new Date().toISOString();
+  console.log(`[DONE] paid=${result.markedPaid} rto=${result.rtoFlagged} err=${result.errors} ${result.durationMs}ms`);
+
+  if (env?.SYNC_KV) {
+    env.SYNC_KV.put('last_sync', JSON.stringify(result), { expirationTtl: 86400 * 7 })
+      .catch(() => {});
+    env.SYNC_KV.get('totals').then(raw => {
+      const t = raw ? JSON.parse(raw) : { markedPaid: 0, rtoFlagged: 0, syncsRun: 0, webhookPaid: 0, webhookRTO: 0 };
+      t.markedPaid += result.markedPaid;
+      t.rtoFlagged += result.rtoFlagged;
+      t.syncsRun   += 1;
+      return env.SYNC_KV.put('totals', JSON.stringify(t));
+    }).catch(() => {});
+  }
+
+  return result;
+}
+
+async function getStats(env) {
+  if (!env?.SYNC_KV) return { error: 'KV not configured' };
+  const [a, b] = await Promise.all([env.SYNC_KV.get('last_sync'), env.SYNC_KV.get('totals')]);
+  return { lastSync: a ? JSON.parse(a) : null, totals: b ? JSON.parse(b) : {} };
+}
+
+async function incrementStat(env, key) {
+  if (!env?.SYNC_KV) return;
+  try {
+    const raw = await env.SYNC_KV.get('totals');
+    const t   = raw ? JSON.parse(raw) : { markedPaid: 0, rtoFlagged: 0, syncsRun: 0, webhookPaid: 0, webhookRTO: 0 };
+    t[key]    = (t[key] || 0) + 1;
+    await env.SYNC_KV.put('totals', JSON.stringify(t));
+  } catch (e) {}
+}
+
+// ─── Shopify Helpers ──────────────────────────────────────────────────────────
+
+async function shopifyFetch(path, token, env, options = {}) {
+  const url = `https://${env.SHOPIFY_STORE}/admin/api/${SHOPIFY_API}${path}`;
+  const res = await fetch(url, {
+    ...options,
+    headers: {
+      'X-Shopify-Access-Token': token,
+      'Content-Type': 'application/json',
+      ...(options.headers || {})
+    }
+  });
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(`Shopify ${res.status}: ${text.slice(0, 200)}`);
+  }
+  return res.json();
+}
+
+async function getOpenCODOrders(token, env) {
+  const data = await shopifyFetch(
+    `/orders.json?status=any&financial_status=pending&fulfillment_status=fulfilled&limit=250&fields=id,order_number,name,financial_status,total_price,total_outstanding,current_total_price,payment_gateway,fulfillments,note_attributes,phone,customer,shipping_address,line_items`,
+    token, env
+  );
+  return (data.orders || []).filter(o => {
+    const gw = (o.payment_gateway || '').toLowerCase();
+    return !['stripe','paypal','jazzcash','easypaisa','credit_card','debit_card','shopify_payments'].some(g => gw.includes(g));
+  });
+}
+
+// ─── Prepaid delivery pass ───────────────────────────────────────────────────
+/**
+ * Why this exists separately from runPollSync().
+ *
+ * runPollSync is a MONEY job: it finds orders Shopify still shows as pending,
+ * confirms delivery with PostEx, and marks them paid. Prepaid orders are
+ * invisible to it on purpose — getOpenCODOrders() asks for
+ * financial_status=pending and drops the card/JazzCash gateways — because there
+ * is nothing left to collect.
+ *
+ * The side effect was that the delivered thank-you and the review request live
+ * INSIDE that sweep, so prepaid buyers got neither. Since made-to-order went
+ * fully prepaid in Sep 2026 that covers every jacket and every pair of shoes,
+ * which meant the review engine could not ask a single made-to-order buyer —
+ * precisely the products whose pages carry almost no ratings.
+ *
+ * This pass closes ONLY the notification gap:
+ *   • never calls markOrderPaid — the money is already in
+ *   • never writes RTO notes — that stays runPollSync's job, so a return is
+ *     recorded in exactly one place rather than twice
+ *   • every message is ref-deduped, so an order the COD sweep already thanked
+ *     is a silent no-op here
+ */
+
+// Only look at recent orders. A "delivered" ping on a two-month-old parcel is
+// noise, and messaging someone long after they got their jacket reads as spam.
+// Kept at/below the 30-day `wasent:` TTL so an order ages out of this window
+// before its dedup marker expires — otherwise it could be thanked twice.
+const PP_WINDOW_DAYS = 30;
+
+async function getPrepaidFulfilledOrders(token, env) {
+  const since = new Date(Date.now() - PP_WINDOW_DAYS * 86400_000).toISOString();
+  const data = await shopifyFetch(
+    `/orders.json?status=any&financial_status=paid&fulfillment_status=fulfilled` +
+    `&created_at_min=${encodeURIComponent(since)}&limit=250` +
+    `&fields=id,order_number,name,financial_status,total_price,payment_gateway,` +
+    `fulfillments,note_attributes,phone,customer,shipping_address,line_items`,
+    token, env
+  );
+  // Deliberately NO gateway filter. A COD order this Worker already marked paid
+  // matches too, and that is fine: its refs are already burned so it is a no-op,
+  // and if the COD sweep ever misses one, this catches it. msgDelivered says
+  // nothing payment-specific, so it is correct either way.
+  return data.orders || [];
+}
+
+async function runPrepaidDeliveryPass(env) {
+  const start = Date.now();
+  const result = {
+    trigger: 'prepaid', startedAt: new Date().toISOString(),
+    ordersChecked: 0, thanked: 0, outForDelivery: 0, reviewsScheduled: 0,
+    seeded: 0, errors: 0, skipped: 0, log: [],
+  };
+  const log = msg => { console.log(msg); result.log.push({ ts: new Date().toISOString(), msg }); };
+
+  if (!env.SYNC_KV) { log('No KV — this pass needs it for dedup, refusing to run'); return result; }
+
+  try {
+    let token;
+    try {
+      token = await getShopifyToken(env);
+    } catch (e) {
+      log(`FATAL: Token failed — ${e.message}`); result.errors++; return result;
+    }
+
+    const orders = await getPrepaidFulfilledOrders(token, env);
+    result.ordersChecked = orders.length;
+    log(`${orders.length} paid+fulfilled orders in the last ${PP_WINDOW_DAYS} days`);
+    if (!orders.length) return result;
+
+    // 🔴 First run ever: burn the markers on everything ALREADY delivered without
+    // sending a thing. Switching this on cold would otherwise blast a month of
+    // customers who got their order weeks ago — the worst failure mode here, and
+    // the kind that gets a WhatsApp number blocked.
+    const seeding = !(await env.SYNC_KV.get('ppass:init'));
+    if (seeding) log('FIRST RUN — seeding a baseline, no messages will be sent this pass');
+
+    for (const o of orders) {
+      const tn = getTrackingNumber(o);
+      if (!tn) { result.skipped++; continue; }
+
+      try {
+        const status = (await trackSinglePostEx(tn, env.POSTEX_TOKEN)).transactionStatus || '';
+        const phone  = normalisePK(o.phone || o.shipping_address?.phone || o.customer?.phone);
+
+        if (status === DELIVERED_STATUS) {
+          if (seeding) {
+            await env.SYNC_KV.put(`wasent:${o.id}:delivered`, 'seeded', { expirationTtl: 60 * 60 * 24 * 30 });
+            await env.SYNC_KV.put(`rvdone:${o.id}`,           'seeded', { expirationTtl: 60 * 60 * 24 * 365 });
+            result.seeded++;
+          } else {
+            if (phone) {
+              const r = await waEnqueue(env, { to: phone, text: msgDelivered(o), ref: `${o.id}:delivered` });
+              if (r.ok) { result.thanked++; log(`${o.name} — delivered thank-you queued`); }
+              else result.skipped++;
+            }
+            // Only schedule if nothing is pending or done already. rvSchedule
+            // overwrites rvdue:, so calling it on an order the COD sweep just
+            // scheduled would silently push the 3-day review timer back an hour
+            // every hour, and the ask would never fire.
+            const pending = await env.SYNC_KV.get(`rvdue:${o.id}`);
+            const done    = await env.SYNC_KV.get(`rvdone:${o.id}`);
+            if (!pending && !done) { await rvSchedule(env, o); result.reviewsScheduled++; }
+          }
+        } else if (String(status).toLowerCase() === OUT_FOR_DELIVERY) {
+          if (seeding) {
+            await env.SYNC_KV.put(`wasent:${o.id}:ofd`, 'seeded', { expirationTtl: 60 * 60 * 24 * 30 });
+            result.seeded++;
+          } else if (phone) {
+            const r = await waEnqueue(env, { to: phone, text: msgOutForDelivery(o), ref: `${o.id}:ofd` });
+            if (r.ok) { result.outForDelivery++; log(`${o.name} — out-for-delivery queued`); }
+            else result.skipped++;
+          }
+        } else {
+          result.skipped++;   // in transit, returned, unknown — runPollSync owns RTO
+        }
+
+        await sleep(150);     // same PostEx rate limit the COD sweep respects
+      } catch (e) {
+        if (e.message.includes('RECORD NOT FOUND')) result.skipped++;
+        else { log(`${o.name} PostEx error: ${e.message}`); result.errors++; }
+      }
+    }
+
+    if (seeding) {
+      await env.SYNC_KV.put('ppass:init', new Date().toISOString());
+      log(`Baseline set on ${result.seeded} orders — real messages begin next run`);
+    }
+  } catch (e) {
+    log(`FATAL: ${e.message}`);
+    result.errors++;
+  }
+
+  result.durationMs  = Date.now() - start;
+  result.completedAt = new Date().toISOString();
+  await env.SYNC_KV.put('last_prepaid_sync', JSON.stringify(result), { expirationTtl: 86400 * 7 })
+    .catch(() => {});
+  console.log(`[PREPAID DONE] thanked=${result.thanked} ofd=${result.outForDelivery} ` +
+              `rv=${result.reviewsScheduled} seeded=${result.seeded} err=${result.errors}`);
+  return result;
+}
+
+function getTrackingNumber(order) {
+  // Check fulfillments first
+  for (const f of (order.fulfillments || [])) {
+    if (f.tracking_number) return f.tracking_number;
+    if (f.tracking_numbers?.length) return f.tracking_numbers[0];
+  }
+  // Check note_attributes — PostEx Shopify app stores tracking here as hxs_courier_tracking
+  const trackingKeys = ['tracking_number', 'hxs_courier_tracking', 'tracking', 'postex_tracking'];
+  for (const a of (order.note_attributes || [])) {
+    if (trackingKeys.includes((a.name || '').toLowerCase()) && a.value) {
+      return a.value;
+    }
+  }
+  return null;
+}
+
+async function findOrderByRef(orderRef, token, env) {
+  const clean = orderRef.replace(/[^0-9a-zA-Z#]/g, '');
+  try {
+    const d = await shopifyFetch(
+      `/orders.json?name=${encodeURIComponent(clean)}&status=any&fields=id,order_number,name,financial_status,total_price,fulfillments,note_attributes`,
+      token, env
+    );
+    if (d.orders?.length) return d.orders[0];
+    const num = clean.replace(/[^0-9]/g, '');
+    if (num) {
+      const d2 = await shopifyFetch(
+        `/orders.json?name=${encodeURIComponent('#'+num)}&status=any&fields=id,order_number,name,financial_status,total_price,fulfillments,note_attributes`,
+        token, env
+      );
+      if (d2.orders?.length) return d2.orders[0];
+    }
+  } catch (e) { console.error('findOrderByRef:', e.message); }
+  return null;
+}
+
+async function findOrderByTracking(trackingNumber, token, env) {
+  try {
+    const d = await shopifyFetch(
+      `/orders.json?status=any&fulfillment_status=fulfilled&limit=250&fields=id,order_number,name,financial_status,total_price,fulfillments,note_attributes`,
+      token, env
+    );
+    for (const o of (d.orders || []))
+      if (getTrackingNumber(o) === String(trackingNumber)) return o;
+  } catch (e) { console.error('findOrderByTracking:', e.message); }
+  return null;
+}
+
+// ─── COD capture amount (v5.1) ───────────────────────────────────────────────
+// The ONLY place that decides how much COD to record. Never uses total_price:
+// on an edited order that is the pre-edit total, and it ignores any card or
+// bank prepayment. Re-reads the order fresh so a webhook arriving minutes after
+// the poll (or vice versa) sees the first capture and skips.
+const toAmount = v => {
+  if (v === null || v === undefined || v === '') return null;
+  const n = Number(String(v).replace(/[^0-9.\-]/g, ''));
+  return Number.isFinite(n) ? n : null;
+};
+const fmtPKR = n => Number(n).toLocaleString('en-US', { maximumFractionDigits: 2 });
+
+async function resolveCodCapture(orderId, postexAmount, token, env) {
+  const d = await shopifyFetch(
+    `/orders/${orderId}.json?fields=id,name,financial_status,total_outstanding,current_total_price`,
+    token, env);
+  const o = d.order || {};
+  const outstanding = toAmount(o.total_outstanding);
+  // Fail closed: without an outstanding figure we never guess an amount.
+  if (outstanding === null) throw new Error(`order ${orderId}: total_outstanding missing`);
+  if (outstanding <= 0)
+    return { action: 'skip', outstanding, financialStatus: o.financial_status || '' };
+  const postex = toAmount(postexAmount);
+  if (postex !== null && Math.abs(postex - outstanding) > COD_MATCH_TOLERANCE)
+    return { action: 'mismatch', postex, outstanding };
+  // Record Shopify's outstanding (within PKR 1 of PostEx) so the balance lands on exactly 0.
+  return { action: 'capture', amount: outstanding.toFixed(2), postex, outstanding };
+}
+
+// v5.2: the only caller of markOrderPaid for COD. Lock → fresh outstanding →
+// capture → re-read. Returns {action: locked|skip|mismatch|captured, ...}.
+const CAPLOCK_TTL_S = 120;
+async function codCaptureOnce(env, orderId, postexAmount, trackingNumber, orderRef, token) {
+  const lockKey = `caplock:${orderId}`;
+  const me = `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+  if (await env.SYNC_KV.get(lockKey)) return { action: 'locked' };
+  await env.SYNC_KV.put(lockKey, me, { expirationTtl: CAPLOCK_TTL_S });
+  if ((await env.SYNC_KV.get(lockKey)) !== me) return { action: 'locked' };   // lost the race
+  try {
+    const cap = await resolveCodCapture(orderId, postexAmount, token, env);     // fresh read, inside the lock
+    if (cap.action === 'mismatch') await noteCodMismatch(env, orderId, cap, trackingNumber, orderRef, token);
+    if (cap.action !== 'capture') return cap;
+    await markOrderPaid(orderId, cap.amount, trackingNumber, orderRef, token, env);
+    await checkOverCapture(env, orderId, token);
+    return { ...cap, action: 'captured' };
+  } finally {
+    try { if ((await env.SYNC_KV.get(lockKey)) === me) await env.SYNC_KV.delete(lockKey); } catch (e) {}
+  }
+}
+
+// Backstop for anything the lock misses: a negative balance means money was
+// recorded twice. One note per order (KV `overcap:<id>`).
+async function checkOverCapture(env, orderId, token) {
+  try {
+    const d = await shopifyFetch(`/orders/${orderId}.json?fields=id,total_outstanding`, token, env);
+    const out = toAmount(d.order?.total_outstanding);
+    if (out === null || out >= 0) return false;
+    const key = `overcap:${orderId}`;
+    if (await env.SYNC_KV.get(key)) return false;
+    const now = new Date().toLocaleString('en-PK', { timeZone: 'Asia/Karachi' });
+    await addOrderNote(orderId,
+      `⚠️ Over-captured by ${fmtPKR(-out)}, check manually\nShopify outstanding is ${fmtPKR(out)} after PostEx Sync capture\nUpdated: ${now}`,
+      token, env);
+    await env.SYNC_KV.put(key, '1', { expirationTtl: 60 * 60 * 24 * 30 });
+    return true;
+  } catch (e) { console.error('checkOverCapture:', e.message); return false; }
+}
+
+// One note per order, not one per hourly sweep.
+async function noteCodMismatch(env, orderId, cap, trackingNumber, orderRef, token) {
+  const key = `codmm:${orderId}`;
+  try { if (await env.SYNC_KV.get(key)) return false; } catch (e) {}
+  const now = new Date().toLocaleString('en-PK', { timeZone: 'Asia/Karachi' });
+  await addOrderNote(orderId,
+    `⚠️ PostEx COD amount ${fmtPKR(cap.postex)} ≠ Shopify outstanding ${fmtPKR(cap.outstanding)}, check manually\nNOT marked paid by PostEx Sync\nTracking: ${trackingNumber}\nRef: ${orderRef}\nUpdated: ${now}`,
+    token, env);
+  try { await env.SYNC_KV.put(key, '1', { expirationTtl: 60 * 60 * 24 * 30 }); } catch (e) {}
+  return true;
+}
+
+async function markOrderPaid(orderId, amount, trackingNumber, orderRef, token, env) {
+  const now = new Date().toLocaleString('en-PK', { timeZone: 'Asia/Karachi' });
+  await shopifyFetch(`/orders/${orderId}/transactions.json`, token, env, {
+    method: 'POST',
+    body: JSON.stringify({
+      transaction: {
+        kind: 'capture', status: 'success', amount,
+        gateway: 'cash on delivery', source: 'external',
+        message: `COD collected — PostEx Delivered | Tracking: ${trackingNumber} | Ref: ${orderRef}`
+      }
+    })
+  });
+  await addOrderNote(orderId,
+    `✅ Delivered & marked paid via PostEx Sync\nTracking: ${trackingNumber}\nRef: ${orderRef}\nUpdated: ${now}\nSource: Automated sync`,
+    token, env);
+}
+
+async function addOrderNote(orderId, note, token, env) {
+  try {
+    const d        = await shopifyFetch(`/orders/${orderId}.json?fields=note`, token, env);
+    const existing = d.order?.note || '';
+    await shopifyFetch(`/orders/${orderId}.json`, token, env, {
+      method: 'PUT',
+      body: JSON.stringify({
+        order: { id: orderId, note: existing ? `${existing}\n\n---\n${note}` : note }
+      })
+    });
+  } catch (e) { console.error('addOrderNote:', e.message); }
+}
+
+// ─── PostEx API ───────────────────────────────────────────────────────────────
+
+async function trackSinglePostEx(trackingNumber, postexToken) {
+  const res = await fetch(
+    `${POSTEX_BASE}/track-order/${encodeURIComponent(trackingNumber)}`,
+    { headers: { 'token': postexToken, 'Content-Type': 'application/json' } }
+  );
+  if (!res.ok) throw new Error(`PostEx ${res.status}`);
+  const data = await res.json();
+  if (data.statusCode === '404' || data.statusMessage === 'RECORD NOT FOUND')
+    throw new Error('RECORD NOT FOUND');
+  if (data.statusCode !== '200') throw new Error(`PostEx: ${data.statusMessage}`);
+  return data.dist || {};
+}
+
+// ─── Utils ────────────────────────────────────────────────────────────────────
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
