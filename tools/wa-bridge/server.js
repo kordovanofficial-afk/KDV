@@ -146,8 +146,17 @@ async function connect() {
       connected = false;
       const code = lastDisconnect?.error?.output?.statusCode;
       const loggedOut = code === DisconnectReason.loggedOut;
-      console.log(`[wa] disconnected (${code}) — ${loggedOut ? 'LOGGED OUT: delete auth folder and re-scan' : 'reconnecting in 5s'}`);
-      if (!loggedOut) setTimeout(connect, 5000);
+      currentQR = null;   // never show a stale QR: a dead code can't be scanned
+      console.log(`[wa] disconnected (${code}) — ${loggedOut ? 'LOGGED OUT: clearing session, fresh QR in 3s' : 'reconnecting in 5s'}`);
+      if (loggedOut) {
+        // Nov 2026 fix: before, a logout stopped the bridge for good and the /qr page kept
+        // showing the last (dead) code, so re-scanning could never work. Now we wipe the
+        // old session and start a fresh pairing automatically.
+        try { require('fs').rmSync(AUTH_DIR, { recursive: true, force: true }); } catch (_) {}
+        setTimeout(connect, 3000);
+      } else {
+        setTimeout(connect, 5000);
+      }
     }
   });
 
