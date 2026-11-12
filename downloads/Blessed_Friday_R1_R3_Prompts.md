@@ -14,7 +14,7 @@ Scene: photorealistic commercial still life. A single long printed paper receipt
 
 The receipt: warm cream thermal paper with a faint paper texture and a torn top edge. Crisp black monospace print, perfectly legible and spelled exactly as written. Each line is left-aligned, with the amounts right-aligned, in this exact order:
 KORDOVAN
-THE WORKSHOP · MADE IN PAKISTAN
+HANDCRAFTED · MADE IN PAKISTAN
 - - - - - - - - - - - - - - - - - -
 THE CABIN TROLLEY            42,000
 BLESSED FRIDAY  -30%        -12,610
@@ -75,7 +75,7 @@ Same prompt, with two changes:
 - [ ] Both sizes (4:5 + 9:16) for each
 
 ## Meta ad copy (I'll set these up)
-**R1 primary text:** "The receipt says it all. The Cabin Trolley, hand-finished in our workshop, is Rs 12,610 less this Blessed Friday. Cash on delivery. Four days only, Fri 27 – Mon 30 Nov."
+**R1 primary text:** "The receipt says it all. The Cabin Trolley, handcrafted in Pakistan, is Rs 12,610 less this Blessed Friday. Cash on delivery. Four days only, Fri 27 – Mon 30 Nov."
 **R1 headline:** `You save Rs 12,610`
 **R3 primary text:** "We hear it often, and it's fair: good leather costs more. That's because it's made to last for decades, not seasons. For four days only, The Corporate Office is Rs 21,370 instead of Rs 28,500. Blessed Friday, Fri 27 – Mon 30 Nov."
 **R3 headline:** `Fair. So for four days, they aren't.`

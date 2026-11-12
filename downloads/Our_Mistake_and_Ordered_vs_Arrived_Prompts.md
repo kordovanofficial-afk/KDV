@@ -25,7 +25,7 @@ Bottom left on the dark wood: the KORDOVAN logo, small, in cream.
 
 Colour palette only: espresso #241C16, cream #F7F2EA, cognac #A0623A, aged brass #B0894F. No other text anywhere, no prices on the bags, no tags, no stickers, no starbursts, no red, no emojis, no exclamation marks. Aspect ratio 4:5.
 ```
-**Meta primary text:** "We'll be honest: we made more bags than we sold this year. Handcrafted in our workshop, built to last decades, and now up to 35% off for four days only. Blessed Friday, Fri 27 – Mon 30 Nov. Cash on delivery."
+**Meta primary text:** "We'll be honest: we made more bags than we sold this year. Handcrafted in Pakistan, built to last decades, and now up to 35% off for four days only. Blessed Friday, Fri 27 – Mon 30 Nov. Cash on delivery."
 **Headline:** `Our mistake. Your gain.`
 
 ---
@@ -51,7 +51,7 @@ Bottom right of the band: the KORDOVAN logo from uploaded image 3, small, in cre
 
 All text perfectly legible and spelled exactly as written. Palette only: espresso, cream, stone, aged brass. No other text, no arrows, no stickers, no emojis. Aspect ratio 4:5.
 ```
-**Meta primary text:** "The biggest worry about buying leather online: will what arrives match the picture? Here's the Mocha Mate on our website, and the same wallet as it actually arrives. Genuine leather, handcrafted in our workshop. Pay cash on delivery, with 7-day returns."
+**Meta primary text:** "The biggest worry about buying leather online: will what arrives match the picture? Here's the Mocha Mate on our website, and the same wallet as it actually arrives. Genuine leather, handcrafted in Pakistan. Pay cash on delivery, with 7-day returns."
 **Headline:** `What you see is what you get`
 
 **Check before sending:** (A) the bags match the real ones; no prices on the image. (B) The right-hand photo is untouched and real; the left and right show the same colour of the same wallet.

@@ -95,7 +95,7 @@ Bottom right corner: the KORDOVAN logo, small, in cream.
 
 Colour palette only: espresso #241C16, cream #F7F2EA, cognac #A0623A, aged brass #B0894F, stone #8B8174. No other text anywhere, no arrows, no ticks or crosses, no stickers, no red, no emojis, no exclamation marks. Aspect ratio 4:5.
 ```
-**Meta primary text:** "One of these is synthetic. Its coating tends to peel at the fold. The other is the Mocha Mate: genuine cow leather that softens the longer you carry it, with an outer button pocket that holds your coins. Cut and stitched in our workshop, made in Pakistan. Cash on delivery across Pakistan, and a 7-day exchange on unused pieces."
+**Meta primary text:** "One of these is synthetic. Its coating tends to peel at the fold. The other is the Mocha Mate: genuine cow leather that softens the longer you carry it, with an outer button pocket that holds your coins. Cut and stitched in Pakistan, made in Pakistan. Cash on delivery across Pakistan, and a 7-day exchange on unused pieces."
 **Headline:** `Mocha Mate: the one that softens`
 
 ---
@@ -129,7 +129,7 @@ Bottom right corner: the KORDOVAN logo, small, in cream.
 
 Colour palette only: espresso #241C16, cream #F7F2EA, cognac #A0623A, aged brass #B0894F, stone #8B8174. No other text anywhere, no arrows, no ticks or crosses, no snowflake icons, no stickers, no red, no emojis, no exclamation marks. Aspect ratio 4:5.
 ```
-**Meta primary text:** "Knitted gloves look warm until the first cold wind on the way to work. Sheep leather keeps the wind out and softens to the shape of your hand the more you wear it. Hand-cut and stitched in our workshop, in black and brown, sizes S to XL. Size chart on the product page. Cash on delivery across Pakistan."
+**Meta primary text:** "Knitted gloves look warm until the first cold wind on the way to work. Sheep leather keeps the wind out and softens to the shape of your hand the more you wear it. Hand-cut and stitched in Pakistan, in black and brown, sizes S to XL. Size chart on the product page. Cash on delivery across Pakistan."
 **Headline:** `Leather gloves that keep the wind out`
 *Size note (CQRO, Nov 11):* changed to "S to XL" because Brown 2XL is 0 and Black 2XL is 1 in Shopify (Nov 11). If 2XL is back in both colours on Nov 30, it may say "S to 2XL" again.
 
@@ -168,13 +168,13 @@ Text in the dark upper area, left-aligned, perfectly legible and spelled exactly
 Line 1, large elegant high-contrast serif (like Fraunces), cream #F7F2EA:
 Stitched twice. Made to soften, not crack.
 Line 2, small clean sans-serif (like Inter), aged brass #B0894F:
-Genuine cowhide. Hand-cut in our workshop.
+Genuine cowhide. Handcrafted in Pakistan.
 
 Bottom right: the KORDOVAN logo, small, in cream.
 
 Colour palette only: espresso #241C16, cream #F7F2EA, cognac #A0623A, aged brass #B0894F. No other text anywhere, no icons, no stickers, no emojis, no exclamation marks. Aspect ratio 4:5.
 ```
-**Meta primary text:** "The Executive belt is genuine cowhide with a fine, visible grain and double-stitched edges. It softens to your waist with wear rather than cracking. Hand-cut and stitched in our workshop, in chocolate brown, black, tan and camel. Cash on delivery across Pakistan."
+**Meta primary text:** "The Executive belt is genuine cowhide with a fine, visible grain and double-stitched edges. It softens to your waist with wear rather than cracking. Hand-cut and stitched in Pakistan, in chocolate brown, black, tan and camel. Cash on delivery across Pakistan."
 **Headline:** `The Executive belt, stitched twice`
 
 ---
@@ -205,7 +205,7 @@ Colour palette only: espresso #241C16, cream #F7F2EA, cognac #A0623A, aged brass
 | 5 | Executive belt, Chocolate Brown | DOUBLE STITCHED | Softens rather than cracks. | The Executive belt |
 | 6 | Cap, Black | SHEEP LEATHER | Takes the shape of your head. | Leather cap |
 
-**Meta primary text:** "Our best-sellers this winter: the wallet that carries the coins too, the RFID KODO, sheep-leather gloves in black and brown, the double-stitched Executive belt and a sheep-leather cap. Each one is cut and stitched in our workshop. Cash on delivery across Pakistan, and free delivery over Rs 5,500."
+**Meta primary text:** "Our best-sellers this winter: the wallet that carries the coins too, the RFID KODO, sheep-leather gloves in black and brown, the double-stitched Executive belt and a sheep-leather cap. Each one is cut and stitched in Pakistan. Cash on delivery across Pakistan, and free delivery over Rs 5,500."
 *(The Rs 5,500 free-delivery line is the store rule in four theme files. The CQRO re-checks it on Nov 30.)*
 
 ---

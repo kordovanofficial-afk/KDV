@@ -140,7 +140,7 @@ The product stays exactly the same shape, colour and design in every frame: no m
 ---
 ## 4. META AD COPY (primary text, same voice)
 **A · The offer, plainly**
-> The Blessed Friday Sale. Up to 35% off our handcrafted bags, for four days only: Friday 27 to Monday 30 November. Cut, stitched and finished by hand in our workshop. Cash on delivery, and free delivery over Rs 5,500.
+> The Blessed Friday Sale. Up to 35% off our handcrafted bags, for four days only: Friday 27 to Monday 30 November. Cut, stitched and finished by hand in Pakistan. Cash on delivery, and free delivery over Rs 5,500.
 
 **B · Craft first**
 > Some things you buy once. Every KORDOVAN bag is hand-cut and hand-stitched to carry you for years, not seasons. This Blessed Friday, it costs up to 35% less. Ends Monday at midnight.
@@ -166,7 +166,7 @@ Use the same LOCK + STYLE blocks first. Upload the product photo(s) + logo as be
 ```
 [LOCK] [STYLE] A single long printed paper receipt lying slightly curled on a dark walnut desk, warm spotlight from the upper left, the leather cabin trolley standing softly out of focus behind it on the right. The receipt is cream thermal paper with crisp black monospace print, perfectly legible, laid out exactly like this, line by line:
 "KORDOVAN"
-"THE WORKSHOP · MADE IN PAKISTAN"
+"HANDCRAFTED · MADE IN PAKISTAN"
 "- - - - - - - - - - - - - - - -"
 "THE CABIN TROLLEY          42,000"
 "BLESSED FRIDAY  −30%      −12,610"

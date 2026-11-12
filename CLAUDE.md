@@ -9,8 +9,8 @@ add only a short rule and a pointer here.
 ## 🔴 HARD RULES (never break)
 - 💰 **FREE options ONLY.** No paid apps, connectors, tools or subscriptions. Use free tiers, native Shopify,
   Cloudflare free and self-hosted tools.
-- 🚫 **Never mention KARACHI in new content** (ads, captions, product/SEO copy, blog, email, WhatsApp). Say "our
-  workshop" or "made in Pakistan". Exceptions kept on purpose: the checkout rate "EXPRESS NEXT DAY DELIVERY (KARACHI
+- 🚫 **Never mention KARACHI in new content** (ads, captions, product/SEO copy, blog, email, WhatsApp). Say "handcrafted in
+  Pakistan" or "made in Pakistan" (NOT "our workshop": a supplier makes our products, Founder Nov 12). Exceptions kept on purpose: the checkout rate "EXPRESS NEXT DAY DELIVERY (KARACHI
   ONLY)", the old Meta ads, and the Shipping/Privacy policies (the Founder edits those).
 - 🛑 **Ask before EVERY push to `kordovan`.** It deploys straight to the LIVE store
   (theme `165057069296`, role MAIN). Work on the session `claude/*` branch, commit and push there, then ask to merge.
@@ -47,7 +47,7 @@ add only a short rule and a pointer here.
 ## 🎥 CONTENT REALITY (Founder, Nov 12)
 - Crafting is OUTSOURCED: **no workshop/craft/stitching footage exists or can be shot**. Staff won't film in the store. Available material: website product photos, GPT/AI images (and AI motion from them), and the **Founder's own office clips** (hands + product on his desk), which Claude edits (cut, on-screen text, end card).
 - Every shot list, social pack and ad plan must use only those sources. "Real" proof = store/office phone photos (e.g. Ordered vs Arrived), the Founder's own used wallet (patina), desk demos.
-- Claims: until the Founder confirms, write "handcrafted in Pakistan", not "our workshop" / "made in our workshop" (crafting is outsourced).
+- **CONFIRMED (Founder, Nov 12): a SUPPLIER makes our products.** Never write "our workshop" / "made in our workshop" / "hand-cut by us". Use "handcrafted in Pakistan" / "made in Pakistan". Still on the live site (sweep needs the Founder's yes): ~35 product descriptions, 6 blog articles and 5 theme files (our-craft, our-story, pdp-main, main-search, theme.liquid).
 
 ## ⏱ HOW I RUN (Founder, Nov 7): scheduled, not continuous (protects the Founder's credit limits)
 - **Team check-in every 2 days at 11:59 PKT** (`trig_01FZUWyfpBhnn9BUytoB2t45`).
