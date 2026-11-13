@@ -126,7 +126,7 @@ add only a short rule and a pointer here.
 - Omar + Sana draft it at the **Nov 11 check-in** (HQ assignment `founder-always-on-creative-funnel`). Founder produces before Dec 1; it runs 90 days from Dec 1. One new-customer ad set with several formats (~60%) + warm retargeting (~30%) + a weekly format test (~10%). Judge each ad on Shopify CPA AND COD refusal rate. Real-only formats (workshop, patina, reviews) come from Ahsan. VIP pre-hype REJECTED (revisit for an exclusive launch next year).
 
 ## 📣 META ADS — current state (re-read live before acting; IDs drift)
-- **FUNNEL LIVE Nov 13 (3,100/day):** TOF `120256055924930428`/as `120256055941820428` 500 (W01) · OLD H1 ad set `120255717721520428` 1,300 (temporary: new TOF H1 ad `120256055946060428` stuck in draft, publish in Ads Manager then move budget 1,300→TOF and pause old H1) · MOF `120256055925770428`/as `120256055942050428` 500 · BOF `120228534676850428` "KDV | BOF | Close (catalogue)" 800. Paused: TOF-W, RT-W, SALE-1111. The table below is PRE-funnel history.
+- **FUNNEL LIVE Nov 13 (3,100/day):** TOF `120256055924930428`/as `120256055941820428` 500 (W01) · H1 Mocha stays in its OLD ad set `120255717721520428` 1,300 = part of TOF (Founder Nov 13: "leave it as is"; keeps learning + social proof). The stuck MCP draft copy `120256055946060428` is invisible to the Founder: discard it (preview → confirm) at the next check-in, never publish it · MOF `120256055925770428`/as `120256055942050428` 500 · BOF `120228534676850428` "KDV | BOF | Close (catalogue)" 800. Paused: TOF-W, RT-W, SALE-1111. The table below is PRE-funnel history.
 | What | ID | Budget/day (pre-sale) |
 |---|---|---|
 | Retarget (warm + buyers, catalogue) | campaign `120228534676850428` / ad set `120228534676860428` | 1,000 |
