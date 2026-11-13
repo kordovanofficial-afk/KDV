@@ -51,3 +51,13 @@ Recommendation for the Founder's yes: S4 ad set 1,000 → 2,000/day until the sa
 Sale-to-date Nov 8–12 morning (active ads, Meta): Retarget 7,031 / 11 purch (639) · H1 Mocha 5,871 / 6 (979) · S4 carousel 5,178 / 7 (740) · S1 4,374 / 3 (1,458) · S2 4,335 / 5 (867) · W01 gloves 2,860 / 1 (2,860). Plus S3 971 and W-RT1 ~1,756 (both paused). Total ≈ PKR 32.4k.
 Shopify: 54 live orders since Nov 8 00:00.
 FLAG for the Founder: W01 gloves in the sale window ≈ 2,860 for ~2 Shopify orders (~1,430 each), above the 1,000 gloves line. It sits in the approved ≈3,000/day bridge budget; recommend a decision at the Nov 13 check-in (lifetime ~1,000 per order, so borderline). No changes made. The sale ends tonight; the 11.11 OVER task resets.
+
+## Nov 13 ~04:30 PKT — 11.11 closed, funnel live (run delayed by usage limit; prices partly on sale until ~04:00 PKT)
+- Prices: revert_1..6 applied, 0 userErrors; store-wide check: no compare-at left; Mocha Mate 3,200.
+- SALE-1111 campaign 120255969486070428: ad sets ended 23:59 (0 spend Nov 13); campaign also PAUSED.
+- Published: TOF `120256055924930428` / ad set `120256055941820428` (W01 ad 120256055946350428 ACTIVE); MOF `120256055925770428` / `120256055942050428` 500 (Ordered vs Arrived 120256055946470428 ACTIVE).
+- ⚠️ H1 Mocha ad 120256055946060428 would NOT publish (stays staged, no error, 3 tries). Fallback: OLD H1 ad set 120255717721520428 re-activated at 1,300; TOF ad set cut 1,700 → 500.
+- Paused: TOF-W campaign 120255846370500428, RT-W ad set 120255846373980428.
+- BOF = Retarget 120228534676850428 renamed "KDV | BOF | Close (catalogue)", 800/day (verified).
+- LIVE TOTAL: TOF 500 + H1 1,300 + MOF 500 + BOF 800 = 3,100/day.
+- Sale read (Shopify, incl. ~9 test orders on Nov 12): Nov 8–12 71 orders / net 203.8k vs Nov 3–7 34 / 200.5k. Real ≈ 62 orders (+80%), revenue flat → smaller baskets (wallet-heavy, no big jacket orders). Survival/RTO to read once delivered.
