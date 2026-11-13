@@ -430,3 +430,11 @@ The first paragraph (the 40 words that render) is accurate; keep it. Everything 
 - Warranty line on wallets: sourced to the theme's PDP fallback (`snippets/pdp-main.liquid`, CB-2) and already live; no wallet has a narrower warranty (the 1-year exception is the Stallion **boot**, not the Stallion wallet). Approved.
 
 **Riskiest item:** publishing the jacket editorial without the hero fix (or without Q1), which would put "full-grain" and "top-grain" on one page. **Next check:** on Nov 13, before apply, re-read compare-at = price on all three pages (revert done) and read back the written `custom.editorial` values.
+
+---
+## 8. PUBLISHED 2026-11-13 ~09:47 PKT (Founder "go ahead", Nov 13)
+- Jackets: seo title+description (F1), hero `descriptionHtml` (top-grain, "cut in your size for one customer", no workshop), `custom.editorial` (price block + FAQ + JSON-LD; intro "made to order in Pakistan").
+- Wallets: alternative title "Leather Wallets for Men: Price in Pakistan Rs 1,499–6,500" (Q2), meta with "handcrafted in Pakistan" (supplier rule, Nov 12), `custom.editorial` (price block + FAQ + JSON-LD).
+- Oxford: seo title + description (F5).
+- All read back live; all named products ACTIVE, wallets in stock, prices = regular. GSC re-measure ~Dec 11 with the SAME query+page method; revert any page whose price-query CTR is not up ~1 pt.
+- Not done (optional): trimming the hidden wallet `descriptionHtml` (still holds a `kv2-gifting` link that never renders).
