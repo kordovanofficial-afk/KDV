@@ -21,3 +21,10 @@ Every morning run adds to this and lists what is still open. Files live in `down
 | Nov 11 | Ahsan | `downloads/Ahsan_Filming_List_December.md` | Film workshop clips + a patina before/after + comment-reply clips on his phone | open, due Nov 28 |
 Still open from before: Ahsan's photo shoot (7 products) · jacket call-list results · Ahsan's Kodo Vertical shop count (asked Nov 8, read, no reply) · Blessed Friday carousel v2 (Founder, due Nov 18).
 | Nov 11 | Team (WhatsApp) | `downloads/Team_Brief_Blessed_Friday.txt` | Blessed Friday plan + why + who does what | sent to Founder |
+
+### Nov 13 check-in
+| Nov 13 | Founder | `downloads/Kordovan_Content_Pack_Nov16-29.pdf` | One 40-min office shoot (26 shots) Sat 15 Nov; make 3 carousels in GPT; schedule posts | open, shoot Nov 15 |
+| Nov 13 | Ahsan | (via Founder) | Pack one Mocha Mate parcel the normal way + 3–4 Blessed Friday bags for the Founder's desk shoot | open |
+- `downloads/Ahsan_Filming_List_December.md` is SUPERSEDED (no workshop footage exists; Founder Nov 12). Closed.
+- Price-in-Pakistan pages: DONE (published Nov 13).
+Still open: Ahsan's photo shoot (7 products) · jacket call-list results · Kodo Vertical count · Blessed Friday creatives (Founder, due Nov 18) · Always-on December prompts (Founder, due Nov 30).
