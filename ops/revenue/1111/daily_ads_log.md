@@ -61,3 +61,4 @@ FLAG for the Founder: W01 gloves in the sale window ≈ 2,860 for ~2 Shopify ord
 - BOF = Retarget 120228534676850428 renamed "KDV | BOF | Close (catalogue)", 800/day (verified).
 - LIVE TOTAL: TOF 500 + H1 1,300 + MOF 500 + BOF 800 = 3,100/day.
 - Sale read (Shopify, incl. ~9 test orders on Nov 12): Nov 8–12 71 orders / net 203.8k vs Nov 3–7 34 / 200.5k. Real ≈ 62 orders (+80%), revenue flat → smaller baskets (wallet-heavy, no big jacket orders). Survival/RTO to read once delivered.
+- Nov 14: stuck H1 draft ad 120256055946060428 DISCARDED (Founder asked; preview listed only that never-published ad). TOF W01 + old H1 ad set verified ACTIVE after.
