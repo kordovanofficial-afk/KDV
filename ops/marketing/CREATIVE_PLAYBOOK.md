@@ -17,6 +17,7 @@ Started Nov 10 2026 (Founder: "pinpoint the exact formula that sells, not just r
 | Gloves W02–W05, W-RT2 | Failed the gloves kill rule (Nov 8) |
 
 ## 3. IN TEST (read Dec 1–3)
+- **Truckkr (Nov 14 → read Nov 21)**, TEST ad set `120256098366860428`, 800/day: zip/keys problem (studio) · patina 'Scratch it' (studio, labelled illustration) · comparison Rs 900 vs Rs 3,800 (studio). Question: which hook sells an unknown Rs 3,800 wallet cold? Comparison has won twice before (H1, W01).
 | Format | Ad | utm_content |
 |---|---|---|
 | Receipt (savings shown as a receipt) | R1 Cabin Trolley | bf_r1_receipt |
