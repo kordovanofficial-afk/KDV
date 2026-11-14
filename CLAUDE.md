@@ -56,6 +56,7 @@ add only a short rule and a pointer here.
   3. Use at most 1–2 agents.
   4. **Team handover (Founder, Nov 8):** anything a human must do goes out as a ready-to-forward FILE in `downloads/` (sent with SendUserFile), naming who it is for. Log in `ops/operations/TEAM_HANDOVER.md`.
   5. Send a short brief (incl. "FOR THE TEAM"), push, then STOP.
+- **Morning brief daily 06:47 PKT** (`trig_01MoDsdkvSLUsZux7nsEYYXP`, Founder Nov 14): one short to-do list for the day (Founder / team / Claude) + yesterday's orders, revenue, ad spend. Report only, no live changes.
 - **Nightly 23:30 PKT** (`trig_01F7dSLQsNatvpcAJWx4yZxL`): read WhatsApp, apply store sales to Shopify stock, reply
   to the day's messages, log to `ops/operations/store_sales_log.md`.
 - 🚫 No long autonomous loops between runs unless the Founder asks in chat.
