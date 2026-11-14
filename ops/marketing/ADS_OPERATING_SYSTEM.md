@@ -45,7 +45,8 @@ Meta's own purchase count is never used alone (it over-reports ~2.05x).
 
 ---
 ## 4. Decision rules: when to stop, when NOT to stop, when to scale
-**Break-even (the CPA ceiling) is per PRODUCT, not one flat number:** ceiling = profit per PLACED order (net of COGS, delivery and that product's refusal rate). From `ADS_PLAYBOOK_PK.md` (Jul data, refresh due): Aristocrat ~3,000 · Bronco ~2,900 · Truckkr ~2,100 · Shelby ~1,500 · Plain Bifold ~1,500 · KODO ~1,100 · **Mocha Mate ~990** · Kodo Vertical ~970 · Bastion ~720 · Rigor Lite ~460. Gloves 1,000 (Founder). Bags: computed per line before BF.
+**Break-even (the CPA ceiling) is per PRODUCT, not one flat number:** ceiling = profit per PLACED order (net of COGS, delivery and that product's lost-order/refusal rate), compared with the **Shopify placed CPA** (utm_content), never Meta CPA × 2.05. **Refreshed Nov 14 2026 (CFO, Aug–Oct data, regular prices; ranges + method in `ops/finance/2026-11-14_cpa_ceilings.md`):** **Mocha Mate ~1,460** (1,200–1,460) · Gloves **1,000 (Founder; computed ~930, range 890–1,180)** · BOF catalogue mix ~1,500 (1,340–2,160) · Executive belt ~1,700 · Jacket ~7,750 per placed / ~16,140 per paid · Aristocrat ~2,460 · Bronco ~2,720 · Truckkr ~1,870 · Shelby ~1,410 · Plain Bifold ~810 · KODO ~1,050 · Kodo Vertical ~1,040 · Bastion ~640 · Rigor Lite ~490. ⚠️ These fall during a sale (Mocha at 2,400 → ~920). Bags: computed per line before BF.
+*Superseded (kept for reference): July 2026 ceilings from `ADS_PLAYBOOK_PK.md`: Aristocrat ~3,000 · Bronco ~2,900 · Truckkr ~2,100 · Shelby ~1,500 · Plain Bifold ~1,500 · KODO ~1,100 · Mocha Mate ~990 · Kodo Vertical ~970 · Bastion ~720 · Rigor Lite ~460 · Gloves 1,000 (Founder).*
 
 | Situation | Action |
 |---|---|
@@ -79,7 +80,7 @@ Always: change at most once per 72h per ad set; batch edits; never pause an ad s
 
 ---
 ## 7. Before launch (owner · date)
-1. **Refresh the per-product ceilings** with Aug–Oct data (profit per placed order, incl. refusal). CFO Ayesha · Nov 13–15. *Mocha Mate's last ceiling (~990) is BELOW the 1,300 we have been using; H1 at ~980 Meta CPA may be break-even at best. Verify first.*
+1. **Refresh the per-product ceilings** with Aug–Oct data (profit per placed order, incl. refusal). CFO Ayesha · Nov 13–15. ✅ **DONE Nov 14** (`ops/finance/2026-11-14_cpa_ceilings.md`, numbers in section 4). Mocha ceiling is ~1,460, not ~990. H1 14-day Shopify placed CPA = 19,801 ÷ 18 = **1,100 (0.75× ceiling): passes**. Retarget/BOF = 17,036 ÷ 11 = 1,549 vs ~1,500 central (1.03×, inside range): watch. No ad is above 1.3×.
 2. Audience sizes for MOF/BOF (merge if MOF < ~50k). CRO Sana · Nov 15.
 3. Build the 3 campaigns as DRAFTS with the naming + UTMs; carry H1 + W01 over by ID (keeps their history) only if their ceiling check passes. CEO · Nov 15.
 4. Founder approves the draft (per-ad table) → live **Nov 16** at 3,000/day.
