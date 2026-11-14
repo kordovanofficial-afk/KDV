@@ -46,6 +46,7 @@ add only a short rule and a pointer here.
 
 ## 🎥 CONTENT REALITY (Founder, Nov 12)
 - Crafting is OUTSOURCED: **no workshop/craft/stitching footage exists or can be shot**. Staff won't film in the store. Available material: website product photos, GPT/AI images (and AI motion from them), and the **Founder's own office clips** (hands + product on his desk), which Claude edits (cut, on-screen text, end card).
+- **IMAGE PROMPT STANDARD (Founder, Nov 14): every GPT/AI image prompt spells out EVERYTHING:** exact size in px + ratio (default 1080×1350, 4:5), layout/composition + camera angle, background (material, colour hex, texture), product colour/texture (hex), lighting (direction, K, shadows), every text line verbatim with font, size, colour hex, position, logo placement (tell the Founder to upload the real logo PNG + product photo), style/vibe and a 'do not' list. Reference: `downloads/Truckkr_4_Ad_Test_Nov2026.md`.
 - Every shot list, social pack and ad plan must use only those sources. "Real" proof = store/office phone photos (e.g. Ordered vs Arrived), the Founder's own used wallet (patina), desk demos.
 - **CONFIRMED (Founder, Nov 12): a SUPPLIER makes our products.** Never write "our workshop" / "made in our workshop" / "hand-cut by us". Use "handcrafted in Pakistan" / "made in Pakistan". Still on the live site (sweep needs the Founder's yes): ~35 product descriptions, 6 blog articles and 5 theme files (our-craft, our-story, pdp-main, main-search, theme.liquid).
 
