@@ -313,8 +313,8 @@ Image `src` values `{{IMG_HERO}}`, `{{IMG_GRAIN}}`, `{{IMG_STYLES}}` and `{{IMG_
 | Target blog | `shoes` (exists; title "shoes". Consider renaming the blog title to "Shoes", which is cosmetic) |
 | Handle | `top-10-leather-shoe-brands-in-pakistan` |
 | Article title (H1) | Top 10 Leather Shoe Brands in Pakistan (2026) |
-| SEO title (55) | `Top 10 Leather Shoe Brands in Pakistan (2026) | Kordovan` |
-| Meta description (151) | `Ten men's leather shoe brands in Pakistan compared honestly, with the price bands that tell genuine leather from coated imitations. We're on the list too.` |
+| SEO title (56) | `Top 10 Leather Shoe Brands in Pakistan (2026) | Kordovan` |
+| Meta description (154) | `Ten men's leather shoe brands in Pakistan compared honestly, with the price bands that tell genuine leather from coated imitations. We're on the list too.` |
 | Summary (excerpt) | An honest guide to the ten men's leather shoe brands worth knowing in Pakistan: what each does well, what to check before you buy, and the price bands that tell genuine leather from a coated imitation. Written by a Pakistani leather brand that is on the list, and says so. |
 | Author | Kordovan |
 | Tags | leather shoes, buying guide, pakistan |
