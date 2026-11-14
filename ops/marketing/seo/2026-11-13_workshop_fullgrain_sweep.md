@@ -282,3 +282,10 @@ Commit `cd94b8e` "Theme: remove 'our workshop' claims (NOT deployed; needs Found
 | article news/real-vs-fake-leather-how-to-check | body | Written by the Kordovan workshop team. | Written by the Kordovan team. |
 | article news/real-vs-fake-leather-how-to-check | body | cut and stitched to order in our own workshop. | cut and stitched to order in Pakistan. |
 | article news/discover-kordovan-leather-redefining-luxury-at-an-affordable-price | body + summary | where we are dedicated to crafting high-quality leather products | where we are dedicated to offering high-quality leather products |
+## Nov 14 follow-up (Founder: "yes, deploy and fix all four")
+- Theme deployed: kordovan `f0b5cd1` (cherry-pick of cd94b8e; tags balanced, no "our workshop" left in the 5 files).
+- PENDING (Shopify connector disconnected mid-task; apply as soon as it reconnects):
+  1. Jacket article: "We have a single store in Malir Cantt." → "We have a single store." (Karachi rule)
+  2. Desert Voyager bomber descriptionHtml: delete "It is also the jacket our customers have been most consistently happy with."
+  3. Cindy Tote (gid://shopify/Product/8919014080752): repair truncated descriptionHtml.
+  4. "Discover Kordovan Leather" (gid://shopify/Article/589424460016): fix broken markup at start of summary.
