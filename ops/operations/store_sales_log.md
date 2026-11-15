@@ -15,3 +15,6 @@ One entry per nightly run (23:30 PKT). Last-read timestamp at the bottom of each
 - No STORE SALES report today → no inventory changes.
 - Replied: Ahsan (Kodo Vertical 2.0 = 0 online, regular KODO = 17; asked for shop count) inside the 24h window. Founder: nightly summary.
 - Note: the front desk (desk-1.0) still doesn't answer natural stock questions. v1.1 (written, not deployed) does. Founder to paste v1.1 when free.
+
+## Nov 14 (nightly, ran late at 06:48 PKT Nov 15)
+- No WhatsApp messages in the last 24h (inbound or outbound). Nothing to apply.
