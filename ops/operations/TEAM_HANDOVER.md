@@ -28,3 +28,10 @@ Still open from before: Ahsan's photo shoot (7 products) · jacket call-list res
 - `downloads/Ahsan_Filming_List_December.md` is SUPERSEDED (no workshop footage exists; Founder Nov 12). Closed.
 - Price-in-Pakistan pages: DONE (published Nov 13).
 Still open: Ahsan's photo shoot (7 products) · jacket call-list results · Kodo Vertical count · Blessed Friday creatives (Founder, due Nov 18) · Always-on December prompts (Founder, due Nov 30).
+
+### Nov 15 check-in
+| Date | Who | File | What | Status |
+|---|---|---|---|---|
+| Nov 15 | Mr. Tahir | `downloads/Team_Messages_Nov15.txt` | KDV#22799 shipped 3×; claim Rs 11,627 PostEx tax withholding; real cost per shoe style | open |
+| Nov 15 | Ahsan | `downloads/Team_Messages_Nov15.txt` | 2 daylight phone photos of the Truckkr (closed + open) for the true-colour ad | open |
+Still open: Ahsan's 7-product photo shoot · jacket call-list results · Kodo Vertical count · Blessed Friday carousel files (Founder, Nov 18) · Founder office shoot (Nov 15) · Always-on December prompts (Nov 30). ⚠️ `downloads/Ahsan_Filming_List_December.md` asks for WORKSHOP clips, which can't exist (supplier makes our products, Nov 12): replace those shots before it's used.
