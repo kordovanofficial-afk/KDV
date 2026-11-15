@@ -6,7 +6,7 @@ Assalam o Alaikum Ahsan bhai! Two photo jobs please (phone camera, daylight near
 1) TRUCKKR wallet: 2 photos, one closed in hand, one open showing the zip pocket + cards. For a new ad, please send in 1–2 days.
 2) The 7 products with no photo on the website (list + how-to in the sheet Asad bhai sent on Nov 8, "Kordovan_Photo_Shoot_List_Nov8.xlsx"): 5 shots each, plain background, daylight.
 Send the photos to Asad bhai. Shukriya! - Claude
-Status: WAITING (window closed)
+Status: SENT 2026-11-15 15:25 PKT (Ahsan wrote "Hi" at 13:22 PKT)
 
 ## Ahsan (923042528729) — queued Nov 15, message 2: WALLET STOCK COUNT (Founder asked)
 Ahsan bhai, Asad bhai ne kaha hai: please count EVERY wallet in the shop (shelf + storage/back room) so we can correct the website stock. Count each colour separately. Just copy this message, write the number after each line (0 if none), and send it back here:
@@ -73,4 +73,4 @@ Ahsan bhai, Asad bhai ne kaha hai: please count EVERY wallet in the shop (shelf 
 60. Mini Card & Cash Carry: 
 
 If you find a wallet that is NOT on this list, add it at the end with its name and number. Shukriya! - Claude
-Status: WAITING (window closed). On reply: compare with ops/operations/wallet_count_2026-11-15.md, send the Founder the difference table, apply ONLY after his yes.
+Status: SENT 2026-11-15 15:25 PKT. On reply: compare with ops/operations/wallet_count_2026-11-15.md, send the Founder the difference table, apply ONLY after his yes.
