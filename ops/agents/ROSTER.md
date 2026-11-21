@@ -1,13 +1,13 @@
 # Kordovan — Agent Roster
 
-Owner: CHRO. Every agent, every stage, every decision. Never delete rows.
+Owner: CEO (CHRO parked Nov 21 2026). Every agent, every stage, every decision. Never delete rows.
 
 **Hiring Floor (interview page):** https://claude.ai/artifact/UubufgPRvXCLYJFrQzP78s (db collections: `candidates`, `seats`, `decisions`, `transcripts`). Source: `ops/agents/hiring-floor.html`
 
 | Seat | Agent file | Status | Since | Source | Notes |
 |---|---|---|---|---|---|
 | CEO | (the main session) | ACTIVE | Oct 31 2026 | — | Appointed by Founder |
-| CHRO | `.claude/agents/chro.md` | PROBATION (to Nov 30 2026) | Oct 31 2026 | Custom build by CEO | "Noor Rehman". Hired by Founder Oct 31 2026. First task: wave 1 candidates |
+| CHRO | `ops/agents/parked/chro.md` | **PARKED Nov 21 2026 (Founder)** — team is built; reactivate by moving the file back to `.claude/agents/`. Was: PROBATION (to Nov 30 2026) | Oct 31 2026 | Custom build by CEO | "Noor Rehman". Hired by Founder Oct 31 2026. First task: wave 1 candidates |
 | Creative Director (under CMO) | `.claude/agents/ad-director.md` | ACTIVE (pre-existing) | — | Custom | Video ad production packages. Reports to CMO once CMO is hired |
 | CQRO | `.claude/agents/cqro.md` | PROBATION (to Nov 30 2026) | Oct 31 2026 | Custom build; structure from VoltAgent compliance-auditor.md (MIT) | "Hamna Qureshi". Hired by Founder Oct 31 2026: "monitor and give more authority that lies within her domain" → binding BLOCK (Founder-only override), direct fixes to L1 facts, standing audit rights, read-only Shopify/Meta/GSC. Register `approvals/REGISTER.md` |
 | CRO | `.claude/agents/cro.md` | PROBATION (to Dec 1 2026) | Nov 1 2026 | Custom build; structure from VoltAgent assumption-mapping.md (MIT) | "Sana Iqbal". Hired by Founder Nov 1 2026. Read-only Shopify/Meta/GSC. First task: final 11.11 recommendation on live data |
@@ -63,3 +63,5 @@ Hiring bar carried from wave 1: five lines first, every number sourced and dated
 Read via WebFetch (summarised pages, not byte-level). No text copied. No inventory/supply-chain agent found in VoltAgent, wshobson or the aggregator search.
 Stage record: Requisition (Nov 1, `briefs/coo.md`, `briefs/cfo.md`) → Sourcing (Nov 1) → Screening 7/7 PASS both (Nov 1) → Work sample scored by CHRO (COO 4/4/5/4/5 = 4.4; CFO 5/4/4/4/4 = 4.2; CEO re-score pending) → `candidates/coo-zain.{json,md}`, `candidates/cfo-ayesha.{json,md}` written → **awaiting CEO review and push to `candidates/coo-zain`, `candidates/cfo-ayesha`; `seats/coo` and `seats/cfo` → status "interviewing"**.
 Conflicts raised with the CEO (not resolved quietly): (1) `briefs/cro.md` RACI lists CRO A/R on discount codes vs the CFO seat's "discount control": proposed split = CRO owns offer + code hygiene, CFO owns the binding margin floor; (2) "ad spend ~4,000/day" is the rate since Oct 24 only; October was ~3,000/day for 23 days; (3) Mocha Mate 43 units (Oct 24) vs 25 (Oct 31) vs data pack 72 units / 101 orders; (4) Bellezza cost 2,350 carries the wallet buffer though bags carry none (Founder said 2,200).
+
+| Alex (Hormozi lens) | `.claude/agents/alex.md` | ACTIVE advisor (Nov 21 2026) | Nov 21 2026 | Custom build by CEO, from public Hormozi frameworks | Opinion only; tagged [Alex lens]; no fake quotes |

@@ -233,7 +233,7 @@ add only a short rule and a pointer here.
   - `#hiring`.
   - db collections: desks, assignments, boardroom, folders, decisions, candidates, config. Keep desks current.
 - **Models (Founder, Nov 8):** every agent runs on Opus (top tier) on purpose. Don't downgrade models to save credits; save usage with fewer, tighter runs instead.
-- Seats: CQRO Hamna (binding quality gate) · CHRO Noor · CRO Sana · CMO Omar (Creative Director under him) · COO Zain ·
+- Seats: CQRO Hamna (binding quality gate) · ~~CHRO Noor~~ PARKED Nov 21 (file in `ops/agents/parked/`) · CRO Sana · CMO Omar (Creative Director under him) · COO Zain ·
   CFO Ayesha. Agent files are in `.claude/agents/`; roster and design in `ops/agents/ROSTER.md` and `ORG_DESIGN.md`;
   register in `ops/agents/approvals/REGISTER.md`. `TEAM.md` = who to name.
 - **"Alex" (Founder, Nov 21):** when the Founder asks for Alex's opinion / "ask Alex", answer through the Hormozi-lens advisor `.claude/agents/alex.md` (frameworks + style; tagged [Alex lens]; never fake quotes). Opinion only — changes still need the Founder's yes.
