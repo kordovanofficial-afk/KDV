@@ -35,3 +35,7 @@ Still open: Ahsan's photo shoot (7 products) · jacket call-list results · Kodo
 | Nov 15 | Mr. Tahir | `downloads/Team_Messages_Nov15.txt` | KDV#22799 shipped 3×; claim Rs 11,627 PostEx tax withholding; real cost per shoe style | open |
 | Nov 15 | Ahsan | `downloads/Team_Messages_Nov15.txt` | 2 daylight phone photos of the Truckkr (closed + open) for the true-colour ad | open |
 Still open: Ahsan's 7-product photo shoot · jacket call-list results · Kodo Vertical count · Blessed Friday carousel files (Founder, Nov 18) · Founder office shoot (Nov 15) · Always-on December prompts (Nov 30). ⚠️ `downloads/Ahsan_Filming_List_December.md` asks for WORKSHOP clips, which can't exist (supplier makes our products, Nov 12): replace those shots before it's used.
+
+### Nov 21 check-in (after the Nov 17–20 outage)
+Still open: Ahsan — wallet count (60 lines, sent Nov 15 on WhatsApp) + Truckkr/7-product photos · Mr. Tahir — KDV#22799 triple shipment, PostEx tax claim (Rs 11,627), shoe costs per style · Founder — Blessed Friday carousel files (were due Nov 18), reply on the Nov 17 Instagram reel, Truckkr comparison-ad pause decision.
+In progress (Claude): Blessed Friday homepage mockup + time-locked code (for Founder yes) · Blessed Friday price/stock-buffer batches (prep only, live from Nov 27 00:00 after the Nov 23 scheduled tasks).
