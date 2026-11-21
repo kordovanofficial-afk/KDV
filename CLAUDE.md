@@ -218,6 +218,7 @@ add only a short rule and a pointer here.
   - Verify with `/health` (`version`) plus a `workers_get_worker_code` diff.
   - It marks delivered COD orders paid and sends WhatsApp notices and review asks. Never delete KV `ppass:init`.
 - **WhatsApp bridge v1.2 LIVE Nov 12** (Oracle VM `~/wa-bridge`, pm2): Baileys **7** (v6 could not reply to WhatsApp's hidden LID chat IDs → "Waiting for this message"). Replies go to the LID the customer wrote from; sent messages are stored so resend requests work. Upgrade/undo: `tools/wa-bridge/upgrade-v7.sh`. Founder confirmed end-to-end working. The worker only messages +92 3xx numbers.
+- **Social Scheduler (built Nov 21, free):** Cloudflare Worker `kordovan-social-scheduler` (`tools/social-scheduler/worker.js`, social-1.0) posts IG+FB stories/feed posts via Meta Graph API on a 10-min cron. Claude queues jobs: `POST /queue` with header `x-sched-key` (key in HQ db `config/social_scheduler`, never in git); `GET /queue`, `POST /run`, `GET /test`. Images must be public https (upload to Shopify Files). No link stickers via API (Meta limit). Founder does the one-time Meta app + token + Cloudflare setup; deploys are manual paste like PostEx.
 - **PostEx over-recording:** 14 orders are double-counted in Shopify "received" (PKR 116,366). **No refunds.**
   Mr. Tahir corrects the ledger (`ops/finance/2026-11-02_postex_overrecorded_orders.md`).
 - **GSC connector** (Worker `kdv-seo-mcp`).
