@@ -3,7 +3,10 @@
   Usage: {% render 'card-product', product: product %}
   Quick-add reuses theme.js hook .product-card__quick-add[data-variant-id]
   (single-variant only); multi-variant routes to the PDP ("Choose Options").
+  Sold-out products are NOT rendered (Founder Nov 21): they disappear from collections, search and grids and
+  come back automatically when stock returns. Made-to-order items keep selling (inventory policy CONTINUE) so stay visible.
 {%- endcomment -%}
+{%- if product.available -%}
 {%- assign v = product.first_available_variant | default: product.variants.first -%}
 {%- assign img2 = product.images[1] -%}
 {%- assign on_sale = false -%}
@@ -91,3 +94,4 @@
     {%- endif -%}
   {%- endfor -%}
 </div>
+{%- endif -%}

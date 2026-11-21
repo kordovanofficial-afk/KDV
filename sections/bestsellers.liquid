@@ -18,7 +18,8 @@
     <div class="kv-pgrid">
       {%- for handle in cat_handles -%}
         {%- assign coll = collections[handle] -%}
-        {%- assign product = coll.products.first -%}
+        {%- assign product = blank -%}
+        {%- for cp in coll.products limit: 12 -%}{%- if cp.available -%}{%- assign product = cp -%}{%- break -%}{%- endif -%}{%- endfor -%}
         {%- assign label = cat_labels[forloop.index0] -%}
         {%- if product != blank -%}
           <a class="kv-card" href="{{ product.url }}">

@@ -33,7 +33,7 @@
       <div class="kv-wrap kv-coll__more">
         {%- assign shown = paginate.current_offset | plus: paginate.page_size -%}
         {%- if shown > paginate.items -%}{%- assign shown = paginate.items -%}{%- endif -%}
-        <div class="pct">Showing <b id="kv-shown">{{ shown }}</b> of <b>{{ paginate.items }}</b> results</div>
+        <div class="pct" style="display:none">Showing <b id="kv-shown">{{ shown }}</b> of <b>{{ paginate.items }}</b> results</div>
         {%- if paginate.next -%}
           <a class="btn" id="kv-more" href="{{ paginate.next.url }}" data-total="{{ paginate.items }}">Load More</a>
         {%- endif -%}
