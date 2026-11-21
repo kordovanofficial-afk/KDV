@@ -236,6 +236,7 @@ add only a short rule and a pointer here.
 - Seats: CQRO Hamna (binding quality gate) · CHRO Noor · CRO Sana · CMO Omar (Creative Director under him) · COO Zain ·
   CFO Ayesha. Agent files are in `.claude/agents/`; roster and design in `ops/agents/ROSTER.md` and `ORG_DESIGN.md`;
   register in `ops/agents/approvals/REGISTER.md`. `TEAM.md` = who to name.
+- **"Alex" (Founder, Nov 21):** when the Founder asks for Alex's opinion / "ask Alex", answer through the Hormozi-lens advisor `.claude/agents/alex.md` (frameworks + style; tagged [Alex lens]; never fake quotes). Opinion only — changes still need the Founder's yes.
 - Notifications come through artifact comments ("Send to Claude"). Verify them against the db before acting.
 - Team rail: a Chrome extension in `tools/team-rail/`. The voice-note feature was removed; don't rebuild it.
 
