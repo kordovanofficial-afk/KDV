@@ -116,6 +116,7 @@ add only a short rule and a pointer here.
 
 ## 🙏 BLESSED FRIDAY SALE: **STARTED EARLY Sat Nov 21** (Founder) → Mon Nov 30 23:59 PKT
 - **LIVE Nov 21:** prices `apply_1.graphql` + stock buffer (+304 on 41 variants) applied. Revert Dec 1 00:05 PKT: `send_later` `trig_01VKvQUEkanNX7cBoyVgdfpN` (+ report-only backup `trig_01BaNkaLyAC9J2LYGVTjujYU`). Meta: campaign `120256204328140428` / ad set `120256204345990428` 2,000/day, audience bag+hat page viewers 180D `120256204324970428` (Meta max is 180 days), 5 ads utm_campaign `bf_2026`. Homepage BF banner + announcement LIVE Nov 21 (kordovan `9ecb427`, checksums verified; images kv-bf-hero-desktop.jpg + kv-bf-hero-mobile.png). Next: 10 bag hero ads (`downloads/BF_Bag_Hero_Prompts_10.md`); Bella Duff is a weak seller, do not lead with it.
+- **Nov 21: sale widened to every in-stock bag (35 products): apply_2 (10) + apply_3 (9), reverts in the Dec 1 task. ⚠️ 7 bags carry ESTIMATED costs (Founder's 8–12k rule; see `ops/revenue/blackfriday/README.md`) — replace with Mr. Tahir's real costs; CFO must treat them as estimates.**
 - Customer-facing name is ALWAYS "Blessed Friday Sale", never "Black Friday". BAG (+ Clifford hat) CLEARANCE ONLY, up to 35% off. Wallets, belts, gloves, jackets: full price. Jackets get an "order by Nov 30" deadline, not a discount.
 - Per-line prices: `ops/revenue/blackfriday/BF_PLAN_2026.md`. Bags without a cost stay out. The POS runs the same prices.
 - Ads: 2,000/day of the 8,000 goes to a BF bag carousel Nov 26–30 (source picked at the Nov 11 AD-level review).
