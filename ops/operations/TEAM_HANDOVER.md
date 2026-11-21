@@ -39,3 +39,7 @@ Still open: Ahsan's 7-product photo shoot · jacket call-list results · Kodo Ve
 ### Nov 21 check-in (after the Nov 17–20 outage)
 Still open: Ahsan — wallet count (60 lines, sent Nov 15 on WhatsApp) + Truckkr/7-product photos · Mr. Tahir — KDV#22799 triple shipment, PostEx tax claim (Rs 11,627), shoe costs per style · Founder — Blessed Friday carousel files (were due Nov 18), reply on the Nov 17 Instagram reel, Truckkr comparison-ad pause decision.
 In progress (Claude): Blessed Friday homepage mockup + time-locked code (for Founder yes) · Blessed Friday price/stock-buffer batches (prep only, live from Nov 27 00:00 after the Nov 23 scheduled tasks).
+
+## Nov 21 (late) — Corporate gifting (Founder: supplier can do bulk + logo)
+- Mr. Tahir: call KDV#22714 buyer (11 Maverik, Rs 247,775, D.I. Khan) Sun Nov 22 11am–1pm with the offer in `downloads/Corporate_Gifting_Offer_and_Call_Script.md` (sent on WhatsApp). Reply format: `GIFT CALL KDV#22714: ...`. Tiers 10/15/20% off normal price, logo free 10+, logo orders paid in advance by bank transfer; Claude floor-checks every quote.
+- Stories: `downloads/Blessed_Friday_10_Story_Prompts.pdf` (Founder makes images; Claude schedules/prepares posting sheet).
