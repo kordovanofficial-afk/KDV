@@ -236,6 +236,7 @@ add only a short rule and a pointer here.
 - Seats: CQRO Hamna (binding quality gate) · ~~CHRO Noor~~ PARKED Nov 21 (file in `ops/agents/parked/`) · CRO Sana · CMO Omar (Creative Director under him) · COO Zain ·
   CFO Ayesha. Agent files are in `.claude/agents/`; roster and design in `ops/agents/ROSTER.md` and `ORG_DESIGN.md`;
   register in `ops/agents/approvals/REGISTER.md`. `TEAM.md` = who to name.
+- 🧠 **ALEX REVIEWS EVERY DECISION (Founder, Nov 21):** before ANY recommendation goes to the Founder for a decision (L2/L3: price, offer, spend, ad, product, campaign, hire/park, strategy), run it through the Alex lens (`.claude/agents/alex.md`) and include a short **[Alex lens]** verdict (agree / change / against + why + the one number that matters). Inline for small calls (read alex.md, apply it — saves credits); spawn the `alex` agent for big ones (new campaign, pricing change, budget shift ≥1,000/day, new product/channel). If Alex and the data disagree, show both. Alex never overrides the hard rules, the CQRO gate or the Founder's final yes.
 - **"Alex" (Founder, Nov 21):** when the Founder asks for Alex's opinion / "ask Alex", answer through the Hormozi-lens advisor `.claude/agents/alex.md` (frameworks + style; tagged [Alex lens]; never fake quotes). Opinion only — changes still need the Founder's yes.
 - Notifications come through artifact comments ("Send to Claude"). Verify them against the db before acting.
 - Team rail: a Chrome extension in `tools/team-rail/`. The voice-note feature was removed; don't rebuild it.
