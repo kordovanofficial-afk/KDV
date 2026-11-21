@@ -1,0 +1,336 @@
+{
+ "location": "gid://shopify/Location/36710940861",
+ "read_at": "2026-11-21 (live Shopify Admin)",
+ "buffer_to": 10,
+ "total_added": 304,
+ "variants": [
+  {
+   "product": "The Cabin Trolley Bag",
+   "variant": "Brown",
+   "vid": "gid://shopify/ProductVariant/50008059379952",
+   "inventoryItemId": "gid://shopify/InventoryItem/52122647494896",
+   "real": 2,
+   "added": 8
+  },
+  {
+   "product": "The Cabin Trolley Bag",
+   "variant": "Black",
+   "vid": "gid://shopify/ProductVariant/50008059412720",
+   "inventoryItemId": "gid://shopify/InventoryItem/52122647527664",
+   "real": 4,
+   "added": 6
+  },
+  {
+   "product": "The Cabin Trolley Bag",
+   "variant": "Coffee Brown",
+   "vid": "gid://shopify/ProductVariant/50008059445488",
+   "inventoryItemId": "gid://shopify/InventoryItem/52122647560432",
+   "real": 2,
+   "added": 8
+  },
+  {
+   "product": "CEO Executive Office Bag",
+   "variant": "Tan",
+   "vid": "gid://shopify/ProductVariant/50054964281584",
+   "inventoryItemId": "gid://shopify/InventoryItem/52170153263344",
+   "real": 1,
+   "added": 9
+  },
+  {
+   "product": "CEO Executive Office Bag",
+   "variant": "Maroon",
+   "vid": "gid://shopify/ProductVariant/50054964314352",
+   "inventoryItemId": "gid://shopify/InventoryItem/52170153296112",
+   "real": 1,
+   "added": 9
+  },
+  {
+   "product": "CEO Executive Office Bag",
+   "variant": "Black",
+   "vid": "gid://shopify/ProductVariant/50054966509808",
+   "inventoryItemId": "gid://shopify/InventoryItem/52170155491568",
+   "real": 3,
+   "added": 7
+  },
+  {
+   "product": "Bella Duff // Mini Handbag & Duffle Bag",
+   "variant": "Red",
+   "vid": "gid://shopify/ProductVariant/50008225022192",
+   "inventoryItemId": "gid://shopify/InventoryItem/52122813563120",
+   "real": 2,
+   "added": 8
+  },
+  {
+   "product": "Bella Duff // Mini Handbag & Duffle Bag",
+   "variant": "Black",
+   "vid": "gid://shopify/ProductVariant/50008225054960",
+   "inventoryItemId": "gid://shopify/InventoryItem/52122813595888",
+   "real": 1,
+   "added": 9
+  },
+  {
+   "product": "Bella Duff // Mini Handbag & Duffle Bag",
+   "variant": "Chocolate",
+   "vid": "gid://shopify/ProductVariant/50008225087728",
+   "inventoryItemId": "gid://shopify/InventoryItem/52122813628656",
+   "real": 1,
+   "added": 9
+  },
+  {
+   "product": "Bella Duff // Mini Handbag & Duffle Bag",
+   "variant": "Elephant Grey",
+   "vid": "gid://shopify/ProductVariant/50008225120496",
+   "inventoryItemId": "gid://shopify/InventoryItem/52122813661424",
+   "real": 8,
+   "added": 2
+  },
+  {
+   "product": "Forester Duffle Bag",
+   "variant": "Crazy Horse",
+   "vid": "gid://shopify/ProductVariant/50016422134000",
+   "inventoryItemId": "gid://shopify/InventoryItem/52131219505392",
+   "real": 1,
+   "added": 9
+  },
+  {
+   "product": "Forester Duffle Bag",
+   "variant": "Tan",
+   "vid": "gid://shopify/ProductVariant/50016422166768",
+   "inventoryItemId": "gid://shopify/InventoryItem/52131219538160",
+   "real": 1,
+   "added": 9
+  },
+  {
+   "product": "Forester Duffle Bag",
+   "variant": "Black",
+   "vid": "gid://shopify/ProductVariant/50016422199536",
+   "inventoryItemId": "gid://shopify/InventoryItem/52131219570928",
+   "real": 1,
+   "added": 9
+  },
+  {
+   "product": "Venture Pack",
+   "variant": "Black",
+   "vid": "gid://shopify/ProductVariant/50016428949744",
+   "inventoryItemId": "gid://shopify/InventoryItem/52131226321136",
+   "real": 2,
+   "added": 8
+  },
+  {
+   "product": "Venture Pack",
+   "variant": "Brown",
+   "vid": "gid://shopify/ProductVariant/50016428982512",
+   "inventoryItemId": "gid://shopify/InventoryItem/52131226353904",
+   "real": 3,
+   "added": 7
+  },
+  {
+   "product": "Venture Pack",
+   "variant": "Tan",
+   "vid": "gid://shopify/ProductVariant/50016429015280",
+   "inventoryItemId": "gid://shopify/InventoryItem/52131226386672",
+   "real": 4,
+   "added": 6
+  },
+  {
+   "product": "The Gridle Crossbody Bag",
+   "variant": "Default Title",
+   "vid": "gid://shopify/ProductVariant/47362207351024",
+   "inventoryItemId": "gid://shopify/InventoryItem/49458751078640",
+   "real": 6,
+   "added": 4
+  },
+  {
+   "product": "Bellezza Clutch",
+   "variant": "Black",
+   "vid": "gid://shopify/ProductVariant/50054692143344",
+   "inventoryItemId": "gid://shopify/InventoryItem/52169881125104",
+   "real": 7,
+   "added": 3
+  },
+  {
+   "product": "Bellezza Clutch",
+   "variant": "Dark Red",
+   "vid": "gid://shopify/ProductVariant/50054692176112",
+   "inventoryItemId": "gid://shopify/InventoryItem/52169881157872",
+   "real": 5,
+   "added": 5
+  },
+  {
+   "product": "TP Branson Briefcase & Business Attache",
+   "variant": "Black",
+   "vid": "gid://shopify/ProductVariant/50393289523440",
+   "inventoryItemId": "gid://shopify/InventoryItem/52511993168112",
+   "real": 1,
+   "added": 9
+  },
+  {
+   "product": "TP Branson Briefcase & Business Attache",
+   "variant": "Tan",
+   "vid": "gid://shopify/ProductVariant/50393289556208",
+   "inventoryItemId": "gid://shopify/InventoryItem/52511993200880",
+   "real": 2,
+   "added": 8
+  },
+  {
+   "product": "TP Branson Briefcase & Business Attache",
+   "variant": "Maroon",
+   "vid": "gid://shopify/ProductVariant/50393289588976",
+   "inventoryItemId": "gid://shopify/InventoryItem/52511993233648",
+   "real": 1,
+   "added": 9
+  },
+  {
+   "product": "The Luxurious Ladies Clutch & Wallet",
+   "variant": "Black",
+   "vid": "gid://shopify/ProductVariant/50008001249520",
+   "inventoryItemId": "gid://shopify/InventoryItem/52122588741872",
+   "real": 4,
+   "added": 6
+  },
+  {
+   "product": "The Luxurious Ladies Clutch & Wallet",
+   "variant": "Chocolate Brown",
+   "vid": "gid://shopify/ProductVariant/50008001282288",
+   "inventoryItemId": "gid://shopify/InventoryItem/52122588774640",
+   "real": 1,
+   "added": 9
+  },
+  {
+   "product": "The Diva Tote // Vegan",
+   "variant": "Light Brown",
+   "vid": "gid://shopify/ProductVariant/50008001446128",
+   "inventoryItemId": "gid://shopify/InventoryItem/52122588938480",
+   "real": 6,
+   "added": 4
+  },
+  {
+   "product": "The Diva Tote // Vegan",
+   "variant": "Biege",
+   "vid": "gid://shopify/ProductVariant/50008001478896",
+   "inventoryItemId": "gid://shopify/InventoryItem/52122588971248",
+   "real": 6,
+   "added": 4
+  },
+  {
+   "product": "The Diva Tote // Vegan",
+   "variant": "Chocolate Brown",
+   "vid": "gid://shopify/ProductVariant/50008001511664",
+   "inventoryItemId": "gid://shopify/InventoryItem/52122589004016",
+   "real": 5,
+   "added": 5
+  },
+  {
+   "product": "The Corporate Office // Laptop Bag",
+   "variant": "Black",
+   "vid": "gid://shopify/ProductVariant/50054898417904",
+   "inventoryItemId": "gid://shopify/InventoryItem/52170087399664",
+   "real": 1,
+   "added": 9
+  },
+  {
+   "product": "The Corporate Office // Laptop Bag",
+   "variant": "Tan",
+   "vid": "gid://shopify/ProductVariant/50054898450672",
+   "inventoryItemId": "gid://shopify/InventoryItem/52170087432432",
+   "real": 1,
+   "added": 9
+  },
+  {
+   "product": "The Corporate Office // Laptop Bag",
+   "variant": "Brown",
+   "vid": "gid://shopify/ProductVariant/50054898483440",
+   "inventoryItemId": "gid://shopify/InventoryItem/52170087465200",
+   "real": 1,
+   "added": 9
+  },
+  {
+   "product": "DBLP Laptop Bag",
+   "variant": "Black",
+   "vid": "gid://shopify/ProductVariant/50008213553392",
+   "inventoryItemId": "gid://shopify/InventoryItem/52122802094320",
+   "real": 2,
+   "added": 8
+  },
+  {
+   "product": "DBLP Laptop Bag",
+   "variant": "Brown",
+   "vid": "gid://shopify/ProductVariant/50008213586160",
+   "inventoryItemId": "gid://shopify/InventoryItem/52122802127088",
+   "real": 1,
+   "added": 9
+  },
+  {
+   "product": "DBLP Laptop Bag",
+   "variant": "Tan",
+   "vid": "gid://shopify/ProductVariant/50008213618928",
+   "inventoryItemId": "gid://shopify/InventoryItem/52122802159856",
+   "real": 1,
+   "added": 9
+  },
+  {
+   "product": "Clifford Cowboy Hat // Faded Black",
+   "variant": "S",
+   "vid": "gid://shopify/ProductVariant/50265952452848",
+   "inventoryItemId": "gid://shopify/InventoryItem/52382962254064",
+   "real": 4,
+   "added": 6
+  },
+  {
+   "product": "Clifford Cowboy Hat // Faded Black",
+   "variant": "L",
+   "vid": "gid://shopify/ProductVariant/50265952387312",
+   "inventoryItemId": "gid://shopify/InventoryItem/52382962188528",
+   "real": 3,
+   "added": 7
+  },
+  {
+   "product": "Clifford Cowboy Hat // Faded Black",
+   "variant": "XL / 23+ Inch",
+   "vid": "gid://shopify/ProductVariant/44668605726960",
+   "inventoryItemId": "gid://shopify/InventoryItem/46765684490480",
+   "real": 2,
+   "added": 8
+  },
+  {
+   "product": "Clifford Cowboy Hat // Rustic Brown",
+   "variant": "Brown / XL / 23+ Inch",
+   "vid": "gid://shopify/ProductVariant/44668629942512",
+   "inventoryItemId": "gid://shopify/InventoryItem/46765708706032",
+   "real": 2,
+   "added": 8
+  },
+  {
+   "product": "Clifford Cowboy Hat // Rustic Brown",
+   "variant": "Brown / L",
+   "vid": "gid://shopify/ProductVariant/50266004783344",
+   "inventoryItemId": "gid://shopify/InventoryItem/52383014617328",
+   "real": 1,
+   "added": 9
+  },
+  {
+   "product": "Clifford Cowboy Hat // Rustic Brown",
+   "variant": "Brown / M",
+   "vid": "gid://shopify/ProductVariant/50266004816112",
+   "inventoryItemId": "gid://shopify/InventoryItem/52383014650096",
+   "real": 2,
+   "added": 8
+  },
+  {
+   "product": "Clifford Cowboy Hat // Rustic Brown",
+   "variant": "Brown / S",
+   "vid": "gid://shopify/ProductVariant/50266004848880",
+   "inventoryItemId": "gid://shopify/InventoryItem/52383014682864",
+   "real": 3,
+   "added": 7
+  },
+  {
+   "product": "Executive Leather Briefcase (Black only; FLOOR EXCEPTION, Founder Nov 11)",
+   "variant": "Black",
+   "vid": "gid://shopify/ProductVariant/50008011243760",
+   "inventoryItemId": "gid://shopify/InventoryItem/52122598736112",
+   "real": 1,
+   "added": 9
+  }
+ ]
+}
