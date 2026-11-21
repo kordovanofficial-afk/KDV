@@ -21,3 +21,6 @@ One entry per nightly run (23:30 PKT). Last-read timestamp at the bottom of each
 
 ## Nov 15 (nightly 23:30)
 - Only inbound today: Ahsan "Hi" (13:22 PKT); photo request + wallet count list sent to him 15:25 PKT. No store sales reported, no count back yet. Nothing applied.
+
+## Nov 16–20 (catch-up, run Nov 21: the session was offline Nov 17–20 and every scheduled run was missed)
+- WhatsApp since Nov 15: only the Founder's Instagram reel link (Nov 17, auto-acked by the Worker, never answered: window closed). No STORE SALES, no wallet count, no photos from Ahsan. Nothing applied.
