@@ -75,5 +75,5 @@ Ahsan bhai, Asad bhai ne kaha hai: please count EVERY wallet in the shop (shelf 
 If you find a wallet that is NOT on this list, add it at the end with its name and number. Shukriya! - Claude
 Status: SENT 2026-11-15 15:25 PKT. On reply: compare with ops/operations/wallet_count_2026-11-15.md, send the Founder the difference table, apply ONLY after his yes.
 
-## QUEUED 2026-11-21 — to Mr. Tahir (923002042352): bag costs + Extendable count
+## SENT 2026-11-21 16:15 PKT — to Mr. Tahir (923002042352): bag costs + Extendable count (wamid ...NUI1NEQ2QkE5OUI2ODU3QjY4; he texted Hi at 15:43 PKT; window open until Nov 22 15:43 PKT)
 Send the text of downloads/For_Tahir_Bag_Costs_Nov21.txt as soon as Tahir messages the Kapso number (24h window). He has NEVER messaged it, so it can't be sent until he does. Founder (Nov 21): he is asking Tahir to text the Kapso number; send as soon as Tahir's first message lands, and push for a reply within 24h. Check-ins scheduled via send_later.
