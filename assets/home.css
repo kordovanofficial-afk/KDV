@@ -172,6 +172,20 @@
   .kv-hero--winter .kv-hero__cta{margin-bottom:20px;}
 }
 
+/* Blessed Friday Sale hero (Nov 27-30 PKT, sections/hero-banner.liquid). The jacket deadline note
+   sits under the CTAs. If a Files image is missing, that breakpoint becomes a text-only Espresso
+   panel (kv-hero--bf-nodesk / --bf-nomob) instead of a wrongly cropped photo. */
+.kv-hero--bf{background:radial-gradient(120% 90% at 85% 20%,#3a2c21 0%,#241C16 55%,#1a130e 100%);}
+.kv-hero__note{font-size:14px;line-height:1.6;max-width:500px;color:rgba(247,242,234,.78);margin:-14px 0 28px;padding-left:14px;border-left:2px solid var(--brass);font-weight:300;}
+.kv-hero__note b{color:var(--canvas);font-weight:500;}
+.kv-hero__note a{color:var(--brass-light);text-decoration:underline;text-underline-offset:3px;}
+@media(min-width:750px){.kv-hero--bf-nodesk .kv-hero__photo,.kv-hero--bf-nodesk .kv-hero__scrim{display:none;}}
+@media(max-width:749px){
+  .kv-hero--bf-nomob .kv-hero__photo,.kv-hero--bf-nomob .kv-hero__scrim{display:none;}
+  .kv-hero--bf-nomob{align-items:center;padding-bottom:0;}
+  .kv-hero__note{font-size:13px;margin:-4px 0 18px;}
+}
+
 /* ============================================================
    Milestone 3: trust marquee + bestsellers (cross-ref homepage-final.html)
    ============================================================ */
