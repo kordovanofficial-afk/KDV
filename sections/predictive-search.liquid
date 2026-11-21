@@ -32,7 +32,7 @@
     {%- if prods.size > 0 -%}
       <div class="kv-srch__rhead"><h3>Products for &ldquo;<em>{{ predictive_search.terms }}</em>&rdquo;</h3></div>
       <div class="kv-srch__res">
-        {%- for p in prods -%}
+        {%- for p in prods -%}{%- unless p.available -%}{%- continue -%}{%- endunless -%}
           <a class="rc" href="{{ p.url }}">
             <div class="rc__m"><img src="{{ p.featured_image | image_url: width: 300 }}" srcset="{{ p.featured_image | image_url: width: 200 }} 200w, {{ p.featured_image | image_url: width: 300 }} 300w, {{ p.featured_image | image_url: width: 500 }} 500w" sizes="(max-width:640px) 40vw, 220px" alt="{{ p.featured_image.alt | escape | default: p.title | escape }}" loading="lazy" decoding="async" width="300" height="375"></div>
             <div class="rc__n">{{ p.title | truncate: 42 }}</div>

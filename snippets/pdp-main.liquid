@@ -124,6 +124,9 @@
           </div>
           <button type="submit" class="product-atc__add"{% unless v.available %} disabled{% endunless %}>{% if v.available %}Add to Cart · {{ v.price | money }}{% else %}Sold Out{% endif %}</button>
         </div>
+        {%- unless product.available -%}
+          <p class="kv-pdp__soldout-note" style="margin:12px 0 0;font-size:14px;line-height:1.55;color:#5c534a">Sold out for now, and it's coming back. <a href="https://wa.me/923332601161?text={{ 'Please tell me when ' | append: product.title | append: ' is back in stock' | url_encode }}" target="_blank" rel="noopener" style="color:#A0623A;font-weight:600">Message us on WhatsApp</a> to hear first, or see similar pieces below.</p>
+        {%- endunless -%}
         {%- if shop.enabled_payment_types != blank -%}
           <div class="kv-pdp__buynow-wrap" style="margin-top:12px">{{ form | payment_button }}</div>
         {%- endif -%}
