@@ -50,7 +50,83 @@
   endif
 -%}
 
-{%- if sale1111 -%}
+{%- comment -%}
+  BLESSED FRIDAY SALE BANNER (plan approved by the Founder Nov 9 2026; ops/revenue/blackfriday/BF_PLAN_2026.md).
+  Customer-facing name is ALWAYS "Blessed Friday Sale". Bag + Clifford hat clearance only, up to 35% off.
+  Turns itself ON at Fri Nov 27 00:00 PKT and OFF after Mon Nov 30 23:59 PKT (unix 1795719600 to 1796065200),
+  then the winter banner returns on its own. Images come from Shopify Files by filename:
+  kv-bf-hero-desktop.jpg/.png (16:9, 2400x1350; keep the LEFT ~45% plain and dark for the text) and
+  kv-bf-hero-mobile.jpg/.png (4:5, 1080x1350; keep the BOTTOM ~45% plain and dark for the text).
+  If an image is missing, that breakpoint shows a text-only Espresso panel (no photo), never the winter art.
+  CTA collection: bf_coll below (smart collection "sale"; check it fills with exactly the clearance lines once the
+  compare-at prices are applied on Nov 26 night, or change the handle here).
+{%- endcomment -%}
+{%- liquid
+  assign bf_on = false
+  if now_s >= 1795719600 and now_s < 1796065200
+    assign bf_on = true
+  endif
+  assign bf_coll = 'sale'
+  assign bf_desk_img = images['kv-bf-hero-desktop.jpg']
+  if bf_desk_img == blank
+    assign bf_desk_img = images['kv-bf-hero-desktop.png']
+  endif
+  assign bf_mob_img = images['kv-bf-hero-mobile.jpg']
+  if bf_mob_img == blank
+    assign bf_mob_img = images['kv-bf-hero-mobile.png']
+  endif
+  assign bf_cls = ''
+  if bf_desk_img == blank
+    assign bf_cls = bf_cls | append: ' kv-hero--bf-nodesk'
+  endif
+  if bf_mob_img == blank
+    assign bf_cls = bf_cls | append: ' kv-hero--bf-nomob'
+  endif
+-%}
+
+{%- if bf_on -%}
+<section class="kv-home kv-hero kv-hero--winter kv-hero--sale kv-hero--bf{{ bf_cls }}">
+  {%- if bf_desk_img != blank or bf_mob_img != blank -%}
+  <div class="kv-hero__photo">
+    <picture>
+      {%- if bf_mob_img != blank -%}
+      <source media="(max-width: 749px)"
+              srcset="{{ bf_mob_img | image_url: width: 600, format: 'webp' }} 600w, {{ bf_mob_img | image_url: width: 900, format: 'webp' }} 900w, {{ bf_mob_img | image_url: width: 1200, format: 'webp' }} 1200w"
+              sizes="100vw" width="1080" height="1350">
+      {%- endif -%}
+      {%- if bf_desk_img != blank -%}
+      <img src="{{ bf_desk_img | image_url: width: 1600, format: 'webp' }}"
+           srcset="{{ bf_desk_img | image_url: width: 1200, format: 'webp' }} 1200w,
+                   {{ bf_desk_img | image_url: width: 1600, format: 'webp' }} 1600w,
+                   {{ bf_desk_img | image_url: width: 2000, format: 'webp' }} 2000w,
+                   {{ bf_desk_img | image_url: width: 2400, format: 'webp' }} 2400w"
+           sizes="100vw" width="2400" height="1350"
+           alt="Kordovan leather bags in the Blessed Friday Sale"
+           loading="eager" fetchpriority="high" decoding="async">
+      {%- else -%}
+      <img src="{{ bf_mob_img | image_url: width: 900, format: 'webp' }}"
+           srcset="{{ bf_mob_img | image_url: width: 600, format: 'webp' }} 600w, {{ bf_mob_img | image_url: width: 900, format: 'webp' }} 900w"
+           sizes="100vw" width="1080" height="1350"
+           alt="Kordovan leather bags in the Blessed Friday Sale"
+           loading="eager" fetchpriority="high" decoding="async">
+      {%- endif -%}
+    </picture>
+  </div>
+  <div class="kv-hero__scrim"></div>
+  {%- endif -%}
+  <div class="kv-wrap kv-hero__inner"><div class="kv-hero__c">
+    <span class="kv-eyebrow">Blessed Friday Sale · 27–30 November</span>
+    <h1>Up to 35% off <em>bags.</em></h1>
+    <p class="kv-hero__sub">A clearance on selected bags and Clifford hats. No code needed: the sale price is already on each one. Ends Monday 30 November, 11:59 pm.</p>
+    <div class="kv-hero__cta">
+      <a class="kv-btn kv-btn--cognac" href="{{ routes.collections_url }}/{{ bf_coll }}">Shop the bag clearance →</a>
+      <a class="kv-btn kv-btn--ghost" href="{{ routes.collections_url }}/kdv-bags">All bags</a>
+    </div>
+    <p class="kv-hero__note"><b>Leather jackets: order by 30 November.</b> Each one is cut for you alone, so it is paid online and reaches your door in about 3 weeks, before winter peaks. <a href="{{ routes.collections_url }}/kdv-jackets">See jackets</a></p>
+    <div class="kv-hero__trust">Cash on delivery on bags · Free delivery over Rs 5,500</div>
+  </div></div>
+</section>
+{%- elsif sale1111 -%}
 <section class="kv-home kv-hero kv-hero--winter kv-hero--sale">
   <div class="kv-hero__photo">
     <picture>
