@@ -9,6 +9,7 @@ add only a short rule and a pointer here.
 ## 🔴 HARD RULES (never break)
 - 💰 **FREE options ONLY.** No paid apps, connectors, tools or subscriptions. Use free tiers, native Shopify,
   Cloudflare free and self-hosted tools.
+- 🚫 **COINS DON'T EXIST IN PAKISTAN (Founder, Nov 21):** never mention coins, coin pockets or coin storage in any copy, prompt or idea. (Live leftovers flagged to the Founder: Truckkr zip ad copy "keys and coins", Mocha Mate title "with Coin Pocket", Truckkr description "coin storage".)
 - 🚫 **Never mention KARACHI in new content** (ads, captions, product/SEO copy, blog, email, WhatsApp). Say "handcrafted in
   Pakistan" or "made in Pakistan" (NOT "our workshop": a supplier makes our products, Founder Nov 12). Exceptions kept on purpose: the checkout rate "EXPRESS NEXT DAY DELIVERY (KARACHI
   ONLY)", the old Meta ads, and the Shipping/Privacy policies (the Founder edits those).
@@ -113,7 +114,8 @@ add only a short rule and a pointer here.
 - **v6 creatives** (dates "8–12 November") in `ops/marketing/creative/`; assets/ and fonts/ rebuilt there.
 - Black Friday margin floor: ≥40% GM and ≥ PKR 1,000 GP per line.
 
-## 🙏 BLESSED FRIDAY SALE (APPROVED Nov 9): Fri Nov 27 00:00 → Mon Nov 30 23:59 PKT
+## 🙏 BLESSED FRIDAY SALE: **STARTED EARLY Sat Nov 21** (Founder) → Mon Nov 30 23:59 PKT
+- **LIVE Nov 21:** prices `apply_1.graphql` + stock buffer (+304 on 41 variants) applied. Revert Dec 1 00:05 PKT: `send_later` `trig_01VKvQUEkanNX7cBoyVgdfpN` (+ report-only backup `trig_01BaNkaLyAC9J2LYGVTjujYU`). Meta: campaign `120256204328140428` / ad set `120256204345990428` 2,000/day, audience bag+hat page viewers 180D `120256204324970428` (Meta max is 180 days), 5 ads utm_campaign `bf_2026`. Homepage BF block = branch `e716b29`, NOT deployed (needs Founder yes).
 - Customer-facing name is ALWAYS "Blessed Friday Sale", never "Black Friday". BAG (+ Clifford hat) CLEARANCE ONLY, up to 35% off. Wallets, belts, gloves, jackets: full price. Jackets get an "order by Nov 30" deadline, not a discount.
 - Per-line prices: `ops/revenue/blackfriday/BF_PLAN_2026.md`. Bags without a cost stay out. The POS runs the same prices.
 - Ads: 2,000/day of the 8,000 goes to a BF bag carousel Nov 26–30 (source picked at the Nov 11 AD-level review).

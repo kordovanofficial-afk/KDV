@@ -46,3 +46,11 @@ Any variant whose `available` is **negative** after the revert sold beyond real 
 - POS shows the same prices automatically (Founder OK). The Founder must not schedule his own price change.
 - No "only X left" copy anywhere (the buffer makes stock numbers untrue).
 - WELCOME10 must be non-combinable with product discounts before launch (35% + 10% breaks the floor).
+
+## Change log — Nov 21 2026 (Founder: "start the blessed friday sale from today")
+- Start moved from Nov 27 to **Sat Nov 21**; end unchanged (Mon Nov 30 23:59 PKT).
+- `apply_1.graphql` applied (16 products / 48 variants, all userErrors empty). `stock_buffer_apply.graphql` applied (+304 units, 41 variants).
+- Revert: Dec 1 00:05 PKT via send_later `trig_01VKvQUEkanNX7cBoyVgdfpN` (runs revert_1 + stock_buffer_revert by delta); backup report-only `trig_01BaNkaLyAC9J2LYGVTjujYU`.
+- `/collections/sale` contains all 16 (productsCount showed 0 — stale counter, products list is correct).
+- Meta: audience `120256204324970428` (bag/hat page viewers, 180D = Meta max; Founder asked 3–4 years, not possible). Campaign `120256204328140428`, ad set `120256204345990428` 2,000/day ABO, ends Nov 30 23:59, 9 cities, refusers excluded, purchase-optimised. Ads (utm_campaign bf_2026): clutch `120256204399950428`, diva `120256204414890428`, clifford `120256204418990428`, belladuff_grey `120256204422530428`, belladuff_red `120256204425380428`.
+- Spend: 10 days x 2,000 = ~20,000 (was 5 x 2,000 = 10,000 approved). Read daily; pause losers at ad level per kill rule (bags: CPA ceiling not set yet — use ≥1,500 spend and 0 sales as the stop line pending CFO).
