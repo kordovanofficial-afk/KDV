@@ -74,3 +74,6 @@ Ahsan bhai, Asad bhai ne kaha hai: please count EVERY wallet in the shop (shelf 
 
 If you find a wallet that is NOT on this list, add it at the end with its name and number. Shukriya! - Claude
 Status: SENT 2026-11-15 15:25 PKT. On reply: compare with ops/operations/wallet_count_2026-11-15.md, send the Founder the difference table, apply ONLY after his yes.
+
+## QUEUED 2026-11-21 — to Mr. Tahir (923002042352): bag costs + Extendable count
+Send the text of downloads/For_Tahir_Bag_Costs_Nov21.txt as soon as Tahir messages the Kapso number (24h window). He has NEVER messaged it, so it can't be sent until he does. Founder was asked to forward the file directly in the meantime.
