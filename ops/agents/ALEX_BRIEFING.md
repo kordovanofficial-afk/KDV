@@ -121,3 +121,4 @@ only reply within 24h, never cold-message).
 ---
 ## Update log (PA duty: refresh after every decision + full refresh every Monday)
 - Nov 21 2026: created (onboarding). Data: Shopify Analytics 12-month/90-day/30-day pulls, CFO files, ads OS.
+- Nov 21: Decisions — call-before-dispatch (team already calls every order; no answer after 2 tries = hold), ads to 9-city RESIDENTS only, staff to record real cancel reasons, hide sold-out products from grids (theme ready, deploy pending). Nov real lost rate 15% (post-mortem). Unknown Shopify Autopilot campaign 1,571/day found.

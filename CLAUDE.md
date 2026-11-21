@@ -140,6 +140,7 @@ add only a short rule and a pointer here.
 | 11.11 Teaser (ThruPlay) | campaign `120255866086090428` / ad set `120255866086510428` | 1,000, ends Nov 9 |
 | **TEST Truckkr** `120256098366860428` 800/day (Nov 14, 3 ads, read ~Nov 21) · Paused: TOF-C `120254472805020428` · BOF DPA `120254220299340428` · TOF-J `120254923438760428` · RT-J `120255674363190428` | | |
 - During the sale: see the 11.11 section (TOF-M 500+500).
+- **Nov 21 (Founder yes, post-mortem):** all 7 of our active ad sets now target people LIVING in the 9 cities (location type home; Meta stores it as home + frequently_in; 'recent'/travellers removed). Lost-order post-mortem: `ops/operations/2026-11-21_lost_orders_postmortem_nov.md` (real Nov loss 15%; outside-9-city orders lose 29%). ⚠️ A **Shopify-managed 'Autopilot Advantage+ Sales' campaign** `120256204494880428` (1,571/day, ALL Pakistan, no refuser exclusion) appeared Nov 21 12:37 PKT — not ours; asked the Founder. Don't edit it without his say.
 - 🔴 **BEFORE ANY PAUSE (lesson Nov 8, I paused the winning gloves ad W01 by judging ad SETS):**
   1. Pull AD-level lifetime + 14-day numbers. Never pause an ad set without listing every ad inside it.
   2. Cross-check each ad against Shopify orders by `utm_content` (each ad has its own, e.g. `w01_comparison`).
