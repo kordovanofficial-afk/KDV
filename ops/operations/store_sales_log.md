@@ -24,3 +24,9 @@ One entry per nightly run (23:30 PKT). Last-read timestamp at the bottom of each
 
 ## Nov 16–20 (catch-up, run Nov 21: the session was offline Nov 17–20 and every scheduled run was missed)
 - WhatsApp since Nov 15: only the Founder's Instagram reel link (Nov 17, auto-acked by the Worker, never answered: window closed). No STORE SALES, no wallet count, no photos from Ahsan. Nothing applied.
+
+## 2026-11-21 nightly (run late, after session restart)
+- Tahir (no "Done:" from Worker; free-text report): Master's Laptop Bag Multicolor x1 → APPLIED −1 (16→15, read back). Forester "brown" x1 → NOT applied (Brown variant already 0; asked Tahir: Crazy Horse or Tan?).
+- Store prices differ from BF prices (Master's 9,700 vs 8,640; Forester 28,000 vs 22,420) → reminded Tahir POS = website until 30 Nov.
+- Stock ADDITIONS awaiting Founder: Rastov Backpack +1 Bodo, +1 Maroon, +1 "Tan" (no Tan variant; asked) · Extendable Tan −1→2 (+3), Brown −1→? (asked), Black 1 (unchanged).
+- Real costs from Tahir applied (see BF README).
