@@ -41,3 +41,12 @@ Before: `batch4_before.json` (incl. old metafields); `build4.py` → `batch4.jso
 TOTAL: 73 product descriptions rewritten. Still skipped: The Stallion BOOT (material unresolved).
 Not rewritten (already 120+ words but salesy/emoji copy, candidates for a polish pass): Forester, Traveler duffle,
 Venture Pack, Gridle, Saloon, Zulfiqar, Hilford, Heritage textured backpack, Corporate-style "✅" copy.
+
+## Batch 5 (polish) — LIVE Nov 22 (9 bag pages, 192–272 words)
+Forester ("globally top-selling" claim removed), Venture Pack, Traveler duffle, Gridle (hashtags out), Saloon
+("ethically sourced" + "Order Now" out), Zulfiqar ("tailor-made"/"Order Now" out), Hilford, Rastov (page carried the
+HILFORD's copy word for word — rewritten as Rastov), Textured Backpack Black (emojis out). All emoji/✅/🔹 lists gone.
+SEO fixes: Rastov + Textured Backpack meta descriptions claimed a "padded laptop" section not supported by the product
+data → rewritten (title+description sent together). Before: `batch5_before.json`; `build5.py` → `batch5.json`.
+TOTAL: 82 product pages rewritten. Open idea: Forester title "…– The Ultimate 3-in-1 Travel Companion" → cleaner
+"Forester | 3-in-1 Leather Duffle & Backpack" (ask Founder; affects catalogue/feed title).
