@@ -43,3 +43,6 @@ In progress (Claude): Blessed Friday homepage mockup + time-locked code (for Fou
 ## Nov 21 (late) — Corporate gifting (Founder: supplier can do bulk + logo)
 - Mr. Tahir: call KDV#22714 buyer (11 Maverik, Rs 247,775, D.I. Khan) Sun Nov 22 11am–1pm with the offer in `downloads/Corporate_Gifting_Offer_and_Call_Script.md` (sent on WhatsApp). Reply format: `GIFT CALL KDV#22714: ...`. Tiers 10/15/20% off normal price, logo free 10+, logo orders paid in advance by bank transfer; Claude floor-checks every quote.
 - Stories: `downloads/Blessed_Friday_10_Story_Prompts.pdf` (Founder makes images; Claude schedules/prepares posting sheet).
+
+## Nov 22 — Ahsan: photos for 5 no-image products (Founder approved)
+File: `downloads/For_Ahsan_Photo_List_Nov22.txt` (sent to Founder to forward; Ahsan outside 24h WA window). Due Tue Nov 24. Includes measurements request (bag dimensions + laptop fit). When photos arrive: upload to products + alt text, then add real dimensions to the 5 descriptions.
