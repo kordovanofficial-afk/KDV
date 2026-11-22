@@ -30,3 +30,9 @@ One entry per nightly run (23:30 PKT). Last-read timestamp at the bottom of each
 - Store prices differ from BF prices (Master's 9,700 vs 8,640; Forester 28,000 vs 22,420) → reminded Tahir POS = website until 30 Nov.
 - Stock ADDITIONS awaiting Founder: Rastov Backpack +1 Bodo, +1 Maroon, +1 "Tan" (no Tan variant; asked) · Extendable Tan −1→2 (+3), Brown −1→? (asked), Black 1 (unchanged).
 - Real costs from Tahir applied (see BF README).
+
+## Nov 22 2026 — nightly run (23:30 PKT)
+- WhatsApp last 24h: 0 inbound from the team. Only outbound = Claude's Nov 21 reply to Mr. Tahir (costs done + 3 questions).
+- Store sales applied: none (no report received).
+- Still waiting on Mr. Tahir: Forester "brown" (Crazy Horse or Tan?), Rastov "Tan" variant, Extendable Brown count, GIFT CALL KDV#22714 result (was due Sun 11am–1pm). His 24h window has CLOSED — Claude can't message him until he writes first.
+- PENDING_WHATSAPP queue: nothing sent (no inbound in window).
