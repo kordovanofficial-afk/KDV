@@ -20,3 +20,10 @@ leather"), Midtown Lite. Junk removed: "PRODUCT DISCLAIMER (MUST READ…)" heade
 built by `build2.py` → `batch2.json` (live = file).
 NEXT (batch 3): Clifford hats, Kodo Vertical, Saffiano, Nova, Dopp Kit, Ripper Case, Fanny Pack, Luke, Rider belt,
 Money Clip, Armour, Sheppard, laptop sleeves, Tray, Imperial belt, Cleopatra, Razor, A4 Folio Bali, The Case + rest.
+
+## Batch 3 — LIVE Nov 22 (13 products, 191–259 words)
+Clifford Faded Black + Rustic Brown, Kodo Vertical 2.0 (removed fake "Limited stock – order today"), Fanny Pack (fixed
+"seven pockets" vs 4 contradiction), Dopp Kit (emojis out), Ripper Case, Rider belt, Nova ("loose change" → small
+valuables), Saffiano, Money Clip, Luke, Sheppard wallet, Armour. Before: `batch3_before.json`; `build3.py` → `batch3.json`.
+TOTAL rewritten so far: 54 products. Remaining thin ones (batch 4): Imperial belt, laptop sleeves, Tray organiser,
+Cleopatra, Razor, A4 Folio Bali, The Case, + the rest of the 80–150-word list (rerun word-count scan first).
