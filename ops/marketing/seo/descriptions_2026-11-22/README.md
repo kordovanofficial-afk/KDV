@@ -27,3 +27,17 @@ Clifford Faded Black + Rustic Brown, Kodo Vertical 2.0 (removed fake "Limited st
 valuables), Saffiano, Money Clip, Luke, Sheppard wallet, Armour. Before: `batch3_before.json`; `build3.py` → `batch3.json`.
 TOTAL rewritten so far: 54 products. Remaining thin ones (batch 4): Imperial belt, laptop sleeves, Tray organiser,
 Cleopatra, Razor, A4 Folio Bali, The Case, + the rest of the 80–150-word list (rerun word-count scan first).
+
+## Batch 4 — LIVE Nov 22 (19 products, 158–271 words)
+Rescanned all 166 active non-jacket products (description <~120 words = thin). Done: Mini Folio, Imperial Reversible
+belt, Casual belt, Suede hat, Tray organiser, Burgundy studded hat, Mini Watch box, Oxford Brown + Black (MTO block,
+"PRODUCT DISCLAIMER" header removed), Slip-On Oxford (MTO), Expedition passport cover, Breathable cap, Kingsman, Stallion
+WALLET (not the boot), Cleopatra (Burgundy + Green, was "emerald" only), A4 Handle Folio Bali, Hunter, Bellezza (AI-draft
+text replaced), Razor. Prices removed from bodies (Rs 4,800 / Rs 9,000).
+FACT FIX: A4 Folio Bali is FAUX (vegan) leather but metafields said "Genuine leather" + seo said "A4 Leather Folio" →
+fixed material, benefits and seo title/description (Merchant Center). Tag "Leather" left (collection rules may use it).
+Watch box material metafield "Suede leather" → "Cow leather, suede-lined".
+Before: `batch4_before.json` (incl. old metafields); `build4.py` → `batch4.json`.
+TOTAL: 73 product descriptions rewritten. Still skipped: The Stallion BOOT (material unresolved).
+Not rewritten (already 120+ words but salesy/emoji copy, candidates for a polish pass): Forester, Traveler duffle,
+Venture Pack, Gridle, Saloon, Zulfiqar, Hilford, Heritage textured backpack, Corporate-style "✅" copy.
