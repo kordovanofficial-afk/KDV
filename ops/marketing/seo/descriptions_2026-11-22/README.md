@@ -10,3 +10,13 @@ Master's live copy differs slightly from build.py (dropped "over the shoulder" +
 Before-values: `batch1_before.json`. Built by `build.py` → `batch1.json`.
 NEXT: batch 2 = the 61 products at 80–150 words, best-sellers first (20 per batch). When Ahsan's measurements
 arrive, add real dimensions to the 5 no-photo products.
+
+## Batch 2 — LIVE Nov 22 (18 best-sellers, 186–290 words each)
+Maverik, Crushable hat, Gloves Brown/Black/Women's Dark Red, Executive belt, Extendable, Ladies Clutch, Shelby & Thomas,
+Flat Cap, Plain Bifold, Rigor Lite, Bastion, Baseball Cap, Aristocrat, Corporate, Diva Tote (VEGAN block, no "genuine
+leather"), Midtown Lite. Junk removed: "PRODUCT DISCLAIMER (MUST READ…)" headers (replaced by a soft link to
+/pages/product-disclaimer on caps/gloves/Extendable), Diva "NADIA KHAN tags" line, Corporate emojis, prices in body
+(Rs 4,800 / PKR 1,499). Self-check removed 4 unprovable lines before publish. Before-values: `batch2_before.json`;
+built by `build2.py` → `batch2.json` (live = file).
+NEXT (batch 3): Clifford hats, Kodo Vertical, Saffiano, Nova, Dopp Kit, Ripper Case, Fanny Pack, Luke, Rider belt,
+Money Clip, Armour, Sheppard, laptop sleeves, Tray, Imperial belt, Cleopatra, Razor, A4 Folio Bali, The Case + rest.
