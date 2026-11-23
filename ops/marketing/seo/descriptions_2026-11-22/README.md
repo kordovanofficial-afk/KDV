@@ -50,3 +50,4 @@ SEO fixes: Rastov + Textured Backpack meta descriptions claimed a "padded laptop
 data → rewritten (title+description sent together). Before: `batch5_before.json`; `build5.py` → `batch5.json`.
 TOTAL: 82 product pages rewritten. Open idea: Forester title "…– The Ultimate 3-in-1 Travel Companion" → cleaner
 "Forester | 3-in-1 Leather Duffle & Backpack" (ask Founder; affects catalogue/feed title).
+- Nov 23 (Founder yes): Forester title renamed "Forester Duffle Bag – The Ultimate 3-in-1 Travel Companion" → "Forester | 3-in-1 Leather Duffle & Backpack" (handle unchanged; SEO title already matched).
