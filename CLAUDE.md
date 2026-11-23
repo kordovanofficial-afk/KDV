@@ -239,7 +239,12 @@ add only a short rule and a pointer here.
   - `#boardroom`: Founder approvals. Every deliverable goes there after the CQRO check.
   - `#hiring`.
   - db collections: desks, assignments, boardroom, folders, decisions, candidates, config. Keep desks current.
-- **Models (Founder, Nov 8):** every agent runs on Opus (top tier) on purpose. Don't downgrade models to save credits; save usage with fewer, tighter runs instead.
+- **MODEL POLICY (Founder, Nov 23 — replaces the Nov 8 "all Opus" rule; credits were burning):** pick the cheapest model that can do the job.
+  - **Haiku:** data pulls, logs, nightly WhatsApp run, morning brief, CQRO fact/rule checks, simple Shopify edits.
+  - **Sonnet (default):** copywriting, SEO batches, ads reads, team check-ins, analysis, theme edits; CMO/CRO/COO/CFO/ad-director agents.
+  - **Opus:** only big strategy calls (Alex on new campaigns/pricing/budget ≥1,000/day), tricky multi-file code, or when Sonnet got it wrong once.
+  - Agent files carry these models (alex stays opus; cqro haiku; others sonnet). Scheduled tasks bound to this session run on the session's model, so the session should sit on Sonnet; switch up to Opus only for a big decision, then back.
+  - Also save tokens: no re-reading big files, write long HTML via scripts, batch mutations, short replies.
 - Seats: CQRO Hamna (binding quality gate) · ~~CHRO Noor~~ PARKED Nov 21 (file in `ops/agents/parked/`) · CRO Sana · CMO Omar (Creative Director under him) · COO Zain ·
   CFO Ayesha. Agent files are in `.claude/agents/`; roster and design in `ops/agents/ROSTER.md` and `ORG_DESIGN.md`;
   register in `ops/agents/approvals/REGISTER.md`. `TEAM.md` = who to name.
