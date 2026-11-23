@@ -1,0 +1,17 @@
+FOR: Mr. Tahir + Ahsan (from Asad)          Start: today
+
+When you CANCEL any order in Shopify, please write ONE line in the order note:
+  "Cancelled: <reason> – <who called/when>"
+Reasons to use (pick one):
+  - No answer after 2 calls
+  - Customer said cancel (changed mind / price / ordered by mistake)
+  - Fake / prank order (wrong address, wrong number)
+  - Duplicate order
+  - Out of stock
+  - Refused at door (returned by PostEx)
+
+Why: last 2 weeks, 5 Mocha Mate orders from our best ad were cancelled and 3 had no reason written.
+We can't fix what we can't see. With the reason, Claude can tell which ads bring fake orders and stop paying for them.
+
+Also: please check 2 orders on 18 Nov from the same customer (KDV#23124 Truckkr + KDV#23125 KODO,
+address "No. 0303" / "No. 901") - looks like a prank/duplicate. Reply on WhatsApp: real or fake?

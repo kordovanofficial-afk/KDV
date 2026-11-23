@@ -46,3 +46,8 @@ In progress (Claude): Blessed Friday homepage mockup + time-locked code (for Fou
 
 ## Nov 22 — Ahsan: photos for 5 no-image products (Founder approved)
 File: `downloads/For_Ahsan_Photo_List_Nov22.txt` (sent to Founder to forward; Ahsan outside 24h WA window). Due Tue Nov 24. Includes measurements request (bag dimensions + laptop fit). When photos arrive: upload to products + alt text, then add real dimensions to the 5 descriptions.
+
+## Nov 23 check-in — cancel reasons (COO)
+| Nov 23 | Mr. Tahir + Ahsan | `downloads/For_Team_Cancel_Reasons_Nov23.txt` | Write a 1-line reason on every cancelled order; check KDV#23124/23125 (prank?) | open |
+Finding: of 5 cancelled H1 Mocha orders (Nov 12–22): 1 refused at door after WA confirm (Karachi, RTO), 1 cancelled by customer on WA within a minute (Kasur), 2 confirmed then cancelled with no note (Multan, Khanewal), 1 no WA reply → held + cancelled (Islamabad). 2 of 5 outside the 9 cities (all before the Nov 21 home-only targeting). Only 1 of 5 cost us shipping. Bridge status check: blocked this run (permission) — not verified.
+Still open: Ahsan 5-product photos (due Nov 24) · Mr. Tahir gift call KDV#22714 + 3 stock answers · Founder Stallion boot material · December always-on prompts (due Nov 30).
