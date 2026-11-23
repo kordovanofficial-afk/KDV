@@ -24,3 +24,11 @@ Voyager/Alonzo) — `top10_body_after.html`; needs a 25KB body push, held to sav
 NEXT: PDP breadcrumb + BreadcrumbList schema (theme push, Founder yes) to send category queries to the collection.
 CHECK: GSC CTR for these pages ~Dec 7 (2 weeks) and with the Dec 11 price-title check. Note: the collection title
 change touches the Nov 13 price-in-Pakistan test (kept "Price Rs 22,000–35,000" in the title).
+
+## Nov 23 (Founder yes) — DEPLOYED
+- PDP breadcrumb: kordovan `4c212d6` (snippets/pdp-main.liquid, live checksum 3a62a295… verified). Middle crumb = MAIN category
+  by product type (jackets → men's/women's jackets, wallets, laptop/office bags, backpacks, crossbody, travel, handbags,
+  belts, gloves, hats, caps, shoes, cigarette cases; fallback collections.first) + BreadcrumbList JSON-LD.
+  Check in GSC → Enhancements → Breadcrumbs in ~1 week; Rich Results Test on a jacket URL.
+- Top-10 jacket blog body pushed (articleUpdate OK): "Updated November 2026", dateModified 2026-11-23, links to
+  Vanguard / Reacher / Desert Voyager / Alonzo. Before: `top10_body_before.html`.
