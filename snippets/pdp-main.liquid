@@ -23,7 +23,73 @@
 
 <section class="kv-pdp">
   <div class="kv-wrap">
-    <div class="crumb"><a href="{{ routes.root_url }}">Home</a> / {% if product.collections.first %}<a href="{{ product.collections.first.url }}">{{ product.collections.first.title }}</a> / {% endif %}{{ product.title }}</div>
+    {%- comment -%}
+      Breadcrumb (Nov 23, SEO): the middle crumb is the product's MAIN category, chosen by
+      product type (not collections.first, which can be a sale or kdv-* collection), so
+      broad searches like "jackets for men in Pakistan" are pointed at the category page.
+      Mirrored as BreadcrumbList JSON-LD below. Falls back to collections.first.
+    {%- endcomment -%}
+    {%- liquid
+      assign pt = product.type | downcase
+      assign tl = product.title | downcase
+      assign is_women = false
+      if tl contains 'women' or tl contains 'ladies' or pt contains "women"
+        assign is_women = true
+      endif
+      assign bc_handle = ''
+      if pt contains 'jacket'
+        if is_women
+          assign bc_handle = 'womens-leather-jackets'
+        else
+          assign bc_handle = 'mens-leather-jackets'
+        endif
+      elsif pt contains 'wallet' or pt contains 'money clip'
+        if is_women
+          assign bc_handle = 'womens-leather-wallets'
+        else
+          assign bc_handle = 'mens-leather-wallets'
+        endif
+      elsif pt == 'laptop bag'
+        assign bc_handle = 'laptop-bags'
+      elsif pt == 'office bag'
+        assign bc_handle = 'office-bags'
+      elsif pt == 'backpack'
+        assign bc_handle = 'leather-backpacks'
+      elsif pt == 'crossbody bag'
+        assign bc_handle = 'crossbody-messenger-bags'
+      elsif pt == 'duffle bag' or pt == 'trolley bag'
+        assign bc_handle = 'travel-bags'
+      elsif pt == 'handbag'
+        assign bc_handle = 'womens-leather-handbags'
+      elsif pt == 'belt'
+        assign bc_handle = 'mens-leather-belts'
+      elsif pt == 'gloves'
+        assign bc_handle = 'leather-gloves'
+      elsif pt == 'hat'
+        assign bc_handle = 'cowboy-hats'
+      elsif pt == 'cap'
+        assign bc_handle = 'leather-caps'
+      elsif pt contains 'shoe' or pt contains 'boot'
+        assign bc_handle = 'mens-leather-shoes'
+      elsif pt == 'cigarette case'
+        assign bc_handle = 'cigarette-cases'
+      endif
+      assign bc = blank
+      if bc_handle != ''
+        assign bc = collections[bc_handle]
+      endif
+      if bc == blank or bc.id == blank
+        assign bc = product.collections.first
+      endif
+    -%}
+    <nav class="crumb" aria-label="Breadcrumb"><a href="{{ routes.root_url }}">Home</a> / {% if bc %}<a href="{{ bc.url }}">{{ bc.title }}</a> / {% endif %}<span aria-current="page">{{ product.title }}</span></nav>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Home","item":{{ shop.url | append: '/' | json }}}
+      {%- if bc -%},{"@type":"ListItem","position":2,"name":{{ bc.title | json }},"item":{{ shop.url | append: bc.url | json }}}{%- endif -%}
+      ,{"@type":"ListItem","position":{% if bc %}3{% else %}2{% endif %},"name":{{ product.title | json }},"item":{{ shop.url | append: product.url | json }}}
+    ]}
+    </script>
   </div>
 
   <!-- ABOVE THE FOLD -->
