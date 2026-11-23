@@ -182,7 +182,7 @@ add only a short rule and a pointer here.
 - **COD fee = +PKR 250** through shipping rates: Pay Online 250, or 0 over 5,500; COD 500, or 250 over 5,500.
   Delivery profile `48076685501` · zone `103282671805`. A discount cannot depend on payment method in Shopify.
 - Croc/snake belts are TEXTURED leather, not exotic skin. The Diva Tote and The Vibe LITE are VEGAN. The Stallion boot
-  is TOP-GRAIN COW LEATHER, croc-embossed (Founder, Nov 23; description, seo + material metafield updated).
+  is TOP-GRAIN COW LEATHER, croc-embossed, LIFETIME warranty like other shoes (Founder, Nov 23; description, seo, material + benefits updated).
 - Wallet costs in Shopify already include the +150 buffer. **Never add +150 again.** Bag costs carry no buffer.
 - `kdv-*` smart collections are referenced by handle in Liquid. `leather-backpacks` (TYPE `backpack`),
   `crossbody-messenger-bags` (TYPE `Crossbody Bag`) and the MTO `type contains 'Jacket'` rule depend on
