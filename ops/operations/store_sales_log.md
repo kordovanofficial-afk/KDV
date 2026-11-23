@@ -36,3 +36,6 @@ One entry per nightly run (23:30 PKT). Last-read timestamp at the bottom of each
 - Store sales applied: none (no report received).
 - Still waiting on Mr. Tahir: Forester "brown" (Crazy Horse or Tan?), Rastov "Tan" variant, Extendable Brown count, GIFT CALL KDV#22714 result (was due Sun 11am–1pm). His 24h window has CLOSED — Claude can't message him until he writes first.
 - PENDING_WHATSAPP queue: nothing sent (no inbound in window).
+
+## Nightly run 2026-11-23 23:30 PKT
+- No WhatsApp messages (inbound or outbound) in the last 24h. No sales to apply. Queued Ahsan + Tahir messages stay WAITING (no inbound to open a window).
