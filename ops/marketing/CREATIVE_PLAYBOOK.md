@@ -48,3 +48,8 @@ Started Nov 10 2026 (Founder: "pinpoint the exact formula that sells, not just r
 
 ## 6. HOW A FORMAT GRADUATES
 Test (10% budget, one new format a week vs the control) → ≥2 Shopify orders at ≤ the category CPA ceiling (wallets ~1,300, gloves 1,000; bags TBD after BF) with a refusal rate ≤ the account average → **PROVEN**, and it joins the always-on new-customer ad set. Two failed tests of the same format with different angles → **LOST**.
+
+## Nov 23 Monday read (14d, Shopify-confirmed) — `ops/marketing/weekly_reads/2026-11-23_monday_read.md`
+- PROVEN: H1 Mocha comparison (12 live/17 placed, 1,182 per placed) · BOF retarget (9/13, 1,137) · BF Clifford hat (2 orders on 1,925) · gloves chai-dhaba lifestyle v2 (1 on 451).
+- 11.11: S1 Bastion STATIC won (3 live orders, incl. 11,710) vs S2 video 1 and S4 carousel 0 → December: lead with static single-product.
+- LOST: MOF "Ordered vs Arrived" (1 order on 4,962) · Truckkr test (0 live on ~6.4k) · gloves comparison (W01 + RT v2, >1,600 per order).
