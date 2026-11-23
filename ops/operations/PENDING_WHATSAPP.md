@@ -77,3 +77,14 @@ Status: SENT 2026-11-15 15:25 PKT. On reply: compare with ops/operations/wallet_
 
 ## SENT 2026-11-21 16:15 PKT — to Mr. Tahir (923002042352): bag costs + Extendable count (wamid ...NUI1NEQ2QkE5OUI2ODU3QjY4; he texted Hi at 15:43 PKT; window open until Nov 22 15:43 PKT)
 Send the text of downloads/For_Tahir_Bag_Costs_Nov21.txt as soon as Tahir messages the Kapso number (24h window). He has NEVER messaged it, so it can't be sent until he does. Founder (Nov 21): he is asking Tahir to text the Kapso number; send as soon as Tahir's first message lands, and push for a reply within 24h. Check-ins scheduled via send_later.
+
+## Nov 23 — queued for Ahsan (send when he next messages) — Status: WAITING
+"Assalam o Alaikum Ahsan bhai! Asad sahab ne kaha hai ke ab main aap se direct baat karunga. 2 cheezen:
+1) Har shaam store band hone se pehle 'STORE SALES dd-Mon' bhej dein (agar koi sale nahi hui to 'NO SALES dd-Mon'). Is se website ka stock theek rehta hai aur main aap se direct baat kar sakta hoon.
+2) 5 products ki photos (Master's, City Backpack, Voyager, A4 Folder, Lanyard) kal tak chahiye – list Asad sahab ne bheji thi.
+Please is message ka jawab 'OK' likh kar de dein."
+
+## Nov 23 — queued for Mr. Tahir (send when he next messages) — Status: WAITING
+"Assalam o Alaikum Tahir sahab! Asad sahab ne kaha hai ke main aap se direct baat karunga. Roz shaam ek message zaroor bhej dein ('STORE SALES dd-Mon' ya 'NO SALES dd-Mon'), warna WhatsApp mujhe aap ko message karne nahi deta.
+Pending: 1) KDV#22714 gift call ka result 2) Forester 'brown' = Crazy Horse ya Tan? 3) Rastov 'Tan' = kaunsa colour? 4) Extendable Brown kitne hain?
+Please jawab zaroor dein."

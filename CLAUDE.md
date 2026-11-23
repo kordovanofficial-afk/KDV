@@ -73,6 +73,7 @@ add only a short rule and a pointer here.
   - Founder `923005555968`
   - Mr. Tahir `923002042352`
   - Ahsan `923042528729`
+- **Founder Nov 23: keep the team chats open.** Our messages do NOT reopen the window (only THEIR message does; templates cost money). So every message Claude sends ends with a reply request, and Ahsan/Tahir send a daily 'STORE SALES dd-Mon' (or 'NO SALES dd-Mon') each evening, which keeps the window open. Ask the team directly, not the Founder, whenever the window is open.
 - **Reply only inside the 24h window.** Never send templates or start conversations: that needs a paid Meta payment
   method (WABA error 141006). The other person must message first.
 - **Store SALES reports are applied to Shopify AUTOMATICALLY** (Founder, Nov 7) with `inventoryAdjustQuantities`.
@@ -139,7 +140,7 @@ add only a short rule and a pointer here.
 | TOF-W Gloves cold | campaign `120255846370500428` / ad set `120255846373560428` | **800** (trimmed Nov 7) |
 | RT-W Gloves + cap warm | ad set `120255846373980428` | 840 |
 | 11.11 Teaser (ThruPlay) | campaign `120255866086090428` / ad set `120255866086510428` | 1,000, ends Nov 9 |
-| **TEST Truckkr** `120256098366860428` PAUSED Nov 22 (failed: ~6.4k spent, CPA ~3.2k); H1 Mocha ad set → 1,860/day Nov 22 (Alex: +~20% only); gloves comparison v2 ad PAUSED Nov 22 (CPA 3,264), chaidhaba v2 keeps RT-W 500 · Paused: TOF-C `120254472805020428` · BOF DPA `120254220299340428` · TOF-J `120254923438760428` · RT-J `120255674363190428` | | |
+| **MOF ad set `120256055942050428` PAUSED Nov 23 (Founder; 1 order on 4,962)** · **TEST Truckkr** `120256098366860428` PAUSED Nov 22 (failed: ~6.4k spent, CPA ~3.2k); H1 Mocha ad set → 1,860/day Nov 22 (Alex: +~20% only); gloves comparison v2 ad PAUSED Nov 22 (CPA 3,264), chaidhaba v2 keeps RT-W 500 · Paused: TOF-C `120254472805020428` · BOF DPA `120254220299340428` · TOF-J `120254923438760428` · RT-J `120255674363190428` | | |
 - During the sale: see the 11.11 section (TOF-M 500+500).
 - **Nov 21 (Founder yes, post-mortem):** all 7 of our active ad sets now target people LIVING in the 9 cities (location type home; Meta stores it as home + frequently_in; 'recent'/travellers removed). Lost-order post-mortem: `ops/operations/2026-11-21_lost_orders_postmortem_nov.md` (real Nov loss 15%; outside-9-city orders lose 29%). ⚠️ A **Shopify-managed 'Autopilot Advantage+ Sales' campaign** `120256204494880428` (1,571/day, ALL Pakistan, no refuser exclusion) appeared Nov 21 12:37 PKT — not ours; asked the Founder. **Founder: KEEP it, he's testing it; 3-day read Nov 24 14:00 PKT (`trig_01YNwxqEWPrukBbzh2617cG2`) — pause pre-approved only if no Shopify-confirmed results.**
 - 🔴 **BEFORE ANY PAUSE (lesson Nov 8, I paused the winning gloves ad W01 by judging ad SETS):**
@@ -181,7 +182,7 @@ add only a short rule and a pointer here.
 - **COD fee = +PKR 250** through shipping rates: Pay Online 250, or 0 over 5,500; COD 500, or 250 over 5,500.
   Delivery profile `48076685501` · zone `103282671805`. A discount cannot depend on payment method in Shopify.
 - Croc/snake belts are TEXTURED leather, not exotic skin. The Diva Tote and The Vibe LITE are VEGAN. The Stallion boot
-  has an unresolved material contradiction, so ask before asserting its material.
+  is TOP-GRAIN COW LEATHER, croc-embossed (Founder, Nov 23; description, seo + material metafield updated).
 - Wallet costs in Shopify already include the +150 buffer. **Never add +150 again.** Bag costs carry no buffer.
 - `kdv-*` smart collections are referenced by handle in Liquid. `leather-backpacks` (TYPE `backpack`),
   `crossbody-messenger-bags` (TYPE `Crossbody Bag`) and the MTO `type contains 'Jacket'` rule depend on
