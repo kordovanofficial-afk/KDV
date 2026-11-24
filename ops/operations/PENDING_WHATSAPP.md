@@ -84,7 +84,7 @@ Send the text of downloads/For_Tahir_Bag_Costs_Nov21.txt as soon as Tahir messag
 2) 5 products ki photos (Master's, City Backpack, Voyager, A4 Folder, Lanyard) kal tak chahiye – list Asad sahab ne bheji thi.
 Please is message ka jawab 'OK' likh kar de dein."
 
-## Nov 23 — queued for Mr. Tahir (send when he next messages) — Status: WAITING
+## Nov 23 — queued for Mr. Tahir — Status: SENT 2026-11-24 23:40 PKT (merged into the sales reply; he wrote at 22:20 PKT)
 "Assalam o Alaikum Tahir sahab! Asad sahab ne kaha hai ke main aap se direct baat karunga. Roz shaam ek message zaroor bhej dein ('STORE SALES dd-Mon' ya 'NO SALES dd-Mon'), warna WhatsApp mujhe aap ko message karne nahi deta.
 Pending: 1) KDV#22714 gift call ka result 2) Forester 'brown' = Crazy Horse ya Tan? 3) Rastov 'Tan' = kaunsa colour? 4) Extendable Brown kitne hain?
 Please jawab zaroor dein."

@@ -39,3 +39,9 @@ One entry per nightly run (23:30 PKT). Last-read timestamp at the bottom of each
 
 ## Nightly run 2026-11-23 23:30 PKT
 - No WhatsApp messages (inbound or outbound) in the last 24h. No sales to apply. Queued Ahsan + Tahir messages stay WAITING (no inbound to open a window).
+
+## Nightly run 2026-11-24 23:30 PKT
+- Inbound: Mr. Tahir "Today's sales" at 22:20 PKT (not in STORE SALES format; no Worker "Done:" reply).
+- APPLIED (-1 each unless noted, shop location, read back OK): Luxurious Clutch White & Brown -2 (18→16), Armour Brown -1 (42→41), Flat Cap Newsboy Black -1 (4→3), Men's Gloves Black XL -1 (13→12).
+- ASKED Tahir (not applied, no guessing): Eva clutch Black (no such product), Diva Tote "coffee brown" x2 (Light Brown or Chocolate Brown?), Gloves Black S + Brown S (qty missing).
+- Sent Tahir the queued Nov 23 message + hats vendor question in the same reply (reply requested). Ahsan: no message, his queued message stays WAITING.
