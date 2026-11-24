@@ -1,32 +1,118 @@
 {
- "gid://shopify/Product/7466990534896": ["copy-of-kordovans-crushable-premium-genuine-leather-western-cowboy-hat-s012", "crushable-leather-cowboy-hat"],
- "gid://shopify/Product/7693032915184": ["copy-of-womens-casual-cap-newsboy-cap-beret-for-girl-brown", "womens-leather-newsboy-cap"],
- "gid://shopify/Product/8076736233712": ["copy-of-natural-oil-tanned-leather-casual-belt-rustic-brown", "the-rider-leather-jeans-belt"],
- "gid://shopify/Product/8127207801072": ["copy-of-mens-leather-fanny-pack", "leather-crossbody-fanny-pack"],
- "gid://shopify/Product/8207108571376": ["copy-of-the-travel-mate-trolley-bag", "the-cabin-trolley-bag"],
- "gid://shopify/Product/8220869984496": ["copy-of-cardinal-blue-premium-oxford-brogue-wingtip-suede-genuine-leather-shoes", "premium-oxford-leather-shoes-brown"],
- "gid://shopify/Product/8251522842864": ["copy-of-the-regal-weaver", "the-aristocratic-strider"],
- "gid://shopify/Product/8251541782768": ["copy-of-executive-comfort-oxford", "enigma-burnished-loafers"],
- "gid://shopify/Product/8251546534128": ["copy-of-enigma-burnished-loafers", "the-luxe-tussle-loafer"],
- "gid://shopify/Product/8273516888304": ["copy-of-kordovan-sleek-laptop-sleeves-tan", "leather-laptop-sleeve-15-5-inch"],
- "gid://shopify/Product/8297214705904": ["leather-tissue-box-1", "leather-tissue-box-rectangle"],
- "gid://shopify/Product/8314261078256": ["copy-of-mock-croc-leather-dress-belt-black", "the-saffire-belt"],
- "gid://shopify/Product/8317154361584": ["the-travel-mate-trolley-bag-brown-1", "the-atlantic-trolley-duffel-bag-black"],
- "gid://shopify/Product/8322893906160": ["copy-of-oxford-brogue-patent-black-limited-trot-series", "the-salemanco-brogue-black"],
- "gid://shopify/Product/8322900525296": ["copy-of-the-salemanco-brogue-burnished-brown", "the-salemanco-oxford"],
- "gid://shopify/Product/8322901573872": ["copy-of-the-tassel-shoe", "the-diplomat-shoe"],
- "gid://shopify/Product/8429202571504": ["copy-of-kordovans-premium-leather-western-cowboy-hat-rustic-maroon", "clifford-cowboy-hat-faded-black"],
- "gid://shopify/Product/8759339483376": ["tp-the-gentlemans-duffle", "the-gentlemans-leather-duffle"],
- "gid://shopify/Product/8759353966832": ["tp-dblp-laptop-bag", "dblp-leather-laptop-bag"],
- "gid://shopify/Product/8759356489968": ["tp-elite-laptop-bag", "elite-leather-laptop-bag"],
- "gid://shopify/Product/8792912724208": ["tp-millard-office-bag", "millard-leather-office-bag"],
- "gid://shopify/Product/9070593900784": ["tp-the-city-backpack", "the-city-leather-backpack"],
- "gid://shopify/Product/9119662801136": ["tp-the-corporate-laptop-bag", "the-corporate-leather-laptop-bag"],
- "gid://shopify/Product/9342852989168": ["tp-venture-pack", "venture-leather-crossbody-pack"],
- "gid://shopify/Product/9370390167792": ["tp-natural-milled-leather-dopp-kit", "natural-milled-leather-dopp-kit"],
- "gid://shopify/Product/9374692606192": ["tp-the-nova-weaved-leather-wallet-clutch", "the-nova-woven-leather-wallet-clutch"],
- "gid://shopify/Product/9463563518192": ["tp-executive-a4-folder", "executive-leather-a4-folder"],
- "gid://shopify/Product/9568867877104": ["tp-voyager-suitcase-trolley-bag-1", "voyager-leather-suitcase-trolley-bag"],
- "gid://shopify/Product/9650093097200": ["rl-the-hilford-backpack", "the-rastov-leather-backpack"],
- "gid://shopify/Product/9660447424752": ["bl-textured-backpack-black", "textured-leather-backpack-black"]
+ "gid://shopify/Product/7466990534896": [
+  "copy-of-kordovans-crushable-premium-genuine-leather-western-cowboy-hat-s012",
+  "crushable-leather-cowboy-hat"
+ ],
+ "gid://shopify/Product/7693032915184": [
+  "copy-of-womens-casual-cap-newsboy-cap-beret-for-girl-brown",
+  "womens-leather-newsboy-cap"
+ ],
+ "gid://shopify/Product/8076736233712": [
+  "copy-of-natural-oil-tanned-leather-casual-belt-rustic-brown",
+  "the-rider-leather-jeans-belt"
+ ],
+ "gid://shopify/Product/8127207801072": [
+  "copy-of-mens-leather-fanny-pack",
+  "leather-crossbody-fanny-pack"
+ ],
+ "gid://shopify/Product/8207108571376": [
+  "copy-of-the-travel-mate-trolley-bag",
+  "the-cabin-trolley-bag"
+ ],
+ "gid://shopify/Product/8220869984496": [
+  "copy-of-cardinal-blue-premium-oxford-brogue-wingtip-suede-genuine-leather-shoes",
+  "premium-oxford-leather-shoes-brown"
+ ],
+ "gid://shopify/Product/8251522842864": [
+  "copy-of-the-regal-weaver",
+  "the-aristocratic-strider"
+ ],
+ "gid://shopify/Product/8251541782768": [
+  "copy-of-executive-comfort-oxford",
+  "enigma-burnished-loafers"
+ ],
+ "gid://shopify/Product/8251546534128": [
+  "copy-of-enigma-burnished-loafers",
+  "the-luxe-tussle-loafer"
+ ],
+ "gid://shopify/Product/8273516888304": [
+  "copy-of-kordovan-sleek-laptop-sleeves-tan",
+  "leather-laptop-sleeve-15-5-inch"
+ ],
+ "gid://shopify/Product/8297214705904": [
+  "leather-tissue-box-1",
+  "leather-tissue-box-rectangle"
+ ],
+ "gid://shopify/Product/8317154361584": [
+  "the-travel-mate-trolley-bag-brown-1",
+  "the-atlantic-trolley-duffel-bag-black"
+ ],
+ "gid://shopify/Product/8322893906160": [
+  "copy-of-oxford-brogue-patent-black-limited-trot-series",
+  "the-salemanco-brogue-black"
+ ],
+ "gid://shopify/Product/8322900525296": [
+  "copy-of-the-salemanco-brogue-burnished-brown",
+  "the-salemanco-oxford"
+ ],
+ "gid://shopify/Product/8322901573872": [
+  "copy-of-the-tassel-shoe",
+  "the-diplomat-shoe"
+ ],
+ "gid://shopify/Product/8429202571504": [
+  "copy-of-kordovans-premium-leather-western-cowboy-hat-rustic-maroon",
+  "clifford-cowboy-hat-faded-black"
+ ],
+ "gid://shopify/Product/8759339483376": [
+  "tp-the-gentlemans-duffle",
+  "the-gentlemans-leather-duffle"
+ ],
+ "gid://shopify/Product/8759353966832": [
+  "tp-dblp-laptop-bag",
+  "dblp-leather-laptop-bag"
+ ],
+ "gid://shopify/Product/8759356489968": [
+  "tp-elite-laptop-bag",
+  "elite-leather-laptop-bag"
+ ],
+ "gid://shopify/Product/8792912724208": [
+  "tp-millard-office-bag",
+  "millard-leather-office-bag"
+ ],
+ "gid://shopify/Product/9070593900784": [
+  "tp-the-city-backpack",
+  "the-city-leather-backpack"
+ ],
+ "gid://shopify/Product/9119662801136": [
+  "tp-the-corporate-laptop-bag",
+  "the-corporate-leather-laptop-bag"
+ ],
+ "gid://shopify/Product/9342852989168": [
+  "tp-venture-pack",
+  "venture-leather-crossbody-pack"
+ ],
+ "gid://shopify/Product/9370390167792": [
+  "tp-natural-milled-leather-dopp-kit",
+  "natural-milled-leather-dopp-kit"
+ ],
+ "gid://shopify/Product/9374692606192": [
+  "tp-the-nova-weaved-leather-wallet-clutch",
+  "the-nova-woven-leather-wallet-clutch"
+ ],
+ "gid://shopify/Product/9463563518192": [
+  "tp-executive-a4-folder",
+  "executive-leather-a4-folder"
+ ],
+ "gid://shopify/Product/9568867877104": [
+  "tp-voyager-suitcase-trolley-bag-1",
+  "voyager-leather-suitcase-trolley-bag"
+ ],
+ "gid://shopify/Product/9650093097200": [
+  "rl-the-hilford-backpack",
+  "the-rastov-leather-backpack"
+ ],
+ "gid://shopify/Product/9660447424752": [
+  "bl-textured-backpack-black",
+  "textured-leather-backpack-black"
+ ]
 }
