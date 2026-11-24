@@ -36,3 +36,11 @@ Full original descriptionHtml is also in the session transcript; key fields kept
 - desc paragraphs 1-2 used snake/croc/"no exotic skins"; alt: "Snake Leather Belt — ..."
 ## The Master's laptop bag (9815382819056)
 - option value "Croc" (id 6878582669552) → colour; desc bullet "Two finishes: Croc and Multicolor"
+## Urban Rider jacket (8167106674928) — reworded Nov 24 (collar is FAUX fur; Founder: avoid the word)
+- title: Urban Rider | Men's Brown Fur Collar Leather Biker Jacket
+- seo.title: Men's Brown Fur Collar Leather Jacket — Urban Rider | Pakistan
+- seo.desc: Urban Rider: brown biker jacket with removable fur collar, premium top-grain sheep leather, made to order in Pakistan. Rs 35,000. About 3 weeks to your door.
+- desc: "A removable fur collar ... Take the fur off ..." / bullet "Notch collar with removable fur"
+- subtitle: Removable fur collar over brown pull-up leather.
+- benefits line 1: Notch collar with removable fur
+- 6 image alts said "fur collar"
