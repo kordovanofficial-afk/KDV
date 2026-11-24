@@ -286,3 +286,9 @@ s = _s(29); s.update(title="Soft where it counts", type="Product", upload="Men's
  prod="the men's black sheep-leather gloves, one turned to show the fleece lining", scene="a dark slate surface #3C3F43 with a soft light", comp="gloves at the lower-centre, 55% width",
  cam="close 50 mm look", light="soft side light 5200 K", pal="slate #3C3F43, black #1C1A18, fleece cream #E9DFCB", tone_i="warm, tactile", tone_p="soft, warm and well made",
  text='"Soft where it counts." (Fraunces Bold 72 px, Alabaster #F7F2EA, y≈480)', sticker="Link sticker to the gloves page")
+
+# --- Alex final tweaks (Nov 24) ---
+_f(6)["real_option"] = "PREFERRED: use a REAL phone photo of Ahsan packing a real order (hands, box and tissue only; no names or addresses visible). Use the GPT image below only if no real photo is possible."
+_f(6)["tags"] = "#kordovan #packing #shoppakistan #cashondelivery #leatherwallet"
+_s(9)["text"] = '"Zero bulk." (Fraunces Bold 76 px, Espresso #241C16, y≈480)'
+_s(9)["title"] = "Zero bulk: The Money Clip"
