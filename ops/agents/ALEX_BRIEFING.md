@@ -128,3 +128,7 @@ only reply within 24h, never cold-message).
 - Nov 23 MONDAY REFRESH: 14d Meta ~74.6k → 33 live Meta-tagged orders (~117k). Winners H1 (1,182/placed), Retarget (1,137), BF Clifford. Losers: MOF trust ad (4,962/order), Truckkr, gloves comparison. 11.11 lesson: static > video > carousel. Free: IG link-in-bio 5 orders, email 1 (24k). Proposed: pause MOF (−500/day). Live budgets ≈ H1 1,860 · BOF 800 · RT-W 500 · BF 2,000 · MOF 500 · Autopilot 1,571 (read Nov 24). Read: weekly_reads/2026-11-23.
 - Nov 23 (Founder yes): MOF trust ad set PAUSED (1 order on 4,962). Autopilot: pause tomorrow 14:00 if no Shopify-confirmed results (pre-approved). Stallion boot = top-grain cow leather, croc-embossed.
 - Nov 23 (Founder 'go jackets'): jacket collection + 6 jacket product SEO titles/metas + 2 jacket blog SEO tags rewritten for CTR (ops/marketing/seo/jackets_2026-11-23). Read ~Dec 7.
+
+## Nov 24 — Autopilot Advantage+ (Shopify-managed) 3-day read: PAUSED
+- Lifetime spend Rs 5,150 (Nov 21 12:37 → Nov 24 morning). Shopify-confirmed orders via utm_medium=autopilot: 2 (KDV#23155 Lahore Rs 2,450; KDV#23169 Chiniot, outside the 9 cities, Rs 2,200) = Rs 4,650, both unpaid COD/pending. Cost per order ≈ Rs 2,575 vs ceiling ~1,500; Meta ROAS 0.91x vs break-even 2.2x. Untargeted (all Pakistan, no refuser exclusion).
+- Decision: paused Nov 24 under the Founder's Nov 21 pre-approval. [Alex lens] agree: 1.7x over the ceiling, 1 of 2 orders outside our 9 cities (29% loss rate there).
