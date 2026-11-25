@@ -45,3 +45,10 @@ One entry per nightly run (23:30 PKT). Last-read timestamp at the bottom of each
 - APPLIED (-1 each unless noted, shop location, read back OK): Luxurious Clutch White & Brown -2 (18→16), Armour Brown -1 (42→41), Flat Cap Newsboy Black -1 (4→3), Men's Gloves Black XL -1 (13→12).
 - ASKED Tahir (not applied, no guessing): Eva clutch Black (no such product), Diva Tote "coffee brown" x2 (Light Brown or Chocolate Brown?), Gloves Black S + Brown S (qty missing).
 - Sent Tahir the queued Nov 23 message + hats vendor question in the same reply (reply requested). Ahsan: no message, his queued message stays WAITING.
+
+## Nightly run 2026-11-25 23:30 PKT
+- Inbound: Mr. Tahir at 23:47 PKT Nov 24 (answers to my questions; no Nov 25 messages). Ahsan: none (queued message stays WAITING).
+- APPLIED, read back OK: Diva Tote Chocolate Brown -2 (9→7), Gloves Black S -1 (10→9), Gloves Brown S -1 (10→9), Forester Crazy Horse -1 (10→9; the Nov 21 "brown" sale).
+- Eva clutch: store-only product, not counted (Tahir).
+- Tahir said: Extendable Brown does not exist; hats vendor ordered, will say when; gift call KDV#22714 has no result; Rastov "Tan" = Tan or camel colour (unclear, nothing applied, no addition made).
+- Replied to Tahir 23:35 PKT (his window closes 23:47): confirmed lines, asked Rastov colour, hats qty/days/price, daily STORE SALES.
