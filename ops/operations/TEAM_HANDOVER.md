@@ -51,3 +51,7 @@ File: `downloads/For_Ahsan_Photo_List_Nov22.txt` (sent to Founder to forward; Ah
 | Nov 23 | Mr. Tahir + Ahsan | `downloads/For_Team_Cancel_Reasons_Nov23.txt` | Write a 1-line reason on every cancelled order; check KDV#23124/23125 (prank?) | open |
 Finding: of 5 cancelled H1 Mocha orders (Nov 12–22): 1 refused at door after WA confirm (Karachi, RTO), 1 cancelled by customer on WA within a minute (Kasur), 2 confirmed then cancelled with no note (Multan, Khanewal), 1 no WA reply → held + cancelled (Islamabad). 2 of 5 outside the 9 cities (all before the Nov 21 home-only targeting). Only 1 of 5 cost us shipping. Bridge status check: blocked this run (permission) — not verified.
 Still open: Ahsan 5-product photos (due Nov 24) · Mr. Tahir gift call KDV#22714 + 3 stock answers · Founder Stallion boot material · December always-on prompts (due Nov 30).
+
+## Nov 25 check-in
+| Nov 25 | Ahsan | `downloads/For_Ahsan_Reminder_Nov25.txt` | Daily STORE SALES line, 5-product photos (moved to Nov 27), cancel reasons | open |
+Still open: Mr. Tahir (sent on WhatsApp Nov 24 night): Eva clutch / Diva colour / gloves S qty, gift call KDV#22714, Forester/Rastov colours, Extendable count, hats vendor lead time · Founder: Retarget ad review (Meta), BF carousel go (Nov 26 eve), Dec 1 funnel questions (cmo-always-on-funnel-dec in Boardroom: budget 5,000, merge campaigns, Mocha restock, review clearing).
