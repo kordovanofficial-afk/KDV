@@ -144,3 +144,6 @@ only reply within 24h, never cold-message).
 
 ## Nov 25 12:00 PKT — BF split check #1: HOLD
 - Hats: 16 sellable (Brown M6 S3; Faded Black S4 L1 XL2) > 3 → HATS ONLY set stays at 700/day. Bags set spent ~Rs 611 so far today (Gridle 218, Venture 215, Executive 95, DBLP 34, Corporate 28, Diva 21), no orders yet; none near the Rs 2,000 kill line. Only BF-tagged bag order so far: Venture Rs 6,880 (Nov 24). No change made. Next read Nov 26 ~12:00 before the carousel go.
+
+## Nov 25 — BF carousel PUBLISHED (Founder go) + bags set 1,300 → 3,300
+- Ad `120256251488440428` (creative 1977632219864728) live in BAGS ONLY `120256242727930428` (in review at read-back); bags set daily budget verified 3,300; HATS ONLY unchanged 700. BF total 4,000/day until Nov 30 23:59. Read the carousel per card by utm_content bf_car_* (Shopify) on Nov 27 and Nov 28; kill/scale rules unchanged.
