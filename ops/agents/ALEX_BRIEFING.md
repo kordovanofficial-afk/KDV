@@ -141,3 +141,6 @@ only reply within 24h, never cold-message).
 ## Nov 25 — BF bag carousel DRAFT ready (publish only on the Founder's go, Nov 26 evening)
 - Creative `1977632219864728` (6-card static carousel from the 6 approved bag statics: Executive, Corporate, DBLP, Gridle, Venture, Diva; utm_content bf_car_<product>, link to /collections/leather-bags). Ad `120256251488440428` is a DRAFT inside the BAGS ONLY ad set `120256242727930428` (not live, no spend).
 - To go live (needs Founder yes): publish the ad draft with ads_activate_entity, and raise the bags ad set 1,300 → 3,300/day (daily_budget 330000, then activate); BF total 4,000/day. Ends Nov 30 23:59. The originally planned 8-card carousel files (Forester/CEO/Bellezza cards) are NOT in the repo; this uses the existing approved statics.
+
+## Nov 25 12:00 PKT — BF split check #1: HOLD
+- Hats: 16 sellable (Brown M6 S3; Faded Black S4 L1 XL2) > 3 → HATS ONLY set stays at 700/day. Bags set spent ~Rs 611 so far today (Gridle 218, Venture 215, Executive 95, DBLP 34, Corporate 28, Diva 21), no orders yet; none near the Rs 2,000 kill line. Only BF-tagged bag order so far: Venture Rs 6,880 (Nov 24). No change made. Next read Nov 26 ~12:00 before the carousel go.
