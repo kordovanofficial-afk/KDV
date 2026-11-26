@@ -57,3 +57,4 @@ Still open: Ahsan 5-product photos (due Nov 24) · Mr. Tahir gift call KDV#22714
 Still open: Mr. Tahir (sent on WhatsApp Nov 24 night): Eva clutch / Diva colour / gloves S qty, gift call KDV#22714, Forester/Rastov colours, Extendable count, hats vendor lead time · Founder: Retarget ad review (Meta), BF carousel go (Nov 26 eve), Dec 1 funnel questions (cmo-always-on-funnel-dec in Boardroom: budget 5,000, merge campaigns, Mocha restock, review clearing).
 
 - Nov 26 — For Mr. Tahir: downloads/For_Tahir_Unfulfilled_Orders_Nov26.txt (3 undispatched orders). Sent to Founder to forward (Tahir's WhatsApp window closed).
+- Nov 26: Privacy policy Clarity paragraph ready: downloads/Privacy_Policy_Clarity_Paragraph_Nov26.txt (Founder pastes; I did not retype the full legal text to avoid corrupting it).

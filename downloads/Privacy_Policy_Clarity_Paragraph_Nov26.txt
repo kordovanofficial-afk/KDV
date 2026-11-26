@@ -1,0 +1,9 @@
+HOW TO ADD (2 minutes): Shopify admin > Settings > Policies > Privacy policy > Edit.
+1) Paste the block below on a new line just BEFORE the heading "Third Party Websites and Links" (in the editor, switch to the <> HTML view for easiest paste).
+2) Change the first line "Last updated: October 29, 2026" to "Last updated: November 26, 2026".
+3) Save.
+
+--- PASTE THIS ---
+<h2>Website Analytics (Microsoft Clarity)</h2>
+<p>We use Microsoft Clarity, a free analytics tool, to understand how visitors use our website, for example which pages they view, where they tap or scroll, and where they leave. Clarity creates anonymised session replays and heatmaps and uses cookies and similar technologies. Sensitive information such as payment details is masked and is not recorded. Data collected by Clarity is processed by Microsoft in line with the <a href="https://privacy.microsoft.com/privacystatement">Microsoft Privacy Statement</a>. You can limit this tracking through your browser's cookie settings or a tracking-protection extension.</p>
+--- END ---
