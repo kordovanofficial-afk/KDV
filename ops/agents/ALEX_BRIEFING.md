@@ -147,3 +147,8 @@ only reply within 24h, never cold-message).
 
 ## Nov 25 — BF carousel PUBLISHED (Founder go) + bags set 1,300 → 3,300
 - Ad `120256251488440428` (creative 1977632219864728) live in BAGS ONLY `120256242727930428` (in review at read-back); bags set daily budget verified 3,300; HATS ONLY unchanged 700. BF total 4,000/day until Nov 30 23:59. Read the carousel per card by utm_content bf_car_* (Shopify) on Nov 27 and Nov 28; kill/scale rules unchanged.
+
+## Nov 26 — Retarget v2 (Founder: "make another retarget ad that will work")
+- Old ad "Retarget" `120228534677040428` (catalogue DPA, product set All Products 608788148654460, creative 1672779920026784) still DISAPPROVED; Meta shows no error text and the catalogue diagnostics have no policy flag (only 125 out-of-stock items). Lifetime: Rs 462.8k spent, 727 Meta purchases.
+- NEW: product set `1166452646327632` "BOF Clean" (74 in-stock ready-to-ship items; no jackets/shoes/Stallion/Tuxedo) + creative `2422552435166599` (catalogue carousel, fresh copy, AI enhancements OFF, utm_content bof_clean_v2) + ad `120256265936730428` in the same BOF ad set `120228534676860428` (800/day, no budget change). Published Nov 26, IN_PROCESS (review).
+- Next: if approved, pause old ad; compare by utm_content bof_clean_v2 vs Shopify. If rejected too, get exact policy text from Account Quality.
