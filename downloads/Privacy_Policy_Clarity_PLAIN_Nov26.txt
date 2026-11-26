@@ -1,0 +1,9 @@
+STEPS (Shopify admin > Settings > Policies > Privacy policy):
+1) Click at the very start of the heading "Third Party Websites and Links", press Enter once, then press the Up arrow to sit on the new empty line.
+2) Type the heading line below by hand: Website Analytics (Microsoft Clarity)
+   Select it and use the toolbar to make it a Heading (same style as the other headings).
+3) Press Enter, make the style Paragraph again, then paste the paragraph below using Ctrl+Shift+V (paste WITHOUT formatting). No tags, nothing to clean up.
+4) At the top change "Last updated: October 29, 2026" to "Last updated: November 26, 2026". Save.
+
+PARAGRAPH TO PASTE (plain text):
+We use Microsoft Clarity, a free analytics tool, to understand how visitors use our website, for example which pages they view, where they tap or scroll, and where they leave. Clarity creates anonymised session replays and heatmaps and uses cookies and similar technologies. Sensitive information such as payment details is masked and is not recorded. Data collected by Clarity is processed by Microsoft in line with the Microsoft Privacy Statement (privacy.microsoft.com/privacystatement). You can limit this tracking through your browser's cookie settings or a tracking-protection extension.
