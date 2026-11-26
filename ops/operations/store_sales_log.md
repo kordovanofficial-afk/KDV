@@ -52,3 +52,8 @@ One entry per nightly run (23:30 PKT). Last-read timestamp at the bottom of each
 - Eva clutch: store-only product, not counted (Tahir).
 - Tahir said: Extendable Brown does not exist; hats vendor ordered, will say when; gift call KDV#22714 has no result; Rastov "Tan" = Tan or camel colour (unclear, nothing applied, no addition made).
 - Replied to Tahir 23:35 PKT (his window closes 23:47): confirmed lines, asked Rastov colour, hats qty/days/price, daily STORE SALES.
+
+## Nightly run 2026-11-26 23:30 PKT
+- WhatsApp last 24h: 0 inbound from the team (no STORE SALES from Tahir/Ahsan today). Only outbound = my Nov 25 reply to Tahir. Nothing applied.
+- Queued and still WAITING (no open window): Ahsan (Nov 23 message), Tahir: unfulfilled-orders message (KDV#23169 / #23170 / #23181) and the hat restock order (files in downloads/, Founder forwards or I send when they write).
+- Non-WhatsApp changes today (Founder): hats shown 10/size (Crushable, Clifford Rustic Brown, Clifford Faded Black), hats ad set 1,400/day, Retarget v2 published, 5 cigarette-case items hidden in the Meta catalogue, Clarity live.
