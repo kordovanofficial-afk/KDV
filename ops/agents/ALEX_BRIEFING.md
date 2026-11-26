@@ -154,3 +154,4 @@ only reply within 24h, never cold-message).
 - Next: if approved, pause old ad; compare by utm_content bof_clean_v2 vs Shopify. If rejected too, get exact policy text from Account Quality.
 - Nov 26 PM: Founder screenshot: Meta reason = Drugs and Pharmaceuticals (restricted drugs) → tobacco cases. Removed Ripper Case + The Case from the clean set (74→72). Old ad stays rejected; do not re-request.
 - Nov 26: HIDDEN in Meta catalogue (visibility=hidden, read back): Ripper Case x3 + The Case x2 (retailer_ids 50016434487536, 50008009638128, 50008009572592, 50008009605360, 50016434454768). Website untouched. Shopify feed sync may re-publish them: re-check Nov 28; to undo set visibility=published.
+- Nov 26: Alex wrote the 6-month SEO plan; daily trigger created. Founder approval of pillar order + Clarity + Monday bundle pending.
