@@ -164,3 +164,8 @@ only reply within 24h, never cold-message).
 ## Nov 26 — Hat restock (Founder decision; Alex had advised a smaller ~80-pc, Rs 172k order incl. Black Stripe + Suede test; Founder chose 10/size on 3 hats, skip Black Stripe, Burgundy Studs, Suede Brown)
 - Order: Crushable 39, Clifford Rustic Brown 42, Clifford Faded Black 33 = 114 pcs ≈ Rs 340.5k. 90-day sales were only 37 hats (stock-constrained). Check sell-through ~Dec 20; reorder rules: no second order until the first batch is half sold. Hats ad set (Clifford, Rs 700/day) pause rule stays (≤3 sellable) until stock lands.
 - Black Stripe shows -3 (oversold): ask Tahir to fix or cancel affected orders.
+
+## Nov 26 — Hats shown in stock (Founder: customers wait ~a week for the restock batch)
+- Set 13 variants of Crushable, Clifford Rustic Brown, Clifford Faded Black to 10 each (equals stock after the 114-pc batch); PDP notice added: "New batch arriving: dispatched in about 7 to 10 days, at the current price; cancel free before dispatch". Record: ops/revenue/hat_restock_2026-11-26/. Black Stripe/Burgundy/Suede untouched.
+- [Alex lens] agree, with 3 guards: (1) honest wait (7-10 days, not 7); (2) COD refusal/cancel rate on these hat orders is THE number: pause hat ads if backorder cancels >15% or if Tahir's vendor date slips; (3) NEVER dispatch hat orders until the batch lands; WhatsApp the customer on dispatch. Hats ad budget left at 700/day (scale only after vendor date is confirmed in writing).
+- Hat "pause at <=3 sellable" rule now = backorder cap (stock shows 10/size): pause the hats ad set when any best size shows <=3.
