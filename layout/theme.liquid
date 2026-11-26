@@ -103,6 +103,7 @@
 
   {{ 'theme.css' | asset_url | stylesheet_tag }}
   {{ 'home.css' | asset_url | stylesheet_tag }}
+  {% render 'clarity' %}
 </head>
 
 <body id="{{ page_title | handle }}" class="template-{{ template.name }}{% if customer %} customer-logged-in{% endif %}">
