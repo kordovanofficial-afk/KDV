@@ -59,3 +59,4 @@ Still open: Mr. Tahir (sent on WhatsApp Nov 24 night): Eva clutch / Diva colour 
 - Nov 26 — For Mr. Tahir: downloads/For_Tahir_Unfulfilled_Orders_Nov26.txt (3 undispatched orders). Sent to Founder to forward (Tahir's WhatsApp window closed).
 - Nov 26: Privacy policy Clarity paragraph ready: downloads/Privacy_Policy_Clarity_Paragraph_Nov26.txt (Founder pastes; I did not retype the full legal text to avoid corrupting it).
 - Nov 26: shopPolicyUpdate blocked (no write_legal_policies scope). Privacy Clarity paragraph is a PLAIN-TEXT file for the Founder: downloads/Privacy_Policy_Clarity_PLAIN_Nov26.txt (the HTML version pasted badly into the rich editor).
+- Nov 26: hat restock order file for Tahir: downloads/For_Tahir_Hat_Restock_Nov26.txt

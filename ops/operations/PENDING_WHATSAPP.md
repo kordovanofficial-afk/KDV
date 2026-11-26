@@ -91,3 +91,6 @@ Please jawab zaroor dein."
 
 ## Nov 26 — queued for Mr. Tahir (Founder asked) — Status: WAITING (his window closed Nov 25 23:47 PKT; he must text first, or the Founder forwards the file)
 Text = downloads/For_Tahir_Unfulfilled_Orders_Nov26.txt (orders KDV#23169 gloves 2XL stock 0, #23170 Bastion not booked, #23181 DBLP awaiting customer confirm).
+
+## Nov 26 — queued for Mr. Tahir: HAT RESTOCK order (Founder decided) — Status: WAITING (his window closed; send when he next messages, or the Founder forwards downloads/For_Tahir_Hat_Restock_Nov26.txt)
+114 hats ~Rs 340,500: Crushable 39 (S10 M10 L9 XL10), Clifford Rustic Brown 42 (S7 M5 L10 XL10 XXL10), Clifford Faded Black 33 (S6 M10 L9 XL8). NOT Black Stripe / Burgundy Studs / Suede Brown. Stock additions to Shopify only with Founder OK when hats arrive.
