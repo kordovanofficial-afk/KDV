@@ -88,3 +88,6 @@ Please is message ka jawab 'OK' likh kar de dein."
 "Assalam o Alaikum Tahir sahab! Asad sahab ne kaha hai ke main aap se direct baat karunga. Roz shaam ek message zaroor bhej dein ('STORE SALES dd-Mon' ya 'NO SALES dd-Mon'), warna WhatsApp mujhe aap ko message karne nahi deta.
 Pending: 1) KDV#22714 gift call ka result 2) Forester 'brown' = Crazy Horse ya Tan? 3) Rastov 'Tan' = kaunsa colour? 4) Extendable Brown kitne hain?
 Please jawab zaroor dein."
+
+## Nov 26 — queued for Mr. Tahir (Founder asked) — Status: WAITING (his window closed Nov 25 23:47 PKT; he must text first, or the Founder forwards the file)
+Text = downloads/For_Tahir_Unfulfilled_Orders_Nov26.txt (orders KDV#23169 gloves 2XL stock 0, #23170 Bastion not booked, #23181 DBLP awaiting customer confirm).
