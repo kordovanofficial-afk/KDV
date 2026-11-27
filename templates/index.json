@@ -12,8 +12,11 @@
     "hero": {
       "type": "hero-banner",
       "settings": {
+        "winter": true,
         "eyebrow": "Pakistan's Original Leather Craft House",
         "subheading": "Handcrafted leather goods for those who value quality over quantity. Every stitch, every grain — made to outlast a lifetime.",
+        "cta_text": "Shop Bestsellers",
+        "cta_url": "",
         "cta_secondary_text": "See the Craft",
         "cta_secondary_url": "/pages/our-craft"
       }
@@ -21,13 +24,6 @@
     "trust": {
       "type": "trust-bar",
       "settings": {}
-    },
-    "featured_collections": {
-      "type": "featured-collections",
-      "settings": {
-        "eyebrow": "Collections",
-        "title": "Shop by Category"
-      }
     },
     "bestsellers": {
       "type": "bestsellers",
@@ -41,6 +37,7 @@
     "brand_story": {
       "type": "brand-story",
       "settings": {
+        "badge": "Handmade in Pakistan",
         "eyebrow": "Our Story",
         "title": "Craft That Speaks for Itself",
         "text": "<p>Kordovan began with a simple belief: a wallet should outlive its trends. We work full-grain leather by hand in Pakistan — cut, stitched, and finished to age into something better with every year you carry it.</p><p>No fast fashion. No corners cut. Just leather built to be handed down.</p>",
@@ -48,21 +45,32 @@
         "cta_url": "/pages/about-kordovan"
       }
     },
+    "featured_collections": {
+      "type": "featured-collections",
+      "settings": {
+        "eyebrow": "Collections",
+        "title": "Shop by Category"
+      }
+    },
     "testimonials": {
       "type": "testimonials",
+      "disabled": true,
       "settings": {
         "eyebrow": "Reviews",
-        "title": "Loved, carried, and passed on"
+        "title": "Loved, carried, and passed on",
+        "aggregate": "4.9 / 5 · from 25,000+ happy customers"
       }
     },
     "email_signup": {
       "type": "email-signup",
       "settings": {
+        "percent": "10%",
         "eyebrow": "Join the Kordovan family",
         "title": "Here's <em>10% off</em> — just for saying hello.",
         "subtitle": "Drop your email and we'll send your code right away — plus first dibs on new drops, members-only offers, and the care tips that keep your leather ageing beautifully.",
         "placeholder": "Your email address",
         "button_text": "Send My Code",
+        "count": "25,000+",
         "disclaimer": "leather lovers already inside. No spam — just good leather."
       }
     }
@@ -73,6 +81,7 @@
     "bestsellers",
     "brand_story",
     "featured_collections",
+    "testimonials",
     "email_signup"
   ]
 }
