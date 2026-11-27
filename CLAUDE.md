@@ -44,6 +44,7 @@ add only a short rule and a pointer here.
 
 ## 🗓 ACTIVE PLAN: `ops/PLAN_2026-11-12_to_12-31.md` (Founder approved Nov 12). Check-ins work from it first.
 - **6-MONTH SEO PLAN (Founder asked Nov 26; Alex lens; APPROVED by Founder Nov 26: conversion-first order, Monday approvals bundle, chest-size + paid-online jacket tests):** `ops/marketing/seo/SEO_6MONTH_PLAN_2026-12_to_2027-05.md` = 182 rows, ONE task per day 1 Dec 2026 → 31 May 2027. Alex: conversion first (organic CVR 0.57% → ~1.0%), then CTR on page-one pages, then money-collection rankings, seasonal gift pages, Top-10 articles, tech/Merchant Center, reviews+email, brand/AI search. Daily task `trig_012uFWWM7dFSr5hqTzMNWveM` 10:13 PKT (L2/L3 items go into a Monday approvals bundle `ops/marketing/seo/WEEKLY_APPROVALS.md`; log `SEO_DAILY_LOG.md`). Check-ins and the nightly work from this plan too.
+- **DEC 2026 BUDGET = 5,000/day (Founder Nov 27, Alex advice); keep good campaigns as is; structure plan `ops/marketing/ads/DEC_2026_STRUCTURE_ALEX.md`; deep CRO plan `ops/marketing/cro/CRO_DEEP_PLAN_2026-11-27.md`.**
 - **Ads Operating System: `ops/marketing/ADS_OPERATING_SYSTEM.md`** (TOF/TEST/MOF/BOF, tags in the ad name = utm_content, per-PRODUCT CPA ceilings, stop/scale rules, Monday weekly read). Funnel live target Nov 16; BF runs inside it.
 - Between sales (Nov 13–25) Meta ≈ 3,000/day on proven ads (Retarget 1,000 · H1 1,300 · W01 600). BF Nov 26–30: +2,000/day on top.
 

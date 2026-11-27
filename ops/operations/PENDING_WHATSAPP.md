@@ -94,3 +94,6 @@ Text = downloads/For_Tahir_Unfulfilled_Orders_Nov26.txt (orders KDV#23169 gloves
 
 ## Nov 26 — queued for Mr. Tahir: HAT RESTOCK order (Founder decided) — Status: WAITING (his window closed; send when he next messages, or the Founder forwards downloads/For_Tahir_Hat_Restock_Nov26.txt)
 114 hats ~Rs 340,500: Crushable 39 (S10 M10 L9 XL10), Clifford Rustic Brown 42 (S7 M5 L10 XL10 XXL10), Clifford Faded Black 33 (S6 M10 L9 XL8). NOT Black Stripe / Burgundy Studs / Suede Brown. Stock additions to Shopify only with Founder OK when hats arrive.
+
+## Nov 27 — CONDITIONAL for Mr. Tahir (Founder): MOCHA MATE restock
+Nightly run: read Mocha Mate stock in Shopify. If it is UNDER 5, add to the reply to Tahir (when he messages): "Mocha Mate sirf [N] reh gaye hain. Restock ka order abhi dein aur vendor se din + qeemat confirm karein." If 5 or more, say nothing. (Nov 27 11:xx PKT stock = 11; sells ~2/day, so expect <5 around Nov 30-Dec 1.) Also mention the open December restock decision to the Founder.
