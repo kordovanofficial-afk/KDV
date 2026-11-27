@@ -57,3 +57,8 @@ One entry per nightly run (23:30 PKT). Last-read timestamp at the bottom of each
 - WhatsApp last 24h: 0 inbound from the team (no STORE SALES from Tahir/Ahsan today). Only outbound = my Nov 25 reply to Tahir. Nothing applied.
 - Queued and still WAITING (no open window): Ahsan (Nov 23 message), Tahir: unfulfilled-orders message (KDV#23169 / #23170 / #23181) and the hat restock order (files in downloads/, Founder forwards or I send when they write).
 - Non-WhatsApp changes today (Founder): hats shown 10/size (Crushable, Clifford Rustic Brown, Clifford Faded Black), hats ad set 1,400/day, Retarget v2 published, 5 cigarette-case items hidden in the Meta catalogue, Clarity live.
+
+## Nightly run 2026-11-27 23:30 PKT
+- WhatsApp last 24h: no messages at all (no inbound, no outbound). Tahir and Ahsan did not send STORE SALES; no sales to apply. Their windows are closed, so all queued messages stay WAITING (Tahir: unfulfilled orders + hat restock + Mocha rule; Ahsan: Nov 23 message).
+- Mocha Mate stock = 11 (not under 5, so no restock request queued tonight).
+- Day's non-WhatsApp work (Founder): CRO plan + Dec structure approved, homepage reviews section hidden live, Clarity live, ads study written.
