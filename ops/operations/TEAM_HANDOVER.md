@@ -61,3 +61,9 @@ Still open: Mr. Tahir (sent on WhatsApp Nov 24 night): Eva clutch / Diva colour 
 - Nov 26: shopPolicyUpdate blocked (no write_legal_policies scope). Privacy Clarity paragraph is a PLAIN-TEXT file for the Founder: downloads/Privacy_Policy_Clarity_PLAIN_Nov26.txt (the HTML version pasted badly into the rich editor).
 - Nov 26: hat restock order file for Tahir: downloads/For_Tahir_Hat_Restock_Nov26.txt
 - Nov 26 HATS: stock shown 10/size on 3 hats as pre-orders (7-10 day wait, PDP notice). Pause hats ad if vendor date slips or cancels >15%. Record ops/revenue/hat_restock_2026-11-26/.
+
+## Nov 27 check-in
+- No new HQ assignments. Boardroom: only the Dec funnel card (`cmo-always-on-funnel-dec`, from Nov 11) is still WAITING on the Founder; Dec 1 is 4 days away.
+- Bridge watch: the status fetch was blocked by the permission classifier (URL carries a key), so the customer WhatsApp bridge is UNCHECKED today. Founder to say if curl to the bridge status URL may be allowed, or check the page himself.
+- Open files for the Founder to forward: Tahir (unfulfilled orders #23169/#23170/#23181 + hat restock order) · Ahsan (5 product photos due today, daily STORE SALES).
+- Next check-in Nov 29.
