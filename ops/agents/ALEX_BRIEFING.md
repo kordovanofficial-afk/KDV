@@ -195,3 +195,6 @@ Saved in `ops/marketing/creative/dec-ads/received/` (1092x1440 jpg): jacket_cut_
 
 ## 2026-11-28 — DECISION: "attitude/taunt" angle (Founder: go with Alex's plan)
 More: run both Clifford ads in Dec hats set. Better: one attitude line per product, "make the OTHER choice look weak, never insult the buyer" (no direct "you are weak/broke" = Meta personal-attributes policy; avoids COD refusals). New: make it the brand voice only after >=2 other products beat their category average in this format. Gate = Shopify CPA under ceiling AND refusal rate <= account average. Wallet plan (Armour, Thomas, Shelby, Truckkr): Founder sends real benefits Nov 29; then Claude writes one cold comparison + one attitude ad + film directions per wallet from confirmed facts only.
+
+## 2026-11-28 — DECISION: build Nov 30 drafts with research structure + scaling system (Founder yes; Tier 2 authority chosen)
+Playbook `ops/marketing/ads/SCALING_PLAYBOOK_2026-12.md`; monitor trigger `trig_01U3DPy6Fet1FxzGYzKhYUHG` (Dec 4,7,10,...,31 at 11:23 PKT, bound to this session). Tier 2: may pause Kill-rule ads and move budget +/-20% between existing ad sets (total unchanged); must ask for total increases, new ads/audiences, pausing H1/Retarget/RT-W outside stock rule. Total ladder: +10%/week (max +500/day) only after a green week (blended CPA <=1,400, refusal <= avg). Renew for Jan on Dec 31.
