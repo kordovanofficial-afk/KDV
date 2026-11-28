@@ -62,3 +62,7 @@ One entry per nightly run (23:30 PKT). Last-read timestamp at the bottom of each
 - WhatsApp last 24h: no messages at all (no inbound, no outbound). Tahir and Ahsan did not send STORE SALES; no sales to apply. Their windows are closed, so all queued messages stay WAITING (Tahir: unfulfilled orders + hat restock + Mocha rule; Ahsan: Nov 23 message).
 - Mocha Mate stock = 11 (not under 5, so no restock request queued tonight).
 - Day's non-WhatsApp work (Founder): CRO plan + Dec structure approved, homepage reviews section hidden live, Clarity live, ads study written.
+
+## Nightly run 2026-11-28 23:30 PKT
+- WhatsApp last 24h: no messages (no inbound, no outbound). No STORE SALES from Tahir/Ahsan; nothing applied. All queued messages stay WAITING (windows closed): Tahir (unfulfilled orders, hat restock, Mocha rule), Ahsan (Nov 23).
+- Day's non-WhatsApp work (Founder): v2 ad images received (jacket, gift, belt, gloves x2, Clifford x2); attitude-angle plan approved; Meta structure research written (`ops/marketing/ads/META_STRUCTURE_RESEARCH_2026-11.md`); Nov 30 19:00 PKT draft-build reminder scheduled (trig_01SUdn6Qj39Go4RPZBsZTHCk). Awaiting Founder yes on the research structure and his wallet benefits list.
