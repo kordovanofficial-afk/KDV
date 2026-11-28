@@ -191,3 +191,4 @@ only reply within 24h, never cold-message).
 
 ## 2026-11-28 — Founder's generated v2 images received (5)
 Saved in `ops/marketing/creative/dec-ads/received/` (1092x1440 jpg): jacket_cut_for_you (HELD), gift_needs_nothing (test wk4 Dec 22-31), belt_buy_once (TOF Prospecting static 2), gloves_chai_dhaba (TOF Prospecting static 1, tried cold), gloves_split_screen (TEST challenger; note gloves comparison v2 lost at CPA 3,264 on Nov 22, so judge it as a test, not a winner). Clifford images + Armour/Thomas/Shelby still to come. Build as PAUSED drafts Nov 30 evening.
+- Nov 28: Clifford images received: `clifford_not_for_everyone_rustic_brown` (warm_clifford_static_status_studio_v2) + `clifford_cowboy_exactly_faded_black` (objection test). Both Rs 10,500, no sale wording. Both go in the Dec hats warm ad set (700/day) as paused drafts Nov 30 evening.
