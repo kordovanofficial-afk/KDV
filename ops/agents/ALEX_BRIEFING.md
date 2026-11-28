@@ -198,3 +198,6 @@ More: run both Clifford ads in Dec hats set. Better: one attitude line per produ
 
 ## 2026-11-28 — DECISION: build Nov 30 drafts with research structure + scaling system (Founder yes; Tier 2 authority chosen)
 Playbook `ops/marketing/ads/SCALING_PLAYBOOK_2026-12.md`; monitor trigger `trig_01U3DPy6Fet1FxzGYzKhYUHG` (Dec 4,7,10,...,31 at 11:23 PKT, bound to this session). Tier 2: may pause Kill-rule ads and move budget +/-20% between existing ad sets (total unchanged); must ask for total increases, new ads/audiences, pausing H1/Retarget/RT-W outside stock rule. Total ladder: +10%/week (max +500/day) only after a green week (blended CPA <=1,400, refusal <= avg). Renew for Jan on Dec 31.
+
+## 2026-11-28 — Clarity decision (see ops/marketing/seo/clarity_2026-11-26/DECISION_2026-11-28.md)
+Clarity confirms the CRO plan; no new project. Use it only for before/after pulls (Dec 3, 7, 11). Wave 0 adds mobile script-error fix + wallets collection cards. Need Founder screenshot of top script errors in Clarity dashboard.

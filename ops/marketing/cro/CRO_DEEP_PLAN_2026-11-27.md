@@ -326,3 +326,7 @@ Rule: a metric moves only on Shopify data; Clarity explains "why", never "how mu
 - Clarity is 1 day of data (788 sessions); treat all Clarity numbers as directional.
 - Provenance of the 10 homepage reviews (none found in the repo; the Founder may know).
 - 31 COD orders still in transit: the 19% lost rate will rise a little.
+
+
+## Update Nov 28: Clarity decision
+See `ops/marketing/seo/clarity_2026-11-26/DECISION_2026-11-28.md`. Wave 0 additions: mobile script-error fix (Founder screenshots top errors from Clarity dashboard) and wallets-collection card fix. Clarity pulls: baseline Dec 3, after Dec 7, after Dec 11.
